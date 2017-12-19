@@ -19,7 +19,7 @@
 
 |   |   |   | Experiences |
 |:-:|:-:|:-:|---|
-| FEB 17 | - | Current | Machine Learning Researcher, Machine Intelligence Lab, SKPlanet, Rep. of Korea |
+| FEB 17 | - | Current | Machine Learning Researcher, Machine Intelligence Lab, **SKPlanet**, Rep. of Korea |
 |   |   |   | -	Neural Machine Translation (A to Z) |
 | DEC 15 | - | JAN 17 | Machine Learning Engineer, Data Lab, Ticketmonster, Rep. of Korea |
 |   |   |   | -	Built and modeled a recommender system using Deeplearning |
