@@ -46,6 +46,6 @@
   * Supervised NMT
   * Unsupervised NMT
 * Future Work
-
-
-
+  * Memory Augmented Neural Network
+    * Text Summarization
+    * End2end Chatbot
