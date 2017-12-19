@@ -33,8 +33,9 @@
 * Text Classification
   * Using CNN
   * Using RNN
+  * Unsupervised Text Classification
 * Neural Machine Translation
-  * 기계번역 개요
+  * 기계번역 개요 및 역사
   * BLEU
   * Seq2seq
   * Attention
