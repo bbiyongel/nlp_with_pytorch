@@ -20,7 +20,6 @@
 | MAY 08 | - | AUG 08 | Intern, Electronics and Telecommunications Research Institute (ETRI), Rep. of Korea |
 
 <br/>
-<br/>
 
 |   |   |   | Awards & Achievements |
 |:-:|:-:|:-:|---|
