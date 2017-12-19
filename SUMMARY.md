@@ -3,7 +3,10 @@
 * [Introduction](README.md)
 * 서문
 * Deeplearning Basic
-* Python and PyTorch
+* PyTorch 소개
+  * 소개
+  * 설치 방법
+  * 예제
 * Word Sense Disambiguation
   * Bayes Theorem
   * Naive Bayes
