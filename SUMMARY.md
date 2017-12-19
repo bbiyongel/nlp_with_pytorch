@@ -5,6 +5,10 @@
 * Deeplearning Basic
 * Python and PyTorch
 * Word Sense Disambiguation
+  * Bayes Theorem
+  * Naive Bayes
+  * WordNet
+  * Using Deeplearning
 * Preprocessing
   * 전처리 개요
   * Corpus 수집
@@ -36,7 +40,7 @@
   * Unsupervised Text Classification
 * Neural Machine Translation
   * 기계번역 개요 및 역사
-  * BLEU
+  * 성능 평가 방법
   * Seq2seq
   * Attention
   * Fully Convolutional Seq2seq
