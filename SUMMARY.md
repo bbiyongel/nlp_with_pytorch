@@ -10,13 +10,13 @@
 * PyTorch 소개
   * 소개
   * 설치 방법
+  * TorchText 소개
   * 예제
 * [Word Sense Disambiguation](word-sense-disambiguation.md)
   * Selectional Preference
   * Bayes Theorem
   * Naive Bayes
   * WordNet
-  * Using Deeplearning
 * Preprocessing
   * 전처리 개요
   * Corpus 수집
