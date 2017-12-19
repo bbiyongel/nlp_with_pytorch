@@ -1,6 +1,7 @@
 # Summary
 
-* Intro
+* [Introduction](README.md)
+* [Intro](intro.md)
 * Deeplearning Basic
 * Python and PyTorch
 * Word Sense Disambiguation
@@ -21,6 +22,4 @@
 * Reinforcement Learning for NMT
   * Supervised NMT
   * Unsupervised NMT
-
-
 
