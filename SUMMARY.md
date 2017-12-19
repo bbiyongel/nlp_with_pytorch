@@ -28,6 +28,7 @@
   * GloVe
   * FastText
 * RNN
+  * RNN
   * LSTM
   * GRU
   * Gradient Clipping
