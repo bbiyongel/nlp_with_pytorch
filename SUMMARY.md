@@ -62,4 +62,4 @@
 * Future Work
   * Memory Augmented Neural Network
     * Text Summarization
-    * End2end Quetional Answering
+    * Quetional Answering
