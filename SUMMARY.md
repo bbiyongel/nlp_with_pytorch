@@ -5,7 +5,7 @@
   * 소개
   * 왜 중요한가?
   * 왜 어려운 것인가?
-* Deeplearning
+* Deeplearning 개요
   * History
 * PyTorch 소개
   * 소개
