@@ -13,9 +13,9 @@
   * TorchText 소개
   * 예제
 * [Word Sense Disambiguation](word-sense-disambiguation.md)
-  * Selectional Preference
   * Bayes Theorem
   * Naive Bayes
+  * Selectional Preference
   * WordNet
 * Preprocessing
   * 전처리 개요
