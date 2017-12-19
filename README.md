@@ -21,24 +21,24 @@
 |:-:|:-:|:-:|---|
 | FEB 17 | - | Current | Machine Learning Researcher, Machine Intelligence Lab, **SKPlanet**, Rep. of Korea |
 |   |   |   | -	Neural Machine Translation (A to Z) |
-| DEC 15 | - | JAN 17 | Machine Learning Engineer, Data Lab, Ticketmonster, Rep. of Korea |
+| DEC 15 | - | JAN 17 | Machine Learning Engineer, Data Lab, **Ticketmonster**, Rep. of Korea |
 |   |   |   | -	Built and modeled a recommender system using Deeplearning |
-| OCT 11 | - | NOV 15 | Researcher, Automatic Speech Translation Team, Electronics and Telecommunications Research Institute (ETRI), Rep. of Korea |
+| OCT 11 | - | NOV 15 | Researcher, Automatic Speech Translation Team, **Electronics and Telecommunications Research Institute (ETRI)**, Rep. of Korea |
 |   |   |   | -	Language Modeling for Speech Recognition (n-gram) |
-| JUN 10 | - | JAN 11 | Software Engineering Intern, Qualcomm R&D, Rep. of Korea |
-| MAY 08 | - | AUG 08 | Intern, Electronics and Telecommunications Research Institute (ETRI), Rep. of Korea |
+| JUN 10 | - | JAN 11 | Software Engineering Intern, **Qualcomm R&D**, Rep. of Korea |
+| MAY 08 | - | AUG 08 | Intern, **Electronics and Telecommunications Research Institute (ETRI)**, Rep. of Korea |
 
 <br/>
 
 |   |   |   | Awards & Achievements |
 |:-:|:-:|:-:|---|
 | JAN 18 | - |   | Fast Campus NMT & NLP Instructor |
-| DEC 17 |   |   | Choongmugong (2nd rank) Award from Korea Intellectual Property Office |
-| DEC 17 |   |   | SKPlanet SUPEX Award |
+| DEC 17 |   |   | **Choongmugong (2nd rank) Award** from Korea Intellectual Property Office |
+| DEC 17 |   |   | **SKPlanet SUPEX Award** |
 | NOV 17 |   |   | Neural Machine Translation Lecturer in SK group |
 | OCT 11 | - | NOV 15 | Received best rank of personal evaluation for 3 years at ETRI |
-| NOV 10 |   |   | Qualstar Hall of Fame at Qualcomm |
+| NOV 10 |   |   | **Qualstar Hall of Fame at Qualcomm** |
 | AUG 09 | - | JUL 10 | BS/MS Program at Stony Brook University |
 | NOV 05 |   |   | 3rd in Program Competition at Ajou University |
-| AUG 03 |   |   | 4th in Korea Olympiad in Informatics (KOI) |
-| AUG 02 |   |   | 3rd in Korea Olympiad in Informatics (KOI) |
+| AUG 03 |   |   | **4th in Korea Olympiad in Informatics (KOI)** |
+| AUG 02 |   |   | **3rd in Korea Olympiad in Informatics (KOI)** |
