@@ -7,7 +7,6 @@
   * 왜 어려운 것인가?
 * Deeplearning Basic
   * History
-  *
 * PyTorch 소개
   * 소개
   * 설치 방법
