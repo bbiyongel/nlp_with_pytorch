@@ -16,6 +16,7 @@
 * RNN
   * LSTM
   * GRU
+  * Gradient Clipping
 * Language Modeling
 * Named Entity Recognition
 * Text Classification
