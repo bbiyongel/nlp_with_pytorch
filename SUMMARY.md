@@ -1,7 +1,7 @@
 # Summary
 
 * [소개글](README.md)
-* Natural Language Processing 개요
+* Natural Language Understanding 개요
   * 소개
   * 왜 중요한가?
   * 왜 어려운 것인가?
