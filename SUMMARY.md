@@ -5,11 +5,14 @@
 * Deeplearning Basic
 * Python and PyTorch
 * Word Sense Disambiguation
-* Preprocessing
+* [Preprocessing](preprocessing.md)
   * Corpus 수집
   * 정제
   * Tokenization
 * Word Embedding Vector
+  * Skip-gram & CBOW
+  * GloVe
+  * FastText
 * RNN
   * LSTM
   * GRU
@@ -22,4 +25,6 @@
 * Reinforcement Learning for NMT
   * Supervised NMT
   * Unsupervised NMT
+
+
 
