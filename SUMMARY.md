@@ -32,6 +32,7 @@
   * Hidden Markov Model
   * Conditional Random Field
   * Using Deeplearning
+  * Named Entity Recognition
 * Language Modeling
   * 언어모델 개요
   * Perpexity
