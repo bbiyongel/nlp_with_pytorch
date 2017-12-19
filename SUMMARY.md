@@ -11,7 +11,7 @@
   * 소개
   * 설치 방법
   * 예제
-* Word Sense Disambiguation
+* [Word Sense Disambiguation](word-sense-disambiguation.md)
   * Bayes Theorem
   * Naive Bayes
   * WordNet
