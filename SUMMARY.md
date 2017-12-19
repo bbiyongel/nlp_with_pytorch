@@ -12,6 +12,7 @@
   * 설치 방법
   * 예제
 * [Word Sense Disambiguation](word-sense-disambiguation.md)
+  * Selectional Preference
   * Bayes Theorem
   * Naive Bayes
   * WordNet
