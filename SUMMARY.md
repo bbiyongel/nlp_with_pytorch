@@ -11,7 +11,7 @@
   * 정제
   * Tokenization
 * Word Embedding Vector
-  * Word Embedding 개요
+  * 개요
   * Skip-gram & CBOW
   * GloVe
   * FastText
@@ -34,9 +34,18 @@
   * Using CNN
   * Using RNN
 * Neural Machine Translation
+  * 기계번역 개요
+  * BLEU
+  * Seq2seq
+  * Attention
+  * Fully Convolutional Seq2seq
+  * Transformer
 * Reinforcement Learning for NMT
+  * 강화학습 개요
+  * Policy Gradient
   * Supervised NMT
   * Unsupervised NMT
+* Future Work
 
 
 
