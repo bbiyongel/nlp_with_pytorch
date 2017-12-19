@@ -31,7 +31,6 @@
   * LSTM
   * GRU
   * Gradient Clipping
-* Named Entity Recognition
 * Part of Speech Tagging
   * 구문분석 개요
   * Hidden Markov Model
