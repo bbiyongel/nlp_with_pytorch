@@ -27,7 +27,7 @@
 * Word Embedding Vector
   * 개요
   * One-hot encoding
-  * Previous methods
+  * [Previous methods](previous-methods.md)
   * Skip-gram & CBOW
   * GloVe
   * FastText
