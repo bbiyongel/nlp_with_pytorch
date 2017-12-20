@@ -38,15 +38,15 @@
   * [GRU](rnn/gru.md)
   * [Gradient Clipping](rnn/gradient-clipping)
 * Sequential Problem
-  * Intro
-  * Hidden Markov Model
-  * Conditional Random Field
-  * Using Deeplearning
+  * [Intro](sequential-problem/intro.md)
+  * [Hidden Markov Model](sequential-problem/hmm.md)
+  * [Conditional Random Field](sequential-problem/crf.md)
+  * [Using Deeplearning](sequential-problem/rnn.md)
 * Language Modeling
-  * [언어모델 개요](c5b8-c5b4-baa8-b378-ac1c-c694.md)
-  * [Perpexity](perpexity.md)
-  * [n-gram](n-gram.md)
-  * [NNLM](nnlm.md)
+  * [언어모델 개요](language-modeling/c5b8-c5b4-baa8-b378-ac1c-c694.md)
+  * [Perpexity](language-modeling/perpexity.md)
+  * [n-gram](language-modeling/n-gram.md)
+  * [NNLM](language-modeling/nnlm.md)
 * Text Classification
   * [Intro](text-classification/intro.md)
   * Using RNN
