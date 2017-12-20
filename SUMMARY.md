@@ -59,8 +59,10 @@
   * [Attention](neural-machine-translation/attention.md)
   * [Input Feeding](neural-machine-translation/input-feeding.md)
   * [Beam Search](neural-machine-translation/beam-search.md)
-  * [Fully Convolutional Seq2seq](neural-machine-translation/fconv.md)
-  * [Transformer](neural-machine-translation/transformer.md)
+  * Advanced Topic on NMT
+    * [Using Monolingual Corpora]()
+    * [Fully Convolutional Seq2seq](neural-machine-translation/fconv.md)
+    * [Transformer](neural-machine-translation/transformer.md)
 * Reinforcement Learning for NMT]
   * [Intro](reinforcement-learning-for-nmt/intro.md)
   * [Policy Gradient](reinforcement-learning-for-nmt/policy-gradient.md)
