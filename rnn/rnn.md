@@ -7,3 +7,5 @@
 ## 수식
 
 ## Gradient vanishing & exploding
+
+## 코드
