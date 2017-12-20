@@ -6,7 +6,7 @@
   * [Intro](intro.md)
   * Why NLP important
   * Why NLP difficult
-  * Deeplearning
+  * [Deeplearning](deeplearning.md)
   * History
 * [PyTorch 소개](pytorch-c18c-ac1c.md)
   * Intro
