@@ -13,17 +13,17 @@
   * [How to install](pytorch-c18c-ac1c/how-to-install.md)
   * [TorchText](pytorch-c18c-ac1c/torchtext.md)
   * [Hello, PyTorch](pytorch-c18c-ac1c/hello-pytorch.md)
-* Word Sense Disambiguation \(WSD\)
-  * intro
-  * Bayes Theorem
-  * Naive Bayes
-  * Selectional Preference
-  * WordNet
+* [Word Sense Disambiguation \(WSD\)](word-sense-disambiguation-wsd.md)
+  * [intro](word-sense-disambiguation-wsd/intro.md)
+  * [Bayes Theorem](word-sense-disambiguation-wsd/bayes-theorem.md)
+  * [Naive Bayes](word-sense-disambiguation-wsd/naive-bayes.md)
+  * [Selectional Preference](word-sense-disambiguation-wsd/selectional-preference.md)
+  * [WordNet](word-sense-disambiguation-wsd/wordnet.md)
 * Preprocessing
   * [전처리 개요](c804-cc98-b9ac-ac1c-c694.md)
   * Corpus 수집
   * Cleaning corpus
-  * Tokenization \(POS Tagging\)
+  * Tokenization
 * Word Embedding Vector
   * Intro
   * [One-hot encoding](one-hot-encoding.md)
