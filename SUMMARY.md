@@ -1,6 +1,7 @@
 # Summary
 
 * [소개글](README.md)
+* To Do & Milestone
 * Natural Language Understanding with Deeplearning
   * 소개
   * 왜 중요한가?
