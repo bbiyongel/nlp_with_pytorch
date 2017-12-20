@@ -19,11 +19,11 @@
   * [Naive Bayes](word-sense-disambiguation-wsd/naive-bayes.md)
   * [Selectional Preference](word-sense-disambiguation-wsd/selectional-preference.md)
   * [WordNet](word-sense-disambiguation-wsd/wordnet.md)
-* Preprocessing
-  * [전처리 개요](c804-cc98-b9ac-ac1c-c694.md)
-  * Corpus 수집
-  * Cleaning corpus
-  * Tokenization (POS Tagging)
+* [Preprocessing](preprocessing.md)
+  * [전처리 개요](preprocessing/c804-cc98-b9ac-ac1c-c694.md)
+  * [Corpus 수집](preprocessing/collecting-corpus.md)
+  * [Cleaning corpus](preprocessing/cleaning-corpus.md)
+  * [Tokenization \(POS Tagging\)](preprocessing/tokenization.md)
 * Word Embedding Vector
   * Intro
   * [One-hot encoding](one-hot-encoding.md)
