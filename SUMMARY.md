@@ -70,9 +70,8 @@
   * Supervised NMT
   * Unsupervised NMT
 * Speech Recognition
-  * 음성인식 소개 및 역사
-  * 성능 평가 방법
-  * WFST 방식
+  * Intro
+  * Traditional methodology
   * End2end deeplearning
 * Future Work
   * Memory Augmented Neural Network
