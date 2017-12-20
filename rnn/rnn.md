@@ -6,4 +6,4 @@
 
 ## 수식
 
-## Gradient exploding
+## Gradient vanishing & exploding
