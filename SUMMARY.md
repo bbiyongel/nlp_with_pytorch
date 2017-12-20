@@ -3,7 +3,7 @@
 * [소개글](README.md)
 * [To Do & Milestone](to-do-and-milestone.md)
 * Natural Language Processing with Deeplearning
-  * Intro
+  * [Intro](intro.md)
   * Why NLP important
   * Why NLP difficult
   * Deeplearning
