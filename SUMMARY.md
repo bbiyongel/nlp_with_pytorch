@@ -1,7 +1,7 @@
 # Summary
 
 * [소개글](README.md)
-* To Do & Milestone
+* [To Do & Milestone](to-do-and-milestone.md)
 * Natural Language Understanding with Deeplearning
   * 소개
   * 왜 중요한가?
@@ -23,7 +23,7 @@
   * 전처리 개요
   * Corpus 수집
   * 정제
-  * Tokenization (POS Tagging)
+  * Tokenization \(POS Tagging\)
 * Word Embedding Vector
   * 개요
   * Skip-gram & CBOW
