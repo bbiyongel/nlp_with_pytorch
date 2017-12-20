@@ -3,12 +3,12 @@
 * [소개글](README.md)
 * [To Do & Milestone](to-do-and-milestone.md)
 * Natural Language Processing with Deeplearning
-  * [Intro](intro.md)
-  * Why NLP important
-  * Why NLP difficult
-  * [Deeplearning](deeplearning.md)
-  * [History](history.md)
-* [PyTorch 소개](pytorch-c18c-ac1c.md)
+  * [Intro](nlp-with-deeplearning/ntro.md)
+  * [Why NLP important](nlp-with-deeplearning/why-nlp-important.md)
+  * [Why NLP difficult](nlp-with-deeplearning/why-nlp-difficult.md)
+  * [Deeplearning](nlp-with-deeplearning/deeplearning.md)
+  * [History](nlp-with-deeplearning/history.md)
+* PyTorch 소개
   * [Intro](pytorch-c18c-ac1c/intro.md)
   * [How to install](pytorch-c18c-ac1c/how-to-install.md)
   * TorchText
