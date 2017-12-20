@@ -61,7 +61,7 @@
   * [Beam Search](neural-machine-translation/beam-search.md)
   * [Fully Convolutional Seq2seq](neural-machine-translation/fconv.md)
   * [Transformer](neural-machine-translation/transformer.md)
-* [Reinforcement Learning for NMT](reinforcement-learning-for-nmt.md)
+* Reinforcement Learning for NMT]
   * [Intro](reinforcement-learning-for-nmt/intro.md)
   * [Policy Gradient](reinforcement-learning-for-nmt/policy-gradient.md)
   * [Supervised NMT](reinforcement-learning-for-nmt/supervised-nmt.md)
