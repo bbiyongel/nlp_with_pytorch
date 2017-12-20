@@ -53,7 +53,6 @@
   * [Intro](text-classification/intro.md)
   * Using RNN
   * Using CNN
-  * Using RNN
   * Unsupervised Text Classification
 * Neural Machine Translation
   * [기계번역 개요 및 역사](ae30-acc4-bc88-c5ed-ac1c-c694-bc0f-c5ed-c0ac.md)
