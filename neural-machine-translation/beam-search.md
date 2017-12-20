@@ -1,6 +1,4 @@
+# Gready Search
+
 # Beam Search
-
-## Gready Search
-
-## 설명
 
