@@ -54,6 +54,7 @@
   * [Seq2seq](seq2seq.md)
   * [Attention](attention.md)
   * [Input Feeding](input-feeding.md)
+  * Beam Search
   * Fully Convolutional Seq2seq
   * Transformer
 * Reinforcement Learning for NMT
