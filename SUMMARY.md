@@ -23,7 +23,7 @@
   * [전처리 개요](c804-cc98-b9ac-ac1c-c694.md)
   * Corpus 수집
   * Cleaning corpus
-  * Tokenization
+  * Tokenization (POS Tagging)
 * Word Embedding Vector
   * Intro
   * [One-hot encoding](one-hot-encoding.md)
@@ -42,8 +42,6 @@
   * Hidden Markov Model
   * Conditional Random Field
   * Using Deeplearning
-  * Named Entity Recognition
-  * Part of Speech Tagging
 * Language Modeling
   * [언어모델 개요](c5b8-c5b4-baa8-b378-ac1c-c694.md)
   * [Perpexity](perpexity.md)
