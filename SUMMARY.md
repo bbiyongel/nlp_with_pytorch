@@ -12,7 +12,7 @@
   * Intro
   * How to install
   * TorchText
-  * PyTorch sample code
+  * Hello, PyTorch
 * Word Sense Disambiguation \(WSD\)
   * [소개](word-sense-disambiguation.md)
   * Bayes Theorem
