@@ -2,10 +2,10 @@
 
 * [소개글](README.md)
 * [To Do & Milestone](to-do-and-milestone.md)
-* Natural Language Understanding with Deeplearning
+* Natural Language Processing with Deeplearning
   * 소개
-  * 왜 중요한가?
-  * 왜 어려운 것인가?
+  * Why NLP important
+  * Why NLP difficult
   * Deeplearning
   * History
 * PyTorch 소개
@@ -31,7 +31,7 @@
   * [Word2Vec](word2vec.md)
   * GloVe
   * FastText
-  * Further methods
+  * [Further methods](further-methods.md)
 * RNN
   * RNN
   * LSTM
