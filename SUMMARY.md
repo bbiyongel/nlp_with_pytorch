@@ -9,8 +9,8 @@
   * [Deeplearning](deeplearning.md)
   * [History](history.md)
 * [PyTorch 소개](pytorch-c18c-ac1c.md)
-  * Intro
-  * How to install
+  * [Intro](pytorch-c18c-ac1c/intro.md)
+  * [How to install](pytorch-c18c-ac1c/how-to-install.md)
   * TorchText
   * Hello, PyTorch
 * Word Sense Disambiguation \(WSD\)
