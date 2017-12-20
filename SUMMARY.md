@@ -20,7 +20,7 @@
   * Selectional Preference
   * WordNet
 * Preprocessing
-  * 전처리 개요
+  * [전처리 개요](c804-cc98-b9ac-ac1c-c694.md)
   * Corpus 수집
   * 정제
   * Tokenization \(POS Tagging\)
