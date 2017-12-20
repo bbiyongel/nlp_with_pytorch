@@ -34,7 +34,7 @@
   * LSTM
   * GRU
   * Gradient Clipping
-* Sequential Modeling
+* Sequential Problem
   * Hidden Markov Model
   * Conditional Random Field
   * Using Deeplearning
