@@ -25,18 +25,18 @@
   * [Cleaning corpus](preprocessing/cleaning-corpus.md)
   * [Tokenization \(POS Tagging\)](preprocessing/tokenization.md)
 * Word Embedding Vector
-  * Intro
-  * [One-hot encoding](one-hot-encoding.md)
-  * [Previous methods](previous-methods.md)
-  * [Word2Vec](word2vec.md)
-  * GloVe
-  * FastText
-  * Advanced embedding
+  * [Intro](word-embedding-vector/intro.md)
+  * [One-hot encoding](word-embedding-vector/one-hot-encoding.md)
+  * [Previous methods](word-embedding-vector/previous-methods.md)
+  * [Word2Vec](word-embedding-vector/word2vec.md)
+  * [GloVe](word-embedding-vector/glove.md)
+  * [FastText](word-embedding-vector/fasttext.md)
+  * [Advanced embedding](word-embedding-vector/advanced-embedding.md)
 * RNN
-  * RNN
-  * LSTM
-  * GRU
-  * Gradient Clipping
+  * [RNN](rnn/rnn.md)
+  * [LSTM](rnn/lstm.md)
+  * [GRU](rnn/gru.md)
+  * [Gradient Clipping](rnn/gradient-clipping)
 * Sequential Problem
   * Intro
   * Hidden Markov Model
