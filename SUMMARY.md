@@ -8,13 +8,13 @@
   * [Why NLP difficult](nlp-with-deeplearning/why-nlp-difficult.md)
   * [Deeplearning](nlp-with-deeplearning/deeplearning.md)
   * [History](nlp-with-deeplearning/history.md)
-* PyTorch 소개
+* [PyTorch 소개](pytorch-c18c-ac1c.md)
   * [Intro](pytorch-c18c-ac1c/intro.md)
   * [How to install](pytorch-c18c-ac1c/how-to-install.md)
-  * TorchText
-  * Hello, PyTorch
+  * [TorchText](pytorch-c18c-ac1c/torchtext.md)
+  * [Hello, PyTorch](pytorch-c18c-ac1c/hello-pytorch.md)
 * Word Sense Disambiguation \(WSD\)
-  * [소개](word-sense-disambiguation.md)
+  * intro
   * Bayes Theorem
   * Naive Bayes
   * Selectional Preference
