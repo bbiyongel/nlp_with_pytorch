@@ -31,7 +31,7 @@
   * [Word2Vec](word2vec.md)
   * GloVe
   * FastText
-  * [Further methods](further-methods.md)
+  * Advanced embedding
 * RNN
   * RNN
   * LSTM
@@ -55,11 +55,6 @@
   * Using CNN
   * Using RNN
   * Unsupervised Text Classification
-* Speech Recognition
-  * 음성인식 소개 및 역사
-  * 성능 평가 방법
-  * WFST 방식
-  * End2end deeplearning
 * Neural Machine Translation
   * [기계번역 개요 및 역사](ae30-acc4-bc88-c5ed-ac1c-c694-bc0f-c5ed-c0ac.md)
   * [성능 평가 방법](c131-b2a5-d3c9-ac00-bc29-bc95.md)
@@ -74,6 +69,11 @@
   * Policy Gradient
   * Supervised NMT
   * Unsupervised NMT
+* Speech Recognition
+  * 음성인식 소개 및 역사
+  * 성능 평가 방법
+  * WFST 방식
+  * End2end deeplearning
 * Future Work
   * Memory Augmented Neural Network
     * Text Summarization
