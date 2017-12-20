@@ -22,7 +22,7 @@
   * 전처리 개요
   * Corpus 수집
   * 정제
-  * Tokenization
+  * Tokenization (POS Tagging)
 * Word Embedding Vector
   * 개요
   * Skip-gram & CBOW
@@ -33,12 +33,12 @@
   * LSTM
   * GRU
   * Gradient Clipping
-* Part of Speech Tagging
-  * 구문분석 개요
+* Sequential Modeling
   * Hidden Markov Model
   * Conditional Random Field
   * Using Deeplearning
   * Named Entity Recognition
+  * Part of Speech Tagging
 * Language Modeling
   * [언어모델 개요](c5b8-c5b4-baa8-b378-ac1c-c694.md)
   * [Perpexity](perpexity.md)
