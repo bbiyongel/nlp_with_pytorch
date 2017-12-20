@@ -71,7 +71,7 @@
 * Speech Recognition
   * Intro
   * Traditional methodology
-  * End2end deeplearning
+  * Seq2seq
 * Future Work
   * Memory Augmented Neural Network
     * Text Summarization
