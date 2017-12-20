@@ -12,7 +12,8 @@
   * 설치 방법
   * TorchText 소개
   * 예제
-* [Word Sense Disambiguation](word-sense-disambiguation.md)
+* Word Sense Disambiguation (WSD)
+  * [소개](word-sense-disambiguation.md)
   * Bayes Theorem
   * Naive Bayes
   * Selectional Preference
