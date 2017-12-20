@@ -28,7 +28,7 @@
   * 개요
   * [One-hot encoding](one-hot-encoding.md)
   * [Previous methods](previous-methods.md)
-  * Skip-gram & CBOW
+  * Word2Vec
   * GloVe
   * FastText
   * Further methods
