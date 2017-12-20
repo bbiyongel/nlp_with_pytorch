@@ -41,7 +41,7 @@
   * Named Entity Recognition
 * Language Modeling
   * [언어모델 개요](c5b8-c5b4-baa8-b378-ac1c-c694.md)
-  * Perpexity
+  * [Perpexity](perpexity.md)
   * [n-gram](n-gram.md)
   * [NNLM](nnlm.md)
 * Text Classification
