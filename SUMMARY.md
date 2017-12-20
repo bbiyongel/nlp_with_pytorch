@@ -44,7 +44,7 @@
   * Perpexity
   * [n-gram](n-gram.md)
   * [NNLM](nnlm.md)
-* Text Classification
+* [Text Classification](text-classification.md)
   * Using CNN
   * Using RNN
   * Unsupervised Text Classification
