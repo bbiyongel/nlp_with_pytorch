@@ -50,7 +50,7 @@
   * Unsupervised Text Classification
 * Neural Machine Translation
   * [기계번역 개요 및 역사](ae30-acc4-bc88-c5ed-ac1c-c694-bc0f-c5ed-c0ac.md)
-  * 성능 평가 방법
+  * [성능 평가 방법](c131-b2a5-d3c9-ac00-bc29-bc95.md)
   * Seq2seq
   * Attention
   * Fully Convolutional Seq2seq
