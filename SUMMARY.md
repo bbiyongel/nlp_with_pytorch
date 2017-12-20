@@ -36,7 +36,7 @@
   * [RNN](rnn/rnn.md)
   * [LSTM](rnn/lstm.md)
   * [GRU](rnn/gru.md)
-  * [Gradient Clipping](rnn/gradient-clipping)
+  * [Gradient Clipping](rnn/gradient-clipping.md)
 * Sequential Problem
   * [Intro](sequential-problem/intro.md)
   * [Hidden Markov Model](sequential-problem/hmm.md)
