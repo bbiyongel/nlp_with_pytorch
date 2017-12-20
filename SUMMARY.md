@@ -28,7 +28,7 @@
   * 개요
   * [One-hot encoding](one-hot-encoding.md)
   * [Previous methods](previous-methods.md)
-  * Word2Vec
+  * [Word2Vec](word2vec.md)
   * GloVe
   * FastText
   * Further methods
