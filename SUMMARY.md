@@ -35,6 +35,7 @@
   * GRU
   * Gradient Clipping
 * Sequential Problem
+  * 문제 정의
   * Hidden Markov Model
   * Conditional Random Field
   * Using Deeplearning
@@ -46,6 +47,8 @@
   * [n-gram](n-gram.md)
   * [NNLM](nnlm.md)
 * Text Classification
+  * 소개
+  * Using RNN
   * Using CNN
   * Using RNN
   * Unsupervised Text Classification
