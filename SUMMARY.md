@@ -1,11 +1,11 @@
 # Summary
 
 * [소개글](README.md)
-* Natural Language Understanding 개요
+* Natural Language Understanding with Deeplearning
   * 소개
   * 왜 중요한가?
   * 왜 어려운 것인가?
-* Deeplearning 개요
+  * Deeplearning
   * History
 * PyTorch 소개
   * 소개
