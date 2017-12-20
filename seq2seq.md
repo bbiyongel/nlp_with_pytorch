@@ -2,8 +2,11 @@
 
 ## Architecture Overview
 
+## Embedding Layer
+
 ## Encoder
 
 ## Decoder
 
-## Softmax
+## Generator
+
