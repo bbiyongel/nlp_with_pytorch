@@ -12,7 +12,7 @@
   * 설치 방법
   * TorchText 소개
   * 예제
-* Word Sense Disambiguation (WSD)
+* Word Sense Disambiguation \(WSD\)
   * [소개](word-sense-disambiguation.md)
   * Bayes Theorem
   * Naive Bayes
@@ -42,7 +42,7 @@
 * Language Modeling
   * [언어모델 개요](c5b8-c5b4-baa8-b378-ac1c-c694.md)
   * Perpexity
-  * n-gram
+  * [n-gram](n-gram.md)
   * NNLM
 * Text Classification
   * Using CNN
