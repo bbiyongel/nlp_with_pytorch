@@ -8,7 +8,7 @@
   * Why NLP difficult
   * Deeplearning
   * History
-* PyTorch 소개
+* [PyTorch 소개](pytorch-c18c-ac1c.md)
   * 소개
   * 설치 방법
   * TorchText 소개
