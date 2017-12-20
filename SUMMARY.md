@@ -26,7 +26,8 @@
   * Tokenization \(POS Tagging\)
 * Word Embedding Vector
   * 개요
-  * Previous Methods
+  * One-hot encoding
+  * Previous methods
   * Skip-gram & CBOW
   * GloVe
   * FastText
