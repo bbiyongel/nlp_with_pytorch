@@ -50,7 +50,7 @@
   * [n-gram](n-gram.md)
   * [NNLM](nnlm.md)
 * Text Classification
-  * [Intro](intro.md)
+  * Intro
   * Using RNN
   * Using CNN
   * Using RNN
