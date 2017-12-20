@@ -49,29 +49,29 @@
   * [NNLM](language-modeling/nnlm.md)
 * Text Classification
   * [Intro](text-classification/intro.md)
-  * Using RNN
-  * Using CNN
-  * Unsupervised Text Classification
+  * [Using RNN](text-classification/rnn.md)
+  * [Using CNN](text-classification/cnn.md)
+  * [Unsupervised Text Classification](text-classification/unsupervised-text-classification.md)
 * Neural Machine Translation
-  * [기계번역 개요 및 역사](ae30-acc4-bc88-c5ed-ac1c-c694-bc0f-c5ed-c0ac.md)
-  * [성능 평가 방법](c131-b2a5-d3c9-ac00-bc29-bc95.md)
-  * [Seq2seq](seq2seq.md)
-  * [Attention](attention.md)
-  * [Input Feeding](input-feeding.md)
-  * Beam Search
-  * Fully Convolutional Seq2seq
-  * Transformer
+  * [기계번역 개요 및 역사](neural-machine-translation/ae30-acc4-bc88-c5ed-ac1c-c694-bc0f-c5ed-c0ac.md)
+  * [성능 평가 방법](neural-machine-translation/c131-b2a5-d3c9-ac00-bc29-bc95.md)
+  * [Seq2seq](neural-machine-translation/seq2seq.md)
+  * [Attention](neural-machine-translation/attention.md)
+  * [Input Feeding](neural-machine-translation/input-feeding.md)
+  * [Beam Search](neural-machine-translation/beam-search.md)
+  * [Fully Convolutional Seq2seq](neural-machine-translation/fconv.md)
+  * [Transformer](neural-machine-translation/transformer.md)
 * Reinforcement Learning for NMT
-  * Intro
-  * Policy Gradient
-  * Supervised NMT
-  * Unsupervised NMT
+  * [Intro](reinforcement-learning-for-nmt/intro.md)
+  * [Policy Gradient](reinforcement-learning-for-nmt/policy-gradient.md)
+  * [Supervised NMT](reinforcement-learning-for-nmt/supervised-nmt.md)
+  * [Unsupervised NMT](reinforcement-learning-for-nmt/unsupervised-nmt.md)
 * Speech Recognition
-  * Intro
-  * Traditional methodology
-  * Seq2seq
+  * [Intro](speech-recognition/intro.md)
+  * [Traditional methodology](speech-recognition/wfst.md)
+  * [Seq2seq](speech-recognition/seq2seq.md)
 * Advanced Topic
-  * Memory Augmented Neural Network
-    * Text Summarization
-    * Quetional Answering
+  * [Memory Augmented Neural Network](advanced-topic/memory-augmented-neural-network.md)
+    * [Text Summarization](advanced-topic/text-summarization.md)
+    * [Quetional Answering](advanced-topic/question-answering.md)
 
