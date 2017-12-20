@@ -3,16 +3,16 @@
 * [소개글](README.md)
 * [To Do & Milestone](to-do-and-milestone.md)
 * Natural Language Processing with Deeplearning
-  * 소개
+  * Intro
   * Why NLP important
   * Why NLP difficult
   * Deeplearning
   * History
 * [PyTorch 소개](pytorch-c18c-ac1c.md)
-  * 소개
-  * 설치 방법
-  * TorchText 소개
-  * 예제
+  * Intro
+  * How to install
+  * TorchText
+  * PyTorch sample code
 * Word Sense Disambiguation \(WSD\)
   * [소개](word-sense-disambiguation.md)
   * Bayes Theorem
@@ -22,10 +22,10 @@
 * Preprocessing
   * [전처리 개요](c804-cc98-b9ac-ac1c-c694.md)
   * Corpus 수집
-  * 정제
+  * Cleaning corpus
   * Tokenization \(POS Tagging\)
 * Word Embedding Vector
-  * 개요
+  * Intro
   * [One-hot encoding](one-hot-encoding.md)
   * [Previous methods](previous-methods.md)
   * [Word2Vec](word2vec.md)
@@ -38,7 +38,7 @@
   * GRU
   * Gradient Clipping
 * Sequential Problem
-  * 문제 정의
+  * Intro
   * Hidden Markov Model
   * Conditional Random Field
   * Using Deeplearning
@@ -50,7 +50,7 @@
   * [n-gram](n-gram.md)
   * [NNLM](nnlm.md)
 * Text Classification
-  * 소개
+  * Intro
   * Using RNN
   * Using CNN
   * Using RNN
@@ -70,7 +70,7 @@
   * Fully Convolutional Seq2seq
   * Transformer
 * Reinforcement Learning for NMT
-  * 강화학습 개요
+  * Intro
   * Policy Gradient
   * Supervised NMT
   * Unsupervised NMT
