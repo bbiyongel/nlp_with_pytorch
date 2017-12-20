@@ -31,6 +31,7 @@
   * Skip-gram & CBOW
   * GloVe
   * FastText
+  * Further methods
 * RNN
   * RNN
   * LSTM
