@@ -76,4 +76,3 @@
   * [Memory Augmented Neural Network](advanced-topic/memory-augmented-neural-network.md)
     * [Text Summarization](advanced-topic/text-summarization.md)
     * [Quetional Answering](advanced-topic/question-answering.md)
-
