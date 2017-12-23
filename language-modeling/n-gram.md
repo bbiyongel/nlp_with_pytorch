@@ -32,7 +32,7 @@ $$
 | 1 | 2-gram | bi-gram |
 | 2 | 3-gram | tri-gram |
 
-위 테이블과 같이 3-gram 까지는 tri-gram이라고 읽지만 4-gram 부터는 그냥 four-gram 이라고 읽습니다.
+위 테이블과 같이 3-gram 까지는 tri-gram이라고 읽지만 4-gram 부터는 그냥 four-gram 이라고 읽습니다. 보통은 3-gram을 가장 많이 사용하고, corpus(말뭉치)의 양이 많을 때는 4-gram을 사용하기도 합니다. 하지만 언어모델의 성능은 크게 오르지 않는데 반해, 단어 조합의 경우의 수는 exponential하게 증가하기 때문에, 크게 효율성이 없습니다.
 
 ## 한계
 
