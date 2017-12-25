@@ -2,7 +2,7 @@
 
 ## Architecture Overview
 
-![](/assets/seq2seq_architecture.png)
+
 
 ## Embedding Layer
 
