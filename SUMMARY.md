@@ -56,8 +56,8 @@
   * [기계번역 개요 및 역사](neural-machine-translation/ae30-acc4-bc88-c5ed-ac1c-c694-bc0f-c5ed-c0ac.md)
   * [성능 평가 방법](neural-machine-translation/c131-b2a5-d3c9-ac00-bc29-bc95.md)
   * [Seq2seq](neural-machine-translation/seq2seq.md)
-  * [Attention](neural-machine-translation/attention.md)
   * [Input Feeding](neural-machine-translation/input-feeding.md)
+  * [Attention](neural-machine-translation/attention.md)
   * [Beam Search](neural-machine-translation/beam-search.md)
   * Advanced Topic on NMT
     * [Using Monolingual Corpora](neural-machine-translation/mono.md)
@@ -76,3 +76,4 @@
   * [Memory Augmented Neural Network](advanced-topic/memory-augmented-neural-network.md)
     * [Text Summarization](advanced-topic/text-summarization.md)
     * [Quetional Answering](advanced-topic/question-answering.md)
+
