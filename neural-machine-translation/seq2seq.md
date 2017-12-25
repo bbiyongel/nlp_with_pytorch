@@ -2,6 +2,8 @@
 
 ## Architecture Overview
 
+![](/assets/seq2seq_architecture.png)
+
 ## Embedding Layer
 
 ### 설명
@@ -25,4 +27,6 @@
 ### 설명
 
 ### 코드
+
+
 
