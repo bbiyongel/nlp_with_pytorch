@@ -19,6 +19,8 @@ Neural Network LM은 많은 형태를 가질 수 있지만 우리는 가장 효�
 
 ## Recurrent Neural Network LM
 
+![RNNLM](/assets/rnn_lm_architecture.png)
+
 ### 설명
 
 Recurrent Neural Network Lauguage Model (RNNLM)은 위와 같은 구조를 지니고 있습니다. 
