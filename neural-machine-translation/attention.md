@@ -61,7 +61,7 @@ def is_same(key, query):
 
 무슨 의미인지는 모르겠지만 ***3.2***라는 값이 나왔습니다. ***is_same*** 함수를 쓸 때에는 두 값이 같은지 if문을 통해 검사하고 값을 할당했기 때문에, 미분을 할 수 없었습니다. 하지만, 이제 우리는 key_value_func을 미분 할 수 있습니다.
 
-### Differentiable Key-Value vector function
+### Differentiable Key-Value Vector function
 
 - 만약, ***dic***의 ***value***에는 100차원의 voctor로 들어있었다면 어떻게 될까요? 
 - 거기에, ***query***와 ***key***값 모두 vector라면 어떻게 될까요? 즉, Word Embedding Vector라면?
