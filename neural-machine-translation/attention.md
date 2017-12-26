@@ -102,7 +102,7 @@ def key_value_func(query):
 
 자, 그럼 이제 answer의 값에는 어떤 vector 값이 들어 있을 겁니다. 그 vector는 ***puppy*** vector와 ***dog***, ***computer***, ***cat*** vector들의 유사도에 따라서 값이 정해졌을겁니다.
 
-즉, 다시 말해서, 이 함수는 query와 비슷한 key 값을 찾아서 비슷한 정도에 따라서 weight를 나누고, 각 key의 value값을 weight 값 만큼 가져와서 모두 더하는 것 입니다.
+즉, 다시 말해서, 이 함수는 query와 비슷한 key 값을 찾아서 비슷한 정도에 따라서 weight를 나누고, 각 key의 value값을 weight 값 만큼 가져와서 모두 더하는 것 입니다. 이것이 Attention이 하는 역할 입니다.
 
 ### Linear Transform
 
