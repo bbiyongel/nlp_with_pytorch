@@ -32,7 +32,7 @@ def key_value_func(query):
     return answer
 ```
 
-코드를 살펴보면, 순차적으로 ***dic*** 내부의 key값들과 ***query*** 값을 비교하며, 같은 key가 있을 경우 weights에 
+코드를 살펴보면, 순차적으로 ***dic*** 내부의 key값들과 ***query*** 값을 비교하여, key가 같을 경우 ***weights***에 ***1.0***을 추가하고, 다를 경우에는 ***0.0***을 추가합니다. 그리고 다시 ***dic*** 내부의 value값들과 weights의 값을 inner product (스칼라곱, dot product) 합니다. 즉, $$ weight = 1.0 $$ 인 경우에만 value 값을 ***answer***에 더합니다.
 
 ### Query-Key-Value function
 
