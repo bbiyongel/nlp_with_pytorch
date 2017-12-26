@@ -29,3 +29,4 @@ Recurrent Neural Network Lauguage Model \(RNNLM\)은 위와 같은 구조를 지
 
 ## 단점
 
+interpolation
