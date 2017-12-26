@@ -116,6 +116,15 @@ def key_value_func(query):
 >>> context_vector = attention(query = decoder_output, keys = encoder_outputs, values = encoder_outputs)
 ```
 
+#### Linear Transformation
+
+이때, 각 input parameter들은 다음을 의미한다고 볼 수 있습니다.
+
+1. decoder_output: 현재 time-step 까지 번역 된 target language 단어들 또는 문장, 의미
+1. encoder_outputs: 각 time-step 에서의 source language 단어 또는 문장, 의미
+
+사실 추상적이므로 딱 잘라 정의할 수 없습니다. 하지만 분명한건, source language와 target language가 다르다는 것 입니다. 따라서 단순히 dot product를 해 주기보단 source language와 target language 간에 bridge를 하나 놓아주어야 합니다. 그래서 우리는 두 언어의 embedding hyper plane이 선형 관계에 있다고 가정하고, ***linear transformation***을 해 줍니다.
+
 ## 설명
 
 ## 코드
