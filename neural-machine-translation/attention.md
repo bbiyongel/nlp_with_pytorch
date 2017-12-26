@@ -104,7 +104,7 @@ def key_value_func(query):
 
 즉, 다시 말해서, 이 함수는 query와 비슷한 key 값을 찾아서 비슷한 정도에 따라서 weight를 나누고, 각 key의 value값을 weight 값 만큼 가져와서 모두 더하는 것 입니다. 이것이 Attention이 하는 역할 입니다.
 
-### Linear Transform
+### Attention for Machine Translation task
 
 그럼 번역과 같은 task에서 attention은 어떻게 작용할까요? 번역 과정에서는 encoder의 각 time-step 별 output을 Key와 Value로 삼고, 현재 time-step의 decoder output을 Query로 삼아 attention을 취합니다.
 
