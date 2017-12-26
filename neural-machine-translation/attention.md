@@ -9,7 +9,7 @@
 Attention을 본격 소개하기 전에 먼저 우리가 알고 있는 자료형을 짚고 넘어갈까 합니다. Key-Value 또는 [Python에서 Dictionary](https://wikidocs.net/16)라고 부르는 자료형 입니다.
 
 ```
-dic = {'dog': 0, 'computer': 1, 'car': 2}
+dic = {'dog': 0, 'computer': 1, 'cat': 2}
 ```
 
 위와 같이 ***Key***와 ***Value***에 해당하는 값들을 넣고 Key를 통해 Value 값에 접근 할 수 있습니다. 위의 작업을 함수로 나타낸다면, 아래와 같이 표현할 수 있을겁니다. (물론 실제 Python Dictionary 동작은 매우 다릅니다.)
@@ -19,10 +19,7 @@ def key_value_func(query):
     weights = []
     
     for key in dic.keys():
-        if key == query:
-            weights += [1.]
-        else:
-            weights += [.0]
+        weights += [is_same(key, query)]
     
     answer = 0
     
@@ -30,9 +27,30 @@ def key_value_func(query):
         answer += weight * value
         
     return answer
+    
+def is_same(key, query):
+    if key == query:
+        return 1.
+    else:
+        return .0
 ```
 
 코드를 살펴보면, 순차적으로 ***dic*** 내부의 key값들과 ***query*** 값을 비교하여, key가 같을 경우 ***weights***에 ***1.0***을 추가하고, 다를 경우에는 ***0.0***을 추가합니다. 그리고 다시 ***dic*** 내부의 value값들과 weights의 값을 inner product (스칼라곱, dot product) 합니다. 즉, $$ weight = 1.0 $$ 인 경우에만 value 값을 ***answer***에 더합니다.
+
+좀 더 발전시켜서, 만약 ***is_same*** 함수 대신에 다른 함수를 써 보면 어떻게 될까요? ***how_similar***라는 key와 query 사이의 유사도를 리턴 해 주는 가상의 함수가 있다고 가정해 봅시다. (가정하는 김에 좀 더 가정해서 cosine similarity라고 가정해 봅시다.)
+
+```
+>>> query = 'puppy'
+>>> is_similar('dog', query)
+0.9
+>>> is_similar('cat', query)
+0.7
+>>> is_similar('computer', query)
+0.1
+
+```
+
+
 
 ### Query-Key-Value function
 
