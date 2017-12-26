@@ -92,6 +92,8 @@ def key_value_func(query):
 [0.1, 0.3, -0.7, 0.0, ...
 >>> word2vec('cat')
 [0.15, 0.2, -0.3, 0.8, ...
+>>> len(word2vec('computer'))
+100
 >>> dic = {word2vec('dog'): word2vec('dog'), word2vec('computer'): word2vec('computer'), word2vec('cat'): word2vec('cat')}
 >>>
 >>> query = 'puppy'
