@@ -37,7 +37,7 @@
   * [LSTM](rnn/lstm.md)
   * [GRU](rnn/gru.md)
   * [Gradient Clipping](rnn/gradient-clipping.md)
-* Sequential Problem
+* Sequence Modeling
   * [Intro](sequential-problem/intro.md)
   * [Hidden Markov Model](sequential-problem/hmm.md)
   * [Conditional Random Field](sequential-problem/crf.md)
@@ -73,6 +73,7 @@
   * [Traditional methodology](speech-recognition/wfst.md)
   * [Seq2seq](speech-recognition/seq2seq.md)
 * Advanced Topic
+  * Dynamic Memory Network
   * [Memory Augmented Neural Network](advanced-topic/memory-augmented-neural-network.md)
     * [Text Summarization](advanced-topic/text-summarization.md)
     * [Quetional Answering](advanced-topic/question-answering.md)
