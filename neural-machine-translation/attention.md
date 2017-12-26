@@ -126,7 +126,9 @@ def key_value_func(query):
 사실 추상적이므로 딱 잘라 정의할 수 없습니다. 하지만 분명한건, source language와 target language가 다르다는 것 입니다. 따라서 단순히 dot product를 해 주기보단 source language와 target language 간에 bridge를 하나 놓아주어야 합니다. 그래서 우리는 두 언어의 embedding hyper plane이 선형 관계에 있다고 가정하고, dot product 하기 전에 ***linear transformation***을 해 줍니다.
 
 $$ w = softmax(E \cdot W d) $$
+
 $$ c = E \cdot w $$
+
 $$ where~d~is~decoder~output,~E~is~encoder~outputs~and~c~is~context~vector $$
 
 ## 설명
