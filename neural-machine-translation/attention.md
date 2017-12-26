@@ -24,7 +24,7 @@ def key_value_func(query):
         else:
             weights += [0]
     
-    answer = ""
+    answer = 0
     
     for weight, value in zip(weights, dic.values()):
         answer += weight * value
