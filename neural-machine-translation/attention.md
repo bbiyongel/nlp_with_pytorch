@@ -12,7 +12,7 @@ Attention을 본격 소개하기 전에 먼저 우리가 알고 있는 자료형
 dic = {'dog': 1, 'computer': 2, 'cat': 3}
 ```
 
-위와 같이 ***Key***와 ***Value***에 해당하는 값들을 넣고 Key를 통해 Value 값에 접근 할 수 있습니다. 위의 작업을 함수로 나타낸다면, 아래와 같이 표현할 수 있을겁니다. (물론 실제 Python Dictionary 동작은 매우 다릅니다.)
+위와 같이 ***Key***와 ***Value***에 해당하는 값들을 넣고 ***Key***를 통해 ***Value*** 값에 접근 할 수 있습니다. 좀 더 바꿔 말하면, ***Query***가 주어졌을 때, ***Key***값에 따라 ***Value***값에 접근 할 수 있습니다. 위의 작업을 함수로 나타낸다면, 아래와 같이 표현할 수 있을겁니다. (물론 실제 Python Dictionary 동작은 매우 다릅니다.)
 
 ```
 def key_value_func(query):
@@ -57,7 +57,11 @@ def is_same(key, query):
 3.2 # = 0.9 * 1 + 0.1 * 2 + 0.7 * 3
 ```
 
-### Query-Key-Value function
+무슨 의미인지는 모르겠지만 ***3.2***라는 값이 나왔습니다. 만약, ***dic***의 ***value***에는 100차원의 voctor로 들어있었다면 어떻게 될까요?
+
+### Linear Transform
+
+
 
 ## 설명
 
