@@ -32,16 +32,15 @@
   * [GloVe](word-embedding-vector/glove.md)
   * [FastText](word-embedding-vector/fasttext.md)
   * [Advanced embedding](word-embedding-vector/advanced-embedding.md)
-* RNN
-  * [RNN](rnn/rnn.md)
-  * [LSTM](rnn/lstm.md)
-  * [GRU](rnn/gru.md)
-  * [Gradient Clipping](rnn/gradient-clipping.md)
 * Sequence Modeling
   * [Intro](sequential-problem/intro.md)
   * [Hidden Markov Model](sequential-problem/hmm.md)
   * [Conditional Random Field](sequential-problem/crf.md)
-  * [Recurrent Neural Network](sequential-problem/rnn.md)
+  * Recurrent Neural Network
+    * [Vanila RNN](sequential-problem/rnn.md)
+    * [LSTM](rnn/lstm.md)
+    * [GRU](rnn/gru.md)
+    * [Gradient Clipping](rnn/gradient-clipping.md)
 * Language Modeling
   * [언어모델 개요](language-modeling/c5b8-c5b4-baa8-b378-ac1c-c694.md)
   * [n-gram](language-modeling/n-gram.md)
