@@ -4,5 +4,10 @@
     "autocover",
     "ace",
     "include-codeblock"
-  ]
+  ],
+  "pluginsConfig": {
+    "mathjax":{
+      "forceSVG": true
+    }
+  }
 }
