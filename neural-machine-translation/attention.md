@@ -41,11 +41,11 @@ def is_same(key, query):
 
 ```
 >>> query = 'puppy'
->>> is_similar('dog', query)
+>>> how_similar('dog', query)
 0.9
->>> is_similar('cat', query)
+>>> how_similar('cat', query)
 0.7
->>> is_similar('computer', query)
+>>> how_similar('computer', query)
 0.1
 ```
 
@@ -62,6 +62,15 @@ def is_same(key, query):
 - 만약, ***dic***의 ***value***에는 100차원의 voctor로 들어있었다면 어떻게 될까요? 
 - 거기에, ***query***와 ***key***값 모두 vector라면 어떻게 될까요? 즉, Word Embedding Vector라면?
 - 그리고, ***dic***의 ***key***값과 ***value***값이 서로 같다면 어떻게 될까요?
+
+그럼 다시 가상의 함수를 만들어보겠습니다. ***word2vec***이라는 함수는 단어를 입력으로 받아서 그 단어에 해당하는 미리 정해진 word embedding vector를 리턴 해 준다고 가정하겠습니다.
+
+```
+>>> word2vec('dog')
+[0.1, 0.3, -0.7, 0.0, ...
+>>> word2vec('cat')
+[0.15, 0.2, -0.3, 0.8, ...
+```
 
 ### Linear Transform
 
