@@ -37,6 +37,8 @@ def is_same(key, query):
 
 코드를 살펴보면, 순차적으로 ***dic*** 내부의 key값들과 ***query*** 값을 비교하여, key가 같을 경우 ***weights***에 ***1.0***을 추가하고, 다를 경우에는 ***0.0***을 추가합니다. 그리고 다시 ***dic*** 내부의 value값들과 weights의 값을 inner product (스칼라곱, dot product) 합니다. 즉, $$ weight = 1.0 $$ 인 경우에만 value 값을 ***answer***에 더합니다.
 
+### Differentiable Key-Value func
+
 좀 더 발전시켜서, 만약 ***is_same*** 함수 대신에 다른 함수를 써 보면 어떻게 될까요? ***how_similar***라는 key와 query 사이의 유사도를 리턴 해 주는 가상의 함수가 있다고 가정해 봅시다. (가정하는 김에 좀 더 가정해서 cosine similarity라고 가정해 봅시다.)
 
 ```
@@ -58,6 +60,8 @@ def is_same(key, query):
 ```
 
 무슨 의미인지는 모르겠지만 ***3.2***라는 값이 나왔습니다. 
+
+### Differentiable Key-Value vector function
 
 - 만약, ***dic***의 ***value***에는 100차원의 voctor로 들어있었다면 어떻게 될까요? 
 - 거기에, ***query***와 ***key***값 모두 vector라면 어떻게 될까요? 즉, Word Embedding Vector라면?
