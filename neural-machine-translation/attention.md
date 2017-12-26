@@ -63,7 +63,25 @@ def is_same(key, query):
 - 거기에, ***query***와 ***key***값 모두 vector라면 어떻게 될까요? 즉, Word Embedding Vector라면?
 - 그리고, ***dic***의 ***key***값과 ***value***값이 서로 같다면 어떻게 될까요?
 
-그럼 다시 가상의 함수를 만들어보겠습니다. ***word2vec***이라는 함수는 단어를 입력으로 받아서 그 단어에 해당하는 미리 정해진 word embedding vector를 리턴 해 준다고 가정하겠습니다.
+그럼 다시 가상의 함수를 만들어보겠습니다. ***word2vec***이라는 함수는 단어를 입력으로 받아서 그 단어에 해당하는 미리 정해진 word embedding vector를 리턴 해 준다고 가정하겠습니다. 그럼 좀 전의 ***how_similar*** 함수는 두 vector 간의 dot product 값을 반환 할 겁니다.
+
+```
+def key_value_func(query):
+    weights = []
+    
+    for key in dic.keys():
+        weights += [how_similar(key, query)]    # dot product 값을 채워 넣는다.
+    
+    weights = softmax(weights)    # 모든 weight들을 구한 후에 softmax를 계산한다.
+    answer = 0
+    
+    for weight, value in zip(weights, dic.values()):
+        answer += weight * value
+        
+    return answer
+```
+
+이번에 key_value_func는 그럼 그 값을 받아서 weights에 저장 한 후, 모든 weights의 값이 채워지면 softmax를 취할 겁니다.
 
 ```
 >>> word2vec('dog')
@@ -71,7 +89,12 @@ def is_same(key, query):
 >>> word2vec('cat')
 [0.15, 0.2, -0.3, 0.8, ...
 >>> dic = {word2vec('dog'): word2vec('dog'), word2vec('computer'): word2vec('computer'), word2vec('cat'): word2vec('cat')}
+>>>
+>>> query = 'puppy'
+>>> answer = key_value_func(word2vec(query))
 ```
+
+자, 그럼 이제 answer의 값에는 어떤 vector 값이 들어 있을 겁니다. 그 vector는 ***puppy*** vector와 ***dog***, ***computer***, ***cat*** vector들의 유사도에 따라서 값이 정해졌을겁니다.
 
 ### Linear Transform
 
