@@ -73,7 +73,7 @@
   * [Traditional methodology](speech-recognition/wfst.md)
   * [Seq2seq](speech-recognition/seq2seq.md)
 * Advanced Topic
-  * Dynamic Memory Network
+  * [Dynamic Memory Network](advanced-topic/dmn.md)
   * [Memory Augmented Neural Network](advanced-topic/memory-augmented-neural-network.md)
     * [Text Summarization](advanced-topic/text-summarization.md)
     * [Quetional Answering](advanced-topic/question-answering.md)
