@@ -12,6 +12,7 @@ Attention을 본격 소개하기 전에 먼저 우리가 알고 있는 자료형
 dic = {"hi": "안녕", "school": "학교", "home": "집"}
 ```
 
+위와 같이 ***Key***와 ***Value***에 해당하는 값들을 넣고 Key를 통해 Value 값에 접근 할 수 있습니다.
 
 
 ### Query-Key-Value function
