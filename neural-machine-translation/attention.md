@@ -20,9 +20,9 @@ def key_value_func(query):
     
     for key in dic.keys():
         if key == query:
-            weights += [1]
+            weights += [1.]
         else:
-            weights += [0]
+            weights += [.0]
     
     answer = 0
     
