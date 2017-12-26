@@ -1,5 +1,6 @@
 {
   "plugins": [
+    "mathjax",
     "autocover",
     "ace",
     "include-codeblock"
