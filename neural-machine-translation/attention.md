@@ -106,6 +106,15 @@ def key_value_func(query):
 
 ### Linear Transform
 
+그럼 번역과 같은 task에서 attention은 어떻게 작용할까요? 번역 과정에서는 encoder의 각 time-step 별 output을 Key와 Value로 삼고, 현재 time-step의 decoder output을 Query로 삼아 attention을 취합니다.
+
+* Query: 현재 time-step의 decoder output
+* Keys: 각 time-step 별 encoder output
+* Values: 각 time-step 별 encoder output
+
+```
+>>> context_vector = attention(query = decoder_output, keys = encoder_outputs, values = encoder_outputs)
+```
 
 ## 설명
 
