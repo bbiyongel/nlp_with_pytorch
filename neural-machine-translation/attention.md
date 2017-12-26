@@ -127,11 +127,9 @@ def key_value_func(query):
 
 $$
 w = softmax(E \cdot W d)
-$$
-$$
+
 c = E \cdot w
-$$
-$$
+
 where~d~is~decoder~output,~E~is~encoder~outputs~and~c~is~context~vector
 $$
 
