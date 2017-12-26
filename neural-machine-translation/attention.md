@@ -9,7 +9,7 @@
 Attention을 본격 소개하기 전에 먼저 우리가 알고 있는 자료형을 짚고 넘어갈까 합니다. Key-Value 또는 [Python에서 Dictionary](https://wikidocs.net/16)라고 부르는 자료형 입니다.
 
 ```
-dic = {'dog': 1, 'computer': 2, 'cat': 3}
+>>> dic = {'dog': 1, 'computer': 2, 'cat': 3}
 ```
 
 위와 같이 ***Key***와 ***Value***에 해당하는 값들을 넣고 ***Key***를 통해 ***Value*** 값에 접근 할 수 있습니다. 좀 더 바꿔 말하면, ***Query***가 주어졌을 때, ***Key***값에 따라 ***Value***값에 접근 할 수 있습니다. 위의 작업을 함수로 나타낸다면, 아래와 같이 표현할 수 있을겁니다. (물론 실제 Python Dictionary 동작은 매우 다릅니다.)
@@ -70,6 +70,7 @@ def is_same(key, query):
 [0.1, 0.3, -0.7, 0.0, ...
 >>> word2vec('cat')
 [0.15, 0.2, -0.3, 0.8, ...
+>>> dic = {word2vec('dog'): word2vec('dog'), word2vec('computer'): word2vec('computer'), word2vec('cat'): word2vec('cat')}
 ```
 
 ### Linear Transform
