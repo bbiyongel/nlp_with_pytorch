@@ -47,10 +47,9 @@ def is_same(key, query):
 0.7
 >>> is_similar('computer', query)
 0.1
-
 ```
 
-
+그리고 해당 함수에 **puppy**라는 단어를 테스트 해 보았더니 위와 같은 값들을 리턴해 주었다고 해 보겠습니다.
 
 ### Query-Key-Value function
 
