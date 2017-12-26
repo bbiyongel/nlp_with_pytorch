@@ -1,6 +1,6 @@
 # Attention
 
-
+## ![](/assets/seq2seq_with_attn_architecture.png)
 
 ## 소개
 
