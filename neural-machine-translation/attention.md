@@ -32,6 +32,7 @@ def key_value_func(query):
     return answer
 ```
 
+코드를 살펴보면, 순차적으로 ***dic*** 내부의 key값들과 ***query*** 값을 비교하며, 같은 key가 있을 경우 weights에 
 
 ### Query-Key-Value function
 
