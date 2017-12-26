@@ -8,3 +8,5 @@
 1. 코드 추가: 깃허브 등에 정리
 1. 레퍼런스 추가
 1. 검수 및 오탈자 교정
+
+https://khan.github.io/KaTeX/function-support.html
