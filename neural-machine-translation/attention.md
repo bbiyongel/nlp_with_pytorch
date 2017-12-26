@@ -66,7 +66,6 @@ def is_same(key, query):
 ### Linear Transform
 
 
-
 ## 설명
 
 ## 코드
