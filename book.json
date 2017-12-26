@@ -3,6 +3,7 @@
   "plugins": [
     "mathjax",
     "autocover",
-    "ace"
+    "ace",
+    "include-codeblock"
   ]
 }
