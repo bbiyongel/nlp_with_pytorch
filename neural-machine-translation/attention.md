@@ -61,7 +61,7 @@ def is_same(key, query):
 
 ### Differentiable Key-Value Vector function
 
-- 만약, ***dic***의 ***value***에는 100차원의 voctor로 들어있었다면 어떻게 될까요? 
+- 만약, ***dic***의 ***value***에는 100차원의 vector로 들어있었다면 어떻게 될까요? 
 - 거기에, ***query***와 ***key***값 모두 vector라면 어떻게 될까요? 즉, Word Embedding Vector라면?
 - 그리고, ***dic***의 ***key***값과 ***value***값이 서로 같다면 어떻게 될까요?
 
