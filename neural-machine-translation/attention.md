@@ -10,22 +10,22 @@ Attention을 본격 소개하기 전에 먼저 우리가 알고 있는 자료형
 >>> dic = {'dog': 1, 'computer': 2, 'cat': 3}
 ```
 
-위와 같이 ***Key***와 ***Value***에 해당하는 값들을 넣고 ***Key***를 통해 ***Value*** 값에 접근 할 수 있습니다. 좀 더 바꿔 말하면, ***Query***가 주어졌을 때, ***Key***값에 따라 ***Value***값에 접근 할 수 있습니다. 위의 작업을 함수로 나타낸다면, 아래와 같이 표현할 수 있을겁니다. (물론 실제 Python Dictionary 동작은 매우 다릅니다.)
+위와 같이 _**Key**_와 _**Value**_에 해당하는 값들을 넣고 _**Key**_를 통해 _**Value**_ 값에 접근 할 수 있습니다. 좀 더 바꿔 말하면, _**Query**_가 주어졌을 때, _**Key**_값에 따라 _**Value**_값에 접근 할 수 있습니다. 위의 작업을 함수로 나타낸다면, 아래와 같이 표현할 수 있을겁니다. \(물론 실제 Python Dictionary 동작은 매우 다릅니다.\)
 
 ```
 def key_value_func(query):
     weights = []
-    
+
     for key in dic.keys():
         weights += [is_same(key, query)]
-    
+
     answer = 0
-    
+
     for weight, value in zip(weights, dic.values()):
         answer += weight * value
-        
+
     return answer
-    
+
 def is_same(key, query):
     if key == query:
         return 1.
@@ -33,11 +33,11 @@ def is_same(key, query):
         return .0
 ```
 
-코드를 살펴보면, 순차적으로 ***dic*** 내부의 key값들과 ***query*** 값을 비교하여, key가 같을 경우 ***weights***에 ***1.0***을 추가하고, 다를 경우에는 ***0.0***을 추가합니다. 그리고 다시 ***dic*** 내부의 value값들과 weights의 값을 inner product (스칼라곱, dot product) 합니다. 즉, $$ weight = 1.0 $$ 인 경우에만 value 값을 ***answer***에 더합니다.
+코드를 살펴보면, 순차적으로 _**dic**_ 내부의 key값들과 _**query**_ 값을 비교하여, key가 같을 경우 _**weights**_에 _**1.0**_을 추가하고, 다를 경우에는 _**0.0**_을 추가합니다. 그리고 다시 _**dic**_ 내부의 value값들과 weights의 값을 inner product \(스칼라곱, dot product\) 합니다. 즉, $$ weight = 1.0 $$ 인 경우에만 value 값을 _**answer**_에 더합니다.
 
 ### Differentiable Key-Value function
 
-좀 더 발전시켜서, 만약 ***is_same*** 함수 대신에 다른 함수를 써 보면 어떻게 될까요? ***how_similar***라는 key와 query 사이의 유사도를 리턴 해 주는 가상의 함수가 있다고 가정해 봅시다. (가정하는 김에 좀 더 가정해서 cosine similarity라고 가정해 봅시다.)
+좀 더 발전시켜서, 만약 _**is\_same**_ 함수 대신에 다른 함수를 써 보면 어떻게 될까요? _**how\_similar**_라는 key와 query 사이의 유사도를 리턴 해 주는 가상의 함수가 있다고 가정해 봅시다. \(가정하는 김에 좀 더 가정해서 cosine similarity라고 가정해 봅시다.\)
 
 ```
 >>> query = 'puppy'
@@ -57,33 +57,33 @@ def is_same(key, query):
 3.2 # = 0.9 * 1 + 0.1 * 2 + 0.7 * 3
 ```
 
-무슨 의미인지는 모르겠지만 ***3.2***라는 값이 나왔습니다. ***is_same*** 함수를 쓸 때에는 두 값이 같은지 if문을 통해 검사하고 값을 할당했기 때문에, 미분을 할 수 없었습니다. 하지만, 이제 우리는 key_value_func을 미분 할 수 있습니다.
+무슨 의미인지는 모르겠지만 _**3.2**_라는 값이 나왔습니다. _**is\_same**_ 함수를 쓸 때에는 두 값이 같은지 if문을 통해 검사하고 값을 할당했기 때문에, 미분을 할 수 없었습니다. 하지만, 이제 우리는 key\_value\_func을 미분 할 수 있습니다.
 
 ### Differentiable Key-Value Vector function
 
-- 만약, ***dic***의 ***value***에는 100차원의 vector로 들어있었다면 어떻게 될까요? 
-- 거기에, ***query***와 ***key***값 모두 vector라면 어떻게 될까요? 즉, Word Embedding Vector라면?
-- 그리고, ***dic***의 ***key***값과 ***value***값이 서로 같다면 어떻게 될까요?
+* 만약, _**dic**_의 _**value**_에는 100차원의 vector로 들어있었다면 어떻게 될까요? 
+* 거기에, _**query**_와 _**key**_값 모두 vector라면 어떻게 될까요? 즉, Word Embedding Vector라면?
+* 그리고, _**dic**_의 _**key**_값과 _**value**_값이 서로 같다면 어떻게 될까요?
 
-그럼 다시 가상의 함수를 만들어보겠습니다. ***word2vec***이라는 함수는 단어를 입력으로 받아서 그 단어에 해당하는 미리 정해진 word embedding vector를 리턴 해 준다고 가정하겠습니다. 그럼 좀 전의 ***how_similar*** 함수는 두 vector 간의 dot product 값을 반환 할 겁니다.
+그럼 다시 가상의 함수를 만들어보겠습니다. _**word2vec**_이라는 함수는 단어를 입력으로 받아서 그 단어에 해당하는 미리 정해진 word embedding vector를 리턴 해 준다고 가정하겠습니다. 그럼 좀 전의 _**how\_similar**_ 함수는 두 vector 간의 dot product 값을 반환 할 겁니다.
 
 ```
 def key_value_func(query):
     weights = []
-    
+
     for key in dic.keys():
         weights += [how_similar(key, query)]    # dot product 값을 채워 넣는다.
-    
+
     weights = softmax(weights)    # 모든 weight들을 구한 후에 softmax를 계산한다.
     answer = 0
-    
+
     for weight, value in zip(weights, dic.values()):
         answer += weight * value
-        
+
     return answer
 ```
 
-이번에 key_value_func는 그럼 그 값을 받아서 weights에 저장 한 후, 모든 weights의 값이 채워지면 softmax를 취할 겁니다.
+이번에 key\_value\_func는 그럼 그 값을 받아서 weights에 저장 한 후, 모든 weights의 값이 채워지면 softmax를 취할 겁니다.
 
 ```
 >>> word2vec('dog')
@@ -98,7 +98,7 @@ def key_value_func(query):
 >>> answer = key_value_func(word2vec(query))
 ```
 
-자, 그럼 이제 answer의 값에는 어떤 vector 값이 들어 있을 겁니다. 그 vector는 ***puppy*** vector와 ***dog***, ***computer***, ***cat*** vector들의 유사도에 따라서 값이 정해졌을겁니다.
+자, 그럼 이제 answer의 값에는 어떤 vector 값이 들어 있을 겁니다. 그 vector는 _**puppy**_ vector와 _**dog**_, _**computer**_, _**cat**_ vector들의 유사도에 따라서 값이 정해졌을겁니다.
 
 즉, 다시 말해서, 이 함수는 query와 비슷한 key 값을 찾아서 비슷한 정도에 따라서 weight를 나누고, 각 key의 value값을 weight 값 만큼 가져와서 모두 더하는 것 입니다. 이것이 Attention이 하는 역할 입니다.
 
@@ -120,10 +120,10 @@ def key_value_func(query):
 
 이때, 각 input parameter들은 다음을 의미한다고 볼 수 있습니다.
 
-1. decoder_output: 현재 time-step 까지 번역 된 target language 단어들 또는 문장, 의미
-1. encoder_outputs: 각 time-step 에서의 source language 단어 또는 문장, 의미
+1. decoder\_output: 현재 time-step 까지 번역 된 target language 단어들 또는 문장, 의미
+2. encoder\_outputs: 각 time-step 에서의 source language 단어 또는 문장, 의미
 
-사실 추상적이므로 딱 잘라 정의할 수 없습니다. 하지만 분명한건, source language와 target language가 다르다는 것 입니다. 따라서 단순히 dot product를 해 주기보단 source language와 target language 간에 bridge를 하나 놓아주어야 합니다. 그래서 우리는 두 언어의 embedding hyper plane이 선형 관계에 있다고 가정하고, dot product 하기 전에 ***linear transformation***을 해 줍니다.
+사실 추상적이므로 딱 잘라 정의할 수 없습니다. 하지만 분명한건, source language와 target language가 다르다는 것 입니다. 따라서 단순히 dot product를 해 주기보단 source language와 target language 간에 bridge를 하나 놓아주어야 합니다. 그래서 우리는 두 언어의 embedding hyper plane이 선형 관계에 있다고 가정하고, dot product 하기 전에 _**linear transformation**_을 해 줍니다.
 
 $$ w = softmax(d^T W \cdot E) $$
 
@@ -131,8 +131,13 @@ $$ c = E \cdot w $$
 
 $$ where~d~is~decoder~output,~E~is~encoder~outputs~and~c~is~context~vector $$
 
+#### ![](/assets/attention_role_example.png)
+
 #### 역할
 
-왜 Attention이 필요한 것일까요? 기존의 seq2seq는 두 개의 RNN(encoder와 decoder)로 이루어져 있습니다. 여기서 압축된 문장의 의미에 해당하는 encoder의 정보를 hidden state (LSTM의 경우에는 + cell state)만으로 전달해야 합니다. 그리고 decoder는 그 정보를 이용해 다시 새로운 문장을 만들어냅니다. 이 때, hidden state만으로는 문장의 정보를 완벽하게 전달하기 힘들기 때문입니다. 따라서 decoder의 각 time-step 마다, hidden state의 정보에 추가하여 hidden state의 정보에 따라 필요한 encoder의 정보에 access하여 끌어다 쓰겠다는 것 입니다.
+왜 Attention이 필요한 것일까요? 기존의 seq2seq는 두 개의 RNN\(encoder와 decoder\)로 이루어져 있습니다. 여기서 압축된 문장의 의미에 해당하는 encoder의 정보를 hidden state \(LSTM의 경우에는 + cell state\)만으로 전달해야 합니다. 그리고 decoder는 그 정보를 이용해 다시 새로운 문장을 만들어냅니다. 이 때, hidden state만으로는 문장의 정보를 완벽하게 전달하기 힘들기 때문입니다. 따라서 decoder의 각 time-step 마다, hidden state의 정보에 추가하여 hidden state의 정보에 따라 필요한 encoder의 정보에 access하여 끌어다 쓰겠다는 것 입니다.
 
 ## 코드
+
+
+
