@@ -135,6 +135,8 @@ $$ where~d~is~decoder~output,~E~is~encoder~outputs~and~c~is~context~vector $$
 
 #### ![](/assets/attention_role_example.png)
 
+#### ![](/assets/attention_role_example.png)
+
 #### 역할
 
 왜 Attention이 필요한 것일까요? 기존의 seq2seq는 두 개의 RNN\(encoder와 decoder\)로 이루어져 있습니다. 여기서 압축된 문장의 의미에 해당하는 encoder의 정보를 hidden state \(LSTM의 경우에는 + cell state\)만으로 전달해야 합니다. 그리고 decoder는 그 정보를 이용해 다시 새로운 문장을 만들어냅니다. 이 때, hidden state만으로는 문장의 정보를 완벽하게 전달하기 힘들기 때문입니다. 따라서 decoder의 각 time-step 마다, hidden state의 정보에 추가하여 hidden state의 정보에 따라 필요한 encoder의 정보에 access하여 끌어다 쓰겠다는 것 입니다.
