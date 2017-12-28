@@ -43,6 +43,7 @@
     * [Gradient Clipping](rnn/gradient-clipping.md)
 * Text Classification
   * [Intro](text-classification/intro.md)
+  * [Using CNN](text-classification/cnn.md)
   * [Using RNN](text-classification/rnn.md)
   * [Using CNN](text-classification/cnn.md)
   * [Unsupervised Text Classification](text-classification/unsupervised-text-classification.md)
