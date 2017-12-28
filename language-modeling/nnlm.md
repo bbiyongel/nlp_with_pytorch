@@ -26,7 +26,7 @@ Neural Network LM은 많은 형태를 가질 수 있지만 우리는 가장 효�
 Recurrent Neural Network Lauguage Model \(RNNLM\)은 위와 같은 구조를 지니고 있습니다. 기존의 n-gram은 각각의 단어를 descrete한 존재로써 처리하였기 때문에, $$ n $$이 커져서 word sequence가 길어지면 어려운 부분이 있었습니다. 따라서, $$ n-1 $$ 이전까지의 단어만 조건부로 잡아 확률을 approximation하였습니다. 하지만, RNNLM은 단어를 embedding하여 vectorize함으로써, sparsity를 해소하였기 때문에, 문장의 첫 단어부터 모두 조건부에 넣어 확률을 계산할 수 있습니다.
 
 $$
-P(w_i|w_{\text{<}i})
+P(w_i|w_{<i})
 $$
 
 ### 코드
