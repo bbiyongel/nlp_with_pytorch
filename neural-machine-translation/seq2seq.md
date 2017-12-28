@@ -4,7 +4,7 @@
 
 ## ![](/assets/seq2seq_architecture.png)
 
-먼저 번역 또는 seq2seq 모델이 하는 작업을 간단하게 수식 화 해보겠습니다.
+먼저 번역 또는 seq2seq 모델을 이용한 작업을 간단하게 수식화 해보겠습니다.
 
 $$
 argmaxP_\theta(Y|X)~where~X=\{x_1,x_2,\cdots,x_n\},~Y=\{y_1,y_2,\cdots,y_m\}
