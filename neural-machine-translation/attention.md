@@ -131,7 +131,7 @@ $$ c = E \cdot w $$
 
 $$ where~d~is~decoder~output,~E~is~encoder~outputs~and~c~is~context~vector $$
 
-#### 
+#### ![](/assets/attention_working_example.png)
 
 #### 역할
 
