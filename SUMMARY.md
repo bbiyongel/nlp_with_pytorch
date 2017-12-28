@@ -45,7 +45,6 @@
   * [Intro](text-classification/intro.md)
   * [Using CNN](text-classification/cnn.md)
   * [Using RNN](text-classification/rnn.md)
-  * [Using CNN](text-classification/cnn.md)
   * [Unsupervised Text Classification](text-classification/unsupervised-text-classification.md)
 * Language Modeling
   * [언어모델 개요](language-modeling/c5b8-c5b4-baa8-b378-ac1c-c694.md)
