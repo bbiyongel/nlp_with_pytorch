@@ -120,6 +120,10 @@ def key_value_func(query):
 
 #### Linear Transformation
 
+
+
+![](/assets/attention_linear_transform.png)
+
 이때, 각 input parameter들은 다음을 의미한다고 볼 수 있습니다.
 
 1. decoder\_output: 현재 time-step 까지 번역 된 target language 단어들 또는 문장, 의미
