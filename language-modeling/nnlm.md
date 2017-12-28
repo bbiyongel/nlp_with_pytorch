@@ -32,7 +32,7 @@ $$
 로그를 취하여 표현 해보면 아래와 같습니다.
 
 $$
-\log{P(w_1, w_2, \cdots, w_k)} = \sum_{i = 1}^{k}{\log{P(w_i|w_{<i}}}
+\log{P(w_1, w_2, \cdots, w_k)} = \sum_{i = 1}^{k}{\log{P(w_i|w_{<i})}}
 $$
 
 ### 코드
