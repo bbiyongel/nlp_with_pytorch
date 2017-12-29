@@ -59,6 +59,9 @@
   * [Input Feeding](neural-machine-translation/input-feeding.md)
   * [Attention](neural-machine-translation/attention.md)
   * [Beam Search](neural-machine-translation/beam-search.md)
+  * NMT products
+    * [Google's NMT]()
+    * [Edinburgh's NMT]()
   * Advanced Topic on NMT
     * [Using Monolingual Corpora](neural-machine-translation/mono.md)
     * [Fully Convolutional Seq2seq](neural-machine-translation/fconv.md)
