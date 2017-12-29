@@ -152,6 +152,8 @@ $$
 
 ![](/assets/attention_evalution_result.png)
 
+현재 방식을 처음 제안한 [\[Loung et al.2015\] Effective Approaches to Attention-based Neural Machine Translation](https://arxiv.org/pdf/1508.04025.pdf)
+
 ## Code
 
 
