@@ -13,4 +13,4 @@
 ### a. Invasion of NMT
 ![http://web.stanford.edu/class/cs224n/lectures/cs224n-2017-lecture10.pdf](/assets/progress_in_machine_translation.png)
 
-### b. Why?
+### b. Why it works well?
