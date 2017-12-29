@@ -67,10 +67,10 @@
     * [Fully Convolutional Seq2seq](neural-machine-translation/fconv.md)
     * [Transformer](neural-machine-translation/transformer.md)
 * Reinforcement Learning for NLP
-  * [Intro](reinforcement-learning-for-nmt/intro.md)
-  * [Policy Gradient](reinforcement-learning-for-nmt/policy-gradient.md)
-  * [Supervised NMT](reinforcement-learning-for-nmt/supervised-nmt.md)
-  * [Unsupervised NMT](reinforcement-learning-for-nmt/unsupervised-nmt.md)
+  * [Intro](reinforcement-learning/intro.md)
+  * [Policy Gradient](reinforcement-learning/policy-gradient.md)
+  * [Supervised NMT](reinforcement-learning/supervised-nmt.md)
+  * [Unsupervised NMT](reinforcement-learning/unsupervised-nmt.md)
 * Speech Recognition
   * [Intro](speech-recognition/intro.md)
   * [Traditional methodology](speech-recognition/wfst.md)
