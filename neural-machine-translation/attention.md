@@ -152,7 +152,13 @@ $$
 
 ![](/assets/attention_evalution_result.png)
 
-현재 방식을 처음 제안한 [\[Loung et al.2015\] Effective Approaches to Attention-based Neural Machine Translation](https://arxiv.org/pdf/1508.04025.pdf)
+현재 방식을 처음 제안한 [\[Loung et al.2015\] Effective Approaches to Attention-based Neural Machine Translation](https://arxiv.org/pdf/1508.04025.pdf)에서는 실험 결과를 위와 같이 주장하였습니다.
+
+- Baseline
+- Reverse
+- Dropout
+- Global Attention
+- Input Feeding
 
 ## Code
 
