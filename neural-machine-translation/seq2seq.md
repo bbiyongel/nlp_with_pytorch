@@ -47,6 +47,8 @@ $$
 
 ### 1. Memorization
 
+
+
 ### 2. Lack of Structural Information
 
 ### 3. Domain Expansion
