@@ -14,6 +14,11 @@ $$ P(Y|X) $$를 최대로 하는 optimal 모델 파라미터($$ \theta^* $$)를 
 인코더는 source 문장을 입력으로 받아 문장을 함축하는 의미의 vector로 만들어 냅니다. $$ P(X) $$를 모델링 하는 작업을 수행한다고 볼 수 있습니다. 사실 새로운 형태라기 보단, 이전 챕터에서 다루었던 Text Classificaion에서 사용되었던 RNN 모델과 거의 같다고 볼 수 있습니다. $$ P(X) $$를 모델링하여, 주어진 문장을 vectorize하여 해당 도메인의 hyper-plane에 projection 시키는 작업이라고 할 수 있습니다. -- 이 vector를 classification 하는 것이 text classification 입니다. 다만, 기존의 text classification에서는 모든 정보가 필요하지 않기 때문에 (예를들어 Sentiment Analysis에서는 ***'나는'***과 같이 중립적인 단어는 classification에 필요하지 않기 때문에 정보를 굳이 간직해야 하지 않을 수도 있습니다.) vector로 만들어내는 과정인 정보를 압축함에 있어서 손실 압축을 해도 되는 task이지만, Machine Translation task에 있어서는 이상적으로는 무손실 압축을 해내야 하는 차이는 있습니다.
 
 ### 2. Decoder
+마찬가지로 디코더도 사실 새로운 형태가 아닙니다. 이전 챕터에서 다루었던 Nerual Network Langauge Model의 연장선으로써, Conditional Neural Network Language Model이라고 할 수 있습니다. 위에서 다루었던 seq2seq모델의 수식을 좀 더 time-step에 대해서 풀어서 써보면 아래와 같습니다.
+
+$$
+
+$$
 
 ### 3. Generator
 이 모듈은 Decoder에서 vector를 받아 softmax를 계산하는 단순한 작업을 하는 모듈 입니다. 
