@@ -17,10 +17,10 @@ $$ P(Y|X) $$를 최대로 하는 optimal 모델 파라미터($$ \theta^* $$)를 
 마찬가지로 디코더도 사실 새로운 형태가 아닙니다. 이전 챕터에서 다루었던 Nerual Network Langauge Model의 연장선으로써, Conditional Neural Network Language Model이라고 할 수 있습니다. 위에서 다루었던 seq2seq모델의 수식을 좀 더 time-step에 대해서 풀어서 써보면 아래와 같습니다.
 
 $$
-P_\theta(Y|X)=\prod_{t=1}^{m}P_\theta(y_t|X,y_{t})
+P_\theta(Y|X)=\prod_{t=1}^{m}P_\theta(y_t|X,y_{<t})
 $$
 
-보면 RNNLM의 수식에서 조건부에 $$ X $$가 추가 된 것을 확인 할 수 있습니다.
+보면 RNNLM의 수식에서 조건부에 $$ X $$가 추가 된 것을 확인 할 수 있습니다. 즉, 이전 time-step의 단어들과 주어진 encoder의 정보에 기반해서 현재 time-step의 단어를 유추해 내는 작업을 수행합니다.
 
 ### 3. Generator
 이 모듈은 Decoder에서 vector를 받아 softmax를 계산하는 단순한 작업을 하는 모듈 입니다. 
