@@ -20,6 +20,8 @@ $$
 P_\theta(Y|X)=\prod_{t=1}^{m}P_\theta(y_t|X,y_{t})
 $$
 
+보면 RNNLM의 수식에서 조건부에 $$ X $$가 추가 된 것을 확인 할 수 있습니다.
+
 ### 3. Generator
 이 모듈은 Decoder에서 vector를 받아 softmax를 계산하는 단순한 작업을 하는 모듈 입니다. 
 
