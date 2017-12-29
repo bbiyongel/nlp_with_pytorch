@@ -1,6 +1,12 @@
+# Inference
+
+# Overview
+
 ![](/assets/beam_search.png)
 
-# Gready Search
+# 1. Sampling
 
-# Beam Search
+# 2. Gready Search
+
+## Beam Search
 
