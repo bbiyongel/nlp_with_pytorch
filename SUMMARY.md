@@ -60,8 +60,8 @@
   * [Attention](neural-machine-translation/attention.md)
   * [Beam Search](neural-machine-translation/beam-search.md)
   * NMT products
-    * [Google's NMT](neural-machine-translation/gnmt)
-    * [Edinburgh's NMT](neural-machine-translation/enmt)
+    * [Google's NMT](neural-machine-translation/gnmt.md)
+    * [Edinburgh's NMT](neural-machine-translation/enmt.md)
   * Advanced Topic on NMT
     * [Using Monolingual Corpora](neural-machine-translation/mono.md)
     * [Fully Convolutional Seq2seq](neural-machine-translation/fconv.md)
