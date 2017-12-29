@@ -66,7 +66,7 @@
     * [Using Monolingual Corpora](neural-machine-translation/mono.md)
     * [Fully Convolutional Seq2seq](neural-machine-translation/fconv.md)
     * [Transformer](neural-machine-translation/transformer.md)
-* Reinforcement Learning for NLU
+* Reinforcement Learning for NLP
   * [Intro](reinforcement-learning-for-nmt/intro.md)
   * [Policy Gradient](reinforcement-learning-for-nmt/policy-gradient.md)
   * [Supervised NMT](reinforcement-learning-for-nmt/supervised-nmt.md)
