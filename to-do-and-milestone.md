@@ -10,12 +10,10 @@
 1. 검수 및 오탈자 교정
 
 참고사이트:
-http://cs224d.stanford.edu/syllabus.html
-http://web.stanford.edu/class/cs224n/syllabus.html
-http://web.stanford.edu/class/cs124/
-http://cs231n.stanford.edu/syllabus.html
-
-https://sites.google.com/view/seq2seq-icml17
-
-https://khan.github.io/KaTeX/function-support.html
-https://github.com/OpenNMT/OpenNMT-py/
+- http://cs224d.stanford.edu/syllabus.html
+- http://web.stanford.edu/class/cs224n/syllabus.html
+- http://web.stanford.edu/class/cs124/
+- http://cs231n.stanford.edu/syllabus.html
+- https://sites.google.com/view/seq2seq-icml17
+- https://khan.github.io/KaTeX/function-support.html
+- https://github.com/OpenNMT/OpenNMT-py/
