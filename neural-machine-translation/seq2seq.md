@@ -11,7 +11,7 @@ $$
 $$ P(Y|X) $$를 최대로 하는 optimal 모델 파라미터($$ \theta^* $$)를 찾아야 합니다. 즉, source 문장 $$ X $$를 받아서 target 문장 $$ Y $$를 생성 해 내는 작업을 하게 됩니다. 이를 위해서 seq2seq는 크게 3개 서브 모듈로 구성되어 있습니다. 
 
 ### 1. Encoder
-인코더는 source 문장을 입력으로 받아 문장을 함축하는 의미의 vector로 만들어 냅니다. $$ P(X) $$를 모델링 하는 작업을 수행한다고 볼 수 있습니다. 사실 새로운 형태라기 보단, 이전 챕터에서 다루었던 Text Classificaion에서 사용되었던 RNN 모델과 거의 같다고 볼 수 있습니다. $$ P(X) $$를 모델링하여, 주어진 문장을 vectorize하여 해당 도메인의 hyper-plane에 projection 시키는 작업이라고 할 수 있습니다. -- 이 vector를 classification 하는 것이 text classification 입니다. 다만, 기존의 text classification에서는 모든 정보가 필요하지 않기 때문에 (예를들어 Sentiment Analysis에서는 ***'나는'***과 같이 중립적인 단어는 classification에 필요하지 않기 때문에 정보를 굳이 간직해야 하지 않을 수도 있습니다.) 정보를 압축함에 있어서 예를 들면 손실압축을 해도 되는 task이지만, Machine Translation task에 있어서는 무손실 압축을 해내야 하는 차이는 있습니다.
+인코더는 source 문장을 입력으로 받아 문장을 함축하는 의미의 vector로 만들어 냅니다. $$ P(X) $$를 모델링 하는 작업을 수행한다고 볼 수 있습니다. 사실 새로운 형태라기 보단, 이전 챕터에서 다루었던 Text Classificaion에서 사용되었던 RNN 모델과 거의 같다고 볼 수 있습니다. $$ P(X) $$를 모델링하여, 주어진 문장을 vectorize하여 해당 도메인의 hyper-plane에 projection 시키는 작업이라고 할 수 있습니다. -- 이 vector를 classification 하는 것이 text classification 입니다. 다만, 기존의 text classification에서는 모든 정보가 필요하지 않기 때문에 (예를들어 Sentiment Analysis에서는 ***'나는'***과 같이 중립적인 단어는 classification에 필요하지 않기 때문에 정보를 굳이 간직해야 하지 않을 수도 있습니다.) vector로 만들어내는 과정인 정보를 압축함에 있어서 손실 압축을 해도 되는 task이지만, Machine Translation task에 있어서는 이상적으로는 무손실 압축을 해내야 하는 차이는 있습니다.
 
 ### 2. Decoder
 
