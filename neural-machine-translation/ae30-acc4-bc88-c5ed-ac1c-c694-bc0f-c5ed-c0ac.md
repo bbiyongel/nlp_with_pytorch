@@ -1,16 +1,16 @@
 # Machine Translation \(MT\)
 
-## 소개
+## 1. 소개
 
-## Rule based Machine Translation
+## 2. Rule based Machine Translation
 
-## Statistical Machine Translation
+## 3. Statistical Machine Translation
 
-## Neural Machine Translation
+## 4. Neural Machine Translation
 
 ![http://web.stanford.edu/class/cs224n/lectures/cs224n-2017-lecture10.pdf](/assets/basic_nmt_architecture.png)
 
-### Invasion of NMT
+### a. Invasion of NMT
 ![http://web.stanford.edu/class/cs224n/lectures/cs224n-2017-lecture10.pdf](/assets/progress_in_machine_translation.png)
 
-### Why?
+### b. Why?
