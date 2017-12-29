@@ -59,7 +59,6 @@ $$
 
 ### 1. Memorization
 
-![http://web.stanford.edu/class/cs224n/lectures/cs224n-2017-lecture10.pdf](/assets/attention_better_translation_of_long_sentence.png)
 
 ### 2. Lack of Structural Information
 
