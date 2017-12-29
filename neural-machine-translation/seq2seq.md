@@ -36,7 +36,9 @@ $$ P(Y|X) $$를 최대로 하는 optimal 모델 파라미터($$ \theta^* $$)를 
 
 ### 1. Memorization
 
-### 2. Domain Expansion
+### 2. Lack of Structural Information
+
+### 3. Domain Expansion
 
 ## Code
 
