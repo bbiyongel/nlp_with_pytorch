@@ -131,7 +131,10 @@ def key_value_func(query):
 
 $$
 w = softmax(d^T W \cdot E) \atop
-c = E \cdot w \atop where~d~is~decoder~output,~E~is~encoder~outputs~and~c~is~context~vector
+c = E \cdot w
+$$
+$$
+where~d~is~decoder~output,~E~is~encoder~outputs~and~c~is~context~vector
 $$
 
 
