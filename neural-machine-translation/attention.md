@@ -129,11 +129,10 @@ def key_value_func(query):
 
 ![](/assets/attention_linear_transform.png)
 
-$$ w = softmax(d^T W \cdot E) $$
-
-$$ c = E \cdot w $$
-
-$$ where~d~is~decoder~output,~E~is~encoder~outputs~and~c~is~context~vector $$
+$$
+w = softmax(d^T W \cdot E) \atop
+c = E \cdot w \atop where~d~is~decoder~output,~E~is~encoder~outputs~and~c~is~context~vector
+$$
 
 
 #### b. 역할
