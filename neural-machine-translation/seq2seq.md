@@ -23,12 +23,12 @@ $$ P(Y|X) $$를 최대로 하는 optimal 모델 파라미터($$ \theta^* $$)를 
 
 |Task|From|To|
 |-|-|-|
-|Neural Machine Translation (NMT)||
-|Chatbot||
-|Other NLP Task||
-|Automatic Speech Recognition (ASR)||
-|Image Captioning||
-|Lip Reading||
+|Neural Machine Translation (NMT)|||
+|Chatbot|||
+|Other NLP Task|||
+|Automatic Speech Recognition (ASR)|||
+|Image Captioning|||
+|Lip Reading|||
 
 ## Limitation
 
