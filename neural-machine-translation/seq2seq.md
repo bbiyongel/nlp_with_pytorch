@@ -18,8 +18,8 @@ $$ P(Y|X) $$를 최대로 하는 모델 파라미터($$ \theta $$)를 찾아야 
 ### 3. Generator
 이 모듈은 Decoder에서 vector를 받아 softmax를 계산하는 단순한 작업을 하는 모듈 입니다. 
 
-<br>
-
+<p>
+d
 
 ## Further use of seq2seq
 Seq2seq 모델은 꼭 기계번역의 task에서만 사용해야 하는 것이 아니라 정말 많은 분야에 적용할 수 있습니다.
