@@ -14,7 +14,7 @@
 - http://web.stanford.edu/class/cs224n/syllabus.html
 - http://web.stanford.edu/class/cs124/
 - http://cs231n.stanford.edu/syllabus.html
-- http://www.meta-net.eu/events/meta-forum-2016/slides/09_sennrich.pdf]
+- http://www.meta-net.eu/events/meta-forum-2016/slides/09_sennrich.pdf
 - https://sites.google.com/view/seq2seq-icml17
 - https://khan.github.io/KaTeX/function-support.html
 - https://github.com/OpenNMT/OpenNMT-py/
