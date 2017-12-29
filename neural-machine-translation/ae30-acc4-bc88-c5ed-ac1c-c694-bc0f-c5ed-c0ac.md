@@ -1,4 +1,4 @@
-# Machine Translation (MT)
+# Machine Translation \(MT\)
 
 ## 소개
 
@@ -7,4 +7,8 @@
 ## Statistical Machine Translation
 
 ## Neural Machine Translation
+
+![](/assets/basic_nmt_architecture.png)
+
+
 
