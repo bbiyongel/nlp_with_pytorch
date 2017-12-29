@@ -10,3 +10,9 @@
 
 ## Beam Search
 
+
+
+![](/assets/decoding_performance.png)
+
+
+
