@@ -20,6 +20,10 @@ $$
 P_\theta(Y|X)=\prod_{t=1}^{m}P_\theta(y_t|X,y_{<t})
 $$
 
+$$
+\log P_\theta(Y|X) = \sum_{t=1}^{m}\log P_\theta(y_t|X, y_{<t})
+$$
+
 보면 RNNLM의 수식에서 조건부에 $$ X $$가 추가 된 것을 확인 할 수 있습니다. 즉, 이전 time-step의 단어들과 주어진 encoder의 정보에 기반해서 현재 time-step의 단어를 유추해 내는 작업을 수행합니다.
 
 ### 3. Generator
