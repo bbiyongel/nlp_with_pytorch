@@ -2,9 +2,9 @@
 
 ## 소개
 
-## Rule based MT
+## Rule based Machine Translation
 
-## Statistical MT
+## Statistical Machine Translation
 
 ## Neural Machine Translation
 
