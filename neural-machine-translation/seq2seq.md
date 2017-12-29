@@ -32,6 +32,7 @@ $$ P(Y|X) $$를 최대로 하는 optimal 모델 파라미터($$ \theta^* $$)를 
 |Image Captioning|변형된 seq2seq를 사용하여 이미지를 입력으로 받아 그림을 설명하는 문장을 출력|
 
 ## Limitation
+사실 seq2seq는 AutoEncoder와 굉장히 역할이 비슷하다고 볼 수 있습니다. 그 중에서도 특히 Sequential한 데이터에 대한 task에 강점이 있는 모델이라고 볼 수 있습니다. 하지만 아래와 같은 한계점들이 있습니다.
 
 ### 1. Memorization
 
