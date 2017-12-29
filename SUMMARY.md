@@ -64,6 +64,7 @@
     * [Edinburgh's NMT](neural-machine-translation/enmt.md)
   * Advanced Topic on NMT
     * [Using Monolingual Corpora](neural-machine-translation/mono.md)
+    * [Multilingual NMT](neural-machine-translation/multilingual-nmt.md)
     * [Fully Convolutional Seq2seq](neural-machine-translation/fconv.md)
     * [Transformer](neural-machine-translation/transformer.md)
 * Reinforcement Learning for NLP
