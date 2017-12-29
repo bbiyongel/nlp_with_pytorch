@@ -61,4 +61,4 @@ $$
 
 ### 4. Generator
 
-
+### 5. Loss
