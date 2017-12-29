@@ -59,7 +59,7 @@
   * [Input Feeding](neural-machine-translation/input-feeding.md)
   * [Attention](neural-machine-translation/attention.md)
   * [Beam Search](neural-machine-translation/beam-search.md)
-  * NMT products
+  * Productized NMT system
     * [Google's NMT](neural-machine-translation/gnmt.md)
     * [Edinburgh's NMT](neural-machine-translation/enmt.md)
   * Advanced Topic on NMT
