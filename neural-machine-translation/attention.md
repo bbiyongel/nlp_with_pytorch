@@ -129,18 +129,16 @@ def key_value_func(query):
 
 ![](/assets/attention_linear_transform.png)
 
-
 $$
 w = softmax(d^T W \cdot E) \atop
 c = E \cdot w
 $$
 
-
-
 $$
 where~d~is~decoder~output,~E~is~encoder~outputs~and~c~is~context~vector
 $$
 
+위와 같이 꼭 번역 task가 아니더라도, 두 다른 domain 사이의 비교를 위해서 사용합니다.
 
 #### b. 역할
 
