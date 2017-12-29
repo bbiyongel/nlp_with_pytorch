@@ -25,6 +25,7 @@ $$ P(Y|X) $$를 최대로 하는 optimal 모델 파라미터($$ \theta^* $$)를 
 |-|-|
 |Neural Machine Translation (NMT)|특정 언어 문장을 입력으로 받아 다른 언어의 문장으로 출력|
 |Chatbot|사용자의 문장 입력을 받아 대답을 출력|
+|Summarization|긴 문장을 입력으로 받아 같은 언어의 요약된 문장으로 출력|
 |Other NLP Task|사용자의 문장 입력을 받아 프로그래밍 코드로 출력 등|
 |Automatic Speech Recognition (ASR)|사용자의 음성을 입력으로 받아 해당 언어의 문자열(문장)으로 출력|
 |Lip Reading|입술 움직임의 동영상을 입력으로 받아 해당 언어의 문장으로 출력|
