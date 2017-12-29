@@ -13,6 +13,7 @@
 http://cs224d.stanford.edu/syllabus.html
 http://web.stanford.edu/class/cs224n/syllabus.html
 http://web.stanford.edu/class/cs124/
+http://cs231n.stanford.edu/syllabus.html
 
 https://sites.google.com/view/seq2seq-icml17
 
