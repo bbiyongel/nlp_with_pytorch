@@ -1,8 +1,8 @@
 # Attention
 
-## 소개
+## Ovewview
 
-### Key-Value function
+### 1. Key-Value function
 
 Attention을 본격 소개하기 전에 먼저 우리가 알고 있는 자료형을 짚고 넘어갈까 합니다. Key-Value 또는 [Python에서 Dictionary](https://wikidocs.net/16)라고 부르는 자료형 입니다.
 
@@ -35,7 +35,7 @@ def is_same(key, query):
 
 코드를 살펴보면, 순차적으로 _**dic**_ 내부의 key값들과 _**query**_ 값을 비교하여, key가 같을 경우 _**weights**_에 _**1.0**_을 추가하고, 다를 경우에는 _**0.0**_을 추가합니다. 그리고 다시 _**dic**_ 내부의 value값들과 weights의 값을 inner product \(스칼라곱, dot product\) 합니다. 즉, $$ weight = 1.0 $$ 인 경우에만 value 값을 _**answer**_에 더합니다.
 
-### Differentiable Key-Value function
+### 2. Differentiable Key-Value function
 
 좀 더 발전시켜서, 만약 _**is\_same**_ 함수 대신에 다른 함수를 써 보면 어떻게 될까요? _**how\_similar**_라는 key와 query 사이의 유사도를 리턴 해 주는 가상의 함수가 있다고 가정해 봅시다. \(가정하는 김에 좀 더 가정해서 cosine similarity라고 가정해 봅시다.\)
 
@@ -59,7 +59,7 @@ def is_same(key, query):
 
 무슨 의미인지는 모르겠지만 _**3.2**_라는 값이 나왔습니다. _**is\_same**_ 함수를 쓸 때에는 두 값이 같은지 if문을 통해 검사하고 값을 할당했기 때문에, 미분을 할 수 없었습니다. 하지만, 이제 우리는 key\_value\_func을 미분 할 수 있습니다.
 
-### Differentiable Key-Value Vector function
+### 3. Differentiable Key-Value Vector function
 
 * 만약, _**dic**_의 _**value**_에는 100차원의 vector로 들어있었다면 어떻게 될까요? 
 * 거기에, _**query**_와 _**key**_값 모두 vector라면 어떻게 될까요? 즉, Word Embedding Vector라면?
@@ -102,7 +102,7 @@ def key_value_func(query):
 
 즉, 다시 말해서, 이 함수는 query와 비슷한 key 값을 찾아서 비슷한 정도에 따라서 weight를 나누고, 각 key의 value값을 weight 값 만큼 가져와서 모두 더하는 것 입니다. 이것이 Attention이 하는 역할 입니다.
 
-### Attention for Machine Translation task
+### 4. Attention for Machine Translation task
 
 그럼 번역과 같은 task에서 attention은 어떻게 작용할까요? 번역 과정에서는 encoder의 각 time-step 별 output을 Key와 Value로 삼고, 현재 time-step의 decoder output을 Query로 삼아 attention을 취합니다.
 
@@ -118,7 +118,7 @@ def key_value_func(query):
 
 ![](/assets/seq2seq_with_attn_architecture.png)
 
-#### Linear Transformation
+#### a. Linear Transformation
 
 이때, 각 input parameter들은 다음을 의미한다고 볼 수 있습니다.
 
@@ -136,7 +136,7 @@ $$ c = E \cdot w $$
 $$ where~d~is~decoder~output,~E~is~encoder~outputs~and~c~is~context~vector $$
 
 
-#### 역할
+#### b. 역할
 
 ![](/assets/attention_working_example.png)
 
