@@ -21,7 +21,7 @@ $$ P(Y|X) $$를 최대로 하는 optimal 모델 파라미터($$ \theta^* $$)를 
 ## Further use of seq2seq
 이와 같이 구성된 Seq2seq 모델은 꼭 기계번역의 task에서만 사용해야 하는 것이 아니라 정말 많은 분야에 적용할 수 있습니다. 특정 도메인의 sequential한 입력을 다른 도메인의 sequential한 데이터로 출력하는데 탁월한 능력을 발휘합니다.
 
-|Task|From-To|
+|Seq2seq Applications|Task (From-To)|
 |-|-|
 |Neural Machine Translation (NMT)|특정 언어 문장을 입력으로 받아 다른 언어의 문장으로 출력|
 |Chatbot|사용자의 문장 입력을 받아 대답을 출력|
