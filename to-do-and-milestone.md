@@ -9,4 +9,6 @@
 1. 레퍼런스 추가
 1. 검수 및 오탈자 교정
 
+참고사이트:
+https://sites.google.com/view/seq2seq-icml17
 https://khan.github.io/KaTeX/function-support.html
