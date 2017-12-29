@@ -24,10 +24,10 @@ Seq2seq 모델은 꼭 기계번역의 task에서만 사용해야 하는 것이 �
 
 ### 1. Embedding Layer
 
-### 1. Encoder
+### 2. Encoder
 
-### Decoder
+### 3. Decoder
 
-### Generator
+### 4. Generator
 
 
