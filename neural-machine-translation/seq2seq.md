@@ -17,7 +17,7 @@ $$ P(Y|X) $$를 최대로 하는 optimal 모델 파라미터($$ \theta^* $$)를 
 마찬가지로 디코더도 사실 새로운 형태가 아닙니다. 이전 챕터에서 다루었던 Nerual Network Langauge Model의 연장선으로써, Conditional Neural Network Language Model이라고 할 수 있습니다. 위에서 다루었던 seq2seq모델의 수식을 좀 더 time-step에 대해서 풀어서 써보면 아래와 같습니다.
 
 $$
-\theta^*=argmax_\theta P_\theta(Y|X)=\prod_{t=1}^{m}P_\theta(y_t|X,y_{t})
+\theta^*=argmaxtheta P_\theta(Y|X)=\prod_{t=1}^{m}P_\theta(y_t|X,y_{t})
 $$
 
 ### 3. Generator
