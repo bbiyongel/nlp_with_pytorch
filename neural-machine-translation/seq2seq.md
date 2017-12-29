@@ -15,9 +15,9 @@ $$ P(Y|X) $$를 최대로 하는 optimal 모델 파라미터\($$ \theta^* $$\)�
 
 ### a. Encoder
 
-인코더는 source 문장을 입력으로 받아 문장을 함축하는 의미의 vector로 만들어 냅니다. $$ P(X) $$를 모델링 하는 작업을 수행한다고 볼 수 있습니다. 사실 새로운 형태라기 보단, 이전 챕터에서 다루었던 Text Classificaion에서 사용되었던 RNN 모델과 거의 같다고 볼 수 있습니다. $$ P(X) $$를 모델링하여, 주어진 문장을 vectorize하여 해당 도메인의 hyper-plane에 projection 시키는 작업이라고 할 수 있습니다. -- 이 vector를 classification 하는 것이 text classification 입니다. 
+인코더는 source 문장을 입력으로 받아 문장을 함축하는 의미의 vector로 만들어 냅니다. $$ P(X) $$를 모델링 하는 작업을 수행한다고 볼 수 있습니다. 사실 새로운 형태라기 보단, 이전 챕터에서 다루었던 Text Classificaion에서 사용되었던 RNN 모델과 거의 같다고 볼 수 있습니다. $$ P(X) $$를 모델링하여, 주어진 문장을 vectorize하여 해당 도메인의 hyper-plane에 projection 시키는 작업이라고 할 수 있습니다. -- 이 vector를 classification 하는 것이 text classification 입니다.
 
-
+![](/assets/encoder_sentence_projection.png)
 
 다만, 기존의 text classification에서는 모든 정보가 필요하지 않기 때문에 \(예를들어 Sentiment Analysis에서는 _**'나는'**_과 같이 중립적인 단어는 classification에 필요하지 않기 때문에 정보를 굳이 간직해야 하지 않을 수도 있습니다.\) vector로 만들어내는 과정인 정보를 압축함에 있어서 손실 압축을 해도 되는 task이지만, Machine Translation task에 있어서는 이상적으로는 무손실 압축을 해내야 하는 차이는 있습니다.
 
@@ -63,7 +63,7 @@ $$
 
 ### a. Memorization
 
-Neural Network 모델은 데이터를 압축하는데에 탁월한 성능([Manifold Assumption 참고](https://en.wikipedia.org/wiki/Semi-supervised_learning#Manifold_assumption))을 지녔습니다.  하지만, Neural Network은 [도라에몽의 주머니](https://namu.wiki/w/4%EC%B0%A8%EC%9B%90%20%EC%A3%BC%EB%A8%B8%EB%8B%88#toc)처럼 무한하게 정보를 집어넣을 수 없습니다. 따라서 표현할 수 있는 정보는 한계가 있기 때문에, 문장(또는 sequence)가 길어질수록 기억력이 떨어지게 됩니다. 비록 LSTM이나 GRU를 사용함으로써 성능을 끌어올릴 수 있지만, 한계가 있기 마련입니다.
+Neural Network 모델은 데이터를 압축하는데에 탁월한 성능\([Manifold Assumption 참고](https://en.wikipedia.org/wiki/Semi-supervised_learning#Manifold_assumption)\)을 지녔습니다.  하지만, Neural Network은 [도라에몽의 주머니](https://namu.wiki/w/4차원 주머니#toc)처럼 무한하게 정보를 집어넣을 수 없습니다. 따라서 표현할 수 있는 정보는 한계가 있기 때문에, 문장\(또는 sequence\)가 길어질수록 기억력이 떨어지게 됩니다. 비록 LSTM이나 GRU를 사용함으로써 성능을 끌어올릴 수 있지만, 한계가 있기 마련입니다.
 
 ### b. Lack of Structural Information
 
@@ -71,7 +71,7 @@ Neural Network 모델은 데이터를 압축하는데에 탁월한 성능([Manif
 
 ### c. Domain Expansion
 
-사실 이 항목은 단점이라기보다는 그냥 당연한 이야기일 수 있습니다. seq2seq는 sequential한 데이터를 입력으로 받아서 다른 도메인의 sequential한 데이터로 출력하는 능력이 뛰어납니다. 따라서, 처음에는 많은 사람들이 seq2seq를 잘 훈련시키면 Chatbot의 기능도 어느정도 할 수 있지 않을까 하는 기대를 했습니다. 하지만 자세히 생각해보면, 대화의 흐름에서 ***대답***은 ***질문***에 비해서 새로운 정보(지식-knowledge, 문맥-context)가 추가 된 경우가 많습니다. 따라서 기존의 typical한 seq2seq의 task(번역, 요약)등은 새로운 정보의 추가가 없기 때문에 잘 해결할 수 있었지만, 대화의 경우에는 좀 더 발전된 architecture가 필요할 것 입니다.
+사실 이 항목은 단점이라기보다는 그냥 당연한 이야기일 수 있습니다. seq2seq는 sequential한 데이터를 입력으로 받아서 다른 도메인의 sequential한 데이터로 출력하는 능력이 뛰어납니다. 따라서, 처음에는 많은 사람들이 seq2seq를 잘 훈련시키면 Chatbot의 기능도 어느정도 할 수 있지 않을까 하는 기대를 했습니다. 하지만 자세히 생각해보면, 대화의 흐름에서 _**대답**_은 _**질문**_에 비해서 새로운 정보\(지식-knowledge, 문맥-context\)가 추가 된 경우가 많습니다. 따라서 기존의 typical한 seq2seq의 task\(번역, 요약\)등은 새로운 정보의 추가가 없기 때문에 잘 해결할 수 있었지만, 대화의 경우에는 좀 더 발전된 architecture가 필요할 것 입니다.
 
 ## 4. Code
 
@@ -85,4 +85,5 @@ Neural Network 모델은 데이터를 압축하는데에 탁월한 성능([Manif
 
 ### e. Loss
 
-seq2seq는 기본적으로 classification task이므로, $$ Cross Entropy $$을 ***Loss Function***으로 사용합니다. 다만, GPU memory 문제와 Padding의 이슈가 있으므로 유의해야 할 점들이 있습니다.
+seq2seq는 기본적으로 classification task이므로, $$ Cross Entropy $$을 _**Loss Function**_으로 사용합니다. 다만, GPU memory 문제와 Padding의 이슈가 있으므로 유의해야 할 점들이 있습니다.
+
