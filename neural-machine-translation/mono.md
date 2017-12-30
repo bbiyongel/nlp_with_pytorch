@@ -14,3 +14,5 @@
 
 ![](/assets/nmt_back_translation.png)
 
+![](/assets/nmt_copied_translation.png)
+
