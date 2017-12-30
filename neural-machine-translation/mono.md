@@ -2,7 +2,7 @@
 
 ## 1. Language Model Ensemble
 
-
+![](/assets/nmt_with_lm_emsemble.png)
 
 ## 2. Empty source-side translation
 
