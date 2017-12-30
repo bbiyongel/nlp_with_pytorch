@@ -116,8 +116,6 @@ def key_value_func(query):
 
 원하는 정보를 attention을 통해 encoder에서 획득한 후, 해당 정보를 decoder output과 concatenate하여 $$ tanh $$를 취한 후, softmax 계산을 통해 다음 time-step의 $$ \hat{y}_{t+1} $$을 구합니다.
 
-![](/assets/seq2seq_with_attn_architecture.png)
-
 #### a. Linear Transformation
 
 이때, 각 input parameter들은 다음을 의미한다고 볼 수 있습니다.
