@@ -8,9 +8,5 @@
 
 ## 4. Copied translation
 
-
-
 ![](/assets/nmt_with_lm_ensemble.png)
-
-
 
