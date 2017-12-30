@@ -2,9 +2,9 @@
 
 ## 1. Language Model Ensemble
 
-![](/assets/nmt_with_lm_ensemble.png)
+![https://arxiv.org/pdf/1503.03535.pdf](/assets/nmt_with_lm_ensemble.png)
 
-![](/assets/nmt_with_lm_ensemble_evaluation.png)
+![https://arxiv.org/pdf/1503.03535.pdf](/assets/nmt_with_lm_ensemble_evaluation.png)
 
 ## 2. Empty source-side translation
 
@@ -14,5 +14,8 @@
 
 ## 4. Copied translation
 
-![](/assets/nmt_copied_translation.png)
+[\[Currey et al.2017\] Copied Monolingual Data Improves Low-Resource Neural Machine
+Translation](https://kheafield.com/papers/edinburgh/copy_paper.pdf)
+
+![https://arxiv.org/pdf/1708.00726.pdf](/assets/nmt_copied_translation.png)
 
