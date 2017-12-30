@@ -22,4 +22,13 @@ NMT이전에 세상을 지배하던 번역 방식입니다. Google이 자신의 
 
 ![http://web.stanford.edu/class/cs224n/lectures/cs224n-2017-lecture10.pdf](/assets/progress_in_machine_translation.png)
 
+현재의 NMT 방식이 제안되고, 곧 기존의 SMT 방식을 크게 앞질러 버렸습니다. 이제는 구글의 번역기에도 NMT 방식이 사용됩니다.
+
 ### b. Why it works well?
+
+왜 Neural Machine Translation이 잘 동작하는 것일까요?
+
+#### 1. 
+#### 2.
+#### 3.
+#### 4.
