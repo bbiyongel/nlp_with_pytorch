@@ -12,5 +12,5 @@
 
 ![](/assets/nmt_with_lm_ensemble_evaluation.png)
 
-![](/assets/back_translation_evaluation.png)
+![](/assets/nmt_back_translation.png)
 
