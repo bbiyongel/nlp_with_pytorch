@@ -2,13 +2,15 @@
 
 ## 1. Language Model Ensemble
 
-
-
 ## 2. Empty source-side translation
 
 ## 3. Back translation
 
 ## 4. Copied translation
+
+
+
+![](/assets/nmt_with_lm_ensemble.png)
 
 
 
