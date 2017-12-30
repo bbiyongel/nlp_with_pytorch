@@ -14,10 +14,6 @@ $$ y $$와 달리 concatenation layer의 출력은 $$ y $$가 embedding layer에
 
 ## 2. 성능 실험
 
-<!--
-![https://arxiv.org/pdf/1508.04025.pdf](/assets/attention_evalution_result.png)
--->
-
 |NMT system|Perplexity|BLEU|
 |-|-|-|
 |Base|10.6|11.3|
