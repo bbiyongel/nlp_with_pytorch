@@ -59,7 +59,7 @@
   * [Input Feeding](neural-machine-translation/input-feeding.md)
   * [Attention](neural-machine-translation/attention.md)
   * [Input Feeding](neural-machine-translation/input-feeding.md)
-  * [Beam Search](neural-machine-translation/beam-search.md)
+  * [Decoding](neural-machine-translation/beam-search.md)
   * Advanced Topic on NMT
     * [Using Monolingual Corpora](neural-machine-translation/mono.md)
     * [Multilingual NMT](neural-machine-translation/multilingual-nmt.md)
