@@ -15,6 +15,9 @@ $$ y $$와 달리 concatenation layer의 출력은 $$ y $$가 embedding layer에
 ## 2. 성능 실험
 
 ![https://arxiv.org/pdf/1508.04025.pdf](/assets/attention_evalution_result.png)  
+|NMT system|Perplexity|BLEU|
+|-|-|-|
+| | | |
 WMT’14 English-German results PPL and BLEU \[Loung, arXiv 2015\]
 
 현재 방식을 처음 제안한 [\[Loung et al.2015\] Effective Approaches to Attention-based Neural Machine Translation](https://arxiv.org/pdf/1508.04025.pdf)에서는 실험 결과를 위와 같이 주장하였습니다. 실험 대상은 아래와 같습니다.
