@@ -65,6 +65,7 @@
     * [Fully Convolutional Seq2seq](neural-machine-translation/fconv.md)
     * [Transformer](neural-machine-translation/transformer.md)
   * Productized NMT system
+    * [기계번역 pipeline](neural-machine-translation/pipeline.md)
     * [Google's NMT](neural-machine-translation/gnmt.md)
     * [Edinburgh's NMT](neural-machine-translation/enmt.md)
 * Reinforcement Learning for NLP
