@@ -1,9 +1,14 @@
 # Monolingual을 활용하여 성능을 극대화
 
-## Language Model Ensemble
+## 1. Language Model Ensemble
 
-## Empty source-side translation
+![](/assets/language_model_ensemble.png)
 
-## Back translation
+## 2. Empty source-side translation
 
-## Copied translation
+## 3. Back translation
+
+## 4. Copied translation
+
+
+
