@@ -16,7 +16,7 @@
 
 ![](/assets/beam_search.png)
 
-하지만 우리는 자료구조, 알고리즘 수업에서 배웠다시피, greedy algorithm은 굉장히 쉽고 간편하지만, 최적의(optimal) 해를 보장하지 않습니다. 따라서 최적의 해에 가까워지기 위해서 우리는 약간의 trick을 첨가합니다.
+하지만 우리는 자료구조, 알고리즘 수업에서 배웠다시피, greedy algorithm은 굉장히 쉽고 간편하지만, 최적의(optimal) 해를 보장하지 않습니다. 따라서 최적의 해에 가까워지기 위해서 우리는 약간의 trick을 첨가합니다. ***Beam Size*** 만큼의 후보를 더 tracking 하는 것 입니다. 
 
 ![http://web.stanford.edu/class/cs224n/lectures/cs224n-2017-lecture10.pdf](/assets/decoding_performance.png)
 En-Cz: 12m training sentence pairs [Cho, arXiv 2016]
