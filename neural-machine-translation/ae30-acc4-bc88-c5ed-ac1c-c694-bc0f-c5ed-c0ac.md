@@ -49,4 +49,4 @@ NMT이전에 세상을 지배하던 번역 방식입니다. Google이 자신의 
 2. Better language model
     - Neural Network Language Model을 기반으로 하는 architecture이므로 기존의 SMT방식의 Language Model보다 더 강합니다. 따라서 Language Generation에 있어서 더 강점을 나타냅니다.
 3. Great context embedding
-    - 
+    - Neural Network의 특기를 십분 발휘하여 문장의 의미를 vectorize하는 능력이 뛰어납니다. 따라서, noise나 sparseness에도 훨씬 더 잘 대처할 수 있게 되었습니다.
