@@ -18,4 +18,6 @@ Hello, how are you? -> Hola, ¿cómo estás?
 
 ### 5. Mixing Languages
 
-### 6. Applications
+### 6. Limitation
+
+### 7. Applications
