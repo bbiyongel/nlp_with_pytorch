@@ -2,29 +2,29 @@
 
 * [소개글](README.md)
 * [To Do & Milestone](to-do-and-milestone.md)
-* Natural Language Processing with Deeplearning
-  * [Intro](nlp-with-deeplearning/ntro.md)
+* [Natural Language Processing with Deeplearning](nlp-with-deeplearning/cover.md)
+  * [Intro](nlp-with-deeplearning/intro.md)
   * [Why NLP important](nlp-with-deeplearning/why-nlp-important.md)
   * [Why NLP difficult](nlp-with-deeplearning/why-nlp-difficult.md)
   * [Deeplearning](nlp-with-deeplearning/deeplearning.md)
   * [History](nlp-with-deeplearning/history.md)
-* PyTorch 소개
+* [PyTorch 소개](pytorch-c18c-ac1c/cover.md)
   * [Intro](pytorch-c18c-ac1c/intro.md)
   * [How to install](pytorch-c18c-ac1c/how-to-install.md)
   * [TorchText](pytorch-c18c-ac1c/torchtext.md)
   * [Hello, PyTorch](pytorch-c18c-ac1c/hello-pytorch.md)
-* Word Sense Disambiguation \(WSD\)
+* [Word Sense Disambiguation \(WSD\)](word-sense-disambiguation-wsd/cover.md)
   * [intro](word-sense-disambiguation-wsd/intro.md)
   * [Bayes Theorem](word-sense-disambiguation-wsd/bayes-theorem.md)
   * [Naive Bayes](word-sense-disambiguation-wsd/naive-bayes.md)
   * [Selectional Preference](word-sense-disambiguation-wsd/selectional-preference.md)
   * [WordNet](word-sense-disambiguation-wsd/wordnet.md)
-* Preprocessing
+* [Preprocessing](preprocessing/cover.md)
   * [전처리 개요](preprocessing/c804-cc98-b9ac-ac1c-c694.md)
   * [Corpus 수집](preprocessing/collecting-corpus.md)
   * [Cleaning corpus](preprocessing/cleaning-corpus.md)
   * [Tokenization \(POS Tagging\)](preprocessing/tokenization.md)
-* Word Embedding Vector
+* [Word Embedding Vector](word-embedding-vector/cover.md)
   * [Intro](word-embedding-vector/intro.md)
   * [One-hot encoding](word-embedding-vector/one-hot-encoding.md)
   * [Previous methods](word-embedding-vector/previous-methods.md)
@@ -32,7 +32,7 @@
   * [GloVe](word-embedding-vector/glove.md)
   * [FastText](word-embedding-vector/fasttext.md)
   * [Advanced embedding](word-embedding-vector/advanced-embedding.md)
-* Sequence Modeling
+* [Sequence Modeling](sequential-problem/cover.md)
   * [Intro](sequential-problem/intro.md)
   * [Hidden Markov Model](sequential-problem/hmm.md)
   * [Conditional Random Field](sequential-problem/crf.md)
@@ -41,7 +41,7 @@
     * [Long Short Term Memory](rnn/lstm.md)
     * [Gated Recurrent Unit](rnn/gru.md)
     * [Gradient Clipping](rnn/gradient-clipping.md)
-* Text Classification
+* [Text Classification](text-classification/cover.md)
   * [Intro](text-classification/intro.md)
   * [Using CNN](text-classification/cnn.md)
   * [Using RNN](text-classification/rnn.md)
