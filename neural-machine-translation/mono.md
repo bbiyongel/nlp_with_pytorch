@@ -3,8 +3,12 @@
 ## 1. Language Model Ensemble
 
 ![https://arxiv.org/pdf/1503.03535.pdf](/assets/nmt_with_lm_ensemble.png)
+[[Gulcehre at el.2015]](https://arxiv.org/pdf/1503.03535.pdf)
 
 ![https://arxiv.org/pdf/1503.03535.pdf](/assets/nmt_with_lm_ensemble_evaluation.png)
+[[Gulcehre at el.2015]](https://arxiv.org/pdf/1503.03535.pdf)
+
+
 
 ## 2. Empty source-side translation
 
