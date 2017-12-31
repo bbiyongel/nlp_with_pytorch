@@ -57,7 +57,7 @@
   * [Seq2seq](neural-machine-translation/seq2seq.md)
   * [Attention](neural-machine-translation/attention.md)
   * [Input Feeding](neural-machine-translation/input-feeding.md)
-  * [Decoding](neural-machine-translation/beam-search.md)
+  * [Search](neural-machine-translation/beam-search.md)
   * Advanced Topic on NMT
     * [Using Monolingual Corpora](neural-machine-translation/mono.md)
     * [Multilingual NMT](neural-machine-translation/multilingual-nmt.md)
