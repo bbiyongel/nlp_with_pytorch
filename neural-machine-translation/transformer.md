@@ -4,7 +4,7 @@
 
 [\[Vaswani at el.2017\]](https://arxiv.org/pdf/1706.03762.pdf)
 
-![](/assets/nmt-transformer-1.png)
+
 
 ### Position Embedding
 
