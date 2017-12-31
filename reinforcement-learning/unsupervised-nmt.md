@@ -8,3 +8,6 @@
 [[Xia at el.2016]](https://arxiv.org/pdf/1611.00179.pdf)
 
 ## Unsupervised NMT
+
+[[Artetxe at el.2017]](https://arxiv.org/pdf/1710.11041.pdf)
+[[Lample at el.2017]](https://arxiv.org/pdf/1711.00043.pdf)
