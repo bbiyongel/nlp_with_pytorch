@@ -31,8 +31,3 @@ NMT이전에 세상을 지배하던 번역 방식입니다. Google이 자신의 
 ### b. Why it works well?
 
 왜 Neural Machine Translation이 잘 동작하는 것일까요?
-
--
--
--
--
