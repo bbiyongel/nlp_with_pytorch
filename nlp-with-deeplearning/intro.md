@@ -1,1 +1,1 @@
-# Natural Language Processing이란
+# What is Natural Language Processing?
