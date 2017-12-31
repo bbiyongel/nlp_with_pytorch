@@ -12,6 +12,8 @@ $$
 
 ### Why it is so hard?
 
+인간의 언어는 컴퓨터의 언어(e.g. programming language)와 같이 명확하지 않습니다. 우리는 언어의 모호성(ambiguity)을 늘림으로써, 의사소통의 효율을 증대시켰습니다. 이러한 점은 컴퓨터로 하여금 우리의 말을 번역하고자 할 때 큰 장벽으로 다가옵니다.
+
 ## History
 
 ### 1. Rule based Machine Translation
