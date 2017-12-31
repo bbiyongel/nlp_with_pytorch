@@ -41,3 +41,5 @@ Beam Search를 사용하면 좀 더 넓은 path에 대해서 search를 수행하
 En-Cz: 12m training sentence pairs [Cho, arXiv 2016]
 
 ## Length Penelty
+
+위의 search 알고리즘을 직접 짜서 수행시켜 보면 한가지 문제점이 발견됩니다. 현재 time-step 까지의 확률을 모두 곱(로그확률의 경우에는 합)하기 때문에 문장이 길어질 수록 확률이 낮아진다는 점 입니다. 따라서 짧은 문장일수록 더 높은 점수를 획득하는 경향이 있습니다. 우리는 이러한 현상을 방지하기 위해서 ***length penelty***를 주어 search가 조기 종료되는 것을 막습니다.
