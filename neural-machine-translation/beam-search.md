@@ -16,7 +16,21 @@
 
 ![](/assets/beam_search.png)
 
-하지만 우리는 자료구조, 알고리즘 수업에서 배웠다시피, greedy algorithm은 굉장히 쉽고 간편하지만, 최적의(optimal) 해를 보장하지 않습니다. 따라서 최적의 해에 가까워지기 위해서 우리는 약간의 trick을 첨가합니다. ***Beam Size*** 만큼의 후보를 더 tracking 하는 것 입니다. 
+하지만 우리는 자료구조, 알고리즘 수업에서 배웠다시피, greedy algorithm은 굉장히 쉽고 간편하지만, 최적의(optimal) 해를 보장하지 않습니다. 따라서 최적의 해에 가까워지기 위해서 우리는 약간의 trick을 첨가합니다. ***Beam Size*** 만큼의 후보를 더 tracking 하는 것 입니다.
+
+현재 time-step에서 Top-***k***개를 뽑아서 (여기서 k는 beam size와 같습니다) 다음 time-step에 대해서 k번 inference를 수행합니다. 그리고 총 $$ k * |V| $$ 개의 softmax 결과 값 중에서 다시 top-k개를 뽑아 다음 time-step으로 넘깁니다. ($$ |V| $$는 Vocabulary size) 여기서 중요한 점은 두가지 입니다.
+
+1. 누적 확률을 사용하여 top-k를 뽑습니다. 이때, 보통 로그 확률을 사용하므로 현재 time-step 까지의 로그확률에 대한 합을 tracking 하고 있어야 합니다.
+2. top-k를 뽑을 때, 현재 time-step에 대해 k번 계산한 모든 결과물 중에서 뽑습니다.
+$$
+\hat{y}_{t}^{k} = argmax_{k\text{-}th} \hat{Y}_t
+$$
+$$
+\hat{Y}_{t} = f_\theta(X, y_{<t}^{1}) \cup f_\theta(X, y_{<t}^{2}) \cup \cdots \cup f_\theta(X, y_{<t}^{k})
+$$
+$$
+X=\{x_1, x_2, \cdots, x_n\}
+$$
 
 ![http://web.stanford.edu/class/cs224n/lectures/cs224n-2017-lecture10.pdf](/assets/decoding_performance.png)
 En-Cz: 12m training sentence pairs [Cho, arXiv 2016]
