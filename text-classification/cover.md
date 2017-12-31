@@ -1,3 +1,3 @@
 # Text Classification
 
-![](https://upload.wikimedia.org/wikipedia/commons/f/fe/Kernel_Machine.svg)
+![](https://commons.wikimedia.org/wiki/File:Kernel_Machine.svg#/media/File:Kernel_Machine.svg)
