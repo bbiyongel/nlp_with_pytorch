@@ -14,8 +14,6 @@ _**2es**_ Hello, how are you? -&gt; Hola, ¿cómo estás?
 
 ### 2. One to Many
 
-
-
 ![](/assets/nmt-zeroshot-2.png)
 
 ### 3. Many to Many
@@ -24,19 +22,11 @@ _**2es**_ Hello, how are you? -&gt; Hola, ¿cómo estás?
 
 ### 4. Zero-shot Translation
 
-
-
 ![](/assets/nmt-zeroshot-4.png)
-
-
 
 ### 5. Mixing Languages
 
-
-
 ![](/assets/nmt-zeroshot-5.png)
-
-
 
 ### 6. Limitation
 
