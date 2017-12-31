@@ -6,7 +6,7 @@
 
 Hello, how are you? -> Hola, ¿cómo estás?
 
-***<2es>*** Hello, how are you? -> Hola, ¿cómo estás?
+***2es*** Hello, how are you? -> Hola, ¿cómo estás?
 
 ### 1. Many to One
 
