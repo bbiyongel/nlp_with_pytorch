@@ -15,6 +15,8 @@
 
 ## 4. Copied translation
 
+이 방식은 [\[Currey et al.2017\] Copied Monolingual Data Improves Low-Resource Neural Machine
+Translation](https://kheafield.com/papers/edinburgh/copy_paper.pdf) 에서 처음 제안되었습니다.
+
 ![https://arxiv.org/pdf/1708.00726.pdf](/assets/nmt_copied_translation.png)
-[\[Currey et al.2017\] Copied Monolingual Data Improves Low-Resource Neural Machine
-Translation](https://kheafield.com/papers/edinburgh/copy_paper.pdf)
+[[Sennrich at el.2017]](https://arxiv.org/pdf/1708.00726.pdf)
