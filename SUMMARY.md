@@ -63,7 +63,7 @@
     * [Multilingual NMT](neural-machine-translation/multilingual-nmt.md)
     * [Fully Convolutional Seq2seq](neural-machine-translation/fconv.md)
     * [Transformer](neural-machine-translation/transformer.md)
-  * Productized NMT system
+  * [Productized NMT system](neural-machine-translation/productize.md)
     * [NMT pipeline](neural-machine-translation/pipeline.md)
     * [Google's NMT](neural-machine-translation/gnmt.md)
     * [Edinburgh's NMT](neural-machine-translation/enmt.md)
