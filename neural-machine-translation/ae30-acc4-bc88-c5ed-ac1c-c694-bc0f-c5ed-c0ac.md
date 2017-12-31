@@ -44,12 +44,14 @@ NMT이전에 세상을 지배하던 번역 방식입니다. Google이 자신의 
 ### 3. Neural Machine Translation
 
 ![http://web.stanford.edu/class/cs224n/lectures/cs224n-2017-lecture10.pdf](/assets/basic_nmt_architecture.png)
+[Image from CS224n](http://web.stanford.edu/class/cs224n/syllabus.html)
 
 사실, 딥러닝 이전의 AI의 전성기\(1980년대\)에도 Neural Network을 사용하여 Machine Translation 문제를 해결하려는 시도는 여럿 있었습니다. 하지만 당시에도 $$ Encoder \longrightarrow Decoder $$ 형태의 구조를 가지고 있었지만, 당연히 지금과 같은 성능을 내기는 어려웠습니다.
 
 ### a. Invasion of NMT
 
 ![http://web.stanford.edu/class/cs224n/lectures/cs224n-2017-lecture10.pdf](/assets/progress_in_machine_translation.png)
+[Image from CS224n](http://web.stanford.edu/class/cs224n/syllabus.html)
 
 현재의 NMT 방식이 제안되고, 곧 기존의 SMT 방식을 크게 앞질러 버렸습니다. 이제는 구글의 번역기에도 NMT 방식이 사용됩니다.
 
