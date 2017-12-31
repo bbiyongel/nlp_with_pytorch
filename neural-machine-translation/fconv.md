@@ -10,7 +10,9 @@
 
 
 
-![](/assets/nmt-fconv.png)
+![](/assets/nmt-fconv-overview.png)
+
+
 
 ## 구조 설계
 
