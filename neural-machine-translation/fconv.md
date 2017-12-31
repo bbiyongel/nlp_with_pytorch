@@ -4,6 +4,10 @@
 
 [[Gehring at el.2017]](https://arxiv.org/pdf/1705.03122.pdf)
 
+### Position Embedding
+
+### Attention
+
 ## 구조 설계
 
 ## 설명
