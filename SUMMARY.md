@@ -46,7 +46,7 @@
   * [Using CNN](text-classification/cnn.md)
   * [Using RNN](text-classification/rnn.md)
   * [Unsupervised Text Classification](text-classification/unsupervised-text-classification.md)
-* Language Modeling
+* [Language Modeling](language-modeling/cover.md)
   * [언어모델 개요](language-modeling/c5b8-c5b4-baa8-b378-ac1c-c694.md)
   * [n-gram](language-modeling/n-gram.md)
   * [Perpexity](language-modeling/perpexity.md)
