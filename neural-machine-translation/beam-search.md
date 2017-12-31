@@ -20,8 +20,6 @@
 
 현재 time-step에서 Top-***k***개를 뽑아서 (여기서 k는 beam size와 같습니다) 다음 time-step에 대해서 k번 inference를 수행합니다. 그리고 총 $$ k * |V| $$ 개의 softmax 결과 값 중에서 다시 top-k개를 뽑아 다음 time-step으로 넘깁니다. ($$ |V| $$는 Vocabulary size) 여기서 중요한 점은 두가지 입니다.
 
-1. 누적 확률을 사용하여 top-k를 뽑습니다. 이때, 보통 로그 확률을 사용하므로 현재 time-step 까지의 로그확률에 대한 합을 tracking 하고 있어야 합니다.
-2. top-k를 뽑을 때, 현재 time-step에 대해 k번 계산한 모든 결과물 중에서 뽑습니다.
 $$
 \hat{y}_{t}^{k} = argmax_{k\text{-}th} \hat{Y}_t
 $$
@@ -31,6 +29,13 @@ $$
 $$
 X=\{x_1, x_2, \cdots, x_n\}
 $$
+
+1. 누적 확률을 사용하여 top-k를 뽑습니다. 이때, 보통 로그 확률을 사용하므로 현재 time-step 까지의 로그확률에 대한 합을 tracking 하고 있어야 합니다.
+2. top-k를 뽑을 때, 현재 time-step에 대해 k번 계산한 모든 결과물 중에서 뽑습니다.
+
+Beam Search를 사용하면 좀 더 넓은 path에 대해서 search를 수행하므로 당연히 좀 더 나은 성능을 보장합니다. 하지만, beam size만큼 번역을 더 수행해야 하기 때문에 속도에 저하가 있습니다. 다행히도 우리는 이 작업을 mini-batch로 만들어 수행하기 때문에, 병렬처리로 인해서 약간의 속도저하만 생기게 됩니다.
+
+아래는 [Cho et al.2016]에서 주장한 ***Beam Search***의 성능향상에 대한 실험 결과 입니다. Sampling 방법은 단순한 Greedy Search 보다 더 좋은 성능을 제공하지만, Beam search가 가장 좋은 성능을 보여줍니다. 특기할 점은 Machine Translation task에서는 보통 beam size를 10이하로 사용한다는 것 입니다. 
 
 ![http://web.stanford.edu/class/cs224n/lectures/cs224n-2017-lecture10.pdf](/assets/decoding_performance.png)
 En-Cz: 12m training sentence pairs [Cho, arXiv 2016]
