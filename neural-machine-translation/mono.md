@@ -10,7 +10,8 @@
 
 ## 3. Back translation
 
-![](/assets/nmt_back_translation.png)
+![https://arxiv.org/pdf/1511.06709.pdf](/assets/nmt_back_translation.png)
+[[Sennrich at el.2015]](https://arxiv.org/pdf/1511.06709.pdf)
 
 ## 4. Copied translation
 
