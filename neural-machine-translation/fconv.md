@@ -2,12 +2,19 @@
 
 ## 소개
 
-[[Gehring at el.2017]](https://arxiv.org/pdf/1705.03122.pdf)
+[\[Gehring at el.2017\]](https://arxiv.org/pdf/1705.03122.pdf)
 
 ### Position Embedding
 
 ### Attention
 
+
+
+![](/assets/nmt-fconv.png)
+
 ## 구조 설계
 
 ## 설명
+
+
+
