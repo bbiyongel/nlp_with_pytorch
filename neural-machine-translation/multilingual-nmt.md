@@ -2,6 +2,6 @@
 
 ## Zero-shot Learning
 
-***Hello, how are you? -> Hola, ¿cómo estás?***
+Hello, how are you? -> Hola, ¿cómo estás?
 
-***<2es> Hello, how are you? -> Hola, ¿cómo estás?***
+***<2es>*** Hello, how are you? -> Hola, ¿cómo estás?
