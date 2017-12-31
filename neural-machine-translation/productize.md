@@ -1,0 +1,3 @@
+# Productization of Neural Machine Translation System
+
+![](https://cdn.namuwikiusercontent.com/s/936c1fb8eb9fc31fa17fde5a90e38187a9ca4b52aa7130a030572ea0fe871cb43dcdd3e947bfdaf5a704e7fcf9bbfbb174bec9d0140aeffcc63e4f6f6f49b56c93aef4eab26bf9a637c0936e6e1c2d62?e=1518334600&k=VSx1AUrSGgsDaYrAdsC6Dw)
