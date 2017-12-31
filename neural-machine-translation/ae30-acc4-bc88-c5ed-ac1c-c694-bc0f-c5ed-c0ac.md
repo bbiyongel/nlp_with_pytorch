@@ -4,6 +4,12 @@
 
 ## Objective
 
+$$
+\hat{e} = argmax P_{f \rightarrow e}(e|f)
+$$
+
+번역의 궁극적인 목표는 어떤 언어($$ f $$, e.g. *french*)의 문장이 주어졌을 때, 우리가 원하는 언어($$ e $$, e.g. *english*)로 확률을 최대로 하는 문장을 찾아내는 것 입니다.
+
 ### Why it is so hard?
 
 ## History
