@@ -4,7 +4,7 @@
 
 ## Objective
 
-### Why it is hard?
+### Why it is so hard?
 
 ## History
 
