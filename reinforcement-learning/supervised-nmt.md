@@ -4,4 +4,4 @@
 
 ## Minimum Risk Training
 
-[[ Shen]](https://arxiv.org/pdf/1512.02433.pdf)
+[[Shen at el.2015]](https://arxiv.org/pdf/1512.02433.pdf)
