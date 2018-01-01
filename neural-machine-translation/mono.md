@@ -28,6 +28,8 @@
 ![https://arxiv.org/pdf/1511.06709.pdf](/assets/nmt_back_translation.png)
 [[Sennrich at el.2015]](https://arxiv.org/pdf/1511.06709.pdf)
 
+위의 Table은 Empty source-side translation(==monolingual)과 back translation(==synthetic) 방식에 대해서 성능을 실험한 결과 입니다.
+
 ## 4. Copied translation
 
 이 방식은 [\[Currey et al.2017\] Copied Monolingual Data Improves Low-Resource Neural Machine
