@@ -1,6 +1,6 @@
 # Recurrent Neural Network
 
-![](/assets/rnn-cover.png)
+![](https://upload.wikimedia.org/wikipedia/commons/a/a1/Alan_Turing_Aged_16.jpg)
 
-[Kyunghyun Cho](http://www.kyunghyuncho.me/home) - Image from Web
+[Alan Turing](https://en.wikipedia.org/wiki/Alan_Turing) - Image from Wikipedia
 
