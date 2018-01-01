@@ -15,4 +15,7 @@
 
 
 ### Author: Ki Hyun Kim 
-(email: pointzz.ki@gmail.com)
+
+- linkedin: https://www.linkedin.com/in/ki-hyun-kim/
+- github: https://github.com/kh-kim/
+- email: pointzz.ki@gmail.com
