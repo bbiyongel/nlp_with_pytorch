@@ -1,3 +1,3 @@
 # Speech Recognition
 
-![](/assets/asr-cover.jpg)
+![](/assets/asr-cover.png)
