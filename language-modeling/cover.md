@@ -3,3 +3,7 @@
 ![](https://upload.wikimedia.org/wikipedia/commons/a/a1/Alan_Turing_Aged_16.jpg)
 
 [Alan Turing](https://en.wikipedia.org/wiki/Alan_Turing) - Image from Wikipedia
+
+![](https://upload.wikimedia.org/wikipedia/commons/b/bb/Noam_Chomsky%2C_2004.jpg)
+
+[Noam Chomsky](https://en.wikipedia.org/wiki/Noam_Chomsky) - Image from Wikipedia
