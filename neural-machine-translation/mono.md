@@ -32,8 +32,8 @@
 
 ## 4. Copied translation
 
-이 방식은 [\[Currey et al.2017\] Copied Monolingual Data Improves Low-Resource Neural Machine
-Translation](https://kheafield.com/papers/edinburgh/copy_paper.pdf) 에서 제안 되었습니다. 기존의 empty 
+이 방식은 같은 저자인 Rich Sennrich에 의해서 [\[Currey et al.2017\] Copied Monolingual Data Improves Low-Resource Neural Machine
+Translation](https://kheafield.com/papers/edinburgh/copy_paper.pdf) 에서 제안 되었습니다. 기존의 Dummy source sentence translation 방식에서 좀 더 나아진 방식입니다. 기존의 방식 대신에 source side와 target side에 identical한 같은 데이터를 넣어 훈련시키는 것 입니다. 기존의 dummy source sentence 방식은 encoder에서 decoder로 가는 길을 훈련시에 dropout 처리 해주어야 했지만, 이 방식은 그럴 필요가 없어진 것이 장점입니다. 
 
 ![https://arxiv.org/pdf/1708.00726.pdf](/assets/nmt_copied_translation.png)
 [[Sennrich at el.2017]](https://arxiv.org/pdf/1708.00726.pdf)
