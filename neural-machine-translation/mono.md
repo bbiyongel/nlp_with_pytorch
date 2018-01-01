@@ -21,6 +21,10 @@
 
 ## 3. Back translation
 
+그리고 같은 [논문](https://arxiv.org/pdf/1708.00726.pdf)에서 또 다른 방법을 제시하였습니다. 이 방법은 기존의 훈련된 ***반대 방향*** 번역기를 사용하여 monolingual corpus를 기계번역하여 synthetic parallel corpus를 만들어 이것을 훈련에 사용하는 방식 입니다. 중요한 점은 기계번역에 의해 만들어진 synthetic parallel corpus를 사용할 때, 반대방향의 번역기의 훈련에 사용한다는 것 입니다.
+
+예를 들어, ***한국어*** monolingual corpus가 있을 때, 이것을 기존에 훈련된 ***한***$$ \rightarrow $$***영***번역기에 기계번역시켜 한-영 synthetic parallel corpus를 만들고, 이것을 ***영***$$ \rightarrow $$***한***번역기를 훈련시키는데 사용하는 것 입니다. 이러한 방법의 특성 때문에 ***back translation*** 이라고 명명되었습니다.
+
 ![https://arxiv.org/pdf/1511.06709.pdf](/assets/nmt_back_translation.png)
 [[Sennrich at el.2015]](https://arxiv.org/pdf/1511.06709.pdf)
 
