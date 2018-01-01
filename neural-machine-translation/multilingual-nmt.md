@@ -56,6 +56,8 @@ Model 1은 $$ Pt \rightarrow En $$, $$ En \rightarrow Es $$를 한 모델에 훈
 
 ### 5. Limitation
 
+위와 같이 multilingual MT model로써는 의의가 있지만, 성능에 있어서는 이득이 있었기 때문에 실제 사용에는 한계가 있습니다. 더군다나 low resource language pair에 대해서는 성능의 향상이 있지만 뒤 챕터에 설명할 방법들을 사용하면 좋은 방법은 아닙니다.
+
 ### 6. Applications
 
 우리는 artificial token을 추가하는 방식을 다른곳에서도 응용할 수 있습니다. 다른 domain의 데이터를 하나로 모아 번역기를 훈련시키는 과정 등에 사용 가능합니다. 예를 들어 corpus를 뉴스기사와 미드 자막에서 각각 모았다고 가정하면, ***문어체***와 ***대화체***로 domain을 나누어 artificial token을 추가하여 우리가 원하는대로 번역문의 말투를 바꾸어줄 수 있을 겁니다. 또는 마찬가지로 ***의료용***과 ***법률용***으로 나누어 번역기의 모드를 바꾸어줄 수 있을 겁니다.
