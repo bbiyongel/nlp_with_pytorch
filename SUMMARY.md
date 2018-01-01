@@ -36,7 +36,7 @@
   * [Intro](sequential-problem/intro.md)
   * [Hidden Markov Model](sequential-problem/hmm.md)
   * [Conditional Random Field](sequential-problem/crf.md)
-  * Recurrent Neural Network
+  * [Recurrent Neural Network](sequential-problem/rnn-cover.md)
     * [Vanila RNN](sequential-problem/rnn.md)
     * [Long Short Term Memory](rnn/lstm.md)
     * [Gated Recurrent Unit](rnn/gru.md)
