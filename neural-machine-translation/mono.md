@@ -1,16 +1,23 @@
 # Monolingual Corpora를 활용하여 성능 쥐어짜기
 
-번역 시스템을 훈련하기 위해서는 다량의 Parallel Corpus(병렬 말뭉치)가 필요합니다. 필자의 경험상 대략 300만 문장쌍이 있으면 완벽하지는 않지만 나름 쓸만한 번역기가 나오기 시작합니다. 하지만 인터넷에는 정말 수치로 정의하기도 힘들 정도의 monolingual corpus가 널려 있는데 반해서, 이러한 parallel corpus을 대량으로 얻는 것은 굉장히 어려운 일입니다. 더군다나, 그 양이 monolingual corpus에 비해서 적기 때문에, 언어 정보를 정확하게 담고 있다고 보기도 어렵고, 모든 정보를 담고 있다고 할 수도 없습니다. 이러한 놓치는 정보를 줄이고, 훈련데이터를 값싸게 구하여 성능을 올리고자 하는 것이 이번 섹션에서 다룰 내용 입니다.
+번역 시스템을 훈련하기 위해서는 다량의 Parallel Corpus(병렬 말뭉치)가 필요합니다. 필자의 경험상 대략 300만 문장쌍이 있으면 완벽하지는 않지만 나름 쓸만한 번역기가 나오기 시작합니다. 하지만 인터넷에는 정말 수치로 정의하기도 힘들 정도의 monolingual corpus가 널려 있는데 반해서, 이러한 parallel corpus을 대량으로 얻는 것은 굉장히 어려운 일입니다. 또한, monolingual corpus가 그 양이 많기 때문에 실제 우리가 사용하는 언어의 확률분포에 좀 더 가까울 수 있고, 따라서 언어모델을 구성함에 있어서 훨씬 유리합니다. 이번 섹션은 이러한 값싼 monolingual corpus를 활용하여 Neural Machine Translation system의 성능을 쥐어짜는 방법들에 대해서 다룹니다.
 
 ## 1. Language Model Ensemble
 
 ![https://arxiv.org/pdf/1503.03535.pdf](/assets/nmt_with_lm_ensemble.png)
 [[Gulcehre at el.2015]](https://arxiv.org/pdf/1503.03535.pdf)
 
+이 방법은 Bengio 교수의 연구실에서 쓴 paper인 [[Gulcehre at el.2015]](https://arxiv.org/pdf/1503.03535.pdf)에서 제안 된 방법입니다. Language Model을 explicit하게 ensemble하여 디코더의 성능을 올리고자 시도하였습니다. 두개의 다른 모델을 쓴 ***shallow fusion*** 방법 보다, LM을 Seq2seq에 포함시켜 end2end training을 하여 한개의 모델로 만든 ***deep fusion*** 방법이 좀 더 나은 성능을 나타냈습니다.
+
 ![https://arxiv.org/pdf/1503.03535.pdf](/assets/nmt_with_lm_ensemble_evaluation.png)
 [[Gulcehre at el.2015]](https://arxiv.org/pdf/1503.03535.pdf)
 
+성능상으로는 뒤에 다룰 내용들보다 성능 상의 gain이 적지만, 그 내용이 방법의 장점은 Monolingual corpus를 전부 활용 할 수 있다는 것입니다.
+
 ## 2. Empty source-side translation
+
+아래의 내용들은 전부 [Edinburgh 대학의 Nematus 번역시스템](https://arxiv.org/pdf/1708.00726.pdf)
+에서 제안되고 사용된 내용들입니다. 
 
 ## 3. Back translation
 
