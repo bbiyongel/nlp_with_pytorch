@@ -54,12 +54,8 @@ Model 1은 $$ Pt \rightarrow En $$, $$ En \rightarrow Es $$를 한 모델에 훈
 
 비록 Model1과 Model2는 훈련 중에 한번도 $$ Pt \rightarrow Es $$ 데이터를 보지 못했지만, 20이 넘는 BLEU를 보여주는 것을 알 수 있습니다. 하지만 bridge 방식의 $$(a),(b)$$ 보다 성능이 떨어지는 것을 알 수 있습니다. 다행히도 $$ (f) $$의 경우에는 $$(c)$$보다 (큰 차이는 아니지만) 성능이 뛰어난 것을 알 수 있습니다. 따라서 우리는 parallel corpus의 양이 얼마 되지 않는 언어쌍의 번역기를 훈련할 때에 위와 같은 방법을 통해서 성능을 끌어올릴 수 있음을 알 수 있습니다.
 
-### 5. Mixing Languages
+### 5. Limitation
 
-![](/assets/nmt-zeroshot-5.png)
-
-### 6. Limitation
-
-### 7. Applications
+### 6. Applications
 
 우리는 artificial token을 추가하는 방식을 다른곳에서도 응용할 수 있습니다. 다른 domain의 데이터를 하나로 모아 번역기를 훈련시키는 과정 등에 사용 가능합니다. 예를 들어 corpus를 뉴스기사와 미드 자막에서 각각 모았다고 가정하면, ***문어체***와 ***대화체***로 domain을 나누어 artificial token을 추가하여 우리가 원하는대로 번역문의 말투를 바꾸어줄 수 있을 겁니다. 또는 마찬가지로 ***의료용***과 ***법률용***으로 나누어 번역기의 모드를 바꾸어줄 수 있을 겁니다.
