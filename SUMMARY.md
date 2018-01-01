@@ -24,6 +24,7 @@
   * [Corpus 수집](preprocessing/collecting-corpus.md)
   * [Cleaning corpus](preprocessing/cleaning-corpus.md)
   * [Tokenization \(POS Tagging\)](preprocessing/tokenization.md)
+  * [Subword Segmentation](preprocessing/bpe.md)
 * [Word Embedding Vector](word-embedding-vector/cover.md)
   * [Intro](word-embedding-vector/intro.md)
   * [One-hot encoding](word-embedding-vector/one-hot-encoding.md)
