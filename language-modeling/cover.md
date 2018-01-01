@@ -1,5 +1,5 @@
 # Language Modeling
 
-![](https://www.agendalugano.ch/system/images/files/000/016/390/original/the_imitation_game_48050661_st_5_s-high.jpg?1462999303)
+![](https://commons.wikimedia.org/wiki/File:Alan_Turing_Aged_16.jpg#/media/File:Alan_Turing_Aged_16.jpg)
 
-Imitation Game - Image from Web
+[Alan Turing](https://en.wikipedia.org/wiki/Alan_Turing) - Image from Web
