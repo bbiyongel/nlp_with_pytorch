@@ -72,11 +72,11 @@
   * [Policy Gradient](reinforcement-learning/policy-gradient.md)
   * [Supervised NMT](reinforcement-learning/supervised-nmt.md)
   * [Unsupervised NMT](reinforcement-learning/unsupervised-nmt.md)
-* Speech Recognition
+* [Speech Recognition](speech-recognition/cover.md)
   * [Intro](speech-recognition/intro.md)
   * [Traditional methodology](speech-recognition/wfst.md)
   * [Seq2seq](speech-recognition/seq2seq.md)
-* Advanced Topic
+* [Advanced Topic](advanced-topic/cover.md)
   * [Memory Augmented Neural Network](advanced-topic/memory-augmented-neural-network.md)
     * [Text Summarization](advanced-topic/text-summarization.md)
     * [Quetional Answering](advanced-topic/question-answering.md)
