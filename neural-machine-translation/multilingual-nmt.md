@@ -54,9 +54,9 @@ Model 1은 $$ Pt \rightarrow En $$, $$ En \rightarrow Es $$를 한 모델에 훈
 
 비록 Model1과 Model2는 훈련 중에 한번도 $$ Pt \rightarrow Es $$ 데이터를 보지 못했지만, 20이 넘는 BLEU를 보여주는 것을 알 수 있습니다. 하지만 bridge 방식의 $$(a),(b)$$ 보다 성능이 떨어지는 것을 알 수 있습니다. 다행히도 $$ (f) $$의 경우에는 $$(c)$$보다 (큰 차이는 아니지만) 성능이 뛰어난 것을 알 수 있습니다. 따라서 우리는 parallel corpus의 양이 얼마 되지 않는 언어쌍의 번역기를 훈련할 때에 위와 같은 방법을 통해서 성능을 끌어올릴 수 있음을 알 수 있습니다.
 
-### 5. Limitation
+### 5. Conclusion
 
-위와 같이 multilingual MT model로써는 의의가 있지만, 성능에 있어서는 이득이 있었기 때문에 실제 사용에는 한계가 있습니다. 더군다나 low resource language pair에 대해서는 성능의 향상이 있지만 뒤 챕터에 설명할 방법들을 사용하면 좋은 방법은 아닙니다.
+앞서 다룬 monlingual corpus를 활용하는 방법의 연장선상으로써 위와 같이 multilingual MT model로써는 의의가 있지만, 성능에 있어서는 이득이 있었기 때문에 실제 사용에는 한계가 있습니다. 더군다나 low resource language pair에 대해서는 성능의 향상이 있지만 뒤 챕터에 설명할 방법들을 사용하면 그다지 좋은 방법은 아닙니다.
 
 ### 6. Applications
 
