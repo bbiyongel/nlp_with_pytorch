@@ -8,9 +8,9 @@
 
 방법은 너무나도 간단합니다. 아래와 같이 기존 parallel corpus의 맨 앞에 artificial token을 삽입함으로써 완성됩니다. 삽입된 token에 따라서 target sentence의 language가 결정됩니다.
 
-- Hello, how are you? -&gt; Hola, ¿cómo estás?
+- Hello, how are you? $$ \rightarrow $$ Hola, ¿cómo estás?
 
-- **\<2es\>** Hello, how are you? -&gt; Hola, ¿cómo estás?
+- **\<2es\>** Hello, how are you? $$ \rightarrow $$ Hola, ¿cómo estás?
 
 ### 1. Many to One
 
