@@ -2,7 +2,8 @@
 
 ## 1. Architecture Overview
 
-  
+![](/assets/seq2seq_architecture.png)
+
 먼저 번역 또는 seq2seq 모델을 이용한 작업을 간단하게 수식화 해보겠습니다.
 
 
