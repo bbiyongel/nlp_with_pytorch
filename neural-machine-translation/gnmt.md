@@ -5,13 +5,19 @@ Google은 2016년 논문([\[Wo at el.2016\]](https://arxiv.org/pdf/1609.08144.pd
 
 ## 1. Model Architecture
 
+Google도 seq2seq 기반의 모델을 구성하였습니다. 다만, 구글은 훨씬 방대한 데이터셋을 가지고 있기 때문에 그에 맞는 깊은 모델을 구성하였습니다. 따라서 아래에 소개될 방법들이 깊은 모델들을 효율적으로 훈련 할 수 있도록 사용되었습니다.
+
 ### a. Residual Connection
 
 ![](/assets/nmt-gnmt-1.png)
 
+보통 LSTM layer를 4개 이상 쌓기 시작하면 모델이 deeper해 짐에 따라서 성능 효율이 저하되기 시작합니다. 따라서 Google은 깊은 모델은 효율적으로 훈련시키기 위하여 residual connection을 적용하였습니다.
+
 ### b. Bi-directional Encoder for First Layer
 
 ![](/assets/nmt-gnmt-2.png)
+
+또한, 모든 LSTM stack에 대해서 bi-directional LSTM을 적용하는 대신에, 첫번째 층에 대해서만 bi-directional LSTM을 적용하였습니다. 따라서 training 및 inference 속도에 개선이 있었습니다.
 
 ## 2. Segmentation Approachs
 
