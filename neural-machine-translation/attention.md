@@ -113,22 +113,34 @@ def key_value_func(query):
 ```
 >>> context_vector = attention(query = decoder_output, keys = encoder_outputs, values = encoder_outputs)
 ```
+
+
 $$
 w = softmax({h_{t}^{tgt}}^T W \cdot H^{src})
 $$
+
+
+
 $$
 c = H^{src} \cdot w~~~~~and~c~is~a~context~vector
 $$
+
+
+
 $$
 \tilde{h}_{t}^{tgt}=\tanh([h_{t}^{tgt}; c])
 $$
+
+
+
 $$
 \hat{y}_{t}=softmax(\tilde{h}_{t}^{tgt})
 $$
 
+
 원하는 정보를 attention을 통해 encoder에서 획득한 후, 해당 정보를 decoder output과 concatenate하여 $$ tanh $$를 취한 후, softmax 계산을 통해 다음 time-step의 입력이 되는 $$ \hat{y}_{t} $$을 구합니다.
 
-![](/assets/seq2seq_with_attention.png)
+![](/assets/seq2seq_with_attention_architecture.png)
 
 #### a. Linear Transformation
 
@@ -151,7 +163,7 @@ $$
 
 #### c. 성능 실험
 
-![http://web.stanford.edu/class/cs224n/lectures/cs224n-2017-lecture10.pdf](/assets/attention_better_translation_of_long_sentence.png)
+![http://web.stanford.edu/class/cs224n/lectures/cs224n-2017-lecture10.pdf](/assets/attention_better_translation_of_long_sentence.png)  
 [Image from CS224n](http://web.stanford.edu/class/cs224n/syllabus.html)
 
 기존 vanila seq2seq는 전반적으로 성능이 떨어짐을 알수 있을 뿐만 아니라, 특히 문장이 길어질 수록 성능이 더욱 하락함을 알 수 있습니다. 하지만 이에 비해서 attention을 사용하면 문장이 길어지더라도 성능이 크게 하락하지 않음을 알 수 있습니다.
