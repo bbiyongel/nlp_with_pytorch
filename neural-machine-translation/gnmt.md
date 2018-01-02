@@ -33,9 +33,13 @@ Google은 후에 설명할 Reinforcement Learning 기법을 사용하여 Maximum
 
 ## 4. Quantization
 
-![](/assets/nmt-gnmt-3.png)
+실제 Neural Network을 사용한 product를 개발할 때에는 여러가지 어려움에 부딪히게 됩니다. 이때, Quantization을 도입함으로써 아래와 같은 여러가지 이점을 얻을 수 있습니다.
 
-속도개선을 위한 Quantization 기법을 도입하였습니다. 또한 Qualtization을 통해서 regularization의 효과도 볼 수 있음을 위의 그래프에서 알 수 있습니다.
+- 계산량을 줄여 자원의 효율적 사용과 응답시간의 감소를 얻을 수 있다.
+- 모델의 실제 저장되는 크기를 줄여 deploy를 효율적으로 할 수 있다.
+- 부가적으로 regularization의 효과를 볼 수 있다. (아래 테이블 참조)
+
+![](/assets/nmt-gnmt-3.png)
 
 ## 5. Optimizer
 
