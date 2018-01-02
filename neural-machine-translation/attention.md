@@ -129,18 +129,13 @@ def key_value_func(query):
 
 ![](/assets/attention_linear_transform.png)
 
-
 $$
 w = softmax({h_{t}^{tgt}}^T W \cdot H^{src}) \atop
 c = H^{src} \cdot w
 $$
-
-
-
 $$
 where~c~is~a~context~vector
 $$
-
 
 위와 같이 꼭 번역 task가 아니더라도, 두 다른 domain 사이의 비교를 위해서 사용합니다.
 
