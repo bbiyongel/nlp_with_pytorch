@@ -38,5 +38,9 @@
 
 ## Training Procedure
 
+## Evaluation
+
+![](/assets/nmt-gnmt-6.png)
+
 
 
