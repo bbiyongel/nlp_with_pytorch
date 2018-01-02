@@ -22,6 +22,8 @@
 
 ## Quantization
 
+![](/assets/nmt-gnmt-3.png)
+
 ## Decoder
 
 ### Length Penalty
