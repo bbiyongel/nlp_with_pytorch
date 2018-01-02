@@ -1,12 +1,12 @@
-# Google Neural Machine Translation (GNMT)
+# Google Neural Machine Translation \(GNMT\)
 
-[[Wo at el.2016]](https://arxiv.org/pdf/1609.08144.pdf)
+[\[Wo at el.2016\]](https://arxiv.org/pdf/1609.08144.pdf)
 
 ## Model Architecture
 
 ### Residual Connection
 
-
+![](/assets/nmt-gnmt-1.png)
 
 ### Bi-directional Encoder for First Layer
 
@@ -27,3 +27,6 @@
 ### Coverage Penalty
 
 ## Training Procedure
+
+
+
