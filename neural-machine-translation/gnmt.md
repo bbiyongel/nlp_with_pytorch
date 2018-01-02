@@ -35,6 +35,8 @@ Google은 후에 설명할 Reinforcement Learning 기법을 사용하여 Maximum
 
 ![](/assets/nmt-gnmt-3.png)
 
+속도개선을 위한 Quantization 기법을 도입하였습니다. 또한 Qualtization을 통해서 regularization의 효과도 볼 수 있음을 위의 그래프에서 알 수 있습니다.
+
 ## 5. Optimizer
 
 ![](/assets/nmt-gnmt-4.png)
