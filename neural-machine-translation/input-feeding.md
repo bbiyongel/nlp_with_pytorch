@@ -22,10 +22,10 @@ $$
 c = H^{src} \cdot w~~~~~and~c~is~a~context~vector
 $$
 $$
-\tilde{h}_{t}^{tgt}=\tanh([h_{t}^{tgt}; c]
+\tilde{h}_{t}^{tgt}=\tanh([h_{t}^{tgt}; c])
 $$
 $$
-\hat{y}_{t}=softmax(\tilde{h}_{t}^{tgt}))
+\hat{y}_{t}=softmax(\tilde{h}_{t}^{tgt})
 $$
 
 ## 1. 단점
