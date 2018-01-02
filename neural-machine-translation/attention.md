@@ -115,7 +115,7 @@ def key_value_func(query):
 ```
 $$
 w = softmax({h_{t}^{tgt}}^T W \cdot H^{src}) \atop
-c = H^{src} \cdot~~~~w~and~c~is~a~context~vector
+c = H^{src} \cdot w~~~~~and~c~is~a~context~vector
 
 $$
 $$
