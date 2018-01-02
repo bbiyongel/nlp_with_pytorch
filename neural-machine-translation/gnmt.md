@@ -20,6 +20,8 @@
 
 ## Training Criteria
 
+![](/assets/nmt-gnmt-5.png)
+
 ## Quantization
 
 ![](/assets/nmt-gnmt-3.png)
