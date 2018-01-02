@@ -24,6 +24,10 @@
 
 ![](/assets/nmt-gnmt-3.png)
 
+## Optimizer
+
+![](/assets/nmt-gnmt-4.png)
+
 ## Decoder
 
 ### Length Penalty
