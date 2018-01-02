@@ -41,21 +41,19 @@ Google은 후에 설명할 Reinforcement Learning 기법을 사용하여 Maximum
 
 ![](/assets/nmt-gnmt-3.png)
 
-## 5. Optimizer
-
-![](/assets/nmt-gnmt-4.png)
-
-Google은 stochastic gradient descent (SGD)를 써서 훈련 시키는 것 보다, Adam과 섞어 사용하면 (epoch 1까지 Adam) 더 좋은 성능을 발휘하는 것을 확인하였습니다.
-
-## 6. Search
+## 5. Search
 
 ### a. Length Penalty
 
 ### b. Coverage Penalty
 
-## 7. Training Procedure
+## 6. Training Procedure
 
-## 8. Evaluation
+![](/assets/nmt-gnmt-4.png)
+
+Google은 stochastic gradient descent (SGD)를 써서 훈련 시키는 것 보다, Adam과 섞어 사용하면 (epoch 1까지 Adam) 더 좋은 성능을 발휘하는 것을 확인하였습니다.
+
+## 7. Evaluation
 
 ![](/assets/nmt-gnmt-6.png)
 
