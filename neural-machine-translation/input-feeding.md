@@ -6,6 +6,19 @@ Decoder output과 Attention 결과값을 concatenate한 이후에 Generator 모�
 
 $$ y $$와 달리 concatenation layer의 출력은 $$ y $$가 embedding layer에서 dense vector(=embedding vector)로 변환되고 난 이후에 embedding vector와 concatenate되어 decoder RNN에 입력으로 주어지게 됩니다. 이러한 과정을 ***input feeding***이라고 합니다.
 
+$$
+h_{t}^{src} = RNN(emb_{src}(x_t), h_{t-1}^{src})
+$$
+$$
+H^{src} = [h_{1}^{src}; h_{2}^{src}; \cdots; h_{n}^{src}]
+$$
+$$
+h_{t}^{tgt} = RNN(emb_{tgt}(y_{t-1}), h_{t-1}^{tgt})~~where~h_{0}^{tgt} = h_{n}^{src} and ~y_{0}=BOS
+$$
+$$
+\hat{y}_{t}=softmax(h_{t}^{tgt})~~and~\hat{y}_{m}=EOS
+$$
+
 ## 1. 단점
 
 이 방식은 ***훈련 속도 저하***라는 단점을 가집니다. input feeding이전 방식에서는 훈련 할 때에는 모든 $$ Y $$를 알고 있기 때문에, encoder와 마찬가지로 decoder도 모든 time-step에 대해서 한번에 ***feed-forward*** 작업이 가능했습니다. 하지만 input feeding으로 인해, decoder RNN의 input으로 이전 time-step의 결과가 필요하게 되어, decoder ***feed-forward*** 할 때에 time-step 별로 sequential하게 계산을 해야 합니다.
