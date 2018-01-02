@@ -59,5 +59,5 @@ Google은 stochastic gradient descent (SGD)를 써서 훈련 시키는 것 보�
 
 ![](/assets/nmt-gnmt-6.png)
 
-
+실제 번역 품질을 측정하기 위하여 BLEU 이외에도 implicit(human) evaluation을 통하여 GNMT의 성능 개선의 정도를 측정하였습니다. 0(Poor)에서 6(Perfect)점 사이로 점수를 매겨 사람의 번역 결과 점수를 Upper Bound로 가정하고 성능의 개선폭을 계산하였습니다. 실제 SMT 방식 대비 엄청난 성능 개선이 이루어진 것을 알 수 있고, 일부 언어쌍에 대해서는 거의 사람의 수준에 필적하는 성능을 보여주는 것을 알 수 있습니다.
 
