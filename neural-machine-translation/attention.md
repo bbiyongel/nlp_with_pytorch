@@ -113,8 +113,15 @@ def key_value_func(query):
 ```
 >>> context_vector = attention(query = decoder_output, keys = encoder_outputs, values = encoder_outputs)
 ```
+$$
+w = softmax({h_{t}^{tgt}}^T W \cdot H^{src}) \atop
+c = H^{src} \cdot w
+$$
+$$
+where~c~is~a~context~vector
+$$
 
-원하는 정보를 attention을 통해 encoder에서 획득한 후, 해당 정보를 decoder output과 concatenate하여 $$ tanh $$를 취한 후, softmax 계산을 통해 다음 time-step의 $$ \hat{y}_{t+1} $$을 구합니다.
+원하는 정보를 attention을 통해 encoder에서 획득한 후, 해당 정보를 decoder output과 concatenate하여 $$ tanh $$를 취한 후, softmax 계산을 통해 다음 time-step의 입력이 되는 $$ \hat{y}_{t} $$을 구합니다.
 
 ![](/assets/seq2seq_with_attention.png)
 
@@ -128,14 +135,6 @@ def key_value_func(query):
 사실 추상적이므로 딱 잘라 정의할 수 없습니다. 하지만 분명한건, source language와 target language가 다르다는 것 입니다. 따라서 단순히 dot product를 해 주기보단 source language와 target language 간에 bridge를 하나 놓아주어야 합니다. 그래서 우리는 두 언어의 embedding hyper plane이 선형 관계에 있다고 가정하고, dot product 하기 전에 _**linear transformation**_을 해 줍니다.
 
 ![](/assets/attention_linear_transform.png)
-
-$$
-w = softmax({h_{t}^{tgt}}^T W \cdot H^{src}) \atop
-c = H^{src} \cdot w
-$$
-$$
-where~c~is~a~context~vector
-$$
 
 위와 같이 꼭 번역 task가 아니더라도, 두 다른 domain 사이의 비교를 위해서 사용합니다.
 
