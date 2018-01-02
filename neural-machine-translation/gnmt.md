@@ -47,7 +47,7 @@ Google은 후에 설명할 Reinforcement Learning 기법을 사용하여 Maximum
 
 Google은 stochastic gradient descent (SGD)를 써서 훈련 시키는 것 보다, Adam과 섞어 사용하면 (epoch 1까지 Adam) 더 좋은 성능을 발휘하는 것을 확인하였습니다.
 
-## 6. Decoder
+## 6. Decoding
 
 ### a. Length Penalty
 
