@@ -114,29 +114,20 @@ def key_value_func(query):
 >>> context_vector = attention(query = decoder_output, keys = encoder_outputs, values = encoder_outputs)
 ```
 
+Attention을 추가한 seq2seq의 수식은 아래와 같은부분이 추가/수정 됩니다.
 
 $$
 w = softmax({h_{t}^{tgt}}^T W \cdot H^{src})
 $$
-
-
-
 $$
 c = H^{src} \cdot w~~~~~and~c~is~a~context~vector
 $$
-
-
-
 $$
 \tilde{h}_{t}^{tgt}=\tanh([h_{t}^{tgt}; c])
 $$
-
-
-
 $$
 \hat{y}_{t}=softmax(\tilde{h}_{t}^{tgt})
 $$
-
 
 원하는 정보를 attention을 통해 encoder에서 획득한 후, 해당 정보를 decoder output과 concatenate하여 $$ tanh $$를 취한 후, softmax 계산을 통해 다음 time-step의 입력이 되는 $$ \hat{y}_{t} $$을 구합니다.
 
