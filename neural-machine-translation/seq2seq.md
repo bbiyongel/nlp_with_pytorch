@@ -50,7 +50,7 @@ $$
 이 모듈은 Decoder에서 vector를 받아 softmax를 계산하는 단순한 작업을 하는 모듈 입니다.
 
 $$
-\hat{y}_{t}=softmax(h_{t}^{tgt})~~where~\hat{y}_{m}=EOS
+\hat{y}_{t}=softmax(h_{t}^{tgt})~~and~\hat{y}_{m}=EOS
 $$
 
 ## 2. Further use of seq2seq
