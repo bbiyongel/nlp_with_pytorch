@@ -13,10 +13,19 @@ $$
 H^{src} = [h_{1}^{src}; h_{2}^{src}; \cdots; h_{n}^{src}]
 $$
 $$
-h_{t}^{tgt} = RNN(emb_{tgt}(y_{t-1}), h_{t-1}^{tgt})~~where~h_{0}^{tgt} = h_{n}^{src} and ~y_{0}=BOS
+h_{t}^{tgt} = RNN([emb_{tgt}(y_{t-1});\tilde{h}_{t-1}^{tgt}], h_{t-1}^{tgt})~~where~h_{0}^{tgt} = h_{n}^{src} and ~y_{0}=BOS
 $$
 $$
-\hat{y}_{t}=softmax(h_{t}^{tgt})~~and~\hat{y}_{m}=EOS
+w = softmax({h_{t}^{tgt}}^T W \cdot H^{src})
+$$
+$$
+c = H^{src} \cdot w~~~~~and~c~is~a~context~vector
+$$
+$$
+\tilde{h}_{t}^{tgt}=\tanh([h_{t}^{tgt}; c]
+$$
+$$
+\hat{y}_{t}=softmax(\tilde{h}_{t}^{tgt}))
 $$
 
 ## 1. 단점
