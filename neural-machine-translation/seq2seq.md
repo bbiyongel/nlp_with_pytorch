@@ -42,7 +42,7 @@ $$
 보면 RNNLM의 수식에서 조건부에 $$ X $$가 추가 된 것을 확인 할 수 있습니다. 즉, 이전 time-step의 단어들과 주어진 encoder의 정보에 기반해서 현재 time-step의 단어를 유추해 내는 작업을 수행합니다.
 
 $$
-h_{t}^{tgt} = RNN(emb_{tgt}(y_{t-1}), h_{t-1}^{tgt})~~where~h_{0}^{tgt} = h_{n}^{src}
+h_{t}^{tgt} = RNN(emb_{tgt}(y_{t-1}), h_{t-1}^{tgt})~~where~h_{0}^{tgt} = h_{n}^{src} and ~y_{0}=BOS
 $$
 
 ### c. Generator
@@ -50,7 +50,7 @@ $$
 이 모듈은 Decoder에서 vector를 받아 softmax를 계산하는 단순한 작업을 하는 모듈 입니다.
 
 $$
-\hat{y}_{t}=softmax(h_{t}^{tgt})
+\hat{y}_{t}=softmax(h_{t}^{tgt})~~where~\hat{y}_{m}=EOS
 $$
 
 ## 2. Further use of seq2seq
