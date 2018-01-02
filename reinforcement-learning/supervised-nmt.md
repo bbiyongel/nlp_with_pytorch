@@ -12,3 +12,10 @@
 
 [\[Gu at el.2017\]](https://arxiv.org/pdf/1702.02429.pdf)
 
+https://arxiv.org/pdf/1707.07402.pdf
+
+https://arxiv.org/pdf/1607.07086.pdf
+
+https://arxiv.org/pdf/1602.01783.pdf
+
+https://arxiv.org/pdf/1505.00521.pdf
