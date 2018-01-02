@@ -23,7 +23,7 @@ $$ P(Y|X) $$를 최대로 하는 optimal 모델 파라미터\($$ \theta^* $$\)�
 다만, 기존의 text classification에서는 모든 정보가 필요하지 않기 때문에 \(예를들어 Sentiment Analysis에서는 _**'나는'**_과 같이 중립적인 단어는 classification에 필요하지 않기 때문에 정보를 굳이 간직해야 하지 않을 수도 있습니다.\) vector로 만들어내는 과정인 정보를 압축함에 있어서 손실 압축을 해도 되는 task이지만, Machine Translation task에 있어서는 이상적으로는 무손실 압축을 해내야 하는 차이는 있습니다.
 
 $$
-h_{t}^{src} = RNN(emb_{src}(x_t), h_{t-1}^{src})
+h_{t}^{src} = RNN_{enc}(emb_{src}(x_t), h_{t-1}^{src})
 $$
 $$
 H^{src} = [h_{1}^{src}; h_{2}^{src}; \cdots; h_{n}^{src}]
@@ -32,7 +32,7 @@ $$
 Encoder를 수식으로 나타내면 위와 같습니다. $$[;]$$는 concatenate를 의미합니다. 위의 수식은 time-step별로 GRU를 통과시킨 것을 나타낸 것이고, 사실상 실제 코딩을 하게 되면 아래와 같이 됩니다.
 
 $$
-H^{src} = RNN(emb_{src}(X), h_{0}^{src})
+H^{src} = RNN_{enc}(emb_{src}(X), h_{0}^{src})
 $$
 
 ### b. Decoder
@@ -49,7 +49,7 @@ $$
 보면 RNNLM의 수식에서 조건부에 $$ X $$가 추가 된 것을 확인 할 수 있습니다. 즉, 이전 time-step의 단어들과 주어진 encoder의 정보에 기반해서 현재 time-step의 단어를 유추해 내는 작업을 수행합니다.
 
 $$
-h_{t}^{tgt} = RNN(emb_{tgt}(y_{t-1}), h_{t-1}^{tgt})~~where~h_{0}^{tgt} = h_{n}^{src} and ~y_{0}=BOS
+h_{t}^{tgt} = RNN_{dec}(emb_{tgt}(y_{t-1}), h_{t-1}^{tgt})~~where~h_{0}^{tgt} = h_{n}^{src} and ~y_{0}=BOS
 $$
 
 위의 수식은 decoder를 나타낸 것입니다. 특기할 점은 decoder 입력의 초기값으로써, $$ y_0 $$에 ***BOS***를 넣어준다는 것 입니다. 
@@ -57,7 +57,7 @@ $$
 Decoder를 구현할 때에 중요한 점은, training 시에는 decoder의 입력으로 실제 $$ Y $$가 들어간다는 것입니다. 하지만, inference 할 때에는 실제 $$ Y $$를 모르기 때문에, 이전 time-step에서 계산되어 나온 $$ \hat{y_{t-1}} $$를 decoder의 입력으로 사용합니다. 따라서 training 할 때에는 모든 time-step을 한번에 계산할 수 있습니다. 그러므로 decoder도 각 time-step별이 아닌 한번에 수식을 정리할 수 있습니다.
 
 $$
-H_{t}^{tgt}=RNN(emb_{tgt}([BOS;Y[:-1]]),h_{n}^{src})
+H_{t}^{tgt}=RNN_{dec}(emb_{tgt}([BOS;Y[:-1]]),h_{n}^{src})
 $$
 
 ### c. Generator

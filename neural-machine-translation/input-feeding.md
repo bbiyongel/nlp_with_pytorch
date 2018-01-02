@@ -6,47 +6,29 @@ Decoder output과 Attention 결과값을 concatenate한 이후에 Generator 모�
 
 $$ y $$와 달리 concatenation layer의 출력은 $$ y $$가 embedding layer에서 dense vector\(=embedding vector\)로 변환되고 난 이후에 embedding vector와 concatenate되어 decoder RNN에 입력으로 주어지게 됩니다. 이러한 과정을 _**input feeding**_이라고 합니다.
 
-
 $$
-h_{t}^{src} = RNN(emb_{src}(x_t), h_{t-1}^{src})
+h_{t}^{src} = RNN_{enc}(emb_{src}(x_t), h_{t-1}^{src})
 $$
-
-
-
 $$
 H^{src} = [h_{1}^{src}; h_{2}^{src}; \cdots; h_{n}^{src}]
 $$
-
-
-
 $$
-h_{t}^{tgt} = RNN([emb_{tgt}(y_{t-1});\tilde{h}_{t-1}^{tgt}], h_{t-1}^{tgt})~~where~h_{0}^{tgt} = h_{n}^{src} and ~y_{0}=BOS
+h_{t}^{tgt} = RNN_{dec}([emb_{tgt}(y_{t-1});\tilde{h}_{t-1}^{tgt}], h_{t-1}^{tgt})~~where~h_{0}^{tgt} = h_{n}^{src} and ~y_{0}=BOS
 $$
-
-
-
 $$
 w = softmax({h_{t}^{tgt}}^T W \cdot H^{src})
 $$
-
-
-
 $$
 c = H^{src} \cdot w~~~~~and~c~is~a~context~vector
 $$
-
-
-
 $$
 \tilde{h}_{t}^{tgt}=\tanh([h_{t}^{tgt}; c])
 $$
-
-
-
 $$
 \hat{y}_{t}=softmax(\tilde{h}_{t}^{tgt})
 $$
 
+위의 수식은 attention과 input feeding이 추가된 seq2seq의 처음부터 끝까지 입니다.
 
 ## 1. 단점
 
