@@ -10,8 +10,6 @@
 
 ### Bi-directional Encoder for First Layer
 
-
-
 ![](/assets/nmt-gnmt-2.png)
 
 ## Segmentation Approachs
