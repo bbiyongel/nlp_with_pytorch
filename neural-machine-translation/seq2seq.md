@@ -52,17 +52,15 @@ $$
 h_{t}^{tgt} = RNN(emb_{tgt}(y_{t-1}), h_{t-1}^{tgt})~~where~h_{0}^{tgt} = h_{n}^{src} and ~y_{0}=BOS
 $$
 
-위의 수식은 decoder를 나타낸 것입니다. 특기할 점은 decoder 입력의 초기값으로써, $$ y_0 $$에 ***BOS***를 넣어준다는 것 입니다. 또한, $$ |Y|=m $$일때, $$ y_{m} $$은 ***EOS*** 토큰이 됩니다. 주의할 점은 이 마지막 $$ y_{m} $$은 decoder 계산의 종료를 나타내기 때문에, decoder의 입력으로 들어가는 일이 없습니다.
+위의 수식은 decoder를 나타낸 것입니다. 특기할 점은 decoder 입력의 초기값으로써, $$ y_0 $$에 ***BOS***를 넣어준다는 것 입니다.
 
 ### c. Generator
 
-이 모듈은 Decoder에서 vector를 받아 softmax를 계산하는 단순한 작업을 하는 모듈 입니다.
-
+이 모듈은 아래와 같이 Decoder에서 vector를 받아 softmax를 계산하는 단순한 작업을 하는 모듈 입니다. $$ |Y|=m $$일때, $$ y_{m} $$은 ***EOS*** 토큰이 됩니다. 주의할 점은 이 마지막 $$ y_{m} $$은 decoder 계산의 종료를 나타내기 때문에, decoder의 입력으로 들어가는 일이 없습니다.
 
 $$
 \hat{y}_{t}=softmax(h_{t}^{tgt})~~and~\hat{y}_{m}=EOS
 $$
-
 
 ## 2. Further use of seq2seq
 
