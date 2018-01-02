@@ -52,7 +52,7 @@ $$
 h_{t}^{tgt} = RNN(emb_{tgt}(y_{t-1}), h_{t-1}^{tgt})~~where~h_{0}^{tgt} = h_{n}^{src} and ~y_{0}=BOS
 $$
 
-위의 수식은 decoder를 나타낸 것입니다. 특기할 점은 decoder 입력의 초기값으로써, $$ y_0 $$에 ***BOS***를 넣어준다는 것 입니다. 
+위의 수식은 decoder를 나타낸 것입니다. 특기할 점은 decoder 입력의 초기값으로써, $$ y_0 $$에 ***BOS***를 넣어준다는 것 입니다. 또한, $$ |Y|=m $$일때, $$ y_{m} $$은 ***EOS*** 토큰이 됩니다.
 
 ### c. Generator
 
