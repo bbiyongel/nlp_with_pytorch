@@ -6,6 +6,8 @@
 
 ### Residual Connection
 
+
+
 ### Bi-directional Encoder for First Layer
 
 ## Segmentation Approachs
