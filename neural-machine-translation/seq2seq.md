@@ -22,41 +22,37 @@ $$ P(Y|X) $$를 최대로 하는 optimal 모델 파라미터\($$ \theta^* $$\)�
 
 다만, 기존의 text classification에서는 모든 정보가 필요하지 않기 때문에 \(예를들어 Sentiment Analysis에서는 _**'나는'**_과 같이 중립적인 단어는 classification에 필요하지 않기 때문에 정보를 굳이 간직해야 하지 않을 수도 있습니다.\) vector로 만들어내는 과정인 정보를 압축함에 있어서 손실 압축을 해도 되는 task이지만, Machine Translation task에 있어서는 이상적으로는 무손실 압축을 해내야 하는 차이는 있습니다.
 
-
 $$
 h_{t}^{src} = RNN(emb_{src}(x_t), h_{t-1}^{src})
 $$
-
-
-
 $$
 H^{src} = [h_{1}^{src}; h_{2}^{src}; \cdots; h_{n}^{src}]
 $$
 
+Encoder를 수식으로 나타내면 위와 같습니다. $$[;]$$는 concatenate를 의미합니다. 위의 수식은 time-step별로 GRU를 통과시킨 것을 나타낸 것이고, 사실상 실제 코딩을 하게 되면 아래와 같이 됩니다.
+
+$$
+H^{src} = RNN(emb_{src}(X), h_{0}^{src})
+$$
 
 ### b. Decoder
 
 마찬가지로 디코더도 사실 새로운 형태가 아닙니다. 이전 챕터에서 다루었던 Nerual Network Langauge Model의 연장선으로써, Conditional Neural Network Language Model이라고 할 수 있습니다. 위에서 다루었던 seq2seq모델의 수식을 좀 더 time-step에 대해서 풀어서 써보면 아래와 같습니다.
 
-
 $$
 P_\theta(Y|X)=\prod_{t=1}^{m}P_\theta(y_t|X,y_{<t})
 $$
-
-
-
 $$
 \log P_\theta(Y|X) = \sum_{t=1}^{m}\log P_\theta(y_t|X, y_{<t})
 $$
 
-
 보면 RNNLM의 수식에서 조건부에 $$ X $$가 추가 된 것을 확인 할 수 있습니다. 즉, 이전 time-step의 단어들과 주어진 encoder의 정보에 기반해서 현재 time-step의 단어를 유추해 내는 작업을 수행합니다.
-
 
 $$
 h_{t}^{tgt} = RNN(emb_{tgt}(y_{t-1}), h_{t-1}^{tgt})~~where~h_{0}^{tgt} = h_{n}^{src} and ~y_{0}=BOS
 $$
 
+위의 수식은 decoder를 나타낸 것입니다. 특기할 점은 decoder 입력의 초기값으로써, $$ y_0 $$에 ***BOS***를 넣어준다는 것 입니다. 
 
 ### c. Generator
 
