@@ -7,7 +7,7 @@
 ![](/assets/nmt-edinburgh-1.png)
 [[Sennrich at el.2016]](http://www.aclweb.org/anthology/P16-1162)
 
-이 논문 또한 (그들이 처음으로 제안한 방식이기에) BPE 방식을 사용하여 tokenization을 수행하였습니다. 이쯤 되면 이제 subword 기반의 tokenization 방식이 정석이 되었음을 알 수 있습니다. 위의 code는 BPE algorithm에 대해서 간략하게 소개한 code 입니다.
+이 논문 또한 (그들이 처음으로 제안한 방식이기에) BPE 방식을 사용하여 tokenization을 수행하였습니다. 이쯤 되면 이제 subword 기반의 tokenization 방식이 정석이 되었음을 알 수 있습니다. 위의 code는 BPE algorithm에 대해서 간략하게 소개한 code 입니다. ***Preprocessing*** 챕터에서 소개했지만, subword 방식은 위와 같이 가장 많이 등장한 character sequence에 대해서 합쳐주며 iteration을 반복하고, 원하는 vocabulary 숫자가 채워질때가지 해당 iteration을 반복합니다.
 
 ## Architecture
 
