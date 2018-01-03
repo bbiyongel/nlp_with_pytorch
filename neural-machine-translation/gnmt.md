@@ -23,6 +23,8 @@ Google도 seq2seq 기반의 모델을 구성하였습니다. 다만, 구글은 �
 
 ### a. Wordpiece Model
 
+구글도 마찬가지로 BPE 모델을 사용하여 tokenization을 수행하였습니다. 그리고 그들은 그들의 tokenizer를 오픈소스로 공개하였습니다.
+
 ### b. Mixed Word/Character Model
 
 ## 3. Training Criteria
