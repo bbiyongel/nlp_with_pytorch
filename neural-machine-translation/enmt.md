@@ -11,6 +11,8 @@
 
 ## Architecture
 
+이 논문에서는 seq2seq를 기반으로 architecture를 만들었는데, 다만 LSTM이 아닌 GRU를 사용하여 RNN stack을 구성하였습니다. Google과 마찬가지로 residual connection을 사용하여 stack을 구성하였고, ***encoder***의 경우에는 4개층, ***decoder***의 경우에는 8개 층을 쌓아 architecture를 구성하였습니다. 실험 시에는 $$ hidden~size = 1024,~word~vector~dimension = 512 $$를 사용하였습니다. 또한, Google과는 다르게 순수하게 ***Adam***만을 사용하여 훈련을 하였습니다.
+
 ## Monolingual Data
 
 ### Synthetic Data
