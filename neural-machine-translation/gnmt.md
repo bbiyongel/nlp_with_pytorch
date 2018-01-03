@@ -65,6 +65,8 @@ $$
 
 Coverage penalty의 수식을 들여다보면, 각 source word $$ x_i $$별로 attention weight의 합을 구하고, 그것의 평균(=합)을 내는 것을 볼 수 있습니다. ***log***를 취했기 때문에 그 중에 attention weight가 편중되어 있다면, 편중되지 않은 source word는 매우 작은 음수 값을 가질 것이기 때문에 좋은 점수를 받을 수 없을 겁니다.
 
+실험에 의하면 $$ \alpha $$와 $$ \beta $$는 각각 $$ 0.6, 0.2 $$ 정도가 좋은것으로 밝혀졌습니다. 하지만, 상기한 Reinforcement Learning 방식을 이용하면 그다지 그 값은 중요하지 않다고 하였습니다.
+
 ## 6. Training Procedure
 
 ![](/assets/nmt-gnmt-4.png)
