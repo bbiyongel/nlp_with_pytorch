@@ -1,6 +1,6 @@
 # University of Edinburgh’s Neural MT Systems
 
-[\[Sennrich at el.2017\]](https://arxiv.org/pdf/1708.00726.pdf)
+사실 Google의 논문은 훌륭하지만 매우 scale이 큽니다. 저는 그래서 작은 scale의 기계번역 시스템에 관한 논문은 이 논문[\[Sennrich at el.2017\]](https://arxiv.org/pdf/1708.00726.pdf)을 높게 평가합니다. 
 
 ## Subword Segmentation
 
