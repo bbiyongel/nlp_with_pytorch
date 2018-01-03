@@ -48,6 +48,7 @@ Google은 후에 설명할 Reinforcement Learning 기법을 사용하여 Maximum
 
 ### a. Length Penalty and Coverage Penalty
 
+Google은 기존에 소개한 ***Length Penalty***에 추가로 ***Coverage Penalty***를 사용하여 좀 더 성능을 끌어올렸습니다. Coverage penalty는 attention weight(probability)의 값의 분포에 따라서 매겨집니다. 이 penalty는 좀 더 attention이 고루 잘 퍼지게 하기 위함입니다.
 $$
 s(Y, X) = \log{P(Y|X)}/lp(Y) + cp(X; Y)
 $$
@@ -58,7 +59,7 @@ $$
 cp(X; Y) = \beta * \sum_{i=1}^{|X|}{\log{(\min{(\sum_{j=1}^{|Y|}{p_{i,j}}, 1.0)})}}
 $$
 $$
-where~p_{i,j}~is~the~attention~probability~of~the~j\text{-}th~target~word~y_j~on~the~i\text{-}th~source~word~x_i.
+where~p_{i,j}~is~the~attention~weight~of~the~j\text{-}th~target~word~y_j~on~the~i\text{-}th~source~word~x_i.
 $$
 
 ## 6. Training Procedure
