@@ -3,9 +3,8 @@
     "katex",
     "autocover",
     "include-codeblock"
-  ]
-  // pdf 옵션
-	"pdf": {
+  ],
+  "pdf": {
     "fontSize": 9,
     "fontFamily": "Serif",
   }
