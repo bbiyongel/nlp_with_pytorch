@@ -1,5 +1,5 @@
 # Preprocessing
 
-![](http://homepages.inf.ed.ac.uk/rsennric/files/rico-klein2.jpg)
+![](https://nlp.stanford.edu/manning/images/Christopher_Manning_027_1154x1154.jpg)
 
-[Rico Sennrich](http://homepages.inf.ed.ac.uk/rsennric/) - Image from Web
+[Christopher Manning](https://nlp.stanford.edu/manning/) - Image from Web
