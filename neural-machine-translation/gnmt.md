@@ -25,6 +25,9 @@ Google도 seq2seq 기반의 모델을 구성하였습니다. 다만, 구글은 �
 
 구글도 마찬가지로 BPE 모델을 사용하여 tokenization을 수행하였습니다. 그리고 그들은 그들의 tokenizer를 오픈소스로 공개하였습니다. -- [SentencePiece: https://github.com/google/sentencepiece](https://github.com/google/sentencepiece)
 
+- original: Jet makers feud over seat width with big orders at stake
+- wordpieces: _J et _makers _fe ud _over _seat _width _with _big _orders _at _stake
+
 ### b. Mixed Word/Character Model
 
 ## 3. Training Criteria
