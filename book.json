@@ -1,7 +1,7 @@
 {
   "plugins": ["katex", "autocover", "include-codeblock"],
   "pdf": {
-    "fontSize": 9,
+    "fontSize": 10,
     "fontFamily": "Serif"
   }
 }
