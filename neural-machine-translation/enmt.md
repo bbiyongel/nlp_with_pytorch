@@ -4,7 +4,7 @@
 
 ## Subword Segmentation
 
-![](/assets/nmt-edinburgh-1.png)
+![](/assets/nmt-edinburgh.png)
 
 ## Architecture
 
