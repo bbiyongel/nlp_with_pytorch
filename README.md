@@ -18,7 +18,7 @@
 ![](/assets/author.gif)
 
 + **SKPlanet Machine Learning Researcher**
-  - Neural Machine Translation: Global 11번가
+  - Neural Machine Translation: [Global 11번가](http://global.11st.co.kr/html/en/main_en.html?trlang=en)
 + **Ticketmonster Machine Learning Engineer**
   - Recommender System
 + **ETRI Researcher**
