@@ -20,3 +20,10 @@
 이전 섹션에서 소개한 그들이 제안한 논문[[Sennrich at el.2015]](https://arxiv.org/pdf/1511.06709.pdf)의 방식대로 back translation과 copied translation 방식을 사용하여 synthetic data를 구성하여 훈련 데이터셋에 추가하였습니다. 이때에 비율은 실험결과에 따라서 $$ parallel : copied : back = 1 : 1 \sim 2 : 1\sim 2 $$로 조절하여 사용하였습니다.
 
 ## Ensemble
+
+이 논문에서 그들은 2가지 앙상블 기법을 사용하였습니다.
+
+- checkpoint ensemble
+    + 특정 epoch에서부터 다른 모델로 다시 훈련하여 ensemble을 구성합니다. 훈련 중간부터 다시 훈련하기 때문에 시간적으로 굉장히 효율적입니다.
+- independent ensemble
+    + 처음부터 다른 모델로 훈련하여 ensemble로 구성합니다. 처음부터 다시 훈련하므로 checkpoint 방식에 비해서 비효율적이지만, diversity 관점에서 낫습니다.
