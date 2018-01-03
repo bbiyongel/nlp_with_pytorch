@@ -46,9 +46,26 @@ Google은 후에 설명할 Reinforcement Learning 기법을 사용하여 Maximum
 
 ## 5. Search
 
-### a. Length Penalty
+### a. Length Penalty and Coverage Penalty
 
-### b. Coverage Penalty
+cp(X; Y ) = β ∗
+X
+|X|
+i=1
+log(min(X
+|Y |
+j=1
+pi,j , 1.0)),
+
+$$
+s(Y, X) = \log{P(Y|X)}/lp(Y) + cp(X; Y)
+$$
+$$
+lp(Y) = \frac{(5+|Y|)^\alpha}{(5+1)^\alpha}
+$$
+$$
+cp(X; Y) = \beta * \sum_{i=1}^{|X|}{\log{(\min{(\sum_{j=1}^{|Y|}{p_{i,j}}, 1.0)})}}
+$$
 
 ## 6. Training Procedure
 
