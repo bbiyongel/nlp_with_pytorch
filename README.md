@@ -17,6 +17,11 @@
 
 ![](/assets/author.gif)
 
++ SKPlanet Machine Learning Researcher
++ Ticketmonster Machine Learning Engineer
++ ETRI Researcher
+
+
 * linkedin: [https://www.linkedin.com/in/ki-hyun-kim/](https://www.linkedin.com/in/ki-hyun-kim/)
 * github: [https://github.com/kh-kim/](https://github.com/kh-kim/)
 * email: pointzz.ki@gmail.com
