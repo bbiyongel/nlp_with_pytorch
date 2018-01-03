@@ -5,7 +5,7 @@
 ## Subword Segmentation
 
 ![](/assets/nmt-edinburgh-1.png)
-[Sennrich at el.2016](http://www.aclweb.org/anthology/P16-1162)
+[[Sennrich at el.2016]](http://www.aclweb.org/anthology/P16-1162)
 
 ## Architecture
 
