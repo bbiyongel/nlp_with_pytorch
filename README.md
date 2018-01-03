@@ -17,12 +17,12 @@
 
 ![](/assets/author.gif)
 
-+ SKPlanet Machine Learning Researcher
++ **SKPlanet Machine Learning Researcher**
   - Neural Machine Translation: Global 11번가
-+ Ticketmonster Machine Learning Engineer
++ **Ticketmonster Machine Learning Engineer**
   - Recommender System
-+ ETRI Researcher
-  - Automatic Speech Translator
++ **ETRI Researcher**
+  - Automatic Speech Translator: GenieTalk [[Android](https://play.google.com/store/apps/details?id=com.hancom.interfree.genietalk&hl=ko)], [[iOS](https://itunes.apple.com/kr/app/%EC%A7%80%EB%8B%88%ED%86%A1-genietalk/id1104930501?mt=8)]
 
 
 * linkedin: [https://www.linkedin.com/in/ki-hyun-kim/](https://www.linkedin.com/in/ki-hyun-kim/)
