@@ -10,7 +10,7 @@ Cross entropy는 훌륭한 classification을 위해서 이미 훌륭한 loss fun
 
 ## Minimum Risk Training
 
-위의 아이디어에서 출발한 논문[\[Shen at el.2015\]](https://arxiv.org/pdf/1512.02433.pdf)이 Minimum Risk Training이라는 방법을 제안하였습니다. 이때에는 Policy Gradient 라는 방법 
+위의 아이디어에서 출발한 논문[\[Shen at el.2015\]](https://arxiv.org/pdf/1512.02433.pdf)이 Minimum Risk Training이라는 방법을 제안하였습니다. 이때에는 Policy Gradient 라는 방법을 직접적으로 명시하진 않았지만, 
 
 ![](/assets/rl-minimum-risk-training.png)
 
