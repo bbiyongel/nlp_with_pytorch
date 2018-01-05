@@ -59,6 +59,7 @@
   * [Attention](neural-machine-translation/attention.md)
   * [Input Feeding](neural-machine-translation/input-feeding.md)
   * [Search](neural-machine-translation/beam-search.md)
+  * [성능 평가 방법](neural-machine-translation/c131-b2a5-d3c9-ac00-bc29-bc95.md)
   * [Advanced Topic on NMT](neural-machine-translation/advanced-topic.md)
     * [Using Monolingual Corpora](neural-machine-translation/mono.md)
     * [Multilingual NMT](neural-machine-translation/multilingual-nmt.md)
