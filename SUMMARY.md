@@ -52,6 +52,7 @@
   * [n-gram](language-modeling/n-gram.md)
   * [Perpexity](language-modeling/perpexity.md)
   * [Neural Network Language Model](language-modeling/nnlm.md)
+  * [Applications](language-modeling/application.md)
 * [Neural Machine Translation](neural-machine-translation/cover.md)
   * [Intro](neural-machine-translation/ae30-acc4-bc88-c5ed-ac1c-c694-bc0f-c5ed-c0ac.md)
   * [Seq2seq](neural-machine-translation/seq2seq.md)
