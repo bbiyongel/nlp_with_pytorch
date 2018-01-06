@@ -29,7 +29,7 @@ $$
 where~head_i = Attention(QW_i^Q, KW_i^K, VW_i^V)
 $$
 $$
-where~W_i^Q \in ℝ^{d_{model}×d_k}, W_i^K \in ℝ^{d_{model}×d_k}, W_i^V \in ℝ^{d_{model}×d_v}~and~W^O \in ℝ^{hd_{v}×d_{model}}
+where~W_i^Q \in \text{ℝ}^{d_{model}×d_k}, W_i^K \in \text{ℝ}^{d_{model}×d_k}, W_i^V \in \text{ℝ}^{d_{model}×d_v}~and~W^O \in \text{ℝ}^{hd_{v}×d_{model}}
 $$
 $$
 d_k = d_v = d_{model}/h = 64
