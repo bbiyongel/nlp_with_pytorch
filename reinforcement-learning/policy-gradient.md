@@ -11,14 +11,23 @@ Policy Gradient는 ***Policy based Reinforcement Learning*** 방식입니다. �
 $$
 \pi_\theta(a|s) = P_\theta(a|s) = P(a|s; \theta)
 $$
+
+위의 $$\pi$$는 policy(정책)을 의미합니다. 그리고 위와 같이 확률로 표현 될 수 있습니다.
+
 $$
-J(\theta) = v_{\pi_\theta}(S_0)~and~we~need~to~maximize~J(\theta)
+J(\theta) = v_{\pi_\theta}(s_0) = E_{\pi_\theta}[v_0]~and~we~need~to~maximize~J(\theta)
 $$
+
+우리는 이 policy에 기반한 $$s_0$$으로부터의 expected average value인 $$J(\theta)$$를 maximize하도록 해야 합니다.
+
 $$
 \theta_{t+1}=\theta_t+\alpha\triangledown_\theta J(\theta)
 $$
+
+따라서, $$\triangledown_\theta J(\theta)$$를 구하여 $$\theta$$를 업데이트 해야 합니다.
+
 $$
-\triangledown_\theta J(\theta) = \triangledown_\theta v_{\pi_\theta}(S_0)
+\triangledown_\theta J(\theta) = \triangledown_\theta v_{\pi_\theta}(s_0)
 $$
 $$
 \triangledown_\theta J(\theta) = E_{\pi_\theta}[\triangledown_\theta \log{\pi_\theta (a|s)}q_\pi (s, a)]
