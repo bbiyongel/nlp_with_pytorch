@@ -78,3 +78,11 @@ $$
 $$
 
 위의 수식도 ***Minimum Risk Training (MRT)*** 방식과 비슷합니다. $$ r(Y, Y^{*(i)}) $$ 또한 정답과 sampling 데이터 사이의 유사도(점수)를 의미합니다. 가장 큰 차이점은 기존에는 risk로 취급하여 minimize하는 방향으로 훈련하였지만, 이번에는 **reward로 취급하여 maximize하는 방향으로 훈련하게 된다는 것 입니다.**
+
+이렇게 새롭게 추가된 objective를 아래와 같이 기존의 MLE방식의 objective와 linear combination을 취하여 최종적인 objective function이 완성됩니다.
+
+$$
+\mathcal{O}_{Mixed}(\theta)=\alpha*\mathcal{O}_{ML}(\theta)+\mathcal{O}_{RL}(\theta)
+$$
+
+이때에 $$ \alpha $$값은 주로 0.017로 셋팅하였습니다.
