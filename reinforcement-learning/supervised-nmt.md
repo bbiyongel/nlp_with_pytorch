@@ -85,4 +85,8 @@ $$
 \mathcal{O}_{Mixed}(\theta)=\alpha*\mathcal{O}_{ML}(\theta)+\mathcal{O}_{RL}(\theta)
 $$
 
-이때에 $$ \alpha $$값은 주로 0.017로 셋팅하였습니다.
+이때에 $$ \alpha $$값은 주로 0.017로 셋팅하였습니다. 위와 같은 방법의 성능을 실험한 결과는 다음과 같습니다.
+
+![](/assets/nmt-gnmt-5.png)
+
+$$ En \rightarrow De $$의 경우에는 성능이 약간 하락함을 보였습니다. 하지만 이는 decoder의 length penalty, coverage penalty와 결합되었기 때문이고, 이 panalty들이 없을 때에는 훨씬 큰 성능 향상이 있었다고 합니다.
