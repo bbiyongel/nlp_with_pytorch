@@ -34,4 +34,12 @@ Generative Adversarial Network overview - Image from [web](https://sthalles.gith
 
 ## GAN과 NLP
 
+위와 같이 GAN은 Computer Vision(CV)분야에서 대성공을 이루었지만 NLP에서는 적용이 어려웠습니다. 그 이유는 Natural Language 자체의 특성에 있습니다. 이미지라는 것은 어떠한 continuous한 값들로 채워진 2차원의 matrix입니다. 하지만 이와 달리 단어라는 것은 descrete한 symbol로써, 언어라는 것은 어떠한 descrete한 값들의 sequential한 배열 입니다. 비록 우리는 **NNLM**이나 **NMT Decoder**를 통해서 latent variable로써 언어의 확률을 모델링 $$ P(w_1,w_2,\cdots,w_n)$$ 하고 있지만, 결국 언어를 나타내기 위해서는 해당 확률 모델에서 ***sampling***(또는 argmax)을 하는 stochastic한 과정을 거쳐야 합니다.
+
+$$
+\hat{w}_t = argmax P(w_t|w_1,\cdots,w_{t-1})
+$$
+
+Sampling 또는 argmax의 연산은 gradient를 전달 할 수 없는 stochastic 연산입니다. -- 오직 deterministic한 연산만 gradient가 back-propagation 가능합니다.
+
 ## 강화학습 소개
