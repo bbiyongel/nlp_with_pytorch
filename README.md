@@ -11,7 +11,9 @@
   * Objective function
   * Optimization such as gradient descent
 
-현재 작성 중이며, 개선이 필요하거나 사실과 다른 내용이 있으면 얼마든지 참여 부탁 드립니다.
+### Notice
+
+현재 ***뒤쪽 LM, NMT, RL 부터*** 작성 중이며, 개선이 필요하거나 사실과 다른 내용이 있으면 얼마든지 참여 부탁 드립니다.
 
 ### Author: Ki Hyun Kim
 
