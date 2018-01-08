@@ -44,7 +44,8 @@ Sampling 또는 argmax의 연산은 gradient를 전달 할 수 없는 stochastic
 
 ## Why we use RL?
 
-위와 같이 GAN을 사용하기 위함 뿐만이 아니라, 강화학습은 매우 중요합니다. 어떠한 task의 문제를 해결함에 있어서 cross entropy를 쓸 수 있는 classification이나, tensor간의 error를 구할 수 있는 mse 등으로 정의 할 수 없는 복잡한 objective들이 많이 존재하기 때문입니다. (비록 그동안 그러한 objective function으로 문제를 해결하였더라도 문제를 단순화 하여 접근한 것일 수도 있습니다.)
+위와 같이 GAN을 사용하기 위함 뿐만이 아니라, 강화학습은 매우 중요합니다. 어떠한 task의 문제를 해결함에 있어서 cross entropy를 쓸 수 있는 classification이나, tensor간의 error를 구할 수 있는 mse 등으로 정의 할 수 없는 복잡한 objective들이 많이 존재하기 때문입니다. (비록 그동안 그러한 objective function으로 문제를 해결하였더라도 문제를 단순화 하여 접근한 것일 수도 있습니다.) 우리는 이러한 문제들을 강화학습을 통해 해결할 수 있습니다. 이를 위해서 잘 설계된 reward를 통해서 보다 복잡하고 정교한 task의 문제를 해결 할 수 있습니다.
 
 ### Why GAN is important?
 
+마찬가지의 이유로 GAN또한 주목받게 됩니다. 단순히 이미지 간의 차이를 비교하는 MSE방식을 사용하게 되면, 결국 이미지는 MSE를 최소화 하기 위해서 자신의 학습했던 확률 분포의 중간으로 출력을 낼 수 밖에 없습니다. 예를 들어 사람의 얼굴을 일부 가리고 가려진 부분을 채워 넣도록 훈련한다면, MSE loss function 아래에서는 각 픽셀마다 가능한 확률 분포의 평균값으로 채워 질 겁니다. 이것이 MSE를 최소화 하는 길이기 때문입니다. 하지만 우리는 그런 흐리멍텅한 이미지를 잘 생성된(채워진) 이미지라고 하지 않습니다. 따라서 사실적인 표현을 위해서는 MSE보다 정교한 objective function을 쓸 수 밖에 없습니다.
