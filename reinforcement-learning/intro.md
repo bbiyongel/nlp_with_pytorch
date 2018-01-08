@@ -28,6 +28,8 @@ $$
 ![](https://sthalles.github.io/assets/dcgan/GANs.png)
 Generative Adversarial Network overview - Image from [web](https://sthalles.github.io/intro-to-gans/)
 
+위와 같이 ***Generator($$G$$)***와 ***Discriminator($$D$$)*** 2개의 모델을 각기 다른 목표를 가지고 동시에 훈련시키는 것입니다. $$G$$는 어떤 이미지를 생성 해 내되, $$D$$를 속이는 이미지를 만들어 내는 것이 목표입니다.
+
 ## GAN과 NLP
 
 ## 강화학습 소개
