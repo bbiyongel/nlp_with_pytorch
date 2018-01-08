@@ -30,7 +30,7 @@ $$
 =\sum_{s=1}^S \sum_{y \in \mathcal{Y(x^{(s)})}}{P(y|x^{(s)};\theta) \triangle(y, y^{(s)})}
 $$
 
-위의 수식에서 $$ \mathcal{Y}(x^{(s)}) $$는 full search space로써, $$ s $$번째 입력 $$ x^{(s)} $$가 주어졌을 때, 가능한 정답의 집합을 의미합니다. 또한 $$ \triangle(y,y^{(s)}) $$는 주어진 입력과 파라미터($$ \theta $$)가 있을 때, sampling한 $$ y $$와 실제 정답 $$ y^{(s)} $$의 차이값을 나타냅니다. 즉, 위 수식에 따르면 ***risk*** $$ \mathcal{R} $$은 주어진 입력과 현재 파라미터 상에서 sampling한 y를 통해 현재 모델(함수)을 approximation하고, 동시에 이를 사용하여 ***risk***의 기대값을 구한다고 볼 수 있습니다.
+위의 수식에서 $$ \mathcal{Y}(x^{(s)}) $$는 full search space로써, $$ s $$번째 입력 $$ x^{(s)} $$가 주어졌을 때, 가능한 정답의 집합을 의미합니다. 또한 $$ \triangle(y,y^{(s)}) $$는 주어진 입력과 파라미터($$ \theta $$)가 있을 때, sampling한 $$ y $$와 실제 정답 $$ y^{(s)} $$의 차이값을 나타냅니다. 즉, 위 수식에 따르면 ***risk*** $$ \mathcal{R} $$은 주어진 입력과 현재 파라미터 상에서 얻은 y를 통해 현재 모델(함수)을 구하고, 동시에 이를 사용하여 ***risk***의 기대값을 구한다고 볼 수 있습니다.
 
 $$
 \hat{\theta}_{MRT}=argmin_\theta(\mathcal{R}(\theta))
