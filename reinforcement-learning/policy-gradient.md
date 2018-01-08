@@ -13,7 +13,10 @@ $$
 위의 $$\pi$$는 policy(정책)을 의미합니다. 그리고 위와 같이 확률로 표현 될 수 있습니다.
 
 $$
-J(\theta) = v_{\pi_\theta}(s_0) = E_{\pi_\theta}[v_0]~and~we~need~to~maximize~J(\theta)
+J(\theta) = E_{\pi_\theta}[r]
+$$
+$$
+=\sum_{s \in \mathcal{S}}{d(s)}\sum_{a \in \mathcal{A}}{\pi_\theta(s, a)\mathcal{R}_{s, a}}
 $$
 
 우리는 이 policy에 기반한 $$s_0$$으로부터의 expected average value인 $$J(\theta)$$를 maximize하도록 해야 합니다.
@@ -25,11 +28,26 @@ $$
 따라서, $$\triangledown_\theta J(\theta)$$를 구하여 $$\theta$$를 업데이트 해야 합니다.
 
 $$
-\triangledown_\theta J(\theta) = \triangledown_\theta v_{\pi_\theta}(s_0)
+\triangledown_\theta\pi_\theta(s,a)=\pi_\theta(s,a)\frac{\triangledown_\theta\pi_theta(s,a)}{\pi_\theta(s,a)}
+$$
+$$
+=\pi_\theta(s,a)\triangledown_\theta\log{\pi_\theta(s,a)}
+$$
+
+이때, 위와 같이 로그의 미분의 성질을 이용하여 $$ \triangledown_\theta J(\theta) $$를 구할 수 있습니다.
+
+$$
+\triangledown_\theta J(\theta)=\sum_{s \in \mathcal{S}}{d(s)}\sum_{a \in \mathcal{A}}{\pi_\theta(s,a)}\triangledown_\theta\log{\pi_\theta(s, a)\mathcal{R}_{s,a}}
 $$
 
 $$
-\triangledown_\theta J(\theta) = E_{\pi_\theta}[\triangledown_\theta \log{\pi_\theta (a|s)}q_{\pi_\theta} (s, a)]
+\triangledown_\theta J(\theta) = E_{\pi_\theta}[\triangledown_\theta \log{\pi_\theta (a|s)}r]
+$$
+
+***Policy Gradient Theorem***에 따르면, 여기서 해당 time-step에 대한 즉각적인 reward($$ r $$) 대신에 episode의 종료까지의 총 reward, 즉 $$ Q $$ function을 사용할 수 있습니다.
+
+$$
+\triangledown_\theta J(\theta) = E_{\pi_\theta}[\triangledown_\theta \log{\pi_\theta (a|s)}Q^{\pi_\theta}(s,a)]
 $$
 
 위의 수식을 NLP에 적용하여 쉽게 설명 해 보면, Monte Carlo 방식을 통해 sampling 된 sentence에 대해서 gradient를 구하고, 그 gradient에 reward를 곱하여 주는 형태입니다. 만약 샘플링 된 해당 문장이 좋은 (큰 양수) reward를 받았다면 learning rate $$ \alpha $$에 추가적인 scaling을 통해서 더 큰 step으로 gradient ascending을 할 수 있을 겁니다. 하지만 negative reward를 받게 된다면, gradient는 반대로 적용이 되도록 값이 곱해지게 될 겁니다. 따라서 해당 샘플링 된 문장이 나오지 않도록 parameter $$ \theta $$가 update 됩니다.
