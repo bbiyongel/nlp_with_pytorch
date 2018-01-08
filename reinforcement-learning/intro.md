@@ -34,7 +34,7 @@ Generative Adversarial Network overview - Image from [web](https://sthalles.gith
 
 
 
-여기에서는 GAN을 자세히 설명하지 않고 넘어가도록 하겠습니다.
+여기에서는 GAN의 수식은 다루지 않고 넘어가도록 하겠습니다.
 
 ## GAN과 NLP
 
