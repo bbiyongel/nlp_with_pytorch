@@ -9,7 +9,7 @@
 Policy Gradient는 ***Policy based Reinforcement Learning*** 방식입니다. 알파고를 개발했던 DeepMind에 의해서 유명해진 Deep Q-Learning은 Value based Reinforcement Learning 방식에 속합니다. 실제 딥러닝을 사용하여 두 방식을 사용 할 때에 가장 큰 차이점은, Value based방식은 인공신경망을 사용하여 어떤 action을 하였을 때에 얻을 수 있는 보상을 예측 하도록 훈련하는 것과 달리, policy based 방식은 인공신경망은 어떤 action을 할지 훈련되고 해당 action에 대한 보상(reward)를 back-propagation 할 때에 gradient를 통해서 전달해 주는 것이 가장 큰 차이점 입니다. 따라서 어떤 Deep Q-learning의 경우에는 action을 선택하는 것이 deterministic한 것에 비해서, ***Policy Gradient***방식은 action을 선택 할 때에 stochastic한 process를 거치게 됩니다. Policy Gradient에 대한 수식은 아래와 같습니다.
 
 $$
-\pi_\theta(a|s)
+\pi_\theta(a|s) = P_\theta(a|s) = P(a|s; \theta)
 $$
 $$
 J(\theta) = v_{\pi_\theta}(S_0)
