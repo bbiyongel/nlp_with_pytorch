@@ -29,7 +29,7 @@ $$
 $$
 
 $$
-\triangledown_\theta J(\theta) = E_{\pi_\theta}[\triangledown_\theta \log{\pi_\theta (a|s)}q_\pi (s, a)]
+\triangledown_\theta J(\theta) = E_{\pi_\theta}[\triangledown_\theta \log{\pi_\theta (s, a)}q_\pi (s, a)]
 $$
 
 $$
