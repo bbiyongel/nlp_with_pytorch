@@ -25,7 +25,7 @@ $$
 \theta_{t+1}=\theta_t+\alpha\triangledown_\theta J(\theta)
 $$
 
-따라서, $$\triangledown_\theta J(\theta)$$를 구하여 $$\theta$$를 업데이트 해야 합니다. 여기서 $$ d(s) $$는 markov chain의 stationary distribution으로써
+따라서, $$\triangledown_\theta J(\theta)$$를 구하여 $$\theta$$를 업데이트 해야 합니다. 여기서 $$ d(s) $$는 markov chain의 stationary distribution으로써 시작점에 상관없이 전체의 trajecotry에서 $$ s $$에 머무르는 시간의 proportion을 의미합니다.
 
 $$
 \triangledown_\theta\pi_\theta(s,a)=\pi_\theta(s,a)\frac{\triangledown_\theta\pi_theta(s,a)}{\pi_\theta(s,a)}
