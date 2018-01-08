@@ -14,6 +14,8 @@ Cross entropy는 훌륭한 classification을 위해서 이미 훌륭한 loss fun
 
 ![](/assets/rl-minimum-risk-training.png)
 
+## RL in GNMT
+
 ## Policy Gradient for NMT
 
 [\[Gu at el.2017\]](https://arxiv.org/pdf/1702.02429.pdf)
