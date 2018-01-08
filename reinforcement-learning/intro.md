@@ -44,4 +44,4 @@ Sampling 또는 argmax의 연산은 gradient를 전달 할 수 없는 stochastic
 
 ## 강화학습 소개
 
-위와 같이 GAN을 사용하기 위함 뿐만이 아니라, 강화학습은 매우 중요합니다. 우
+위와 같이 GAN을 사용하기 위함 뿐만이 아니라, 강화학습은 매우 중요합니다. 어떠한 task의 문제를 해결함에 있어서 cross entropy를 쓸 수 있는 classification이나, tensor간의 error를 구할 수 있는 mse 등으로 정의 할 수 없는 복잡한 objective들이 많이 존재하기 때문입니다. (비록 그동안 그러한 objective function으로 문제를 해결하였더라도 문제를 단순화 하여 접근한 것일 수도 있습니다.)
