@@ -29,8 +29,13 @@ $$
 $$
 \triangledown_\theta J(\theta) = \triangledown_\theta v_{\pi_\theta}(s_0)
 $$
+
 $$
 \triangledown_\theta J(\theta) = E_{\pi_\theta}[\triangledown_\theta \log{\pi_\theta (a|s)}q_\pi (s, a)]
+$$
+
+$$
+q_\pi(s, a) = \sum_{s', r}P(s', r|s, a)(r + v_\pi(s'))
 $$
 
 위의 수식을 NLP에 적용하여 쉽게 설명 해 보면, Monte Carlo 방식을 통해 sampling 된 sentence에 대해서 gradient를 구하고, 그 gradient에 reward를 곱하여 주는 형태입니다. 만약 샘플링 된 해당 문장이 좋은 (큰 양수) reward를 받았다면 learning rate $$ \alpha $$에 추가적인 scaling을 통해서 더 큰 step으로 gradient ascending을 할 수 있을 겁니다. 하지만 negative reward를 받게 된다면, gradient는 반대로 적용이 되도록 값이 곱해지게 될 겁니다. 따라서 해당 샘플링 된 문장이 나오지 않도록 parameter $$ \theta $$가 update 됩니다.
