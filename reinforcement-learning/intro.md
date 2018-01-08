@@ -32,8 +32,6 @@ Generative Adversarial Network overview - Image from [web](https://sthalles.gith
 
 여기에서는 GAN의 수식은 다루지 않고 넘어가도록 하겠습니다.
 
-### Why GAN is important?
-
 ## GAN과 NLP
 
 위와 같이 GAN은 Computer Vision(CV)분야에서 대성공을 이루었지만 NLP에서는 적용이 어려웠습니다. 그 이유는 Natural Language 자체의 특성에 있습니다. 이미지라는 것은 어떠한 continuous한 값들로 채워진 2차원의 matrix입니다. 하지만 이와 달리 단어라는 것은 descrete한 symbol로써, 언어라는 것은 어떠한 descrete한 값들의 sequential한 배열 입니다. 비록 우리는 **NNLM**이나 **NMT Decoder**를 통해서 latent variable로써 언어의 확률을 모델링 $$ P(w_1,w_2,\cdots,w_n)$$ 하고 있지만, 결국 언어를 나타내기 위해서는 해당 확률 모델에서 ***sampling***(또는 argmax)을 하는 stochastic한 과정을 거쳐야 합니다.
@@ -44,6 +42,9 @@ $$
 
 Sampling 또는 argmax의 연산은 gradient를 전달 할 수 없는 stochastic 연산입니다. -- 오직 deterministic한 연산만 gradient가 back-propagation 가능합니다. 이러한 이유 때문에 보통은 GAN을 NLP에는 적용할 수 없는 인식이 지배적이었습니다. 하지만 강화학습을 사용함으로써 Adversarial learning을 NLP에도 적용할 수 있게 되었습니다.
 
-## 강화학습 소개
+## Why we use RL?
 
 위와 같이 GAN을 사용하기 위함 뿐만이 아니라, 강화학습은 매우 중요합니다. 어떠한 task의 문제를 해결함에 있어서 cross entropy를 쓸 수 있는 classification이나, tensor간의 error를 구할 수 있는 mse 등으로 정의 할 수 없는 복잡한 objective들이 많이 존재하기 때문입니다. (비록 그동안 그러한 objective function으로 문제를 해결하였더라도 문제를 단순화 하여 접근한 것일 수도 있습니다.)
+
+### Why GAN is important?
+
