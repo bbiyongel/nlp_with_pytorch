@@ -74,6 +74,7 @@
   * [Policy Gradient](reinforcement-learning/policy-gradient.md)
   * [Supervised NMT](reinforcement-learning/supervised-nmt.md)
   * [Unsupervised NMT](reinforcement-learning/unsupervised-nmt.md)
+  * [Adversarial NLG](reinforcement-learning/arae.md)
 * [Speech Recognition](speech-recognition/cover.md)
   * [Intro](speech-recognition/intro.md)
   * [Traditional methodology](speech-recognition/wfst.md)
