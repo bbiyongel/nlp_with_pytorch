@@ -55,22 +55,26 @@ $$
 Q(y|x^{(s)};\theta,\alpha)=\frac{P(y|x^{(s)};\theta)^\alpha}{\sum_{y' \in S(x^{(s)})}P(y'|x^{(s)};\theta)^\alpha}
 $$
 
-하지만 주어진 입력에 대한 가능한 정답에 대한 전체 space를 search할 수는 없기 때문에, Monte Carlo를 사용하여 sampling하는 것을 택합니다. 그리고 위의 수식에 대해서 $$ \theta $$에 대해서 미분을 수행합니다.
+하지만 주어진 입력에 대한 가능한 정답에 대한 전체 space를 search할 수는 없기 때문에, Monte Carlo를 사용하여 sampling하는 것을 택합니다. 그리고 위의 수식에서 $$ \theta $$에 대해서 미분을 수행합니다.
 
 아래는 위와 같이 훈련한 MRT에 대한 성능을 실험한 결과 입니다. 기존의 MLE 방식에 비해서 BLEU가 상승한 것을 확인할 수 있습니다.
 
 ![](/assets/rl-minimum-risk-training.png)
 
-## RL in GNMT
+## Policy Gradient for GNMT
 
-## Policy Gradient for NMT
+Google은 GNMT 논문[\[Wo at el.2016\]](https://arxiv.org/pdf/1609.08144.pdf)에서 policy gradient를 사용하여 training criteria를 개량하였습니다.
 
-[\[Gu at el.2017\]](https://arxiv.org/pdf/1702.02429.pdf)
+기존 MLE 방식의 Objective를 아래와 같이 구성합니다. $$ Y^{*(i)} $$은 optimal 정답 데이터를 의미합니다.
 
-https://arxiv.org/pdf/1707.07402.pdf
+$$
+\mathcal{O}_{ML}(\theta)=\sum_{i=1}^N\log P_\theta(Y^{*(i)}|X^{(i)})
+$$
 
-https://arxiv.org/pdf/1607.07086.pdf
+여기에 추가로 RL방식의 Objective를 추가하였는데 이 방식이 policy gradient 방식과 같습니다.
 
-https://arxiv.org/pdf/1602.01783.pdf
+$$
+\mathcal{O}_{RL}(\theta)=\sum_{i=1}^N \sum_{Y \in \mathcal{Y}} P_\theta(Y|X^{(i)})r(Y, Y^{*(i)})
+$$
 
-https://arxiv.org/pdf/1505.00521.pdf
+위의 수식도 ***Minimum Risk Training (MRT)*** 방식과 비슷합니다. $$ r(Y, Y^{*(i)}) $$ 또한 정답과 sampling 데이터 사이의 유사도(점수)를 의미합니다. 가장 큰 차이점은 기존에는 risk로 취급하여 minimize하는 방향으로 훈련하였지만, 이번에는 **reward로 취급하여 maximize하는 방향으로 훈련하게 된다는 것 입니다.**
