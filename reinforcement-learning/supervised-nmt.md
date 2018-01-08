@@ -51,11 +51,11 @@ $$
 and~Q(y|x^{(s)};\theta,\alpha)~is~a~distribution~defined~on~the~subspace~S(x^{(s)}):
 $$
 
-
 $$
 Q(y|x^{(s)};\theta,\alpha)=\frac{P(y|x^{(s)};\theta)^\alpha}{\sum_{y' \in S(x^{(s)})}P(y'|x^{(s)};\theta)^\alpha}
 $$
 
+하지만 주어진 입력에 대한 가능한 정답에 대한 전체 space를 search할 수는 없기 때문에, Monte Carlo를 사용하여 sampling하는 것을 택합니다.
 
 ![](/assets/rl-minimum-risk-training.png)
 
