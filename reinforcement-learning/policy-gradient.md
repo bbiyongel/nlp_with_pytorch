@@ -25,7 +25,7 @@ $$
 \theta_{t+1}=\theta_t+\alpha\triangledown_\theta J(\theta)
 $$
 
-따라서, $$\triangledown_\theta J(\theta)$$를 구하여 $$\theta$$를 업데이트 해야 합니다. 여기서 $$ d(s) $$는 stationary distribution으로써, 각 state에 머무르는 비율로 이해할 수 있습니다.
+따라서, $$\triangledown_\theta J(\theta)$$를 구하여 $$\theta$$를 업데이트 해야 합니다. 여기서 $$ d(s) $$는 markov chain의 stationary distribution으로써
 
 $$
 \triangledown_\theta\pi_\theta(s,a)=\pi_\theta(s,a)\frac{\triangledown_\theta\pi_theta(s,a)}{\pi_\theta(s,a)}
