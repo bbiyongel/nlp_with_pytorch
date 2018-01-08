@@ -50,9 +50,12 @@ $$
 $$
 and~Q(y|x^{(s)};\theta,\alpha)~is~a~distribution~defined~on~the~subspace~S(x^{(s)}):
 $$
+
+
 $$
 Q(y|x^{(s)};\theta,\alpha)=\frac{P(y|x^{(s)};\theta)^\alpha}{\sum_{y' \in S(x^{(s)})}P(y'|x^{(s)};\theta)^\alpha}
 $$
+
 
 ![](/assets/rl-minimum-risk-training.png)
 
