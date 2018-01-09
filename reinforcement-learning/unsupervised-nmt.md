@@ -8,6 +8,8 @@ Supervised learning 방식은 높은 정확도를 자랑하지만 labeling 데�
 
 ## Dual Learning for Machine Translation
 
+### CycleGAN
+
 먼저 좀 더 이해하기 쉬운 Computer Vision쪽 논문[\[Zhu at el.2017\]](https://arxiv.org/pdf/1703.10593.pdf)을 예제로 설명 해 볼까 합니다. ***Cycle GAN***은 아래와 같이 unparalleled image set이 여러개 있을 때, $$ Set~X $$의 이미지를 $$ Set~Y $$의 이미지로 합성/변환 시켜주는 방법 입니다. 사진을 전체 구조는 유지하되 *모네*의 그림풍으로 바꾸어 주기도 하고, 말과 얼룩말을 서로 바꾸어 주기도 합니다. 겨울 풍경을 여름 풍경으로 바꾸어주기도 합니다.
 
 ![](https://junyanz.github.io/CycleGAN/images/teaser.jpg)
@@ -20,8 +22,10 @@ $$ G $$는 $$ x $$를 입력으로 받아 $$ \hat{y} $$으로 변환 해 냅니�
 ![](/assets/rl-cycle-gan.png)
 
 이 방식의 핵심 key point는 $$ \hat{x} $$나 $$ \hat{y} $$를 합성 할 때에 기존의 Set $$ X, Y $$에 속하는 것 처럼 만들어내야 한다는 것 입니다. 이것을 Machine Translation에 적용 시켜 보면 어떻게 될까요?
+
+### Dual Learning
   
-[\[Xia at el.2016\]](https://arxiv.org/pdf/1611.00179.pdf)
+공교롭게도 비슷한 시기에 나온 논문[\[Xia at el.2016\]](https://arxiv.org/pdf/1611.00179.pdf)이 있습니다. ***GAN***이 안되는 NLP의 특성상 CycleGAN처럼 direct로 gradient를 이어줄 수는 없었지만 기본적으로는 아주 비슷한 idea입니다.
 
 
 
