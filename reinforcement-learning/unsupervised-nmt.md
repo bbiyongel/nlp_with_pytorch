@@ -25,7 +25,7 @@ $$ G $$는 $$ x $$를 입력으로 받아 $$ \hat{y} $$으로 변환 해 냅니�
 
 ### Dual Learning
   
-공교롭게도 비슷한 시기에 나온 논문[\[Xia at el.2016\]](https://arxiv.org/pdf/1611.00179.pdf)이 있습니다. ***GAN***이 안되는 NLP의 특성상 CycleGAN처럼 direct로 gradient를 이어줄 수는 없었지만 기본적으로는 아주 비슷한 idea입니다.
+공교롭게도 비슷한 시기에 나온 논문[\[Xia at el.2016\]](https://arxiv.org/pdf/1611.00179.pdf)이 있습니다. ***GAN***이 안되는 NLP의 특성상 CycleGAN처럼 direct로 gradient를 이어줄 수는 없었지만 기본적으로는 아주 비슷한 idea입니다. 짝이 없는 monolingual corpus를 이용하여 성능을 극대화 하고자 하였습니다.
 
 즉, monolingual sentence($$ s $$)에 대해서 번역을 하고 그 문장($$ s_{mid} $$)을 사용하여 복원을 하였을 때($$ \hat{s} $$) 원래의 처음 문장으로 돌아올 수 있도록(처음 문장과의 차이를 최소화 하도록) 훈련하는 것입니다. 이때, 번역된 문장 $$ s_{mid} $$는 자연스러운 해당 언어의 문장이 되었는가도 중요한 지표가 됩니다.
 
