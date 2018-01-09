@@ -27,9 +27,32 @@ $$ G $$는 $$ x $$를 입력으로 받아 $$ \hat{y} $$으로 변환 해 냅니�
   
 공교롭게도 비슷한 시기에 나온 논문[\[Xia at el.2016\]](https://arxiv.org/pdf/1611.00179.pdf)이 있습니다. ***GAN***이 안되는 NLP의 특성상 CycleGAN처럼 direct로 gradient를 이어줄 수는 없었지만 기본적으로는 아주 비슷한 idea입니다.
 
-
-
 ![](/assets/rl-dual-learning-1.png)
+
+위에서 설명한 algorithm을 따라가 보겠습니다. 이 방법에서는 $$ Set~X,~Set~Y $$ 대신에 $$ Language~A,~Language~B $$로 표기하고 있습니다. $$ G_{A \rightarrow B} $$의 파라미터 $$ \theta_{AB} $$와 $$ F_{B \rightarrow A} $$의 파라미터 $$ \theta_{BA} $$가 등장합니다.
+
+기존의 policy gradient와 마찬가지로 아래와 같은 parameter update를 수행해야 합니다.
+
+$$
+\theta_{AB} \leftarrow \theta_{AB} + \gamma \triangledown_{\theta_{AB}}\hat{E}[r]
+$$
+$$
+\theta_{BA} \leftarrow \theta_{BA} + \gamma \triangledown_{\theta_{BA}}\hat{E}[r]
+$$
+
+$$ \hat{E}[r] $$을 각각의 parameter에 대해서 미분 해 준 값을 더해주는 것을 볼 수 있습니다. 이 reward의 기대값은 아래와 같이 구할 수 있습니다.
+
+$$
+r=\alpha r_{AB} + (1-\alpha)r_{BA}
+$$
+$$
+r_{AB}=LM_{B}(s_{mid})
+$$
+$$
+r_{BA}=\log{P(s|s_{mid};\theta_{BA})}
+$$
+
+위와 같이 $$ k $$개의 sampling한 문장에 대해서 각기 방향에 대한 reward를 각각 구한 후, 이를 linear combination을 취해줍니다.
 
 ![](/assets/rl-dual-learning-2.png)
 
