@@ -15,9 +15,11 @@ Cycle GAN - image from [web](https://junyanz.github.io/CycleGAN/)
 
 아래에 이 방법을 도식화 하여 나타냈습니다. $$ Set~X $$와 $$ Set~Y $$ 모두 각각 Generator($$ G, F $$)와 Discriminator($$ D_X, D_Y $$)를 가지고 있어서, $$ minmax $$ 게임을 수행합니다. 
 
-$$ G $$는 $$ x $$를 입력으로 받아 $$ \hat{y} $$으로 변환 해 냅니다. 그리고 $$ D_Y $$는 $$ \hat{y} $$ 또는 $$ y $$를 입력으로 받아 합성 유무($$ Real/Fake $$)를 판단 합니다. 
+$$ G $$는 $$ x $$를 입력으로 받아 $$ \hat{y} $$으로 변환 해 냅니다. 그리고 $$ D_Y $$는 $$ \hat{y} $$ 또는 $$ y $$를 입력으로 받아 합성 유무($$ Real/Fake $$)를 판단 합니다. 마찬가지로 $$ F $$는 $$ y $$를 입력으로 받아 $$ \hat{x} $$으로 변환 합니다. 이후에 $$ D_X $$는 $$ \hat{x} $$ 또는 $$ x $$를 입력으로 받아 합성 유부를 판단 합니다.
+
 ![](/assets/rl-cycle-gan.png)
 
+이 방식의 핵심 key point는 $$ \hat{x} $$나 $$ \hat{y} $$를 합성 할 때에 기존의 Set $$ X, Y $$에 속하는 것 처럼 만들어내야 한다는 것 입니다. 이것을 Machine Translation에 적용 시켜 보면 어떻게 될까요?
   
 [\[Xia at el.2016\]](https://arxiv.org/pdf/1611.00179.pdf)
 
