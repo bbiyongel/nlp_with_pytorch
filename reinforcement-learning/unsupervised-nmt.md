@@ -67,6 +67,8 @@ $$
 
 ![](/assets/rl-dual-learning-2.png)
 
+위의 table은 이 방법의 성능을 비교한 결과 입니다. Pseudo-NMT는 이전 챕터에서 설명하였던 back-translation을 의미합니다. 그리고 그 방식보다 더 좋은 성능을 기록한 것을 볼 수 있습니다.
+
 ![](/assets/rl-dual-learning-3.png)
 
 ## Unsupervised NMT
