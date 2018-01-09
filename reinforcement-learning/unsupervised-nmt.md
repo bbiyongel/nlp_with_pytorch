@@ -63,7 +63,7 @@ $$
 \triangledown_{\theta_{BA}}\hat{E}[r]=\frac{1}{K}\sum_{k=1}^K[(1-\alpha)\triangledown_{\theta_{BA}}\log{P(s|s_{mid,k};\theta_{BA})}]
 $$
 
-이렇게 얻어진 $$ E[r] $$를 각 parameter에 대해서 미분하게 되면 위와 같은 수식을 얻을 수 있고, 상기 서술한 parameter update 수식에 대입하면 됩니다.
+이렇게 얻어진 $$ E[r] $$를 각 parameter에 대해서 미분하게 되면 위와 같은 수식을 얻을 수 있고, 상기 서술한 parameter update 수식에 대입하면 됩니다. 비슷한 방식으로 $$ B \rightarrow A $$를 구할 수 있습니다.
 
 ![](/assets/rl-dual-learning-2.png)
 
