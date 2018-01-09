@@ -8,7 +8,10 @@ Supervised learning 방식은 높은 정확도를 자랑하지만 labeling 데�
 
 ## Dual Learning for Machine Translation
 
-[\[Zhu at el.2017\]](https://arxiv.org/pdf/1703.10593.pdf)
+먼저 좀 더 이해하기 쉬운 Computer Vision쪽 논문[\[Zhu at el.2017\]](https://arxiv.org/pdf/1703.10593.pdf)을 예제로 설명 해 볼까 합니다. ***Cycle GAN***은 아래와 같이 unparalleled image set이 여러개 있을 때, set A의 이미지를 set B의 이미지로 합성/변환 시켜주는 방법 입니다.
+
+![](https://junyanz.github.io/CycleGAN/images/teaser.jpg)
+Cycle GAN - image from [web](https://junyanz.github.io/CycleGAN/)
 
 ![](/assets/rl-cycle-gan.png)
 
