@@ -105,7 +105,7 @@ $$ \hat{x}\sim d(e(C(x),\ell),\ell) $$는 source sentence $$ x $$를 $$ C $$를 
 
 ### b. Cross Domain Training (Translation)
 
-이번엔 이전 iteration의 모델 $$ M $$에서 noisy translated된 문장($$ y $$)을 다시 source sentence로 원상복구 하는 task에 대한 objective 입니다.
+이번엔 이전 iteration의 모델 $$ M $$에서 언어($$ \ell_2 $$)의 noisy translated된 문장($$ y $$)을 다시 언어($$ \ell_1 $$) source sentence로 원상복구 하는 task에 대한 objective 입니다.
 
 $$
 y=M(x)
