@@ -14,6 +14,8 @@ Neural Machine Translation의 최강자는 Google이라고 모두가 여기고 �
 
 따라서 word embedding vector와 같은 dimension의 position embedding vector를 구하여 매 time-step마다 더해준 뒤, 상위 layer로 feed forward 하게 됩니다.
 
+하지만 position embedding이 없다고 이 방식이 동작하지 않는 것은 아닙니다. Position embedding의 유무에 따라서 실험결과 BLEU가 최대 0.5 정도 차이가 나기도 합니다.
+
 ### b. Gated Linear Unit
 
 $$
