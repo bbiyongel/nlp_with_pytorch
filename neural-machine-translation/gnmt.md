@@ -40,9 +40,11 @@ Google은 후에 설명할 Reinforcement Learning 기법을 사용하여 Maximum
 
 - 계산량을 줄여 자원의 효율적 사용과 응답시간의 감소를 얻을 수 있다.
 - 모델의 실제 저장되는 크기를 줄여 deploy를 효율적으로 할 수 있다.
-- 부가적으로 regularization의 효과를 볼 수 있다. (아래 테이블 참조)
+- 부가적으로 regularization의 효과를 볼 수 있다.
 
 ![](/assets/nmt-gnmt-3.png)
+
+위의 그래프를 보면 전체적으로 Quantized verion이 더 낮은 loss를 보여주는 것을 확인할 수 있습니다.
 
 ## 5. Search
 
