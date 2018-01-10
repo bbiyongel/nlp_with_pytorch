@@ -8,5 +8,7 @@ Neural Machine Translation의 최강자는 Google이라고 모두가 여기고 �
 
 ### a. Position Embedding
 
-### b. Attention
+### b. Gated Linear Unit
+
+### c. Attention
 
