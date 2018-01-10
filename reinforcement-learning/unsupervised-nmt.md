@@ -118,8 +118,16 @@ $$
 
 Encoder가 언어와 상관없이 항상 같은 분포로 hyper plane에 projection하는지 검사하기 위한 ***discriminator***가 추가되어 Adversarial Training을 진행합니다. 
 
-Discriminator는 latent variable $$ z $$의 언어를 예측하여 아래의 cross-entropy loss를 minimize하도록 훈련됩니다. 따라서 encoder는 discriminator를 속일 수 있도록(***fool***) 훈련 되야 합니다.
+Discriminator는 latent variable $$ z $$의 언어를 예측하여 아래의 cross-entropy loss를 minimize하도록 훈련됩니다. $$ x_i, \ell_i $$는 같은 언어(language pair)를 의미합니다.
 
+$$
+\mathcal{L}_D(\theta_D|\theta,\mathcal{Z})=-\Bbb{E}_{(x_i,\ell_i)}[\log{p_D(\ell_i|e(x_i,\ell_i))}]
+$$
+
+따라서 encoder는 discriminator를 속일 수 있도록(***fool***) 훈련 되야 합니다.
+
+$$
+$$
 
 
 ![](/assets/rl-unsupervised-nmt-4.png)
