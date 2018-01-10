@@ -8,6 +8,14 @@ Facebook에서 CNN을 활용한 번역기에 대한 논문을 내며, 기존의 
 
 "Attention is all you need"라는 제목의 논문답게 이 논문은 정말로 Attention만 구현해서 모든것을 해냅니다. 그리고 저자는 이 모델 구조를 ***Transformer***라고 이름 붙였습니다.
 
+Encoder와 decoder를 설명하기에 앞서, sub-module부터 소개하겠습니다. Encoder와 decoder를 이루고 있는 sub-module은 크게 3가지로 나뉘어 집니다.
+
+1. Self-attention
+2. Attention
+3. Feed Forward Layer
+
+Encoder는 다수의 self-attention layer와 마지막 feed forward layer로 이루어져 있습니다. Decoder는 다수의 self-attention과 attention이 번갈아 나타나고, 마지막에 feed forward layer가 있습니다. 이처럼 Transformer는 구성되며 각 모듈에 대한 자세한 설명은 아래와 같습니다.
+
 ## 2. Position Embedding
 
 $$
