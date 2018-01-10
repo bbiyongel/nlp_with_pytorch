@@ -1,6 +1,6 @@
-# 왜 강화학습을 써야 하나?
+# Reinforcement Learning for Natural Language Processing
 
-## Discriminative learning vs Generative learning
+## 1. Discriminative learning vs Generative learning
 
 2012년 ImageNet competition에서 deeplearning을 활용한 AlexNet이 우승을 차지한 이래로 Computer Vision, Speech Recognition, Natural Language Processing 등을 차례로 deeplearning이 정복 해 왔습니다. Deeplearning이 뛰어난 능력을 보인 분야는 특히 classification 분야였습니다. 기존의 전통적인 방식과 달리 pattern recognition 분야에서는 압도적인 성능을 보여주었습니다. 이러한 classification 문제는 보통 ***Discriminative Learning***에 속하는데 이를 일반화 하면 다음과 같습니다.
 
@@ -21,7 +21,7 @@ $$
 
 요새는 pattern recognition을 비롯한 discriminative learning은 이제 deeplearning으로 당연하게 잘 해결되기 때문에 사람들의 관심과 연구 트렌드는 위와 같은 generative learning으로 집중되고 있습니다.
 
-## Generative Adversarial Network (GAN)
+## 2. Generative Adversarial Network (GAN)
 
 2016년부터 주목받기 시작하여 2017년에 가장 큰 화제였던 분야는 단연 GAN이라고 말할 수 있습니다. Variational Auto Encoder(VAE)와 함께 Generative learning을 대표하는 방법 중에 하나입니다. GAN을 통해서 우리는 사실같은 이미지를 생성해내고 합성해내는 일들을 딥러닝을 통해 할 수 있게 되었습니다. 이러한 합성/생성 된 이미지들을 통해 자율주행과 같은 실생활에 중요하고 어렵지만 데이터셋을 얻기 힘든 task들을 해결 하는데 큰 도움을 얻을 수 있으리라고 예상 됩니다. (실제로 GTA게임을 통해 자율주행을 훈련하려는 시도는 이미 유명합니다.)
 
@@ -32,7 +32,7 @@ Generative Adversarial Network overview - Image from [web](https://sthalles.gith
 
 여기에서는 GAN의 수식은 다루지 않고 넘어가도록 하겠습니다.
 
-## GAN과 NLP
+## 3. GAN과 NLP
 
 위와 같이 GAN은 Computer Vision(CV)분야에서 대성공을 이루었지만 NLP에서는 적용이 어려웠습니다. 그 이유는 Natural Language 자체의 특성에 있습니다. 이미지라는 것은 어떠한 continuous한 값들로 채워진 2차원의 matrix입니다. 하지만 이와 달리 단어라는 것은 descrete한 symbol로써, 언어라는 것은 어떠한 descrete한 값들의 sequential한 배열 입니다. 비록 우리는 **NNLM**이나 **NMT Decoder**를 통해서 latent variable로써 언어의 확률을 모델링 $$ P(w_1,w_2,\cdots,w_n)$$ 하고 있지만, 결국 언어를 나타내기 위해서는 해당 확률 모델에서 ***sampling***(또는 argmax)을 하는 stochastic한 과정을 거쳐야 합니다.
 
@@ -42,7 +42,7 @@ $$
 
 Sampling 또는 argmax의 연산은 gradient를 전달 할 수 없는 stochastic 연산입니다. -- 오직 deterministic한 연산만 gradient가 back-propagation 가능합니다. 이러한 이유 때문에 보통은 GAN을 NLP에는 적용할 수 없는 인식이 지배적이었습니다. 하지만 강화학습을 사용함으로써 Adversarial learning을 NLP에도 적용할 수 있게 되었습니다.
 
-## Why we use RL?
+## 4. Why we use RL?
 
 위와 같이 GAN을 사용하기 위함 뿐만이 아니라, 강화학습은 매우 중요합니다. 어떠한 task의 문제를 해결함에 있어서 cross entropy를 쓸 수 있는 classification이나, tensor간의 error를 구할 수 있는 mse 등으로 정의 할 수 없는 복잡한 objective들이 많이 존재하기 때문입니다. (비록 그동안 그러한 objective function으로 문제를 해결하였더라도 문제를 단순화 하여 접근한 것일 수도 있습니다.) 우리는 이러한 문제들을 강화학습을 통해 해결할 수 있습니다. 이를 위해서 잘 설계된 reward를 통해서 보다 복잡하고 정교한 task의 문제를 해결 할 수 있습니다.
 
