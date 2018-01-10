@@ -66,11 +66,13 @@ $$
 
 실제 구현을 할 때에는 self attention의 경우에는 이전 layer의 출력값이 모두 Q, K, V를 이루게 됩니다. 같은 값이 Q, K, V로 들어가지만 linear transform을 해주기 때문에 상관이 없습니다. Decoder에서 수행하는 encoder에 대한 attention을 할 때에는, Q는 decoder의 이전 layer의 출력값이 되지만, K, V는 encoder의 출력값이 됩니다.
 
+### Self Attention for Decoder
+
+## 4. Feed Forward Layer
+
 $$
 FFN(x) = \max{(0, xW_1 + b_1)}W_2 + b_2
 $$
 $$
 d_{ff} = 2048
 $$
-
-### Self Attention for Decoder
