@@ -151,3 +151,4 @@ $$ \lambda $$를 통해서 linear combination을 취하여 loss를 결합 합니
 
 ![](/assets/rl-unsupervised-nmt-5.png)
 
+사실 이 논문에서 제안한 방식은 오직 monolingual corpus를 활용하여 번역기를 만들수 있다는 점을 제외하면 성능이 뛰어나지는 않습니다. 따라서, 실제 field에서 사용 될 가능성은 낮아 보입니다. 왜냐하면 실제 parallel corpus가 없는 번역 task에서도 기존의 pivot등의 다양한 방식이 존재하기 때문입니다.
