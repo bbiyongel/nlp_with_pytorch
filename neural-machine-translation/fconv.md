@@ -45,7 +45,7 @@ $$
 thus~[A;B] \in R^{2d}
 $$
 
-GLU를 사용하여 직전 convolution layer에서의 결과값인 vector($$ \in R^{2d} $$)를 입력으로 삼아 gate 연산을 수행합니다.
+GLU를 사용하여 직전 convolution layer에서의 결과값인 vector($$ \in R^{2d} $$)를 입력으로 삼아 gate 연산을 수행합니다. 이 연산은 LSTM이나 GRU에서의 gate들과 매우 비슷하게 동작을 수행합니다.
 
 ### d. Attention
 
