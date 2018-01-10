@@ -21,6 +21,8 @@ Encoder는 다수의 self-attention layer와 마지막 feed forward layer로 이
 
 ## 2. Position Embedding
 
+이전 Facebook 논문과 마찬가지로, RNN을 이용하지 않기 때문에, 위치정보를 단어와 함께 주는 것이 필요합니다. 따라서 Google에서도 마찬가지로 position embedding을 통해서 위치 정보를 나타내고자 하였으며, 그 수식은 약간 다릅니다.
+
 $$
 PE(pos, 2i) = \sin(pos / 10000^{2i / d_{model}})
 $$
