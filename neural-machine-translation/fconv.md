@@ -16,7 +16,9 @@ Neural Machine Translation의 최강자는 Google이라고 모두가 여기고 �
 
 하지만 position embedding이 없다고 이 방식이 동작하지 않는 것은 아닙니다. Position embedding의 유무에 따라서 실험결과 BLEU가 최대 0.5 정도 차이가 나기도 합니다.
 
-### b. Gated Linear Unit
+### b. Convolutional Layer
+
+### c. Gated Linear Unit
 
 $$
 v([A;B])=A \otimes \sigma(B)
@@ -28,5 +30,5 @@ $$
 thus~[A;B] \in R^{2d}
 $$
 
-### c. Attention
+### d. Attention
 
