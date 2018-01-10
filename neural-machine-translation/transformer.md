@@ -45,6 +45,7 @@ Attention(Q, K, V) = softmax(\frac{QK^T}{\sqrt{d_k}})V
 $$
 
 이렇게 구성된 attention을 하나의 ***head***로 삼아 ***Multi-Head Attention***을 구성합니다. 
+
 $$
 MultiHead(Q, K, V) = [head_1;head_2;\cdots;head_h]W^O
 $$
