@@ -89,6 +89,8 @@ $$
 
 ### c. Self Attention for Decoder
 
+Decoder의 self-attention은 encoder의 그것과 조금 다릅니다. 이전 레이어의 출력값을 가지고 Q, K, V를 구성하는 것은 같지만, 약간의 제약이 더해졌습니다.
+
 ### d. Position-wise Feed Forward Layer
 
 
