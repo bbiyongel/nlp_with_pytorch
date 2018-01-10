@@ -1,12 +1,11 @@
 # Transformer
 
-## 소개
 
 [\[Vaswani at el.2017\]](https://arxiv.org/pdf/1706.03762.pdf)
 
 ![](/assets/nmt-transformer-1.png)
 
-### Position Embedding
+## Position Embedding
 
 $$
 PE(pos, 2i) = \sin(pos / 10000^{2i / d_{model}})
@@ -15,7 +14,7 @@ $$
 PE(pos, 2i + 1) = \cos(pos / 10000^{2i / d_{model}})
 $$
 
-### Self Attention
+## Attention
 
 ![](/assets/nmt-transformer-2.png)
 
@@ -43,12 +42,3 @@ $$
 $$
 d_{ff} = 2048
 $$
-
-### Attention
-
-## 구조 설계
-
-## 설명
-
-
-
