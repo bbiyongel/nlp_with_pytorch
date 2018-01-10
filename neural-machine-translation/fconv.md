@@ -36,8 +36,6 @@ $$
 
 위의 물음에서 출발한 것이 이 논문의 핵심입니다. 따라서 kernel\(or window\) size $$ k $$인 convolution filter가 $$ d $$개 channel의 입력을 받아서 convolution 연산을 수행하여 $$ 2d $$개 channel의 출력을 결과값으로 내놓습니다.
 
-
-
 ![](/assets/nmt-fconv-2.png)
 
 ### c. Gated Linear Unit
