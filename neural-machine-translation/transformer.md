@@ -52,6 +52,9 @@ $$
 $$
 where~head_i = Attention(QW_i^Q, KW_i^K, VW_i^V)
 $$
+
+이때에 각 head의 Q, K, V 마다 다른 W를 곱해줌으로써 각각 linear transformation형태를 취해 줍니다. 즉, head마다 필요한 다른 정보(feature)를 attention을 통해 encoding 할 수 있게 됩니다.
+
 $$
 where~W_i^Q \in \mathbb{R}^{d_{model}\times d_k}, W_i^K \in \mathbb{R}^{d_{model}\times d_k}, W_i^V \in \mathbb{R}^{d_{model}\times d_v}~and~W^O \in \mathbb{R}^{hd_{v}\times d_{model}}
 $$
