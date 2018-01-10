@@ -30,13 +30,13 @@ $$
 
 위의 수식은 attention과 input feeding이 추가된 seq2seq의 처음부터 끝까지 입니다. $$ RNN_{dec} $$는 이제 $$ \tilde{h}_{t-1}^{tgt} $$를 입력으로 받기 때문에, 모든 time-step을 한번에 처리하도록 구현할 수 없다는 점이 구현상의 차이점입니다.
 
-## 1. 단점
+## 1. cons
 
 이 방식은 _**훈련 속도 저하**_라는 단점을 가집니다. input feeding이전 방식에서는 훈련 할 때에는 모든 $$ Y $$를 알고 있기 때문에, encoder와 마찬가지로 decoder도 모든 time-step에 대해서 한번에 _**feed-forward**_ 작업이 가능했습니다. 하지만 input feeding으로 인해, decoder RNN의 input으로 이전 time-step의 결과가 필요하게 되어, decoder _**feed-forward**_ 할 때에 time-step 별로 sequential하게 계산을 해야 합니다.
 
 하지만 이 단점이 크게 부각되지 않는 이유는 어차피 _**inference**_ 단계에서는 decoder는 input feeding이 아니더라도 time-step 별로 sequential하게 계산되어야 하기 때문입니다. inference 단계에서는 이전 time-step의 output인 $$ \hat{y}_t $$를 decoder\(정확하게는 decoder 이전의 embedding layer\)의 입력으로 사용해야 하기 때문에, 어쩔 수 없이 병렬처리가 아닌 sequential 하게 계산해야 합니다. 따라서 input feeding으로 인한 속도 저하는 거의 없습니다.
 
-## 2. 성능 실험
+## 2. Evaluation
 
 | NMT system | Perplexity | BLEU |
 | --- | --- | --- |
