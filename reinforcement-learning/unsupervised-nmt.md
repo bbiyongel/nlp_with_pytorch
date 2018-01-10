@@ -77,9 +77,13 @@ $$
 
 위의 Dual Learning 논문과 달리 이 논문[\[Lample at el.2017\]](https://arxiv.org/pdf/1711.00043.pdf)은 오직 Monolingual Corpus만을 사용하여 번역기를 제작하는 방법을 제안하였습니다. 따라서 **Unsupervised NMT**라고 할 수 있습니다.
 
+이 논문의 핵심 아이디어는 아래와 같습니다. 제일 중요한 것은 encoder가 언어에 상관 없이 같은 내용일 경우에 같은 vector로 encoding할 수 있도록 훈련하는 것 입니다. 이러한 encoder를 만들기 위해서 GAN이 도입되었습니다.
 
+GAN을 NLP에 쓰지 못한다고 해 놓고 GAN을 썼다니 이게 무슨 소리인가 싶겠지만, encoder의 출력값인 vector에 대해서 GAN을 적용한 것이라 discrete한 값이 아닌 continuous한 값이기 때문에 가능한 것 입니다.
 
 ![](/assets/rl-unsupervised-nmt-3.png)
+
+이렇게 다른 언어일지라도 동일한 내용에 대해서는 같은 vector로 encoding하도록 훈련 된 encoder의 출력값을 가지고 decoder로 원래의 문장으로 잘 돌아오도록 해 주는 것이 이 논문의 핵심 내용입니다.
 
 ![](/assets/rl-unsupervised-nmt-4.png)
 
