@@ -18,6 +18,15 @@ Neural Machine Translation의 최강자는 Google이라고 모두가 여기고 �
 
 ### b. Convolutional Layer
 
+개념을 좀 더 풀어서 설명하면 다음과 같습니다. [[Ranzato at el.2015]](https://arxiv.org/pdf/1511.06732.pdf)에서는 단순히 이전 layer의 결과값을 averaging하는 encoder를 제안하였습니다. 
+
+$$
+e_j=w_j+l_j,~z_j=\frac{1}{k}\sum_{t=-\lfloor k/2 \rfloor}^{\lfloor k/2 \rfloor}{e_{j+t}}
+$$
+$$
+where~w_j~is~word~vector~and~l_j~is~position~embedding~vector
+$$
+
 ### c. Gated Linear Unit
 
 $$
