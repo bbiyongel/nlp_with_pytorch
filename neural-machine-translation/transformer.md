@@ -107,3 +107,4 @@ $$
 
 ![](/assets/nmt-transformer-3.png)
 
+Google은 transformer를 통해서 State of the Art의 성능을 달성했다고 보고하였습니다. 뿐만아니라, 기존의 RNN 및 Facebook의 ConvS2S보다 훨씬 빠른 속도로 훈련이 가능하다고 하였습니다. 실제로 위의 table을 보면, transformer의 training cost의 magnitude는 $$ 10^{18} $$으로, 대부분의 다른 방식 $$ 10^{19} $$와 급격한 차이를 보이는 것을 알 수 있습니다.
