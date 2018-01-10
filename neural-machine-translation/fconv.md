@@ -64,5 +64,15 @@ GLU를 사용하여 직전 convolution layer에서의 결과값인 vector\($$ \i
 
 ### d. Attention
 
-
-
+$$
+d_i^l=W_d^l h_i^l+b_d^l+g_i
+$$
+$$
+a_{ij}^l=\frac{\exp{(d_i^l z_j^u)}}{\sum_{t=1}^m \exp{(d_i^l z_t^u)}}
+$$
+$$
+c_i^l=\sum_{j=1}^m{a_{ij}^l(z_j^u+e_j)}
+$$
+$$
+\tilde{h}_i^l=h_i^l+c_i^l
+$$
