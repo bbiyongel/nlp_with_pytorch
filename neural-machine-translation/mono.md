@@ -40,3 +40,9 @@ Translation](https://kheafield.com/papers/edinburgh/copy_paper.pdf) 에서 제�
 
 ## 5. Unsupervised Neural Machine Translation
 
+[\[Artetxe at el.2017\]](https://arxiv.org/pdf/1710.11041.pdf)
+
+![](/assets/rl-unsupervised-nmt-1.png)
+
+![](/assets/rl-unsupervised-nmt-2.png)
+

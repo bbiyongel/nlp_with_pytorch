@@ -75,13 +75,6 @@ $$
 
 ## Unsupervised NMT
 
-[\[Artetxe at el.2017\]](https://arxiv.org/pdf/1710.11041.pdf)
-
-![](/assets/rl-unsupervised-nmt-1.png)
-
-![](/assets/rl-unsupervised-nmt-2.png)
-
-  
 [\[Lample at el.2017\]](https://arxiv.org/pdf/1711.00043.pdf)
 
 
