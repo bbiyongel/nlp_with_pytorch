@@ -127,10 +127,19 @@ $$
 따라서 encoder는 discriminator를 속일 수 있도록(***fool***) 훈련 되야 합니다.
 
 $$
+\mathcal{L}_{adv}(\theta_{enc},\mathcal{Z}|\theta_D)=-\Bbb{E}_{(x_i,\ell_i)}[\log{p_D}(\ell_j|e(x_i,\ell_i))]
+$$
+$$
+where~j=-(i-1)
 $$
 
-
 ![](/assets/rl-unsupervised-nmt-4.png)
+
+위의 3가지 objective를 결합하면 ***Final Objective Function***을 얻을 수 있습니다.
+
+$$
+\mathcal{L}(\theta_{enc},\theta{dec},\mathcal{Z})=
+$$
 
 ![](/assets/rl-unsupervised-nmt-5.png)
 
