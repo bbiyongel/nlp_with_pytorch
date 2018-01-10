@@ -116,6 +116,10 @@ $$
 
 ### c. Adversarial Training
 
+Encoder가 언어와 상관없이 항상 같은 분포로 hyper plane에 projection하는지 검사하기 위한 ***discriminator***가 추가되어 Adversarial Training을 진행합니다. 
+
+Discriminator는 latent variable $$ z $$의 언어를 예측하여 아래의 cross-entropy loss를 minimize하도록 훈련됩니다.
+
 ![](/assets/rl-unsupervised-nmt-4.png)
 
 ![](/assets/rl-unsupervised-nmt-5.png)
