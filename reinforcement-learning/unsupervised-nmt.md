@@ -87,6 +87,18 @@ GAN을 NLP에 쓰지 못한다고 해 놓고 GAN을 썼다니 이게 무슨 소�
 
 특기 할 만한 점은 이 논문에서는 언어에 따라서 encoder와 decoder를 다르게 사용한 것이 아니라 언어에 상관없이 1개씩의 encoder와 decoder를 사용하였습니다.
 
+이 논문의 훈련은 3가지 관점에서 수행됩니다.
+
+### a. Denoising Autoencoder
+
+이전 챕터에서 다루었듯이 Seq2seq 모델도 결국 Autoencoder의 일종이라고 볼 수 있습니다. 그러한 관점에서 autoencoder(AE)로써 단순 복사(copy) task는 굉장히 쉬운 task에 속합니다. 그러므로 단순히 encoding 한 source sentence를 같은 언어의 문장으로 decoding 하는 것은 매우 쉬운 일이 될 것입니다. 따라서 AE에게 단순히 복사 작업을 지시하는 것이 아닌 noise를 섞어 준 source sentence에서 denoising을 하면서 reconstruction(복원)을 할 수 있도록 훈련해야 합니다. 따라서 이 task의 objective는 아래와 같습니다.
+
+
+
+### b. Cross Domain Training (Translation)
+
+### c. Adversarial Training
+
 ![](/assets/rl-unsupervised-nmt-4.png)
 
 ![](/assets/rl-unsupervised-nmt-5.png)
