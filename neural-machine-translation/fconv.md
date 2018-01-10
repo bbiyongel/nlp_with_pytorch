@@ -18,7 +18,7 @@ Neural Machine Translation의 최강자는 Google이라고 모두가 여기고 �
 
 ### b. Convolutional Layer
 
-개념을 좀 더 풀어서 설명하면 다음과 같습니다. [[Ranzato at el.2015]](https://arxiv.org/pdf/1511.06732.pdf)에서는 단순히 이전 layer의 결과값을 averaging하는 encoder를 제안하였습니다. 
+Convolutional Layer를 사용한 encoder를 설명하기 이전에, 먼저 [[Ranzato at el.2015]](https://arxiv.org/pdf/1511.06732.pdf)에서는 단순히 이전 layer의 결과값을 averaging하는 encoder를 제안하였습니다. 
 
 $$
 e_j=w_j+l_j,~z_j=\frac{1}{k}\sum_{t=-\lfloor k/2 \rfloor}^{\lfloor k/2 \rfloor}{e_{j+t}}
@@ -26,6 +26,10 @@ $$
 $$
 where~w_j~is~word~vector~and~l_j~is~position~embedding~vector
 $$
+
+위와 같이 단순히 평균을 내는 것만으로도 어느정도의 성능을 낼 수 있었습니다. 만약 여기서 convolution filter를 사용하여 averaging 대신에 convolution연산을 한다면 어떻게 될까요?
+
+위의 물음에서 출발한 것이 이 논문의 핵심입니다. 따라서 kernel(or window) size $$ k $$인 convolution filter가 $$ d $$개 channel의 입력을 받아서 convolution 연산을 수행하여 $$ 2d $$개 channel의 출력을 결과값으로 내놓습니다.
 
 ### c. Gated Linear Unit
 
