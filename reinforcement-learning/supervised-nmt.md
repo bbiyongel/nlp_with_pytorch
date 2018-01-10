@@ -1,6 +1,6 @@
 # Supervised NMT
 
-## Cross-entropy vs BLEU
+## 1. Cross-entropy vs BLEU
 
 $$
 L= -\frac{1}{|Y|}\sum_{y \in Y}{P(y) \log P_\theta(y)}
@@ -8,7 +8,7 @@ $$
 
 Cross entropy는 훌륭한 classification을 위해서 이미 훌륭한 loss function이지만 약간의 문제점을 가지고 있습니다. Seq2seq의 훈련 과정에 적용하게 되면, 그 자체의 특성으로 인해서 우리가 평가하는 BLEU와의 괴리가 생기게 됩니다. (자세한 내용은 이전 챕터 내용 참조) 따라서 어찌보면 우리가 원하는 번역 task의 objective와 다름으로 인해서 cross-entropy 자체에 over-fitting되는 효과가 생길 수 있습니다. 일반적으로 BLEU는 implicit evluation과 좋은 상관관계에 있다고 알려져 있지만, cross entropy는 이에 비해 낮은 상관관계를 가지기 때문입니다. 따라서 차라리 BLEU를 objective function으로 사용하게 된다면 더 좋은 결과를 얻을 수 있습니다.
 
-## Minimum Risk Training
+## 2. Minimum Risk Training
 
 위의 아이디어에서 출발한 논문[\[Shen at el.2015\]](https://arxiv.org/pdf/1512.02433.pdf)이 Minimum Risk Training이라는 방법을 제안하였습니다. 이때에는 Policy Gradient를 직접적으로 사용하진 않았지만, 거의 비슷한 방법으로 policy gradient가 정립되기 이전에 제안된 방법이라는 점이 인상적입니다.
 
@@ -63,7 +63,7 @@ $$
 
 아래에서 설명할 policy gradient 방식과의 차이점은 sampling을 통해 기대값을 approximation 할 때에 $$ Q $$라는 값을 sampling한 값의 확률들에 대해서 normalize한 형태로 만들어 주었다는 것 입니다.
 
-## Policy Gradient for GNMT
+## 3. Policy Gradient for GNMT
 
 Google은 GNMT 논문[\[Wo at el.2016\]](https://arxiv.org/pdf/1609.08144.pdf)에서 policy gradient를 사용하여 training criteria를 개량하였습니다.
 
