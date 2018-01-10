@@ -38,9 +38,13 @@ Position embedding의 결과값의 dimension은 word embedding의 dimension과 �
 
 이 논문에서의 Attention방식은 여러개의 attention으로 구성된 multi-head attention을 제안합니다. 마치 Convolution layer에서 여러개의 filter가 있어서 여러가지 다양한 feature를 뽑아 내는 것과 같은 원리라고 볼 수 있습니다.
 
+기본적인 attention의 수식은 아래와 같습니다. 기본적인 attention은 원래 그냥 dot-product attention인데 scaled라는 이름이 붙은 이유는 key의 dimension인 $$ \sqrt{d_k} $$로 나누어주었기 때문입니다. 이외에는 이전 섹션에서 다루었던 attention과 같습니다.
+
 $$
 Attention(Q, K, V) = softmax(\frac{QK^T}{\sqrt{d_k}})V
 $$
+
+이렇게 구성된 attention을 하나의 ***head***로 삼아 ***Multi-Head Attention***을 구성합니다. 
 $$
 MultiHead(Q, K, V) = [head_1;head_2;\cdots;head_h]W^O
 $$
