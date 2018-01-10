@@ -102,7 +102,7 @@ $$
 d_{ff} = 2048
 $$
 
-사실 여기에서 소개한 이 layer는 
+사실 여기에서 소개한 이 layer는 기존의 fully connected feed forward layer라기보단, kernel size가 1인 convolutional layer라고 볼 수 있습니다.
 
 ## 2. Evaluation
 
