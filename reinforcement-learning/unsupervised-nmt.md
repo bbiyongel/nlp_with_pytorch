@@ -138,7 +138,13 @@ $$
 위의 3가지 objective를 결합하면 ***Final Objective Function***을 얻을 수 있습니다.
 
 $$
-\mathcal{L}(\theta_{enc},\theta{dec},\mathcal{Z})=
+\mathcal{L}(\theta_{enc},\theta{dec},\mathcal{Z})=\lambda_{auto}[\mathcal{L}_{auto}(\theta_{enc},\theta_{dec},\mathcal{Z},\ell_{src})+\mathcal{L}_{auto}(\theta_{enc},\theta_{dec},\mathcal{Z},\ell_{tgt})]
+$$
+$$
++\lambda_{cd}[\mathcal{L}_{cd}(\theta_{enc},\theta_{dec},\mathcal{Z},\ell_{src},\ell_{tgt})+\mathcal{L}_{cd}(\theta_{enc},\theta_{dec},\mathcal{Z},\ell_{tgt},\ell_{src})]
+$$
+$$
++\lambda_{adv}\mathcal{L}_{adv}(\theta_{enc},\mathcal{Z}|\theta_D)
 $$
 
 ![](/assets/rl-unsupervised-nmt-5.png)
