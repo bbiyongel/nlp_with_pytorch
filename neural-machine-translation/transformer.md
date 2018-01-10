@@ -36,6 +36,8 @@ Position embedding의 결과값의 dimension은 word embedding의 dimension과 �
 
 ![](/assets/nmt-transformer-2.png)
 
+이 논문에서의 Attention방식은 여러개의 attention으로 구성된 multi-head attention을 제안합니다. 마치 Convolution layer에서 여러개의 filter가 있어서 여러가지 다양한 feature를 뽑아 내는 것과 같은 원리라고 볼 수 있습니다.
+
 $$
 Attention(Q, K, V) = softmax(\frac{QK^T}{\sqrt{d_k}})V
 $$
