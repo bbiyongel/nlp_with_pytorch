@@ -33,7 +33,7 @@ $$
 
 ### c. Gated Linear Unit
 
-이 논문에서는 [[Dauphine et al.2016]](https://arxiv.org/pdf/1612.08083.pdf)에서 제안한 Gated Linear Unit을 사용하였습니다. 
+이 논문에서는 [[Dauphine et al.2016]](https://arxiv.org/pdf/1612.08083.pdf)에서 제안한 Gated Linear Unit(GLU)을 사용하였습니다. 
 
 $$
 v([A;B])=A \otimes \sigma(B)
@@ -44,6 +44,8 @@ $$
 $$
 thus~[A;B] \in R^{2d}
 $$
+
+GLU를 사용하여 직전 convolution layer에서의 결과값인 vector($$ \in R^{2d} $$)를 입력으로 삼아 gate 연산을 수행합니다.
 
 ### d. Attention
 
