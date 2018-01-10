@@ -61,7 +61,7 @@ $$
 
 ![](/assets/rl-minimum-risk-training.png)
 
-아래에서 설명할 policy gradient 방식과의 차이점은 sampling을 통해 기대값을 approximation 할 때에 $$ Q $$라는 값을 sampling한 값의 확률들에 대해서 normalize한 형태로 만들어 주었다는 것 입니다.
+아래에서 설명할 policy gradient 방식과의 **차이점은 sampling을 통해 기대값을 approximation 할 때에 $$ Q $$라는 값을 sampling한 값의 확률들에 대해서 normalize한 형태로 만들어 주었다**는 것 입니다.
 
 ## 3. Policy Gradient for GNMT
 
