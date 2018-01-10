@@ -147,5 +147,7 @@ $$
 +\lambda_{adv}\mathcal{L}_{adv}(\theta_{enc},\mathcal{Z}|\theta_D)
 $$
 
+$$ \lambda $$를 통해서 linear combination을 취하여 loss를 결합합니다.
+
 ![](/assets/rl-unsupervised-nmt-5.png)
 
