@@ -10,7 +10,21 @@ Neural Machine Translation의 최강자는 Google이라고 모두가 여기고 �
 
 ### a. Position Embedding
 
+이 방식은 RNN을 기반으로 하지 않기 때문에 position embedding을 사용하였습니다. RNN을 사용하면 우리가 직접적으로 위치 정보를 명시하지 않아도 자연스럽게 위치정보가 encoding 되지만, convolutional layer의 경우에는 이것이 없기 때문에 직접 위치 정보를 주어야 하기 때문입니다.
+
+따라서 word embedding vector와 같은 dimension의 position embedding vector를 구하여 매 time-step마다 더해준 뒤, 상위 layer로 feed forward 하게 됩니다.
+
 ### b. Gated Linear Unit
+
+$$
+v([A;B])=A \otimes \sigma(B)
+$$
+$$
+where~A \in R^{d}~and~B \in R^{d}
+$$
+$$
+thus~[A;B] \in R^{2d}
+$$
 
 ### c. Attention
 
