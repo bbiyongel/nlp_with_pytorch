@@ -75,7 +75,7 @@ $$
 
 ## 3. Unsupervised NMT
 
-[\[Lample at el.2017\]](https://arxiv.org/pdf/1711.00043.pdf)
+위의 Dual Learning 논문과 달리 이 논문[\[Lample at el.2017\]](https://arxiv.org/pdf/1711.00043.pdf)은 오직 Monolingual Corpus만을 사용하여 번역기를 제작하는 방법을 제안하였습니다. 따라서 **Unsupervised NMT**라고 할 수 있습니다.
 
 
 
