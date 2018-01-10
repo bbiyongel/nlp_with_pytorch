@@ -85,6 +85,8 @@ GAN을 NLP에 쓰지 못한다고 해 놓고 GAN을 썼다니 이게 무슨 소�
 
 이렇게 다른 언어일지라도 동일한 내용에 대해서는 같은 vector로 encoding하도록 훈련 된 encoder의 출력값을 가지고 decoder로 원래의 문장으로 잘 돌아오도록 해 주는 것이 이 논문의 핵심 내용입니다.
 
+특기 할 만한 점은 이 논문에서는 언어에 따라서 encoder와 decoder를 다르게 사용한 것이 아니라 언어에 상관없이 1개씩의 encoder와 decoder를 사용하였습니다.
+
 ![](/assets/rl-unsupervised-nmt-4.png)
 
 ![](/assets/rl-unsupervised-nmt-5.png)
