@@ -6,6 +6,8 @@ Facebook에서 CNN을 활용한 번역기에 대한 논문을 내며, 기존의 
 
 ![](/assets/nmt-transformer-1.png)
 
+"Attention is all you need"라는 제목의 논문답게 이 논문은 정말로 Attention만 구현해서 모든것을 해냅니다. 그리고 저자는 이 모델 구조를 ***Transformer***라고 이름 붙였습니다.
+
 ## Position Embedding
 
 $$
