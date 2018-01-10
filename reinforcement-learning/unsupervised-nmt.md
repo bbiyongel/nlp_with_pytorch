@@ -105,6 +105,15 @@ $$ \hat{x}\sim d(e(C(x),\ell),\ell) $$는 source sentence $$ x $$를 $$ C $$를 
 
 ### b. Cross Domain Training (Translation)
 
+이번엔 이전 iteration의 모델 $$ M $$에서 noisy translated된 문장($$ y $$)을 다시 source sentence로 원상복구 하는 task에 대한 objective 입니다.
+
+$$
+y=M(x)
+$$
+$$
+\mathcal{L}_{cd}(\theta_{enc},\theta_{dec},\mathcal{Z},\ell_1,\ell_2)=\Bbb{E}_{x\sim\mathcal{D}_{\ell_1},\hat{x}\sim d(e(C(y),\ell_2),\ell_1)}[\triangle(\hat{x},x)]
+$$
+
 ### c. Adversarial Training
 
 ![](/assets/rl-unsupervised-nmt-4.png)
