@@ -89,7 +89,7 @@ $$
 
 ### c. Self Attention for Decoder
 
-### d. Feed Forward Layer
+### d. Position-wise Feed Forward Layer
 
 
 $$
