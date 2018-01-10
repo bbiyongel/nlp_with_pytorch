@@ -2,13 +2,13 @@
 
 Facebook에서 CNN을 활용한 번역기에 대한 논문을 내며, 기존의 GNMT 보다 속도나 성능면에서 뛰어남을 자랑하자, 이에 질세라 Google에서 바로 곧이어 발표한 [Attention is all you need \[Vaswani at el.2017\]](https://arxiv.org/pdf/1706.03762.pdf) 논문입니다. 실제로 ArXiv에 Facebook이 5월에 해당 논문을 발표한데 이어서 6월에 이 논문이 발표되었습니다. 이 논문을 한 문장으로 요약하자면 **"그래도 아직 우리가 더 잘하지롱"** 정도가 되겠습니다. 덕분에 NMT 기술이 덩달아 발전하는 순기능까지 있었고, 개인적으로는 아주 재미있는 구경이었습니다. 
 
-## Architecture Overview
+## 1. Architecture Overview
 
 ![](/assets/nmt-transformer-1.png)
 
 "Attention is all you need"라는 제목의 논문답게 이 논문은 정말로 Attention만 구현해서 모든것을 해냅니다. 그리고 저자는 이 모델 구조를 ***Transformer***라고 이름 붙였습니다.
 
-## Position Embedding
+## 2. Position Embedding
 
 $$
 PE(pos, 2i) = \sin(pos / 10000^{2i / d_{model}})
@@ -17,7 +17,7 @@ $$
 PE(pos, 2i + 1) = \cos(pos / 10000^{2i / d_{model}})
 $$
 
-## Attention
+## 3. Attention
 
 ![](/assets/nmt-transformer-2.png)
 
