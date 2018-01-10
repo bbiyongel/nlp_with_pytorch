@@ -30,6 +30,8 @@ $$
 PE(pos, 2i + 1) = \cos(pos / 10000^{2i / d_{model}})
 $$
 
+Position embedding의 결과값의 dimension은 word embedding의 dimension과 같으며, 두 값을 더하여 encoder 또는 decoder의 입력으로 넘겨주게 됩니다.
+
 ## 3. Attention
 
 ![](/assets/nmt-transformer-2.png)
