@@ -6,6 +6,8 @@ Neural Machine Translation의 최강자는 Google이라고 모두가 여기고 �
 
 ![](/assets/nmt-fconv-overview.png)
 
+사실 Facebook의 그림실력은 그닥 칭찬하고 싶지 않습니다. 논문에 있는 그림이 조금 이해하기 어려울 수 있으나 최대한 따라가보도록 하겠습니다.
+
 ### a. Position Embedding
 
 ### b. Gated Linear Unit
