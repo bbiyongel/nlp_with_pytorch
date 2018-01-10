@@ -93,7 +93,15 @@ GAN을 NLP에 쓰지 못한다고 해 놓고 GAN을 썼다니 이게 무슨 소�
 
 이전 챕터에서 다루었듯이 Seq2seq 모델도 결국 Autoencoder의 일종이라고 볼 수 있습니다. 그러한 관점에서 autoencoder(AE)로써 단순 복사(copy) task는 굉장히 쉬운 task에 속합니다. 그러므로 단순히 encoding 한 source sentence를 같은 언어의 문장으로 decoding 하는 것은 매우 쉬운 일이 될 것입니다. 따라서 AE에게 단순히 복사 작업을 지시하는 것이 아닌 noise를 섞어 준 source sentence에서 denoising을 하면서 reconstruction(복원)을 할 수 있도록 훈련해야 합니다. 따라서 이 task의 objective는 아래와 같습니다.
 
+$$
+\mathcal{L}_{auto}(\theta_{enc},\theta_{dec},\mathcal{Z},\ell)=\Bbb{E}_{x\sim\mathcal{D}_\ell,\hat{x}\sim d(e(C(x),\ell),\ell)}[\triangle(\hat{x},x)]
+$$
 
+$$ \hat{x}\sim d(e(C(x),\ell),\ell) $$는 source sentence $$ x $$를 $$ C $$를 통해 noise를 추가하고, 같은 언어 $$ \ell $$로 encoding과 decoding을 수행한 것을 의미합니다. $$ \triangle(\hat{x},x) $$는 원문과 복원된 문장과의 차이(error)를 나타냅니다.
+
+#### Noise Model
+
+***Noise Model*** $$ C(x) $$는 임의로 문장 내 단어들을 drop하거나, 순서를 섞어주는 일을 합니다. drop rate는 보통 0.1, 순서를 섞어주는 단어사이의 거리는 3정도가 적당한 것으로 설명 합니다.
 
 ### b. Cross Domain Training (Translation)
 
