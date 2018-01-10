@@ -2,7 +2,7 @@
 
 Facebook에서 CNN을 활용한 번역기에 대한 논문을 내며, 기존의 GNMT 보다 속도나 성능면에서 뛰어남을 자랑하자, 이에 질세라 Google에서 바로 곧이어 발표한 [Attention is all you need \[Vaswani at el.2017\]](https://arxiv.org/pdf/1706.03762.pdf) 논문입니다. 실제로 ArXiv에 Facebook이 5월에 해당 논문을 발표한데 이어서 6월에 이 논문이 발표되었습니다. 이 논문을 한 문장으로 요약하자면 **"그래도 아직 우리가 더 잘하지롱"** 정도가 되겠습니다. 덕분에 NMT 기술이 덩달아 발전하는 순기능까지 있었고, 개인적으로는 아주 재미있는 구경이었습니다. 
 
-## 1. Architecture Overview
+## 1. Architecture
 
 ![](/assets/nmt-transformer-1.png)
 
@@ -19,7 +19,7 @@ Encoder와 decoder를 설명하기에 앞서, sub-module부터 소개하겠습�
 
 Encoder는 다수의 self-attention layer와 마지막 feed forward layer로 이루어져 있습니다. Decoder는 다수의 self-attention과 attention이 번갈아 나타나고, 마지막에 feed forward layer가 있습니다. 이처럼 Transformer는 구성되며 각 모듈에 대한 자세한 설명은 아래와 같습니다.
 
-## 2. Position Embedding
+### a. Position Embedding
 
 이전 Facebook 논문과 마찬가지로, RNN을 이용하지 않기 때문에, 위치정보를 단어와 함께 주는 것이 필요합니다. 따라서 Google에서도 마찬가지로 position embedding을 통해서 위치 정보를 나타내고자 하였으며, 그 수식은 약간 다릅니다.
 
@@ -32,7 +32,7 @@ $$
 
 Position embedding의 결과값의 dimension은 word embedding의 dimension과 같으며, 두 값을 더하여 encoder 또는 decoder의 입력으로 넘겨주게 됩니다.
 
-## 3. Attention
+### b. Attention
 
 ![](/assets/nmt-transformer-2.png)
 
@@ -66,9 +66,9 @@ $$
 
 실제 구현을 할 때에는 self attention의 경우에는 이전 layer의 출력값이 모두 Q, K, V를 이루게 됩니다. 같은 값이 Q, K, V로 들어가지만 linear transform을 해주기 때문에 상관이 없습니다. Decoder에서 수행하는 encoder에 대한 attention을 할 때에는, Q는 decoder의 이전 layer의 출력값이 되지만, K, V는 encoder의 출력값이 됩니다.
 
-### Self Attention for Decoder
+### c. Self Attention for Decoder
 
-## 4. Feed Forward Layer
+### d. Feed Forward Layer
 
 $$
 FFN(x) = \max{(0, xW_1 + b_1)}W_2 + b_2
@@ -76,3 +76,6 @@ $$
 $$
 d_{ff} = 2048
 $$
+
+## 2. Evaluation
+
