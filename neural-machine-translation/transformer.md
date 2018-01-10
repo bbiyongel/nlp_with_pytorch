@@ -15,9 +15,9 @@ Encoder와 decoder를 설명하기에 앞서, sub-module부터 소개하겠습�
 2. Attention
    * Encoder의 output에 대해서 기존의 seq2seq와 같이 attention을 수행합니다.
 3. Feed Forward Layer
-   * 여러 attention layer을 거쳐 얻은 결과물을 최종적으로 정리합니다.
+   * attention layer을 거쳐 얻은 결과물을 최종적으로 정리합니다.
 
-Encoder는 다수의 self-attention layer와 마지막 feed forward layer로 이루어져 있습니다. Decoder는 다수의 self-attention과 attention이 번갈아 나타나고, 마지막에 feed forward layer가 있습니다. 이처럼 Transformer는 구성되며 각 모듈에 대한 자세한 설명은 아래와 같습니다.
+Encoder는 다수의 self-attention layer와 feed forward layer로 이루어져 있습니다. Decoder는 다수의 self-attention과 attention이 번갈아 나타나고, feed forward layer가 있습니다. 이처럼 Transformer는 구성되며 각 모듈에 대한 자세한 설명은 아래와 같습니다.
 
 ### a. Position Embedding
 
