@@ -2,6 +2,8 @@
 
 ## 1. Motivation
 
+한문장으로 Attention을 정의하면 ***Query와 비슷한 값을 가진 Key를 찾아서 그 Value를 얻는 과정*** 입니다. 기존의 Key-Value 방식과 비교하며 attention에 대해서 설명 하겠습니다.
+
 ### a. Key-Value function
 
 Attention을 본격 소개하기 전에 먼저 우리가 알고 있는 자료형을 짚고 넘어갈까 합니다. Key-Value 또는 [Python에서 Dictionary](https://wikidocs.net/16)라고 부르는 자료형 입니다.
