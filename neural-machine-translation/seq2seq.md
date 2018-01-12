@@ -65,7 +65,7 @@ $$
 이 모듈은 아래와 같이 Decoder에서 vector를 받아 softmax를 계산하는 단순한 작업을 하는 모듈 입니다. $$ |Y|=m $$일때, $$ y_{m} $$은 ***EOS*** 토큰이 됩니다. 주의할 점은 이 마지막 $$ y_{m} $$은 decoder 계산의 종료를 나타내기 때문에, decoder의 입력으로 들어가는 일이 없습니다.
 
 $$
-\hat{y}_{t}=softmax(h_{t}^{tgt})~~and~\hat{y}_{m}=EOS
+\hat{y}_{t}=softmax(linear(h_{t}^{tgt}))~~and~\hat{y}_{m}=EOS
 $$
 
 ## 2. Applications of seq2seq
