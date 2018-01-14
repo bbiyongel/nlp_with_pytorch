@@ -44,6 +44,7 @@
     * [Gradient Clipping](sequential-problem/gradient-clipping.md)
 * [Text Classification](text-classification/cover.md)
   * [Intro](text-classification/intro.md)
+  * [Naive Bayes](text-classification/naive-bayes.md)
   * [Using CNN](text-classification/cnn.md)
   * [Using RNN](text-classification/rnn.md)
   * [Unsupervised Text Classification](text-classification/unsupervised-text-classification.md)
