@@ -4,4 +4,4 @@ Text Classification은 텍스트 문장 또는 문서(문장들)를 입력으로
 
 - Sentiment Analysis (감성분석)
 - Categorization (카테고리 분류)
-- 
+- User Intent Classificaion (사용자 의도 파악)
