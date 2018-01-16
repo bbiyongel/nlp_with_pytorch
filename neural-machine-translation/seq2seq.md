@@ -77,7 +77,7 @@ $$
 \hat{y}_t=argmax{P(y_t|y_{<t},X)}~where~X=\{x_1,x_2,\cdots,x_n\}
 $$
 
-위와 같이 이전 time-step의 
+위와 같이 조건부에 $$ \hat{y}_{<t} $$가 들어가는 것이 아닌, $$ y_{<t} $$가 들어가는 것이기 때문에, 훈련시에 이전 time-step의 출력을 넣어줄 수 없습니다. 만약 넣어주게 된다면 해당 time-step의 decoder에겐 잘못된 것을 가르쳐 주는 꼴이 될 것입니다.
 
 따라서 training 할 때에는 모든 time-step을 한번에 계산할 수 있습니다. 그러므로 decoder도 각 time-step별이 아닌 한번에 수식을 정리할 수 있습니다.
 
