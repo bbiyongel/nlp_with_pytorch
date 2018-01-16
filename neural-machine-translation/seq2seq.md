@@ -71,6 +71,14 @@ $$
 
 Decoder를 구현할 때에 중요한 점은, **training 시에는 decoder의 입력으로 이전 time-step의 decoder의 출력값이 아닌, 실제 $$ Y $$가 들어간다**는 것입니다. 하지만, inference 할 때에는 실제 $$ Y $$를 모르기 때문에, 이전 time-step에서 계산되어 나온 $$ \hat{y_{t-1}} $$를 decoder의 입력으로 사용합니다. 이 방법을 ***Teacher Forcing***이라고 합니다. -- 추후 만악의 근원(?)이 됩니다.
 
+Teacher Forcing이 필요한 이유는 NMT의 수식을 살펴보면 알 수 있습니다. 해당 time-step의 단어를 구할 때 수식은 아래와 같습니다.
+
+$$
+\hat{y}_t=argmax{P(y_t|y_{<t},X)}~where~X=\{x_1,x_2,\cdots,x_n\}
+$$
+
+위와 같이 이전 time-step의 
+
 따라서 training 할 때에는 모든 time-step을 한번에 계산할 수 있습니다. 그러므로 decoder도 각 time-step별이 아닌 한번에 수식을 정리할 수 있습니다.
 
 $$
