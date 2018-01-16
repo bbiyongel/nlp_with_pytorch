@@ -24,10 +24,10 @@ $$
 c = H^{src} \cdot w~~~~~and~c~is~a~context~vector
 $$
 $$
-\tilde{h}_{t}^{tgt}=\tanh(linear([h_{t}^{tgt}; c]))
+\tilde{h}_{t}^{tgt}=\tanh(linear_{2hs \rightarrow hs}([h_{t}^{tgt}; c]))
 $$
 $$
-\hat{y}_{t}=softmax(linear(\tilde{h}_{t}^{tgt}))
+\hat{y}_{t}=softmax(linear_{hs \rightarrow |V_{tgt}|}(\tilde{h}_{t}^{tgt}))
 $$
 
 위의 수식은 attention과 input feeding이 추가된 seq2seq의 처음부터 끝까지 입니다. $$ RNN_{dec} $$는 이제 $$ \tilde{h}_{t-1}^{tgt} $$를 입력으로 받기 때문에, 모든 time-step을 한번에 처리하도록 구현할 수 없다는 점이 구현상의 차이점입니다.
