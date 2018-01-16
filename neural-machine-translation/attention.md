@@ -127,10 +127,13 @@ $$
 c = H^{src} \cdot w~~~~~and~c~is~a~context~vector
 $$
 $$
-\tilde{h}_{t}^{tgt}=\tanh(linear([h_{t}^{tgt}; c]))
+\tilde{h}_{t}^{tgt}=\tanh(linear_{2hs \rightarrow hs}([h_{t}^{tgt}; c]))
 $$
 $$
-\hat{y}_{t}=softmax(linear(\tilde{h}_{t}^{tgt}))
+where~hs~is~hidden~size~of~RNN.
+$$
+$$
+\hat{y}_{t}=softmax(linear_{hs \rightarrow |V_{tgt}|}(\tilde{h}_{t}^{tgt}))
 $$
 
 원하는 정보를 attention을 통해 encoder에서 획득한 후, 해당 정보를 decoder output과 concatenate하여 $$ tanh $$를 취한 후, softmax 계산을 통해 다음 time-step의 입력이 되는 $$ \hat{y}_{t} $$을 구합니다.
