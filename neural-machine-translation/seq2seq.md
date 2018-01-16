@@ -71,7 +71,7 @@ $$
 where~hs~is~hidden~size~of~RNN,~and~|V_{tgt}|~is~size~of~output~vocabulary.
 $$
 
-## 2. Teaching Force
+## 2. Teacher Forcing
 
 ## 2. Applications of seq2seq
 
