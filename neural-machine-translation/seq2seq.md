@@ -54,12 +54,6 @@ $$
 
 위의 수식은 decoder를 나타낸 것입니다. 특기할 점은 decoder 입력의 초기값으로써, $$ y_0 $$에 ***BOS***를 넣어준다는 것 입니다. 
 
-Decoder를 구현할 때에 중요한 점은, training 시에는 decoder의 입력으로 실제 $$ Y $$가 들어간다는 것입니다. 하지만, inference 할 때에는 실제 $$ Y $$를 모르기 때문에, 이전 time-step에서 계산되어 나온 $$ \hat{y_{t-1}} $$를 decoder의 입력으로 사용합니다. 따라서 training 할 때에는 모든 time-step을 한번에 계산할 수 있습니다. 그러므로 decoder도 각 time-step별이 아닌 한번에 수식을 정리할 수 있습니다.
-
-$$
-H^{tgt}=RNN_{dec}(emb_{tgt}([BOS;Y[:-1]]),h_{n}^{src})
-$$
-
 ### c. Generator
 
 이 모듈은 아래와 같이 Decoder에서 vector를 받아 softmax를 계산하는 단순한 작업을 하는 모듈 입니다. $$ |Y|=m $$일때, $$ y_{m} $$은 ***EOS*** 토큰이 됩니다. 주의할 점은 이 마지막 $$ y_{m} $$은 decoder 계산의 종료를 나타내기 때문에, decoder의 입력으로 들어가는 일이 없습니다.
@@ -72,6 +66,12 @@ where~hs~is~hidden~size~of~RNN,~and~|V_{tgt}|~is~size~of~output~vocabulary.
 $$
 
 ## 2. Teacher Forcing
+
+많은 분들이 여기까지 잘 따라왔다면 궁금즘을 하나 가질 수 있습니다. Decoder를 구현할 때에 중요한 점은, training 시에는 decoder의 입력으로 실제 $$ Y $$가 들어간다는 것입니다. 하지만, inference 할 때에는 실제 $$ Y $$를 모르기 때문에, 이전 time-step에서 계산되어 나온 $$ \hat{y_{t-1}} $$를 decoder의 입력으로 사용합니다. 따라서 training 할 때에는 모든 time-step을 한번에 계산할 수 있습니다. 그러므로 decoder도 각 time-step별이 아닌 한번에 수식을 정리할 수 있습니다.
+
+$$
+H^{tgt}=RNN_{dec}(emb_{tgt}([BOS;Y[:-1]]),h_{n}^{src})
+$$
 
 ## 3. Applications of seq2seq
 
