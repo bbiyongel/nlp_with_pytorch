@@ -26,8 +26,12 @@ $$
 $$
 \hat{Y}_{t} = f_\theta(X, y_{<t}^{1}) \cup f_\theta(X, y_{<t}^{2}) \cup \cdots \cup f_\theta(X, y_{<t}^{k})
 $$
+
 $$
 X=\{x_1, x_2, \cdots, x_n\}
+$$
+$$
+\hat{Y}_t^k=\{\hat{y}_1^{k'}, \cdots, \hat{y}_t^k\}
 $$
 
 1. 누적 확률을 사용하여 top-k를 뽑습니다. 이때, 보통 로그 확률을 사용하므로 현재 time-step 까지의 로그확률에 대한 합을 tracking 하고 있어야 합니다.
