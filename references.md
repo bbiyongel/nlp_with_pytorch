@@ -19,8 +19,8 @@
 
 - Speech Recognition
   - [STATE-OF-THE-ART SPEECH RECOGNITION WITH SEQUENCE-TO-SEQUENCE MODELS](https://arxiv.org/pdf/1712.01769.pdf)
-  - [[DeepMind Seminar @ Youtube]](https://www.youtube.com/watch?v=HyUtT_z-cms&t=7s)
-  - [[Stanford Lecture @ Youtube]](https://www.youtube.com/watch?v=3MjIkWxXigM&t=2223s)
+  - [DeepMind Seminar @ Youtube](https://www.youtube.com/watch?v=HyUtT_z-cms&t=7s)
+  - [Stanford Lecture @ Youtube](https://www.youtube.com/watch?v=3MjIkWxXigM&t=2223s)
 
     
 - Chatbot
