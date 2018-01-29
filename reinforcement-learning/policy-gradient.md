@@ -1,10 +1,3 @@
-[https://arxiv.org/pdf/1609.05473.pdf](https://arxiv.org/pdf/1609.05473.pdf)
-[https://arxiv.org/pdf/1702.03334.pdf](https://arxiv.org/pdf/1702.03334.pdf)
-[https://arxiv.org/pdf/1607.07086.pdf](https://arxiv.org/pdf/1607.07086.pdf)
-[https://arxiv.org/pdf/1505.00521.pdf](https://arxiv.org/pdf/1505.00521.pdf)
-[https://arxiv.org/pdf/1707.07402.pdf](https://arxiv.org/pdf/1707.07402.pdf)
-[https://www.jair.org/media/5507/live-5507-10333-jair.pdf](https://www.jair.org/media/5507/live-5507-10333-jair.pdf)
-
 # Monte Carlo
 
 ***Monte Carlo***는 난수를 이용하여 임의의 함수를 근사하는 방법입니다. 예를 들어 임의의 함수 $$f$$가 있을 때, 사실은 해당 함수가 Gaussian distribution을 따르고 있고, 충분히 많은 수의 random number $$x$$를 생성하여, $$f(x)$$를 구한다면, $$f(x)$$의 분포는 역시 gaussian distribution을 따르고 있을 것 입니다. 이와 같이 임의의 함수에 대해서 Monte Carlo 방식을 통해 해당 함수를 근사할 수 있습니다.

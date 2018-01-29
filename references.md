@@ -1,3 +1,10 @@
+- RL (Policy Gradient)
+  - [https://arxiv.org/pdf/1609.05473.pdf](https://arxiv.org/pdf/1609.05473.pdf)
+  - [https://arxiv.org/pdf/1702.03334.pdf](https://arxiv.org/pdf/1702.03334.pdf)
+  - [https://arxiv.org/pdf/1607.07086.pdf](https://arxiv.org/pdf/1607.07086.pdf)
+  - [https://arxiv.org/pdf/1505.00521.pdf](https://arxiv.org/pdf/1505.00521.pdf)
+  - [https://arxiv.org/pdf/1707.07402.pdf](https://arxiv.org/pdf/1707.07402.pdf)
+  - [https://www.jair.org/media/5507/live-5507-10333-jair.pdf](https://www.jair.org/media/5507/live-5507-10333-jair.pdf)
 
 - Speech Recognition
   - [[Chiu at el.2017]](https://arxiv.org/pdf/1712.01769.pdf)
