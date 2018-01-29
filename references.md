@@ -22,4 +22,4 @@
 
     
 - Chatbot
-  - [A Deep Reinforcement Learning Chatbot](https://arxiv.org/pdf/1801.06700v1.pdf)
+  - [A Deep Reinforcement Learning Chatbot (Short Version)](https://arxiv.org/pdf/1801.06700v1.pdf)
