@@ -16,6 +16,9 @@
   - [REINFORCEMENT LEARNING NEURAL TURING MACHINES](https://arxiv.org/pdf/1505.00521.pdf)
   - [Reinforcement Learning for Bandit Neural Machine Translation with Simulated Human Feedback](https://arxiv.org/pdf/1707.07402.pdf)
   - [On Monte Carlo Tree Search and Reinforcement Learning](https://www.jair.org/media/5507/live-5507-10333-jair.pdf)
+  - [DEEP REINFORCEMENT LEARNING: AN OVERVIEW](https://arxiv.org/pdf/1701.07274.pdf)
+  - [Asynchronous Methods for Deep Reinforcement Learning](https://arxiv.org/pdf/1602.01783.pdf)
+  - [Evolution Strategies as a Scalable Alternative to Reinforcement Learning](https://arxiv.org/pdf/1703.03864.pdf)
 
 
 - Speech Recognition
