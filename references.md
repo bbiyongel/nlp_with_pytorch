@@ -5,6 +5,7 @@
 - MT
   - [NON-AUTOREGRESSIVE NEURAL MACHINE TRANSLATION](https://arxiv.org/pdf/1711.02281.pdf)
   - [WORD TRANSLATION WITHOUT PARALLEL DATA](https://arxiv.org/pdf/1710.04087v2.pdf)
+  - [DiSAN: Directional Self-Attention Network for RNN/CNN-Free Language Understanding](https://arxiv.org/pdf/1709.04696.pdf)
 
 
 - RL (Policy Gradient)
