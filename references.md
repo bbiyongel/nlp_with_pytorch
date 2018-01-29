@@ -1,3 +1,6 @@
+- MT
+  - [NON-AUTOREGRESSIVE NEURAL MACHINE TRANSLATION](https://arxiv.org/pdf/1711.02281.pdf)
+
 - RL (Policy Gradient)
   - [SeqGAN: Sequence Generative Adversarial Nets with Policy Gradient](https://arxiv.org/pdf/1609.05473.pdf)
   - [BATCH POLICY GRADIENT METHODS FOR IMPROVING NEURAL CONVERSATION MODELS](https://arxiv.org/pdf/1702.03334.pdf)
