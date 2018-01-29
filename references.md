@@ -4,6 +4,7 @@
 
 - MT
   - [NON-AUTOREGRESSIVE NEURAL MACHINE TRANSLATION](https://arxiv.org/pdf/1711.02281.pdf)
+  - [WORD TRANSLATION WITHOUT PARALLEL DATA](https://arxiv.org/pdf/1710.04087v2.pdf)
 
 
 - RL (Policy Gradient)
