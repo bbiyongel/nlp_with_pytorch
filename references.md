@@ -19,6 +19,8 @@
   - [DEEP REINFORCEMENT LEARNING: AN OVERVIEW](https://arxiv.org/pdf/1701.07274.pdf)
   - [Asynchronous Methods for Deep Reinforcement Learning](https://arxiv.org/pdf/1602.01783.pdf)
   - [Evolution Strategies as a Scalable Alternative to Reinforcement Learning](https://arxiv.org/pdf/1703.03864.pdf)
+  - [A3C Slides](https://www.systems.ethz.ch/sites/default/files/hadp2017-lavrentios_frobeen.pdf)
+  - [Asynchronous Methods for Deep Reinforcement Learning](https://arxiv.org/pdf/1602.01783v1.pdf)
 
 
 - Speech Recognition
