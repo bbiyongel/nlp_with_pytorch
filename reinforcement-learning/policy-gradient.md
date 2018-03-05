@@ -19,13 +19,13 @@ $$
 =\sum_{s \in \mathcal{S}}{d(s)}\sum_{a \in \mathcal{A}}{\pi_\theta(s, a)\mathcal{R}_{s, a}}
 $$
 
-우리는 이 policy에 기반한 $$s_0$$으로부터의 expected average value인 $$J(\theta)$$를 maximize하도록 해야 합니다.
+즉 우리의 objective function은 initial state에서의 expected cumulative reward를 최대(maximize)로 하도록 하는 policy($$\theta$$)를 찾는 것 입니다.
 
 $$
 \theta_{t+1}=\theta_t+\alpha\triangledown_\theta J(\theta)
 $$
 
-따라서, $$\triangledown_\theta J(\theta)$$를 구하여 $$\theta$$를 업데이트 해야 합니다. 여기서 $$ d(s) $$는 markov chain의 stationary distribution으로써 시작점에 상관없이 전체의 trajecotry에서 $$ s $$에 머무르는 시간의 proportion을 의미합니다.
+Gradient Ascent에 따라서, $$\triangledown_\theta J(\theta)$$를 구하여 $$\theta$$를 업데이트 해야 합니다. 여기서 $$ d(s) $$는 markov chain의 stationary distribution으로써 시작점에 상관없이 전체의 trajecotry에서 $$ s $$에 머무르는 시간의 proportion을 의미합니다.
 
 $$
 \triangledown_\theta\pi_\theta(s,a)=\pi_\theta(s,a)\frac{\triangledown_\theta\pi_\theta(s,a)}{\pi_\theta(s,a)}
