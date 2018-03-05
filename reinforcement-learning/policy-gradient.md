@@ -13,7 +13,7 @@ $$
 위의 $$\pi$$는 policy(정책)을 의미합니다. 그리고 위와 같이 확률로 표현 될 수 있습니다.
 
 $$
-J(\theta) = E_{\pi_\theta}[r]
+J(\theta) = E_{\pi_\theta}[r] = v_\theta(s_0)
 $$
 $$
 =\sum_{s \in \mathcal{S}}{d(s)}\sum_{a \in \mathcal{A}}{\pi_\theta(s, a)\mathcal{R}_{s, a}}
