@@ -39,4 +39,4 @@ $$
 
 ## 단점
 
-NNLM은 word embedding vector를 사용하여 sparseness를 해결하여 큰 효과를 보았습니다. 따라서 훈련 데이터셋에서 보지 못한 단어의 조합에 대해서도 대처가 가능합니다. 하지만 그만큼 연산량에 있어서 n-gram에 비해서 매우 많은 대가를 치루어야 합니다. 단순히 table look-up 수준의 연산량을 필요로 하는 n-gram방식에 비해서 NNLM은 다수의 matrix 연산등이 포함된 feed forward 연산을 수행해야 하기 때문입니다. 그럼에도 불구하고 점점 빨라지는 H\W 사이에서 NNLM은 대세로 자리잡아 가고 있습니다.
+NNLM은 word embedding vector를 사용하여 sparseness를 해결하여 큰 효과를 보았습니다. 따라서 훈련 데이터셋에서 보지 못한 단어의 조합에 대해서도 대처가 가능합니다. 하지만 그만큼 연산량에 있어서 n-gram에 비해서 매우 많은 대가를 치루어야 합니다. 단순히 table look-up 수준의 연산량을 필요로 하는 n-gram방식에 비해서 NNLM은 다수의 matrix 연산등이 포함된 feed forward 연산을 수행해야 하기 때문입니다. 그럼에도 불구하고 점점 빨라지는 H\W 사이에서 NNLM의 중요성은 커지고 있습니다.
