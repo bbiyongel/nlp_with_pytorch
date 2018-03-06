@@ -50,7 +50,7 @@ $$
 \triangledown_\theta J(\theta) = E_{\pi_\theta}[\triangledown_\theta \log{\pi_\theta (a|s)}Q^{\pi_\theta}(s,a)]
 $$
 
-이 수식에서 expectation을 Monte Carlo sampling으로 대체하면 아래와 같이 parameter update를 수행 할 수 있습니다.
+여기서 바로 Policy Gradients의 진가가 드러납니다. 우리는 policy network에 대해서 gradient를 구하지만, Q-function에 대해서는 gradient를 구할 필요가 없습니다. 즉, 미분이 불가능한 함수라도 reward function으로 사용할 수 있는 것입니다. 이렇게 어떠한 함수도 reward로 사용할 수 있게 됨에 따라, 기존의 cross entropy와 같은 loss function 대신에 좀 더 task에 부합한 함수(번역의 경우에는 BLEU)를 사용하여 network를 훈련시킬 수 있게 되었습니다. 위의 수식에서 expectation을 Monte Carlo sampling으로 대체하면 아래와 같이 parameter update를 수행 할 수 있습니다.
 
 $$
 \theta \leftarrow \theta + \alpha Q^{\pi_\theta}(s_t,a_t)\triangledown_\theta\log{\pi_\theta(a_t|s_t)}
