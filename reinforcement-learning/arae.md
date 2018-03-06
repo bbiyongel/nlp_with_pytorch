@@ -1,1 +1,1 @@
-# Adversarial Natural Language Generation
+# Sequence Generative Adversarial Networks (SegGAN)
