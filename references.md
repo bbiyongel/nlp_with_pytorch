@@ -1,3 +1,14 @@
+참고사이트:
+- http://cs224d.stanford.edu/syllabus.html
+- http://web.stanford.edu/class/cs224n/syllabus.html
+- http://web.stanford.edu/class/cs124/
+- http://cs231n.stanford.edu/syllabus.html
+- https://web.stanford.edu/~jurafsky/slp3/
+- https://github.com/nyu-dl/NLP_DL_Lecture_Note/blob/master/lecture_note.pdf
+- https://sites.google.com/view/seq2seq-icml17
+- https://khan.github.io/KaTeX/function-support.html
+- https://github.com/OpenNMT/OpenNMT-py/
+
 - Text Classificaion
   - [Deep Learning for Sentiment Analysis: A Survey](https://arxiv.org/pdf/1801.07883v1.pdf)
 
