@@ -33,6 +33,4 @@
 * github: [https://github.com/kh-kim/](https://github.com/kh-kim/)
 * email: pointzz.ki@gmail.com
 
-<center>
 ![](/assets/ccl.png)
-</center>
