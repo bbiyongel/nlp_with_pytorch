@@ -33,4 +33,4 @@
 * github: [https://github.com/kh-kim/](https://github.com/kh-kim/)
 * email: pointzz.ki@gmail.com
 
-![](/assets/ccl.png)
+![저작자표시-비영리-동일조건변경허락(BY-NC-SA)](/assets/ccl.png)
