@@ -5,7 +5,6 @@
 * [To read](references.md)
 * [Natural Language Processing with Deeplearning](nlp-with-deeplearning/cover.md)
   * [Intro](nlp-with-deeplearning/intro.md)
-  * [Why NLP important](nlp-with-deeplearning/why-nlp-important.md)
   * [Why NLP difficult](nlp-with-deeplearning/why-nlp-difficult.md)
   * [Deeplearning](nlp-with-deeplearning/deeplearning.md)
   * [History](nlp-with-deeplearning/history.md)
