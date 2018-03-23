@@ -8,6 +8,7 @@
 - https://sites.google.com/view/seq2seq-icml17
 - https://khan.github.io/KaTeX/function-support.html
 - https://github.com/OpenNMT/OpenNMT-py/
+- https://machinelearningmastery.com/applications-of-deep-learning-for-natural-language-processing/
 
 - Text Classificaion
   - [Deep Learning for Sentiment Analysis: A Survey](https://arxiv.org/pdf/1801.07883v1.pdf)
