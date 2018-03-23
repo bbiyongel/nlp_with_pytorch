@@ -5,6 +5,7 @@
 - Siri, Alexa와 같이 사용자의 의도를 파악하고 대답하거나 도움을 주는 task
 - 번역과 같은 task
 - 감성분석과 같이 사람의 언어를 이해하고 수치화 하는 task
+- 사용자로부터 입력을 받아 사용자가 원하는 것을 검색해주는 task
 
 ## Natural Language Understanding
 
