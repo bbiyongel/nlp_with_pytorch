@@ -6,7 +6,3 @@
 - 번역과 같은 task
 - 감성분석과 같이 사람의 언어를 이해하고 수치화 하는 task
 - 사용자로부터 입력을 받아 사용자가 원하는 것을 검색해주는 task
-
-## Natural Language Understanding
-
-## Natural Language Generation
