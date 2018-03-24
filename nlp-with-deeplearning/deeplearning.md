@@ -90,6 +90,7 @@ Deep learning이 NLP에서도 주류가 되면서, 위와 같은 접근 방법�
 ![](/assets/intro-nlp-symbolic-vs-neural.png)
 [[Gao et al.2017](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/07/dl-summer-school-2017.-Jianfeng-Gao.v2.pdf)]
 
+!--
 ### Word2Vec
 
 ![](/assets/intro-word-embedding.png)
@@ -102,6 +103,7 @@ Deep learning이 NLP에서도 주류가 되면서, 위와 같은 접근 방법�
 ### Attention
 
 ### Reinforcement Learning
+--!
 
 ## Conclusion
 
