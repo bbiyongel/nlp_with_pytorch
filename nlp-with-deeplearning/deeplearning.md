@@ -34,6 +34,14 @@ Traditional Speech Recognition System
 
 ### Machine Translation
 
+물밀듯이 밀려오는 딥러닝의 침략 앞에서 기계번역 또한 예외일 순 없었습니다. 
+
+![](http://www.kecl.ntt.co.jp/rps/_src/sc1134/innovative_3_1e.jpg)
+
+https://devblogs.nvidia.com/introduction-neural-machine-translation-with-gpus/
+https://devblogs.nvidia.com/introduction-neural-machine-translation-gpus-part-2/
+https://devblogs.nvidia.com/introduction-neural-machine-translation-gpus-part-3/
+
 ### Generative Learning
 
 ## Paradigm Shift on NLP from Traditional to Deep Learning
