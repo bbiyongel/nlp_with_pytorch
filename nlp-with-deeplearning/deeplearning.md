@@ -85,5 +85,7 @@ $$
 
 ## Conclusion
 
+NLP의 실용성
+
 ![](/assets/intro-end-2-end-nlp-deep-learning.png)
 
