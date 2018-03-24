@@ -1,6 +1,6 @@
 # Summary
 
-* [소개글](README.md)
+[소개글](README.md)
 * [To Do & Milestone](to-do-and-milestone.md)
 * [To read](references.md)
 * [Natural Language Processing with Deeplearning](nlp-with-deeplearning/cover.md)
