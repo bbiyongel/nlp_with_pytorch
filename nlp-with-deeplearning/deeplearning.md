@@ -4,6 +4,12 @@
 
 ## Deep Learning
 
+### Before 2010
+
+### AlexNet
+
+### Dropout
+
 ## Word2Vec
 
 ## Gradient
