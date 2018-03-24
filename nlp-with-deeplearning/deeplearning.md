@@ -85,15 +85,17 @@ Deep learning 이전의 기존의 전형적인 NLP application의 구조는 보�
 ![](/assets/intro-paradigm-shift.png)
 [[Gao et al.2017](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/07/dl-summer-school-2017.-Jianfeng-Gao.v2.pdf)]
 
+Deep learning이 NLP에서도 주류가 되면서, 위와 같은 접근 방법의 변화들을 꼽을 수 있습니다. 
+
+![](/assets/intro-nlp-symbolic-vs-neural.png)
+[[Gao et al.2017](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/07/dl-summer-school-2017.-Jianfeng-Gao.v2.pdf)]
+
 ### Word2Vec
 
 ![](/assets/intro-word-embedding.png)
 
 ![](/assets/intro-word2vec.png)
 [[Mikolov et al.2013](https://arxiv.org/pdf/1301.3781.pdf)]
-
-![](/assets/intro-nlp-symbolic-vs-neural.png)
-[[Gao et al.2017](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/07/dl-summer-school-2017.-Jianfeng-Gao.v2.pdf)]
 
 ### LSTM and GRU
 
