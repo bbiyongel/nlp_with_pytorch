@@ -6,7 +6,9 @@
 - Morphology – the study of the meaning of components of words
 - Syntax – the study of the structural relationships between words
 - Semantics – the study of meaning
-- Discourse – they study of linguistic units larger than a single utterance 
+- Discourse – they study of linguistic units larger than a single utterance
+
+[[Gao et al.2017](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/07/dl-summer-school-2017.-Jianfeng-Gao.v2.pdf)]
 
 따라서, 이러한 NLP의 최종적인 목표는 사람의 언어를 이해하여 컴퓨터로 하여금 여러가지 tasks를 수행할 수 있도록 하는 것입니다. 그러므로 이미 실제로 NLP는 우리의 일상에 가장 깊숙히 들어와 있는 분야이기도 합니다. NLP에 의해서 수행되는 대표적인 task 또는 응용분야들은 다음과 같습니다.
 
