@@ -10,12 +10,12 @@
 
 ### Speech Recognition
 
-# Paradigm Shift on NLP via Deep Learning
+## Paradigm Shift on NLP via Deep Learning
 
-## Word2Vec
+### Word2Vec
 
-## LSTM and GRU
+### LSTM and GRU
 
-## Attention
+### Attention
 
-## Reinforcement Learning
+### Reinforcement Learning
