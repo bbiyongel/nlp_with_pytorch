@@ -12,7 +12,7 @@
 
 ## Paradigm Shift on NLP via Deep Learning
 
-![](/assets/intro-paradigm-shift.png)
+![](/assets/intro-paradigm-shift.png)![](/assets/intro-traditional-nlp.png)
 
 ### Word2Vec
 
@@ -21,8 +21,6 @@
 ### Attention
 
 ### Reinforcement Learning
-
-
 
 ![](/assets/intro-end-2-end-nlp-deep-learning.png)
 
