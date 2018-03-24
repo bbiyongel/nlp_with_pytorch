@@ -75,7 +75,7 @@ $$
 
 ## Paradigm Shift on NLP from Traditional to Deep Learning
 
-기존의 전형적인 NLP application의 구조는 보통 아래와 같았습니다. 
+Deep learning 이전의 기존의 전형적인 NLP application의 구조는 보통 아래와 같습니다.
 
 ![](/assets/intro-traditional-nlp.png)
 
