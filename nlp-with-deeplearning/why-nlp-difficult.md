@@ -2,4 +2,6 @@
 
 ## Ambiguity
 
+## Paraphrase
+
 ## Discrete, Not Continuous
