@@ -12,6 +12,8 @@
 
 ## Paradigm Shift on NLP via Deep Learning
 
+![](/assets/intro-paradigm-shift.png)
+
 ### Word2Vec
 
 ### LSTM and GRU
@@ -19,3 +21,6 @@
 ### Attention
 
 ### Reinforcement Learning
+
+
+
