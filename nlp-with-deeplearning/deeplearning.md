@@ -12,6 +12,10 @@
 
 ### Computer Vision
 
+2012년 이미지넷에서 인공신경망을 이용한 AlexNet\(\[[Krizhevsky at el.2012](https://www.cs.toronto.edu/~kriz/imagenet_classification_with_deep_convolutional.pdf)\]\)은 경쟁자들을 큰 차이로 따돌리며 우승을 하고, 딥러닝의 시대의 서막을 올립니다. AlexNet은
+
+![](/assets/intro-imagenet.png)
+
 ### Speech Recognition
 
 ## Paradigm Shift on NLP from Traditional to Deep Learning
