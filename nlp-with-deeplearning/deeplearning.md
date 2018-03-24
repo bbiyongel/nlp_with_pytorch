@@ -67,6 +67,8 @@ $$
 
 ![Modeling face based on age](http://www.i-programmer.info/images/stories/News/2017/feb/A/age.jpg)
 
+이러한 과정에서 Adversarial learning (GAN)이나 Variational Auto-encoder (VAE)등이 주목받게 되었습니다.
+
 ## Paradigm Shift on NLP from Traditional to Deep Learning
 
 ![](/assets/intro-paradigm-shift.png)![](/assets/intro-traditional-nlp.png)
