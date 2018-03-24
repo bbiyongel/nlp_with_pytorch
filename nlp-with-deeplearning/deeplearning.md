@@ -16,8 +16,6 @@
 
 ### Word2Vec
 
-
-
 ![](/assets/intro-nlp-symbolic-vs-neural.png)
 
 ### LSTM and GRU
