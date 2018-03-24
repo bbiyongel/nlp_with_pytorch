@@ -16,7 +16,7 @@
 
 ### Word2Vec
 
-![](/assets/intro-word2vec.png)![](/assets/intro-nlp-symbolic-vs-neural.png)
+![](/assets/intro-word-embedding.png)![](/assets/intro-word2vec.png)![](/assets/intro-nlp-symbolic-vs-neural.png)
 
 ### LSTM and GRU
 
