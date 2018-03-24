@@ -42,7 +42,7 @@ Traditional Speech Recognition System
 
 ![History of Machine Translation](http://iconictranslation.com/wp-content/uploads/2017/06/NMT-Graph-2-a.png)
 
-Seq2seq를 기반으로 attention mechanism([[Bahdanau et al.2014](https://arxiv.org/pdf/1409.0473.pdf)], [[Luong et al.2015](https://arxiv.org/pdf/1508.04025.pdf)])이 제안되며 결국 
+Seq2seq를 기반으로 attention mechanism([[Bahdanau et al.2014](https://arxiv.org/pdf/1409.0473.pdf)], [[Luong et al.2015](https://arxiv.org/pdf/1508.04025.pdf)])이 제안되며 결국 기계번역은 Neural Machine Translation에 의해서 대통합이 이루어지게 됩니다.
 
 https://devblogs.nvidia.com/introduction-neural-machine-translation-with-gpus/
 https://devblogs.nvidia.com/introduction-neural-machine-translation-gpus-part-2/
