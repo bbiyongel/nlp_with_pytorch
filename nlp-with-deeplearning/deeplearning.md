@@ -56,7 +56,7 @@ Neural Network은 pattern classification에 있어서 타 알고리즘에 비해
 > 각 방식이 흥미를 두고 있는 것:
 - Discriminative learning
 $$
-\hat{Y} = argmax_{Y}P(Y|X)
+\hat{Y} = argmax_{Y}P(Y|X).
 $$
 - Generative learning
 $$
