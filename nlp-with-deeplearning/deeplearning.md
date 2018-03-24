@@ -75,7 +75,7 @@ $$
 
 ## Paradigm Shift on NLP from Traditional to Deep Learning
 
-Deep learning 이전의 기존의 전형적인 NLP application의 구조는 보통 아래와 같습니다.
+Deep learning 이전의 기존의 전형적인 NLP application의 구조는 보통 아래와 같습니다. Task에 따라서 phonology가 추가되기도 하고, 아래와 같이 여러가지 단계의 module로 구성되어 복잡한 디자인을 구성하게 됩니다. 
 
 ![](/assets/intro-traditional-nlp.png)
 [[Gao et al.2017](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/07/dl-summer-school-2017.-Jianfeng-Gao.v2.pdf)]
