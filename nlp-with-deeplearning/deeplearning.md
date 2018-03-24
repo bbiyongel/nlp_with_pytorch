@@ -77,11 +77,17 @@ $$
 
 위에서 언급한 기계번역의 사례 처럼 NLP 전반에 걸쳐 deep learning의 물결이 들어오기 시작했습니다. 
 
-![](/assets/intro-paradigm-shift.png)![](/assets/intro-traditional-nlp.png)
+![](/assets/intro-paradigm-shift.png)!
+
+[](/assets/intro-traditional-nlp.png)
 
 ### Word2Vec
 
-![](/assets/intro-word-embedding.png)![](/assets/intro-word2vec.png)![](/assets/intro-nlp-symbolic-vs-neural.png)
+![](/assets/intro-word-embedding.png)
+
+![](/assets/intro-word2vec.png)
+
+![](/assets/intro-nlp-symbolic-vs-neural.png)
 
 ### LSTM and GRU
 
