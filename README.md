@@ -16,7 +16,7 @@
 
 ### Notice
 
-현재 _**뒤쪽 **_[_**LM**_](language-modeling/cover.md)_**, **_[_**NMT**_](neural-machine-translation/cover.md)_**, **_[_**RL**_](reinforcement-learning/cover.md)_** 부터**_ 작성 중이며, 개선이 필요하거나 사실과 다른 내용이 있으면 얼마든지 참여 부탁 드립니다.
+현재 **뒤쪽 [LM](language-modeling/cover.md), [NMT](neural-machine-translation/cover.md), [RL](reinforcement-learning/cover.md) 부터** 작성 중이며, 개선이 필요하거나 사실과 다른 내용이 있으면 얼마든지 참여 부탁 드립니다.
 
 ### Author: Ki Hyun Kim
 
