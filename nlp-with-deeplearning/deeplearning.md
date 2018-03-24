@@ -63,6 +63,8 @@ $$
 P(X), itself.
 $$
 
+따라서, 곧 연구자들은 또 다른 흥미거리를 찾아 나섰는데, 그것은 Generative Learning이었습니다. 기존의 classification 문제는 $$ X $$가 주어졌을 때, 알맞은 $$ Y $$를 찾아내는 것에 집중했다면, 이제는 $$ X $$ 자체에 집중하기 시작한 것 입니다. 
+
 ## Paradigm Shift on NLP from Traditional to Deep Learning
 
 ![](/assets/intro-paradigm-shift.png)![](/assets/intro-traditional-nlp.png)
