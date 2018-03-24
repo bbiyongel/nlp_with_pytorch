@@ -60,7 +60,7 @@ $$
 $$
 - Generative learning
 $$
-P(X)
+P(X), itself.
 $$
 
 ## Paradigm Shift on NLP from Traditional to Deep Learning
