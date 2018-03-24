@@ -10,13 +10,13 @@
 
 ### Speech Recognition
 
-## Paradigm Shift on NLP via Deep Learning
+## Paradigm Shift on NLP from Traditional to Deep Learning
 
 ![](/assets/intro-paradigm-shift.png)![](/assets/intro-traditional-nlp.png)
 
 ### Word2Vec
 
-![](/assets/intro-nlp-symbolic-vs-neural.png)
+![](/assets/intro-word2vec.png)![](/assets/intro-nlp-symbolic-vs-neural.png)
 
 ### LSTM and GRU
 
