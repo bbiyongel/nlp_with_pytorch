@@ -78,6 +78,9 @@ $$
 Deep learning 이전의 기존의 전형적인 NLP application의 구조는 보통 아래와 같습니다.
 
 ![](/assets/intro-traditional-nlp.png)
+[[Gao et al.2017](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/07/dl-summer-school-2017.-Jianfeng-Gao.v2.pdf)]
+
+
 
 하지만, 위에서 언급한 기계번역의 사례 처럼 NLP 전반에 걸쳐 deep learning의 물결이 들어오기 시작했습니다. 
 
