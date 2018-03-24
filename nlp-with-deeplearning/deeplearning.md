@@ -6,6 +6,4 @@
 
 ## Word2Vec
 
-좀 더 자세히 살펴보면 word2vec의 등장으로 
-
 ## Gradient
