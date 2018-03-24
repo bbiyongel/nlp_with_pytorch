@@ -34,6 +34,8 @@ Traditional Speech Recognition System
 
 ### Machine Translation
 
+### Generative Learning
+
 ## Paradigm Shift on NLP from Traditional to Deep Learning
 
 ![](/assets/intro-paradigm-shift.png)![](/assets/intro-traditional-nlp.png)
