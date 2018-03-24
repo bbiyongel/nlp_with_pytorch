@@ -12,4 +12,8 @@
 
 ## Word2Vec
 
-## Gradient
+## LSTM and GRU
+
+## Attention
+
+## Reinforcement Learning
