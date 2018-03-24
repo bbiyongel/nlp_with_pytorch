@@ -24,5 +24,7 @@
 
 ### Reinforcement Learning
 
+## Conclusion
+
 ![](/assets/intro-end-2-end-nlp-deep-learning.png)
 
