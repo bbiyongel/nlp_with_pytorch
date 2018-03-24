@@ -30,7 +30,7 @@ Traditional Speech Recognition System
 
 ![Accuracy of ASR](https://media.licdn.com/mpr/mpr/AAEAAQAAAAAAAAlTAAAAJDc0OTI3MzkyLTI2MTktNGE2Ni04MmI1LTJkODZhYjdlZWM1MQ.png)
 
-그러던 중, 2012년 GMM을 DNN으로 대체하며, 십수년간의 정체를 단숨에 뛰어넘는 큰 혁명을 맞이하게 됩니다. (Vision, NLP에서 모두 보이는 익숙한 패턴입니다.) 
+그러던 중, 2012년 GMM을 DNN으로 대체하며, 십수년간의 정체를 단숨에 뛰어넘는 큰 혁명을 맞이하게 됩니다. (Vision, NLP에서 모두 보이는 익숙한 패턴입니다.) 그리고 점차 AM전체를 LSTM으로 대체하고, 또한 end-to-end model이 점점 저변을 넓혀가고 있는 추세입니다.
 
 ## Paradigm Shift on NLP from Traditional to Deep Learning
 
