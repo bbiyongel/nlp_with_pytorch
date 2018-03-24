@@ -6,7 +6,7 @@
 * [Natural Language Processing with Deeplearning](nlp-with-deeplearning/cover.md)
   * [Intro](nlp-with-deeplearning/intro.md)
   * [Deeplearning](nlp-with-deeplearning/deeplearning.md)
-  * [Why NLP difficult](nlp-with-deeplearning/why-nlp-difficult.md)
+  * [Why NLP is difficult](nlp-with-deeplearning/why-nlp-difficult.md)
   * [Recent Trends](nlp-with-deeplearning/trends.md)
 * [Hello PyTorch](pytorch-c18c-ac1c/cover.md)
   * [Intro](pytorch-c18c-ac1c/intro.md)
