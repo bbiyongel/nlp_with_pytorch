@@ -92,6 +92,7 @@ Deep learning 이전의 기존의 전형적인 NLP application의 구조는 보�
 ![](/assets/intro-word2vec.png)
 
 ![](/assets/intro-nlp-symbolic-vs-neural.png)
+[[Gao et al.2017](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/07/dl-summer-school-2017.-Jianfeng-Gao.v2.pdf)]
 
 ### LSTM and GRU
 
@@ -102,4 +103,4 @@ Deep learning 이전의 기존의 전형적인 NLP application의 구조는 보�
 ## Conclusion
 
 ![](/assets/intro-end-2-end-nlp-deep-learning.png)
-
+[[Gao et al.2017](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/07/dl-summer-school-2017.-Jianfeng-Gao.v2.pdf)]
