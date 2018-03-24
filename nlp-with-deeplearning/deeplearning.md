@@ -38,6 +38,8 @@ Traditional Speech Recognition System
 
 ![](http://www.kecl.ntt.co.jp/rps/_src/sc1134/innovative_3_1e.jpg)
 
+2014년 Sequence-to-sequence라는 architecture가 소개 되며, end-to-end neural machine translation의 시대가 열리게 되었습니다. 
+
 https://devblogs.nvidia.com/introduction-neural-machine-translation-with-gpus/
 https://devblogs.nvidia.com/introduction-neural-machine-translation-gpus-part-2/
 https://devblogs.nvidia.com/introduction-neural-machine-translation-gpus-part-3/
