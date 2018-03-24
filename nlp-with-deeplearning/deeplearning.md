@@ -51,6 +51,8 @@ https://devblogs.nvidia.com/introduction-neural-machine-translation-gpus-part-3/
 
 ### Generative Learning
 
+Neural Network은 pattern classification에 있어서 타 알고리즘에 비해서 너무나도 압도적인 성능을 보여주었기 때문에, image recognition, text classification과 같은 단순한 분류 문제(classification or discriminative learning)는 금방 정복되고 더 이상 연구자들의 흥미를 끌 수 없었습니다.
+
 ## Paradigm Shift on NLP from Traditional to Deep Learning
 
 ![](/assets/intro-paradigm-shift.png)![](/assets/intro-traditional-nlp.png)
