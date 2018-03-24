@@ -112,4 +112,6 @@ Deep learning이 NLP에서도 주류가 되면서, 위와 같은 접근 방법�
 ![](/assets/intro-end-2-end-nlp-deep-learning.png)
 [[Gao et al.2017](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/07/dl-summer-school-2017.-Jianfeng-Gao.v2.pdf)]
 
+다시 말해, 비록 NLP는 discrete한 symbol로 이루어진 사람의 언어를 다루는 분야이지만, 성공적인 word embedding과 long term sequential data에 대한 효과적인 대응방법이 나옴에 따라서, 점차 다른 인공지능의 분야들처럼 큰 발전이 이루어지게 되었습니다.
+
 이렇게 deep learning이 널리 퍼짐에 따라, NLP를 포함한 인공지능의 여러 분야에서 모두 큰 발전과 성공을 보이고 있습니다. 따라서, 이 책은 기존의 전통적인 방식과 새롭게 제안된 최신의 deep learning 기술을 모두 소개하고자 합니다.
