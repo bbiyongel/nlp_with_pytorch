@@ -7,7 +7,7 @@
   * [Intro](nlp-with-deeplearning/intro.md)
   * [Why NLP difficult](nlp-with-deeplearning/why-nlp-difficult.md)
   * [Deeplearning](nlp-with-deeplearning/deeplearning.md)
-  * [History](nlp-with-deeplearning/history.md)
+  * [Recent Trends](nlp-with-deeplearning/history.md)
 * [Hello PyTorch](pytorch-c18c-ac1c/cover.md)
   * [Intro](pytorch-c18c-ac1c/intro.md)
   * [How to install](pytorch-c18c-ac1c/how-to-install.md)
