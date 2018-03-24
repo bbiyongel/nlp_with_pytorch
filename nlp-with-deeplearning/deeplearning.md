@@ -40,7 +40,7 @@ Traditional Speech Recognition System
 
 2014년 Sequence-to-sequence(seq2seq)라는 architecture가 소개 되며, end-to-end neural machine translation의 시대가 열리게 되었습니다. 
 
-![](http://iconictranslation.com/wp-content/uploads/2017/06/NMT-Graph-2-a.png)
+![History of Machine Translation](http://iconictranslation.com/wp-content/uploads/2017/06/NMT-Graph-2-a.png)
 
 Seq2seq를 기반으로 attention mechanism([[Bahdanau et al.2014](https://arxiv.org/pdf/1409.0473.pdf)], [[Luong et al.2015](https://arxiv.org/pdf/1508.04025.pdf)])이 제안되며 결국 
 
