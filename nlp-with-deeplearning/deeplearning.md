@@ -17,7 +17,7 @@
 ![Recent History of ImageNet](/assets/intro-imagenet.png)
 Recent History of ImageNet
 
-이후, ImageNet은 딥러닝의 경연장이 되었고, 거의 모든 참가자들이 딥러닝을 이용하여 알고리즘을 구현하였습니다. 결국, ResNet([[He at el.2015](https://arxiv.org/pdf/1512.03385.pdf)])은 Residual Connection을 활용하여 150층이 넘는 deep architecture를 구성하며 우승하였습니다.
+이후, ImageNet은 딥러닝의 경연장이 되었고, 거의 모든 참가자들이 딥러닝을 이용하여 알고리즘을 구현하였습니다. 결국, ResNet([[He et al.2015](https://arxiv.org/pdf/1512.03385.pdf)])은 Residual Connection을 활용하여 150층이 넘는 deep architecture를 구성하며 우승하였습니다.
 
 ### Speech Recognition
 
@@ -30,7 +30,7 @@ Traditional Speech Recognition System
 
 ![Accuracy of ASR](https://media.licdn.com/mpr/mpr/AAEAAQAAAAAAAAlTAAAAJDc0OTI3MzkyLTI2MTktNGE2Ni04MmI1LTJkODZhYjdlZWM1MQ.png)
 
-그러던 중, 2012년 GMM을 DNN으로 대체하며, 십수년간의 정체를 단숨에 뛰어넘는 큰 혁명을 맞이하게 됩니다. (Vision, NLP에서 모두 보이는 익숙한 패턴입니다.) 그리고 점차 AM전체를 LSTM으로 대체하고, 또한 end-to-end model([[Chiu at el.2017](https://arxiv.org/pdf/1712.01769.pdf)])이 점점 저변을 넓혀가고 있는 추세입니다.
+그러던 중, 2012년 GMM을 DNN으로 대체하며, 십수년간의 정체를 단숨에 뛰어넘는 큰 혁명을 맞이하게 됩니다. (Vision, NLP에서 모두 보이는 익숙한 패턴입니다.) 그리고 점차 AM전체를 LSTM으로 대체하고, 또한 end-to-end model([[Chiu et al.2017](https://arxiv.org/pdf/1712.01769.pdf)])이 점점 저변을 넓혀가고 있는 추세입니다.
 
 ### Machine Translation
 
@@ -38,7 +38,12 @@ Traditional Speech Recognition System
 
 ![](http://www.kecl.ntt.co.jp/rps/_src/sc1134/innovative_3_1e.jpg)
 
-2014년 Sequence-to-sequence라는 architecture가 소개 되며, end-to-end neural machine translation의 시대가 열리게 되었습니다. 
+2014년 Sequence-to-sequence(seq2seq)라는 architecture가 소개 되며, end-to-end neural machine translation의 시대가 열리게 되었습니다. 
+
+![http://web.stanford.edu/class/cs224n/lectures/cs224n-2017-lecture10.pdf](/assets/progress_in_machine_translation.png)
+[Image from CS224n](http://web.stanford.edu/class/cs224n/syllabus.html)
+
+Seq2seq를 기반으로 attention mechanism([[Bahdanau et al.2014](https://arxiv.org/pdf/1409.0473.pdf)], [[Luong et al.2015](https://arxiv.org/pdf/1508.04025.pdf)])
 
 https://devblogs.nvidia.com/introduction-neural-machine-translation-with-gpus/
 https://devblogs.nvidia.com/introduction-neural-machine-translation-gpus-part-2/
