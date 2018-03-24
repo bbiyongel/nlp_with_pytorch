@@ -6,9 +6,9 @@
 
 ### Before 2010's
 
-### AlexNet
+### Computer Vision
 
-### Dropout
+### Speech Recognition
 
 ## Word2Vec
 
