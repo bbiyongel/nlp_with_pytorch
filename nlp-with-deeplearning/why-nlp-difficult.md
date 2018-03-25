@@ -6,16 +6,16 @@
 
 ## Ambiguity
 
-아래의 문장을 한번 살펴볼까요.
+아래의 문장을 한번 살펴볼까요. 어떤 회사의 번역이 가장 정확한지 살펴 볼 까요.
 
 > 커피숍에 **차**를 마시러 가던 **차** 안에서 나는 그녀에게 **차**였다.
-- Google: I was in the car while I was going to drink tea at the coffee shop.
-- Microsoft: In a car that was going to drink tea in the coffee shop, I was a car to her.
-- Naver: I got dumped by her in the car I was going to the coffee shop.
-- Kakao: I was in the car going to the coffee shop for tea and I was tea to her.
-- SK: I got dumped by her in the car on the coffee shop.
+- Google: I was in the **car** while I was going to drink **tea** at the coffee shop.
+- Microsoft: In a **car** that was going to drink **tea** in the coffee shop, I was a **car** to her.
+- Naver: I got **dumped** by her in the **car** I was going to the coffee shop.
+- Kakao: I was in the **car** going to the coffee shop for **tea** and I was **tea** to her.
+- SK: I got **dumped** by her in the **car** on the coffee shop.
 
-같은 **차**라는 단어가 세 번 등장하였고, 모두 다른 의미를 지니고 있습니다: tea, car, and kick. 
+안타깝게도 완벽한 번역은 없는 것 같습니다. 같은 **차**라는 단어가 세 번 등장하였고, 모두 다른 의미를 지니고 있습니다: tea, car, and kick. 
 
 ## Paraphrase
 
