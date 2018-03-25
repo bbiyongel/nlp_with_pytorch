@@ -71,6 +71,7 @@
     * [NMT pipeline](neural-machine-translation/pipeline.md)
     * [Google's NMT](neural-machine-translation/gnmt.md)
     * [Edinburgh's NMT](neural-machine-translation/enmt.md)
+    * [Microsoft's NMT](neural-machine-translation/msmt.md)
 * [Reinforcement Learning for NLP](reinforcement-learning/cover.md)
   * [Intro](reinforcement-learning/intro.md)
   * [Policy Gradient](reinforcement-learning/policy-gradient.md)
