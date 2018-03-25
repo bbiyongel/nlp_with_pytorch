@@ -2,10 +2,10 @@
 
 ## Tensor
 
-~~~python
+```
 def test():
-    hello;
-~~~
+    print('hello')
+```
 
 ## Variable and Autograd
 
