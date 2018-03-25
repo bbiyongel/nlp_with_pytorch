@@ -41,7 +41,7 @@ def is_same(key, query):
 
 좀 더 발전시켜서, 만약 _**is\_same**_ 함수 대신에 다른 함수를 써 보면 어떻게 될까요? _**how\_similar**_라는 key와 query 사이의 유사도를 리턴 해 주는 가상의 함수가 있다고 가정해 봅시다. \(가정하는 김에 좀 더 가정해서 cosine similarity라고 가정해 봅시다.\)
 
-```
+```python
 >>> query = 'puppy'
 >>> how_similar('dog', query)
 0.9
