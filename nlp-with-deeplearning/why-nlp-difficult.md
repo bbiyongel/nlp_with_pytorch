@@ -2,7 +2,10 @@
 
 음성인식은 눈에 보이지 않는 signal을 다룹니다. 보이지도 않는 가운데 noise와 signal을 가려내야 하고, 소리의 특성상 noise와 signal은 그냥 더해져서 나타납니다. 게다가 time-step은 무지하게 길어요. 어려울 것 같습니다. 그렇다면 눈에 보이는 computer vision을 생각 해 보죠. 그런데 computer vision은 눈에 보이지만 이미지는 너무 크고, 다양합니다. 심지어 내 눈에는 다 똑같은 색깔인데 사실은 알고보면 다른 색이라고 합니다. 그럼 애초에 discrete한 단어들로 이루어져 있는 자연어처리를 해 볼까요? 그럼 NLP는 쉬울까요? 하지만 세상에 쉬운일은 없죠... Natural language processing도 다른 분야 못지않게 매우 어렵습니다. 어떠한 점들이 NLP를 어렵게 만드는 것일까요?
 
+사람은 언어를 통해 타인과 교류하고, 의견과 지식을 전달 합니다. 소리로 표현된 말을 석판, 나무, 종이에 적기 시작하였고 사람의 지식은 본격적으로 축적되기 시작하였습니다. 이와 같이 언어는 사람의 생각과 지식을 내포하고 있습니다.
+
 ## Ambiguity
+
 
 > 커피숍에 **차**를 마시러 가던 **차** 안에서 나는 그녀에게 **차**였다.
 - Google: I was in the car while I was going to drink tea at the coffee shop.
@@ -12,6 +15,10 @@
 - SK: I got dumped by her in the car on the coffee shop.
 
 ## Paraphrase
+
+![](http://cdnweb01.wikitree.co.kr/webdata/editor/201608/16/img_20160816082838_215c7a7a.png)
+
+영화나 드라마의 어떤 장면을 말로 표현 한다고 해 봅시다. 그럼 아주 다양한 표현이 나올 것 입니다.
 
 ## Discrete, Not Continuous
 
