@@ -2,6 +2,8 @@
 
 ## 장점
 
+PyTorch는 현재 대중적인 deep learning framework 중에서 가장 나중에 나온 만큼, 대부분 framework들의 장점들을 모아놓았습니다.
+
 1. Dynamic Neural Networks
  - 기존의 static한 딥러닝 framework(TensorFlow, Theano)와 다르게 dynamic한 환경을 제공합니다.
 1. Easy to Use
