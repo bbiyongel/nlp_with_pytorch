@@ -1,5 +1,7 @@
 # Why NLP is difficult?
 
+하지만 natural language processing은 어렵습니다.
+
 ## Ambiguity
 
 > 커피숍에 **차**를 마시러 가던 **차** 안에서 나는 그녀에게 **차**였다.
