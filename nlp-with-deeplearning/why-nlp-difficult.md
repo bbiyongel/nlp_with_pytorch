@@ -47,9 +47,10 @@
 
 ## Discrete, Not Continuous
 
-사실은 discrete하기 때문에 그동안 쉽다고 느껴졌습니다. 하지만 neural network에 적용하기 위해서는 continuous한 값으로 바꾸어주어야 합니다. Word embedding이 그 역할 훌륭하게 수행하고 있긴 합니다. 하지만 애초에 continuous한 값이 아니었기 때문에 여러 제약이 존재합니다.
+사실은 discrete하기 때문에 그동안 쉽다고 느껴졌습니다. 하지만 neural network에 적용하기 위해서는 continuous한 값으로 바꾸어주어야 합니다. Word embedding이 그 역할 훌륭하게 수행하고 있긴 합니다. 하지만 애초에 continuous한 값이 아니었기 때문에 neural network 상에서 여러가지 방법을 구현할 때에 제약이 존재합니다.
 
 ## Curse of Dimensionality
 
-## Noise
+## Noise and Normalization
 
+모든 분야의 데이터에서 noise를 signal로 부터 적절히 분리해 내는 일은 매우 중요합니다. 그러한 과정에서 자칫 실수하면 data는 본래의 의미마저 같이 잃어버릴 수도 있습니다. 이러한 관점에서 NLP는 어려움이 존재 합니다. 특히, 다른 종류의 데이터에 비해서 데이터가 살짝 바뀌었을 때의 의미의 변화가 훨씬 크기 때문 입니다. 예를 들어 이미지에서 한 픽셀의 RGB값이 각각 0에서 255까지로 나타내어지고, 그 값중 하나의 수치가 1이 바뀌었다고 해도 해당 이미지의 의미는 변화가 없다고 할 수 있습니다. 하지만 단어는 discrete한 symbol이기 때문에, 단어가 살짝만 바뀌어도 문장의 의미가 완전히 다르게 변할 수도 있습니다. 또한, 마찬가지로 띄어쓰기나 어순의 차이로 인한 정제의 이슈도 큰 어려움이 될 수 있습니다.
