@@ -53,7 +53,7 @@ def is_same(key, query):
 
 그리고 해당 함수에 **puppy**라는 단어를 테스트 해 보았더니 위와 같은 값들을 리턴해 주었다고 해 보겠습니다. 그럼 아래와 같이 실행 될 겁니다.
 
-```
+```python
 >>> query = 'puppy'
 >>> key_value_func(query)
 3.2 # = 0.9 * 1 + 0.1 * 2 + 0.7 * 3
@@ -69,7 +69,7 @@ def is_same(key, query):
 
 그럼 다시 가상의 함수를 만들어보겠습니다. _**word2vec**_이라는 함수는 단어를 입력으로 받아서 그 단어에 해당하는 미리 정해진 word embedding vector를 리턴 해 준다고 가정하겠습니다. 그럼 좀 전의 _**how\_similar**_ 함수는 두 vector 간의 dot product 값을 반환 할 겁니다.
 
-```
+```python
 def key_value_func(query):
     weights = []
 
@@ -87,7 +87,7 @@ def key_value_func(query):
 
 이번에 key\_value\_func는 그럼 그 값을 받아서 weights에 저장 한 후, 모든 weights의 값이 채워지면 softmax를 취할 겁니다. 여기서 softmax는 weights의 합의 크기를 1로 고정시키는 normalization의 역할을 합니다. 따라서 similarity의 총 합에서 차지하는 비율 만큼 weight의 값이 채워질 겁니다.
 
-```
+```python
 >>> word2vec('dog')
 [0.1, 0.3, -0.7, 0.0, ...
 >>> word2vec('cat')
@@ -114,7 +114,7 @@ def key_value_func(query):
 * Keys: 각 time-step 별 encoder output
 * Values: 각 time-step 별 encoder output
 
-```
+```python
 >>> context_vector = attention(query = decoder_output, keys = encoder_outputs, values = encoder_outputs)
 ```
 
