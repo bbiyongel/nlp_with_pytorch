@@ -2,9 +2,7 @@
 
 ## Tensor
 
-def test():
-    print('hello')
-
+a
 
 ## Variable and Autograd
 
