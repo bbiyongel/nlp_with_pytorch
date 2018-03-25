@@ -15,7 +15,7 @@
 - Kakao: I was in the **car** going to the coffee shop for **tea** and I was **tea** to her.
 - SK: I got **dumped** by her in the **car** on the coffee shop.
 
-안타깝게도 완벽한 번역은 없는 것 같습니다. 같은 **차**라는 단어가 세 번 등장하였고, 모두 다른 의미를 지니고 있습니다: tea, car, and kick. 
+안타깝게도 완벽한 번역은 없는 것 같습니다. 같은 **차**라는 단어가 세 번 등장하였고, 모두 다른 의미를 지니고 있습니다: tea, car, and kick (or dump). 일부는 표현을 빠뜨리기도 하였고, 다른 일부는 단어를 헷갈린 것 같습니다. 
 
 ## Paraphrase
 
