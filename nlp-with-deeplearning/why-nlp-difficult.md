@@ -15,6 +15,8 @@
 - Kakao: I was in the car going to the coffee shop for tea and I was tea to her.
 - SK: I got dumped by her in the car on the coffee shop.
 
+같은 **차**라는 단어가 세 번 등장하였고, 모두 다른 의미를 지니고 있습니다: tea, car, and kick. 
+
 ## Paraphrase
 
 ![](http://cdnweb01.wikitree.co.kr/webdata/editor/201608/16/img_20160816082838_215c7a7a.png)
