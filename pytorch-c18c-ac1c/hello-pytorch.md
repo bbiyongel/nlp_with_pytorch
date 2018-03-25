@@ -3,8 +3,9 @@
 ## Tensor
 
 ```python
-def test():
-    print('hello')
+import torch
+
+x = torch.FloatTensor(3, 3)
 ```
 
 ## Variable and Autograd
