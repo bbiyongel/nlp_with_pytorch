@@ -51,7 +51,7 @@
 
 ## Curse of Dimensionality
 
-Discrete한 데이터이기 때문에 많은 종류의 데이터를 표현하기 위해서는 엄청난 dimension이 필요합니다. 다행히 적절한 word embedding을 통해서 이 문제를 해결함으로써, 이제는 이러한 문제는 크게 다가오진 않습니다.
+Discrete한 데이터이기 때문에 많은 종류의 데이터를 표현하기 위해서는 엄청난 dimension이 필요합니다. 다행히 적절한 word embedding을 통해서 dimension reduction을 하여 이 문제를 해결함으로써, 이제는 이러한 문제는 크게 다가오진 않습니다.
 
 ## Noise and Normalization
 
