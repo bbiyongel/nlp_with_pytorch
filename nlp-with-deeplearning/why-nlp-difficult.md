@@ -1,6 +1,6 @@
 # Why NLP is difficult?
 
-하지만 natural language processing은 어렵습니다.
+하지만 natural language processing은 어렵습니다. 어떠한 점들이 NLP를 어렵게 만드는 것일까요?
 
 ## Ambiguity
 
@@ -14,3 +14,7 @@
 ## Paraphrase
 
 ## Discrete, Not Continuous
+
+### Noise
+
+### Curse of Dimensionality
