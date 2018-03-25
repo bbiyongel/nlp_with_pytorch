@@ -2,6 +2,11 @@
 
 ## Tensor
 
+~~~python
+def test():
+    hello;
+~~~
+
 ## Variable and Autograd
 
 ## Basic Operation (Forward)
