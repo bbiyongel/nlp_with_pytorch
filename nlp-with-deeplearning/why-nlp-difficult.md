@@ -1,6 +1,6 @@
 # Why NLP is difficult?
 
-하지만 natural language processing은 어렵습니다. 어떠한 점들이 NLP를 어렵게 만드는 것일까요?
+음성인식은 눈에 보이지 않는 signal을 다룹니다. 어려울 것 같습니다. 그렇다면 눈에 보이는 computer vision을 생각 해 보죠. 그런데 Computer vision은 눈에 보이지만 이미지는 너무 크고, 다양합니다. 그럼 NLP는 쉬울까요? 하지만 natural language processing도 다른 분야 못지않게 매우 어렵습니다. 어떠한 점들이 NLP를 어렵게 만드는 것일까요?
 
 ## Ambiguity
 
