@@ -46,6 +46,8 @@
 
 ## Discrete, Not Continuous
 
-### Noise
+사실은 discrete하기 때문에 그동안 쉽다고 느껴졌습니다. 하지만 neural network에 적용하기 위해서는 continuous한 값으로 바꾸어주어야 합니다. Word embedding이 그 역할 훌륭하게 수행하고 있긴 합니다. 하지만 애초에 continuous한 값이 아니었기 때문에 여러 제약이 존재합니다.
 
-### Curse of Dimensionality
+## Noise
+
+## Curse of Dimensionality
