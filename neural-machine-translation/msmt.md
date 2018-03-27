@@ -26,7 +26,7 @@ $$
 $$
 
 $$
-\frac{\partial\mathcal{L}(x;\theta_{x \rightarrow y})}{\partial\theta_{x \rightarrow y}}=\sum_{y}{\frac{\partial P(y|x;\theta_{x \rightarrow y})}{\partial\theta_{x \rightarrow y}}\log{}}
+\frac{\partial\mathcal{L}(x;\theta_{x \rightarrow y})}{\partial\theta_{x \rightarrow y}}=\sum_{y}{\frac{\partial P(y|x;\theta_{x \rightarrow y})}{\partial\theta_{x \rightarrow y}}\log{P(x|y;\theta_{y \rightarrow x})}}
 $$
 
 #### Dual Supervised Learning \(DSL\)
