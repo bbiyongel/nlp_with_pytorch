@@ -1,4 +1,8 @@
-# Pipeline for Machine Translation
+# Productization of Machine Translation
+
+
+
+## Pipeline for Machine Translation
 
 이번 섹션에서는 실제 Machine Translation 시스템을 구축하기 위한 절차와 시스템 Pipeline이 어떻게 구성되는지 살펴보도록 하겠습니다. 아울러 그 다음에는 실제 Google 등에서 발표한 논문을 통해서 그들의 상용 번역 시스템의 실제 구성에 대해서 살펴보도록 하겠습니다.
 
@@ -22,3 +26,4 @@
     - Evaluation (성능 평가) 과정도 inference에 속합니다. 이때에는 준비된 테스트셋(훈련 데이터셋에 포함되어 있지 않은)을 사용하여 beam-search를 사용하여 inference를 수행합니다.
 1. Tokenization 복원
     - inference 과정이 끝나더라도 BPE를 통한 tokenization이 더해져 있기 때문에 아직 사람이 실제 사용하는 문장 구성과 형태가 다릅니다. 따라서 BPE에 의한 tokenization을 복원 하면 프로세스가 종료됩니다.
+
