@@ -32,7 +32,7 @@ Google도 seq2seq 기반의 모델을 구성하였습니다. 다만, 구글은 �
 
 ![](/assets/nmt-gnmt-5.png)
 
-Google은 다른 [챕터](reinforcement-learning/cover.md)에서 설명한 Reinforcement Learning 기법을 사용하여 Maximum Likelihood Estimation (MLE)방식의 훈련된 모델에 fine-tuning을 수행하였습니다. 따라서 위의 테이블과 같은 추가적이 성능 개선을 얻어낼 수 있었습니다.
+Google은 강화학습을 다룬 [챕터](reinforcement-learning/cover.md)에서 설명한 Reinforcement Learning 기법을 사용하여 Maximum Likelihood Estimation (MLE)방식의 훈련된 모델에 fine-tuning을 수행하였습니다. 따라서 위의 테이블과 같은 추가적이 성능 개선을 얻어낼 수 있었습니다.
 
 ## 4. Quantization
 
