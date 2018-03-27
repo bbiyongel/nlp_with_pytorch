@@ -22,7 +22,11 @@ Microsoft는 전통적인\(?\) RNN방식의 seq2seq 대신, Google의 Transforme
 #### Dual Unsupervised Learning \(DUL\)
 
 $$
-\mathcal{L}(x;\theta_{x \rightarrow y})=E_{y \sim P(\cdot|x;\theta_{x \rightarrow y})}\{\log{P(x|y;\theta_{y \rightarrow x})}\} = \sum_{y}P(y|x;\theta_{x \rightarrow y})\log{P(x|y;\theta_{y \rightarrow x})}
+\mathcal{L}(x;\theta_{x \rightarrow y})=E_{y \sim P(\cdot|x;\theta_{x \rightarrow y})}\{\log{P(x|y;\theta_{y \rightarrow x})}\} = \sum_{y}{P(y|x;\theta_{x \rightarrow y})\log{P(x|y;\theta_{y \rightarrow x})}}
+$$
+
+$$
+\frac{\partial\mathcal{L}(x;\theta_{x \rightarrow y})}{\partial\theta_{x \rightarrow y}}=\sum_{y}{\frac{\partial P(y|x;\theta_{x \rightarrow y})}{\partial\theta_{x \rightarrow y}}\log{}}
 $$
 
 #### Dual Supervised Learning \(DSL\)
