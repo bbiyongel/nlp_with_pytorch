@@ -10,6 +10,7 @@
 - https://github.com/OpenNMT/OpenNMT-py/
 - https://machinelearningmastery.com/applications-of-deep-learning-for-natural-language-processing/
 http://ruder.io/deep-learning-nlp-best-practices/
+- [Oxford NLP lecture notes](https://github.com/oxford-cs-deepnlp-2017/lectures)
 
 - Text Classificaion
   - [Deep Learning for Sentiment Analysis: A Survey](https://arxiv.org/pdf/1801.07883v1.pdf)
@@ -37,10 +38,12 @@ http://ruder.io/deep-learning-nlp-best-practices/
 
 
 - Speech Recognition
+  - [Deep Learning for Speech Recognition @ Cambridge](http://lxmls.it.pt/2017/talk.pdf)
   - [STATE-OF-THE-ART SPEECH RECOGNITION WITH SEQUENCE-TO-SEQUENCE MODELS](https://arxiv.org/pdf/1712.01769.pdf)
   - [DeepMind Seminar @ Youtube](https://www.youtube.com/watch?v=HyUtT_z-cms&t=7s)
   - [Stanford Lecture @ Youtube](https://www.youtube.com/watch?v=3MjIkWxXigM&t=2223s)
-
+  - [Deep Speech Recognition @ MS](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/02/deepsr-chinasip-july6.pdf)
+    
     
 - Chatbot
   - [A Deep Reinforcement Learning Chatbot (Short Version)](https://arxiv.org/pdf/1801.06700v1.pdf)
