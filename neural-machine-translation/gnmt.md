@@ -1,4 +1,5 @@
 # Google Neural Machine Translation \(GNMT\)
+### (Google’s Neural Machine Translation System: Bridging the Gap between Human and Machine Translation)
 
 Google은 2016년 논문([\[Wo at el.2016\]](https://arxiv.org/pdf/1609.08144.pdf)
 )을 발표하여 그들의 번역시스템에 대해서 상세히 소개하였습니다. 실제 시스템에 적용된 모델 architecture부터 훈련 algorithm 까지 상세히 기술하였기 때문에, 실제 번역 시스템을 구성하고자 할 때에 좋은 reference가 될 수 있습니다. 또한 다른 논문들에서 실험 결과에 대해 설명할 때, GNMT를 upper boundary baseline으로 참조하기도 합니다. 아래의 내용들은 그들의 논문에서 소개한 내용을 다루도록 하겠습니다.
