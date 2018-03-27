@@ -13,7 +13,7 @@
 - Kakao: I was in the **car** going to the coffee shop for **tea** and I was **tea** to her.
 - SK: I got **dumped** by her in the **car** on the coffee shop.
 
-위와 같이 어려운 문장(문장구조는 쉬우나 중의성에 대해서 높은 난이도)에 대해서 어찌보면 갈 길이 멀기도 하거니와, 어찌되었든 기술의 수준은 비슷하다고 볼 수 있습니다.
+위와 같이 어려운 문장(문장구조는 쉬우나 중의성에 대해서 높은 난이도)에 대해서 어찌보면 갈 길이 멀기도 합니다. 따라서, 위와 같이 누군가 저런 어려운 문제에 대한 한단계 더 높은 기술력을 가졌다기보단, 기술의 수준은 비슷하다고 볼 수 있습니다.
 
 ## Pipeline for Machine Translation
 
