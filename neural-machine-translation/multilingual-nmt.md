@@ -1,5 +1,7 @@
 # Multi-lingual Neural Machine Translation
 
+이제부터는 기계번역의 성능을 끌어올리기 위한 advanced technique를 설명하고자 합니다. 코드를 직접 구현하고 실습을 해 보기보단, 논문을 소개하는 위주가 될 것 입니다. 앞으로 소개할 기술(논문)들은 일부는 기계번역에만 적용 가능한 기술들도 있지만, NLG 또는 sequential data generation에 응용될 수 있는  기술들도 있습니다.
+
 기존의 번역 시스템이 Seq2seq를 필두로 어느정도 안정된 성능을 제공함에 따라서, 이를 활용한 여러가지 추가적인 연구주제가 생겨났습니다. 하나의 end2end model에서 여러쌍의 번역을 동시에 제공하는 multi-lingual NMT model이 그 주제중에 하나입니다.
 
 ## Zero-shot Learning
