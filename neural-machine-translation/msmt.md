@@ -14,6 +14,10 @@ Microsoft는 전통적인(?) RNN방식의 seq2seq 대신, Google의 Transformer 
 
 ### Dual Learning for NMT
 
+#### Dual Unsupervised Learning (DUL)
+
+#### Dual Supervised Learning (DSL)
+
 ### Joint Training of Src2Tgt and Tgt2Src Models
 
 ## Beyond the Left-to-Right Bias
