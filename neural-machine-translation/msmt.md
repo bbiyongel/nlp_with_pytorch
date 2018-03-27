@@ -11,9 +11,13 @@ Microsoft는 전통적인\(?\) RNN방식의 seq2seq 대신, Google의 Transforme
 * Auto-regressive 속성\(이전 time-step의 prediction이 다음 time-step의 prediction에 영향을 주는 것\)의 단점을 보완하기 위한 Deliberation Networks\(\[[Xia et al.,2017](https://papers.nips.cc/paper/6775-deliberation-networks-sequence-generation-beyond-one-pass-decoding.pdf)\]\)과 Kullback-Leibler \(KL\) divergence를 이용한 regularization
 * NMT성능을 극대화 하기 위한 훈련 데이터 selection과 filtering
 
+위의 기술들에 대해서 한 항목씩 차례로 살펴보도록 하겠습니다.
+
 ## Exploiting the Dual Nature of Translation
 
 ### Dual Learning for NMT
+
+이 논문에서는 두가지 방식의 Dual learning을 다루었습니다.
 
 #### Dual Unsupervised Learning \(DUL\)
 
