@@ -1,6 +1,7 @@
 # University of Edinburgh’s Neural MT Systems
 
 사실 Google의 논문은 훌륭하지만 매우 scale이 큽니다. 저는 그래서 작은 scale의 기계번역 시스템에 관한 논문은 이 논문[\[Sennrich at el.2017\]](https://arxiv.org/pdf/1708.00726.pdf)을 높게 평가합니다. 이 논문도 기계번역 시스템을 구성할 때에 훌륭한 baseline이 될 수 있습니다.
+Edinburgh 대학의 Sennrich교수는 매년 열리는 WMT competition에 참가하고 있고, 해당 대회에 참가하는 기계번역 시스템들은 이처럼 매년 자신들의 기술에 대한 paper를 제출합니다. 좋은 참고자료로 삼을 수 있습니다.
 
 ## 1. Subword Segmentation
 
