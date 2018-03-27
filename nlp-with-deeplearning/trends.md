@@ -2,6 +2,8 @@
 
 ## Text Classification
 
+## NER, SR and POS
+
 ## Machine Translation
 
 ## Question Answering
