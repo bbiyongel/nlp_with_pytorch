@@ -21,3 +21,5 @@ Microsoft는 전통적인(?) RNN방식의 seq2seq 대신, Google의 Transformer 
 ### Deliberation Networks
 
 ### Agreement Regularization of Left-to-Right and Right-to-Left Models
+
+## Data Selection and Filtering
