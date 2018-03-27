@@ -28,6 +28,8 @@ Microsoft는 전통적인\(?\) RNN방식의 seq2seq 대신, Google의 Transforme
 
 ### Agreement Regularization of Left-to-Right and Right-to-Left Models
 
+![](/assets/nmt-productization-msnmt-kld.png)
+
 ## Data Selection and Filtering
 
 
