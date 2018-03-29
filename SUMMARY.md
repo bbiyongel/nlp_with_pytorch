@@ -74,7 +74,7 @@
   * [Supervised NMT](reinforcement-learning/supervised-nmt.md)
   * [Unsupervised NMT](reinforcement-learning/unsupervised-nmt.md)
   * [SeqGAN](reinforcement-learning/seqgan.md)
-* [Productization](neural-machine-translation/productize.md)
+* [Productization of NMT](neural-machine-translation/productize.md)
   * [NMT pipeline](neural-machine-translation/pipeline.md)
   * [Google's NMT](neural-machine-translation/gnmt.md)
   * [Edinburgh's NMT](neural-machine-translation/enmt.md)
