@@ -70,6 +70,7 @@
 * [Reinforcement Learning for NLP](reinforcement-learning/cover.md)
   * [Intro](reinforcement-learning/intro.md)
   * [Policy Gradient](reinforcement-learning/policy-gradient.md)
+  * [SeqGAN](reinforcement-learning/seqgan.md)
   * [Supervised NMT](reinforcement-learning/supervised-nmt.md)
   * [Unsupervised NMT](reinforcement-learning/unsupervised-nmt.md)
   * [SeqGAN](reinforcement-learning/seqgan.md)
