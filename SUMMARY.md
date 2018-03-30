@@ -64,7 +64,6 @@
   * [Advanced Topic on NMT](neural-machine-translation/advanced-topic.md)
     * [Multilingual NMT](neural-machine-translation/multilingual-nmt.md)
     * [Using Monolingual Corpora](neural-machine-translation/mono.md)
-    * [Dual Supervised Learning](neural-machine-translation/dsl.md)
     * [Fully Convolutional Seq2seq](neural-machine-translation/fconv.md)
     * [Transformer](neural-machine-translation/transformer.md)
     * [MemDec](neural-machine-translation/memdec.md)
