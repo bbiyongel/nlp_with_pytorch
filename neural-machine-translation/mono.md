@@ -42,12 +42,16 @@ $$
 ## 4. Copied translation
 
 이 방식은 같은 저자인 Rich Sennrich에 의해서 [\[Currey et al.2017\] Copied Monolingual Data Improves Low-Resource Neural Machine  
-Translation](https://kheafield.com/papers/edinburgh/copy_paper.pdf) 에서 제안 되었습니다. 기존의 Dummy source sentence translation 방식에서 좀 더 나아진 방식입니다. 기존의 방식 대신에 source side와 target side에 identical한 같은 데이터를 넣어 훈련시키는 것 입니다. 기존의 dummy source sentence 방식은 encoder에서 decoder로 가는 길을 훈련시에 dropout 처리 해주어야 했지만, 이 방식은 그럴 필요가 없어진 것이 장점입니다.
+Translation](https://kheafield.com/papers/edinburgh/copy_paper.pdf) 에서 제안 되었습니다. 기존의 Dummy source sentence translation 방식에서 좀 더 나아진 방식입니다. 기존의 방식 대신에 source side와 target side에 identical한 같은 데이터를 넣어 훈련시키는 것 입니다. 기존의 dummy source sentence 방식은 encoder에서 decoder로 가는 길을 훈련시에 dropout 처리 해주어야 했지만, 이 방식은 그럴 필요가 없어진 것이 장점입니다. 하지만 source language의 vocabulary에 target language의 vocabulary가 포함되어야 하는 불필요함을 감수해야 합니다.
 
 ![https://arxiv.org/pdf/1708.00726.pdf](/assets/nmt_copied_translation.png)  
 [\[Sennrich at el.2017\]](https://arxiv.org/pdf/1708.00726.pdf)
 
-## 5. Unsupervised Neural Machine Translation
+## 5. Conclusion
+
+위와 같이 여러 방법들이 제안되었지만, 위의 방법 중에서는 구현 방법의 용이성과 효율성 때문에 back translation이 가장 많이 쓰이는 추세 입니다. 간단한 방법임에도 불구하고 효과적으로 성능 향상을 얻을 수 있습니다.
+
+## 6. Unsupervised Neural Machine Translation
 
 [\[Artetxe at el.2017\]](https://arxiv.org/pdf/1710.11041.pdf)
 
