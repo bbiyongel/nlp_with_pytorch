@@ -21,7 +21,7 @@
 
 ## 3. Back translation
 
-그리고 같은 [논문](https://arxiv.org/pdf/1511.06709.pdf)에서 또 다른 방법을 제시하였습니다. 이 방법은 기존의 훈련된 _**반대 방향**_ 번역기를 사용하여 monolingual corpus를 기계번역하여 synthetic parallel corpus를 만들어 이것을 훈련에 사용하는 방식 입니다. 중요한 점은 기계번역에 의해 만들어진 synthetic parallel corpus를 사용할 때, 반대방향의 번역기의 훈련에 사용한다는 것 입니다.
+그리고 같은 [논문](https://arxiv.org/pdf/1511.06709.pdf)에서 좀 더 발전된 다른 방법을 제시하였습니다. 이 방법은 기존의 훈련된 _**반대 방향**_ 번역기를 사용하여 monolingual corpus를 기계번역하여 synthetic parallel corpus를 만들어 이것을 훈련에 사용하는 방식 입니다. 중요한 점은 기계번역에 의해 만들어진 synthetic parallel corpus를 사용할 때, 반대방향의 번역기의 훈련에 사용한다는 것 입니다.
 
 ![](/assets/nmt_back_translation_overview.png)
 
@@ -38,8 +38,6 @@ $$
 [\[Sennrich at el.2015\]](https://arxiv.org/pdf/1511.06709.pdf)
 
 위의 Table은 Dummy source translation\(==monolingual\)과 back translation\(==synthetic\) 방식에 대해서 성능을 실험한 결과 입니다. 두가지 방법 모두 사용하였을 때에 성능이 제법 향상된 것을 볼 수 있습니다. Parallel corpus와 거의 같은양의 corpus가 각각 사용되었습니다. 위에서 언급했듯이, explicit한 Language Model Ensemble 방식에서는 corpus양의 제한이 없었지만, 이 방식에서는 기존의 parallel corpus와 차이 없이 섞어서 동시에 훈련에 사용하기 때문에, monolingual corpus의 양이 parallel corpus 보다 많아질 경우 주객전도 현상이 일어날 수 있습니다. 따라서 그 양을 제한하여 훈련에 사용하였습니다.
-
-### Joint Training using Back Translation
 
 ## 4. Copied translation
 
