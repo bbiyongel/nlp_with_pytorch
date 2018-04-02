@@ -13,10 +13,10 @@
 우리는 기존의 policy gradient와 마찬가지로 아래와 같은 parameter update를 수행해야 합니다.
 
 $$
-\theta_{AB} \leftarrow \theta_{AB} + \gamma \triangledown_{\theta_{AB}}\hat{E}[r]
-$$
-$$
+\begin{aligned}
+\theta_{AB} \leftarrow \theta_{AB} + \gamma \triangledown_{\theta_{AB}}\hat{E}[r] \\
 \theta_{BA} \leftarrow \theta_{BA} + \gamma \triangledown_{\theta_{BA}}\hat{E}[r]
+\end{aligned}
 $$
 
 $$ \hat{E}[r] $$을 각각의 parameter에 대해서 미분 해 준 값을 더해주는 것을 볼 수 있습니다. 이 reward의 기대값은 아래와 같이 구할 수 있습니다.
