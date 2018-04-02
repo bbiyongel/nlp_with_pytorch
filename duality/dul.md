@@ -52,3 +52,48 @@ $$
 
 ## Dual Transfer Learning for NMT with Marginal Distribution Regularization
 
+$$
+P(y)=\sum_{x \in \mathcal{X}}{P(y|x;\theta)P(x)}
+$$
+
+$$
+\begin{aligned}
+\sum_{x \in \mathcal{X}}{P(y|x;\theta)P(x)}=E_{x \sim P(x)}P(y|x;\theta) \\
+\approx\frac{1}{K}\sum^K_{i=1}{P(y|x^i;\theta)},~x^i\sim P(x)
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\mathcal{B}&=\{(x^n, y^n)\}^N_{n=1} \\
+\mathcal{M}&=\{y^s\}^S_{s=1}
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+&\max\sum^N_{n=1}{\log{P(y^n|x^n;\theta)}}, \\
+&s.t.~P(y)=E_{x\sim P(x)}P(y|x;\theta), \forall{y}\in\mathcal{M}.
+\end{aligned}
+$$
+
+$$
+\mathcal{S}(\theta)=[\log\hat{P}(y)-\log{E_{x\sim\hat{P}(x)}P(y|x;\theta)}]^2
+$$
+
+$$
+\mathcal{L}(\theta)=-\sum^N_{n=1}{\log{P(y^n|x^n;\theta)}}+\lambda\sum^S_{s=1}{[\log\hat{P}(y)-\log{E_{x\sim\hat{P}(x)}P(y|x;\theta)}]^2}
+$$
+
+$$
+\begin{aligned}
+P(y)=E_{x\sim\hat{P}(x)}P(y|x;\theta)&=\sum_{x\in\mathcal{X}}{P(y|x;\theta)\hat{P}(x)} \\
+&=\sum_{x\in\mathcal{X}}\frac{P(y|x;\theta)\hat{P}(x)}{P(x|y)}P(x|y) \\
+&=E_{x\sim P(x|y)}\frac{P(y|x;\theta)\hat{P}(x)}{P(x|y)} \\
+&=\frac{1}{K}\sum^K_{i=1}{\frac{P(y|x_i;\theta)\hat{P}(x_i)}{P(x_i|y)}}, x_i\sim P(x|y)
+\end{aligned}
+$$
+
+$$
+\mathcal{L}(\theta)\approx-\sum^N_{n=1}{\log{P(y^n|x^n;\theta)}}+\lambda\sum^S_{s=1}{[\log{\hat{P}(y^s)}-\log{\frac{1}{K}\sum^K_{i=1}\frac{\hat{P}(x^s_i)P(y^s|x^s_i\theta)}{P(x^s_i|y^s)}}]^2}
+$$
