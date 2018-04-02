@@ -42,6 +42,8 @@ $$
 
 ### Deliberation Networks
 
+Microsoft는 [[Xia et al.2018]](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/12/6775-deliberation-networks-sequence-generation-beyond-one-pass-decoding.pdf)에서 소개한 방식을 통해 번역 성능을 더욱 높이려 하였습니다.
+
 ![](/assets/nmt-productization-msnmt-deliberation.png)
 
 ![](/assets/nmt-productization-msnmt-deliberation-implementation.png)
