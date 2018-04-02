@@ -47,13 +47,11 @@ Translation](https://kheafield.com/papers/edinburgh/copy_paper.pdf) 에서 제�
 ![https://arxiv.org/pdf/1708.00726.pdf](/assets/nmt_copied_translation.png)  
 [\[Sennrich at el.2017\]](https://arxiv.org/pdf/1708.00726.pdf)
 
-
-
-## 6. Conclusion
+## 5. Conclusion
 
 위와 같이 여러 방법들이 제안되었지만, 위의 방법 중에서는 구현 방법의 용이성과 효율성 때문에 back translation이 가장 많이 쓰이는 추세 입니다. Back translation 기법은 간단한 방법임에도 불구하고 효과적으로 성능 향상을 얻을 수 있습니다.
 
-## 7. Unsupervised Neural Machine Translation
+## 6. Unsupervised Neural Machine Translation
 
 [\[Artetxe at el.2017\]](https://arxiv.org/pdf/1710.11041.pdf)
 
