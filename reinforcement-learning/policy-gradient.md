@@ -24,6 +24,12 @@ $$
 E_{x \sim dice}[x] \approx \frac{1}{N}\sum^N_{i=1}{x_i}
 $$
 
+주사위 reward의 기대값은 $$ N $$번 sampling한 주사위 값의 평균이라고 할 수 있습니다. N값이 무한대에 가까워질 수록 (커질 수록) 해당 값은 실제 기대값 $$3.5$$에 가까워질 것 입니다. 따라서 우리는 경우에 따라서 N이 1인 경우도 생각해 봐야 할 수 있습니다. 즉, 아래와 같은 수식이 될 수도 있습니다.
+
+$$
+E_{x \sim dice}[x] \approx x
+$$
+
 # Policy Gradient
 
 Policy Gradient는 _**Policy based Reinforcement Learning**_ 방식입니다. 알파고를 개발했던 DeepMind에 의해서 유명해진 Deep Q-Learning은 Value based Reinforcement Learning 방식에 속합니다. 실제 딥러닝을 사용하여 두 방식을 사용 할 때에 가장 큰 차이점은, Value based방식은 인공신경망을 사용하여 어떤 action을 하였을 때에 얻을 수 있는 보상을 예측 하도록 훈련하는 것과 달리, policy based 방식은 인공신경망은 어떤 action을 할지 훈련되고 해당 action에 대한 보상\(reward\)를 back-propagation 할 때에 gradient를 통해서 전달해 주는 것이 가장 큰 차이점 입니다. 따라서 어떤 Deep Q-learning의 경우에는 action을 선택하는 것이 deterministic한 것에 비해서, _**Policy Gradient**_방식은 action을 선택 할 때에 stochastic한 process를 거치게 됩니다. Policy Gradient에 대한 수식은 아래와 같습니다.
