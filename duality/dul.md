@@ -22,13 +22,11 @@ $$
 $$ \hat{E}[r] $$을 각각의 parameter에 대해서 미분 해 준 값을 더해주는 것을 볼 수 있습니다. 이 reward의 기대값은 아래와 같이 구할 수 있습니다.
 
 $$
-r=\alpha r_{AB} + (1-\alpha)r_{BA}
-$$
-$$
-r_{AB}=LM_{B}(s_{mid})
-$$
-$$
-r_{BA}=\log{P(s|s_{mid};\theta_{BA})}
+\begin{aligned}
+r&=\alpha r_{AB} + (1-\alpha)r_{BA} \\
+r_{AB}&=LM_{B}(s_{mid}) \\
+r_{BA}&=\log{P(s|s_{mid};\theta_{BA})} \\
+\end{aligned}
 $$
 
 위와 같이 $$ k $$개의 sampling한 문장에 대해서 각기 방향에 대한 reward를 각각 구한 후, 이를 linear combination을 취해줍니다. 이때, $$ s_{mid} $$는 sampling한 문장을 의미하고, $$ LM_B $$를 사용하여 해당 문장이 $$ language B $$의 집합에 잘 어울리는지를 따져 reward로 리턴합니다. 여기서 기존의 cross entropy를 사용할 수 없는 이유는 monlingual sentence이기 때문에 번역을 하더라도 정답을 알 수 없기 때문입니다. 또한 우리는 다수의 monolingual corpus를 갖고 있기 때문에, $$ LM $$은 쉽게 만들어낼 수 있습니다.
