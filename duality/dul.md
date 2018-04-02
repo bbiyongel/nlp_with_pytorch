@@ -51,3 +51,4 @@ $$
 또한, 위 그래프에서 문장의 길이와 상관 없이 모든 구간에서 baseline NMT를 성능으로 압도하고 있는 것을 알 수 있습니다. 다만, parallel corpus의 양이 커질수록 monolingual corpus에 의한 성능 향상의 폭이 줄어드는 것을 확인 할 수 있습니다.
 
 ## Dual Transfer Learning for NMT with Marginal Distribution Regularization
+
