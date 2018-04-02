@@ -17,7 +17,7 @@ Microsoft는 전통적인\(?\) RNN방식의 seq2seq 대신, Google의 Transforme
 
 ### Dual Learning for NMT
 
-이 논문에서는 두가지 방식의 Dual learning을 다루었습니다.
+이 논문에서는 앞서 설명 한 두가지 방식의 Dual learning을 다루었습니다. 
 
 #### Dual Unsupervised Learning \(DUL\)
 
