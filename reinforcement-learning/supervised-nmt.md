@@ -37,16 +37,16 @@ $$
 이렇게 정의된 ***risk***를 최소화 하도록 하는 것이 objective입니다. 따라서 실제 구현에 있어서는 $$ \triangle(y,y^{(s)}) $$ 사용을 위해서 BLEU 점수에 $$ -1 $$을 곱하여 사용하기도 합니다.
 
 $$
-\tilde{\mathcal{R}}(\theta)=\sum_{s=1}^S{E_{y|x^{(s)};\theta,\alpha}[\triangle(y,y^{(s)})]}
+\begin{aligned}
+\tilde{\mathcal{R}}(\theta)&=\sum_{s=1}^S{E_{y|x^{(s)};\theta,\alpha}[\triangle(y,y^{(s)})]} \\
+&=\sum_{s=1}^S \sum_{y \in \mathcal{S}(x^{(s)})}{Q(y|x^{(s)};\theta,\alpha)\triangle(y,y^{(s)})}
+\end{aligned}
 $$
 $$
-=\sum_{s=1}^S \sum_{y \in \mathcal{S}(x^{(s)})}{Q(y|x^{(s)};\theta,\alpha)\triangle(y,y^{(s)})}
-$$
-$$
-where~\mathcal{S}(x^{(s)})~is~a~sampled~subset~of~the~full~search~space~\mathcal{y}(x^{(s)})
-$$
-$$
+\begin{aligned}
+where~\mathcal{S}(x^{(s)})~is~a~sampled~subset~of~the~full~search~space~\mathcal{y}(x^{(s)}) \\
 and~Q(y|x^{(s)};\theta,\alpha)~is~a~distribution~defined~on~the~subspace~S(x^{(s)}):
+\end{aligned}
 $$
 
 $$
