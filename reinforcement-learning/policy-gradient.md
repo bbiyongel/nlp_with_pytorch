@@ -11,7 +11,7 @@ $$
 위의 수식은 아래와 같이 표현 할 수 있습니다.
 
 $$
-E_{x\sim dice}[x]=3.5
+E_{x\sim dice}[x]=\sum^6_{i=x}{\frac{1}{6}\times x}=3.5
 $$
 
 # Monte Carlo Sampling
