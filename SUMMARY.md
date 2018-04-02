@@ -75,6 +75,7 @@
   * [Unsupervised NMT](reinforcement-learning/unsupervised-nmt.md)
 * [Exploit Duality](duality/cover.md)
   * [Duality](duality/intro.md)
+  * [Dual Unsupervised Learning](duality/dul.md)
   * [Dual Supervised Learning](duality/dsl.md)
 * [Productization of NMT](neural-machine-translation/productize.md)
   * [NMT pipeline](neural-machine-translation/pipeline.md)
