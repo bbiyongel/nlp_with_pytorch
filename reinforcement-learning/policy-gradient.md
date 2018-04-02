@@ -1,8 +1,22 @@
 # Expectation
 
-# Monte Carlo
+![](/assets/lm_rolling_dice.png)
 
-_**Monte Carlo**_는 난수를 이용하여 임의의 함수를 근사하는 방법입니다. 예를 들어 임의의 함수 $$f$$가 있을 때, 사실은 해당 함수가 Gaussian distribution을 따르고 있고, 충분히 많은 수의 random number $$x$$를 생성하여, $$f(x)$$를 구한다면, $$f(x)$$의 분포는 역시 gaussian distribution을 따르고 있을 것 입니다. 이와 같이 임의의 함수에 대해서 Monte Carlo 방식을 통해 해당 함수를 근사할 수 있습니다.
+기대값(expectation)은 reward와 그 reward를 받을 확률을 곱한 값의 총 합을 통해 얻을 수 있습니다. 즉, reward에 대한 가중평균(weighted average)라고 볼 수 있습니다. 주사위의 경우에는 reward의 경우에는 1부터 6까지 받을 수 있지만, 각 reward에 대한 확률은 $\frac{1}{6}$로 동일합니다.
+
+$$
+P(reward~from~dice)=\sum^6_{i=1}{\frac{1}{6}\times i}
+$$
+
+# Monte Carlo Sampling
+
+_**Monte Carlo Sampling**_은 난수를 이용하여 임의의 함수를 근사하는 방법입니다. 예를 들어 임의의 함수 $$f$$가 있을 때, 사실은 해당 함수가 Gaussian distribution을 따르고 있고, 충분히 많은 수의 random number $$x$$를 생성하여, $$f(x)$$를 구한다면, $$f(x)$$의 분포는 역시 gaussian distribution을 따르고 있을 것 입니다. 이와 같이 임의의 함수에 대해서 Monte Carlo 방식을 통해 해당 함수를 근사할 수 있습니다.
+
+따라서 Monte Carlo sampling을 사용하면 기대값(expectation) 내의 표현을 밖으로 끄집어 낼 수 있습니다. 즉, 아래와 같이 수식을 simplify할 수 있습니다.
+
+$$
+P(y|x) = \frac{P(x|y)P(y)}{P(x)}
+$$
 
 # Policy Gradient
 
