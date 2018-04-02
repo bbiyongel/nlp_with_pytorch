@@ -1,4 +1,6 @@
 # Dual Unsupervised Learning
+
+## Dual Learning for Machine Translation
   
 공교롭게도 CycleGAN과 비슷한 시기에 나온 논문[\[Xia at el.2016\]](https://arxiv.org/pdf/1611.00179.pdf)이 있습니다. ***GAN***이 안되는 NLP의 특성상 CycleGAN처럼 direct로 gradient를 이어줄 수는 없었지만 기본적으로는 아주 비슷한 idea입니다. 짝이 없는 monolingual corpus를 이용하여 성능을 극대화 하고자 하였습니다.
 
