@@ -42,7 +42,7 @@ $$
 
 ### Deliberation Networks
 
-Microsoft는 [[Xia et al.2018]](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/12/6775-deliberation-networks-sequence-generation-beyond-one-pass-decoding.pdf)에서 소개한 방식을 통해 번역 성능을 더욱 높이려 하였습니다.
+Microsoft는 [[Xia et al.2017]](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/12/6775-deliberation-networks-sequence-generation-beyond-one-pass-decoding.pdf)에서 소개한 방식을 통해 번역 성능을 더욱 높이려 하였습니다. 이 방법은 사람이 번역을 하는 방법에서 영감을 얻은 것 입니다. 사람은 번역을 할 때에 source sentence에서 draft target sentence를 얻고, 그 draft로부터 최종적인 target sentence를 번역 해 내곤 합니다. 따라서 신경망을 통해 같은 방법을 구현하고자 하였습니다.
 
 ![](/assets/nmt-productization-msnmt-deliberation.png)
 
