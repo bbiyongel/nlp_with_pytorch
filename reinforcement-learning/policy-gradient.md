@@ -21,7 +21,7 @@ _**Monte Carlo Sampling**_은 난수를 이용하여 임의의 함수를 근사�
 따라서 Monte Carlo sampling을 사용하면 기대값(expectation) 내의 표현을 밖으로 끄집어 낼 수 있습니다. 즉, 주사위의 reward에 대한 기대값을 아래와 같이 simplify할 수 있습니다.
 
 $$
-E_{x \sim dice}[x] \approx x
+E_{x \sim dice}[x] \approx \frac{1}{N}\sum^N_{i=1}{x}
 $$
 
 # Policy Gradient
