@@ -18,10 +18,12 @@ $$
 
 _**Monte Carlo Sampling**_은 난수를 이용하여 임의의 함수를 근사하는 방법입니다. 예를 들어 임의의 함수 $$f$$가 있을 때, 사실은 해당 함수가 Gaussian distribution을 따르고 있고, 충분히 많은 수의 random number $$x$$를 생성하여, $$f(x)$$를 구한다면, $$f(x)$$의 분포는 역시 gaussian distribution을 따르고 있을 것 입니다. 이와 같이 임의의 함수에 대해서 Monte Carlo 방식을 통해 해당 함수를 근사할 수 있습니다.
 
+![](https://upload.wikimedia.org/wikipedia/commons/8/84/Pi_30K.gif)
+
 따라서 Monte Carlo sampling을 사용하면 기대값(expectation) 내의 표현을 밖으로 끄집어 낼 수 있습니다. 즉, 주사위의 reward에 대한 기대값을 아래와 같이 simplify할 수 있습니다.
 
 $$
-E_{x \sim dice}[x] \approx \frac{x1}{N}\sum^N_{i=1}{x_i}
+E_{x \sim dice}[x] \approx \frac{1}{N}\sum^N_{i=1}{x_i}
 $$
 
 주사위 reward의 기대값은 $$ N $$번 sampling한 주사위 값의 평균이라고 할 수 있습니다. N값이 무한대에 가까워질 수록 (커질 수록) 해당 값은 실제 기대값 $$3.5$$에 가까워질 것 입니다. 따라서 우리는 경우에 따라서 N이 1인 경우도 생각해 봐야 할 수 있습니다. 즉, 아래와 같은 수식이 될 수도 있습니다.
