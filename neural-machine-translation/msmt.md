@@ -46,6 +46,12 @@ Microsoft는 [[Xia et al.2017]](https://www.microsoft.com/en-us/research/wp-cont
 
 ![](/assets/nmt-productization-msnmt-deliberation.png)
 
+예를 들어 기존의 번역의 수식은 deliberation networks를 통해 아래와 같이 바뀔 수 있습니다.
+
+$$
+P(Y|X)=\prod{P(y_i|X,y_{i})} \rightarrow \prod{P(y_i|X,Y_{mid},y_{i})}
+$$
+
 ![](/assets/nmt-productization-msnmt-deliberation-implementation.png)
 
 ### Agreement Regularization of Left-to-Right and Right-to-Left Models
