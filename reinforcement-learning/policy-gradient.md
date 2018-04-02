@@ -16,13 +16,10 @@ $$
 
 
 $$
-J(\theta) = E_{\pi_\theta}[r] = v_\theta(s_0)
-$$
-
-
-
-$$
-=\sum_{s \in \mathcal{S}}{d(s)}\sum_{a \in \mathcal{A}}{\pi_\theta(s, a)\mathcal{R}_{s, a}}
+\begin{aligned}
+J(\theta) &= E_{\pi_\theta}[r] = v_\theta(s_0) \\
+&=\sum_{s \in \mathcal{S}}{d(s)}\sum_{a \in \mathcal{A}}{\pi_\theta(s, a)\mathcal{R}_{s, a}}
+\end{aligned}
 $$
 
 
@@ -38,13 +35,10 @@ Gradient Ascent에 따라서, $$\triangledown_\theta J(\theta)$$를 구하여 $$
 
 
 $$
-\triangledown_\theta\pi_\theta(s,a)=\pi_\theta(s,a)\frac{\triangledown_\theta\pi_\theta(s,a)}{\pi_\theta(s,a)}
-$$
-
-
-
-$$
-=\pi_\theta(s,a)\triangledown_\theta\log{\pi_\theta(s,a)}
+\begin{aligned}
+\triangledown_\theta\pi_\theta(s,a)&=\pi_\theta(s,a)\frac{\triangledown_\theta\pi_\theta(s,a)}{\pi_\theta(s,a)} \\
+&=\pi_\theta(s,a)\triangledown_\theta\log{\pi_\theta(s,a)}
+\end{aligned}
 $$
 
 
@@ -52,13 +46,10 @@ $$
 
 
 $$
-\triangledown_\theta J(\theta)=\sum_{s \in \mathcal{S}}{d(s)}\sum_{a \in \mathcal{A}}{\pi_\theta(s,a)}\triangledown_\theta\log{\pi_\theta(s, a)\mathcal{R}_{s,a}}
-$$
-
-
-
-$$
-\triangledown_\theta J(\theta) = E_{\pi_\theta}[\triangledown_\theta \log{\pi_\theta (a|s)}r]
+\begin{aligned}
+\triangledown_\theta J(\theta)&=\sum_{s \in \mathcal{S}}{d(s)}\sum_{a \in \mathcal{A}}{\pi_\theta(s,a)}\triangledown_\theta\log{\pi_\theta(s, a)\mathcal{R}_{s,a}} \\
+&= E_{\pi_\theta}[\triangledown_\theta \log{\pi_\theta (a|s)}r]
+\end{aligned}
 $$
 
 
