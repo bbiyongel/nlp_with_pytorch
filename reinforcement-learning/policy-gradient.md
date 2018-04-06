@@ -5,13 +5,22 @@
 기대값(expectation)은 reward와 그 reward를 받을 확률을 곱한 값의 총 합을 통해 얻을 수 있습니다. 즉, reward에 대한 가중평균(weighted average)라고 볼 수 있습니다. 주사위의 경우에는 reward의 경우에는 1부터 6까지 받을 수 있지만, 각 reward에 대한 확률은 $$ {1}/{6} $$로 동일합니다.
 
 $$
-expected~reward~from~dice=\sum^6_{x=1}{\frac{1}{6}\times x}=\frac{1}{6}\times(1+2+3+4+5+6)=3.5
+\begin{aligned}
+expected~reward~from~dice&=\sum^6_{x=1}{P(X=x)\times reward(x)} \\
+where P(x)=\frac{1}{6}, \forall x~~&and~~reward(x)=x.
+\end{aligned}
 $$
 
-위의 수식은 아래와 같이 표현 할 수 있습니다.
+따라서 실제 주사위의 기대값은 아래와 같이 3.5가 됩니다.
 
 $$
-E_{x\sim dice}[x]=\sum^6_{x=1}{\frac{1}{6}\times x}=3.5
+\frac{1}{6}\times(1+2+3+4+5+6)=3.5
+$$
+
+또한, 위의 수식은 아래와 같이 표현 할 수 있습니다.
+
+$$
+E_{x\sim P(X)}[reward(x)]=\sum^6_{x=1}{P(X=x)\times reward(x)}=3.5
 $$
 
 # Monte Carlo Sampling
@@ -23,13 +32,13 @@ _**Monte Carlo Sampling**_은 난수를 이용하여 임의의 함수를 근사�
 따라서 Monte Carlo sampling을 사용하면 기대값(expectation) 내의 표현을 밖으로 끄집어 낼 수 있습니다. 즉, 주사위의 reward에 대한 기대값을 아래와 같이 simplify할 수 있습니다.
 
 $$
-E_{x \sim dice}[x] \approx \frac{1}{N}\sum^N_{i=1}{x_i}
+E_{x \sim P(X)}[reward(x)] \approx \frac{1}{N}\sum^N_{i=1}{reward(x_i)}
 $$
 
 주사위 reward의 기대값은 $$ N $$번 sampling한 주사위 값의 평균이라고 할 수 있습니다. N값이 무한대에 가까워질 수록 (커질 수록) 해당 값은 실제 기대값 $$3.5$$에 가까워질 것 입니다. 따라서 우리는 경우에 따라서 N이 1인 경우도 생각해 봐야 할 수 있습니다. 즉, 아래와 같은 수식이 될 수도 있습니다.
 
 $$
-E_{x \sim dice}[x] \approx x
+E_{x \sim P(X)}[reward(x)] \approx reward(x)
 $$
 
 위와 같은 가정을 가지고 수식을 simplify할 수 있게 되면, 이후 gradient를 구한다거나 할 때에 수식이 간단해져 매우 편리합니다.
