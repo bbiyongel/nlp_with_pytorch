@@ -21,4 +21,4 @@ Corpus를 구하는 방법은 여러가지가 있습니다. Open된 데이터를
 
 ## Multilingual Corpora
 
-## Speech Corpora
+## Speech with Transcript
