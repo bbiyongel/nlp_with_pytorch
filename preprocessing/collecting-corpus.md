@@ -41,9 +41,11 @@ Disallow: /profiles
 |문어체|일반, 시사 등|[PGR21](https://pgr21.com/)|중간|
 |대화체|일반|드라마, 영화 자막|낮음|
 
+자막은 저작권이 있는 경우가 많기 때문에 저작권 관련 정보를 잘 확인 하는 것도 중요합니다.
+
 ## Multilingual Corpora
 
-Machine Translation을 위한 parallel corpus를 구하는 것은 monolingual corpus에 비해서 상당히 어렵습니다. Crawling을 수행 할 때에는 해당 사이트의 robots.txt 등을 확인하여 적법한 절차를 통해 crawling을 수행하길 권장 합니다.
+Machine Translation을 위한 parallel corpus를 구하는 것은 monolingual corpus에 비해서 상당히 어렵습니다. Crawling을 수행 할 때에는 해당 사이트의 robots.txt 등을 확인하여 적법한 절차를 통해 crawling을 수행하길 권장 합니다. 자막은 저작권이 있는 경우가 많기 때문에 저작권 관련 정보를 잘 확인 하는 것도 중요합니다.
 
 |문체|domain|수집처|정제 난이도|정렬 난이도|
 |-|-|-|-|-|
@@ -55,4 +57,4 @@ Machine Translation을 위한 parallel corpus를 구하는 것은 monolingual co
 
 ## Speech with Transcript
 
-Speech 데이터와 그와 함께 annotated된 transcript 데이터를 구하는 것은 정말 어렵습니다. 주로 연구용으로 공개 된 데이터들을 이용하거나 드라마, 영화 자막을 활용하여 드라마나 영화에서 추출 하는 방법도 생각 해 볼 수 있습니다.
+Speech 데이터와 그와 함께 annotated된 transcript 데이터를 구하는 것은 정말 어렵습니다. 주로 연구용으로 공개 된 데이터들을 이용하거나 자막을 활용하여 영상에서 추출 하는 방법도 생각 해 볼 수 있습니다.
