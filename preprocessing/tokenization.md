@@ -1,2 +1,2 @@
-# Normalization (Tokenization or Segmentaion)
+# Tokenization (Segmentaion)
 
