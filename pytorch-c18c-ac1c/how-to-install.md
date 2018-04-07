@@ -9,7 +9,6 @@ Linux (Ubuntu) 기준으로 PyTorch를 설치하고 실행하는 것을 살펴 �
 ```bash
 $ sudo which python
 /usr/bin/python
-ll
 ```
 
 ### 2.7 vs 3.6
