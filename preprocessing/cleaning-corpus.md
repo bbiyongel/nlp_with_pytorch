@@ -1,3 +1,3 @@
-# Normalization (Cleaning)
+# Cleaning
 
 ## Regular Expression
