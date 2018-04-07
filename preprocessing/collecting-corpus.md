@@ -4,6 +4,30 @@ Corpus를 구하는 방법은 여러가지가 있습니다. Open된 데이터를
 
 하지만 무작정 웹사이트로부터 corpus를 crawling하는 것은 법적인 문제가 될 수 있습니다. 저작권 뿐만 아니라, 불필요한 traffic을 웹서버에 가중시킴으로써, 문제가 생길 수 있습니다. 따라서 올바른 방법으로 적절한 웹사이트에서 상업적인 목적이 아닌 경우에 제한된 crawling을 할 것을 권장합니다.
 
+Crawling에 대한 허용 여부는 robots.txt를 보면 확인 할 수 있습니다. 예를 들어 TED의 robot.txt는 다음과 같이 확인 할 수 있습니다.
+
+```bash
+$ wget https://www.ted.com/robots.txt
+$ cat robots.txt
+User-agent: *
+Disallow: /latest
+Disallow: /latest-talk
+Disallow: /latest-playlist
+Disallow: /people
+Disallow: /profiles
+Disallow: /conversations
+
+User-agent: Baiduspider
+Disallow: /search
+Disallow: /latest
+Disallow: /latest-talk
+Disallow: /latest-playlist
+Disallow: /people
+Disallow: /profiles
+```
+
+모든 User-agent에 대해서 일부 경우에 대해서 disallow 인 것을 확인 할 수 있습니다. 좀 더 자세한 내용은 http://www.robotstxt.org/ 에서 확인 할 수 있습니다.
+
 ## Monolingual Corpora
 
 사실 가장 손 쉽게 구할 수 있는 종류의 corpus 입니다. 경우에 따라서 Wikipedia나 각종 Wiki에서는 dump 데이터를 제공하기도 합니다. 따라서 해당 데이터를 다운로드 및 수집하는 것은 손쉽게 대량의 corpus를 얻을 수 있는 방법 중에 하나 입니다. 아래는 domain에 따른 대표적인 corpus의 수집 방식 입니다. 또한 Kaggle에서도 많은 종류의 dataset이 대량으로 upload되어 있으니 필요에 따라 다운로드 받아 사용하면 매우 유용합니다.
