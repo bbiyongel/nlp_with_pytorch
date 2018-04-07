@@ -45,4 +45,12 @@ Disallow: /profiles
 
 Machine Translation을 위한 parallel corpus를 구하는 것은 monolingual corpus에 비해서 상당히 어렵습니다.
 
+|문체|domain|수집처|정제 난이도|정렬 난이도|
+|-|-|-|-|-|
+|대화체|시사, 교양, 과학 등|TED|낮음|중간|
+|문어체|시사|[중앙일보영자신문](http://koreajoongangdaily.joins.com/news/list/List.aspx?gCat=060201)|낮음|중간|
+|문어체|시사|[동아일보영자신문](http://english.donga.com/)|낮음|중간|
+|문어체|일반|[Korean Parallel Data](https://sites.google.com/site/koreanparalleldata/)|낮음|낮음|
+|대화체|일반|드라마, 영화 자막|낮음|중간|
+
 ## Speech with Transcript
