@@ -43,4 +43,6 @@ Disallow: /profiles
 
 ## Multilingual Corpora
 
+Machine Translation을 위한 parallel corpus를 구하는 것은 monolingual corpus에 비해서 상당히 어렵습니다.
+
 ## Speech with Transcript
