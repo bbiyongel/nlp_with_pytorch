@@ -4,10 +4,11 @@
 
 ## Pipeline
 
-1. Building naive translator
-    1. Collect corpus for each language
-    1. Get word embedding vector for each language
-1. Align collected corpus based on naive translation
+1. Building naive translator.
+    1. Collect corpus for each language.
+    1. Get word embedding vector for each language.
+    1. Get word-level-translator using [MUSE](https://github.com/facebookresearch/MUSE).
+1. Align collected corpus based on naive translation.
 
 [Champollion](https://github.com/LowResourceLanguages/champollion)
 
