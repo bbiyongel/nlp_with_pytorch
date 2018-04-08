@@ -4,6 +4,11 @@
 
 ## Pipeline
 
+1. Building naive translator
+    1. Collect corpus for each language
+    1. Get word embedding vector for each language
+1. Align collected corpus based on naive translation
+
 [Champollion](https://github.com/LowResourceLanguages/champollion)
 
 https://www.microsoft.com/en-us/download/details.aspx?id=52608
