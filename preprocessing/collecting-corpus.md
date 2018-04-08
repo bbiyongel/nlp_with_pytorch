@@ -51,6 +51,7 @@ Machine Translation을 위한 parallel corpus를 구하는 것은 monolingual co
 
 |문체|domain|수집처|정제 난이도|정렬 난이도|
 |-|-|-|-|-|
+|문어체|시사, 과학 등|[OPUS](http://opus.nlpl.eu/)|낮음|중간|
 |대화체|시사, 교양, 과학 등|TED|낮음|중간|
 |문어체|시사|[중앙일보영자신문](http://koreajoongangdaily.joins.com/news/list/List.aspx?gCat=060201)|낮음|중간|
 |문어체|시사|[동아일보영자신문](http://english.donga.com/)|낮음|중간|
