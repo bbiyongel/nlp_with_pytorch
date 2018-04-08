@@ -12,7 +12,7 @@
     1. Sentence-tokenize for each language.
     1. Normalize (clean + tokenize) corpus for each language.
     1. Get pseudo translation for each language from naive translator.
-    1. Align parallel corpus using Bleualign
+    1. Align parallel corpus using Bleualign.
 
 ## Building Naive Translator
 
