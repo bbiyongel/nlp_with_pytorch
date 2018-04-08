@@ -4,7 +4,7 @@
 
 ## Overview
 
-1. Building naive translator.
+1. Building naive translator. (You may use pre-trained translator)
     1. Collect and normalize (clean + tokenize) corpus for each language.
     1. Get word embedding vector for each language.
     1. Get word-level-translator using [MUSE](https://github.com/facebookresearch/MUSE).
