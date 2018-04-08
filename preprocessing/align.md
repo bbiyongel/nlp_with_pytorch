@@ -8,8 +8,4 @@
     1. Collect corpus for each language.
     1. Get word embedding vector for each language.
     1. Get word-level-translator using [MUSE](https://github.com/facebookresearch/MUSE).
-1. Align collected semi-parallel corpus based on naive translation using[Bleualign](https://github.com/rsennrich/Bleualign)
-
-[Champollion](https://github.com/LowResourceLanguages/champollion)
-
-https://www.microsoft.com/en-us/download/details.aspx?id=52608
+1. Align collected semi-parallel corpus based on naive translation using [Bleualign](https://github.com/rsennrich/Bleualign).
