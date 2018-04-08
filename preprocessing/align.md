@@ -10,4 +10,3 @@
     1. Get word-level-translator using [MUSE](https://github.com/facebookresearch/MUSE).
 1. Align collected semi-parallel corpus based on naive translation using [Bleualign](https://github.com/rsennrich/Bleualign).
 
-## 
