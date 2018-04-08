@@ -58,6 +58,8 @@ Machine Translation을 위한 parallel corpus를 구하는 것은 monolingual co
 |문어체|일반|[Korean Parallel Data](https://sites.google.com/site/koreanparalleldata/)|낮음|낮음|
 |대화체|일반|드라마, 영화 자막|낮음|중간|
 
+자막을 parallel corpus로 사용할 경우 몇가지 문제점이 있습니다. 번역 품질의 저하로 인한 문제는 둘째치고, 'he'나 'she'같은 대명사가 사람 이름과 같은 고유명사로 표현 되어 있는 경우도 많습니다. 따라서, 이러한 문제점들을 두루 고려해야 할 필요성이 있습니다.
+
 ## Speech with Transcript
 
 Speech 데이터와 그와 함께 annotated된 transcript 데이터를 구하는 것은 정말 어렵습니다. 주로 연구용으로 공개 된 데이터들을 이용하거나 자막을 활용하여 영상에서 추출 하는 방법도 생각 해 볼 수 있습니다.
