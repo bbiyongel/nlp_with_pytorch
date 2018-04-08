@@ -24,6 +24,7 @@
   * [Collecting corpus](preprocessing/collecting-corpus.md)
   * [Cleaning corpus](preprocessing/cleaning-corpus.md)
   * [Tokenization \(POS Tagging\)](preprocessing/tokenization.md)
+  * [Aligning corpus](preprocessing/align.md)
   * [Subword Segmentation](preprocessing/bpe.md)
 * [Word Embedding Vector](word-embedding-vector/cover.md)
   * [Intro](word-embedding-vector/intro.md)
