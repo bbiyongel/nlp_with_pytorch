@@ -13,6 +13,6 @@
     1. Normalize (clean + tokenize) corpus for each language.
     1. Align parallel corpus using Champollion.
 
-## Building Naive Translator
+## Building Dictionary
 
-## Align via Naive Translator
+## Align via Champollion
