@@ -24,4 +24,4 @@ Python을 처음 접하는 많은 사용자들이 2.7과 3.6 사이에서 어떤
 ## PyTorch
 
 ![https://twitter.com/karpathy/status/868178954032513024](/assets/pytorch-intro-Karpathy.png)
-[Image from Karpathy's twitter](https://twitter.com/karpathy/status/868178954032513024)
+[Image from [Karpathy's twitter](https://twitter.com/karpathy/status/868178954032513024)]
