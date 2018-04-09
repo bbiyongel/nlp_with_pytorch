@@ -4,15 +4,14 @@
 
 ## Process Overview for Parallel Corpus Alignment
 
-1. Building naive translator. (You may use pre-trained translator)
+1. Building a dictionary between source language to target language.
     1. Collect and normalize (clean + tokenize) corpus for each language.
     1. Get word embedding vector for each language.
     1. Get word-level-translator using [MUSE](https://github.com/facebookresearch/MUSE).
-1. Align collected semi-parallel corpus based on naive translation using [Bleualign](https://github.com/rsennrich/Bleualign).
+1. Align collected semi-parallel corpus using [Champollion](https://github.com/LowResourceLanguages/champollion).
     1. Sentence-tokenize for each language.
     1. Normalize (clean + tokenize) corpus for each language.
-    1. Get pseudo translation for each language from naive translator.
-    1. Align parallel corpus using Bleualign.
+    1. Align parallel corpus using Champollion.
 
 ## Building Naive Translator
 
