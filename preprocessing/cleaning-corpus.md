@@ -8,14 +8,26 @@
 
 ### \[ \]의 사용
 
+```
+[2345cde]
+```
 ![](/assets/preproc-regex-oneof.png)
+```
+(2|3|4|5|c|d|e)
+```
 
 ### -의 사용
 
+```
+[2-5c-e]
+```
 ![](/assets/preproc-regex-dash.png)
 
 ### \[^ \]의 사용
 
+```
+[^2-5c-e]
+```
 ![](/assets/preproc-regex-none_of.png)
 
 ### \( \)의 사용
