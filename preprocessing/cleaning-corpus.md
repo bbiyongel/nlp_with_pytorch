@@ -8,11 +8,19 @@
 
 ### \[ \]의 사용
 
+![](/assets/preproc-regex-oneof.png)
+
+### -의 사용
+
+![](/assets/preproc-regex-dash.png)
+
 ### \[^ \]의 사용
+
+![](/assets/preproc-regex-none_of.png)
 
 ### \( \)의 사용
 
-### -의 사용
+![](/assets/preproc-regex-group.png)
 
 ### \|의 사용
 
@@ -118,6 +126,8 @@
 > hijklmnop
 
 만약 그냥 **\[0-9\]+**으로 숫자를 찾아서 없애면 두번째 줄의 숫자만 있는 경우와 숫자가 가장자리에 있는 경우도 사라지게 됩니다. 그럼 어떻게 해야 할까요? 이때 유용한 방법이 치환자를 사용하는 것 입니다.
+
+![](/assets/preproc-regex-substitution.png)
 
 괄호로 묶인 부분은 group으로 지정이 되고, 바뀔 문자열 내에서 역슬래시\(\)와 함께 숫자로 가리킬 수 있습니다. 예를 들어 아래와 같이 구현 할 수 있습니다.
 
