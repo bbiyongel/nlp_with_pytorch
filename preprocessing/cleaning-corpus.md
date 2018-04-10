@@ -31,9 +31,13 @@
 * 지역번호 다음 번호 그룹은 3에서 4자리 숫자이다.
 * 마지막은 항상 4자리 숫자이다.
 
+위의 규칙을 따르는 regular expression을 표현하면 아래와 같습니다.
+
 ```regex
 ([\w]+\s*:?\s*)?\(?\+?([0-9]{1,3})?\-?[0-9]{2,3}(\)|\-)?[0-9]{3,4}\-?[0-9]{4}
 ```
 
-![](/assets/preproc-regex-phone_number.png)
+위의 수식을 그림으로 표현하면 아래와 같습니다.
 
+![](/assets/preproc-regex-phone_number.png)
+[Image from [regexper.com](https://regexper.com/)]
