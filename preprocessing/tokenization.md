@@ -6,12 +6,20 @@
 
 ### Mecab
 
-```console
+```bash
 $ sudo apt-get install curl
 $ bash <(curl -s https://raw.githubusercontent.com/konlpy/konlpy/master/scripts/mecab.sh)
 ```
-```
+```bash
 $ echo "안녕하세요, 반갑습니다!" | mecab
+안녕	NNG,*,T,안녕,*,*,*,*
+하	XSV,*,F,하,*,*,*,*
+세요	EP+EF,*,F,세요,Inflect,EP,EF,시/EP/*+어요/EF/*
+,	SC,*,*,*,*,*,*,*
+반갑	VA,*,T,반갑,*,*,*,*
+습니다	EF,*,F,습니다,*,*,*,*
+!	SF,*,*,*,*,*,*,*
+EOS
 ```
 
 ### KoNLPy
