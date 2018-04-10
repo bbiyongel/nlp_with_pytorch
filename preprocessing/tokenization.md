@@ -4,6 +4,6 @@
 
 ## Mecab
 
-## Konlpy
+## KoNLPy
 
 ## NLTK (Moses)
