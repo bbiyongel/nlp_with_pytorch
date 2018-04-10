@@ -71,6 +71,6 @@
 >>> re.sub(regex, "REMOVED", x)
 REMOVED
 >>> x = "CONTENT jiu 02)9420-4104"
->>> re.sub(regex, "", x)
+>>> re.sub(regex, "REMOVED", x)
 CONTENT REMOVED
 ```
