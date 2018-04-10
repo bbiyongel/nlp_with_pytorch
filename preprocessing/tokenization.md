@@ -105,6 +105,8 @@ http://konlpy-ko.readthedocs.io/
 
 ### Tokenizer NLTK (Moses)
 
+>North Korea's state mouthpiece, the Rodong Sinmun, is also keeping mum on Kim's summit with Trump while denouncing ever-tougher U.S. sanctions on the rogue state.
+
 ```python
 import sys, fileinput
 from nltk.tokenize.moses import MosesTokenizer
@@ -118,6 +120,8 @@ if __name__ == "__main__":
 
             sys.stdout.write(" ".join(tokens) + "\n")
 ```
+
+>North Korea 's state mouthpiece , the Rodong Sinmun , is also keeping mum on Kim 's summit with Trump while denouncing ever-tougher U.S. sanctions on the rogue state .
 
 ## Chinese
 
