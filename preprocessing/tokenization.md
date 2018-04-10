@@ -105,6 +105,8 @@ http://konlpy-ko.readthedocs.io/
 
 ### Tokenizer NLTK (Moses)
 
+http://www.nltk.org/api/nltk.tokenize.html#module-nltk.tokenize.moses
+
 >North Korea's state mouthpiece, the Rodong Sinmun, is also keeping mum on Kim's summit with Trump while denouncing ever-tougher U.S. sanctions on the rogue state.
 
 ```python
@@ -127,4 +129,8 @@ if __name__ == "__main__":
 
 ### Stanford Parser
 
+https://nlp.stanford.edu/software/lex-parser.shtml
+
 ### JIEBA
+
+https://github.com/fxsjy/jieba
