@@ -10,6 +10,9 @@
 $ sudo apt-get install curl
 $ bash <(curl -s https://raw.githubusercontent.com/konlpy/konlpy/master/scripts/mecab.sh)
 ```
+```
+$ echo "안녕하세요, 반갑습니다!" | mecab
+```
 
 ### KoNLPy
 
