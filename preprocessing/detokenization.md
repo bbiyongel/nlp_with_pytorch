@@ -40,7 +40,8 @@ if __name__ == "__main__":
 
 ## Detokenization
 
-```
+```bash
+sed "s/ //g" | sed "s/▁▁/ /g" | sed "s/▁//g"
 ```
 
 ```python
