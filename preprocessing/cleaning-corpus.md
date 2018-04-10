@@ -70,7 +70,7 @@
 >>> x = "Ki: +82-10-9420-4104"
 >>> re.sub(regex, "REMOVED", x)
 REMOVED
->>> x = "jiu 02)9420-4104"
+>>> x = "CONTENT jiu 02)9420-4104"
 >>> re.sub(regex, "", x)
 REMOVED
 ```
