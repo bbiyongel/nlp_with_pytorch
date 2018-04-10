@@ -114,3 +114,5 @@ to = r'\1\2'
 
 y = '\n'.join([re.sub(regex, to, x_i) for x_i in x.split('\n')])
 ```
+
+위의 방법은 굳이 python과 같은 programming 언어가 아니더라도 sublime text와 같이 지원되는 text editor들이 있으니 editor 상에서의 정제를 할 때에도 유용하게 사용할 수 있습니다.
