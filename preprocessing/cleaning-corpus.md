@@ -69,8 +69,8 @@
 >>> regex = r"([\w]+\s*:?\s*)?\(?\+?([0-9]{1,3})?\-?[0-9]{2,3}(\)|\-)?[0-9]{3,4}\-?[0-9]{4}"
 >>> x = "Ki: +82-10-9420-4104"
 >>> re.sub(regex, "REMOVED", x)
-REMOVED
+'REMOVED'
 >>> x = "CONTENT jiu 02)9420-4104"
 >>> re.sub(regex, "REMOVED", x)
-CONTENT REMOVED
+'CONTENT REMOVED'
 ```
