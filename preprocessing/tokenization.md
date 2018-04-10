@@ -21,6 +21,10 @@ $ echo "안녕하세요, 반갑습니다!" | mecab
 !	SF,*,*,*,*,*,*,*
 EOS
 ```
+```bash
+$ echo "안녕하세요, 반갑습니다!" | mecab -O wakati
+안녕 하 세요 , 반갑 습니다 !
+```
 
 ### KoNLPy
 
