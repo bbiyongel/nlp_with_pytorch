@@ -1,10 +1,16 @@
 # Detokenization
 
->There 's currently over a thousand TED Talks on the TED website .
+>There's currently over a thousand TED Talks on the TED website.
 
->There 's currently over a thousand TED Talks on the TED website .
+>▁There 's ▁currently ▁over ▁a ▁thousand ▁TED ▁Talks ▁on ▁the ▁TED ▁website .
 
->▁There ▁'s ▁currently ▁over ▁a ▁thous and ▁TED ▁T al ks ▁on ▁the ▁TED ▁we b site ▁.
+>▁▁There ▁'s ▁▁currently ▁▁over ▁▁a ▁▁thous and ▁▁TED ▁▁T al ks ▁▁on ▁▁the ▁▁TED ▁▁we b site ▁.
+
+>▁▁There▁'s▁▁currently▁▁over▁▁a▁▁thousand▁▁TED▁▁Talks▁▁on▁▁the▁▁TED▁▁website▁.
+
+> There▁'s currently over a thousand TED Talks on the TED website▁.
+
+> There's currently over a thousand TED Talks on the TED website.
 
 ## Post Tokenization
 
