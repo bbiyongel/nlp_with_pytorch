@@ -62,14 +62,14 @@
 ![](/assets/preproc-regex-phone_number.png)
 [Image from [regexper.com](https://regexper.com/)]
 
-### Python에서의 Regular Expression
-
 ```python
 a
 >>> import re
->>> 
+>>>
 >>> x = "Ki: +82-10-9420-4104"
 >>> re.sub(
 >>> x = "jiu 02)9420-4104
 ```
 aaa
+
+### Python에서의 Regular Expression
