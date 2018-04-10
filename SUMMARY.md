@@ -26,6 +26,7 @@
   * [Tokenization \(POS Tagging\)](preprocessing/tokenization.md)
   * [Aligning corpus](preprocessing/align.md)
   * [Subword Segmentation](preprocessing/bpe.md)
+  * [Detokenization](preprocessing/detokenization.md)
 * [Word Embedding Vector](word-embedding-vector/cover.md)
   * [Intro](word-embedding-vector/intro.md)
   * [One-hot encoding](word-embedding-vector/one-hot-encoding.md)
