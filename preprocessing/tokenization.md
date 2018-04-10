@@ -6,7 +6,16 @@
 
 ### Mecab
 
+```console
+$ sudo apt-get install curl
+$ bash <(curl -s https://raw.githubusercontent.com/konlpy/konlpy/master/scripts/mecab.sh)
+```
+
 ### KoNLPy
+
+http://konlpy-ko.readthedocs.io/
+
+
 
 ## English 
 
