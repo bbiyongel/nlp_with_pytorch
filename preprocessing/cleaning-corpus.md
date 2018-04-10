@@ -39,36 +39,58 @@
 
 ### \|의 사용
 
+```
+(x|y)
+```
 ![](/assets/preproc-regex-or.png)
 
 ### ?, \*, +의 사용
 
 ?는 앞의 수식하는 부분이 나타나지 않거나 한번만 나타날 경우 사용 합니다.
-
+```
+x?
+```
 ![](/assets/preproc-regex-question.png)
 
 +는 앞의 수식하는 부분이 한 번 이상 나타날 경우 사용 합니다.
-
+```
+x+
+```
 ![](/assets/preproc-regex-plus.png)
 
 \*는 앞의 수식하는 부분이 나타나지 않거나 여러번 나타날 경우 사용 합니다.
-
+```
+x*
+```
 ![](/assets/preproc-regex-star.png)
 
 ### {n}, {n,}, {n,m}의 사용
 
+```
+x{n}
+```
 ![](/assets/preproc-regex-n.png)
-
+```
+x{n,}
+```
 ![](/assets/preproc-regex-n_comma.png)
-
+```
+x{n,m}
+```
 ![](/assets/preproc-regex-n_to_m.png)
 
 ### . 의 사용
 
+```
+.
+```
 ![](/assets/preproc-regex-dot.png)
 
 ### ^와 $의 사용
 
+```
+^x$
+```
 ![](/assets/preproc-regex-start_end.png)
 
 ### 지정문자의 사용
