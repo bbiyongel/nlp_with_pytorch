@@ -30,8 +30,6 @@ $ echo "안녕하세요, 반갑습니다!" | mecab -O wakati
 
 http://konlpy-ko.readthedocs.io/
 
-
-
 ## English 
 
 ### Tokenizer NLTK (Moses)
