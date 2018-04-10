@@ -1,7 +1,6 @@
 # Sentence Tokenization
 
 ## by NLTK
-
 ```python
 import sys, fileinput, re
 from nltk.tokenize import sent_tokenize
