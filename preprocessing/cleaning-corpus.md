@@ -48,6 +48,10 @@
 
 ![](/assets/preproc-regex-n_to_m.png)
 
+### . 의 사용
+
+![](/assets/preproc-regex-dot.png)
+
 ### ^와 $의 사용
 
 ![](/assets/preproc-regex-start_end.png)
