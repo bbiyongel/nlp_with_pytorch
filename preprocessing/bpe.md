@@ -27,7 +27,25 @@
 ▁남자 ▁가 ▁가격 표 ▁의 ▁금액 ▁을 ▁보 ▁고 ▁있 ▁다 ▁.
 
 영어 원문
-
-
+>There 's currently over a thousand TED Talks on the TED website .
+And I guess many of you here think that this is quite fantastic , except for me , I don 't agree with this .
+I think we have a situation here .
+Because if you think about it , 1,000 TED Talks , that 's over 1,000 ideas worth spreading .
+How on earth are you going to spread a thousand ideas ?
+Even if you just try to get all of those ideas into your head by watching all those thousand TED videos , it would actually currently take you over 250 hours to do so .
+And I did a little calculation of this .
+The damage to the economy for each one who does this is around $ 15,000 .
+So having seen this danger to the economy , I thought , we need to find a solution to this problem .
+Here 's my approach to it all .
 
 영어 BPE 적용
+>▁There ▁'s ▁currently ▁over ▁a ▁thousand ▁TED ▁Talks ▁on ▁the ▁TED ▁website ▁.
+▁And ▁I ▁guess ▁many ▁of ▁you ▁here ▁think ▁that ▁this ▁is ▁quite ▁fantastic ▁, ▁except ▁for ▁me ▁, ▁I ▁don ▁'t ▁agree ▁with ▁this ▁.
+▁I ▁think ▁we ▁have ▁a ▁situation ▁here ▁.
+▁Because ▁if ▁you ▁think ▁about ▁it ▁, ▁1,000 ▁TED ▁Talks ▁, ▁that ▁'s ▁over ▁1,000 ▁ideas ▁worth ▁spreading ▁.
+▁How ▁on ▁earth ▁are ▁you ▁going ▁to ▁spread ▁a ▁thousand ▁ideas ▁?
+▁Even ▁if ▁you ▁just ▁try ▁to ▁get ▁all ▁of ▁those ▁ideas ▁into ▁your ▁head ▁by ▁watching ▁all ▁those ▁thousand ▁TED ▁videos ▁, ▁it ▁would ▁actually ▁currently ▁take ▁you ▁over ▁250 ▁hours ▁to ▁do ▁so ▁.
+▁And ▁I ▁did ▁a ▁little ▁calculation ▁of ▁this ▁.
+▁The ▁damage ▁to ▁the ▁economy ▁for ▁each ▁one ▁who ▁does ▁this ▁is ▁around ▁$ ▁15,000 ▁.
+▁So ▁having ▁seen ▁this ▁danger ▁to ▁the ▁economy ▁, ▁I ▁thought ▁, ▁we ▁need ▁to ▁find ▁a ▁solution ▁to ▁this ▁problem ▁.
+▁Here ▁'s ▁my ▁approach ▁to ▁it ▁all ▁.
