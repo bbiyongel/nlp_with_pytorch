@@ -1,3 +1,24 @@
+# Sentence Tokenization
+
+## by NLTK
+
+```python
+import sys, fileinput, re
+from nltk.tokenize import sent_tokenize
+
+if __name__ == "__main__":
+    for line in fileinput.input():
+        if line.strip() != "":
+            line = re.sub(r'([a-z])\.([A-Z])', r'\1. \2', line.strip())
+
+            sentences = sent_tokenize(line.strip())
+
+            for s in sentences:
+                if s != "":
+                    sys.stdout.write(s + "\n")
+
+```
+
 # Part of Speech Tagging, Tokenization (Segmentaion)
 
 우리가 하고자 하는 task에 따라서 Part-of-speech (POS) tagging 또는 단순한 segmentation을 통해 normalization을 수행합니다.
