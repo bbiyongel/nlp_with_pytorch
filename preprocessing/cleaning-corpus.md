@@ -62,7 +62,7 @@
 ![](/assets/preproc-regex-phone_number.png)
 [Image from [regexper.com](https://regexper.com/)]
 
-```python
+```
 a
 >>> import re
 >>>
