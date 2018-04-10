@@ -19,6 +19,27 @@ if __name__ == "__main__":
 
 ```
 
+## Combine and Tokenization
+```python
+import sys, fileinput
+from nltk.tokenize import sent_tokenize
+
+if __name__ == "__main__":
+    buf = []
+
+    for line in fileinput.input():
+        if line.strip() != "":
+            buf += [line.strip()]
+            sentences = sent_tokenize(" ".join(buf))
+
+            if len(sentences) > 1:
+                buf = sentences[1:]
+
+                sys.stdout.write(sentences[0] + '\n')
+
+    sys.stdout.write(" ".join(buf) + "\n")
+```
+
 # Part of Speech Tagging, Tokenization (Segmentaion)
 
 우리가 하고자 하는 task에 따라서 Part-of-speech (POS) tagging 또는 단순한 segmentation을 통해 normalization을 수행합니다.
