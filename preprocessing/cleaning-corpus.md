@@ -32,6 +32,9 @@
 
 ### \( \)의 사용
 
+```
+(x)(yz)
+```
 ![](/assets/preproc-regex-group.png)
 
 ### \|의 사용
