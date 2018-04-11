@@ -4,4 +4,4 @@
 
 ## Flourish of NLG
 
-## Breakthough with RL
+## Breakthough using RL
