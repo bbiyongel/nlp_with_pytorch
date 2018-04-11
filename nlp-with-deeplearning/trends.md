@@ -8,9 +8,11 @@
 
 ![](/assets/intro-word2vec.png)
 
-그러던 와중에 Mikolov는 2013년 Word2Vec\[Mikolov et al.2013\]을 발표합니다. 단순한 구조의 neural network를 사용하여 효과적으로 단어들을 hyper plane\(또는 vector space\)에 성공적으로 projection\(투영\) 시킴으로써, 본격적인 NLP 문제에 대한 딥러닝 활용의 신호탄을 쏘아 올렸습니다.
+그러던 와중에 Mikolov는 2013년 Word2Vec\[Mikolov et al.2013\]을 발표합니다. 단순한 구조의 neural network를 사용하여 효과적으로 단어들을 hyper plane\(또는 vector space\)에 성공적으로 projection\(투영\) 시킴으로써, 본격적인 NLP 문제에 대한 딥러닝 활용의 신호탄을 쏘아 올렸습니다. 아래와 같이 우리는 고차원의 공간에 단어가 어떻게 배치되는지 알 수 있음으로 해서, deep learning을 활용하여 NLP에 대한 문제를 해결하고자 할 때에 network 내부는 어떤식으로 동작하는지에 대한 insight를 얻을 수 있었습니다.
 
 ![](/assets/intro-word-embedding.png)
+
+
 
 ## Flourish of NLG
 
