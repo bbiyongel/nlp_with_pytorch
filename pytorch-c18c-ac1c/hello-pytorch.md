@@ -43,7 +43,7 @@ z = (x + y) + Variable(torch.FloatTensor(2, 2), requires_grad = True)
 
 ![](/assets/pytorch-intro-xyz-graph.png)
 
-## Basic Operation Example \(Forward\)
+## How to Do Basic Operations \(Forward\)
 
 $$
 y = xW^t + b
