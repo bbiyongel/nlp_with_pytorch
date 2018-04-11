@@ -33,7 +33,8 @@ x = Variable(x, requires_grad = True)
 y = torch.FloatTensor(2, 2)
 y = Variable(y, requires_grad = False)
 
-z = x + y
+z = (x + y) + Variable(torch.FloatTensor(2, 2)
+, requires_grad = True)
 ```
 
 ## Basic Operation (Forward)
