@@ -32,7 +32,9 @@ Attention이 큰 성공을 거두자, continuous한 방식으로 memory에 acces
 
 이러한 memory를 활용하는 기법은 Memory Augmented Neural Network(MANN)이라 불리우며, 이 기법이 발전한다면 최종적으로는 우리가 원하는 정보를 neural network 상에 저장하고 필요할 때 잘 조합하여 꺼내쓰는, Question Answering (QA) task와 같은 문제에 효율적으로 대응 할 수 있게 될 것입니다.
 
->참고사이트: https://jamiekang.github.io/2017/05/08/neural-turing-machine
+>참고사이트: 
+- https://jamiekang.github.io/2017/05/08/neural-turing-machine
+- https://sites.google.com/view/mann-emnlp2017/
 
 ## Convergence of NLP and Reinforcement Learning
 
