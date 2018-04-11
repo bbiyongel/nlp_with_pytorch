@@ -100,7 +100,7 @@ torch.Size([10, 3, 5])
 torch.Size([10, 3, 5])
 ```
 
-[http://pytorch.org/docs/master/torch.html?highlight=matmul\#torch.matmul](http://pytorch.org/docs/master/torch.html?highlight=matmul#torch.matmul)
+참고사이트: [http://pytorch.org/docs/master/torch.html?highlight=matmul\#torch.matmul](http://pytorch.org/docs/master/torch.html?highlight=matmul#torch.matmul)
 
 ## Extension Class of nn.Module
 
