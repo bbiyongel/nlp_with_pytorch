@@ -42,7 +42,7 @@ requires_grad 속성은 직접 생성한 경우에는 False 값을 default로 �
 ## Basic Operation Example (Forward)
 
 ```python
-
+a
 ```
 
 ## Extension Class of nn.Module
