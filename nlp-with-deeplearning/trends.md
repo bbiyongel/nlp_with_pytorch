@@ -26,7 +26,7 @@
 
 또한, 이와 같이 NLP 분야에서 딥러닝을 활용하여 큰 성과를 거두자, 더욱더 많은 연구가 활기를 띄게 되어 관련한 연구가 쏟아져 나오게 되었고, 기계번역은 가장 먼저 end-to-end 방식을 활용하여 상용화에 성공하였을 뿐만 아니라, Natural Language Processing에 대한 이해도가 더욱 높아지게 되었습니다.
 
-## Convergence with Reinforcement Learning
+## Convergence of NLP and Reinforcement Learning
 
-
+일찌감치 
 
