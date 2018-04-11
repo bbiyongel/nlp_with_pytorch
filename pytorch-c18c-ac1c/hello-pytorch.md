@@ -176,7 +176,7 @@ MyLinear(
 )
 ```
 
-## Backward
+## Backward (Back-propagation)
 
 $$
 \begin{aligned}
