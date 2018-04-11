@@ -21,7 +21,7 @@ $ sudo which python
 
 Python을 처음 접하는 많은 사용자들이 2.7과 3.6 사이에서 어떤 것을 택해야 할 지 고민하게 됩니다. 처음 python을 접하는 사람들은 3.6을 택하는 것을 추천합니다. 특히, 이 책에서 다루는 NLP와 관련된 text encoding의 default가 UTF-8로 되어 있어서 훨씬 더 편리하게 사용할 수 있습니다. 따라서, 시간을 아끼기 위해서는 3.6으로 시작할 것을 권장합니다. 다만, 2.7에서 작성된 코드를 3.6에서 사용하기 위해서는 코드를 약간 수정해야 할 필요성이 있습니다. \(참고로, 대부분의 경우 3.6에서 작성한 코드는 2.7에서 잘 돌아갈 가능성이 훨씬 더 높습니다.\)
 
-## PyTorch
+## 왜 PyTorch 인가?
 
 ![https://twitter.com/karpathy/status/868178954032513024](/assets/pytorch-intro-Karpathy.png)
 [Image from [Karpathy's twitter](https://twitter.com/karpathy/status/868178954032513024)]
