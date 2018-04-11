@@ -28,5 +28,5 @@ Python을 처음 접하는 많은 사용자들이 2.7과 3.6 사이에서 어떤
 
 - Python First, 깔끔한 코드
 - Autograd
-- NumPy/SciPy 등과의 뛰어난 호환성
+- NumPy/SciPy과 뛰어난 호환성
 - Dynamic Graph
