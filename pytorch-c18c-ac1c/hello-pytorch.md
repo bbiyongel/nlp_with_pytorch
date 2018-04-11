@@ -188,6 +188,23 @@ $$
 y = f(x_1, x_2, x_3) = x_1 \times x_2 + x_3
 $$
 
+```python
+class MyLinear(nn.Module):
+
+    def __init__(self.input_size, output_size):
+        super(MyLinear, self).__init__()
+        
+        self.hidden_size = int((inpu_size + output_size) * .5
+        self.linear1 = nn.Linear(input_size, self.hidden_size)
+        self.linear2 = nn.Linear(self.hidden_size, output_size)
+        
+    def forward(self.x):
+        x = self.linear1(x)
+        y = self.linear2(x)
+        
+        return y
+```
+
 ## train\(\) and eval\(\)
 
 ```python
