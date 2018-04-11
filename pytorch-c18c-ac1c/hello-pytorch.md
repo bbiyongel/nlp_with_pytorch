@@ -198,7 +198,6 @@ linear.train()
 
 ## Using GPU
 
-## Mini-project
 
 
 
