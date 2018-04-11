@@ -12,9 +12,9 @@
 
 ![](/assets/intro-word-embedding.png)
 
-이때까지는 문장이란 단어들의 time series이기 때문에, 당연히 Recurrent Neural Network(RNN)을 통해 해결해야 한다는 고정관념이 팽배해 있었습니다 -- Image=CNN, NLP=RNN. 하지만 2014년, Kim은 CNN만을 활용해 기존의 Text Classification보다 성능을 끌어올린 방법을 제시[Kim et al.2014]하며 한차례 파란을 일으킵니다. 
+이때까지는 문장이란 단어들의 time series이기 때문에, 당연히 Recurrent Neural Network\(RNN\)을 통해 해결해야 한다는 고정관념이 팽배해 있었습니다 -- Image=CNN, NLP=RNN. 하지만 2014년, Kim은 CNN만을 활용해 기존의 Text Classification보다 성능을 끌어올린 방법을 제시\[Kim et al.2014\]하며 한차례 파란을 일으킵니다.
 
-
+![](/assets/intro-cnn-text-classification.png)
 
 ## Flourish of NLG
 
