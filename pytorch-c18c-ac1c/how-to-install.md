@@ -23,18 +23,23 @@ Python을 처음 접하는 많은 사용자들이 2.7과 3.6 사이에서 어떤
 
 ## 왜 PyTorch 인가?
 
+![](/assets/pytorch-intro-company.png)
 
 
-![https://twitter.com/karpathy/status/868178954032513024](/assets/pytorch-intro-Karpathy.png)
-[Image from [Karpathy's twitter](https://twitter.com/karpathy/status/868178954032513024)]
+
+![https://twitter.com/karpathy/status/868178954032513024](/assets/pytorch-intro-Karpathy.png)  
+\[Image from [Karpathy's twitter](https://twitter.com/karpathy/status/868178954032513024)\]
 
 Tesla의 AI 수장인 Karpathy는 자신의 트위터에서 파이토치를 찬양하였습니다. 그럼 무엇이 그를 찬양하도록 만들었는지 좀 더 알아보도록 하겠습니다. PyTorch는 major deep learning framework 중에서 가장 늦게 나온 편인 만큼, 그동안 여러 framework의 장점을 모두 갖고 있습니다.
 
-- Python First, 깔끔한 코드
-    - 먼저 Tensorflow와 달리 Python First를 표방한 PyTorch는 tensor연산과 같이 속도에 크리티컬 한 부분을 제외하고는 대부분의 모듈이 python으로 짜여 있습니다. 따라서 코드가 깔끔합니다.
-- NumPy/SciPy과 뛰어난 호환성
-    - Theano의 장점인 NumPy와의 호환성이 PyTorch에도 그대로 들어왔습니다. 따라서 기존 numpy를 사용하던 사용자들은 처음 파이토치를 접하더라도 큰 위화감 없이 그대로 적응할 수 있습니다.
-- Autograd
-    - 단지 값을 앞으로 전달(feed-forward)시키며 차례차례 계산 한 것일 뿐인데, **backward()** 호출 한번에 gradient를 구할 수 있습니다.
-- Dynamic Graph
-    - Tensorflow의 경우 session이라는 개념이 있어서, session이 시작되면 model architecture등의 graph 구조의 수정이 어려웠습니다. 하지만, PyTorch는 그러한 개념이 없어 편리하게 사용 할 수 있습니다.
+* Python First, 깔끔한 코드
+  * 먼저 Tensorflow와 달리 Python First를 표방한 PyTorch는 tensor연산과 같이 속도에 크리티컬 한 부분을 제외하고는 대부분의 모듈이 python으로 짜여 있습니다. 따라서 코드가 깔끔합니다.
+* NumPy/SciPy과 뛰어난 호환성
+  * Theano의 장점인 NumPy와의 호환성이 PyTorch에도 그대로 들어왔습니다. 따라서 기존 numpy를 사용하던 사용자들은 처음 파이토치를 접하더라도 큰 위화감 없이 그대로 적응할 수 있습니다.
+* Autograd
+  * 단지 값을 앞으로 전달\(feed-forward\)시키며 차례차례 계산 한 것일 뿐인데, **backward\(\)** 호출 한번에 gradient를 구할 수 있습니다.
+* Dynamic Graph
+  * Tensorflow의 경우 session이라는 개념이 있어서, session이 시작되면 model architecture등의 graph 구조의 수정이 어려웠습니다. 하지만, PyTorch는 그러한 개념이 없어 편리하게 사용 할 수 있습니다.
+
+
+
