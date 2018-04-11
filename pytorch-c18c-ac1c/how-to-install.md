@@ -28,6 +28,8 @@ Python을 처음 접하는 많은 사용자들이 2.7과 3.6 사이에서 어떤
 
 Tesla의 AI 수장인 Karpathy는 자신의 트위터에서 파이토치를 찬양하였습니다. 그럼 무엇이 그를 찬양하도록 만들었는지 좀 더 알아보도록 하겠습니다. PyTorch는 major deep learning framework 중에서 가장 늦게 나온 편인 만큼, 그동안 여러 framework의 장점을 모두 갖고 있습니다.
 
+![](http://pytorch.org/tutorials/_static/pytorch-logo-dark.svg)
+
 - Python First, 깔끔한 코드
     - 먼저 Tensorflow와 달리 Python First를 표방한 PyTorch는 tensor연산과 같이 속도에 크리티컬 한 부분을 제외하고는 대부분의 모듈이 python으로 짜여 있습니다. 따라서 코드가 깔끔합니다.
 - NumPy/SciPy과 뛰어난 호환성
