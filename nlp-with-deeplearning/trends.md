@@ -20,9 +20,11 @@
 
 ## Flourish of NLG
 
+![](/assets/intro-word-alignment.png)
+
 2014년 NLP에 큰 혁명이 다가옵니다. Sequence-to-Sequence의 발표\[Sutskever et al.2014\]에 이어, Attention 기법이 개발되어 성공적으로 기계번역에 적용\[Bahdanau et al.2014\]하여 큰 성과를 거둡니다.
 
-![](/assets/intro-word-alignment.png)
+
 
 ## Breakthough with Attention, and Future
 
