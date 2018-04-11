@@ -8,8 +8,6 @@
 
 그러던 와중에 Mikolov는 2013년 Word2Vec\[Mikolov et al.2013\]을 발표합니다. 단순한 구조의 neural network를 사용하여 효과적으로 단어들을 hyper plane\(또는 vector space\)에 projection\(투영\) 시킴으로써, 
 
-
-
 ## Flourish of NLG
 
 ## Breakthough with Attention, and Future
