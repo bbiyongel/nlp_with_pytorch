@@ -206,6 +206,6 @@ linear.train()
 >>> x = torch.cuda.FloatTensor(16, 10)
 >>> x = Variable(x)
 >>> linear = MyLinear(10, 5)
->>> linear.gpu()
+>>> linear.cuda()
 >>> y = linear(x)
 ```
