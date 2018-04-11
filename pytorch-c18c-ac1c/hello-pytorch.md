@@ -37,7 +37,7 @@ y = Variable(y, requires_grad = False)
 z = (x + y) + Variable(torch.FloatTensor(2, 2), requires_grad = True)
 ```
 
-requires_grad 속성은 직접 생성한 경우에는 False 값을 default로 갖습니다. 연산을 통해 자동으로 생성된 경우(위의 코드 예제에서 z)에는 True 값만 갖도록 됩니다. 
+requires_grad 속성은 직접 생성한 경우에는 False 값을 default로 갖습니다. 연산을 통해 자동으로 생성된 경우(위의 코드 예제에서 z)에는 True 값만 갖도록 됩니다. 따라서 결론적으로 사용자가 지정한 연산/계산을 통해 생성된 computation graph의 leaf node에 해당되는 variable만 requires_grad 값을 True 또는 False로 지정할 수 있습니다. 만약 gradient 자체를 구할 일이 없을 경우에는 volatile 속성을 True 값을 주면 해당 Variable이 속한 computation graph 전체의 gradient를 구하지 않게 됩니다.
 
 ## Basic Operation Example (Forward)
 
