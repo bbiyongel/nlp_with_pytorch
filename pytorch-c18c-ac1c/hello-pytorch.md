@@ -194,7 +194,7 @@ linear.train()
 # Restart training, again.
 ```
 
-속도 뿐만 아니라, dropout 또는 batch-normalization과 같은 training과 inference 시에 다른 **forward()** 동작을 하는 module들에 대해서 각기 때에 따라 올바른 동작을 하도록 함.
+**eval()**을 사용하여 module로 하여금 inference mode로 바꾸어주게 되면, inference 속도 뿐만 아니라, dropout 또는 batch-normalization과 같은 training과 inference 시에 다른 **forward()** 동작을 하는 module들에 대해서 각기 때에 따라 올바른 동작을 하도록 합니다.
 
 ## Using GPU
 
