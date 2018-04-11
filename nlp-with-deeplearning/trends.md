@@ -20,6 +20,8 @@
 
 ## Flourish of NLG
 
+2014년 
+
 ## Breakthough with Attention, and Future
 
 ## Convergence with Reinforcement Learning
