@@ -104,6 +104,13 @@ torch.Size([10, 3, 5])
 
 ## Extension Class of nn.Module
 
+```python
+class MyLinear(nn.Module):
+
+def __init__():
+    
+```
+
 ## Backward and zero\_grad\(\)
 
 ## train\(\) and eval\(\)
