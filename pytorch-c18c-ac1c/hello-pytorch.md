@@ -187,9 +187,11 @@ $$
 ## train\(\) and eval\(\)
 
 ```python
+# Training...
 linear.eval()
-# Do some inference process
+# Do some inference process.
 linear.train()
+# Restart training, again.
 ```
 
 ## Using GPU
