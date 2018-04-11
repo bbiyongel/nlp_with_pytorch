@@ -176,7 +176,7 @@ MyLinear(
 )
 ```
 
-## Backward and zero\_grad\(\)
+## Backward
 
 $$
 \begin{aligned}
