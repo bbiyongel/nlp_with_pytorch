@@ -180,7 +180,7 @@ MyLinear(
 
 $$
 \begin{aligned}
-&\mathcal{L}(x, y)=\frac{1}{N}\sum^N_{i=1}{(x_n - y_n)^2}
+&\mathcal{L}_{MSE}(x, y)=\frac{1}{N}\sum^N_{i=1}{(x_n - y_n)^2}
 \end{aligned}
 $$
 
