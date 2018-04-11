@@ -28,6 +28,10 @@
 
 ## Advanced Technique with Memory
 
+Attention이 큰 성공을 거두자, continuous한 방식으로 memory에 access하는 기법에 대한 관심이 커졌습니다. 곧이어 Neural Turing Machine(NTM)[Graves et al.2014]이 대담한 이름대로 큰 파란을 일으키며 주목을 받았습니다. Continuous한 방식으로 memory에서 정보를 read/write하는 방법을 제시하였고, 곧이어 variation들이 제시되며 memory 활용방법에 대한 관심이 높아졌습니다.
+
+>참고사이트: https://jamiekang.github.io/2017/05/08/neural-turing-machine
+
 ## Convergence of NLP and Reinforcement Learning
 
 일찌감치 Variational Auto Encoder\(VAE\)\[Kingma et al.2013\]와 Generative Adversarial Networks\(GAN\)\[Goodfellow et al.2014\]을 통해 Computer Vision 분야는 기존의 discriminative learning 방식을 벗어나 generative learning에 관심이 옮겨간 것과 달리, NLP분야는 그럴 필요가 없었습니다. 이미 language modeling 자체가 문장에 대한 generative learning이기 때문 입니다.
