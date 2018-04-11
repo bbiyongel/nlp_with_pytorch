@@ -22,9 +22,7 @@
 
 ![](/assets/intro-word-alignment.png)
 
-2014년 NLP에 큰 혁명이 다가옵니다. Sequence-to-Sequence의 발표\[Sutskever et al.2014\]에 이어, Attention 기법이 개발되어 성공적으로 기계번역에 적용\[Bahdanau et al.2014\]하여 큰 성과를 거둡니다.
-
-
+2014년 NLP에 큰 혁명이 다가옵니다. Sequence-to-Sequence의 발표\[Sutskever et al.2014\]에 이어, Attention 기법이 개발되어 성공적으로 기계번역에 적용\[Bahdanau et al.2014\]하여 큰 성과를 거둡니다. 이에 NLP분야는 일대 혁명을 맞이합니다. 기존의 한정적인 적용 사례에서 벗어나, 주어진 정보에 기반하여 자유롭게 문장을 생성할 수 있게 된 것입니다. 따라서, 기계번역 뿐만 아니라, summarization, 챗봇 등 더 넓고 깊은 주제의 NLP의 문제를 적극적으로 해결해보려 시도 할 수 있게 되었습니다.
 
 ## Breakthough with Attention, and Future
 
