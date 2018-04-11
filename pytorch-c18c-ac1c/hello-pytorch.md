@@ -107,8 +107,16 @@ torch.Size([10, 3, 5])
 ```python
 class MyLinear(nn.Module):
 
-def __init__():
-    super(MyLinear, self).__init__()
+    def __init__(input_size, output_size):
+        super(MyLinear, self).__init__()
+        
+        self.W = torch.FloatTensor(input_size, output_size)
+        self.b = torch.FloatTensor(output_size)
+        
+    def forward(x):
+        y = torch.mm(x, W) + b
+        
+        return y
 ```
 
 ## Backward and zero\_grad\(\)
