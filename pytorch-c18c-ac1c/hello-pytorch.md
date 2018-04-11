@@ -180,7 +180,7 @@ MyLinear(
 
 $$
 \begin{aligned}
-&\mathcal{L}(x, y)=\{l_1, \dots, l_N \}^T,~~l_n=(x_n-y_n)^2,
+&\mathcal{L}(x, y)=\sum^N_{i=1}{(x_n - y_n)^2}
 \end{aligned}
 $$
 
