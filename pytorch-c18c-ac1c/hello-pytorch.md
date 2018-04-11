@@ -117,6 +117,12 @@ class MyLinear(nn.Module):
         y = torch.mm(x, W) + b
         
         return y
+        
+x = torch.FloatTensor(16, 10)
+x = Variable(x)
+linear = MyLinear(10, 5)
+
+y = linear(x)
 ```
 
 ## Backward and zero\_grad\(\)
