@@ -178,6 +178,12 @@ MyLinear(
 
 ## Backward and zero\_grad\(\)
 
+$$
+\begin{aligned}
+&\mathcal{L}(x, y)=\{l_1, \dots, l_N \}^T,~~l_n=(x_n-y_n)^2,
+\end{aligned}
+$$
+
 ## train\(\) and eval\(\)
 
 ## Using GPU
