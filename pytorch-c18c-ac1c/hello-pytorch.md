@@ -16,6 +16,14 @@ x = torch.FloatTensor(3, 3)
 
 ![](http://pytorch.org/tutorials/_images/Variable.png)
 
+```python
+import torch
+from torch.autograd import Variable
+
+x = torch.FloatTensor(3, 3)
+x = Variable(x)
+```
+
 ## Basic Operation (Forward)
 
 ## Backward
