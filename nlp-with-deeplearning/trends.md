@@ -28,4 +28,7 @@
 
 ## Convergence of NLP and Reinforcement Learning
 
-일찌감치 Variational Auto Encoder(VAE)[Kingma et al.2013]와 Generative Adversarial Networks(GAN)[Goodfellow et al.2014]을 통해 
+일찌감치 Variational Auto Encoder(VAE)[Kingma et al.2013]와 Generative Adversarial Networks(GAN)[Goodfellow et al.2014]을 통해 Computer Vision 분야는 기존의 discriminative learning 방식을 벗어나 generative learning에 관심이 옮겨간 것과 달리, NLP분야는 그럴 필요가 없었습니다. 이미 language modeling 자체가 문장에 대한 generative learning이기 때문 입니다.
+
+하지만, 기계번역의 연구결과서 큰 성과를 띄면서 학계는 다른 어려움에 부딪히게 됩니다. Deep learning에서 사용하는 cross entropy와 실제 기계번역을 위한 objective function과 괴리(discrepancy)가 있었기 때문입니다. 따라서, 마치 Computer Vision에서 기존의 MSE loss의 한계를 벗어나기 위해 GAN을 도입한 것 처럼, 기존의 loss function과 다른 무엇인가가 필요하였습니다. 이때 성공적으로 강화학습의 policy gradients 방식을 NLP에 적용함으로써, 마치 vision분야의 adversarial learning을 NLP에서도 흉내낼 수 있게 되었습니다.
+
