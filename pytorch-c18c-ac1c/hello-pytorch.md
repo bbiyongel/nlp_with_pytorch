@@ -42,4 +42,8 @@ z = (x + y) + Variable(torch.FloatTensor(2, 2), requires_grad = True)
 
 ## Extension Class of nn.Module
 
+## train() and eval()
+
+## Using GPU
+
 ## Mini-project
