@@ -35,4 +35,4 @@ Tesla의 AI 수장인 Karpathy는 자신의 트위터에서 파이토치를 찬�
 - Autograd
     - 단지 값을 앞으로 전달(feed-forward)시키며 차례차례 계산 한 것일 뿐인데, **backward()** 호출 한번에 gradient를 구할 수 있습니다.
 - Dynamic Graph
-    - Tensorflow의 경우 session이라는 개념이 있어서, session이 시작되면 model architecture등의 graph 구조의 수정이 어려웠습니다. 하지만, PyTorch는 그러한 개념이 없이 별다른 생각없이 사용 할 수 있습니다.
+    - Tensorflow의 경우 session이라는 개념이 있어서, session이 시작되면 model architecture등의 graph 구조의 수정이 어려웠습니다. 하지만, PyTorch는 그러한 개념이 없어 편리하게 사용 할 수 있습니다.
