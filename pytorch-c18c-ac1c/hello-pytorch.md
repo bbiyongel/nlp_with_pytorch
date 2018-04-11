@@ -184,6 +184,10 @@ $$
 \end{aligned}
 $$
 
+$$
+y = f(x_1, x_2, x_3) = x_1 \times x_2 + x_3
+$$
+
 ## train\(\) and eval\(\)
 
 ```python
