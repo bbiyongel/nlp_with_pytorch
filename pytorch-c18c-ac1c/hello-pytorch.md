@@ -37,7 +37,13 @@ y = Variable(y, requires_grad = False)
 z = (x + y) + Variable(torch.FloatTensor(2, 2), requires_grad = True)
 ```
 
-## Basic Operation (Forward)
+requires_grad 속성은 직접 생성한 경우에는 False 값을 default로 갖습니다. 연산을 통해 자동으로 생성된 경우(위의 코드 예제에서 z)에는 True 값만 갖도록 됩니다. 
+
+## Basic Operation Example (Forward)
+
+```python
+
+```
 
 ## Extension Class of nn.Module
 
