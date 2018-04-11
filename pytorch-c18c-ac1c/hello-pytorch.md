@@ -50,6 +50,18 @@ y = xW^t + b
 $$
 
 ```python
+import torch
+from torch.autograd import Variable
+
+def linear(x):
+    W = Variable(torch.FloatTensor(10, 5), requires_grad = True)
+    b = Variable(torch.FloatTensor(5), requires_grad = True)
+    
+    y = torch.mm(x, W) + b
+
+x = torch.FloatTensor(16, 10)
+x = Variable(x, requires_grad = True)
+
 
 ```
 
