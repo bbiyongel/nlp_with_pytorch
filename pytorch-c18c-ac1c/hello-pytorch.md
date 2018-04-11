@@ -7,7 +7,14 @@ PyTorch의 tensor는 numpy의 array와 같은 개념입니다. 값을 저장하�
 ```python
 import torch
 
-x = torch.FloatTensor(3, 3)
+x = torch.FloatTensor(2, 2)
+x = torch.FloatTensor([[1, 2], [3, 4]])
+
+import numpy as np
+
+x = [[1, 2], [3, 4]]
+x = np.array(x)
+x = torch.from_numpy(x)
 ```
 
 ## Variable and Autograd
@@ -20,7 +27,7 @@ x = torch.FloatTensor(3, 3)
 import torch
 from torch.autograd import Variable
 
-x = torch.FloatTensor(3, 3)
+x = torch.FloatTensor(2, 2)
 x = Variable(x, requires_grad=True)
 ```
 
