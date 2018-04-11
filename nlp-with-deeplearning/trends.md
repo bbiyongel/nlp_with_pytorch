@@ -4,4 +4,6 @@
 
 ## Flourish of NLG
 
-## Breakthough using RL
+## Breakthough with Attention, and Future
+
+## Convergence with Reinforcement Learning
