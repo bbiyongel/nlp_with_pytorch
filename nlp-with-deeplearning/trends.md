@@ -12,9 +12,11 @@
 
 ![](/assets/intro-word-embedding.png)
 
-이때까지는 문장이란 단어들의 time series이기 때문에, 당연히 Recurrent Neural Network\(RNN\)을 통해 해결해야 한다는 고정관념이 팽배해 있었습니다 -- Image=CNN, NLP=RNN. 하지만 2014년, Kim은 CNN만을 활용해 기존의 Text Classification보다 성능을 끌어올린 방법을 제시\[Kim et al.2014\]하며 한차례 파란을 일으킵니다.
+이때까지는 문장이란 단어들의 time series이기 때문에, 당연히 Recurrent Neural Network\(RNN\)을 통해 해결해야 한다는 고정관념이 팽배해 있었습니다 -- Image=CNN, NLP=RNN. 하지만 2014년, Kim은 CNN만을 활용해 기존의 Text Classification보다 성능을 끌어올린 방법을 제시\[Kim et al.2014\]하며 한차례 파란을 일으킵니다. 이 방법은 word embedding vector와 결합하여 더 성능을 극대화 할 수 있었습니다. 위의 paper를 통해서 학계는 NLP에 대한 시각을 한차례 더 넓힐 수 있게 됩니다.
 
 ![](/assets/intro-cnn-text-classification.png)
+
+이외에도 POS(Part-of-Speech) tagging, Sentence parsing, NER(Named Entity Recognition), SR(Semantic Role) labeling등에서도 기존의 state of the art를 뛰어넘는 성과를 이루냅니다. 하지만 딥러닝의 등장으로 인해 대부분의 task들이 end-to-end를 통해 문제를 해결하고자 함에따라, (또한, 딥러닝 이전에도 이미 매우 좋은 성과를 내고 있었거나, 딥러닝의 적용 후에도 큰 성능의 차이가 없음에) 파란을 일으키지는 못합니다.
 
 ## Flourish of NLG
 
