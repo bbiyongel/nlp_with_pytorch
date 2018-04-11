@@ -186,6 +186,12 @@ $$
 
 ## train\(\) and eval\(\)
 
+```python
+linear.eval()
+# Do some inference process
+linear.train()
+```
+
 ## Using GPU
 
 ## Mini-project
