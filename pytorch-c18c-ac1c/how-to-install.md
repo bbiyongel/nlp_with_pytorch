@@ -26,6 +26,8 @@ Python을 처음 접하는 많은 사용자들이 2.7과 3.6 사이에서 어떤
 ![https://twitter.com/karpathy/status/868178954032513024](/assets/pytorch-intro-Karpathy.png)
 [Image from [Karpathy's twitter](https://twitter.com/karpathy/status/868178954032513024)]
 
+Tesla의 AI 수장인 Karpathy는 자신의 트위터에서 파이토치를 찬양하였습니다. 그럼 무엇이 그를 찬양하도록 만들었는지 좀 더 알아보도록 하겠습니다.
+
 - Python First, 깔끔한 코드
 - Autograd
 - NumPy/SciPy과 뛰어난 호환성
