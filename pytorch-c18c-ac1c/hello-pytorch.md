@@ -105,13 +105,17 @@ torch.Size([10, 3, 5])
 ## Extension Class of nn.Module
 
 ```python
+import torch
+import torch.nn as nn
+from torch.autograd import Variable
+
 class MyLinear(nn.Module):
 
     def __init__(input_size, output_size):
         super(MyLinear, self).__init__()
         
-        self.W = Variable(torch.FloatTensor(input_size, output_size, requires_grad = True))
-        self.b = Variable(torch.FloatTensor(output_size, requires_grad = True))
+        self.W = Variable(torch.FloatTensor(input_size, output_size), requires_grad = True)
+        self.b = Variable(torch.FloatTensor(output_size), requires_grad = True)
         
     def forward(x):
         y = torch.mm(x, W) + b
