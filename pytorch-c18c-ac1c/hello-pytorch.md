@@ -185,7 +185,10 @@ $$
 $$
 
 $$
-y = f(x_1, x_2, x_3) = x_1 \times x_2 + x_3
+\begin{aligned}
+f_1(x_1, x_2, x_3) &= x_1 \times x_2 + x_3
+f_1(x_1, x_2, x_3) &= x_1 + x_2 \times x_3
+\end{aligned}
 $$
 
 ```python
