@@ -144,6 +144,8 @@ class MyLinear(nn.Module):
         return y
 ```
 
+참고사이트: http://pytorch.org/docs/master/nn.html?highlight=parameter#parameters
+
 ```python
 >>> print(linear)
 MyLinear(
