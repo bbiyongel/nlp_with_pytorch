@@ -22,6 +22,7 @@ x = torch.from_numpy(x)
 자동으로 gradient를 계산할 수 있게 하기 위해서, tensor를 wrapping해 주는 class입니다. Variable은 gradient를 저장할 수 있는 **grad**와 tensor를 저장하는 **data** 속성(attribute)을 갖고 있습니다. 또한 **grad_fn**이라는 속성은 variable을 생성한 연산(또는 함수)를 가리키고 있어, 연산(feed-forward)에 따라 마지막까지 자동으로 생성된 Variable을 사용하여 최초 계산에 사용된 Variable까지의 gradient를 자동으로 계산 해 줍니다.
 
 ![](http://pytorch.org/tutorials/_images/Variable.png)
+[Structure of Variable. Image from [PyTorch Tutorial](http://pytorch.org/tutorials/beginner/deep_learning_60min_blitz.html)]
 
 ```python
 import torch
