@@ -60,18 +60,14 @@ Seq2seq를 기반으로 attention mechanism\(\[[Bahdanau et al.2014](https://arx
 Neural Network은 pattern classification에 있어서 타 알고리즘에 비해서 너무나도 압도적인 성능을 보여주었기 때문에, image recognition, text classification과 같은 단순한 분류 문제\(classification or discriminative learning\)는 금방 정복되고 더 이상 연구자들의 흥미를 끌 수 없었습니다.
 
 > 각 방식이 흥미를 두고 있는 것:
->
-> * Discriminative learning
->
->   $$
->   \hat{Y} = argmax_{Y}P(Y|X).
->   $$
->
-> * Generative learning
->
->   $$
->   P(X), itself.
->   $$
+* Discriminative learning
+$$
+\hat{Y} = argmax_{Y}P(Y|X).
+$$
+* Generative learning
+$$
+P(X), itself.
+$$
 
 따라서, 곧 연구자들은 또 다른 흥미거리를 찾아 나섰는데, 그것은 Generative Learning이었습니다. 기존의 classification 문제는 $$ X $$가 주어졌을 때, 알맞은 $$ Y $$를 찾아내는 것에 집중했다면, 이제는 $$ X $$ 자체에 집중하기 시작한 것 입니다. 예를 들어 기존에는 사람의 얼굴 사진이 주어지면 남자인지 여자인지, 또는 더 나아가 이 사람이 누구인지 알아내는 것이었다면, 이제는 얼굴 자체를 묘사할 수 있는 모델을 훈련하고자 하였습니다.
 
