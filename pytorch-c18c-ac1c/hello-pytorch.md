@@ -108,7 +108,7 @@ torch.Size([10, 3, 5])
 class MyLinear(nn.Module):
 
 def __init__():
-    
+    super(MyLinear, self).__init__()
 ```
 
 ## Backward and zero\_grad\(\)
