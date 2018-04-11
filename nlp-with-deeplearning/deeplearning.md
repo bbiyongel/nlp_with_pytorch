@@ -48,7 +48,7 @@ Traditional Speech Recognition System
 
 Seq2seq를 기반으로 attention mechanism\(\[[Bahdanau et al.2014](https://arxiv.org/pdf/1409.0473.pdf)\], \[[Luong et al.2015](https://arxiv.org/pdf/1508.04025.pdf)\]\)이 제안되며 결국 기계번역은 Neural Machine Translation에 의해서 대통합이 이루어지게 됩니다.
 
-결국, 기계번역은 가장 늦게 혁명이 이루어졌지만, 가장 먼저 상용화가 된 분야가 되었습니다. 현재의 상용 기계번역 시스템은 모두 딥러닝에 의한 시스템으로 대체되었다고 볼 수 있습니다.
+결국, 기계번역은 가장 늦게 혁명이 이루어졌지만, 가장 먼저 딥러닝만을 사용해 상용화가 된 분야가 되었습니다. 현재의 상용 기계번역 시스템은 모두 딥러닝에 의한 시스템으로 대체되었다고 볼 수 있습니다.
 
 > 참고 사이트:
 >
