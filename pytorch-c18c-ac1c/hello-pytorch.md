@@ -45,6 +45,9 @@ requires_grad 속성은 직접 생성한 경우에는 False 값을 default로 �
 a
 ```
 
+### Broadcasting
+http://pytorch.org/docs/master/torch.html?highlight=matmul#torch.matmul
+
 ## Extension Class of nn.Module
 
 ## Backward and zero_grad()
