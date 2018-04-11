@@ -128,8 +128,27 @@ class MyLinear(nn.Module):
 >>> x = Variable(x)
 >>> linear = MyLinear(10, 5)
 >>> y = linear(x)
->>> print(linear)
 ```
+
+```python
+class MyLinear(nn.Module):
+
+    def __init__(self.input_size, output_size):
+        super(MyLinear, self).__init__()
+        self.W = Variable(torch.FloatTensor(input_size, output_size), requires_grad = True)
+        self.b = Variable(torch.FloatTensor(output_size), requires_grad = True)
+    def forward(self.x):
+        y = torch.mm(x, self.W) + self.b
+        return y
+```
+
+```python
+>>> print(linear)
+MyLinear(
+)
+```
+
+
 
 ## Backward and zero\_grad\(\)
 
