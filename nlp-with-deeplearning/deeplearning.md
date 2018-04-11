@@ -96,7 +96,7 @@ Deep learning이 NLP에서도 주류가 되면서, 위와 같은 접근 방법�
 
 하지만 word2vec등의 word embedding을 통해서 단어\(또는 token\)을 continuous한 vector로써 나타낼 수 있게 되고, 모호성과 유의성에서도 이득을 볼 수 있게 되었습니다. 또한, deep learning의 장점을 잘 살려 end-to-end model을 구현함으로써 더욱 높은 성능을 뽑을 수 있게 되었습니다. 또한, RNN의 단점을 보완한 LSTM과 GRU에 대한 활용법이 고도화 되었고, attention의 등장으로 인해서 긴 time-step의 sequential 데이터에 대해서도 어렵지 않게 훈련할 수 있게 된 점도 큰 터닝 포인트라고 볼 수 있습니다.
 
-&lt;!--  
+!--  
 ![](/assets/intro-nlp-symbolic-vs-neural.png)  
 \[[Gao et al.2017](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/07/dl-summer-school-2017.-Jianfeng-Gao.v2.pdf)\]
 
@@ -113,7 +113,7 @@ Deep learning이 NLP에서도 주류가 되면서, 위와 같은 접근 방법�
 
 ### Reinforcement Learning
 
---&gt;
+--;
 
 ## Conclusion
 
