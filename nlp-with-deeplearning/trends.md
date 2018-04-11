@@ -24,7 +24,7 @@
 
 2014년 NLP에 큰 혁명이 다가옵니다. Sequence-to-Sequence의 발표\[Sutskever et al.2014\]에 이어, Attention 기법이 개발되어 성공적으로 기계번역에 적용\[Bahdanau et al.2014\]하여 큰 성과를 거둡니다. 이에 NLP분야는 일대 혁명을 맞이합니다. 기존의 한정적인 적용 사례에서 벗어나, 주어진 정보에 기반하여 자유롭게 문장을 생성할 수 있게 된 것입니다. 따라서, 기계번역 뿐만 아니라, summarization, 챗봇 등 더 넓고 깊은 주제의 NLP의 문제를 적극적으로 해결해보려 시도 할 수 있게 되었습니다.
 
-## Breakthough with Attention, and Future
+또한, 이와 같이 NLP 분야에서 딥러닝을 활용하여 큰 성과를 거두자, 더욱더 많은 연구가 활기를 띄게 되어 관련한 연구가 쏟아져 나오게 되었고, 기계번역은 가장 먼저 end-to-end 방식을 활용하여 상용화에 성공하였을 뿐만 아니라, Natural Language Processing에 대한 이해도가 더욱 높아지게 되었습니다.
 
 ## Convergence with Reinforcement Learning
 
