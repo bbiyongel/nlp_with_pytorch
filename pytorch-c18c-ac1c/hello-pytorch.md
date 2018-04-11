@@ -141,10 +141,13 @@ class MyLinear(nn.Module):
         
     def forward(self.x):
         y = torch.mm(x, self.W) + self.b
+        
         return y
 ```
 
 참고사이트: http://pytorch.org/docs/master/nn.html?highlight=parameter#parameters
+
+>when they’re assigned as Module attributes they are automatically added to the list of its parameters, and will appear e.g. in parameters() iterator. Assigning a Tensor doesn’t have such effect. This is because one might want to cache some temporary state, like last hidden state of the RNN, in the model.
 
 ```python
 >>> print(linear)
@@ -152,7 +155,26 @@ MyLinear(
 )
 ```
 
+```python
+class MyLinear(nn.Module):
 
+    def __init__(self.input_size, output_size):
+        super(MyLinear, self).__init__()
+        
+        self.linear = nn.Linear(input_size, output_size)
+                
+    def forward(self.x):
+        y = self.linear(x)
+        
+        return y
+```
+
+```python
+>>> print(linear)
+MyLinear(
+  (linear): Linear(in_features=10, out_features=5, bias=True)
+)
+```
 
 ## Backward and zero\_grad\(\)
 
