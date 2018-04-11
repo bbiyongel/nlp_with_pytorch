@@ -203,9 +203,11 @@ linear.train()
 ## Using GPU
 
 ```python
+>>> # Note that tensor is declared in torch.cuda.
 >>> x = torch.cuda.FloatTensor(16, 10)
 >>> x = Variable(x)
 >>> linear = MyLinear(10, 5)
+>>> # .cuda() let module move to GPU memory.
 >>> linear.cuda()
 >>> y = linear(x)
 ```
