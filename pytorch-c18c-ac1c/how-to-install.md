@@ -23,8 +23,6 @@ Python을 처음 접하는 많은 사용자들이 2.7과 3.6 사이에서 어떤
 
 ## 왜 PyTorch 인가?
 
-![](http://pytorch.org/tutorials/_images/pytorch-logo-flat.png)
-
 ![](/assets/pytorch-intro-company.png)
 
 ![https://twitter.com/karpathy/status/868178954032513024](/assets/pytorch-intro-Karpathy.png)  
