@@ -28,7 +28,12 @@ import torch
 from torch.autograd import Variable
 
 x = torch.FloatTensor(2, 2)
-x = Variable(x, requires_grad=True)
+x = Variable(x, requires_grad = True)
+
+y = torch.FloatTensor(2, 2)
+y = Variable(y, requires_grad = False)
+
+z = x + y
 ```
 
 ## Basic Operation (Forward)
