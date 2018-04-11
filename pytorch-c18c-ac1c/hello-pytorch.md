@@ -46,7 +46,7 @@ z = (x + y) + Variable(torch.FloatTensor(2, 2), requires_grad = True)
 ## Basic Operation Example \(Forward\)
 
 $$
-y = xW^t+b
+y = xW^t + b
 $$
 
 ```python
