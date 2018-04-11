@@ -39,7 +39,7 @@ y = Variable(y, requires_grad = False)
 z = (x + y) + Variable(torch.FloatTensor(2, 2), requires_grad = True)
 ```
 
-위의 코드에서 x와 y를 Variable로 선언하고 더한 후에, 변수로 지정하지 않은 Variable을 더하고 그 값을 z에 저장합니다. 따라서 아래와 같은 computation graph를 가지게 됩니다. x, y, z는 leaf node에 해당하므로 requires_grad를 사용자가 임의로 설정할 수 있습니다.
+위의 코드에서 x와 y를 Variable로 선언하고 더한 후에, 변수로 지정하지 않은 Variable을 더하고 그 값을 z에 저장합니다. 따라서 아래와 같은 computation graph를 가지게 됩니다. x, y, z는 leaf node에 해당하므로 requires_grad를 사용자가 임의로 설정할 수 있습니다. 이후에 z에 gradient가 전달되어 오면, 연산 과정에서 형성된 tree 구조를 통해 chide node들에게 gradient를 전달 할 수 있습니다.
 
 ![](/assets/pytorch-intro-xyz-graph.png)
 
