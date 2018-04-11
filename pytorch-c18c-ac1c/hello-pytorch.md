@@ -58,11 +58,13 @@ def linear(x):
     b = Variable(torch.FloatTensor(5), requires_grad = True)
     
     y = torch.mm(x, W) + b
+    
+    return y
 
 x = torch.FloatTensor(16, 10)
-x = Variable(x, requires_grad = True)
+x = Variable(x)
 
-
+y = linear(x)
 ```
 
 ### Broadcasting
