@@ -29,6 +29,8 @@ Tensorflow를 개발한 Google에 맞서, PyTorch는 Facebook의 주도하에 �
 
 ![](/assets/pytorch-intro-company.png)
 
+![](https://cdn-images-1.medium.com/max/2000/1*8a2Nz2SnCgT9UFl7rSaywg.png)
+
 ![https://twitter.com/karpathy/status/868178954032513024](/assets/pytorch-intro-Karpathy.png)  
 \[Image from [Karpathy's twitter](https://twitter.com/karpathy/status/868178954032513024)\]
 
