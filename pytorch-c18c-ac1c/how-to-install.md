@@ -32,7 +32,7 @@ Tensorflow를 개발한 Google에 맞서, PyTorch는 Facebook의 주도하에 �
 일찌감치 Tensorflow를 내세운 Google과 달리, PyTorch는 그에비해 훨씬 뒤늦게 deep learning framework 개발에 뛰어들었기 때문에, 상대적으로 훨씬 적은 유저풀을 갖고 있습니다.
 
 ![](https://cdn-images-1.medium.com/max/2000/1*8a2Nz2SnCgT9UFl7rSaywg.png)
-[, Image from [Karpathy's medium](https://medium.com/@karpathy/a-peek-at-trends-in-machine-learning-ab8a1085a106)]
+[plot of how some of the more popular frameworks evolved over time, Image from [Karpathy's medium](https://medium.com/@karpathy/a-peek-at-trends-in-machine-learning-ab8a1085a106)]
 
 하지만, PyTorch가 가진 장점과 매력 때문에, 산업계보다는 학계에서 적극적으로 PyTorch의 사용을 늘려가고 있는 추세이며, 이러한 트렌드는 산업계에도 점점 퍼져나가고 있습니다. 따라서, Tensorflow는 paper를 구현한 수많은 github source code와 pretrain된 model parameter가 있는 것이 장점이긴 하지만, PyTorch도 빠르게 따라잡고 있는 추세 입니다. -- 하지만 아직은 Tensorflow의 아성을 넘기에는 부족합니다.
 
