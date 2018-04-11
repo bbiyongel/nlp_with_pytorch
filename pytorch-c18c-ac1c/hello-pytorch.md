@@ -135,8 +135,10 @@ class MyLinear(nn.Module):
 
     def __init__(self.input_size, output_size):
         super(MyLinear, self).__init__()
-        self.W = Variable(torch.FloatTensor(input_size, output_size), requires_grad = True)
-        self.b = Variable(torch.FloatTensor(output_size), requires_grad = True)
+        
+        self.W = nn.Parameter(torch.FloatTensor(input_size, output_size), requires_grad = True)
+        self.b = nn.Parameter(torch.FloatTensor(output_size), requires_grad = True)
+        
     def forward(self.x):
         y = torch.mm(x, self.W) + self.b
         return y
