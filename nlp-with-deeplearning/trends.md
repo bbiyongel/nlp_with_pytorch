@@ -28,4 +28,4 @@
 
 ## Convergence of NLP and Reinforcement Learning
 
-일찌감치 Variational Auto Encoder[Kingma et al.2013](VAE)와 Generative Adversarial Networks[Goodfellow et al.2014](GAN)을 통해 
+일찌감치 Variational Auto Encoder(VAE)[Kingma et al.2013]와 Generative Adversarial Networks(GAN)[Goodfellow et al.2014]을 통해 
