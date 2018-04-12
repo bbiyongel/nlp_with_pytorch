@@ -184,12 +184,6 @@ $$
 \end{aligned}
 $$
 
-$$
-\begin{aligned}
-f(x_1, x_2, x_3) &= 3 \times x_1 + x_2 - 2 \times x_3
-\end{aligned}
-$$
-
 ```python
 import random
 
@@ -209,6 +203,12 @@ class MyModel(nn.Module):
                                
         return y
 ```
+
+$$
+\begin{aligned}
+f(x_1, x_2, x_3) &= 3x_1 + x_2 - 2x_3
+\end{aligned}
+$$
 
 ```python
 def ground_truth(x):
