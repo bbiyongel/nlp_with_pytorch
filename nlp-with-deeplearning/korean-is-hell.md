@@ -36,6 +36,8 @@
 
 이러한 특징은 Parsing, POS Tagging 부터 Language Modeling에 이르기까지 한국어 NLP를 훨씬 어렵게 만드는 이유 중에 하나 입니다.
 
+또한 접사가 붙어 같은 단어가 다양하게 생겨나기 때문에, 하나의 어근에서 생겨난 비슷한 의미의 단어가 정말 많이 생성됩니다. 따라서 이들을 모두 다르게 처리할 수 없기 때문에, 추가적인 segmentation을 통해서 같은 어근에서 생겨난 단어를 처리하게 됩니다. 이와 관련한 내용은 Preprocessing 챕터에서 다루도록 하겠습니다.
+
 > 읽을거리:
 * [http://zomzom.tistory.com/1074](http://zomzom.tistory.com/1074)
 * [https://m.blog.naver.com/reading0365/221057575669](https://m.blog.naver.com/reading0365/221057575669)
