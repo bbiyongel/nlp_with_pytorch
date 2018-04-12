@@ -6,7 +6,7 @@
 
 ## Ambiguity
 
-아래의 문장을 한번 살펴볼까요. 어떤 회사의 번역이 가장 정확한지 살펴 볼까요. (2018년 3월 기준)
+아래의 문장을 한번 살펴볼까요. 어떤 회사의 번역이 가장 정확한지 살펴 볼까요. (2018년 4월 기준)
 
 > 차를 마시러 공원에 가던 차 안에서 나는 그녀에게 차였다.
 - Google: I was kicking her in the car that went to the park for tea.
