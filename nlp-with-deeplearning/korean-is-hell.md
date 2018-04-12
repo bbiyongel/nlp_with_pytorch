@@ -34,6 +34,8 @@
 |15.|먹으러 간다 밥을 나는.|O|
 |16.|밥을 먹으러 나는 간다.|O|
 
+이러한 특징은 Parsing, POS Tagging 부터 Language Modeling에 이르기까지 한국어 NLP를 훨씬 어렵게 만드는 이유 중에 하나 입니다.
+
 > 읽을거리:
 * [http://zomzom.tistory.com/1074](http://zomzom.tistory.com/1074)
 * [https://m.blog.naver.com/reading0365/221057575669](https://m.blog.naver.com/reading0365/221057575669)
