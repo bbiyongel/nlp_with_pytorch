@@ -17,6 +17,20 @@
 
 ## Align via Champollion
 
+```
+omitted <=> 1
+omitted <=> 2
+omitted <=> 3
+1 <=> 4
+2 <=> 5
+3 <=> 6
+4,5 <=> 7
+6 <=> 8
+7 <=> 9
+8 <=> 10
+9 <=> omitted
+```
+
 ```python
 import sys, argparse, os
 
