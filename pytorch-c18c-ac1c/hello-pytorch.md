@@ -191,11 +191,11 @@ loss.backward()
 ## train\(\) and eval\(\)
 
 ```python
->>> # Training...
->>> linear.eval()
->>> # Do some inference process.
->>> linear.train()
->>> # Restart training, again.
+# Training...
+linear.eval()
+# Do some inference process.
+linear.train()
+# Restart training, again.
 ```
 
 위와 같이 PyTorch는 **train()**과 **eval()** 함수를 제공하여 사용자가 필요에 따라 model에 대해서 훈련시와 추론시의 모드 전환을 쉽게 할 수 있도록 합니다. nn.Module을 상속받아 구현하고 생성한 객체는 기본적으로 training mode로 되어 있는데, **eval()**을 사용하여 module로 하여금 inference mode로 바꾸어주게 되면, (gradient를 계산하지 않도록 함으로써) inference 속도 뿐만 아니라, dropout 또는 batch-normalization과 같은 training과 inference 시에 다른 **forward()** 동작을 하는 module들에 대해서 각기 때에 따라 올바른 동작을 하도록 합니다. 다만, inference가 끝나면 다시 **train()**을 선언 해 주어, 원래의 훈련모드로 돌아가게 해 주어야 합니다.
