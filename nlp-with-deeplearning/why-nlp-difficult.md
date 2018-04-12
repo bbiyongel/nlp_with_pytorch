@@ -31,6 +31,7 @@
 ## Paraphrase
 
 ![](http://cdnweb01.wikitree.co.kr/webdata/editor/201608/16/img_20160816082838_215c7a7a.png)
+
 김치 싸대기로 유명한 드라마 [모두 다 김치](https://namu.wiki/w/%EB%AA%A8%EB%91%90%20%EB%8B%A4%20%EA%B9%80%EC%B9%98)의 문제적 장면
 
 > 1. 여자가 김치를 어떤 남자에게 집어 던지고 있다.
