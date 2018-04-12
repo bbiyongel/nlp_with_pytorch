@@ -10,13 +10,9 @@
 
 ![](/assets/intro-why-korean-hell-example.png)
 
-
-
 > 읽을거리:
 * [http://zomzom.tistory.com/1074](http://zomzom.tistory.com/1074)
 * [https://m.blog.naver.com/reading0365/221057575669](https://m.blog.naver.com/reading0365/221057575669)
-
-
 
 ## 주어 생략
 
