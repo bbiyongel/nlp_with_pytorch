@@ -11,7 +11,7 @@
 * [Hello PyTorch](pytorch-c18c-ac1c/cover.md)
   * [Intro](pytorch-c18c-ac1c/intro.md)
   * [How to install](pytorch-c18c-ac1c/how-to-install.md)
-  * [PyTorch practice](pytorch-c18c-ac1c/hello-pytorch.md)
+  * [PyTorch tutorial](pytorch-c18c-ac1c/hello-pytorch.md)
   * [TorchText](pytorch-c18c-ac1c/torchtext.md)
 * [Word Sense Disambiguation \(WSD\)](word-sense-disambiguation-wsd/cover.md)
   * [intro](word-sense-disambiguation-wsd/intro.md)
