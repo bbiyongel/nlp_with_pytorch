@@ -7,6 +7,7 @@
   * [Intro](nlp-with-deeplearning/intro.md)
   * [Deeplearning](nlp-with-deeplearning/deeplearning.md)
   * [Why NLP is difficult](nlp-with-deeplearning/why-nlp-difficult.md)
+  * [Why Korean NLP is more difficult](nlp-with-deeplearning/korean-is-hell.md)
   * [Recent Trends](nlp-with-deeplearning/trends.md)
 * [Hello PyTorch](pytorch-c18c-ac1c/cover.md)
   * [Intro](pytorch-c18c-ac1c/intro.md)
