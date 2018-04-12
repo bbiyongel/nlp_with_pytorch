@@ -47,6 +47,8 @@
 
 ![](/assets/intro-why-korean-hell-my-bro.png) ![](/assets/intro-why-korean-hell-human-meat.png)
 
+애초에 동양권에서는 띄어쓰기라는 것이 존재하지 않았고 근대에 들어와서 도입된 것이기 때문에, 띄어쓰기에 맞춰 발전 해 온 언어는 아닙니다. 따라서 띄어쓰기에 대한 표준이 계속 바뀌어 왔기 때문에, 사람마다 띄어쓰기를 하는 것이 다를 뿐더러, 심지어는 띄어쓰기가 아예 없더라도 해석이 가능하기도 합니다. 결국, 위에서처럼 추가적인 segmentation을 통해서 띄어쓰기를 정제(normalization) 해 주는 process가 마찬가지로 필요하게 됩니다.
+
 ## 주어 생략
 
 ## 평서문과 의문문의 차이
