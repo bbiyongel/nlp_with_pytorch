@@ -14,6 +14,23 @@
     1. Align parallel corpus using Champollion.
 
 ## Building Dictionary
+```
+stories <> 이야기
+stories <> 소설
+contact <> 연락
+contact <> 연락처
+contact <> 접촉
+green <> 녹색
+green <> 초록색
+green <> 빨간색
+dark <> 어두운
+dark <> 어둠
+dark <> 짙
+song <> 노래
+song <> 곡
+song <> 음악
+salt <> 소금
+```
 
 ## Align via Champollion
 
