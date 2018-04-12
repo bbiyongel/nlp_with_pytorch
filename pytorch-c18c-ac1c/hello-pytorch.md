@@ -186,7 +186,7 @@ $$
 
 $$
 \begin{aligned}
-f(x_1, x_2, x_3) &= x_1 \times x_2 + x_3
+f(x_1, x_2, x_3) &= 3 \times x_1 + x_2 - 2 \times x_3
 \end{aligned}
 $$
 
