@@ -1,0 +1,1 @@
+# Why Korean NLP is more difficult?
