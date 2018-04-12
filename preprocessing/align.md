@@ -14,6 +14,7 @@
     1. Align parallel corpus using Champollion.
 
 ## Building Dictionary
+
 ```
 stories <> 이야기
 stories <> 소설
