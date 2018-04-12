@@ -8,12 +8,15 @@
 | 굴절어 | 라틴어, 독일어, 러시아어 |  |
 | 고립어 | 영어, 중국어 | 어순에 따라 단어의 문법적 기능이 정해짐 |
 
-> 읽을거리:
->
-> * [http://zomzom.tistory.com/1074](http://zomzom.tistory.com/1074)
-> * [https://m.blog.naver.com/reading0365/221057575669](https://m.blog.naver.com/reading0365/221057575669)
+![](/assets/intro-why-korean-hell-example.png)
 
-## ![](/assets/intro-why-korean-hell-example.png)
+
+
+> 읽을거리:
+* [http://zomzom.tistory.com/1074](http://zomzom.tistory.com/1074)
+* [https://m.blog.naver.com/reading0365/221057575669](https://m.blog.naver.com/reading0365/221057575669)
+
+
 
 ## 주어 생략
 
