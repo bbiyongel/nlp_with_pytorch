@@ -45,7 +45,7 @@
 
 ## 띄어쓰기의 어려움
 
-![](/assets/intro-why-korean-hell-my-bro.png)
+![](/assets/intro-why-korean-hell-my-bro.png) ![](/assets/intro-why-korean-hell-human-meat.png)
 
 ## 주어 생략
 
