@@ -12,7 +12,7 @@
 
 > 읽을거리: 
 - http://zomzom.tistory.com/1074
-- https://m.blog.naver.com/PostView.nhn?blogId=reading0365&logNo=221057575669&proxyReferer=&proxyReferer=https%3A%2F%2Fwww.google.co.kr%2F
+- https://m.blog.naver.com/reading0365/221057575669
 
 ## 주어 생략
 
