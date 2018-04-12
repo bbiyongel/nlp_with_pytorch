@@ -9,6 +9,7 @@
 | 고립어 | 영어, 중국어 | 어순에 따라 단어의 문법적 기능이 정해짐 |
 
 ![](/assets/intro-why-korean-hell-example.png)
+[Image from [나무위키(교착어)](https://namu.wiki/w/%EA%B5%90%EC%B0%A9%EC%96%B4)]
 
 > 읽을거리:
 * [http://zomzom.tistory.com/1074](http://zomzom.tistory.com/1074)
