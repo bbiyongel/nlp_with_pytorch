@@ -44,7 +44,7 @@
 
 ## 띄어쓰기의 어려움
 
-
+![](https://cdn.namuwikiusercontent.com/s/f41caf17ee7cf2934b8fa9a26cda4b70eca6f8746fe85434f8b7168ff0f06532c8e8e296ac60982d53e954e00cf00a372c4844b5c0cc8bb519d7197bff4abab79eda6f3e871387ab814fc7846f3e47b1?e=1531853299&k=S7g87mq9ZUFL2sDdkr9VSQ)
 
 ## 주어 생략
 
