@@ -42,6 +42,8 @@
 * [http://zomzom.tistory.com/1074](http://zomzom.tistory.com/1074)
 * [https://m.blog.naver.com/reading0365/221057575669](https://m.blog.naver.com/reading0365/221057575669)
 
+## 띄어쓰기의 비정제
+
 ## 주어 생략
 
 ## 평서문과 의문문의 차이
