@@ -51,6 +51,8 @@
 
 ## 주어 생략
 
+> 읽을거리: http://www.hani.co.kr/arti/society/schooling/261322.html
+
 ## 평서문과 의문문의 차이
 
 ## 한자 기반의 언어
