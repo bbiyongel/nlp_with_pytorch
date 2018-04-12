@@ -1,4 +1,4 @@
-# Why Korean NLP is more difficult?
+# 무엇이 한국어 NLP를 더욱 어렵게 만드는가?
 
 ## 교착어 (어순)
 
