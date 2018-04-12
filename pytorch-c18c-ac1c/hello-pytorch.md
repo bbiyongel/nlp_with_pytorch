@@ -178,7 +178,15 @@ MyLinear(
 
 ## Backward (Back-propagation)
 
+```python
+x = torch.FloatTensor(16, 10)
+x = Variable(x)
+linear = MyLinear(10, 5)
+y = linear(x)
+loss = y.sum()
 
+loss.backward()
+```
 
 ## train\(\) and eval\(\)
 
