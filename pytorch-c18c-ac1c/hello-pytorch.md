@@ -191,20 +191,79 @@ f(x_1, x_2, x_3) &= x_1 \times x_2 + x_3
 $$
 
 ```python
-class MyLinear(nn.Module):
+import random
+
+import torch
+import torch.nn as nn
+from torch.autograd import Variable
+
+class MyModel(nn.Module):
 
     def __init__(self, input_size, output_size):
-        super(MyLinear, self).__init__()
+        super(MyModel, self).__init__()
         
-        self.hidden_size = int((inpu_size + output_size) * .5
-        self.linear1 = nn.Linear(input_size, self.hidden_size)
-        self.linear2 = nn.Linear(self.hidden_size, output_size)
-        
+        self.linear = nn.Linear(input_size, output_size)
+                               
     def forward(self, x):
-        x = self.linear1(x)
-        y = self.linear2(x)
-        
+        y = self.linear(x)
+                               
         return y
+```
+
+```python
+def ground_truth(x):
+    return 3 * x[:, 0] + x[:, 1] - 2 * x[:, 2]
+```
+
+```python
+def train(model, x, y, optim):
+    optim.zero_grad()
+    
+    y_hat = model(x)
+    loss = ((y - y_hat)**2).sum() / x.size(0)
+    
+    loss.backward()
+    
+    optim.step()
+    
+    return loss.data[0]
+```
+
+```python
+batch_size = 1
+n_epochs = 1000
+n_iter = 10000
+
+model = MyModel(3, 1)
+print(model)
+
+optim = torch.optim.SGD(model.parameters(), lr = 0.0001, momentum=0.1)
+```
+
+```python
+for epoch in range(n_epochs):
+    avg_loss = 0
+    
+    for i in range(n_iter):
+        x = Variable(torch.rand(batch_size, 3))
+        y = Variable(ground_truth(x.data))
+
+        loss = train(model, x, y, optim)
+        
+        avg_loss += loss
+    avg_loss = avg_loss / n_iter
+
+    x_valid = Variable(torch.FloatTensor([[.3, .2, .1]]))
+    y_valid = Variable(ground_truth(x_valid.data))
+
+    model.eval()
+    y_hat = model(x_valid)
+    model.train()
+    
+    print(avg_loss, y_valid.data[0], y_hat.data[0, 0])  
+
+    if avg_loss < .001:
+        break
 ```
 
 ## train\(\) and eval\(\)
