@@ -8,12 +8,12 @@
 
 아래의 문장을 한번 살펴볼까요. 어떤 회사의 번역이 가장 정확한지 살펴 볼까요. (2018년 3월 기준)
 
-> 커피숍에 **차**를 마시러 가던 **차** 안에서 나는 그녀에게 **차**였다.
-- Google: I was in the **car** while I was going to drink **tea** at the coffee shop.
-- Microsoft: In a **car** that was going to drink **tea** in the coffee shop, I was a **car** to her.
-- Naver: I got **dumped** by her in the **car** I was going to the coffee shop.
-- Kakao: I was in the **car** going to the coffee shop for **tea** and I was **tea** to her.
-- SK: I got **dumped** by her in the **car** on the coffee shop.
+> 차를 마시러 공원에 가던 차 안에서 나는 그녀에게 차였다.
+- Google: I was kicking her in the car that went to the park for tea.
+- Microsoft: I was a car to her, in the car I had a car and went to the park.
+- Naver: I got dumped by her on the way to the park for tea.
+- Kakao: I was in the car going to the park for tea and I was in her car.
+- SK: I got dumped by her in the car that was going to the park for a cup of tea.
 
 안타깝게도 완벽한 번역은 없는 것 같습니다. 같은 **차**라는 단어가 세 번 등장하였고, 모두 다른 의미를 지니고 있습니다: tea, car, and kick (or dump). 일부는 표현을 빠뜨리기도 하였고, 다른 일부는 단어를 헷갈린 것 같습니다. 이렇게 단어의 중의성 때문에 문장을 해석하는데 모호함이 생기기도 합니다. 또 다른 상황을 살펴보겠습니다.
 
