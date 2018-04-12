@@ -4,14 +4,16 @@
 
 사실, 요즈음과 같이 새로운 기술에 대한 논문 및 소스코드 공개가 당연시되는 현상 아래에서는 각 기계번역 시스템마다의 수준의 편차가 그렇게 크지 않습니다. 따라서 누가 최신 기술을 구현했느냐보다, 상용화에 대한 경험과 연륜, 데이터의 양과 품질(정제 이슈)에 따라 성능이 결정될 수 있습니다.
 
-아래는 현재 대표적인 기계번역 시스템의 현 주소를 살펴볼 수 있는 간단한 샘플 문장 입니다. (2018년 03월 기준)
+아래는 현재 대표적인 기계번역 시스템의 현 주소를 살펴볼 수 있는 간단한 샘플 문장 입니다. (2018년 04월 기준)
 
-> 커피숍에 **차**를 마시러 가던 **차** 안에서 나는 그녀에게 **차**였다.
-- Google: I was in the **car** while I was going to drink **tea** at the coffee shop.
-- Microsoft: In a **car** that was going to drink **tea** in the coffee shop, I was a **car** to her.
-- Naver: I got **dumped** by her in the **car** I was going to the coffee shop.
-- Kakao: I was in the **car** going to the coffee shop for **tea** and I was **tea** to her.
-- SK: I got **dumped** by her in the **car** on the coffee shop.
+> 차를 마시러 공원에 가던 차 안에서 나는 그녀에게 차였다.
+- Google: I was kicking her in the car that went to the park for tea.
+- Microsoft: I was a car to her, in the car I had a car and went to the park.
+- Naver: I got dumped by her on the way to the park for tea.
+- Kakao: I was in the car going to the park for tea and I was in her car.
+- SK: I got dumped by her in the car that was going to the park for a cup of tea.
+
+
 
 위와 같이 어려운 문장(문장구조는 쉬우나 중의성에 대해서 높은 난이도)에 대해서 어찌보면 갈 길이 멀기도 합니다. 따라서, 위와 같이 누군가 저런 어려운 문제에 대한 한단계 더 높은 기술력을 가졌다기보단, 기술의 수준은 비슷하다고 볼 수 있습니다.
 
