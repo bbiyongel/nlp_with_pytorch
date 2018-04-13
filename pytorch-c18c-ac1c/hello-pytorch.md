@@ -145,7 +145,7 @@ torch.Size([3, 1, 7])
 RuntimeError: The size of tensor a (2) must match the size of tensor b (3) at non-singleton dimension 1
 ```
 
-Broadcasting 연산의 가장 주의해야 할 점은, 의도하지 않은 broadcasting연산으로 인해서 bug가 발생할 가능성 입니다. 원래는 같은 size의 tensor끼리 연산을 해야 하는 부분인데, 코딩하며 실수에 의해서 다른 size가 되었을 때, 덧셈 또는 곱셈을 하고 error가 나서 알아차려야 하지만, error가 나지 않ㅇ고 
+Broadcasting 연산의 가장 주의해야 할 점은, 의도하지 않은 broadcasting연산으로 인해서 bug가 발생할 가능성 입니다. 원래는 같은 size의 tensor끼리 연산을 해야 하는 부분인데, 코딩하며 실수에 의해서 다른 size가 되었을 때, 덧셈 또는 곱셈을 하고 error가 나서 알아차려야 하지만, error가 나지 않고 넘어가 버린 상태에서, 결국 기대하던 값과 다른 값이 결과로 나오게 되어, 원인을 찾느라 고생할 수도 있습니다. 따라서 코딩 할 때에 요령이 필요합니다.
 
 >참고사이트: 
 - [http://pytorch.org/docs/master/torch.html?highlight=matmul\#torch.matmul](http://pytorch.org/docs/master/torch.html?highlight=matmul#torch.matmul)
