@@ -76,3 +76,5 @@
 |원문|저는 여기 한 가지 문제점이 있다고 생각합니다.|
 |형태소에 따른 segmentation|저 는 여기 한 가지 문제점 이 있 다고 생각 합니다 .|
 |count based subword segmentation|▁저 ▁는 ▁여기 ▁한 ▁가지 ▁문 제 점 ▁이 ▁있 ▁다고 ▁생각 ▁합니다 ▁.|
+
+Preprocessing 챕터에서 다루겠지만, 이렇게 마지막까지 subword level로 segmentation할 경우에, 
