@@ -64,6 +64,6 @@
 
 |언어|단어|조합|
 |-|-|-|
-|영어|Concentrate|con + centr + ate|
-|한국어|집중|集 + 中|
+|영어|Concentrate|con(=together) + centr(=center) + ate(=make)|
+|한국어|집중(集中)|集(모을 집) + 中(가운데 중)|
 
