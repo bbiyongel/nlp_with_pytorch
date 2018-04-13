@@ -102,7 +102,31 @@ torch.Size([10, 3, 5])
 torch.Size([10, 3, 5])
 ```
 
+마찬가지로 덧셈 연산에 대해서도 broadcasting이 적용될 수 있는데 그 규칙은 아래와 같습니다. 곱셈과 
+
 ```python
+>>> x=torch.FloatTensor(5,7,3)
+>>> y=torch.FloatTensor(5,7,3)
+# same shapes are always broadcastable (i.e. the above rules always hold)
+
+>>> x=torch.FloatTensor()
+>>> y=torch.FloatTensor(2,2)
+# x and y are not broadcastable, because x does not have at least 1 dimension
+
+# can line up trailing dimensions
+>>> x=torch.FloatTensor(5,3,4,1)
+>>> y=torch.FloatTensor(  3,1,1)
+# x and y are broadcastable.
+# 1st trailing dimension: both have size 1
+# 2nd trailing dimension: y has size 1
+# 3rd trailing dimension: x size == y size
+# 4th trailing dimension: y dimension doesn't exist
+
+# but:
+>>> x=torch.FloatTensor(5,2,4,1)
+>>> y=torch.FloatTensor(  3,1,1)
+# x and y are not broadcastable, because in the 3rd trailing dimension 2 != 3
+
 # can line up trailing dimensions to make reading easier
 >>> x=torch.FloatTensor(5,1,4,1)
 >>> y=torch.FloatTensor(  3,1,1)
