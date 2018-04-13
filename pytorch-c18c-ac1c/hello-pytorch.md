@@ -102,7 +102,7 @@ torch.Size([10, 3, 5])
 torch.Size([10, 3, 5])
 ```
 
-마찬가지로 덧셈 연산에 대해서도 broadcasting이 적용될 수 있는데 그 규칙은 아래와 같습니다. 곱셈과 
+마찬가지로 덧셈 연산에 대해서도 broadcasting이 적용될 수 있는데 그 규칙은 아래와 같습니다. 곱셈에 비해서 좀 더 규칙이 까다로우니 주의해야 합니다.
 
 ```python
 >>> x=torch.FloatTensor(5,7,3)
@@ -144,6 +144,8 @@ torch.Size([3, 1, 7])
 >>> (x+y).size()
 RuntimeError: The size of tensor a (2) must match the size of tensor b (3) at non-singleton dimension 1
 ```
+
+Broadcasting 연산의 가장 주의해야 할 점은, 의도하지 않은 broadcasting연산으로 인해서 bug가 발생할 가능성 입니다. 원래는 같은 size의 tensor끼리 연산을 해야 하는 부분인데, 코딩하며 실수에 의해서 다른 size가 되었을 때, 덧셈 또는 곱셈을 하고 error가 나서 알아차려야 하지만, error가 나지 않ㅇ고 
 
 >참고사이트: 
 - [http://pytorch.org/docs/master/torch.html?highlight=matmul\#torch.matmul](http://pytorch.org/docs/master/torch.html?highlight=matmul#torch.matmul)
