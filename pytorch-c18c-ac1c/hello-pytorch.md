@@ -69,6 +69,14 @@ y = linear(x)
 
 ### Broadcasting
 
+PyTorch에 새롭게 추가된 기능인 Broadcasting에 대해서 설명 해 보겠습니다. NumPy에서 제공되는 broadcasting과 동일하게 동작합니다. 이 함수를 통해서 임의의 차원의 tensor끼리 연산을 가능하게 해 줍니다. 이전에는 강제로 2차원을 만들거나 하여 곱해주는 수 밖에 없었습니다. 다만, 입력으로 주어지는 tensor들의 차원에 따라서 규칙이 적용됩니다. 그 규칙은 아래와 같습니다.
+
+1. 입력으로 들어가는 두 tensor가 모두 1차원(vector) 일 때
+    - dot product가 수행되어 결과값이 scalar가 나옴.
+1. 입력 tensor가 모두 2차원(matrix) 일 때
+    - matrix-matrix product가 수행 됨
+1. 입력 tensor가 
+
 ```python
 >>> # vector x vector
 >>> tensor1 = torch.randn(3)
@@ -100,7 +108,28 @@ torch.Size([10, 3, 5])
 torch.Size([10, 3, 5])
 ```
 
-참고사이트: [http://pytorch.org/docs/master/torch.html?highlight=matmul\#torch.matmul](http://pytorch.org/docs/master/torch.html?highlight=matmul#torch.matmul)
+```python
+# can line up trailing dimensions to make reading easier
+>>> x=torch.FloatTensor(5,1,4,1)
+>>> y=torch.FloatTensor(  3,1,1)
+>>> (x+y).size()
+torch.Size([5, 3, 4, 1])
+
+# but not necessary:
+>>> x=torch.FloatTensor(1)
+>>> y=torch.FloatTensor(3,1,7)
+>>> (x+y).size()
+torch.Size([3, 1, 7])
+
+>>> x=torch.FloatTensor(5,2,4,1)
+>>> y=torch.FloatTensor(3,1,1)
+>>> (x+y).size()
+RuntimeError: The size of tensor a (2) must match the size of tensor b (3) at non-singleton dimension 1
+```
+
+>참고사이트: 
+- [http://pytorch.org/docs/master/torch.html?highlight=matmul\#torch.matmul](http://pytorch.org/docs/master/torch.html?highlight=matmul#torch.matmul)
+- http://pytorch.org/docs/master/notes/broadcasting.html#broadcasting-semantics
 
 ## nn.Module
 
