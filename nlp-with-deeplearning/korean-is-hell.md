@@ -79,4 +79,4 @@
 
 Preprocessing 챕터에서 다루겠지만, 이렇게 마지막까지 subword level로 segmentation할 경우에, 더욱 중의성 문제가 가중되어 버립니다. 
 
-**문제점(問題點)**이라는 단어가 **문(問, 물을 문) 제(題, 제목 제) 점(點, 점 점)**이라고 각각 segmentation 되었습니다. 하지만 결제(決濟)의 **제(濟, 건널 제)**도 있고, 제공(提供)의 **제(提, 끌 제)**도 있을 겁니다. 그런데 neural network에서 **제**라는 token은 결국 embedding vector로 변환이 될 겁니다. 따라서, embedding vector는 **제(題, 제목 제), 제(濟, 건널 제), 제(提, 끌 제)** 세가지 모두에 대해서 embedding을 하게 될 것이고 저 뜻의 중앙 방향으로 vector가 애매하게 embedding 될 것 입니다.
+**문제점(問題點)**이라는 단어가 **문(問, 물을 문) 제(題, 제목 제) 점(點, 점 점)**이라고 각각 segmentation 되었습니다. 하지만 결제(決濟)의 **제(濟, 건널 제)**도 있고, 제공(提供)의 **제(提, 끌 제)**도 있을 겁니다. 그런데 neural network에서 **제**라는 token은 결국 embedding vector로 변환이 될 겁니다. 따라서, embedding vector는 **제(題, 제목 제), 제(濟, 건널 제), 제(提, 끌 제)** 세가지 모두에 대해서 embedding을 하게 될 것이고 저 뜻의 중앙 방향으로 vector가 애매하게 embedding 될 것 입니다. 사실, 굳이 neural network로 가지 않더라도, traditional NLP에서도 헷갈릴 것 또한 자명한 사실 입니다.
