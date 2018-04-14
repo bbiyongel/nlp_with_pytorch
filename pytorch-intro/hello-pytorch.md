@@ -71,8 +71,6 @@ x = Variable(x)
 y = linear(x)
 ```
 
-다만 위의 경우와 다르게, 실제의 linear layer의 경우에는, 입력으로 3차원의 tensor를 입력으로 받아서 처리하도록 되어 있습니다. 해당 기능을 구현하는 방법을 아래에서 다루도록 하겠습니다.
-
 ### Broadcasting
 
 PyTorch에 새롭게 추가된 기능인 Broadcasting에 대해서 설명 해 보겠습니다. NumPy에서 제공되는 broadcasting과 동일하게 동작합니다. **matmul()**을 사용하면 임의의 차원의 tensor끼리 연산을 가능하게 해 줍니다. 이전에는 강제로 2차원을 만들거나 하여 곱해주는 수 밖에 없었습니다. 다만, 입력으로 주어지는 tensor들의 차원에 따라서 규칙이 적용됩니다. 그 규칙은 아래와 같습니다.
@@ -193,11 +191,21 @@ linear = MyLinear(10, 5)
 y = linear(x)
 ```
 
-**forward()**에서 정의 해 준대로 잘 동작 하는 것을 볼 수 있습니다. 하지만, 위와 같이 W와 b를 선언하면 문제점이 있습니다. parameters() 함수는 module 내에 선언 된 learnable parameter들을 iterative하게 주는 iterator를 반환하는 함수 입니다. 한번, linear module 내의 learnable parameter를 확인 해 보도록 하겠습니다.
+**forward()**에서 정의 해 준대로 잘 동작 하는 것을 볼 수 있습니다. 하지만, 위와 같이 W와 b를 선언하면 문제점이 있습니다. parameters() 함수는 module 내에 선언 된 learnable parameter들을 iterative하게 주는 iterator를 반환하는 함수 입니다. 한번, linear module 내의 learnable parameter들의 크기를 size()함수를 통해 확인 해 보도록 하겠습니다.
 
 ```python
-
+>>> params = [p.size() for p in linear.parameters()]
+>>> print(params)
+[]
 ```
+
+아무것도 들어있지 않은 빈 list가 찍혔습니다. 즉, linear module 내에는 learnable parameter가 없다는 이야기 입니다. 그 이유는 __init__() 내에서 Variable로 선언 하였기 때문 입니다. 아래의 웹페이지에 그 이유가 자세히 나와 있습니다.
+
+참고사이트: http://pytorch.org/docs/master/nn.html?highlight=parameter#parameters
+
+>when they’re assigned as Module attributes they are automatically added to the list of its parameters, and will appear e.g. in parameters() iterator. Assigning a Tensor doesn’t have such effect. This is because one might want to cache some temporary state, like last hidden state of the RNN, in the model.
+
+따라서 우리는 Variable 대신에 Parameter라는 class를 사용하여 tensor를 wrapping해야 합니다. 그럼 아래와 같이 될 것 입니다.
 
 ```python
 class MyLinear(nn.Module):
@@ -214,15 +222,23 @@ class MyLinear(nn.Module):
         return y
 ```
 
-참고사이트: http://pytorch.org/docs/master/nn.html?highlight=parameter#parameters
+그럼 아까와 같이 다시 linear module 내부의 learnable parameter들의 size를 확인 해 보도록 하겠습니다.
 
->when they’re assigned as Module attributes they are automatically added to the list of its parameters, and will appear e.g. in parameters() iterator. Assigning a Tensor doesn’t have such effect. This is because one might want to cache some temporary state, like last hidden state of the RNN, in the model.
+```python
+>>> params = [p.size() for p in linear.parameters()]
+>>> print(params)
+[torch.Size([10, 5]), torch.Size([5])]
+```
+
+잘 들어있는 것을 확인 할 수 있습니다. 그럼 아래와 같이 한번 실행 해 보죠.
 
 ```python
 >>> print(linear)
 MyLinear(
 )
 ```
+
+아쉽게도 Parameter로 선언 된 parameter들은 print로 찍혀 나오지 않습니다. -- 왜 그렇게 구현 해 놓았는지 이유는 잘 모르겠습니다. 그럼 print에서도 확인할 수 있게 깔끔하게 바꾸어 보도록 하겠습니다. 아래와 같이 바꾸면 제대로 된 구현이라고 볼 수 있습니다.
 
 ```python
 class MyLinear(nn.Module):
@@ -238,6 +254,8 @@ class MyLinear(nn.Module):
         return y
 ```
 
+nn.Linear class를 사용하여 W와 b를 대체하였습니다. 그리고 아래와 같이 print를 해 보면 내부의 Linear Layer가 잘 찍혀 나오는 것을 확인 할 수 있습니다.
+
 ```python
 >>> print(linear)
 MyLinear(
@@ -247,15 +265,23 @@ MyLinear(
 
 ## Backward (Back-propagation)
 
+이제까지 원하는 연산을 통해 값을 앞으로 전달(feed-forward)하는 방법을 살펴보았습니다. 이제 이렇게 얻은 값을 우리가 원하는 값과의 차이를 계산하여 error를 뒤로 전달(back-propagation)하는 것을 해 보도록 하겠습니다.
+
+예를 들어 우리가 원하는 값은 아래와 같이 **100**이라고 하였을 때, linear의 결과값 matrix의 합과 목표값과의 거리(error 또는 loss)를 구하고, 그 값에 대해서 **backward()**함수를 사용함으로써 gradient를 구합니다. 이때, error는 Variable class로 된 sclar로 표현 되어야 합니다. vector나 matrix의 형태여서는 안됩니다.
+
 ```python
+objective = 100
+
 x = torch.FloatTensor(16, 10)
 x = Variable(x)
 linear = MyLinear(10, 5)
 y = linear(x)
-loss = y.sum()
+loss = (objective - y.sum())**2
 
 loss.backward()
 ```
+
+위와 같이 구해진 각 parameter들의 gradient에 대해서 gradient descent 방법을 사용하여 error(loss)를 줄여나갈 수 있을 것 입니다.
 
 ## train\(\) and eval\(\)
 
@@ -271,11 +297,22 @@ linear.train()
 
 ## Example
 
+이제까지 배운 것들을 활용하여 임의의 함수를 approximate하는 neural network를 구현 해 보도록 하겠습니다. 
+
+1. Random으로 generate한 tensor들을 
+1. 우리가 approximate하고자 하는 ground-truth 함수에 넣어 정답을 구하고, 
+1. 그 정답($$y$$)과 neural network를 통과한 $$\hat{y}$$과의 차이(error)를 Mean Square Error(MSE)를 통해 구하여 
+1. SGD를 통해서 optimize하도록 해 보겠습니다.
+
+MSE의 수식은 아래와 같습니다.
+
 $$
 \begin{aligned}
 &\mathcal{L}_{MSE}(x, y)=\frac{1}{N}\sum^N_{i=1}{(x_n - y_n)^2}
 \end{aligned}
 $$
+
+먼저 1개의 linear layer를 가진 MyModel이라는 module을 선언합니다.
 
 ```python
 import random
@@ -297,30 +334,43 @@ class MyModel(nn.Module):
         return y
 ```
 
+그리고 아래와 같이, 임의의 함수가 동작한다고 가정하겠습니다.
+
 $$
 \begin{aligned}
 f(x_1, x_2, x_3) &= 3x_1 + x_2 - 2x_3
 \end{aligned}
 $$
 
+해당 함수를 python으로 구현하면 아래와 같습니다. 물론 neural network 입장에서는 내부 동작 내용을 알 수 없는 함수 입니다.
+
 ```python
 def ground_truth(x):
     return 3 * x[:, 0] + x[:, 1] - 2 * x[:, 2]
 ```
 
+아래는 입력을 받아 feed-forward 시킨 후, back-propagation하여 gradient descent까지 하는 함수 입니다.
+
 ```python
 def train(model, x, y, optim):
+    # initialize gradients in all parameters in module.
     optim.zero_grad()
     
+    # feed-forward
     y_hat = model(x)
+    # get error between answer and inferenced.
     loss = ((y - y_hat)**2).sum() / x.size(0)
     
+    # back-propagation
     loss.backward()
     
+    # one-step of gradient descent
     optim.step()
     
     return loss.data[0]
 ```
+
+그럼 위의 함수들을 사용 하기 위해서 hyper-parameter를 setting하겠습니다.
 
 ```python
 batch_size = 1
@@ -332,6 +382,8 @@ optim = torch.optim.SGD(model.parameters(), lr = 0.0001, momentum=0.1)
 
 print(model)
 ```
+
+위의 setting 값을 사용하여 평균 loss 값이 **.001**보다 작을 때 까지 훈련 시킵니다.
 
 ```python
 for epoch in range(n_epochs):
@@ -346,6 +398,7 @@ for epoch in range(n_epochs):
         avg_loss += loss
     avg_loss = avg_loss / n_iter
 
+    # simple test sample to check the network.
     x_valid = Variable(torch.FloatTensor([[.3, .2, .1]]))
     y_valid = Variable(ground_truth(x_valid.data))
 
@@ -355,11 +408,15 @@ for epoch in range(n_epochs):
     
     print(avg_loss, y_valid.data[0], y_hat.data[0, 0])  
 
-    if avg_loss < .001:
+    if avg_loss < .001: # finish the training if the loss is smaller than .001.
         break
 ```
 
+위와 같이 임의의 함수에 대해서 실제로 neural network를 approximate하는 아주 간단한 예제를 살펴 보았습니다. 앞으로 책에서 다루어질 architecture들과 훈련 방법들도 이 예제의 연장선상에 지나지 않습니다.
+
 ## Using GPU
+
+PyTorch는 당연히 GPU상에서 훈련하는 방법도 제공합니다. 아래와 같이 **cuda()**함수를 통해서 원하는 객체를 GPU memory상으로 copy(Variable 또는 Tensor의 경우)하거나 move(nn.Module의 하위 클래스인 경우) 시킬 수 있습니다.
 
 ```python
 >>> # Note that tensor is declared in torch.cuda.
@@ -370,3 +427,5 @@ for epoch in range(n_epochs):
 >>> linear.cuda()
 >>> y = linear(x)
 ```
+
+또한, **cpu()**함수를 통해서 다시 PC의 memory로 copy하거나 move할 수 있습니다.
