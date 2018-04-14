@@ -17,6 +17,7 @@ http://ruder.io/deep-learning-nlp-best-practices/
 
 - Text Classificaion
   - [Deep Learning for Sentiment Analysis: A Survey](https://arxiv.org/pdf/1801.07883v1.pdf)
+  - [Learning to Generate Reviews and Discovering Sentiment](https://arxiv.org/pdf/1704.01444.pdf)
 - MT
   - [NON-AUTOREGRESSIVE NEURAL MACHINE TRANSLATION](https://arxiv.org/pdf/1711.02281.pdf)
   - [WORD TRANSLATION WITHOUT PARALLEL DATA](https://arxiv.org/pdf/1710.04087v2.pdf)
