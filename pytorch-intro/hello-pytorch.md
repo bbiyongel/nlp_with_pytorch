@@ -153,11 +153,17 @@ RuntimeError: The size of tensor a (2) must match the size of tensor b (3) at no
 
 Broadcasting 연산의 가장 주의해야 할 점은, 의도하지 않은 broadcasting연산으로 인해서 bug가 발생할 가능성 입니다. 원래는 같은 size의 tensor끼리 연산을 해야 하는 부분인데, 코딩하며 실수에 의해서 다른 size가 되었을 때, 덧셈 또는 곱셈을 하고 error가 나서 알아차려야 하지만, error가 나지 않고 넘어가 버린 상태에서, 결국 기대하던 값과 다른 값이 결과로 나오게 되어, 원인을 찾느라 고생할 수도 있습니다. 따라서 코딩 할 때에 요령이 필요합니다.
 
->참고사이트: 
-- [http://pytorch.org/docs/master/torch.html?highlight=matmul\#torch.matmul](http://pytorch.org/docs/master/torch.html?highlight=matmul#torch.matmul)
-- http://pytorch.org/docs/master/notes/broadcasting.html#broadcasting-semantics
+> 참고사이트: 
+> - [http://pytorch.org/docs/master/torch.html?highlight=matmul\#torch.matmul](http://pytorch.org/docs/master/torch.html?highlight=matmul#torch.matmul)
+> - http://pytorch.org/docs/master/notes/broadcasting.html#broadcasting-semantics
 
 ## nn.Module
+
+이제까지 우리가 원하는 수식을 어떻게 어떻게 feed-forward 구현 하는지 살펴 보았습니다. 이것을 좀 더 편리하고 깔끔하게 사용하는 방법에 대해서 다루어 보도록 하겠습니다. PyTorch는 nn.Module이라는 class를 제공하여 사용자가 이 위에서 자신이 필요로 하는 model architecture를 구현할 수 있도록 하였습니다. 
+
+nn.Module의 상속한 사용자 정의 class는 다시 내부에 nn.Module을 상속한 class를 선언하여 소유 할 수 있습니다. 즉, nn.Module 안에 nn.Module 객체를 선언하여 사용 할 수 있습니다. 그리고 nn.Module의 forward() 함수를 override하여 feed-forward를 구현할 수 있습니다. 이외에도 nn.Module의 특성을 이용하여 한번에 weight parameter를 save/load할 수도 있습니다.
+
+그럼 앞서 구현한 linear 함수 대신에 MyLinear라는 class를 nn.Module을 상속받아 선언하고, 사용하여 똑같은 기능을 구현 해 보겠습니다.
 
 ```python
 import torch
@@ -178,11 +184,19 @@ class MyLinear(nn.Module):
         return y
 ```
 
+위와 같이 선언한 MyLinear class를 이제 직접 사용해서 정상 동작 하는지 확인 해 보겠습니다.
+
 ```python        
 x = torch.FloatTensor(16, 10)
 x = Variable(x)
 linear = MyLinear(10, 5)
 y = linear(x)
+```
+
+**forward()**에서 정의 해 준대로 잘 동작 하는 것을 볼 수 있습니다. 하지만, 위와 같이 W와 b를 선언하면 문제점이 있습니다. parameters() 함수는 module 내에 선언 된 learnable parameter들을 iterative하게 주는 iterator를 반환하는 함수 입니다. 한번, linear module 내의 learnable parameter를 확인 해 보도록 하겠습니다.
+
+```python
+
 ```
 
 ```python
