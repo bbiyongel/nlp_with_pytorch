@@ -23,6 +23,8 @@ http://ruder.io/deep-learning-nlp-best-practices/
   - [WORD TRANSLATION WITHOUT PARALLEL DATA](https://arxiv.org/pdf/1710.04087v2.pdf)
   - [DiSAN: Directional Self-Attention Network for RNN/CNN-Free Language Understanding](https://arxiv.org/pdf/1709.04696.pdf)
   - [BI-DIRECTIONAL BLOCK SELF-ATTENTION FOR FAST AND MEMORY-EFFICIENT SEQUENCE MODELING](https://openreview.net/pdf?id=H1cWzoxA-)
+- Summarization
+  - [Text Summarization Techniques: A Brief Survey](https://arxiv.org/pdf/1707.02268.pdf)
 - RL (Policy Gradient)
   - [SeqGAN: Sequence Generative Adversarial Nets with Policy Gradient](https://arxiv.org/pdf/1609.05473.pdf)
   - [BATCH POLICY GRADIENT METHODS FOR IMPROVING NEURAL CONVERSATION MODELS](https://arxiv.org/pdf/1702.03334.pdf)
