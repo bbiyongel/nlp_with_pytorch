@@ -21,7 +21,7 @@
   * [Selectional Preference](word-sense-disambiguation-wsd/selectional-preference.md)
   * [WordNet](word-sense-disambiguation-wsd/wordnet.md)
 * [Preprocessing](preprocessing/cover.md)
-  * [Intro](preprocessing/c804-cc98-b9ac-ac1c-c694.md)
+  * [Intro](preprocessing/intro.md)
   * [Collecting corpus](preprocessing/collecting-corpus.md)
   * [Cleaning corpus](preprocessing/cleaning-corpus.md)
   * [Tokenization \(POS Tagging\)](preprocessing/tokenization.md)
