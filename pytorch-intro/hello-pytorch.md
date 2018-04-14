@@ -45,9 +45,13 @@ z = (x + y) + Variable(torch.FloatTensor(2, 2), requires_grad = True)
 
 ## How to Do Basic Operations \(Forward\)
 
+이번에는 Linear Layer(또는 fully-connected layer, dense layer)를 구현 해 보도록 하겠습니다. M by N의 입력 matrix가 주어지면, N by P의 matrix를 곱한 후, P size의 vector를 bias로 더하도록 하겠습니다. 수식은 아래와 같을 것 입니다.
+
 $$
 y = xW^t + b
 $$
+
+이러한 linaer layer의 기능은 아래와 같이 PyTorch로 구현할 수 있습니다.
 
 ```python
 import torch
@@ -66,6 +70,8 @@ x = Variable(x)
 
 y = linear(x)
 ```
+
+다만 위의 경우와 다르게, 실제의 linear layer의 경우에는, 입력으로 3차원의 tensor를 입력으로 받아서 처리하도록 되어 있습니다. 해당 기능을 구현하는 방법을 아래에서 다루도록 하겠습니다.
 
 ### Broadcasting
 
