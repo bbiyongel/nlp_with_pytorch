@@ -412,7 +412,7 @@ for epoch in range(n_epochs):
         break
 ```
 
-위와 같이 임의의 함수에 대해서 실제로 neural network를 approximate하는 아주 간단한 예제를 살펴 보았습니다. 앞으로 책에서 다루어질 architecture들과 훈련 방법들도 이 예제의 연장선상에 지나지 않습니다.
+위와 같이 임의의 함수에 대해서 실제로 neural network를 approximate하는 아주 간단한 예제를 살펴 보았습니다. 사실은 neural network라기보단, linear regression이라고 봐야 합니다. 하지만, 앞으로 책에서 다루어질 architecture들과 훈련 방법들도 이 예제의 연장선상에 지나지 않습니다.
 
 ## Using GPU
 
