@@ -1,4 +1,4 @@
-# Hello PyTorch,
+# PyTorch Tutorial
 
 ## Tensor
 
