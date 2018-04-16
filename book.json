@@ -1,5 +1,5 @@
 {
-  "plugins": ["latex-codecogs", "autocover", "include-codeblock"],
+  "plugins": ["katex", "autocover", "include-codeblock"],
   "pdf": {
     "fontSize": 10,
     "fontFamily": "Serif"
