@@ -1,5 +1,5 @@
 {
-  "plugins": ["katex", "autocover", "include-codeblock"],
+  "plugins": ["mathjax", "autocover", "include-codeblock"],
   "pdf": {
     "fontSize": 10,
     "fontFamily": "Serif"
