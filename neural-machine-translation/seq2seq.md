@@ -123,11 +123,11 @@ Neural Network 모델은 데이터를 압축하는데에 탁월한 성능\([Mani
 
 ### Encoder
 
-### c. Decoder
+### Decoder
 
-### d. Generator
+### Generator
 
-### e. Loss
+### Loss
 
 seq2seq는 기본적으로 classification task이므로, $$ Cross Entropy $$을 _**Loss Function**_으로 사용합니다. 다만, GPU memory 문제와 Padding의 이슈가 있으므로 유의해야 할 점들이 있습니다.
 
