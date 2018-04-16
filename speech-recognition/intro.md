@@ -1,5 +1,5 @@
 # Speech Recognition
 
-## 소개
+## Introduction
 
-## 역사
+## History

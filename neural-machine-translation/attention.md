@@ -1,10 +1,10 @@
 # Attention
 
-## 1. Motivation
+## Motivation
 
 한문장으로 Attention을 정의하면 ***Query와 비슷한 값을 가진 Key를 찾아서 그 Value를 얻는 과정*** 입니다. 기존의 Key-Value 방식과 비교하며 attention에 대해서 설명 하겠습니다.
 
-### a. Key-Value function
+### Key-Value function
 
 Attention을 본격 소개하기 전에 먼저 우리가 알고 있는 자료형을 짚고 넘어갈까 합니다. Key-Value 또는 [Python에서 Dictionary](https://wikidocs.net/16)라고 부르는 자료형 입니다.
 
@@ -37,7 +37,7 @@ def is_same(key, query):
 
 코드를 살펴보면, 순차적으로 _**dic**_ 내부의 key값들과 _**query**_ 값을 비교하여, key가 같을 경우 _**weights**_에 _**1.0**_을 추가하고, 다를 경우에는 _**0.0**_을 추가합니다. 그리고 다시 _**dic**_ 내부의 value값들과 weights의 값을 inner product \(스칼라곱, dot product\) 합니다. 즉, $$ weight = 1.0 $$ 인 경우에만 value 값을 _**answer**_에 더합니다.
 
-### b. Differentiable Key-Value function
+### Differentiable Key-Value function
 
 좀 더 발전시켜서, 만약 _**is\_same**_ 함수 대신에 다른 함수를 써 보면 어떻게 될까요? _**how\_similar**_라는 key와 query 사이의 유사도를 리턴 해 주는 가상의 함수가 있다고 가정해 봅시다. \(가정하는 김에 좀 더 가정해서 cosine similarity라고 가정해 봅시다.\)
 
@@ -61,7 +61,7 @@ def is_same(key, query):
 
 무슨 의미인지는 모르겠지만 _**3.2**_라는 값이 나왔습니다. _**is\_same**_ 함수를 쓸 때에는 두 값이 같은지 if문을 통해 검사하고 값을 할당했기 때문에, 미분을 할 수 없었습니다. 하지만, 이제 우리는 key\_value\_func을 미분 할 수 있습니다.
 
-### c. Differentiable Key-Value Vector function
+### Differentiable Key-Value Vector function
 
 * 만약, _**dic**_의 _**value**_에는 100차원의 vector로 들어있었다면 어떻게 될까요? 
 * 거기에, _**query**_와 _**key**_값 모두 vector라면 어떻게 될까요? 즉, Word Embedding Vector라면?
@@ -104,9 +104,9 @@ def key_value_func(query):
 
 즉, 다시 말해서, 이 함수는 query와 비슷한 key 값을 찾아서 비슷한 정도에 따라서 weight를 나누고, 각 key의 value값을 weight 값 만큼 가져와서 모두 더하는 것 입니다. 이것이 Attention이 하는 역할 입니다.
 
-## 2. Attention for Machine Translation task
+## Attention for Machine Translation task
 
-### a. Overview
+### Overview
 
 그럼 번역과 같은 task에서 attention은 어떻게 작용할까요? 번역 과정에서는 encoder의 각 time-step 별 output을 Key와 Value로 삼고, 현재 time-step의 decoder output을 Query로 삼아 attention을 취합니다.
 
@@ -140,7 +140,7 @@ $$
 
 ![](/assets/seq2seq_with_attention_architecture.png)
 
-### b. Linear Transformation
+### Linear Transformation
 
 이때, 각 input parameter들은 다음을 의미한다고 볼 수 있습니다.
 
@@ -153,20 +153,20 @@ $$
 
 위와 같이 꼭 번역 task가 아니더라도, 두 다른 domain 사이의 비교를 위해서 사용합니다.
 
-### c. Why
+### Why
 
 ![](/assets/attention_working_example.png)
 
 왜 Attention이 필요한 것일까요? 기존의 seq2seq는 두 개의 RNN\(encoder와 decoder\)로 이루어져 있습니다. 여기서 압축된 문장의 의미에 해당하는 encoder의 정보를 hidden state \(LSTM의 경우에는 + cell state\)의 vector로 전달해야 합니다. 그리고 decoder는 그 정보를 이용해 다시 새로운 문장을 만들어냅니다. 이 때, hidden state만으로는 문장의 정보를 완벽하게 전달하기 힘들기 때문입니다. 따라서 decoder의 각 time-step 마다, hidden state의 정보에 추가하여 hidden state의 정보에 따라 필요한 encoder의 정보에 access하여 끌어다 쓰겠다는 것 입니다.
 
-### d. Evaluation
+### Evaluation
 
 ![http://web.stanford.edu/class/cs224n/lectures/cs224n-2017-lecture10.pdf](/assets/attention_better_translation_of_long_sentence.png)  
 [Image from CS224n](http://web.stanford.edu/class/cs224n/syllabus.html)
 
 기존 vanila seq2seq는 전반적으로 성능이 떨어짐을 알수 있을 뿐만 아니라, 특히 문장이 길어질 수록 성능이 더욱 하락함을 알 수 있습니다. 하지만 이에 비해서 attention을 사용하면 문장이 길어지더라도 성능이 크게 하락하지 않음을 알 수 있습니다.
 
-## 3. Code
+## Code
 
 
 

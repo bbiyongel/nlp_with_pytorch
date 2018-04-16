@@ -59,7 +59,7 @@
   * [Applications](language-modeling/application.md)
 * [Neural Machine Translation](neural-machine-translation/cover.md)
   * [Intro](neural-machine-translation/ae30-acc4-bc88-c5ed-ac1c-c694-bc0f-c5ed-c0ac.md)
-  * [Seq2seq](neural-machine-translation/seq2seq.md)
+  * [Sequence-to-Sequence](neural-machine-translation/seq2seq.md)
   * [Attention](neural-machine-translation/attention.md)
   * [Input Feeding](neural-machine-translation/input-feeding.md)
   * [Search](neural-machine-translation/beam-search.md)

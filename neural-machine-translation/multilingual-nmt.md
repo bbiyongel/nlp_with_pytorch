@@ -26,25 +26,25 @@
     
 언어가 다른 corpus를 하나로 합치다보면 양이 다르기 때문에 이에 대한 대처 방법도 정의 되어야 합니다. 따라서 아래의 실험들에서 oversampling 기법의 사용 유무도 같이 실험이 되었습니다. Oversampling 기법은 양이 적은 corpus를 양이 많은 corpus에 양과 비슷하도록 (데이터를 반복시켜) 양을 늘려 맞춰주는 방법을 말합니다.
 
-### 1. Many to One
+### Many to One
 
 ![](/assets/nmt-zeroshot-1.png)
 
 이 실험에서는 전체적으로 성능이 향상 된 것을 볼 수 있습니다. 하단의 일본어, 한국어, 스페인어, 포르투갈어 실험의 경우에는 모두 oversampling을 기준으로 실험되었습니다.
 
-### 2. One to Many
+### One to Many
 
 ![](/assets/nmt-zeroshot-2.png)
 
 이 실험에서는 이전 실험과 달리 성능의 향상이 있다고 보기 힘듭니다. 게다가 oversampling과 관련해서 corpus의 양이 적은 영어/독일어 corpus는 oversampling의 이득을 본 반면, 양이 충분한 영어/프랑스어 corpus의 경우에는 oversampling을 하면 더 큰 손해를 보는 것을 볼 수 있습니다.
 
-### 3. Many to Many
+### Many to Many
 
 ![](/assets/nmt-zeroshot-3.png)
 
 이 실험에서도 대부분의 실험결과가 성능의 하락으로 이어졌습니다. (그렇지만 절대적인 BLEU 수치는 쓸만합니다.)
 
-### 4. Zero-shot Translation
+### Zero-shot Translation
 
 ![](/assets/nmt-zeroshot-4.png)
 
@@ -56,10 +56,10 @@ Model 1은 $$ Pt \rightarrow En $$, $$ En \rightarrow Es $$를 한 모델에 훈
 
 비록 Model1과 Model2는 훈련 중에 한번도 $$ Pt \rightarrow Es $$ 데이터를 보지 못했지만, 20이 넘는 BLEU를 보여주는 것을 알 수 있습니다. 하지만 bridge 방식의 $$(a),(b)$$ 보다 성능이 떨어지는 것을 알 수 있습니다. 다행히도 $$ (f) $$의 경우에는 $$(c)$$보다 (큰 차이는 아니지만) 성능이 뛰어난 것을 알 수 있습니다. 따라서 우리는 parallel corpus의 양이 얼마 되지 않는 언어쌍의 번역기를 훈련할 때에 위와 같은 방법을 통해서 성능을 끌어올릴 수 있음을 알 수 있습니다.
 
-### 5. Conclusion
+### Conclusion
 
 앞서 다룬 monlingual corpus를 활용하는 방법의 연장선상으로써 위와 같이 multilingual MT model로써는 의의가 있지만, 성능에 있어서는 이득이 있었기 때문에 실제 사용에는 한계가 있습니다. 더군다나 low resource language pair에 대해서는 성능의 향상이 있지만 뒤 챕터에 설명할 방법들을 사용하면 그다지 좋은 방법은 아닙니다.
 
-### 6. Applications
+### Applications
 
 우리는 artificial token을 추가하는 방식을 다른곳에서도 응용할 수 있습니다. 다른 domain의 데이터를 하나로 모아 번역기를 훈련시키는 과정 등에 사용 가능합니다. 예를 들어 corpus를 뉴스기사와 미드 자막에서 각각 모았다고 가정하면, ***문어체***와 ***대화체***로 domain을 나누어 artificial token을 추가하여 우리가 원하는대로 번역문의 말투를 바꾸어줄 수 있을 겁니다. 또는 마찬가지로 ***의료용***과 ***법률용***으로 나누어 번역기의 모드를 바꾸어줄 수 있을 겁니다.

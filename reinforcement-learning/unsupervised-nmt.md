@@ -2,11 +2,11 @@
 
 Supervised learning 방식은 높은 정확도를 자랑하지만 labeling 데이터가 필요하기 때문에 데이터 확보, 모델 및 시스템을 구축하는데 높은 비용과 시간이 소요됩니다. 하지만 ***Unsupervised Learning***의 경우에는 데이터 확보에 있어서 훨씬 비용과 시간을 절감할 수 있기 때문에 좋은 대안이 될 수 있습니다.
 
-## 1. Parallel corpus vs Monolingual corpus
+## Parallel corpus vs Monolingual corpus
 
 그러한 의미에서 parallel corpus에 비해서 확보하기 쉬운 monolingual corpus는 좋은 대안이 될 수 있습니다. 소량의 parallel corpus와 다량의 monolingual corpus를 결합하여 더 나은 성능을 확보할 수도 있을 것입니다. 이전 챕터에 다루었던 [Back translation과 Copied translation](neural-machine-translation/mono.md)에서 이와 관련하여 NMT의 성능을 고도화 하는 방법을 보여주었습니다. 강화학습에서도 마찬가지로 unsupervised 방식을 적용하려는 시도들이 많이 보이고 있습니다. 다만, 대부분의 방식들은 아직 실제 field에서 적용하기에는 다소 효율성이 떨어집니다.
 
-## 2. Unsupervised NMT
+## Unsupervised NMT
 
 위의 Dual Learning 논문과 달리 이 논문[\[Lample at el.2017\]](https://arxiv.org/pdf/1711.00043.pdf)은 오직 Monolingual Corpus만을 사용하여 번역기를 제작하는 방법을 제안하였습니다. 따라서 **Unsupervised NMT**라고 할 수 있습니다.
 
@@ -22,7 +22,7 @@ GAN을 NLP에 쓰지 못한다고 해 놓고 GAN을 썼다니 이게 무슨 소�
 
 이 논문의 훈련은 3가지 관점에서 수행됩니다.
 
-### a. Denoising Autoencoder
+### Denoising Autoencoder
 
 이전 챕터에서 다루었듯이 Seq2seq 모델도 결국 Autoencoder의 일종이라고 볼 수 있습니다. 그러한 관점에서 autoencoder(AE)로써 단순 복사(copy) task는 굉장히 쉬운 task에 속합니다. 그러므로 단순히 encoding 한 source sentence를 같은 언어의 문장으로 decoding 하는 것은 매우 쉬운 일이 될 것입니다. 따라서 AE에게 단순히 복사 작업을 지시하는 것이 아닌 noise를 섞어 준 source sentence에서 denoising을 하면서 reconstruction(복원)을 할 수 있도록 훈련해야 합니다. 따라서 이 task의 objective는 아래와 같습니다.
 
@@ -36,7 +36,7 @@ $$ \hat{x}\sim d(e(C(x),\ell),\ell) $$는 source sentence $$ x $$를 $$ C $$를 
 
 ***Noise Model*** $$ C(x) $$는 임의로 문장 내 단어들을 drop하거나, 순서를 섞어주는 일을 합니다. drop rate는 보통 0.1, 순서를 섞어주는 단어사이의 거리는 3정도가 적당한 것으로 설명 합니다.
 
-### b. Cross Domain Training (Translation)
+### Cross Domain Training (Translation)
 
 이번엔 이전 iteration의 모델 $$ M $$에서 언어($$ \ell_2 $$)의 noisy translated된 문장($$ y $$)을 다시 언어($$ \ell_1 $$) source sentence로 원상복구 하는 task에 대한 objective 입니다.
 
@@ -47,7 +47,7 @@ $$
 \mathcal{L}_{cd}(\theta_{enc},\theta_{dec},\mathcal{Z},\ell_1,\ell_2)=\Bbb{E}_{x\sim\mathcal{D}_{\ell_1},\hat{x}\sim d(e(C(y),\ell_2),\ell_1)}[\triangle(\hat{x},x)]
 $$
 
-### c. Adversarial Training
+### Adversarial Training
 
 Encoder가 언어와 상관없이 항상 같은 분포로 hyper plane에 projection하는지 검사하기 위한 ***discriminator***가 추가되어 Adversarial Training을 진행합니다. 
 
