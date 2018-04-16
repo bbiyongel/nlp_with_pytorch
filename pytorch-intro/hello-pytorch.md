@@ -4,7 +4,7 @@
 
 PyTorch의 tensor는 numpy의 array와 같은 개념입니다. 값을 저장하고 그 값들에 대해서 연산을 수행할 수 있는 함수를 제공합니다.
 
-```python
+```py
 import torch
 
 x = torch.FloatTensor(2, 2)
@@ -26,7 +26,7 @@ x = torch.from_numpy(x)
 
 requires\_grad 속성은 직접 생성한 경우에는 False 값을 default로 갖습니다. 연산을 통해 자동으로 생성된 경우\(위의 코드 예제에서 z\)에는 True 값만 갖도록 됩니다. 따라서 결론적으로 사용자가 지정한 연산/계산을 통해 생성된 computation graph의 leaf node에 해당되는 variable만 requires\_grad 값을 True 또는 False로 지정할 수 있습니다. 만약 gradient 자체를 구할 일이 없을 경우\(inference 모드, 훈련 중이 아닐 때\)에는 volatile 속성을 True 값을 주면 해당 Variable이 속한 computation graph 전체의 gradient를 구하지 않게 됩니다.
 
-```python
+```py
 import torch
 from torch.autograd import Variable
 
@@ -53,7 +53,7 @@ $$
 
 이러한 linaer layer의 기능은 아래와 같이 PyTorch로 구현할 수 있습니다.
 
-```python
+```py
 import torch
 from torch.autograd import Variable
 
@@ -75,7 +75,7 @@ y = linear(x)
 
 PyTorch에 새롭게 추가된 기능인 Broadcasting에 대해서 설명 해 보겠습니다. NumPy에서 제공되는 broadcasting과 동일하게 동작합니다. **matmul()**을 사용하면 임의의 차원의 tensor끼리 연산을 가능하게 해 줍니다. 이전에는 강제로 2차원을 만들거나 하여 곱해주는 수 밖에 없었습니다. 다만, 입력으로 주어지는 tensor들의 차원에 따라서 규칙이 적용됩니다. 그 규칙은 아래와 같습니다.
 
-```python
+```py
 >>> # vector x vector
 >>> tensor1 = torch.randn(3)
 >>> tensor2 = torch.randn(3)
@@ -108,7 +108,7 @@ torch.Size([10, 3, 5])
 
 마찬가지로 덧셈 연산에 대해서도 broadcasting이 적용될 수 있는데 그 규칙은 아래와 같습니다. 곱셈에 비해서 좀 더 규칙이 복잡하니 주의해야 합니다.
 
-```python
+```py
 >>> x=torch.FloatTensor(5,7,3)
 >>> y=torch.FloatTensor(5,7,3)
 # same shapes are always broadcastable (i.e. the above rules always hold)
@@ -163,7 +163,7 @@ nn.Module의 상속한 사용자 정의 class는 다시 내부에 nn.Module을 �
 
 그럼 앞서 구현한 linear 함수 대신에 MyLinear라는 class를 nn.Module을 상속받아 선언하고, 사용하여 똑같은 기능을 구현 해 보겠습니다.
 
-```python
+```py
 import torch
 import torch.nn as nn
 from torch.autograd import Variable
@@ -184,7 +184,7 @@ class MyLinear(nn.Module):
 
 위와 같이 선언한 MyLinear class를 이제 직접 사용해서 정상 동작 하는지 확인 해 보겠습니다.
 
-```python        
+```py
 x = torch.FloatTensor(16, 10)
 x = Variable(x)
 linear = MyLinear(10, 5)
@@ -193,7 +193,7 @@ y = linear(x)
 
 **forward()**에서 정의 해 준대로 잘 동작 하는 것을 볼 수 있습니다. 하지만, 위와 같이 W와 b를 선언하면 문제점이 있습니다. parameters() 함수는 module 내에 선언 된 learnable parameter들을 iterative하게 주는 iterator를 반환하는 함수 입니다. 한번, linear module 내의 learnable parameter들의 크기를 size()함수를 통해 확인 해 보도록 하겠습니다.
 
-```python
+```py
 >>> params = [p.size() for p in linear.parameters()]
 >>> print(params)
 []
@@ -207,7 +207,7 @@ y = linear(x)
 
 따라서 우리는 Variable 대신에 Parameter라는 class를 사용하여 tensor를 wrapping해야 합니다. 그럼 아래와 같이 될 것 입니다.
 
-```python
+```py
 class MyLinear(nn.Module):
 
     def __init__(self, input_size, output_size):
@@ -224,7 +224,7 @@ class MyLinear(nn.Module):
 
 그럼 아까와 같이 다시 linear module 내부의 learnable parameter들의 size를 확인 해 보도록 하겠습니다.
 
-```python
+```py
 >>> params = [p.size() for p in linear.parameters()]
 >>> print(params)
 [torch.Size([10, 5]), torch.Size([5])]
@@ -232,7 +232,7 @@ class MyLinear(nn.Module):
 
 잘 들어있는 것을 확인 할 수 있습니다. 그럼 아래와 같이 한번 실행 해 보죠.
 
-```python
+```py
 >>> print(linear)
 MyLinear(
 )
@@ -240,7 +240,7 @@ MyLinear(
 
 아쉽게도 Parameter로 선언 된 parameter들은 print로 찍혀 나오지 않습니다. -- 왜 그렇게 구현 해 놓았는지 이유는 잘 모르겠습니다. 그럼 print에서도 확인할 수 있게 깔끔하게 바꾸어 보도록 하겠습니다. 아래와 같이 바꾸면 제대로 된 구현이라고 볼 수 있습니다.
 
-```python
+```py
 class MyLinear(nn.Module):
 
     def __init__(self, input_size, output_size):
@@ -256,7 +256,7 @@ class MyLinear(nn.Module):
 
 nn.Linear class를 사용하여 W와 b를 대체하였습니다. 그리고 아래와 같이 print를 해 보면 내부의 Linear Layer가 잘 찍혀 나오는 것을 확인 할 수 있습니다.
 
-```python
+```py
 >>> print(linear)
 MyLinear(
   (linear): Linear(in_features=10, out_features=5, bias=True)
@@ -269,7 +269,7 @@ MyLinear(
 
 예를 들어 우리가 원하는 값은 아래와 같이 **100**이라고 하였을 때, linear의 결과값 matrix의 합과 목표값과의 거리(error 또는 loss)를 구하고, 그 값에 대해서 **backward()**함수를 사용함으로써 gradient를 구합니다. 이때, error는 Variable class로 된 sclar로 표현 되어야 합니다. vector나 matrix의 형태여서는 안됩니다.
 
-```python
+```py
 objective = 100
 
 x = torch.FloatTensor(16, 10)
@@ -285,7 +285,7 @@ loss.backward()
 
 ## train\(\) and eval\(\)
 
-```python
+```py
 # Training...
 linear.eval()
 # Do some inference process.
@@ -314,7 +314,7 @@ $$
 
 먼저 1개의 linear layer를 가진 MyModel이라는 module을 선언합니다.
 
-```python
+```py
 import random
 
 import torch
@@ -344,14 +344,14 @@ $$
 
 해당 함수를 python으로 구현하면 아래와 같습니다. 물론 neural network 입장에서는 내부 동작 내용을 알 수 없는 함수 입니다.
 
-```python
+```py
 def ground_truth(x):
     return 3 * x[:, 0] + x[:, 1] - 2 * x[:, 2]
 ```
 
 아래는 입력을 받아 feed-forward 시킨 후, back-propagation하여 gradient descent까지 하는 함수 입니다.
 
-```python
+```py
 def train(model, x, y, optim):
     # initialize gradients in all parameters in module.
     optim.zero_grad()
@@ -372,7 +372,7 @@ def train(model, x, y, optim):
 
 그럼 위의 함수들을 사용 하기 위해서 hyper-parameter를 setting하겠습니다.
 
-```python
+```py
 batch_size = 1
 n_epochs = 1000
 n_iter = 10000
@@ -385,7 +385,7 @@ print(model)
 
 위의 setting 값을 사용하여 평균 loss 값이 **.001**보다 작을 때 까지 훈련 시킵니다.
 
-```python
+```py
 for epoch in range(n_epochs):
     avg_loss = 0
     
@@ -418,7 +418,7 @@ for epoch in range(n_epochs):
 
 PyTorch는 당연히 GPU상에서 훈련하는 방법도 제공합니다. 아래와 같이 **cuda()**함수를 통해서 원하는 객체를 GPU memory상으로 copy(Variable 또는 Tensor의 경우)하거나 move(nn.Module의 하위 클래스인 경우) 시킬 수 있습니다.
 
-```python
+```py
 >>> # Note that tensor is declared in torch.cuda.
 >>> x = torch.cuda.FloatTensor(16, 10)
 >>> x = Variable(x)
