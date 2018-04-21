@@ -21,7 +21,7 @@ $$
 그럼 Bayes Theorem에 의해서 수식은 AM과 LM 부분으로 나뉠 수 있습니다. 그리고 밑변의 prior $$ P(X) $$는 날려버릴 수 있습니다.
 
 $$
-argmax\frac{P(X|Y)P(Y)}{P(X)} = argmax P(X|Y)P(Y)
+argmax\frac{P(X|Y)P(Y)}{P(X)} = argmax \underbrace{P(X|Y)}_{AM}\underbrace{P(Y)}_{LM}
 $$
 
 여기서 $$ P(X|Y) $$가 Acoustic Model (AM)을 의미하고, $$ P(Y) $$는 Language Model (LM)을 의미 합니다. 즉, $$ P(Y) $$는 문장의 확률을 의미하고, $$ P(X|Y) $$는 문장(= sequence of word = sequence of phone)이 주어졌을 때, audio signal이 나타날 확률을 나타냅니다.
