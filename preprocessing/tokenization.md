@@ -100,6 +100,8 @@ after:
 |중국어|PKU Parser|Java|북경대에서 개발. Stanford Parser와 성능 차이가 거의 없음|
 |중국어|Jieba|Python|가장 최근에 개발됨. Python으로 제작되어 시스템 구성에 용이|
 
+사실 일반적인 또는 전형적인 쉬운 문장(표준어를 사용하며 문장 구조가 명확한 문장)의 경우에는 대부분의 프로그램들의 성능이 비슷합니다. 하지만 각 프로그램 성능의 차이를 만드는 것은 바로 신조어나 보지 못한 고유명사를 처리하는 능력입니다. 따라서 어떤 한 프로그램을 선택하고자 할때에, 그런 부분에 초점을 맞추어 성능을 평가하고 선택해야 할 필요성이 있습니다.
+
 ## Korean
 
 ### Mecab
@@ -146,7 +148,7 @@ KoNLPy는 여러 한국어 tokenizer 또는 tagger들을 모아놓은 wrapper를
 
 ### Tokenizer NLTK (Moses)
 
-http://www.nltk.org/api/nltk.tokenize.html#module-nltk.tokenize.moses
+> 참고사이트: http://www.nltk.org/api/nltk.tokenize.html#module-nltk.tokenize.moses
 
 >North Korea's state mouthpiece, the Rodong Sinmun, is also keeping mum on Kim's summit with Trump while denouncing ever-tougher U.S. sanctions on the rogue state.
 
@@ -170,8 +172,10 @@ if __name__ == "__main__":
 
 ### Stanford Parser
 
-https://nlp.stanford.edu/software/lex-parser.shtml
+> 참고사이트: https://nlp.stanford.edu/software/lex-parser.shtml
 
 ### JIEBA
 
-https://github.com/fxsjy/jieba
+비교적 가장 늦게 개발/업데이트가 이루어진 Jieba library는 
+
+> 참고사이트: https://github.com/fxsjy/jieba
