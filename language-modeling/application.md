@@ -6,14 +6,15 @@
 
 음성인식 시스템을 구성할 때, 언어모델은 중요하게 쓰입니다. 사실 실제 사람의 경우에도 말을 들을 때 언어모델이 굉장히 중요하게 작용합니다. 어떤 단어를 발음하고 있는지 명확하게 알아듣지 못하더라도, 머릿속에 저장되어 있는 언어모델을 이용하여 알아듣기 때문입니다. 예를 들어, 우리는 갑자기 쌩뚱맞은 주제로 대화를 전환하게 되면 보통 한번에 잘 못알아듣는 경우가 많습니다. Computer의 경우에도 음소별 classification의 성능은 이미 사람보다 뛰어납니다. 다만, 사람에 비해 context 정보를 활용할 수 있는 능력, ***눈치***가 없기 때문에 음성인식률이 떨어지는 경우가 많습니다. 따라서, 그나마 좋은 language model을 정의하여 사용함으로써, 음성인식의 정확도를 높일 수 있습니다.
 
-![Traditional Speech Recognition System](https://www.esat.kuleuven.be/psi/spraak/demo/Recog/lvr_scheme.gif)
+![Traditional Speech Recognition System](https://www.esat.kuleuven.be/psi/spraak/demo/Recog/lvr_scheme.gif)<br>
+(Traditional ASR System based on WFST, Image from web)
 
 Language Model이 가장 중요한 역할을 차지하는 음성인식을 대표 삼아, Language Model이 다른 모델들과 결합하여 어떻게 쓰이는지 알아보도록 하겠습니다. 아래는 Speech Recognition 시스템의 수식을 개략적으로 나타낸 것 입니다. 음성 신호 $$ X $$가 주어졌을 때 확률을 최대로 하는 문장 $$ \hat{Y} $$를 구하는 것이 목표 입니다.
 
 $$
 \begin{aligned}
 \hat{Y} = argmax P(Y|X) &= argmax\frac{P(X|Y)P(Y)}{P(X)} \\
-\text{where X is audio signal and }&\text{Y is word sequence, }Y = \{ y_1, y_2, \dots y_n \}.
+\text{where X is audio signal and }&\text{Y is word sequence, }Y = \{ y_1, y_2, \dots y_n \}. \\
 \end{aligned}
 $$
 
@@ -29,15 +30,17 @@ $$
 
 ## Machine Translation (MT)
 
-번역 시스템을 구성 할 때에도 언어모델은 중요한 역할을 합니다. Source sentence를 분석하여 의미를 파악한 후 target sentence를 만들어 낼 때에, 언어 모델을 기반으로 문장을 다시 생성 해 냅니다. 더 자세한 내용은 다음 챕터에서 다루도록 하겠습니다.
+번역 시스템을 구성 할 때에도 언어모델은 중요한 역할을 합니다. 기존 SMT 시스템에서는 explicit하게 LM이 translation model과 결합하였지만, Neural Machine Translation (NMT)의 경우에도 LM이 마찬가지로 매우 중요한 역할을 차지 합니다. 예를 들어, NMT에서는 source sentence를 분석하여 의미를 파악한 후 target sentence를 만들어 낼 때에, 언어 모델을 기반으로 문장을 다시 생성 해 냅니다. 더 자세한 내용은 다음 챕터에서 다루도록 하겠습니다.
 
-![](http://www.kecl.ntt.co.jp/rps/_src/sc1134/innovative_3_1e.jpg)
+![](http://www.kecl.ntt.co.jp/rps/_src/sc1134/innovative_3_1e.jpg)<br>
+(Statistical Machine Translation, SMT, system, Image from web)
 
 ## Optical Character Recognition (OCR)
 
 광학문자인식 시스템을 만들 때에도 언어모델이 사용 됩니다. 사진에서 추출하여 글자를 인식 할 때에 언어모델의 확률의 도움을 받아 글자나 글씨를 인식합니다.
 
-![](https://doi.ieeecomputersociety.org/cms/Computer.org/dl/trans/tp/2013/10/figures/ttp20131024131.gif)
+![](https://doi.ieeecomputersociety.org/cms/Computer.org/dl/trans/tp/2013/10/figures/ttp20131024131.gif)<br>
+(OCR system, Image from web)
 
 ## Natural Language Generation
 
