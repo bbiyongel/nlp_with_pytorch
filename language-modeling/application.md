@@ -14,7 +14,7 @@ Language Model이 가장 중요한 역할을 차지하는 음성인식을 대표
 $$
 \begin{aligned}
 \hat{Y} = argmax P(Y|X) &= argmax\frac{P(X|Y)P(Y)}{P(X)}, \\
-\text{where X is an audio signal and }&\text{Y is a word sequence, }Y = \{ y_1, y_2, \dots, y_n \}.
+where X is an audio signal and Y is a word sequence, Y = \{ y_1, y_2, \dots, y_n \}.
 \end{aligned}
 $$
 
