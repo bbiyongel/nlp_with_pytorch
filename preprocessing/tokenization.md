@@ -113,6 +113,8 @@ $ bash <(curl -s https://raw.githubusercontent.com/konlpy/konlpy/master/scripts/
 
 위의 instruction을 따라 정상적으로 설치 된 Mecab의 경우에는, KoNLPy에서 불러 사용할 수 있습니다. -- 참고사이트: http://konlpy-ko.readthedocs.io/ko/v0.4.3/api/konlpy.tag/#mecab-class
 
+또는 아래와 같이 bash상에서 **mecab**명령어를 통해서 직접 실행 가능하며 standard input/output을 사용하여 tokenization을 수행할 수 있습니다.
+
 ```bash
 $ echo "안녕하세요, 반갑습니다!" | mecab
 안녕	NNG,*,T,안녕,*,*,*,*
@@ -124,6 +126,9 @@ $ echo "안녕하세요, 반갑습니다!" | mecab
 !	SF,*,*,*,*,*,*,*
 EOS
 ```
+
+만약, 단순히 띄어쓰기만 적용하고 싶을 경우에는 **-O wakati** 옵션을 사용하여 실행시키면 됩니다.
+
 ```bash
 $ echo "안녕하세요, 반갑습니다!" | mecab -O wakati
 안녕 하 세요 , 반갑 습니다 !
