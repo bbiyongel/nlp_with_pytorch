@@ -33,6 +33,10 @@
 * github: [https://github.com/kh-kim/](https://github.com/kh-kim/)
 * email: pointzz.ki@gmail.com
 
+### Fast Campus Lecture
+![](http://cdn.www.fastcampus.co.kr/wp-content/uploads/2018/03/main.png)<br>
+현재 이 책을 바탕으로 패스트캠퍼스에서 [자연어처리 강의](http://www.fastcampus.co.kr/data_camp_nlpadv/)도 이루어지고 있습니다.
+
 이 저작물은 크리에이티브 커먼즈 [저작자표시-비영리-동일조건변경허락(BY-NC-SA)](https://creativecommons.org/licenses/by-nc-sa/2.0/kr/)에 따라 이용할 수 있습니다.
 
 ![저작자표시-비영리-동일조건변경허락(BY-NC-SA)](/assets/ccl.png)
