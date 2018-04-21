@@ -1,10 +1,23 @@
 # Segmentation using Subword (Byte Pare Encoding, BPE)
 
-[[Sennrich at el.2015]](https://arxiv.org/pdf/1508.07909.pdf)
+Byte Pair Encoding (BPE) 알고리즘을 통한 subword segmentation은 [[Sennrich at el.2015]](https://arxiv.org/pdf/1508.07909.pdf)에서 처음 제안되었고, 현재는 주류 전처리 방법으로 자리잡아 사용되고 있습니다.
+
+Subword segmenation은 기본적으로 단어는 여러 sub-word들의 조합으로 이루어진다는 가정 하에 적용 되는 알고리즘입니다. 실제로 영어나 한국어의 경우에도 latin어와 한자를 기반으로 형성 된 언어이기 때문에, 많은 단어들이 sub-word들로 구성되어 있습니다. 따라서 적절한 subword detection을 통해서 subword 단위로 쪼개어 주면 어휘수를 줄일 수 있고 sparsity를 효과적으로 감소시킬 수 있습니다.
+
+|언어|단어|조합|
+|-|-|-|
+|영어|Concentrate|con(=together) + centr(=center) + ate(=make)|
+|한국어|집중(集中)|集(모을 집) + 中(가운데 중)|
+
+Sparsity 감소 이외에도, 가장 대표적인 subword segmentation으로 얻는 효과는 unknown(UNK) token에 대한 효율적인 대처 입니다. Natrual Language Generation (NLG)를 포함한 대부분의 딥러닝 NLP 알고리즘들은 문장을 입력으로 받을 때 단순히 word sequence로써 받아들이게 됩니다. 따라서 UNK가 나타나게 되면 이후의 language model의 확률은 매우 망가져버리게 됩니다. 따라서 적절한 문장의 encoding또는 generation이 어렵습니다. -- 특히 문장 generation의 경우에는 이전 단어를 기반으로 다음 단어를 예측하기 때문에 더더욱 어렵습니다.
+
+하지만 subword tokenization을 통해서 신조어나 typo(오타) 같은 UNK에 대해서 subword나 character 단위로 쪼개줌으로써 known token들의 조합으로 만들어버릴 수 있습니다. 이로써, UNK 자체를 없앰으로서 효율적으로 UNK에 대처할 수 있고, NLP 결과물의 품질을 향상시킬 수 있습니다.
 
 ## Example
 
-한글 원문
+아래와 같이 BPE를 적용하면 원래의 띄어쓰기 공백 이외에도 BPE의 적용으로 인한 공백이 추가됩니다. 따라서 원래의 띄어쓰기와 BPE로 인한 띄어쓰기를 구분해야 할 필요성이 있습니다. 그래서 특수문자(▁)를 사용하여 기존의 띄어쓰기(또는 단어의 시작)를 나타냅니다. 이를 통해 후에 설명할 detokenization에서 문장을 BPE이전의 형태로 원상복구 할 수 있습니다.
+
+한글 Mecab에 의해 tokenization 된 원문
 ```
 현재 TED 웹 사이트 에 는 1 , 000 개 가 넘 는 TED 강연 들 이 있 습니다 .
 여기 계신 여러분 의 대다수 는 정말 대단 한 일 이 라고 생각 하 시 겠 죠 -- 전 다릅니다 .
@@ -32,7 +45,7 @@
 ▁정말 ▁그렇게 ▁하 ▁는 ▁경우 ▁1 ▁인 ▁당 ▁경제 ▁적 ▁손 실 ▁은 ▁15 ▁, ▁000 ▁달러 ▁정도 ▁가 ▁됩니다 ▁.
 ```
 
-영어 원문
+영어 NLTK에 의해 tokenization이 된 원문
 ```
 There 's currently over a thousand TED Talks on the TED website .
 And I guess many of you here think that this is quite fantastic , except for me , I don 't agree with this .
@@ -59,3 +72,15 @@ Here 's my approach to it all .
 ▁So ▁having ▁seen ▁this ▁dang er ▁to ▁the ▁economy ▁, ▁I ▁thought ▁, ▁we ▁need ▁to ▁find ▁a ▁solution ▁to ▁this ▁problem ▁.
 ▁Here ▁'s ▁my ▁approach ▁to ▁it ▁all ▁.
 ```
+
+|원문|subword segmentation|
+|-|-|
+|대다수|대 + 다 + 수|
+|문제점|문 + 제 + 점|
+|건가요|건 + 가요|
+|website|we + b + site|
+|except|ex + cept|
+|250|2 + 50|
+|15,000|15 + ,000|
+
+위와 같이 subword segmentation에 의해서 추가적으로 쪼개진 단어들은 적절한 subword의 형태로 나누어진 것을 볼 수 있습니다. 특히, 숫자 같은 경우에는 자주 쓰이는 숫자 **50**이나 **,000**의 경우 성공적으로 하나의 subword로 지정된 것을 볼 수 있습니다.
