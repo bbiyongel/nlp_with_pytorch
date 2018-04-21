@@ -86,7 +86,7 @@ if __name__ == "__main__":
 |일본어|Mecab|||
 |중국어|Stanford Parser|||
 |중국어|PKU Parser|||
-|중국어|Jieba|||
+|중국어|Jieba|Python으로 제작되어 연동 쉬움||
 
 ## Korean
 
