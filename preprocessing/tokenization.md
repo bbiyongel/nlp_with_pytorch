@@ -77,16 +77,16 @@ if __name__ == "__main__":
 
 띄어쓰기(tokenization or segmentation)에 대해서 살펴 보겠습니다. 한국어, 영어와 달리 일본어, 중국어의 경우에는 띄어쓰기가 없는 경우가 없습니다. 또한, 한국어의 경우에도 띄어쓰기가 도입된 것은 근대에 이르러서이기 때문에, 띄어쓰기의 표준화가 부족하여 띄어쓰기가 중구난방인 경우가 많습니다. 특히나, 한국어의 경우에는 띄어쓰기가 문장의 의미 해석에 큰 영향을 끼치지 않기 때문에 더욱이 이런 현상은 가중화 됩니다. 이러한 한국어의 띄어쓰기 특성은 앞서 [Why Korean NLP is Hell](nlp-with-deeplearning/korean-is-hell.md)에서 다루었습니다.
 
-각 언어별 주요 tokenizer를 정리하면 아래와 같습니다.
+각 언어별 주요 프로그램들을 정리하면 아래와 같습니다.
 
-|언어|프로그램명|특징|주소|
+|언어|프로그램명|제작언어|특징|
 |-|-|-|-|
-|한국어|Mecab|||
-|한국어|KoNLPy|||
-|일본어|Mecab|||
-|중국어|Stanford Parser|||
-|중국어|PKU Parser|||
-|중국어|Jieba|Python으로 제작되어 연동 쉬움||
+|한국어|Mecab|C++|일본어 Mecab을 wrapping하였으며, 속도가 가장 빠름. 설치가 종종 까다로움|
+|한국어|KoNLPy|Python Wrapping(복합)|PIP을 통해 설치 가능하며 사용이 쉬우나, 일부 tagger의 경우에는 속도가 느림|
+|일본어|Mecab|C++|속도가 빠르다|
+|중국어|Stanford Parser|Java|미국 스탠포드에서 개발|
+|중국어|PKU Parser|Java||
+|중국어|Jieba|Python|중국에서 개발|
 
 ## Korean
 
