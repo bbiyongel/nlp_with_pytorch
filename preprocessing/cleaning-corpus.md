@@ -19,6 +19,8 @@
 |3|N.Y.C.|
 |4|N.Y.C|
 
+따라서 이러한 다양한 표현을 일원화 시켜주는 것은 한개의 의미를 지니는 여러 단어의 형태를 하나로 통일시켜 줌으로써, Sparsity를 감소시키는 효과를 거둘 수 있습니다.
+
 ## Regular Expression
 
 또한, crawling을 통해 얻어낸 다량의 corpus는 보통 특수문자, 기호 등에 의해서 noise가 섞여 있는 경우가 많습니다. 또한, 웹사이트의 성격에 따라 일정한 패턴을 띄고 있는 경우도 많습니다. 이러한 noise들을 효율적으로 감지하고 없애기 위해서는 regular expression\(정규식\)의 사용은 필수적 입니다. 따라서, 이번 section은 regular expression\(regex\)에 대해서 살펴 봅니다.
