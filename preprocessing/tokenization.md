@@ -97,17 +97,22 @@ after:
 |한국어|KoNLPy|Python Wrapping(복합)|PIP을 통해 설치 가능하며 사용이 쉬우나, 일부 tagger의 경우에는 속도가 느림|
 |일본어|Mecab|C++|속도가 빠르다|
 |중국어|Stanford Parser|Java|미국 스탠포드에서 개발|
-|중국어|PKU Parser|Java||
+|중국어|PKU Parser|Java|북경대에서 개발. Stanford Parser와 성능 차이가 거의 없음|
 |중국어|Jieba|Python|가장 최근에 개발됨. Python으로 제작되어 시스템 구성에 용이|
 
 ## Korean
 
 ### Mecab
 
+한국어 tokenization에 가장 많이 사용되는 프로그램은 Mecab입니다. 원래 Mecab은 일본어 tokenizer 오픈소스로 개발되었지만, 이를 한국어 tokenizing에 성공적으로 적용시켜 널리 사용되고 있습니다. 아래와 같이 설치 가능합니다. -- 참고사이트: http://konlpy-ko.readthedocs.io/ko/v0.4.3/install/#ubuntu
+
 ```bash
 $ sudo apt-get install curl
 $ bash <(curl -s https://raw.githubusercontent.com/konlpy/konlpy/master/scripts/mecab.sh)
 ```
+
+위의 instruction을 따라 정상적으로 설치 된 Mecab의 경우에는, KoNLPy에서 불러 사용할 수 있습니다. -- 참고사이트: http://konlpy-ko.readthedocs.io/ko/v0.4.3/api/konlpy.tag/#mecab-class
+
 ```bash
 $ echo "안녕하세요, 반갑습니다!" | mecab
 안녕	NNG,*,T,안녕,*,*,*,*
