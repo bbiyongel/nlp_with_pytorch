@@ -86,7 +86,7 @@ if __name__ == "__main__":
 |일본어|Mecab|C++|속도가 빠르다|
 |중국어|Stanford Parser|Java|미국 스탠포드에서 개발|
 |중국어|PKU Parser|Java||
-|중국어|Jieba|Python|중국에서 개발|
+|중국어|Jieba|Python|가장 최근에 개발됨. Python으로 제작되어 시스템 구성에 용이|
 
 ## Korean
 
