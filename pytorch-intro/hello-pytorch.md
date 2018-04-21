@@ -281,7 +281,15 @@ loss = (objective - y.sum())**2
 loss.backward()
 ```
 
-위와 같이 구해진 각 parameter들의 gradient에 대해서 gradient descent 방법을 사용하여 error(loss)를 줄여나갈 수 있을 것 입니다.
+위와 같이 구해진 각 parameter들의 gradient에 대해서 gradient descent 방법을 사용하여 error(loss)를 줄여나갈 수 있을 것 입니다. 이제까지 다룬 내용을 바탕으로 PyTorch상에서 딥러닝을 수행하는 과정은 아래와 같이 요약 해 볼 수 있습니다.
+
+1. nn.Module 클래스를 상속받아 Model 아키텍쳐 선언(forward함수를 통해)
+2. Model 객체 생성
+3. SGD나 Adam등의 Optimizer를 생성하고, Model의 parameter를 등록
+4. 데이터로 미니배치를 구성하여 feed-forward --> computation graph 생성o
+5. loss function을 통해 최종 결과값(scalar) loss를 계산
+6. loss에 대해서 backward() 호출 --> computation graph 상의 Variable node들에 gradient가 채워짐 
+7. o
 
 ## train\(\) and eval\(\)
 
