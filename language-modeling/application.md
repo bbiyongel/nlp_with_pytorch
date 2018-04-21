@@ -8,6 +8,25 @@
 
 ![Traditional Speech Recognition System](https://www.esat.kuleuven.be/psi/spraak/demo/Recog/lvr_scheme.gif)
 
+Language Model이 가장 중요한 역할을 차지하는 음성인식을 대표 삼아, Language Model이 다른 모델들과 결합하여 어떻게 쓰이는지 알아보도록 하겠습니다. 아래는 Speech Recognition 시스템의 수식을 개략적으로 나타낸 것 입니다. 음성 신호 $$ X $$가 주어졌을 때 확률을 최대로 하는 문장 $$ \hat{Y} $$를 구하는 것이 목표 입니다.
+
+$$
+\begin{aligned}
+\hat{Y} = argmax P(Y|X) &= argmax\frac{P(X|Y)P(Y)}{P(X)} \\
+\text{where X is audio signal and }&\text{Y is word sequence, }Y = \{ y_1, y_2, \dots y_n \}.
+\end{aligned}
+$$
+
+그럼 Bayes Theorem에 의해서 수식은 AM과 LM 부분으로 나뉠 수 있습니다. 그리고 밑변의 prior $$ P(X) $$는 날려버릴 수 있습니다.
+
+$$
+argmax\frac{P(X|Y)P(Y)}{P(X)} = argmax \underbrace{P(X|Y)}_{\text{AM}}\underbrace{P(Y)}_{\text{LM}}
+$$
+
+여기서 $$ P(X|Y) $$가 Acoustic Model (AM)을 의미하고, $$ P(Y) $$는 Language Model (LM)을 의미 합니다. 즉, $$ P(Y) $$는 문장의 확률을 의미하고, $$ P(X|Y) $$는 문장(= sequence of word = sequence of phone)이 주어졌을 때, audio signal이 나타날 확률을 나타냅니다.
+
+이처럼 LM은 AM과 결합하여, context에 기반하여 다음 단어를 예측하도록 함으로써, 음성인식의 성능을 더울 향상 시킬 수 있습니다.
+
 ## Machine Translation (MT)
 
 번역 시스템을 구성 할 때에도 언어모델은 중요한 역할을 합니다. Source sentence를 분석하여 의미를 파악한 후 target sentence를 만들어 낼 때에, 언어 모델을 기반으로 문장을 다시 생성 해 냅니다. 더 자세한 내용은 다음 챕터에서 다루도록 하겠습니다.
