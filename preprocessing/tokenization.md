@@ -176,6 +176,8 @@ after:
 
 ### Stanford Parser
 
+스탠포드 대학교에서 제작한 중국어 parser입니다. Java로 제작되었습니다.
+
 > 참고사이트: https://nlp.stanford.edu/software/lex-parser.shtml
 
 ### JIEBA
