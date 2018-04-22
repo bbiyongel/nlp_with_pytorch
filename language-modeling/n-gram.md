@@ -60,13 +60,13 @@ $$
 P_{continuation}(w) \varpropto |\{ v : C(v, w) > 0 \}|
 $$
 $$
-P_{continuation}(w) = \frac{|\{ v : C(v, w) > 0 \}|}{\sum_{w'}{|\{ v : C(v, w') > 0 \}|}}.
+P_{continuation}(w) = \frac{|\{ v : C(v, w) > 0 \}|}{\sum_{w'}{|\{ v : C(v, w') > 0 \}|}}
 $$
 
 $$
 \begin{aligned}
 P_{KN}(w_i|w_{i-1})=\frac{\max{(C(w_{i-1}, w_i) - d, 0)}}{C(w_{i-1})}+\lambda(w_{i-1})P_{continuation}(w_i), \\
-where~\lambda(w_{i-1})=\frac{d}{\sum_v{C(w_{i-1}, v)}}\times|\{ w: c(w_{i-1}, w)>0 \}|
+where~\lambda(w_{i-1})=\frac{d}{\sum_v{C(w_{i-1}, v)}}\times|\{ w: c(w_{i-1}, w)>0 \}|.
 \end{aligned}
 $$
 
