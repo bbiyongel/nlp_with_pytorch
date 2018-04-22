@@ -68,6 +68,8 @@ Counting을 단순히 확률 값으로 이용 할 경우 문제점이 무엇이 
 
 #### Absolute Smoothing
 
+[[Church et al.1991](https://www.sciencedirect.com/science/article/pii/088523089190016J)]은 bigram에 대해서 실험을 한 결과를 제시하였습니다. Training corpus에서 n번 나타난 bigram에 대해서, test corpus에서 나타난 횟수를 count하고 평균을 낸 것 입니다. 그 결과는 아래와 같습니다.
+
 ![](/assets/lm-absolute_discounting.png)
 
 #### Kneser-Ney Smoothing
