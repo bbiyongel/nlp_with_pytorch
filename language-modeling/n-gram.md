@@ -56,6 +56,10 @@ $$
 
 #### Kneser-Ney Smoothing
 
+$$
+P_{continuation} 
+$$
+
 ### Back-off
 
 $$
