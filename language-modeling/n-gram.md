@@ -62,7 +62,7 @@ $$
 
 ### Smoothing \(Discounting\)
 
-위의 방식에는 문제점이 있습니다. 바로 corpus에 출현하지 않는 단어 조합에 대한 대처 방법 입니다.
+Counting을 단순히 확률 값으로 이용 할 경우 문제점이 무엇이 있을까요? 바로 training corpus에 출현하지 않는 단어 조합에 대한 대처 방법 입니다. 훈련셋에 등장하지 않는 unseen word sequence라고 해서 등장 확률이 0이 되면 맞지 않습니다. 따라서 counting 값 또는 확률 값을 좀 더 다듬어 줘야 할 필요성이 있습니다. 아래 파란색 bar와 같이 들쭉날쭉한 counting 값을 주황색 line으로 smooth하게 바꾸어 주기 때문에 smoothing 또는 discounting이라고 불립니다. 그럼 그 방법에 대해 살펴보겠습니다.
 
 ![](/assets/lm-why-smoothing.png)
 
