@@ -57,7 +57,10 @@ $$
 #### Kneser-Ney Smoothing
 
 $$
-P_{continuation} 
+P_{continuation}(w) \varpropto |\{ v : C(v, w) > 0 \}|
+$$
+$$
+P_{continuation}(w) = \frac{|\{ v : C(v, w) > 0 \}|}{\sum_{w'}{|\{ v : C(v, w') > 0 \}|}}
 $$
 
 ### Back-off
