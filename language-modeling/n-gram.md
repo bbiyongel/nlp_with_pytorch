@@ -64,7 +64,7 @@ $$
 
 #### Absolute smoothing
 
-
+![](/assets/lm-absolute_discounting.png)
 
 #### Kneser-Ney Smoothing
 
