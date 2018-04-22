@@ -52,6 +52,15 @@ $$
 
 ## Back-off
 
+$$
+\begin{aligned}
+\tilde{P}(w_n|w_{n-k}, \cdots , w_{n-1}) = &\lambda_1 P(w_n|w_{n-k}, \cdots , w_{n-1}) \\
+&+ \lambda_2 P(w_n|w_{n-k+1}, \cdots , w_{n-1}) \\
+&+ \cdots \\
+&+ \lambda_k P(w_n)
+\end{aligned}
+$$
+
 ## Interpolation
 
 ## Conclusion
