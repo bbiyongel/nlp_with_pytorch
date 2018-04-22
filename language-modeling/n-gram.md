@@ -94,7 +94,7 @@ $$
 P_{continuation}(w) = \frac{|\{ v : C(v, w) > 0 \}|}{\sum_{w'}{|\{ v : C(v, w') > 0 \}|}}
 $$
 
-
+이렇게 우리는 $$ P_{KN} $$를 정의 할 수 있습니다.
 
 $$
 \begin{aligned}
