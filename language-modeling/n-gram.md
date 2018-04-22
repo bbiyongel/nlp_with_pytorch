@@ -52,7 +52,7 @@ $$
 
 위의 방식에는 문제점이 있습니다. 바로 corpus에 출현하지 않는 단어 조합에 대한 대처 방법 입니다. 
 
-#### Add one smoothing
+#### Absolute smoothing
 
 #### Kneser-Ney Smoothing
 
