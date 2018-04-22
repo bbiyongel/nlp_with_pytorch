@@ -77,10 +77,10 @@ $ cat [before filename] | python tokenizer.py | python post_tokenize.py [before 
 
 ## Detokenization
 
-아래는 앞서 설명한 detokenization을 bash에서 sed 명령어를 통해 수행 할 경우에 대한 예제 입니다. 다만, 이 경우에는 최종 문장의 맨 앞에 공백이 생깁니다.
+아래는 앞서 설명한 detokenization을 bash에서 sed 명령어를 통해 수행 할 경우에 대한 예제 입니다.
 
 ```bash
-sed "s/ //g" | sed "s/▁▁/ /g" | sed "s/▁//g"
+sed "s/ //g" | sed "s/▁▁/ /g" | sed "s/▁//g" | sed "s/^\s//g"
 ```
 
 또는 아래의 python script 예제 처럼 처리 할 수도 있습니다.
