@@ -64,7 +64,7 @@ $$
 
 ![](/assets/lm-why-smoothing.png)
 
-#### Absolute smoothing
+#### Absolute Smoothing
 
 ![](/assets/lm-absolute_discounting.png)
 
