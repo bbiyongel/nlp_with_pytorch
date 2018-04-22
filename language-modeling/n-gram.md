@@ -103,9 +103,11 @@ where~\lambda(w_{i-1})=\frac{d}{\sum_v{C(w_{i-1}, v)}}\times|\{ w: c(w_{i-1}, w)
 \end{aligned}
 $$
 
-
 ### Back-off
 
+너무 긴 word sequence는 실제 training corpus에서 굉장히 희귀(rare, sparse)하기 때문에, 우리는 Markov assumption을 통해서 generalization을 얻을 수 있었습니다. 그럼 그것을 응용해서 좀 더 나아가 보도록 하겠습니다.
+
+아래 수식을 보면 특정 n-gram의 확률을 n보다 더 작은 sequence에 대해서 확률을 구하여 linear combination을 계산 하는 것을 볼 수 있습니다. 아래와 같이 n보다 더 작은 sequence에 대해서도 확률을 가져옴으로써 smoothing을 통해 generalization 효과를 좀 더 얻을 수 있습니다.
 
 $$
 \begin{aligned}
@@ -118,6 +120,7 @@ where~&\sum_i{\lambda_i}=1.
 \end{aligned}
 $$
 
+또한, 다음 단어를 예측 해 내는 task를 하는 실전(inference)에서도, training corpus에 존재하지 않는 unseen n-gram에 대해서도 training corpus에 나타났던 word sequence가 있을 때까지 back-off하여, 다음 단어의 확률을 예측 해 볼 수 있습니다.
 
 ### Interpolation
 
