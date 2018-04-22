@@ -58,7 +58,7 @@ $$
 
 ## Generalization
 
-머신러닝의 힘은 보지 못한 case에 대한 대처 능력, 즉 generalization에 있습니다. n-gram도 Markov assumption을 통해서 generalization 능력을 어느정도 갖게 되었는데, 이것을 좀 더 향상시킬 수 있는 방법을 살펴 보도록 하겠습니다.
+머신러닝의 힘은 보지 못한 case에 대한 대처 능력, 즉 generalization에 있습니다. n-gram도 Markov assumption을 통해서 generalization 능력을 갖게 되었는데, 이것을 좀 더 향상시킬 수 있는 방법을 살펴 보도록 하겠습니다.
 
 ### Smoothing \(Discounting\)
 
@@ -72,10 +72,11 @@ Counting을 단순히 확률 값으로 이용 할 경우 문제점이 무엇이 
 
 ![](/assets/lm-absolute_discounting.png)
 
-재미있게도, 0번과 1번 나타난 bigram을 제외하면, 2번부터 9번 나타난 bigram의 경우에는 test corpus에서의 출현 횟수는 training corpus 출현 횟수보다 약 0.75번 정도 적게 나타났다는 것 입니다. 즉, 상수 **d**를 빼주는 것과 같다는 것입니다.
+재미있게도, 0번과 1번 나타난 bigram을 제외하면, 2번부터 9번 나타난 bigram의 경우에는 test corpus에서의 출현 횟수는 training corpus 출현 횟수보다 약 0.75번 정도 적게 나타났다는 것 입니다. 즉, counting에서 상수 **d**를 빼주는 것과 같다는 것입니다.
 
 #### Kneser-Ney Smoothing
 
+[[Kneser et al.1995](https://www.semanticscholar.org/paper/Improved-backing-off-for-M-gram-language-modeling-Kneser-Ney/9548ac30c113562a51e603dbbc8e9fa651cfd3ab)]은 여기에서 한발 더 나아가, KN discount를 제시하였습니다.
 
 $$
 P_{continuation}(w) \varpropto |\{ v : C(v, w) > 0 \}|
