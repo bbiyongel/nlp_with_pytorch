@@ -80,7 +80,7 @@ Counting을 단순히 확률 값으로 이용 할 경우 문제점이 무엇이 
 
 KN discounting의 main idea는 단어 **w**가 누군가(**v**)의 뒤에서 출현 할 때, 얼마나 다양한 단어 뒤에서 출현하는지를 알아내는 것 입니다. 그래서 다양한 단어 뒤에 나타나는 단어일수록, unseen word sequence로써 나타날 확률이 높다는 것 입니다.
 
-예를 들어, 우리 책은 machine learning과 deep learning을 다루는 책 이므로, 책 내에서 **learning**이라는 keyword의 빈도는 굉장히 높을 것 입니다. 하지만, 해당 단어는 주로 **machine**과 **deep**뒤에서만 나타났다고 해 보죠. **learning**이라는 단어에 비해서, **laptop**이라는 표현의 빈도는 낮을 것 입니다. 하지만 **learning**과 같이 특정 단어의 뒤에서 대부분 나타나기 보단, 자유롭게 나타났을 것 같습니다. KN discounting은 이러한 경우 **laptop**이 unseen word sequence에서 나타날 확률이 더 높다고 가정 하는 것 입니다.
+예를 들어, 우리 책은 machine learning과 deep learning을 다루는 책 이므로, 책 내에서 **learning**이라는 keyword의 빈도는 굉장히 높을 것 입니다. 하지만, 해당 단어는 주로 **machine**과 **deep**뒤에서만 나타났다고 해 보죠. **learning**이라는 단어에 비해서, **laptop**이라는 표현의 빈도는 낮을 것 입니다. 하지만 **learning**과 같이 특정 단어의 뒤에서 대부분 나타나기 보단, 자유롭게 나타났을 것 같습니다. KN discounting은 이 경우, **laptop**이 unseen word sequence에서 나타날 확률이 더 높다고 가정 하는 것 입니다.
 
 $$
 P_{continuation}(w) \varpropto |\{ v : C(v, w) > 0 \}|
