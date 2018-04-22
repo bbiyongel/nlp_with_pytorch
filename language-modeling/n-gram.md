@@ -124,6 +124,7 @@ $$
 
 ### Interpolation
 
+Interpolation에 의한 generalization을 살펴 보도록 하겠습니다. Interpolation은 두 다른 Language Model을 linear하게 일정 비율($$ \lambda $$)로 섞어 주는 것 입니다. Interpolation을 통해 얻을 수 있는 효과는, general한 corpus를 통해 구축한 language model을, 필요에 따라 다른 특정 domain의 (양이 적은) corpus를 통해 구축한 domain specific(or adapted) language model과 섞어 주는 것 입니다. 이를 통해 일반적인 언어 모델을 해당 domain에 특화 된 언어 모델로 만들 수 있습니다.
 
 $$
 \begin{aligned}
@@ -131,6 +132,11 @@ $$
 \end{aligned}
 $$
 
+예를 들어 의료 쪽 음성인식(ASR) 또는 기계번역(MT) 시스템을 구축한다고 가정 해 보겠습니다. 그렇다면 기존의 general한 corpus를 통해 생성한 language model의 경우에는 의료 용어라던가 표현이 낯설 수도 있습니다.
+
+![](http://file2.nocutnews.co.kr/newsroom/image/2018/01/22/20180122110200782659_0_750_585.jpg)
+
+따라서 일반적인 대화에서와 다른 의미를 지닌 단어가 나올 수도 있고, 일반적인 대화에서는 rare한 표현(word sequence)가 훨씬 더 자주 등장 할 수 있습니다. 이런 case들에 잘 대처하기 위해서 해당 domain corpus로 생성한 language model을 섞어주어 해당 domain에 특화 시킬 수 있습니다.
 
 ## Conclusion
 
