@@ -58,6 +58,8 @@ $$
 
 ## Generalization
 
+머신러닝의 힘은 보지 못한 case에 대한 대처 능력, 즉 generalization에 있습니다. n-gram도 Markov assumption을 통해서 generalization 능력을 어느정도 갖게 되었는데, 이것을 좀 더 향상시킬 수 있는 방법을 살펴 보도록 하겠습니다.
+
 ### Smoothing \(Discounting\)
 
 위의 방식에는 문제점이 있습니다. 바로 corpus에 출현하지 않는 단어 조합에 대한 대처 방법 입니다.
