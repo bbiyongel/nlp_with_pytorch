@@ -78,6 +78,8 @@ Counting을 단순히 확률 값으로 이용 할 경우 문제점이 무엇이 
 
 [[Kneser et al.1995](https://www.semanticscholar.org/paper/Improved-backing-off-for-M-gram-language-modeling-Kneser-Ney/9548ac30c113562a51e603dbbc8e9fa651cfd3ab)]은 여기에서 한발 더 나아가, KN discount를 제시하였습니다.
 
+KN discounting의 main idea는 단어 **w**가 누군가(**v**)의 뒤에서 출현 할 때, 얼마나 다양한 단어 뒤에서 출현하는지를 알아내는 것 입니다. 그래서 다양한 단어 뒤에 나타나는 단어일수록, unseen word sequence로써 나타날 확률이 높다는 것 입니다.
+
 $$
 P_{continuation}(w) \varpropto |\{ v : C(v, w) > 0 \}|
 $$
