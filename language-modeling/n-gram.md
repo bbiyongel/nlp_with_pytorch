@@ -72,6 +72,8 @@ Counting을 단순히 확률 값으로 이용 할 경우 문제점이 무엇이 
 
 ![](/assets/lm-absolute_discounting.png)
 
+재미있게도, 0번과 1번 나타난 bigram을 제외하면, 2번부터 9번 나타난 bigram의 경우에는 test corpus에서의 출현 횟수는 training corpus 출현 횟수보다 약 0.75번 정도 적게 나타났다는 것 입니다. 즉, 상수 **d**를 빼주는 것과 같다는 것입니다.
+
 #### Kneser-Ney Smoothing
 
 
