@@ -46,11 +46,13 @@ $$
 
 이제 위와 같이 3개 단어의 출현 빈도와, 앞 2개 단어의 출현 빈도만 구하면 $$ x_i $$의 확률을 근사할 수 있습니다.
 
-## Smoothing
+## Generalization
+
+### Smoothing
 
 위의 방식에는 문제점이 있습니다. 바로 corpus에 출현하지 않는 단어 조합에 대한 대처 방법 입니다. 
 
-## Back-off
+### Back-off
 
 $$
 \begin{aligned}
@@ -63,7 +65,7 @@ where~&\sum_i{\lambda_i}=1.
 \end{aligned}
 $$
 
-## Interpolation
+### Interpolation
 
 ## Conclusion
 
