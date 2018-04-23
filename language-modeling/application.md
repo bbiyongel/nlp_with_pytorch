@@ -18,7 +18,7 @@ $$
 \end{aligned}
 $$
 
-그럼 Bayes Theorem에 의해서 수식은 AM과 LM 부분으로 나뉠 수 있습니다. 그리고 밑변의 prior $$ P(X) $$는 날려버릴 수 있습니다.
+그럼 Bayes Theorem에 의해서 수식은 AM과 LM 부분으로 나뉠 수 있습니다. 그리고 밑변의 evidence $$ P(X) $$는 날려버릴 수 있습니다.
 
 $$
 argmax\frac{P(X|Y)P(Y)}{P(X)} = argmax P(X|Y)P(Y)
