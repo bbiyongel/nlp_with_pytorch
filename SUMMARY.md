@@ -55,7 +55,7 @@
   * [Intro](language-modeling/intro.md)
   * [n-gram](language-modeling/n-gram.md)
   * [Perpexity](language-modeling/perpexity.md)
-  * [SRILM tutorial](language-modeling/srilm.md)
+  * [n-gram Exercise (SRILM)](language-modeling/srilm.md)
   * [Neural Network Language Model](language-modeling/nnlm.md)
   * [Applications](language-modeling/application.md)
 * [Neural Machine Translation](neural-machine-translation/cover.md)
