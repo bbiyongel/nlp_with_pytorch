@@ -51,6 +51,10 @@ $ ngram -help
 
 ### Language Modeling
 
+```bash
+$ time ngram-count -order 3 -kndiscount -text <text_fn> -lm <output_lm_fn> -write_vocab <output_vocab_fn> -debug 2
+```
+
 ### Evaluation
 
 ### Sentence Generation
