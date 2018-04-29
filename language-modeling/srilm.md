@@ -42,6 +42,7 @@ $ ngram -help
 -unk: mark OOV as
 -kndiscountn: Use Kneser-Ney discounting for N-grams of order n
 
+
 >ngram: LM을 활용
 -ppl: calculate perplexity for test file name
 -order: n-gram count
