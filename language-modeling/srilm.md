@@ -59,4 +59,8 @@ $ time ngram-count -order 3 -kndiscount -text <text_fn> -lm <output_lm_fn> -writ
 
 ### Sentence Generation
 
+```bash
+$ ngram -lm <input_lm_fn> -gen <n_sentence_to_generate> | python {PREPROC_PATH}/detokenizer.py
+```
+
 ### Interpolation
