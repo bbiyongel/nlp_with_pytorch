@@ -55,12 +55,20 @@ $ ngram -help
 $ time ngram-count -order 3 -kndiscount -text <text_fn> -lm <output_lm_fn> -write_vocab <output_vocab_fn> -debug 2
 ```
 
-### Evaluation
-
 ### Sentence Generation
 
 ```bash
 $ ngram -lm <input_lm_fn> -gen <n_sentence_to_generate> | python {PREPROC_PATH}/detokenizer.py
 ```
 
+### Evaluation
+
+```bash
+$ ngram -ppl <test_fn> -lm <input_lm_fn> -order 3 -debug 2
+```
+
 ### Interpolation
+
+```bash
+$ ngram -lm <input_lm_fn> -mix-lm <mix_lm_fn> -lambda <mix_ratio_between_0_and_1> -write-lm <output_lm_fn> -debug 2
+```
