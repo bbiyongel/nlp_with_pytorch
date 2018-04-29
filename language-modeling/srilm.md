@@ -24,6 +24,11 @@ PATH={SRILM_PATH}/bin/{MACHINE}:$PATH
 # PATH=/home/khkim/Workspace/nlp/srilm/bin/i686-m64:$PATH
 export PATH
 ```
+```bash
+$ source ~/.profile
+$ ngram-count -help
+$ ngram -help
+```
 
 ## Prepare Dataset
 
