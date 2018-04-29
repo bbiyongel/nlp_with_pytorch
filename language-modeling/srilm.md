@@ -17,6 +17,10 @@ $ vi ./Makefile
 ```bash
 $ make
 ```
+```
+PATH={SRILM_PATH}/bin/{MACHINE}:$PATH
+export PATH
+```
 
 ## Prepare Dataset
 
