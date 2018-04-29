@@ -14,6 +14,8 @@ $ tar –xzvf ./srilm-1.7.2.tar.gz
 ```bash
 $ vi ./Makefile
 ```
+7번째 라인 # SRILM = ‘@#$%@#$” 을 경로 지정 후 de-commentize
+
 ```bash
 $ make
 ```
