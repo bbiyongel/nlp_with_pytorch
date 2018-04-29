@@ -6,7 +6,17 @@ SRILM은 음성인식, segmentation, 기계번역 등에 사용되는 통계 언
 
 > http://www.speech.sri.com/projects/srilm/download.html
 
-
+```bash
+$ mkdir srilm
+$ cd ./srilm
+$ tar –xzvf ./srilm-1.7.2.tar.gz
+```
+```bash
+$ vi ./Makefile
+```
+```bash
+$ make
+```
 
 ## Prepare Dataset
 
