@@ -34,20 +34,18 @@ $ ngram -help
 
 ## Basic Usage
 
->ngram-count: LM을 훈련
--vocab: lexicon file name
--text: training corpus file name 
--order: n-gram count 
--write: output countfile file name 
--unk: mark OOV as
--kndiscountn: Use Kneser-Ney discounting for N-grams of order n
+- ngram-count: LM을 훈련
+    - vocab: lexicon file name
+    - text: training corpus file name 
+    - order: n-gram count 
+    - write: output countfile file name 
+    - unk: mark OOV as
+    - kndiscountn: Use Kneser-Ney discounting for N-grams of order n
 
-
->ngram: LM을 활용
--ppl: calculate perplexity for test file name
--order: n-gram count
--lm: language model file name
-
+- ngram: LM을 활용
+    - ppl: calculate perplexity for test file name
+    - order: n-gram count
+    - lm: language model file name
 
 ### Language Modeling
 
