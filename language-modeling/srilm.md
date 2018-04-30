@@ -117,6 +117,8 @@ file ./data/test.refined.tok.bpe.txt: 1000 sentences, 13302 words, 32 OOVs0 zer
 
 ### Interpolation
 
+SRILM을 통해서 단순한 smoothing(or discounting) 뿐만이 아니라 interpolation을 수행 할 수도 있습니다. 이 경우에는 완성된 두 개의 별도의 language model이 필요하고, 이를 섞어주기 위한 hyper parameter lambda가 필요합니다.
+
 ```bash
 $ ngram -lm <input_lm_fn> -mix-lm <mix_lm_fn> -lambda <mix_ratio_between_0_and_1> -write-lm <output_lm_fn> -debug 2
 ```
