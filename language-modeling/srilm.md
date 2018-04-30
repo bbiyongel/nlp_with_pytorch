@@ -4,7 +4,7 @@ SRILM은 음성인식, segmentation, 기계번역 등에 사용되는 통계 언
 
 ## Install SRILM
 
-> http://www.speech.sri.com/projects/srilm/download.html
+> 다운로드: http://www.speech.sri.com/projects/srilm/download.html
 
 ```bash
 $ mkdir srilm
