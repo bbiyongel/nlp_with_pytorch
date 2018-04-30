@@ -6,24 +6,31 @@ SRILM은 음성인식, segmentation, 기계번역 등에 사용되는 통계 언
 
 > 다운로드: http://www.speech.sri.com/projects/srilm/download.html
 
+위의 주소에서 SRILM은 간단한 정보를 기입 한 후, 다운로드 가능합니다. 이후에 아래와 같이 디렉터리를 만들고 그 안에 압축을 풀어 놓습니다.
+
 ```bash
 $ mkdir srilm
 $ cd ./srilm
 $ tar –xzvf ./srilm-1.7.2.tar.gz
 ```
-```bash
-$ vi ./Makefile
-```
-7번째 라인 # SRILM = ‘@#$%@#$” 을 경로 지정 후 de-commentize
+
+디렉터리 내부에 Makefile을 열어 7번째 라인의 SRILM의 경로 지정 후에 주석을 해제 하여 줍니다. 그리고 make명령을 통해 SRILM을 빌드 합니다.
 
 ```bash
+$ vi ./Makefile
 $ make
 ```
+
+빌드가 정상적으로 완료 된 후에, PATH에 SRILM/bin 내부에 새롭게 생성된 디렉터리를 등록 한 후, export 해 줍니다.
+
 ```
 PATH={SRILM_PATH}/bin/{MACHINE}:$PATH
 #PATH=/home/khkim/Workspace/nlp/srilm/bin/i686-m64:$PATH
 export PATH
 ```
+
+그리고 아래와 같이 ngram-count와 ngram이 정상적으로 동작하는 것을 확인 합니다.
+
 ```bash
 $ source ~/.profile
 $ ngram-count -help
