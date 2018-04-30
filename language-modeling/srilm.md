@@ -43,6 +43,8 @@ $ ngram -help
 
 ## Basic Usage
 
+아래는 주로 SRILM에서 사용되는 프로그램들의 주요 arguments에 대한 설명입니다.
+
 - ngram-count: LM을 훈련
     - vocab: lexicon file name
     - text: training corpus file name 
