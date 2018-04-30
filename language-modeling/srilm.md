@@ -21,7 +21,7 @@ $ make
 ```
 ```
 PATH={SRILM_PATH}/bin/{MACHINE}:$PATH
-# PATH=/home/khkim/Workspace/nlp/srilm/bin/i686-m64:$PATH
+#PATH=/home/khkim/Workspace/nlp/srilm/bin/i686-m64:$PATH
 export PATH
 ```
 ```bash
