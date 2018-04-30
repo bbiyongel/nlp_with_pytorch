@@ -177,7 +177,6 @@ def train_epoch(model, criterion, train_iter, valid_iter, config):
     no_improve_cnt = 0
 
     for epoch in range(1, config.n_epochs):
-        #optimizer = optim.Adam(model.parameters(), lr = current_lr)
         optimizer = optim.SGD(model.parameters(), lr = current_lr)
         print("current learning rate: %f" % current_lr)
         print(optimizer)
