@@ -78,8 +78,9 @@ class LanguageModelDataset(data.Dataset):
                         [line], fields))
 
         super(LanguageModelDataset, self).__init__(examples, fields, **kwargs)
+```
 
-
+```python
 if __name__ == '__main__':
     import sys
     loader = DataLoader(sys.argv[1], sys.argv[2])
