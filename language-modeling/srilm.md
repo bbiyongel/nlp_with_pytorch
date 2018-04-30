@@ -84,7 +84,7 @@ $ ngram -ppl <test_fn> -lm <input_lm_fn> -order 3 -debug 2
 ```
 
 ```bash
-$ ngram -ppl ./data/test.refined.tok.bpe.txt -lm ./data/ted.aligned.en.refined.tok.bpe.lm -order 3 -debug 2
+$ ngram -ppl ./data/test.refined.tok.bpe.txt -lm ./data/ted.aligned.en.refined.tok.bpe.lm -order 3 -debug 2
 file ./data/test.refined.tok.bpe.txt: 1000 sentences, 13302 words, 32 OOVs0 zeroprobs, logprob= -36717.49 ppl= 374.1577 ppl1= 584.7292
 ```
 
