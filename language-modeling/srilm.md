@@ -115,6 +115,8 @@ file ./data/test.refined.tok.bpe.txt: 1000 sentences, 13302 words, 32 OOVs0 zer
 0 zeroprobs, logprob= -26.71738 ppl= 268.4436 ppl1= 469.6111
 ```
 
+위의 결과에서는 10개의 단어가 주어졌고, 5번의 back-off이 되어 3-gram은 3개만 hit되었고, 4개의 2-gram과 4개의 1-gram이 hit되었습니다. 그리하여 -26.71의 log-probability가 계산되어, 268의 PPL로 환산되었음을 볼 수 있습니다.
+
 ### Interpolation
 
 SRILM을 통해서 단순한 smoothing(or discounting) 뿐만이 아니라 interpolation을 수행 할 수도 있습니다. 이 경우에는 완성된 두 개의 별도의 language model이 필요하고, 이를 섞어주기 위한 hyper parameter lambda가 필요합니다. 아래와 같이 명령어를 입력하여 interpolation을 수행할 수 있습니다.
