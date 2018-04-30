@@ -61,14 +61,18 @@ $ ngram -help
 
 ### Language Modeling
 
+위에서 나온 대로, language model을 훈련하기 위해서는 ngram-count 모듈을 이용 합니다. 아래의 명령어는 예를 들어 kndiscount를 사용한 상태에서 tri-gram을 훈련하고 LM과 거기에 사용된 vocabulary를 출력하도록 하는 명령 입니다.
+
 ```bash
 $ time ngram-count -order 3 -kndiscount -text <text_fn> -lm <output_lm_fn> -write_vocab <output_vocab_fn> -debug 2
 ```
 
 ### Sentence Generation
 
+아래의 명령은 위와 같이 ngram-count 모듈을 사용해서 만들어진 lm을 활용하여 문장을 생성하는 명령입니다. 문장을 생성 한 이후에는 preprocessing 챕터에서 다루었듯이 detokenization을 수행해 주어야 하며, pipeline을 통해 sed와 regular expression을 사용하여 detokenization을 해 주도록 해 주었습니다.
+
 ```bash
-$ ngram -lm <input_lm_fn> -gen <n_sentence_to_generate> | python {PREPROC_PATH}/detokenizer.py
+$ ngram -lm <input_lm_fn> -gen <n_sentence_to_generate> | sed "s/ //g" | sed "s/▁▁/ /g" | sed "s/▁//g" | sed "s/^\s//g"
 ```
 
 ### Evaluation
