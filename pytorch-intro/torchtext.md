@@ -9,3 +9,11 @@
 ```bash
 $ pip install torchtext
 ```
+
+## Example
+
+### Reading Monolingual Corpus
+
+### Reading Monolingual Corpus with Labeling
+
+### Reading Parallel(Bi-lingual) Corpus
