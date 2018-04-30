@@ -75,6 +75,8 @@ $ time ngram-count -order 3 -kndiscount -text <text_fn> -lm <output_lm_fn> -writ
 $ ngram -lm <input_lm_fn> -gen <n_sentence_to_generate> | sed "s/ //g" | sed "s/▁▁/ /g" | sed "s/▁//g" | sed "s/^\s//g"
 ```
 
+위와 같이 매번 sed와 regular expression을 통하는 것이 번거롭다면, preprocessing 챕터에서 제공되었던 detokenization python script를 통하여 detokenization을 수행 할 수도 있습니다.
+
 ### Evaluation
 
 ```bash
