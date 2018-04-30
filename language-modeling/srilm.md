@@ -39,6 +39,8 @@ $ ngram -help
 
 ## Prepare Dataset
 
+이전 preprocessing 챕터에서 다루었던 대로 tokenize가 완료된 파일을 데이터로 사용합니다. 그렇게 준비된 파일을 training set과 test set으로 나누어 준비 합니다.
+
 ## Basic Usage
 
 - ngram-count: LM을 훈련
