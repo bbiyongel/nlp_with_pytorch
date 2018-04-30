@@ -100,7 +100,13 @@ from torchtext import data, datasets
 
 class DataLoader(object):
 
-    def __init__(self, train_fn, valid_fn, tokenizer, batch_size = 64, device = -1, max_vocab = 9999999, fix_length = None, use_eos = False, shuffle = True):
+    def __init__(self, train_fn, valid_fn, tokenizer, batch_size = 64, 
+                                                        device = -1, 
+                                                        max_vocab = 9999999, 
+                                                        fix_length = None, 
+                                                        use_eos = False, 
+                                                        shuffle = True
+                                                        ):
         super(DataLoader, self).__init__()
 
         self.label = data.Field(sequential = False, 
