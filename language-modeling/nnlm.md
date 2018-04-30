@@ -43,7 +43,12 @@ import torch.nn as nn
 
 class LanguageModel(nn.Module):
 
-    def __init__(self, vocab_size, word_vec_dim = 512, hidden_size = 512, n_layers = 4, dropout_p = .2, max_length = 255):
+    def __init__(self, vocab_size, word_vec_dim = 512, 
+                                    hidden_size = 512, 
+                                    n_layers = 4, 
+                                    dropout_p = .2, 
+                                    max_length = 255
+                                    ):
         self.vocab_size = vocab_size
         self.word_vec_dim = word_vec_dim
         self.hidden_size = hidden_size
@@ -79,7 +84,15 @@ EOS = 3
 
 class DataLoader():
 
-    def __init__(self, train_fn, valid_fn, batch_size = 64, device = -1, max_vocab = 99999999, max_length = 255, fix_length = None, use_bos = True, use_eos = True, shuffle = True):
+    def __init__(self, train_fn, valid_fn, batch_size = 64, 
+                                            device = -1, 
+                                            max_vocab = 99999999, 
+                                            max_length = 255, 
+                                            fix_length = None, 
+                                            use_bos = True, 
+                                            use_eos = True, 
+                                            shuffle = True
+                                            ):
         super(DataLoader, self).__init__()
 
         self.text = data.Field(sequential = True, 
