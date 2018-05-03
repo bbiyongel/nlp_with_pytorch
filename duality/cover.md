@@ -1,4 +1,4 @@
 # Exploit Duality
 
-![](http://bair.berkeley.edu/blog/assets/BAIR_Logo.png)<br>
-Berkeley AI Research Lab.
+![](http://static.neow.in/images/uploaded/2014/08/microsoft-research-02_story.jpg)<br>
+Microsoft Research
