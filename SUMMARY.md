@@ -3,7 +3,7 @@
 * [소개글](README.md)
 * [To Do & Milestone](to-do-and-milestone.md)
 * [To read](references.md)
-* [Index](index.md)
+* [Index](index_list.md)
 * [Natural Language Processing with Deeplearning](nlp-with-deeplearning/cover.md)
   * [Intro](nlp-with-deeplearning/intro.md)
   * [Deeplearning](nlp-with-deeplearning/deeplearning.md)
