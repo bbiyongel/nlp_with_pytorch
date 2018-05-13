@@ -39,10 +39,10 @@ $$
 X=\{x_0,x_1,\cdots,x_n,x_{n+1}\}~where~x_0=BOS~and~x_{n+1}=EOS.
 $$
 $$
-\hat{x}_{i+1}=Linear_{hidden \rightarrow |V|}(RNN(Emb(x_i)))
+\hat{x}_{i+1}=Softmax(Linear_{hidden \rightarrow |V|}(RNN(Emb(x_i))))
 $$
 $$
-\hat{X}[1:]=Linear_{hidden \rightarrow |V|}(RNN(Emb(X[:-1])))
+\hat{X}[1:]=Softmax(Linear_{hidden \rightarrow |V|}(RNN(Emb(X[:-1]))))
 $$
 
 ### Model Architecture
