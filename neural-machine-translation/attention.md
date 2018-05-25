@@ -69,6 +69,7 @@ _**2.2**_라는 값이 나왔습니다. 강아지와 고양이, 그리고 컴퓨
 
 * 만약, _**dic**_의 _**value**_에는 100차원의 vector로 들어있었다면 어떻게 될까요? 
 * 거기에, _**query**_와 _**key**_값 모두 vector라면 어떻게 될까요? 즉, Word Embedding Vector라면?
+* **how similar** 함수는 이 vector 들 간의 cosine similarity를 반환 해 주는 함수라면?
 * 그리고, _**dic**_의 _**key**_값과 _**value**_값이 서로 같다면 어떻게 될까요?
 
 그럼 다시 가상의 함수를 만들어보겠습니다. _**word2vec**_이라는 함수는 단어를 입력으로 받아서 그 단어에 해당하는 미리 정해진 word embedding vector를 리턴 해 준다고 가정하겠습니다. 그럼 좀 전의 _**how\_similar**_ 함수는 두 vector 간의 dot product 값을 반환 할 겁니다.
