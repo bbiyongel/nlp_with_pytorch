@@ -19,7 +19,11 @@ def key_value_func(query):
     weights = []
 
     for key in dic.keys():
-        weights += [is_same(key, query) / len(dic)]
+        weights += [is_same(key, query)]
+        
+    weight_sum = sum(weights)
+    for i, w in enumerate(weights):
+        weights[i] = weights[i] / weight_sum
 
     answer = 0
 
