@@ -9,7 +9,7 @@
 Attention을 본격 소개하기 전에 먼저 우리가 알고 있는 자료형을 짚고 넘어갈까 합니다. Key-Value 또는 [Python에서 Dictionary](https://wikidocs.net/16)라고 부르는 자료형 입니다.
 
 ```py
->>> dic = {'computer': 1, 'dog': 2, 'cat': 3}
+>>> dic = {'computer': 9, 'dog': 2, 'cat': 3}
 ```
 
 위와 같이 _**Key**_와 _**Value**_에 해당하는 값들을 넣고 _**Key**_를 통해 _**Value**_ 값에 접근 할 수 있습니다. 좀 더 바꿔 말하면, _**Query**_가 주어졌을 때, _**Key**_값에 따라 _**Value**_값에 접근 할 수 있습니다. 위의 작업을 함수로 나타낸다면, 아래와 같이 표현할 수 있을겁니다. \(물론 실제 Python Dictionary 동작은 매우 다릅니다.\)
@@ -60,10 +60,10 @@ def is_same(key, query):
 ```py
 >>> query = 'puppy'
 >>> key_value_func(query)
-2.2 # = .1 / (.9 + .8 + .1) * 1 + .9 / (.9 + .8 + .1) * 2 + .7 / (.9 + .8 + .1) * 3
+2.823 # = .1 / (.9 + .7 + .1) * 9 + .9 / (.9 + .7 + .1) * 2 + .7 / (.9 + .7 + .1) * 3
 ```
 
-_**2.2**_라는 값이 나왔습니다. 강아지와 고양이, 그리고 컴퓨터의 유사도의 비율에 따른 dic의 값의 비율을 지녔다라고 볼 수 있습니다. _**is\_same**_ 함수를 쓸 때에는 두 값이 같은지 if문을 통해 검사하고 값을 할당했기 때문에, 미분을 할 수 없었습니다. 하지만, 이제 우리는 key\_value\_func을 미분 할 수 있습니다.
+_**2.823**_라는 값이 나왔습니다. 강아지와 고양이, 그리고 컴퓨터의 유사도의 비율에 따른 dic의 값의 비율을 지녔다라고 볼 수 있습니다. _**is\_same**_ 함수를 쓸 때에는 두 값이 같은지 if문을 통해 검사하고 값을 할당했기 때문에, 미분을 할 수 없었습니다. 하지만, 이제 우리는 key\_value\_func을 미분 할 수 있습니다.
 
 ### Differentiable Key-Value Vector function
 
@@ -99,7 +99,7 @@ def key_value_func(query):
 [0.15, 0.2, -0.3, 0.8, ...
 >>> len(word2vec('computer'))
 100
->>> dic = {word2vec('dog'): word2vec('dog'), word2vec('computer'): word2vec('computer'), word2vec('cat'): word2vec('cat')}
+>>> dic = {word2vec('computer'): word2vec('computer'), word2vec('dog'): word2vec('dog'), word2vec('cat'): word2vec('cat')}
 >>>
 >>> query = 'puppy'
 >>> answer = key_value_func(word2vec(query))
