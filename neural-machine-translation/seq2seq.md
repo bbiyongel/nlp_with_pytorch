@@ -121,11 +121,80 @@ Neural Network 모델은 데이터를 압축하는데에 탁월한 성능\([Mani
 
 ### Encoder
 
+```python
+class Encoder(nn.Module):
+
+    def __init__(self, word_vec_dim, hidden_size, n_layers = 4, dropout_p = .2):
+        super(Encoder, self).__init__()
+
+        self.rnn = nn.LSTM(word_vec_dim, int(hidden_size / 2), num_layers = n_layers, dropout = dropout_p, bidirectional = True, batch_first = True)
+
+    def forward(self, emb):
+        # |emb| = (batch_size, length, word_vec_dim)
+
+        if isinstance(emb, tuple):
+            x, lengths = emb
+            x = pack(x, lengths.tolist(), batch_first = True)
+        else:
+            x = emb
+        
+        y, h = self.rnn(x)
+        # |y| = (batch_size, length, hidden_size)
+        # |h[0]| = (num_layers * 2, batch_size, hidden_size / 2)
+
+        if isinstance(emb, tuple):
+            y, _ = unpack(y, batch_first = True)
+
+        return y, h
+```
+
 ### Decoder
+
+```python
+class Decoder(nn.Module):
+
+    def __init__(self, word_vec_dim, hidden_size, n_layers = 4, dropout_p = .2):
+        super(Decoder, self).__init__()
+
+        self.rnn = nn.LSTM(word_vec_dim + hidden_size, hidden_size, num_layers = n_layers, dropout = dropout_p, bidirectional = False, batch_first = True)
+
+    def forward(self, emb_t, h_t_1_tilde, h_t_1):
+        # |emb_t| = (batch_size, 1, word_vec_dim)
+        # |h_t_1_tilde| = (batch_size, 1, hidden_size)
+        # |h_t_1[0]| = (n_layers, batch_size, hidden_size)
+        batch_size = emb_t.size(0)
+        hidden_size = h_t_1[0].size(-1)
+
+        if h_t_1_tilde is None:
+            h_t_1_tilde = emb_t.new(batch_size, 1, hidden_size).zero_()
+
+        x = torch.cat([emb_t, h_t_1_tilde], dim = -1)
+        y, h = self.rnn(x, h_t_1)
+
+        return y, h
+```
 
 ### Generator
 
-### Sequence-to-Sequence
+```python
+class Generator(nn.Module):
+    
+    def __init__(self, hidden_size, output_size):
+        super(Generator, self).__init__()
+
+        self.output = nn.Linear(hidden_size, output_size)
+        self.softmax = nn.LogSoftmax(dim = -1)
+
+    def forward(self, x):
+        # |x| = (batch_size, length, hidden_size)
+
+        y = self.softmax(self.output(x))
+        # |y| = (batch_size, length, output_size)
+
+        return y
+```
+
+### Sequence-to-Sequence (Combine)
 
 ### Loss
 
