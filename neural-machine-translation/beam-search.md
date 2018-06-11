@@ -14,6 +14,53 @@
 
 ### Code
 
+```python
+    def greedy_search(self, src):
+        mask = None
+        x_length = None
+        if isinstance(src, tuple):
+            x, x_length = src
+            mask = self.generate_mask(x, x_length)
+        else:
+            x = src
+        batch_size = x.size(0)
+
+        emb_src = self.emb_src(x)
+        h_src, h_0_tgt = self.encoder((emb_src, x_length))
+        h_0_tgt, c_0_tgt = h_0_tgt
+        h_0_tgt = h_0_tgt.transpose(0, 1).contiguous().view(batch_size, -1, self.hidden_size).transpose(0, 1).contiguous()
+        c_0_tgt = c_0_tgt.transpose(0, 1).contiguous().view(batch_size, -1, self.hidden_size).transpose(0, 1).contiguous()
+        h_0_tgt = (h_0_tgt, c_0_tgt)
+
+        y = x.new(batch_size, 1).zero_() + data_loader.BOS
+        done = x.new_ones(batch_size, 1).float()
+        h_t_tilde = None
+        decoder_hidden = h_0_tgt
+        y_hats = []
+        while done.sum() > 0:
+            emb_t = self.emb_dec(y)
+            # |emb_t| = (batch_size, 1, word_vec_dim)
+
+            decoder_output, decoder_hidden = self.decoder(emb_t, h_t_tilde, decoder_hidden)
+            context_vector = self.attn(h_src, decoder_output, mask)
+            h_t_tilde = self.tanh(self.concat(torch.cat([decoder_output, context_vector], dim = -1)))
+            y_hat = self.generator(h_t_tilde)
+            # |y_hat| = (batch_size, 1, output_size)
+            y_hats += [y_hat]
+
+            y = torch.topk(y_hat, 1, dim = -1)[1].squeeze(-1)
+            done = done * torch.ne(y, data_loader.EOS).float()
+            # |y| = (batch_size, 1)
+            # |done| = (batch_size, 1)
+
+        y_hats = torch.cat(y_hats, dim = 1)
+        indice = torch.topk(y_hats, 1, dim = -1)[1].squeeze(-1)
+        # |y_hat| = (batch_size, length, output_size)
+        # |indice| = (batch_size, length)
+
+        return y_hats, indice
+```
+
 ## Beam Search
 
 ![](/assets/beam_search.png)
