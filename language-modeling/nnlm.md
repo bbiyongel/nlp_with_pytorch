@@ -47,6 +47,10 @@ $$
 
 ## Code
 
+github repo url: https://github.com/kh-kim/OpenNLMTK
+
+### language_model.py
+
 ```python
 import torch
 import torch.nn as nn
@@ -85,6 +89,8 @@ class LanguageModel(nn.Module):
 
         return y_hat
 ```
+
+### data_loader.py
 
 ```python
 from torchtext import data, datasets
@@ -171,6 +177,8 @@ if __name__ == '__main__':
             break
 
 ```
+
+### trainer.py
 
 ```python
 import time
@@ -308,6 +316,8 @@ def train_epoch(model, criterion, train_iter, valid_iter, config):
             break
 ```
 
+### utils.py
+
 ```python
 
 import torch
@@ -340,6 +350,8 @@ def get_parameter_norm(parameters, norm_type = 2):
 
     return total_norm
 ```
+
+### train.py
 
 ```python
 import argparse
