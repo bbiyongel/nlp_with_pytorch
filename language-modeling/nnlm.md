@@ -45,7 +45,7 @@ $$
 \hat{X}[1:]=Softmax(Linear_{hidden \rightarrow |V|}(RNN(Emb(X[:-1]))))
 $$
 
-### Model Architecture
+## Code
 
 ```python
 import torch
