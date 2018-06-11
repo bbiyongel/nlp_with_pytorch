@@ -12,7 +12,9 @@
 
 우리는 자료구조, 알고리즘 수업에서 수 많은 search 방법에 대해 배웠습니다. DFS, BFS, Dynamic Programming 등. 우리는 이 중에서 Greedy algorithm을 기반으로 search를 구현합니다. 즉, softmax layer에서 가장 값이 큰 index를 뽑아 해당 time-step의 $$ \hat{y}_t $$로 사용하게 되는 것 입니다.
 
-### Beam Search
+### Code
+
+## Beam Search
 
 ![](/assets/beam_search.png)
 
@@ -56,3 +58,5 @@ $$
 $$
 where~\beta~is~hyper~parameter~of~minimum~length.
 $$
+
+### Code
