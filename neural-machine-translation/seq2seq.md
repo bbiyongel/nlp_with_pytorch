@@ -119,13 +119,13 @@ Neural Network 모델은 데이터를 압축하는데에 탁월한 성능\([Mani
 
 ## Code
 
-### Embedding Layer
-
 ### Encoder
 
 ### Decoder
 
 ### Generator
+
+### Sequence-to-Sequence
 
 ### Loss
 
