@@ -66,6 +66,7 @@
   * [Input Feeding](neural-machine-translation/input-feeding.md)
   * [Search](neural-machine-translation/beam-search.md)
   * [Evaluation](neural-machine-translation/eval.md)
+  * [Source Code](neural-machine-translation/code.md)
 * [Advanced Topic on NMT](neural-machine-translation/advanced-topic.md)
   * [Multilingual NMT](neural-machine-translation/multilingual-nmt.md)
   * [Using Monolingual Corpora](neural-machine-translation/mono.md)
