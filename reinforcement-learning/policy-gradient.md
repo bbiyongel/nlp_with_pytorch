@@ -122,6 +122,8 @@ Policy Gradient에 대한 자세한 설명은 원 논문인 [\[Sutton at el.1999
 
 $$
 \begin{aligned}
+X=\{x_1, x_2, \cdots, x_n\} \\
+Y=\{y_0, y_1, \cdots, y_m\}
 \end{aligned}
 $$
 
