@@ -130,6 +130,12 @@ $$
 
 $$
 \begin{aligned}
+\hat{Y}=argmax_{Y}P(Y|X)
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
 \hat{\theta}&=argmax_{\theta}P(\theta|X, Y) \\
 &=argmax_{\theta}P(Y|X; \theta)P(\theta) \\
 \end{aligned}
