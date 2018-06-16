@@ -141,6 +141,10 @@ $$
 $$
 \begin{aligned}
 J(\theta)&=-\sum{\log{P(Y|X;\theta)}} \\
-&=-\sum{\log{P(y_i|X, y_{i}; \theta)}}
+&=-\sum{\log{P(y_i|X, y_{<i}; \theta)}}
 \end{aligned}
+$$
+
+$$
+\theta \leftarrow \theta - \gamma
 $$
