@@ -120,4 +120,25 @@ Policy Gradient에 대한 자세한 설명은 원 논문인 [\[Sutton at el.1999
 
 ## MLE vs RL(Policy Gradients)
 
+$$
+\begin{aligned}
+\end{aligned}
+$$
 
+$$
+\begin{aligned}
+\hat{\theta}&=argmax_{\theta}P(\theta|X, Y) \\
+&=argmax_{\theta}P(Y|X; \theta)P(\theta) \\
+\end{aligned}
+$$
+
+$$
+\theta \leftarrow \theta + \gamma \nabla J(\theta)
+$$
+
+$$
+\begin{aligned}
+J(\theta)&=-\sum{\log{P(Y|X;\theta)}} \\
+&=-\sum{\log{P(y_i|X, y_{i}; \theta)}}
+\end{aligned}
+$$
