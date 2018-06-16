@@ -122,8 +122,9 @@ Policy Gradient에 대한 자세한 설명은 원 논문인 [\[Sutton at el.1999
 
 $$
 \begin{aligned}
-X=\{x_1, x_2, \cdots, x_n\} \\
-Y=\{y_0, y_1, \cdots, y_m\}
+(X, Y) &\in \mathcal{B} \\
+X&=\{x_1, x_2, \cdots, x_n\} \\
+Y&=\{y_0, y_1, \cdots, y_m\}
 \end{aligned}
 $$
 
@@ -141,10 +142,10 @@ $$
 $$
 \begin{aligned}
 J(\theta)&=-\sum{\log{P(Y|X;\theta)}} \\
-&=-\sum{\log{P(y_i|X, y_{<i}; \theta)}}
+&=-\sum{\sum{\log{P(y_i|X, y_{i}; \theta)}}}
 \end{aligned}
 $$
 
 $$
-\theta \leftarrow \theta - \gamma
+\theta \leftarrow \theta - \gamma \sum{\sum{\log{P(y_i|X, y_{i}; \theta)}}}
 $$
