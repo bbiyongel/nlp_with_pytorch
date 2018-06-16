@@ -122,7 +122,7 @@ Policy Gradient에 대한 자세한 설명은 원 논문인 [\[Sutton at el.1999
 
 $$
 \begin{aligned}
-(X, Y) &\in \mathcal{B} \\
+&(X, Y) \in \mathcal{B} \\
 X&=\{x_1, x_2, \cdots, x_n\} \\
 Y&=\{y_0, y_1, \cdots, y_m\}
 \end{aligned}
@@ -141,11 +141,15 @@ $$
 
 $$
 \begin{aligned}
-J(\theta)&=-\sum{\log{P(Y|X;\theta)}} \\
-&=-\sum{\sum{\log{P(y_i|X, y_{i}; \theta)}}}
+J(\theta)&=-\sum_{(X, Y) \in \mathcal{B}}{\log{P(Y|X;\theta)}} \\
+&=-\sum_{(X, Y) \in \mathcal{B}}{\sum_{i = 0}^{m}{\log{P(y_i|X, y_{i}; \theta)}}}
 \end{aligned}
 $$
 
 $$
-\theta \leftarrow \theta - \gamma \sum{\sum{\log{P(y_i|X, y_{i}; \theta)}}}
+\theta \leftarrow \theta - \gamma \sum_{(X, Y) \in \mathcal{B}}{\sum_{i = 0}^{m}{\log{P(y_i|X, y_{i}; \theta)}}}
+$$
+
+$$
+\theta \leftarrow \theta + \alpha Q^{\pi_\theta}(s_t,a_t)\triangledown_\theta\log{\pi_\theta(a_t|s_t)}
 $$
