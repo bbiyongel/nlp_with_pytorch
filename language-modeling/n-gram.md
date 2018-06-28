@@ -26,7 +26,7 @@ $$
 
 
 $$
-P(x_1,x_2,\cdots,x_i)=\prod_{j}{P(x_j|x_{j-k},\cdots,x_{j-1})}
+P(x_1,x_2,\cdots,x_n)=\prod_{j=1}^{n}{P(x_j|x_{j-k},\cdots,x_{j-1})}
 $$
 
 
@@ -34,7 +34,7 @@ $$
 
 
 $$
-\log{P(x_1,x_2,\cdots,x_i)}=\sum_{j}{log{P(x_j|x_{j-k},\cdots,x_{j-1})}}
+\log{P(x_1,x_2,\cdots,x_n)}=\sum_{j=1}^{n}{log{P(x_j|x_{j-k},\cdots,x_{j-1})}}
 $$
 
 
@@ -54,7 +54,13 @@ P(x_i|x_{i-2},x_{i-1})=\frac{COUNT(x_{i-2},x_{i-1},x_i)}{COUNT(x_{i-2},x_{i-1})}
 $$
 
 
-이제 위와 같이 3개 단어의 출현 빈도와, 앞 2개 단어의 출현 빈도만 구하면 $$ x_i $$의 확률을 근사할 수 있습니다.
+이제 위와 같이 3개 단어의 출현 빈도와, 앞 2개 단어의 출현 빈도만 구하면 $$ x_i $$의 확률을 근사할 수 있습니다. 즉, 아래와 같은 문장 전체의 확률에 대해서
+
+$$
+P(x_1, x_2, \cdots, x_n)
+$$
+
+비록 훈련 corpus 내에 해당 문장이 존재 한 적이 없더라도, Markov assumption을 통해서 우리는 해당 문장의 확률을 근사(approximation)할 수 있게 되었습니다.
 
 ## Generalization
 
