@@ -142,7 +142,7 @@ $$
 
 ![](http://file2.nocutnews.co.kr/newsroom/image/2018/01/22/20180122110200782659_0_750_585.jpg)
 
-따라서 일반적인 대화에서와 다른 의미를 지닌 단어가 나올 수도 있고, 일반적인 대화에서는 rare한 표현(word sequence)가 훨씬 더 자주 등장 할 수 있습니다. 이런 case들에 잘 대처하기 위해서 해당 domain corpus로 생성한 language model을 섞어주어 해당 domain에 특화 시킬 수 있습니다.
+따라서 일반적인 대화에서와 다른 의미를 지닌 단어가 나올 수도 있고, 일반적인 대화에서는 희귀(rare)한 표현(word sequence)가 훨씬 더 자주 등장 할 수 있습니다. 이런 case들에 잘 대처하기 위해서 해당 domain corpus로 생성한 language model을 섞어주어 해당 domain에 특화 시킬 수 있습니다.
 
 ## Conclusion
 
