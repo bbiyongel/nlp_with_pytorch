@@ -1,7 +1,6 @@
 # Summary
 
 * [소개글](README.md)
-* [To Do & Milestone](to-do-and-milestone.md)
 * [To read](references.md)
 * [Index](index_list.md)
 * [Natural Language Processing with Deeplearning](nlp-with-deeplearning/cover.md)
@@ -56,7 +55,7 @@
   * [Intro](language-modeling/intro.md)
   * [n-gram](language-modeling/n-gram.md)
   * [Perpexity](language-modeling/perpexity.md)
-  * [n-gram Exercise (SRILM)](language-modeling/srilm.md)
+  * [n-gram Exercise \(SRILM\)](language-modeling/srilm.md)
   * [Neural Network Language Model](language-modeling/nnlm.md)
   * [Applications](language-modeling/application.md)
 * [Neural Machine Translation](neural-machine-translation/cover.md)
