@@ -8,13 +8,10 @@ Perplexity 측정 방법은 explicit evaluation 방법의 하나입니다. 줄�
 
 
 $$
-PPL(w_1,w_2,\cdots,w_n)=P(w_1,w_2,\cdots,w_N)^{-\frac{1}{N}}
-$$
-
-
-
-$$
-=\sqrt[N]{\frac{1}{P(w_1,w_2,\cdots,w_N)}}
+\begin{aligned}
+PPL(w_1,w_2,\cdots,w_n)=&P(w_1,w_2,\cdots,w_N)^{-\frac{1}{N}} \\
+=&\sqrt[N]{\frac{1}{P(w_1,w_2,\cdots,w_N)}}
+\end{aligned}
 $$
 
 
