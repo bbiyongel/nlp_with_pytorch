@@ -14,53 +14,6 @@
 
 Neural Machine Translation task도 기본적으로 어떤 단어를 pick 하는 작업이기 때문에 기본적으로 classification task에 속합니다. 따라서 ***Cross Entropy***를 Loss function으로 사용합니다. 
 
-$$
-H(p,q)=-{\sum_{\forall x}{p(x)\log{q(x)}}}
-$$
-
-위의 식은 기본 Cross Entropy 수식입니다. 이것을 우리의 번역 모델($$ M_\theta $$)에 적용하여 보면 아래와 같습니다.
-
-$$
-L= -\frac{1}{|Y|}\sum_{y \in Y}{P(y) \log P_\theta(y)}
-$$
-
-여기서 $$ P(y) $$는 정답(ground-truth)이므로 항상 $$ 1 $$입니다. 그러므로 아래와 같이 됩니다.
-
-$$
-L= -\frac{1}{|Y|}\sum_{y \in Y}{\log P_\theta(y)}
-$$
-
-$$
-=\log{((\prod_{y \in Y}{P_\theta(y)})^{-\frac{1}{|Y|}})}
-$$
-
-$$
-=\log{(\sqrt[|Y|]{\frac{1}{\prod_{y \in Y}{P_\theta(y)}}})}
-$$
-
-그런데 재미있는 점은 이전 챕터 Language Modeling 할 때 성능평가 지표로써 사용했던 Perplexity가 Cross Entropy와 밀접한 관련이 있다는 것 입니다. 이전 챕터에서 다루었던 PPL (Perplexity) 수식을 떠올려보겠습니다.
-
-$$
-PPL(W)=P(w_1, w_2, \cdots, w_N)^{-\frac{1}{N}}
-=\sqrt[N]{\frac{1}{P(w_1,w_2,\cdots,w_N)}}
-$$
-
-$$
-By~chain~rule,
-$$
-
-$$
-PPL(W)=\sqrt[N]{\prod_{i=1}^{N}{\frac{1}{P(w_i|w_1,\cdots,w_{i-1})}}}
-$$
-
-앞서 정리했던 Cross Entropy와 수식이 비슷함을 알 수 있습니다. 따라서 ***PPL***과 ***Cross Entropy***의 관계는 아래와 같습니다.
-
-$$
-PPL = \exp(Cross~Entropy)
-$$
-
-따라서, 우리는 Cross Entropy를 통해 얻은 Loss 값에 exponential을 취함으로써, PPL을 얻어 번역기의 성능을 나타낼 수 있습니다.
-
 ### BLEU
 
 위의 PPL은 우리가 사용하는 Loss function과 직결되어 바로 알 수 있는 간편함이 있지만, 실제 번역기의 성능과 완벽한 비례관계에 있다고 할 수는 없습니다. Cross Entropy의 수식을 해석 해 보면, 각 time-step 별 실제 정답에 해당하는 단어의 확률만 채점하기 때문입니다.
