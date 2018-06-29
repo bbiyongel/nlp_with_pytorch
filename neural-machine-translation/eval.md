@@ -59,7 +59,7 @@ $$
 PPL = \exp(Cross~Entropy)
 $$
 
-따라서, 우리는 Cross Entropy를 통해 얻은 Loss 값에 exponential을 취함으로써, PPL을 얻어 번역기의 성능을 나타낼 수 있습니다. -- 실제로 entropy는 정보량을 나타내는 단위이고, 이것은 perplexity의 branch의 개념과 유사합니다.
+따라서, 우리는 Cross Entropy를 통해 얻은 Loss 값에 exponential을 취함으로써, PPL을 얻어 번역기의 성능을 나타낼 수 있습니다.
 
 ### BLEU
 
