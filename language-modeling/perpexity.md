@@ -86,7 +86,7 @@ $$
 L= -\frac{1}{|Y|}\sum_{y \in Y}{P(y) \log P_\theta(y)}
 $$
 
-여기서 $$ P(y) $$는 정답(ground-truth)이므로 항상 $$ 1 $$입니다. 그러므로 아래와 같이 됩니다.
+여기서 $$ P(y) $$는 정답(ground-truth)이므로 항상 $$ 1 $$입니다. 그러므로 아래와 같이 생략 할 수 있습니다.
 
 $$
 L= -\frac{1}{|Y|}\sum_{y \in Y}{\log P_\theta(y)}
