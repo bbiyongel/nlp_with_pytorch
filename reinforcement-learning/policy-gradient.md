@@ -20,7 +20,7 @@ $$
 또한, 위의 수식은 아래와 같이 표현 할 수 있습니다.
 
 $$
-E_{x\sim P(X)}[reward(x)]=\sum^6_{x=1}{P(X=x)\times reward(x)}=3.5
+E_{X \sim P}[reward(x)]=\sum^6_{x=1}{P(X=x)\times reward(x)}=3.5
 $$
 
 # Monte Carlo Sampling
