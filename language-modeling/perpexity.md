@@ -100,7 +100,7 @@ $$
 =\log{(\sqrt[|Y|]{\frac{1}{\prod_{y \in Y}{P_\theta(y)}}})}
 $$
 
-그런데 재미있는 점은 이전 챕터 Language Modeling 할 때 성능평가 지표로써 사용했던 Perplexity가 Cross Entropy와 밀접한 관련이 있다는 것 입니다. 이전 챕터에서 다루었던 PPL (Perplexity) 수식을 떠올려보겠습니다.
+여기에 PPL 수식을 다시 떠올려 보겠습니다.
 
 $$
 PPL(W)=P(w_1, w_2, \cdots, w_N)^{-\frac{1}{N}}
