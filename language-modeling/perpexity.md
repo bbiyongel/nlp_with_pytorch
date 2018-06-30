@@ -79,13 +79,13 @@ $$
 
 ### Cross Entropy Loss
 
-크로스 엔트로피(Cross entropy)는 entropy로부터 한 걸음 더 나아가, 우리가 구하고자 하는 ground-truth 확률분포 $$P$$를 통해 우리가 학습중인 확률분포 $$Q$$의 정보량의 기대값을 이릅니다.
+크로스 엔트로피(Cross entropy)는 entropy로부터 한 걸음 더 나아가, 우리가 구하고자 하는 ground-truth 확률분포 $$P$$를 통해 우리가 학습중인 확률분포 $$Q$$의 정보량의 기대값을 이릅니다. 크로스 엔트로피의 수식은 아래와 같습니다.
 
 $$
 H(P,Q)=-{\sum_{\forall x}{P(x)\log{Q(x)}}}
 $$
 
-위의 식은 기본 Cross Entropy 수식입니다. 이것을 우리의 모델($$ \theta $$)을 최적화 하기 위한 loss함수로 적용하여 보면 아래와 같습니다.
+이것을 우리의 모델($$ \theta $$)을 최적화 하기 위한 loss함수로 적용하여 보면 아래와 같습니다.
 
 $$
 \begin{aligned}
