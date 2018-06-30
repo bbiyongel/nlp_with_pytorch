@@ -104,9 +104,9 @@ $$
 
 $$
 \begin{aligned}
-L&=-\frac{1}{N}\sum_{i=1}^{N}{\log{P_\theta(w_i|w_i)}} \\
-&=\log{((\prod_{y \in Y}{P_\theta(y)})^{-\frac{1}{|Y|}})} \\
-&=\log{(\sqrt[|Y|]{\frac{1}{\prod_{y \in Y}{P_\theta(y)}}})} \\
+L&=-\frac{1}{N}\sum_{i=1}^{N}{\log{P_\theta(w_i|w_{i})}} \\
+&=\log{((\prod_{i=1}^{N}{P_\theta(w_i|w_{i})})^{-\frac{1}{N}})} \\
+&=\log{(\sqrt[N]{\frac{1}{\prod_{i=1}^{N}{P_\theta(w_i|w_{i})}}})} \\
 \end{aligned}
 $$
 
