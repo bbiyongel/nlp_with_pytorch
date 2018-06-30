@@ -1,12 +1,12 @@
 # N-gram
 
-## Sparsness
+## Sparseness
 
-이전 섹션에서 언어모델에 대해 소개를 간략히 했습니다. 하지만 만약 그 수식대로라면 우리는 확률들을 거의 구할 수 없을 것 입니다. 왜냐하면 비록 우리가 수천만~수억 문장을 인터넷에서 긁어 모았다고 하더라도, 애초에 출현할 수 있는 단어의 조합의 경우의 수는 무한대에 가깝기 때문입니다. 문장이 조금만 길어지더라도 Count를 구할 수 없어 분자가 0이 되어 확률이 0이 되거나, 심지어 분모가 0이 되어 정의할 수가 없어져버릴 것이기 때문입니다. 이렇게 너무나도 많은 경우의 수 때문에 생기는 문제를 희소성(sparsness or sparsity)문제라고 표현합니다.
+이전 섹션에서 언어모델에 대해 소개를 간략히 했습니다. 하지만 만약 그 수식대로라면 우리는 확률들을 거의 구할 수 없을 것 입니다. 왜냐하면 비록 우리가 수천만~수억 문장을 인터넷에서 긁어 모았다고 하더라도, 애초에 출현할 수 있는 단어의 조합의 경우의 수는 무한대에 가깝기 때문입니다. 문장이 조금만 길어지더라도 Count를 구할 수 없어 분자가 0이 되어 확률이 0이 되거나, 심지어 분모가 0이 되어 정의할 수가 없어져버릴 것이기 때문입니다. 이렇게 너무나도 많은 경우의 수 때문에 생기는 문제를 희소성(sparseness or sparsity)문제라고 표현합니다.
 
 ## Markov Assumption
 
-따라서 sparsness 문제를 해결하기 위해서 Markov Assumption을 도입합니다.
+따라서 sparseness 문제를 해결하기 위해서 Markov Assumption을 도입합니다.
 
 
 $$
@@ -62,11 +62,11 @@ $$
 
 ## Generalization
 
-머신러닝의 힘은 보지 못한 case에 대한 대처 능력, 즉 generalization에 있습니다. 따라서, n-gram도 Markov assumption을 통해서 sparsness or sparsity를 해결하는 generalization 능력을 갖게 되었다고 할 수 있습니다. 이제 우리는 이것을 좀 더 향상시킬 수 있는 방법을 살펴 보도록 하겠습니다.
+머신러닝의 힘은 보지 못한 case에 대한 대처 능력, 즉 generalization에 있습니다. 따라서, n-gram도 Markov assumption을 통해서 sparseness or sparsity를 해결하는 generalization 능력을 갖게 되었다고 할 수 있습니다. 이제 우리는 이것을 좀 더 향상시킬 수 있는 방법을 살펴 보도록 하겠습니다.
 
 ### Smoothing \(Discounting\)
 
-Counting을 단순히 확률 값으로 이용 할 경우 문제점이 무엇이 있을까요? 바로 training corpus에 출현하지 않는 단어 조합에 대한 대처 방법 입니다. 비록, markov assumption을 적용하여 우리는 sparsness를 훨씬 줄였고, 문장의 모든 단어 조합에 대해서 count 할 필요가 없지만, 어찌되었든 그래도 훈련 corpus에 등장하지 않는 경우는 결국 존재 할 것인데, 그 경우인 unseen word sequence라고 해서 등장 확률이 0이 되면 맞지 않습니다. 따라서 counting 값 또는 확률 값을 좀 더 다듬어 줘야 할 필요성이 있습니다. 아래 파란색 bar와 같이 들쭉날쭉한 counting 값을 주황색 line으로 smooth하게 바꾸어 주기 때문에 smoothing 또는 discounting이라고 불립니다. 그럼 그 방법에 대해 살펴보겠습니다.
+Counting을 단순히 확률 값으로 이용 할 경우 문제점이 무엇이 있을까요? 바로 training corpus에 출현하지 않는 단어 조합에 대한 대처 방법 입니다. 비록, markov assumption을 적용하여 우리는 sparseness를 훨씬 줄였고, 문장의 모든 단어 조합에 대해서 count 할 필요가 없지만, 어찌되었든 그래도 훈련 corpus에 등장하지 않는 경우는 결국 존재 할 것인데, 그 경우인 unseen word sequence라고 해서 등장 확률이 0이 되면 맞지 않습니다. 따라서 counting 값 또는 확률 값을 좀 더 다듬어 줘야 할 필요성이 있습니다. 아래 파란색 bar와 같이 들쭉날쭉한 counting 값을 주황색 line으로 smooth하게 바꾸어 주기 때문에 smoothing 또는 discounting이라고 불립니다. 그럼 그 방법에 대해 살펴보겠습니다.
 
 ![](/assets/lm-why-smoothing.png)
 

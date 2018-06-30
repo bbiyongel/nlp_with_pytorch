@@ -1,6 +1,6 @@
 # Neural Network Language Model
 
-## Against to Sparsness
+## Against to Sparseness
 
 앞서 설명한 것과 같이 기존의 n-gram 기반의 언어모델은 간편하지만 훈련 데이터에서 보지 못한 단어의 조합에 대해서 상당히 취약한 부분이 있었습니다. 그것의 근본적인 원인은 n-gram 기반의 언어모델은 단어간의 유사도를 알 지 못하기 때문입니다. 예를 들어 우리에게 훈련 corpus로 아래와 같은 문장이 주어졌다고 했을 때,
 
@@ -21,7 +21,7 @@ Neural Network LM은 많은 형태를 가질 수 있지만 우리는 가장 효�
 
 ![](/assets/rnn_lm_architecture.png)
 
-Recurrent Neural Network Lauguage Model \(RNNLM\)은 위와 같은 구조를 지니고 있습니다. 기존의 언어모델은 각각의 단어를 descrete한 존재로써 처리하였기 때문에, 문장(word sequence)의 길이가 길어지면 희소성(sparsness)문제가 발생하여 어려운 부분이 있었습니다. 따라서, $$ n-1 $$ 이전까지의 단어만 (주로 $$n=3$$) 조건부로 잡아 확률을 근사(approximation) 하였습니다. 하지만, RNN LM은 단어를 embedding하여 벡터화(vectorize)함으로써, 희소성 문제를 해소하였기 때문에, 문장의 첫 단어부터 모두 조건부에 넣어 확률을 근사 할 수 있습니다.
+Recurrent Neural Network Lauguage Model \(RNNLM\)은 위와 같은 구조를 지니고 있습니다. 기존의 언어모델은 각각의 단어를 descrete한 존재로써 처리하였기 때문에, 문장(word sequence)의 길이가 길어지면 희소성(sparseness)문제가 발생하여 어려운 부분이 있었습니다. 따라서, $$ n-1 $$ 이전까지의 단어만 (주로 $$n=3$$) 조건부로 잡아 확률을 근사(approximation) 하였습니다. 하지만, RNN LM은 단어를 embedding하여 벡터화(vectorize)함으로써, 희소성 문제를 해소하였기 때문에, 문장의 첫 단어부터 모두 조건부에 넣어 확률을 근사 할 수 있습니다.
 
 $$
 P(w_1,w_2,\cdots,w_k) = \prod_{i=1}^{k}{P(w_i|w_{<i})}
@@ -35,19 +35,27 @@ $$
 
 ## Implementation
 
+이제 RNN을 활용한 언어모델을 구현 해 보도록 하겠습니다. PyTorch로 구현하기에 앞서, 이를 수식화 해보면 아래와 같습니다. -- ***language_model.py*** 가 이를 구현 한 코드 입니다.
+
 $$
-X=\{x_0,x_1,\cdots,x_n,x_{n+1}\}~where~x_0=BOS~and~x_{n+1}=EOS.
+\begin{aligned}
+X&=\{x_0,x_1,\cdots,x_n,x_{n+1}\} \\
+&where~x_0=BOS~and~x_{n+1}=EOS. \\ \\
+\hat{x}_{i+1}&=Softmax(Linear_{hidden \rightarrow |V|}(RNN(Emb(x_i)))) \\
+\hat{X}[1:]&=Softmax(Linear_{hidden \rightarrow |V|}(RNN(Emb(X[:-1])))), \\
+&where~|V|~is~size~of~vocabulary.
+\end{aligned}
 $$
-$$
-\hat{x}_{i+1}=Softmax(Linear_{hidden \rightarrow |V|}(RNN(Emb(x_i))))
-$$
-$$
-\hat{X}[1:]=Softmax(Linear_{hidden \rightarrow |V|}(RNN(Emb(X[:-1]))))
-$$
+
+위의 수식을 따라가 보면, 문장 $$X$$를 입력으로 받아 각 time-step 별($$x_i$$)로 Emb(embedding layer)에 넣어 정해진 차원(dimension)의 embedding vector를 얻습니다. RNN은 해당 embedding vector를 입력으로 받아, hidden size의 vector 형태로 반환 합니다. 이 RNN 출력 vector를 linear layer를 통해 어휘(vocabulary)수 dimension의 vector로 변환 한 후, softmax를 취하여 $$\hat{x}_{i+1}$$을 구합니다.
+
+여기서 우리는 LSTM을 사용하여 RNN을 대체 할 것이고, LSTM은 여러 층(layer)로 구성되어 있으며, 각 층 사이에는 dropout이 들어가 있습니다. 이 결과($$\hat{X}$$)를 이전 섹션에서 perplexity와 엔트로피(entropy)와의 관계를 설명하였듯이, cross entropy loss를 사용하여 모델($$ \theta $$) 최적화를 수행 합니다.
 
 ## Code
 
-github repo url: https://github.com/kh-kim/OpenNLMTK
+아래의 PyTorch 코드는 저자의 github에서 다운로드 할 수 있습니다. (업데이트 여부에 따라 코드가 약간 달라질 수 있습니다.)
+
+- github repo url: https://github.com/kh-kim/OpenNLMTK
 
 ### language_model.py
 
@@ -425,6 +433,6 @@ if __name__ == '__main__':
                         )
 ```
 
-## Drawbacks
+## Conclusion
 
-NNLM은 word embedding vector를 사용하여 sparseness를 해결하여 큰 효과를 보았습니다. 따라서 훈련 데이터셋에서 보지 못한 단어의 조합에 대해서도 대처가 가능합니다. 하지만 그만큼 연산량에 있어서 n-gram에 비해서 매우 많은 대가를 치루어야 합니다. 단순히 table look-up 수준의 연산량을 필요로 하는 n-gram방식에 비해서 NNLM은 다수의 matrix 연산등이 포함된 feed forward 연산을 수행해야 하기 때문입니다. 그럼에도 불구하고 점점 빨라지는 H\W 사이에서 NNLM의 중요성은 커지고 있습니다.
+NNLM은 word embedding vector를 사용하여 희소성(sparseness)을 해결하여 큰 효과를 보았습니다. 따라서 훈련 데이터셋에서 보지 못한 단어(unseen word sequence)의 조합에 대해서도 훌륭한 대처가 가능합니다. 하지만 그만큼 연산량에 있어서 n-gram에 비해서 매우 많은 대가를 치루어야 합니다. 단순히 table look-up 수준의 연산량을 필요로 하는 n-gram방식에 비해서 NNLM은 다수의 matrix 연산등이 포함된 feed forward 연산을 수행해야 하기 때문입니다. 그럼에도 불구하고 GPU의 사용과 점점 빨라지는 H\W 사이에서 NNLM의 중요성은 커지고 있고, 실제로도 많은 분야에 적용되어 훌륭한 성과를 거두고 있습니다.
