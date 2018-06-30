@@ -94,18 +94,14 @@ L&=-\frac{1}{|Y|}\sum_{y \in Y}{P(y) \log P_\theta(y)} \\
 \end{aligned}
 $$
 
-여기서 $$ y $$는 문장(word sequence)로 생각하고, $$ P(y) $$는 정답(ground-truth)이므로 항상 $$ 1 $$입니다. 그러므로 아래와 같이 생략 할 수 있습니다.
+여기서 $$ y={y_1,y_2,\cdots,y_N} $$는 $$N$$개의 단어로 이루어진 문장(word sequence)로 생각하고, 한 문장에 대한 cross entropy는 아래와 같이 표현할 수 있습니다.
 
 $$
-L= -\frac{1}{|Y|}\sum_{y \in Y}{\log P_\theta(y)}
-$$
-
-$$
-=\log{((\prod_{y \in Y}{P_\theta(y)})^{-\frac{1}{|Y|}})}
-$$
-
-$$
-=\log{(\sqrt[|Y|]{\frac{1}{\prod_{y \in Y}{P_\theta(y)}}})}
+\begin{aligned}
+L&= -\frac{1}{|Y|}\sum_{i = 1}^{N}{P(y_i|y_{i}) \log P_\theta(y_i|y_{i})} \\
+&=\log{((\prod_{y \in Y}{P_\theta(y)})^{-\frac{1}{|Y|}})} \\
+&=\log{(\sqrt[|Y|]{\frac{1}{\prod_{y \in Y}{P_\theta(y)}}})} \\
+\end{aligned}
 $$
 
 여기에 PPL 수식을 다시 떠올려 보겠습니다.
