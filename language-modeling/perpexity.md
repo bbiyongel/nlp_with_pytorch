@@ -23,9 +23,7 @@ $$
 =\sqrt[N]{\frac{1}{\prod_{i=1}^{N}{P(w_i|w_1,\cdots,w_{i-1})}}}
 $$
 
-
 라고 표현 될 수 있고, 여기에 n-gram이 적용 될 경우,
-
 
 $$
 =\sqrt[N]{\frac{1}{\prod_{i=1}^{N}{P(w_i|w_{i-n+1},\cdots,w_{i-1})}}}
