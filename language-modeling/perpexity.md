@@ -121,7 +121,7 @@ $$
 PPL(W)=\sqrt[N]{\prod_{i=1}^{N}{\frac{1}{P(w_i|w_1,\cdots,w_{i-1})}}}
 $$
 
-앞서 정리했던 Cross Entropy와 수식이 비슷함을 알 수 있습니다. 따라서 ***PPL***과 ***Cross Entropy***의 관계는 아래와 같습니다.
+앞서 정리했던 Cross Entropy와 수식이 비슷한 형태임을 알 수 있습니다. 따라서 ***PPL***과 ***Cross Entropy***의 관계는 아래와 같습니다.
 
 $$
 PPL = \exp(Cross~Entropy)
