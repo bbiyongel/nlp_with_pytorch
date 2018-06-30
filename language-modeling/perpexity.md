@@ -79,7 +79,7 @@ $$
 
 ### Cross Entropy Loss
 
-크로스 엔트로피(Cross entropy)는 entropy로부터 한 걸음 더 나아가, ground-truth 확률분포 $$P$$로부터 발생한 사건 $$X$$의 
+크로스 엔트로피(Cross entropy)는 entropy로부터 한 걸음 더 나아가, 우리가 구하고자 하는 ground-truth 확률분포 $$P$$를 통해 우리가 학습중인 확률분포 $$Q$$의 정보량의 기대값을 이릅니다.
 
 $$
 H(P,Q)=-{\sum_{\forall x}{P(x)\log{Q(x)}}}
