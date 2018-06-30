@@ -95,8 +95,8 @@ $$
 
 $$
 \begin{aligned}
-H(P, P_\theta)&=-E_{X,Y \sim P}[\log{P_\theta(w_i|w_i)}] \\ 
-&\approx -\frac{1}{N}\sum_{i=1}^{N}{\log{P_\theta(w_i|w_i)}}
+H(P, P_\theta)&=-E_{X,Y \sim P}[\log{P_\theta(w_i|w_{<i})}] \\ 
+&\approx -\frac{1}{N}\sum_{i=1}^{N}{\log{P_\theta(w_i|w_{<i})}}
 \end{aligned}
 $$
 
