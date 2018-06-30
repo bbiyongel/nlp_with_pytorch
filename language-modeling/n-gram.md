@@ -29,6 +29,7 @@ $$
 P(x_1,x_2,\cdots,x_n) \approx \prod_{j=1}^{n}{P(x_j|x_{j-k},\cdots,x_{j-1})}
 $$
 
+이것을 log확률로 표현하면,
 
 $$
 \log{P(x_1,x_2,\cdots,x_n)} \approx \sum_{j=1}^{n}{log{P(x_j|x_{j-k},\cdots,x_{j-1})}}
