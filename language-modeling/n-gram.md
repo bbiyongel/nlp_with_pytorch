@@ -6,7 +6,7 @@
 
 ## Markov Assumption
 
-따라서 이러한 문제를 해결하기 위해서 Markov Assumption을 도입합니다.
+따라서 sparsness 문제를 해결하기 위해서 Markov Assumption을 도입합니다.
 
 
 $$
