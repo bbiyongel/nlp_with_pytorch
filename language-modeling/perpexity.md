@@ -88,13 +88,18 @@ $$
 이것을 $$Q$$ 대신, 우리의 모델($$ P_\theta $$)을 최적화 하기 위해 최소화(minimize)해야 하는 loss(손실)함수로 적용하여 보면 아래와 같습니다.
 
 $$
+H(P,P_\theta)=-E_{X \sim P}[\log{P_\theta(x)}]
+$$
+
+여기서 우리는 K번의 Sampling 하는 과정을 통해 expectation을 제거할 수 있습니다. -- 강화학습(Reinforcement Learning) 챕터 참고
+
+$$
 \begin{aligned}
-L&=-\frac{1}{|Y|}\sum_{y \in Y}{P(y) \log P_\theta(y)} \\
-&=-\frac{1}{|Y|}\sum_{y \in Y}{\sum_{i = 1}^{N}{P(y_i|y_{i}) \log P_\theta(y_i|y_{i})}}
+H(P, P_\theta) &\approx -\frac{1}{N}\sum_{i=1}^{N}{\log P_\theta(y_i|y_{i})}
 \end{aligned}
 $$
 
-여기서 $$ y={y_1,y_2,\cdots,y_N} $$는 $$N$$개의 단어로 이루어진 문장(word sequence)로 생각하고, 한 문장에 대한 cross entropy는 아래와 같이 표현할 수 있습니다.
+여기서 $$ {y_1,y_2,\cdots,y_N} $$는 $$N$$개의 단어로 이루어진 문장(word sequence)로 생각하고, 한 문장에 대한 cross entropy는 아래와 같이 표현할 수 있습니다.
 
 $$
 \begin{aligned}
