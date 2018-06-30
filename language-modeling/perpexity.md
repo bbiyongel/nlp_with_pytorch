@@ -91,7 +91,7 @@ $$
 $$
 \begin{aligned}
 L&=-\frac{1}{|Y|}\sum_{y \in Y}{P(y) \log P_\theta(y)} \\
-&=-\frac{1}{|Y|}\sum_{y \in Y}{\sum_{i = 1}^{N}{P(y_i|y_{i}) \log P_\theta(y)}}
+&=-\frac{1}{|Y|}\sum_{y \in Y}{\sum_{i = 1}^{N}{P(y_i|y_{i}) \log P_\theta(y_i|y_{i})}}
 \end{aligned}
 $$
 
