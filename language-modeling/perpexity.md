@@ -99,7 +99,7 @@ H(P, P_\theta) &\approx -\frac{1}{K}\sum{\sum_{i=1}^{N}{\log P_\theta(y_i|y_{i})
 \end{aligned}
 $$
 
-여기서 $$ y=\{y_1,y_2,\cdots,y_N\} $$는 $$N$$개의 단어로 이루어진 문장(word sequence)로 생각하고, 한 문장($$K=1$$에 대한 cross entropy는 아래와 같이 표현할 수 있습니다.
+여기서 $$ y=\{y_1,y_2,\cdots,y_N\} $$는 $$N$$개의 단어로 이루어진 문장(word sequence)로 생각하고, 한 문장($$K=1$$)에 대한 cross entropy는 아래와 같이 표현할 수 있습니다.
 
 $$
 \begin{aligned}
