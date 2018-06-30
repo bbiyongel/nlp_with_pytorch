@@ -86,7 +86,7 @@ $$
 H(P,Q)=-{\sum_{\forall x}{P(x)\log{Q(x)}}}
 $$
 
-위의 식은 기본 Cross Entropy 수식입니다. 이것을 우리의 번역 모델($$ M_\theta $$)에 적용하여 보면 아래와 같습니다.
+위의 식은 기본 Cross Entropy 수식입니다. 이것을 우리의 모델($$ M_\theta $$)에 적용하여 보면 아래와 같습니다.
 
 $$
 L= -\frac{1}{|Y|}\sum_{y \in Y}{P(y) \log P_\theta(y)}
