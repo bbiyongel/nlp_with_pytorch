@@ -1,6 +1,6 @@
 # Neural Network Language Model
 
-## Introduction
+## Against to Sparsness
 
 앞서 설명한 것과 같이 기존의 n-gram 기반의 언어모델은 간편하지만 훈련 데이터에서 보지 못한 단어의 조합에 대해서 상당히 취약한 부분이 있었습니다. 그것의 근본적인 원인은 n-gram 기반의 언어모델은 단어간의 유사도를 알 지 못하기 때문입니다. 예를 들어 우리에게 아래와 같은 문장이 주어졌다고 했을 때,
 
