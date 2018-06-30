@@ -85,7 +85,7 @@ $$
 H(P,Q)=-E_{X \sim P}[\log{Q(x)}]=-{\sum_{\forall x}{P(x)\log{Q(x)}}}
 $$
 
-이것을 $$Q$$ 대신, 우리의 모델($$ P_\theta $$)을 최적화 하기 위한 loss함수로 적용하여 보면 아래와 같습니다.
+이것을 $$Q$$ 대신, 우리의 모델($$ P_\theta $$)을 최적화 하기 위해 최소화(minimize)해야 하는 loss(손실)함수로 적용하여 보면 아래와 같습니다.
 
 $$
 \begin{aligned}
