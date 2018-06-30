@@ -13,7 +13,7 @@
 
 비록 강아지가 개의 새끼이고 포유류에 속하는 가축에 해당한다는 깊고 해박한 지식이 없을지라도, 강아지와 고양이 사이의 유사도가 자동차와 고양이 사이의 유사도보다 높은 것을 알기 때문에 자동차 보다는 강아지에 대한 반려동물의 확률이 더 높음을 유추할 수 있습니다. 하지만 n-gram 방식의 언어모델은 단어간의 유사도를 구할 수 없기 때문에, 이와 같이 훈련 corpus에서 보지 못한 단어(unseen word sequence)의 조합(n-gram)에 대해서 효과적으로 대처할 수 없습니다.
 
-하지만 Neural Network LM은 word embedding을 사용하여 단어를 vectorize 함으로써, 강아지와 고양이를 비슷한 vector로 학습하고, 자동차와 고양이 보다 훨씬 높은 유사도를 가지게 합니다. 따라서 NNLM이 훈련 corpus에서 보지 못한 단어의 조합을 보더라도, 비슷한 훈련 데이터로부터 배운 것과 유사하게 대처할 수 있습니다.
+하지만 Neural Network LM은 word embedding을 사용하여 단어를 벡터화(vectorize) 함으로써, 강아지와 고양이를 비슷한 vector로 학습하고, 자동차와 고양이 보다 훨씬 높은 유사도를 가지게 합니다. 따라서 NNLM이 훈련 corpus에서 보지 못한 단어의 조합을 보더라도, 비슷한 훈련 데이터로부터 배운 것과 유사하게 대처할 수 있습니다.
 
 Neural Network LM은 많은 형태를 가질 수 있지만 우리는 가장 효율적이고 흔한 형태인 Recurrent Neural Network(RNN)의 일종인 Long Short Term Memory(LSTM)을 활용한 방식에 대해서 짚고 넘어가도록 하겠습니다.
 
@@ -21,7 +21,7 @@ Neural Network LM은 많은 형태를 가질 수 있지만 우리는 가장 효�
 
 ![](/assets/rnn_lm_architecture.png)
 
-Recurrent Neural Network Lauguage Model \(RNNLM\)은 위와 같은 구조를 지니고 있습니다. 기존의 n-gram은 각각의 단어를 descrete한 존재로써 처리하였기 때문에, $$ n $$이 커져서 word sequence가 길어지면 희소성(sparsness)문제가 발생하여 어려운 부분이 있었습니다. 따라서, $$ n-1 $$ 이전까지의 단어만 조건부로 잡아 확률을 approximation하였습니다. 하지만, RNNLM은 단어를 embedding하여 vectorize함으로써, sparsity를 해소하였기 때문에, 문장의 첫 단어부터 모두 조건부에 넣어 확률을 계산할 수 있습니다.
+Recurrent Neural Network Lauguage Model \(RNNLM\)은 위와 같은 구조를 지니고 있습니다. 기존의 언어모델은 각각의 단어를 descrete한 존재로써 처리하였기 때문에, 문장(word sequence)의 길이가 길어지면 희소성(sparsness)문제가 발생하여 어려운 부분이 있었습니다. 따라서, $$ n-1 $$ 이전까지의 단어만 (주로 $$n=3$$) 조건부로 잡아 확률을 근사(approximation) 하였습니다. 하지만, RNN LM은 단어를 embedding하여 벡터화(vectorize)함으로써, 희소성 문제를 해소하였기 때문에, 문장의 첫 단어부터 모두 조건부에 넣어 확률을 근사 할 수 있습니다.
 
 $$
 P(w_1,w_2,\cdots,w_k) = \prod_{i=1}^{k}{P(w_i|w_{<i})}
