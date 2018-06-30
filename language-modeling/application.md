@@ -49,6 +49,3 @@ $$
 ## Others
 
 이외에도 여러가지 영역에 정말 다양하게 사용됩니다. 검색엔진에서 사용자가 검색어를 입력하는 도중에 밑에 drop-down으로 제시되는 검색어 완성 등에도 language model이 사용 될 수 있습니다.
-
-## Why Language Model is important?
-
