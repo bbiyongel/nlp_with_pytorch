@@ -88,7 +88,7 @@ $$
 이것을 $$Q$$ 대신, 우리의 모델($$ P_\theta $$)을 최적화 하기 위해 최소화(minimize)해야 하는 loss(손실)함수로 적용하여 보면 아래와 같습니다.
 
 $$
-H(P,P_\theta)=-E_{X,Y \sim P}[\log{P_\theta(y|x)}]=-
+L=H(P,P_\theta)=-E_{X,Y \sim P}[\log{P_\theta(y|x)}]
 $$
 
 여기서 우리는 N번의 Sampling 하는 과정을 통해 expectation을 제거할 수 있습니다. -- 강화학습(Reinforcement Learning) 챕터 참고
@@ -104,7 +104,7 @@ $$
 
 $$
 \begin{aligned}
-L&= -\frac{1}{|Y|}\sum_{i = 1}^{N}{P(y_i|y_{i}) \log P_\theta(y_i|y_{i})} \\
+L&=-\frac{1}{N}\sum_{i=1}^{N}{\log{P_\theta(w_i|w_i)}} \\
 &=\log{((\prod_{y \in Y}{P_\theta(y)})^{-\frac{1}{|Y|}})} \\
 &=\log{(\sqrt[|Y|]{\frac{1}{\prod_{y \in Y}{P_\theta(y)}}})} \\
 \end{aligned}
