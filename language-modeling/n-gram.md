@@ -62,7 +62,7 @@ $$
 
 ## Generalization
 
-머신러닝의 힘은 보지 못한 case에 대한 대처 능력, 즉 generalization에 있습니다. 따라서, n-gram도 Markov assumption을 통해서 generalization 능력을 갖게 되었다고 할 수 있습니다. 이제 우리는 이것을 좀 더 향상시킬 수 있는 방법을 살펴 보도록 하겠습니다.
+머신러닝의 힘은 보지 못한 case에 대한 대처 능력, 즉 generalization에 있습니다. 따라서, n-gram도 Markov assumption을 통해서 sparsness or sparsity를 해결하는 generalization 능력을 갖게 되었다고 할 수 있습니다. 이제 우리는 이것을 좀 더 향상시킬 수 있는 방법을 살펴 보도록 하겠습니다.
 
 ### Smoothing \(Discounting\)
 
