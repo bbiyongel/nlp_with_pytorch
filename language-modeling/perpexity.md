@@ -100,7 +100,7 @@ H(P, P_\theta)&=-E_{X,Y \sim P}[\log{P_\theta(w_i|w_i)}] \\
 \end{aligned}
 $$
 
-여기서 $$ Y=\{y_1,y_2,\cdots,y_N\} $$는 $$N$$개의 단어로 이루어진 문장(word sequence)로 생각하고, 한 문장($$K=1$$)에 대한 cross entropy는 아래와 같이 표현할 수 있습니다.
+여기서 $$ Y=\{y_1,y_2,\cdots,y_N\} $$는 $$N$$개의 단어로 이루어진 문장(word sequence)로 생각하고, 한 문장에 대한 cross entropy는 아래와 같이 표현할 수 있습니다.
 
 $$
 \begin{aligned}
