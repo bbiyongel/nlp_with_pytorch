@@ -89,7 +89,10 @@ $$
 위의 식은 기본 Cross Entropy 수식입니다. 이것을 우리의 모델($$ \theta $$)을 최적화 하기 위한 loss함수로 적용하여 보면 아래와 같습니다.
 
 $$
-L= -\frac{1}{|Y|}\sum_{y \in Y}{P(y) \log P_\theta(y)}
+\begin{aligned}
+L&=-\frac{1}{|Y|}\sum_{y \in Y}{P(y) \log P_\theta(y)} \\
+&=-\frac{1}{|Y|}\sum_{y \in Y}{\sum_{i = 1}^{N}{P(y_i|y_{i}) \log P_\theta(y)}}
+\end{aligned}
 $$
 
 여기서 $$ y $$는 문장(word sequence)로 생각하고, $$ P(y) $$는 정답(ground-truth)이므로 항상 $$ 1 $$입니다. 그러므로 아래와 같이 생략 할 수 있습니다.
