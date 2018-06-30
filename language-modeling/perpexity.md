@@ -131,4 +131,4 @@ $$
 PPL = \exp(Cross~Entropy)
 $$
 
-따라서, 우리는 Cross Entropy를 통해 얻은 Loss 값에 exponential을 취함으로써, PPL을 얻어 번역기의 성능을 나타낼 수 있습니다.
+따라서, 우리는 Cross Entropy를 통해 얻은 Loss 값에 exponential을 취함으로써, PPL을 얻어 언어모델의 성능을 나타낼 수 있습니다.
