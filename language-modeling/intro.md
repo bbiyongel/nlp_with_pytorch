@@ -42,7 +42,7 @@ $$
 P(A, B)
 $$
 
-우리는 이 수식을 조건부 확률(Conditional Probability)로 표현할 수 있습니다.
+우리는 이 수식을 베이즈 정리(Bayes Theorem)에 따라 조건부 확률(Conditional Probability)로 표현할 수 있습니다.
 
 $$
 P(A, B) = P(A)P(B|A)
