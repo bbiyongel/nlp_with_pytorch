@@ -96,7 +96,7 @@ $$
 $$
 \begin{aligned}
 H(P, P_\theta) &\approx -\frac{1}{K}\sum_{i=1}^{K}{} \\
-&=-\frac{1}{K}\sum_{i=1}^{K}{\sum_{i=1}^{N}{\log P_\theta(y_i|y_{i})}}
+&=-\frac{1}{K}\sum_{i=1}^{K}{\sum_{j=1}^{N}{\log P_\theta(y_j|y_{j})}}
 \end{aligned}
 $$
 
