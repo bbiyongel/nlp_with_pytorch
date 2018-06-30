@@ -12,11 +12,11 @@
 
 ### Cross Entropy and Perplexity
 
-Neural Machine Translation task도 기본적으로 어떤 단어를 pick 하는 작업이기 때문에 기본적으로 classification task에 속합니다. 따라서 ***Cross Entropy***를 Loss function으로 사용합니다. 
+신경망 기계번역도 기본적으로 매 time-step마다 최고 확률을 갖는 단어를 선택(분류) 하는 작업이기 때문에 기본적으로 분류(classification)작업에 속합니다. 따라서 Cross Entropy를 손실함수(loss function)로 사용합니다. 이전 섹션에서 언급하였듯이, 신경망 기계번역도 조건부 언어모델이기 때문에 perplexity를 통해 성능을 측정할 수 있습니다. 그러므로 이전 언어모델 챕터에서 다루었듯이, cross entropy loss 값에 exponantial을 취하여 perplexity(PPL) 값을 얻을 수 있습니다.
 
 ### BLEU
 
-위의 PPL은 우리가 사용하는 Loss function과 직결되어 바로 알 수 있는 간편함이 있지만, 실제 번역기의 성능과 완벽한 비례관계에 있다고 할 수는 없습니다. Cross Entropy의 수식을 해석 해 보면, 각 time-step 별 실제 정답에 해당하는 단어의 확률만 채점하기 때문입니다.
+위의 PPL은 우리가 사용하는 Loss function과 직결되어 바로 알 수 있는 간편함이 있지만, 사실 안타깝게도 실제 번역기의 성능과 완벽한 비례관계에 있다고 할 수는 없습니다. Cross Entropy의 수식을 해석 해 보면, 각 time-step 별 실제 정답에 해당하는 단어의 확률만 채점하기 때문입니다.
 
 |원문|I|love|to|go|to|school|.|
 |-|-|-|-|-|-|-|-|
@@ -25,7 +25,7 @@ Neural Machine Translation task도 기본적으로 어떤 단어를 pick 하는 
 |번역1|학교에|가는|것을|좋아한다|나는|.| |
 |번역2|나는|오락실에|가는|것을|싫어한다|.| |
 
-예를 들어, 번역1은 cross entropy loss에 의하면 매우 높은 loss값을 가집니다. 하지만 번역2는 번역1에 비해 완전 틀린 번역이지만 loss가 훨씬 낮을 겁니다. 따라서 실제 번역문의 품질과 cross entropy 사이에는 괴리가 있습니다. 이러한 간극을 줄이기 위해 여러가지 방법들이 제시되었습니다 -- [METEOR](https://en.wikipedia.org/wiki/METEOR), [BLEU](https://en.wikipedia.org/wiki/BLEU). 이번 섹션은 그 중 가장 널리 쓰이는 BLEU에 대해 짚고 넘어가겠습니다.
+예를 들어, 번역1은 cross entropy loss에 의하면 매우 높은 loss값을 가집니다. 하지만 번역2는 번역1에 비해 완전 틀린 번역이지만 loss가 훨씬 낮을 겁니다. 따라서 실제 번역문의 품질과 cross entropy 사이에는 (특히 teacher forcing 방식이 더해져) 괴리가 있습니다. 이러한 간극을 줄이기 위해 여러가지 방법들이 제시되었습니다 -- [METEOR](https://en.wikipedia.org/wiki/METEOR), [BLEU](https://en.wikipedia.org/wiki/BLEU). 이번 섹션은 그 중 가장 널리 쓰이는 BLEU에 대해 짚고 넘어가겠습니다.
 
 $$
 BLEU=brevity\text{-}penalty*\prod_{n=1}^{N}{p_n^{w_n}}
