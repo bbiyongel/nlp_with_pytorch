@@ -66,7 +66,7 @@ $$
 \log{P(W)}=\sum_{i=1}^{n}{\log{P(w_i|w_{<i})}}
 $$
 
-좀 더 실제 예제를 가지고 표현 해 보도록 하겠습니다.
+이제 우리는 실제 예제를 가지고 표현 해 보도록 하겠습니다.
 
 $$
 P(BOS, \text{나는}, \text{학교에}, \text{갑니다}, EOS) = P(BOS)P(\text{나는}|BOS)P(\text{학교에}|BOS,\text{나는})P(\text{갑니다}|BOS,\text{나는},\text{학교에})P(EOS|BOS,...,\text{갑니다})
