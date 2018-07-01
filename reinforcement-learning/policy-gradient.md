@@ -31,7 +31,7 @@ Monte Carlo Sampling은 난수를 이용하여 임의의 함수를 근사하는 
 
 ![approximation of pi using Monte Carlo](https://upload.wikimedia.org/wikipedia/commons/8/84/Pi_30K.gif)
 
-따라서 Monte Carlo sampling을 사용하면 기대값(expectation) 내의 표현을 밖으로 끄집어 낼 수 있습니다. 즉, 주사위의 reward에 대한 기대값을 아래와 같이 simplify할 수 있습니다.
+따라서 Monte Carlo sampling을 사용하면 기대값(expectation) 내의 표현을 밖으로 꺼낼 수 있습니다. 즉, 주사위의 reward에 대한 기대값을 아래와 같이 simplify할 수 있습니다.
 
 $$
 E_{X \sim P}[reward(x)] \approx \frac{1}{N}\sum^N_{i=1}{reward(x_i)}
