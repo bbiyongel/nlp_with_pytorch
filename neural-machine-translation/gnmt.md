@@ -35,6 +35,32 @@ Google도 seq2seq 기반의 모델을 구성하였습니다. 다만, 구글은 �
 
 Google은 강화학습을 다룬 [챕터](reinforcement-learning/cover.md)에서 설명한 Reinforcement Learning 기법을 사용하여 Maximum Likelihood Estimation (MLE)방식의 훈련된 모델에 fine-tuning을 수행하였습니다. 따라서 위의 테이블과 같은 추가적이 성능 개선을 얻어낼 수 있었습니다.
 
+기존 MLE 방식의 Objective를 아래와 같이 구성합니다. $$ Y^{*(i)} $$은 optimal 정답 데이터를 의미합니다.
+
+$$
+\mathcal{O}_{ML}(\theta)=\sum_{i=1}^N\log P_\theta(Y^{*(i)}|X^{(i)})
+$$
+
+여기에 추가로 RL방식의 Objective를 추가하였는데 이 방식이 policy gradient 방식과 같습니다.
+
+$$
+\mathcal{O}_{RL}(\theta)=\sum_{i=1}^N \sum_{Y \in \mathcal{Y}} P_\theta(Y|X^{(i)})r(Y, Y^{*(i)})
+$$
+
+위의 수식도 Minimum Risk Training (MRT) 방식과 비슷합니다. $$ r(Y, Y^{*(i)}) $$ 또한 정답과 sampling 데이터 사이의 유사도(점수)를 의미합니다. 가장 큰 차이점은 기존에는 risk로 취급하여 minimize하는 방향으로 훈련하였지만, 이번에는 reward로 취급하여 maximize하는 방향으로 훈련하게 된다는 것 입니다.
+
+이렇게 새롭게 추가된 objective를 아래와 같이 기존의 MLE방식의 objective와 linear combination을 취하여 최종적인 objective function이 완성됩니다.
+
+$$
+\mathcal{O}_{Mixed}(\theta)=\alpha*\mathcal{O}_{ML}(\theta)+\mathcal{O}_{RL}(\theta)
+$$
+
+이때에 $$ \alpha $$값은 주로 0.017로 셋팅하였습니다. 위와 같은 방법의 성능을 실험한 결과는 다음과 같습니다.
+
+![](/assets/nmt-gnmt-5.png)
+
+$$ En \rightarrow De $$의 경우에는 성능이 약간 하락함을 보였습니다. 하지만 이는 decoder의 length penalty, coverage penalty와 결합되었기 때문이고, 이 panalty들이 없을 때에는 훨씬 큰 성능 향상이 있었다고 합니다.
+
 ## Quantization
 
 실제 Neural Network을 사용한 product를 개발할 때에는 여러가지 어려움에 부딪히게 됩니다. 이때, Quantization을 도입함으로써 아래와 같은 여러가지 이점을 얻을 수 있습니다.
