@@ -2,7 +2,7 @@
 
 ## Discriminative learning vs Generative learning
 
-2012년 ImageNet competition에서 deeplearning을 활용한 AlexNet이 우승을 차지한 이래로 Computer Vision, Speech Recognition, Natural Language Processing 등을 차례로 deeplearning이 정복 해 왔습니다. Deeplearning이 뛰어난 능력을 보인 분야는 특히 classification 분야였습니다. 기존의 전통적인 방식과 달리 pattern recognition 분야에서는 압도적인 성능을 보여주었습니다. 이러한 classification 문제는 보통 ***Discriminative Learning***에 속하는데 이를 일반화 하면 다음과 같습니다.
+2012년 이미지넷 대회(ImageNet competition)에서 deeplearning을 활용한 AlexNet이 우승을 차지한 이래로 Computer Vision, Speech Recognition, Natural Language Processing 등을 차례로 deeplearning이 정복 해 왔습니다. Deeplearning이 뛰어난 능력을 보인 분야는 특히 classification 분야였습니다. 기존의 전통적인 방식과 달리 pattern recognition 분야에서는 압도적인 성능을 보여주었습니다. 이러한 classification 문제는 보통 ***Discriminative Learning***에 속하는데 이를 일반화 하면 다음과 같습니다.
 
 $$
 \hat{y} = argmax_{y \in Y} P(y|x)
