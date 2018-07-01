@@ -133,11 +133,15 @@ Y&=\{y_0, y_1, \cdots, y_m\}
 \end{aligned}
 $$
 
+근사하여 얻은 함수는 임의의 시퀀스 $$X$$가 주어졌을 때, $$\hat{Y}$$를 반환하도록 잘 학습되어 있을 겁니다.
+
 $$
 \begin{aligned}
 \hat{Y}=argmax_{Y}P(Y|X)
 \end{aligned}
 $$
+
+그럼 해당 함수를 근사하기 위해서 우리는 parameter $$\theta$$를 학습해야 합니다. $$\theta$$는 아래와 같이 Maximum Likelihood Estimation(MLE)를 통해서 얻어질 수 있습니다.
 
 $$
 \begin{aligned}
@@ -146,12 +150,16 @@ $$
 \end{aligned}
 $$
 
+$$\theta$$에 대해 MLE를 수행하기 위해서 우리는 목적함수(objective function)을 아래와 같이 정의 합니다. 아래는 cross entropy loss를 목적함수로 정의 한 것 입니다.
+
 $$
 \begin{aligned}
-J(\theta)&=-\sum_{(X, Y) \in \mathcal{B}}{\log{P(Y|X;\theta)}} \\
-&=-\sum_{(X, Y) \in \mathcal{B}}{\sum_{i = 0}^{m}{\log{P(y_i|X, y_{i}; \theta)}}}
+J(\theta)&=-\sum_{(X, Y) \in \mathcal{B}}{P(Y|X)\log{P(Y|X;\theta)}} \\
+&=-\sum_{(X, Y) \in \mathcal{B}}{\sum_{i = 0}^{m}{\log{P(y_i|X, y_{<i}; \theta)}}}
 \end{aligned}
 $$
+
+위의 수식에서 $$P(Y|X)$$는 훈련 데이터셋에 존재하므로 보통 $$1$$이라고 할 수 있습니다. 따라서 수식에서 생략 할 수 있습니다.
 
 $$
 \begin{aligned}
