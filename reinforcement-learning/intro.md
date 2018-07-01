@@ -12,7 +12,7 @@ $$
 \hat{\theta}=argmax P(y|x;\theta)
 $$
 
-주어진 $$x$$에 대해서 최대의 확률 값을 갖는 $$y$$를 찾아내는 것 입니다. 이러한 조건부 확률 모델을 학습하는 것을 discriminative learning이라고 부릅니다. 하지만 이에 반해 ***Generative Learning***은 확률 $$ P(x) $$ 자체를 modeling 하는 것을 이릅니다. Generative learning이 훨씬 더 어려운 task에 속하게 됩니다. 예를 들어 
+주어진 $$x$$에 대해서 최대의 $$y$$ 값을 갖도록 하는 를 찾아내는 것 입니다. 이러한 조건부 확률 모델을 학습하는 것을 discriminative learning이라고 부릅니다. 하지만 이에 반해 ***Generative Learning***은 확률 $$ P(x) $$ 자체를 modeling 하는 것을 이릅니다. Generative learning이 훨씬 더 어려운 task에 속하게 됩니다. 예를 들어 
 
 1. 사람의 생김새($$x$$)가 주어졌을 때 성별($$y|x$$)의 확률 분포를 배우는 것
 1. 사람의 생김새($$x$$)와 성별($$y$$) 자체의 확률 분포를 배우는 것
