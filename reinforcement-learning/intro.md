@@ -28,7 +28,7 @@ $$
 ![](https://sthalles.github.io/assets/dcgan/GANs.png)
 Generative Adversarial Network overview - Image from [web](https://sthalles.github.io/intro-to-gans/)
 
-위와 같이 ***Generator($$G$$)***와 ***Discriminator($$D$$)*** 2개의 모델을 각기 다른 목표를 가지고 동시에 훈련시키는 것입니다. $$D$$는 임의의 이미지를 입력으로 받아 이것이 실제 존재하는 이미지인지, 아니면 합성된 이미지인지 탐지 해 내는 역할을 합니다. $$G$$는 어떤 이미지를 생성 해 내되, $$D$$를 속이는 이미지를 만들어 내는 것이 목표입니다. 이렇게 두 모델이 잘 균형을 이루며 $$ minmax $$ 게임을 펼치게 되면, $$G$$는 결국 훌륭한 이미지를 합성 해 내는 Generator가 됩니다.
+위와 같이 ***Generator($$G$$)***와 ***Discriminator($$D$$)*** 2개의 모델을 각기 다른 목표를 가지고 동시에 훈련시키는 것입니다. $$D$$는 임의의 이미지를 입력으로 받아 이것이 실제 존재하는 이미지인지, 아니면 합성된 이미지인지 탐지 해 내는 역할을 합니다. $$G$$는 어떤 이미지를 생성 해 내되, $$D$$를 속이는 이미지를 만들어 내는 것이 목표입니다. 이렇게 두 모델이 잘 균형을 이루며 min/max 게임을 펼치게 되면, $$G$$는 결국 훌륭한 이미지를 합성 해 내는 Generator가 됩니다.
 
 여기에서는 GAN의 수식은 다루지 않고 넘어가도록 하겠습니다.
 
