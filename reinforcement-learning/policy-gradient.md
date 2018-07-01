@@ -66,15 +66,13 @@ J(\theta) &= E_{\pi_\theta}[r] = v_\theta(s_0) \\
 $$
 
 
-즉 우리의 목표(objective)는 initial state에서의 expected cumulative reward를 최대\(maximize\)로 하도록 하는 policy\($$\theta$$\)를 찾는 것 입니다.
-
+즉 우리의 목표(objective)는 initial state에서의 expected cumulative reward를 최대\(maximize\)로 하도록 하는 policy\($$\theta$$\)를 찾는 것 입니다. 최소화 하여야 하는 손실(loss)와 달리 보상(reward)는 최대화 하여야 하므로 기존의 gradient descent 대신에 gradient ascent를 사용하여 최적화(optimization)을 수행 합니다.
 
 $$
 \theta_{t+1}=\theta_t+\alpha\triangledown_\theta J(\theta)
 $$
 
-
-Gradient Ascent에 따라서, $$\triangledown_\theta J(\theta)$$를 구하여 $$\theta$$를 업데이트 해야 합니다. 여기서 $$ d(s) $$는 markov chain의 stationary distribution으로써 시작점에 상관없이 전체의 trajecotry에서 $$ s $$에 머무르는 시간의 proportion을 의미합니다.
+Gradient ascent에 따라서, $$\triangledown_\theta J(\theta)$$를 구하여 $$\theta$$를 업데이트 해야 합니다. 여기서 $$ d(s) $$는 markov chain의 stationary distribution으로써 시작점에 상관없이 전체의 trajecotry에서 $$ s $$에 머무르는 시간의 proportion을 의미합니다.
 
 
 $$
