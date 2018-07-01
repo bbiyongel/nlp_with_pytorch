@@ -150,7 +150,7 @@ $$
 \end{aligned}
 $$
 
-$$\theta$$에 대해 MLE를 수행하기 위해서 우리는 목적함수(objective function)을 아래와 같이 정의 합니다. 아래는 cross entropy loss를 목적함수로 정의 한 것 입니다.
+$$\theta$$에 대해 MLE를 수행하기 위해서 우리는 목적함수(objective function)을 아래와 같이 정의 합니다. 아래는 cross entropy loss를 목적함수로 정의 한 것 입니다. 우리의 목표는 목적함수를 최소화(minimize)하는 것 입니다.
 
 $$
 \begin{aligned}
@@ -159,7 +159,7 @@ J(\theta)&=-\sum_{(X, Y) \in \mathcal{B}}{P(Y|X)\log{P(Y|X;\theta)}} \\
 \end{aligned}
 $$
 
-위의 수식에서 $$P(Y|X)$$는 훈련 데이터셋에 존재하므로 보통 $$1$$이라고 할 수 있습니다. 따라서 수식에서 생략 할 수 있습니다.
+위의 수식에서 $$P(Y|X)$$는 훈련 데이터셋에 존재하므로 보통 $$1$$이라고 할 수 있습니다. 따라서 수식에서 생략 할 수 있습니다. 위에서 정의한 목적함수를 최소화 하여야 하기 때문에, gradient descent를 통해 지역최소점(local minima)를 찾아내어 전역최소점(global minima)에 근사(approximation)할 수 있습니다.
 
 $$
 \begin{aligned}
