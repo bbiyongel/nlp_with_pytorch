@@ -143,7 +143,7 @@ $$
 $$
 
 $$
-\theta \leftarrow \theta + \gamma \nabla J(\theta)
+\theta \leftarrow \theta - \gamma \nabla J(\theta)
 $$
 
 $$
@@ -154,7 +154,7 @@ J(\theta)&=-\sum_{(X, Y) \in \mathcal{B}}{\log{P(Y|X;\theta)}} \\
 $$
 
 $$
-\theta \leftarrow \theta - \gamma \sum_{(X, Y) \in \mathcal{B}}{\sum_{i = 0}^{m}{\nabla_\theta\log{P(y_i|X, y_{i}; \theta)}}}
+\theta \leftarrow \theta + \gamma \sum_{(X, Y) \in \mathcal{B}}{\sum_{i = 0}^{m}{\nabla_\theta\log{P(y_i|X, y_{i}; \theta)}}}
 $$
 
 $$
