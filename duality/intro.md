@@ -2,6 +2,8 @@
 
 ## What is Duality?
 
+Duality란 무엇일까요? 우리가 보통 기계학습을 통해 학습하는 것은 어떤 도메인의 데이터 $$X$$를 받아서, 다른 도메인의 데이터 $$Y$$로 맵핑(mapping)해주는 함수를 근사(approximation)하는 것이라 할 수 있습니다. 따라서 대부분의 기계학습에 사용되는 데이터셋은 두 도메인 사이의 데이터로 구성되어있기 마련입니다.
+
 | Task($$ D_1 \rightarrow D_2$$) | Domain 1 | Domain 2 | Task($$ D_1 \leftarrow D_2$$) |
 | --- | --- | --- | --- |
 | 기계번역 | source 언어 문장 | target 언어 문장 | 기계번역 |
