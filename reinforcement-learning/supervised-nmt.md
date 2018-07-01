@@ -19,7 +19,7 @@ where~\mathcal{L}(\theta)&=\sum_{s=1}^S\log{P(y^{(s)}|x^{(s)};\theta)}
 \end{aligned}
 $$
 
-기존의 Maximum Likelihood Estimation (MLE)방식의 위와 같은 Loss function을 사용하여 $$ |S| $$개의 입력과 출력에 대해서 loss 값을 구하고, 이를 최대화 하는 $$ \theta $$를 찾는 것이 objective였습니다. 하지만 이 논문에서는 ***Risk***를 아래와 같이 정의하고, 이를 최소화 하는 것을 Minimum Risk Training (MRT)라고 하였습니다.
+기존의 Maximum Likelihood Estimation (MLE)방식은 위와 같은 손실 함수(Loss function)를 사용하여 $$ |S| $$개의 입력과 출력에 대해서 loss 값을 구하고, 이를 최대화 하는 $$ \theta $$를 찾는 것이 목표(objective)였습니다. 하지만 이 논문에서는 ***Risk***를 아래와 같이 정의하고, 이를 최소화 하는 학습 방식을 Minimum Risk Training (MRT)라고 하였습니다.
 
 $$
 \begin{aligned}
