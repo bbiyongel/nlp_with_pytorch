@@ -104,15 +104,14 @@ $$
 $$
 
 
-여기서 바로 Policy Gradients의 진가가 드러납니다. 우리는 policy network에 대해서 gradient를 구하지만, Q-function에 대해서는 gradient를 구할 필요가 없습니다. 즉, 미분이 불가능한 함수라도 reward function으로 사용할 수 있는 것입니다. 이렇게 어떠한 함수도 reward로 사용할 수 있게 됨에 따라, 기존의 cross entropy와 같은 loss function 대신에 좀 더 task에 부합한 함수\(번역의 경우에는 BLEU\)를 사용하여 network를 훈련시킬 수 있게 되었습니다. 위의 수식에서 expectation을 Monte Carlo sampling으로 대체하면 아래와 같이 parameter update를 수행 할 수 있습니다.
-
+여기서 바로 Policy Gradients의 진가가 드러납니다. 우리는 policy network에 대해서 gradient를 구하지만, Q-function에 대해서는 gradient를 구할 필요가 없습니다. 즉, 미분의 가능 여부를 떠나서 임의의 어떠한 함수라도 보상 함수(reward function)로 사용할 수 있는 것입니다. 이렇게 어떠한 함수도 reward로 사용할 수 있게 됨에 따라, 기존의 단순히 cross entropy와 같은 손실 함수(loss function)에 학습(fitting) 시키는 대신에 좀 더 실제 문제에 부합하는 함수\(번역의 경우에는 BLEU\)를 사용하여 $$\theta$$를 훈련시킬 수 있게 되었습니다. 위의 수식에서 기대값 수식을 Monte Carlo sampling으로 대체하면 아래와 같이 parameter update를 수행 할 수 있습니다.
 
 $$
 \theta \leftarrow \theta + \alpha Q^{\pi_\theta}(s_t,a_t)\triangledown_\theta\log{\pi_\theta(a_t|s_t)}
 $$
 
 
-위의 수식을 NLP에 적용하여 쉽게 설명 해 보면, Monte Carlo 방식을 통해 sampling 된 sentence에 대해서 gradient를 구하고, 그 gradient에 reward를 곱하여 주는 형태입니다. 만약 샘플링 된 해당 문장이 좋은 \(큰 양수\) reward를 받았다면 learning rate $$ \alpha $$에 추가적인 scaling을 통해서 더 큰 step으로 gradient ascending을 할 수 있을 겁니다. 하지만 negative reward를 받게 된다면, gradient는 반대로 적용이 되도록 값이 곱해지게 될 겁니다. 따라서 해당 샘플링 된 문장이 나오지 않도록 parameter $$ \theta $$가 update 됩니다.
+위의 수식을 NLP에 적용하여 쉽게 설명 해 보면, Monte Carlo 방식을 통해 sampling 된 action들에 대해서 gradient를 구하고, 그 gradient에 reward를 곱하여 주는 형태입니다. 만약 샘플링 된 해당 action들이 좋은 \(큰 양수\) reward를 받았다면 learning rate $$ \alpha $$에 추가적인 곱셈을 통해서 더 큰 step으로 gradient ascending을 할 수 있을 겁니다. 하지만 negative reward를 받게 된다면, gradient의 반대방향으로 step을 갖도록 값이 곱해지게 될 겁니다. 따라서 해당 샘플링 된 action들이 앞으로는 잘 나오지 않도록 parameter $$ \theta $$가 update 됩니다.
 
 따라서 실제 gradient에 따른 local minima를 찾는 것이 아닌, 아래 그림과 같이 실제 reward-objective function에 따른 최적을 값을 찾게 됩니다. 하지만, 기존의 gradient는 방향과 크기를 나타낼 수 있었던 것에 비해서, policy gradient는 기존의 gradient의 방향에 크기(scalar)값을 곱해줌으로써 방향을 직접 지정해 줄 수는 없습니다. 따라서 실제 objective function에 따른 최적의 방향을 스스로 찾아갈 수는 없습니다. 그러므로 매우 훈련이 어렵고 비효율적인 단점을 갖고 있습니다.
 
