@@ -19,7 +19,7 @@ $$
 \hat{\theta}=argmax P(x, y;\theta)
 $$
 
-요새는 pattern recognition을 비롯한 discriminative learning은 이제 deeplearning으로 당연하게 잘 해결되기 때문에 사람들의 관심과 연구 트렌드는 위와 같은 generative learning으로 집중되고 있습니다.
+사실 이제는 패턴인식과 같은 discriminative learning은 이제 딥러닝으로 너무나도 당연하게 잘 해결되기 때문에, 사람들의 관심과 연구 트렌드는 위와 같은 generative learning으로 집중되고 있습니다.
 
 ## Generative Adversarial Network (GAN)
 
