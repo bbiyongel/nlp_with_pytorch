@@ -158,5 +158,8 @@ $$
 $$
 
 $$
-\theta \leftarrow \theta + \alpha Q^{\pi_\theta}(s_t,a_t)\triangledown_\theta\log{\pi_\theta(a_t|s_t)}
+\begin{aligned}
+\theta &\leftarrow \theta + \alpha\nabla J(\theta) \\
+\theta &\leftarrow \theta + \alpha Q^{\pi_\theta}(s_t,a_t)\triangledown_\theta\log{\pi_\theta(a_t|s_t)}
+\end{aligned}
 $$
