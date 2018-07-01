@@ -65,6 +65,10 @@ $$
 
 ### Code
 
+MRT(or RL)을 PyTorch를 사용하여 구현 해 보도록 하겠습니다. 자세한 전체 코드는 이전의 NMT PyTorch 실습 코드의 git repository에서 다운로드 할 수 있습니다.
+
+- git repo url: https://github.com/kh-kim/simple-nmt
+
 ```python
 import time
 import numpy as np
