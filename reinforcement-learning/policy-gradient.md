@@ -43,7 +43,7 @@ $$
 E_{X \sim P}[reward(x)] \approx reward(x)=x
 $$
 
-위와 같은 가정을 가지고 수식을 simplify할 수 있게 되면, 이후 gradient를 구한다거나 할 때에 수식이 간단해져 매우 편리합니다.
+위와 같은 가정을 가지고 수식을 간단히 표현할 수 있게 되면, 이후 gradient를 구한다거나 할 때에 수식이 간단해져 매우 편리합니다.
 
 # Policy Gradient
 
