@@ -78,7 +78,9 @@ import torch.nn.utils as torch_utils
 
 import utils
 import data_loader
+```
 
+```python
 def get_reward(y, y_hat):
     # |y| = (batch_size, length1)
     # |y_hat| = (batch_size, length2)
@@ -104,7 +106,9 @@ def get_reward(y, y_hat):
     # |scores| = (batch_size)
 
     return scores
+```
 
+```python
 def get_gradient(y, y_hat, criterion, reward = 1):
     # |y| = (batch_size, length)
     # |y_hat| = (batch_size, length, output_size)
@@ -119,7 +123,9 @@ def get_gradient(y, y_hat, criterion, reward = 1):
     log_prob.div(batch_size).backward()
 
     return log_prob
+```
 
+```python
 def train_epoch(model, criterion, train_iter, valid_iter, config, start_epoch = 1, others_to_save = None):
     current_lr = config.rl_lr
 
