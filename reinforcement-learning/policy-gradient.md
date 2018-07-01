@@ -66,7 +66,7 @@ J(\theta) &= E_{\pi_\theta}[r] = v_\theta(s_0) \\
 $$
 
 
-즉 우리의 objective function은 initial state에서의 expected cumulative reward를 최대\(maximize\)로 하도록 하는 policy\($$\theta$$\)를 찾는 것 입니다.
+즉 우리의 목표(objective)는 initial state에서의 expected cumulative reward를 최대\(maximize\)로 하도록 하는 policy\($$\theta$$\)를 찾는 것 입니다.
 
 
 $$
