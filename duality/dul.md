@@ -8,9 +8,9 @@
 
 ![](/assets/rl-dual-learning-1.png)
 
-위에서 설명한 algorithm을 따라가 보겠습니다. 이 방법에서는 $$ Set~X,~Set~Y $$ 대신에 $$ Language~A,~Language~B $$로 표기하고 있습니다. $$ G_{A \rightarrow B} $$의 파라미터 $$ \theta_{AB} $$와 $$ F_{B \rightarrow A} $$의 파라미터 $$ \theta_{BA} $$가 등장합니다. 이 $$ G_{A \rightarrow B}, F_{B \rightarrow A} $$는 모두 parallel corpus에 의해서 pre-training이 되어 있는 상태 입니다. 즉, 기본적인 저성능의 번역기 수준이라고 가정합니다.
+위에서 설명한 알고리즘을 따라가 보겠습니다. 이 방법에서는 $$ Set~X,~Set~Y $$ 대신에 $$ Language~A,~Language~B $$로 표기하고 있습니다. $$ G_{A \rightarrow B} $$의 파라미터 $$ \theta_{AB} $$와 $$ F_{B \rightarrow A} $$의 파라미터 $$ \theta_{BA} $$가 등장합니다. 이 $$ G_{A \rightarrow B}, F_{B \rightarrow A} $$는 모두 parallel corpus에 의해서 pre-training이 되어 있는 상태 입니다. 즉, 기본적인 저성능의 번역기 수준이라고 가정합니다.
 
-우리는 기존의 policy gradient와 마찬가지로 아래와 같은 parameter update를 수행해야 합니다.
+우리는 기존의 policy gradient와 마찬가지로 아래와 같은 파라미터 업데이트를 수행해야 합니다.
 
 $$
 \begin{aligned}
@@ -19,7 +19,7 @@ $$
 \end{aligned}
 $$
 
-$$ \hat{E}[r] $$을 각각의 parameter에 대해서 미분 해 준 값을 더해주는 것을 볼 수 있습니다. 이 reward의 기대값은 아래와 같이 구할 수 있습니다.
+$$ \hat{E}[r] $$을 각각의 파라미터에 대해서 미분 해 준 값을 더해주는 것을 볼 수 있습니다. 이 reward의 기대값은 아래와 같이 구할 수 있습니다.
 
 $$
 \begin{aligned}
@@ -29,7 +29,7 @@ r_{BA}&=\log{P(s|s_{mid};\theta_{BA})} \\
 \end{aligned}
 $$
 
-위와 같이 $$ k $$개의 sampling한 문장에 대해서 각기 방향에 대한 reward를 각각 구한 후, 이를 linear combination을 취해줍니다. 이때, $$ s_{mid} $$는 sampling한 문장을 의미하고, $$ LM_B $$를 사용하여 해당 문장이 $$ language B $$의 집합에 잘 어울리는지를 따져 reward로 리턴합니다. 여기서 기존의 cross entropy를 사용할 수 없는 이유는 monlingual sentence이기 때문에 번역을 하더라도 정답을 알 수 없기 때문입니다. 또한 우리는 다수의 monolingual corpus를 갖고 있기 때문에, $$ LM $$은 쉽게 만들어낼 수 있습니다.
+위와 같이 $$ k $$개의 sampling한 문장에 대해서 각기 방향에 대한 reward를 각각 구한 후, 이를 선형 결합(linear combination)을 취해줍니다. 이때, $$ s_{mid} $$는 sampling한 문장을 의미하고, $$ LM_B $$를 사용하여 해당 문장이 $$ language B $$의 집합에 잘 어울리는지를 따져 reward로 리턴합니다. 여기서 기존의 cross entropy를 사용할 수 없는 이유는 monlingual sentence이기 때문에 번역을 하더라도 정답을 알 수 없기 때문입니다. 또한 우리는 다수의 monolingual corpus를 갖고 있기 때문에, $$ LM $$은 쉽게 만들어낼 수 있습니다.
 
 $$
 \begin{aligned}
