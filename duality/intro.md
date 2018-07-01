@@ -2,6 +2,13 @@
 
 ## What is Duality?
 
+| Task($$ D_1 \rightarrow D_2$$) | Domain 1 | Domain 2 | Task($$ D_1 \leftarrow D_2$$) |
+| --- | --- | --- | --- |
+| 기계번역 | source 언어 문장 | target 언어 문장 | 기계번역 |
+| 음성인식 | 음성 신호 | 텍스트(transcript) | 음성합성 |
+| 이미지 분류 | 이미지 | class | 이미지 합성 |
+| 요약 | 본문(content) 텍스트 | 제목(title) 텍스트 | 본문 생성 |
+
 ## CycleGAN
 
 먼저 좀 더 이해하기 쉬운 Computer Vision쪽 논문[\[Zhu at el.2017\]](https://arxiv.org/pdf/1703.10593.pdf)을 예제로 설명 해 볼까 합니다. ***Cycle GAN***은 아래와 같이 unparalleled image set이 여러개 있을 때, $$ Set~X $$의 이미지를 $$ Set~Y $$의 이미지로 합성/변환 시켜주는 방법 입니다. 사진을 전체 구조는 유지하되 *모네*의 그림풍으로 바꾸어 주기도 하고, 말과 얼룩말을 서로 바꾸어 주기도 합니다. 겨울 풍경을 여름 풍경으로 바꾸어주기도 합니다.
