@@ -159,7 +159,7 @@ J(\theta)&=-\sum_{(X, Y) \in \mathcal{B}}{P(Y|X)\log{P(Y|X;\theta)}} \\
 \end{aligned}
 $$
 
-위의 수식에서 $$P(Y|X)$$는 훈련 데이터셋에 존재하므로 보통 $$1$$이라고 할 수 있습니다. 따라서 수식에서 생략 할 수 있습니다. 위에서 정의한 목적함수를 최소화 하여야 하기 때문에, gradient descent를 통해 지역최소점(local minima)를 찾아내어 전역최소점(global minima)에 근사(approximation)할 수 있습니다.
+위의 수식에서 $$P(Y|X)$$는 훈련 데이터셋에 존재하므로 보통 $$1$$이라고 할 수 있습니다. 따라서 수식에서 생략 할 수 있습니다. 위에서 정의한 목적함수를 최소화 하여야 하기 때문에, gradient descent를 통해 지역최소점(local minima)를 찾아내어 전역최소점(global minima)에 근사(approximation)할 수 있습니다. 해당 수식은 아래와 같습니다.
 
 $$
 \begin{aligned}
@@ -167,6 +167,8 @@ $$
 \theta &\leftarrow \theta + \gamma \sum_{(X, Y) \in \mathcal{B}}{\sum_{i = 0}^{m}{\nabla_\theta\log{P(y_i|X, y_{i}; \theta)}}}
 \end{aligned}
 $$
+
+우리는 위의 수식에서 learning rate $$\gamma$$를 통해 update step size를 조절 하는 것을 확인할 수 있습니다.
 
 $$
 \begin{aligned}
