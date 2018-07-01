@@ -121,6 +121,10 @@ Policy Gradient에 대한 자세한 설명은 원 논문인 [\[Sutton at el.1999
 
 ## MLE vs RL(Policy Gradients)
 
+여기서 reward의 역할을 좀 더 직관적으로 설명하고 넘어가도록 하겠습니다.
+
+우리에게 $$n$$개의 시퀀스로 이루어진 입력을 받아, $$m$$개의 시퀀스로 이루어진 출력을 하는 함수를 근사하는 것이 목표로 주어진다고 가정 해 봅니다. 그렇다면 시퀀스 $$X$$와 $$Y$$는 $$\mathcal{B}$$라는 dataset에 존재 합니다.
+
 $$
 \begin{aligned}
 &(X, Y) \in \mathcal{B} \\
