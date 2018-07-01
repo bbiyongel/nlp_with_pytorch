@@ -47,6 +47,8 @@ $$
 
 # Policy Gradient
 
+사실 강화학습(RL) 자체는 매우 유서 깊고 방대한 학문입니다. 따라서 이 책에서 깊은 내용을 모두 다루는 것은 어렵습니다. 우리는 NLP에 적용 가능한 방법에 대해서 그 개념을 간단히 다루고 넘어가도록 하겠습니다.
+
 Policy Gradient는 정책기반 강화학습(Policy based Reinforcement Learning) 방식에 속합니다. 알파고를 개발했던 DeepMind에 의해서 유명해진 Deep Q-Learning은 가치기반 강화학습(Value based Reinforcement Learning) 방식에 속합니다. 실제 딥러닝을 사용하여 두 방식을 사용 할 때에 가장 큰 차이점은, Value based방식은 인공신경망을 사용하여 어떤 action을 하였을 때에 얻을 수 있는 보상을 예측 하도록 훈련하는 것과 달리, policy based 방식은 인공신경망은 어떤 action을 할지 훈련되고 해당 action에 대한 보상\(reward\)를 back-propagation 할 때에 gradient를 통해서 전달해 주는 것이 가장 큰 차이점 입니다. 따라서 어떤 Deep Q-learning의 경우에는 action을 선택하는 것이 deterministic한 것에 비해서, Policy Gradient 방식은 action을 선택 할 때에 stochastic한 process를 거치게 됩니다. Policy Gradient에 대한 수식은 아래와 같습니다.
 
 
