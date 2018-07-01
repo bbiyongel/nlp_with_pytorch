@@ -44,7 +44,7 @@ $$
 
 이러한 이유 때문에 Discriminator의 loss를 Generator에 전달 할 수가 업고, 따라서 GAN을 NLP에는 적용할 수 없는 인식이 지배적이었습니다. 하지만 강화학습을 사용함으로써 Adversarial learning을 NLP에도 우회적으로 사용할 수 있게 되었습니다.
 
-참고로 ***Reparameterization Trick***을 이용해 이 문제를 해결하려는 시도들도 있습니다. NLP분야에서는 [Gumbel Softmax [Jang at el.2016]](https://arxiv.org/pdf/1611.01144.pdf)가 대표적입니다. 이를 활용하면 gradient를 전달 할 수 있기 때문에, policy gradient 없이 문제를 해결 할 수도 있습니다.
+참고로 ***Reparameterization Trick***을 이용해 이 문제를 해결하려는 시도들도 있습니다. [Gumbel Softmax [Jang at el.2016]](https://arxiv.org/pdf/1611.01144.pdf)가 대표적입니다. 이를 활용하면 gradient를 전달 할 수 있기 때문에, policy gradient 없이 문제를 해결 할 수도 있습니다.
 
 ## Why we use RL?
 
