@@ -28,13 +28,13 @@ $$
 \end{aligned}
 $$
 
-위의 수식에서 $$ \mathcal{Y}(x^{(s)}) $$는 full search space로써, $$ s $$번째 입력 $$ x^{(s)} $$가 주어졌을 때, 가능한 정답의 집합을 의미합니다. 또한 $$ \triangle(y,y^{(s)}) $$는 주어진 입력과 파라미터($$ \theta $$)가 있을 때, sampling한 $$ y $$와 실제 정답 $$ y^{(s)} $$의 차이값을 나타냅니다. 즉, 위 수식에 따르면 ***risk*** $$ \mathcal{R} $$은 주어진 입력과 현재 파라미터 상에서 얻은 y를 통해 현재 모델(함수)을 구하고, 동시에 이를 사용하여 ***risk***의 기대값을 구한다고 볼 수 있습니다.
+위의 수식에서 $$ \mathcal{Y}(x^{(s)}) $$는 full search space로써, $$ s $$번째 입력 $$ x^{(s)} $$가 주어졌을 때, 가능한 정답의 집합을 의미합니다. 또한 $$ \triangle(y,y^{(s)}) $$는 입력과 파라미터($$ \theta $$)가 주어졌을 때, sampling한 $$ y $$와 실제 정답 $$ y^{(s)} $$의 차이(error)값을 나타냅니다. 즉, 위 수식에 따르면 risk $$ \mathcal{R} $$은 주어진 입력과 현재 파라미터 상에서 얻은 y를 통해 현재 모델(함수)을 구하고, 동시에 이를 사용하여 risk의 기대값을 구한다고 볼 수 있습니다.
 
 $$
 \hat{\theta}_{MRT}=argmin_\theta(\mathcal{R}(\theta))
 $$
 
-이렇게 정의된 ***risk***를 최소화 하도록 하는 것이 objective입니다. 따라서 실제 구현에 있어서는 $$ \triangle(y,y^{(s)}) $$ 사용을 위해서 BLEU 점수에 $$ -1 $$을 곱하여 사용하기도 합니다.
+이렇게 정의된 risk를 최소화 하도록 하는 것이 objective입니다. 사실 risk 대신에 reward로 생각하면, reward를 최대화 하는 것이 objective가 됩니다. 결국은 risk를 최소화 할 때에는 gradient descent, reward를 최대화 할 때는 gradient ascent를 사용하게 되므로, 결국 완벽하게 같은 이야기라고 볼 수 있습니다. 따라서 실제 구현에 있어서는 $$ \triangle(y,y^{(s)}) $$ 사용을 위해서 BLEU 점수에 $$ -1 $$을 곱하여 사용 합니다.
 
 $$
 \begin{aligned}
