@@ -38,15 +38,15 @@ $$
 \end{aligned}
 $$
 
-이렇게 얻어진 $$ E[r] $$를 각 parameter에 대해서 미분하게 되면 위와 같은 수식을 얻을 수 있고, 상기 서술한 parameter update 수식에 대입하면 됩니다. 비슷한 방식으로 $$ B \rightarrow A $$를 구할 수 있습니다.
+이렇게 얻어진 $$ E[r] $$를 각 파라미터에 대해서 미분하게 되면 위와 같은 수식을 얻을 수 있고, 상기 서술한 파라미터 업데이트 수식에 대입하면 됩니다. 비슷한 방식으로 $$ B \rightarrow A $$를 구할 수 있습니다.
 
 ![](/assets/rl-dual-learning-2.png)
 
-위의 table은 이 방법의 성능을 비교한 결과 입니다. Pseudo-NMT는 이전 챕터에서 설명하였던 back-translation을 의미합니다. 그리고 그 방식보다 더 좋은 성능을 기록한 것을 볼 수 있습니다.
+위의 테이블은 이 방법의 성능을 비교한 결과 입니다. Pseudo-NMT는 이전 챕터에서 설명하였던 back-translation을 의미합니다. 그리고 그 방식보다 더 좋은 성능을 기록한 것을 볼 수 있습니다.
 
 ![](/assets/rl-dual-learning-3.png)
 
-또한, 위 그래프에서 문장의 길이와 상관 없이 모든 구간에서 baseline NMT를 성능으로 압도하고 있는 것을 알 수 있습니다. 다만, parallel corpus의 양이 커질수록 monolingual corpus에 의한 성능 향상의 폭이 줄어드는 것을 확인 할 수 있습니다.
+또한, 위 그래프에서 문장의 길이와 상관 없이 모든 구간에서 baseline NMT를 성능으로 압도하고 있는 것을 알 수 있습니다. 다만, 병렬(parallel) corpus의 양이 커질수록 단방향(monolingual) corpus에 의한 성능 향상의 폭이 줄어드는 것을 확인 할 수 있습니다.
 
 ## Dual Transfer Learning for NMT with Marginal Distribution Regularization
 
