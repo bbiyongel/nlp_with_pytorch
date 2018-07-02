@@ -21,10 +21,10 @@ $$
 
 $$
 
-\hat{y_t}_t=argmax_{y}{P(y|X,y_{t};\theta)}~where~X=\{x_1,x_2,\cdots,x_n\}
+\hat{y_t}_t=argmax_{y}{P(y|X,y_{t};\theta)}~where~X=\{x_1,x_2,\cdots,x_n\}~and~Y=\{\}
 $$
 $$
-\mathcal{L}=-\sum_{i=1}^{n}{\log{P(y_i)}}
+\mathcal{L}(Y)=-\sum_{i=1}^{n}{\log{P(y_i)}}
 $$
 $$
 \theta \leftarrow \theta - \lambda\frac{1}{N}\sum_{i=1}^{N}{\mathcal{L}(Y_i)}
