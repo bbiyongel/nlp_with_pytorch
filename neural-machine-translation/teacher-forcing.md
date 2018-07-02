@@ -20,11 +20,15 @@ $$
 이것은 과거에 잘못된 예측을 하게 되면 점점 시간이 지날수록 더 큰 잘못된 예측을 할 가능성을 야기하기도 합니다. 또한, 과거의 결과값에 따라 문장(또는 시퀀스)의 구성이 바뀔 뿐만 아니라, 그 길이 마저도 바뀌게 됩니다. 따라서 우리는 이런 auto-regressive 속성을 유지한 채 훈련을 할 수 없습니다.
 
 $$
-\begin{aligned}
-\hat{y_t}_t&=argmax_{y}{P(y|X,y_{t};\theta)}~where~X=\{x_1,x_2,\cdots,x_n\} \\
-\mathcal{L}&=-\sum_{i=1}{n}{\log{P(y_i)}} \\
+
+\hat{y_t}_t&=argmax_{y}{P(y|X,y_{t};\theta)}~where~X=\{x_1,x_2,\cdots,x_n\}
+$$
+$$
+\mathcal{L}&=-\sum_{i=1}{n}{\log{P(y_i)}}
+$$
+$$
 \theta &\leftarrow \theta - \lambda\frac{1}{N}\sum_{i=1}{N}{\mathcal{L}}
-\end{algiend}
+
 $$
 
 위와 같이 조건부에 $$ \hat{y}_{<t} $$가 들어가는 것이 아닌, $$ y_{<t} $$가 들어가는 것이기 때문에, 훈련시에는 이전 time-step의 출력 $$ \hat{y}_{<t} $$을 현재 time-step의 입력으로 넣어줄 수 없습니다. 만약 넣어주게 된다면 현재 time-step의 decoder에겐 잘못된 것을 가르쳐 주는 꼴이 될 것입니다.
