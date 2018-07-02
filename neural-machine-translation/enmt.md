@@ -25,4 +25,4 @@ Edinburgh 대학의 Sennrich교수는 매년 열리는 WMT 대회에 참가하�
 - checkpoint ensemble
     + 특정 epoch에서부터 다른 모델로 다시 훈련하여 ensemble을 구성합니다. 훈련 중간부터 다시 훈련하기 때문에 시간적으로 굉장히 효율적입니다.
 - independent ensemble
-    + 처음부터 다른 모델로 훈련하여 ensemble로 구성합니다. 처음부터 다시 훈련하므로 checkpoint 방식에 비해서 비효율적이지만, diversity 관점에서 낫습니다.
+    + 처음부터 다른 모델로 훈련하여 ensemble로 구성합니다. 처음부터 다시 훈련하므로 checkpoint 방식에 비해서 비효율적이지만, 다양성(diversity) 관점에서 낫습니다.
