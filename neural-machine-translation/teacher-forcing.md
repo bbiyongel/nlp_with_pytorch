@@ -1,4 +1,4 @@
-## Difference between Training and Inference
+# Auto-regressive and Teacher Focing
 
 많은 분들이 여기까지 잘 따라왔다면 궁금즘을 하나 가질 수 있습니다. Decoder의 입력으로 이전 time-step의 출력이 들어가는것이 훈련 때도 같은 것인가? 사실, 안타깝게도 seq2seq의 기본적인 훈련 방식은 추론(inference)할 때의 방식과 상이합니다.
 
