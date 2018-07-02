@@ -16,11 +16,11 @@ Edinburgh 대학의 Sennrich교수는 매년 열리는 WMT 대회에 참가하�
 
 ## Synthetic Data using Monolingual Data
 
-이전 섹션에서 소개한 그들이 제안한 논문[[Sennrich at el.2015]](https://arxiv.org/pdf/1511.06709.pdf)의 방식대로 back translation과 copied translation 방식을 사용하여 synthetic data를 구성하여 훈련 데이터셋에 추가하였습니다. 이때에 비율은 실험결과에 따라서 $$ parallel : copied : back = 1 : 1 \sim 2 : 1\sim 2 $$로 조절하여 사용하였습니다.
+이전 섹션에서 소개한 그들이 제안한 논문[[Sennrich at el.2015]](https://arxiv.org/pdf/1511.06709.pdf)의 방식대로 back translation과 copied translation 방식을 사용하여 합성 병렬(pseudo parallel) corpus를 구성하여 훈련 데이터셋에 추가하였습니다. 이때에 비율은 실험결과에 따라서 $$ parallel : copied : back = 1 : 1 \sim 2 : 1\sim 2 $$로 조절하여 사용하였습니다.
 
 ## Ensemble
 
-이 논문에서 그들은 2가지 앙상블 기법을 모두 사용하였습니다.
+이 논문에서 그들은 2가지 앙상블(ensemble) 기법을 모두 사용하였습니다.
 
 - checkpoint ensemble
     + 특정 epoch에서부터 다른 모델로 다시 훈련하여 ensemble을 구성합니다. 훈련 중간부터 다시 훈련하기 때문에 시간적으로 굉장히 효율적입니다.
