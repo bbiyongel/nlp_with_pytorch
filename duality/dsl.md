@@ -11,12 +11,14 @@ P(Y|X)P(X)&=P(X|Y)P(Y)
 \end{aligned}
 $$
 
-
+따라서 위의 수식을 따라서, 우리의 데이터셋을 통해 훈련한 모델들은 아래와 같은 수식을 만족해야 합니다.
 
 $$
 P(x)P(y|x;\theta_{x \rightarrow y})=P(y)P(x|y;\theta_{y \rightarrow x})
 $$
-<br>
+
+이 전제를 우리의 번역 훈련을 위한 목표에 적용하면 다음과 같습니다.
+
 $$
 \begin{aligned}
 objective 1: \min_{\theta_{x \rightarrow y}}{\frac{1}{n}\sum^n_{i=1}{\ell_1(f(x_i;\theta_{x \rightarrow y}), y_i)}}, \\
@@ -24,14 +26,20 @@ objective 2: \min_{\theta_{y \rightarrow x}}{\frac{1}{n}\sum^n_{i=1}{\ell_1(g(y_
 s.t.~P(x)P(y|x;\theta_{x \rightarrow y})=P(y)P(x|y;\theta_{y \rightarrow x}), \forall{x, y}.
 \end{aligned}
 $$
-<br>
+
+위의 수식을 해석하면, 목표(objective1)은 베이즈 정리에 따른 제약조건을 만족함과 동시에, $$ \ell_1 $$을 최소화(minimize) 하도록 해야 합니다. $$ \ell_1 $$은 번역함수 $$ f $$에 입력 $$ x_i $$를 넣어 나온 반환값과 $$ y_i $$ 사이의 손실(loss)를 의미 합니다. 마찬가지로, $$ \ell_2 $$도 번역함수 $$ g $$에 대해 같은 작업을 수행하고 최소화하여 목표(objective2)를 만족해야 합니다.
+
 $$
 \mathcal{L}_{duality}=((\log{\hat{P}(x)} + \log{P(y|x;\theta_{x \rightarrow y})}) - (\log{\hat{P}(y)} + \log{P(x|y;\theta_{y \rightarrow x}}))^2
 $$
-<br>
+
+그러므로 우리는 $$ \mathcal{L}_{duality} $$와 같이 베이즈 정리에 따른 제약조건의 양 변의 값의 차이를 최소화(minimize)하도록 하는 MSE 손실함수(loss function)을 만들 수 있습니다. 이 부가적인 제약조건의 손실함수를 기존의 목적함수(objective function)에 추가하여 동시에 minimize 하도록 하면, 아래와 같이 표현 할 수 있습니다.
+
 $$
 \begin{aligned}
 \theta_{x \rightarrow y} \leftarrow \theta_{x \rightarrow y}-\gamma\nabla_{\theta_{x \rightarrow y}}\frac{1}{n}\sum^m_{j=1}{[\ell_1(f(x_i;\theta_{x \rightarrow y}), y_i)+\lambda_{x \rightarrow y}\mathcal{L}_{duality}]} \\
 \theta_{y \rightarrow x} \leftarrow \theta_{y \rightarrow x}-\gamma\nabla_{\theta_{y \rightarrow x}}\frac{1}{n}\sum^m_{j=1}{[\ell_2(g(y_i;\theta_{y \rightarrow x}), x_i)+\lambda_{y \rightarrow x}\mathcal{L}_{duality}]}
 \end{aligned}
 $$
+
+여기서 $$ \lambda $$는 라그랑지안 
