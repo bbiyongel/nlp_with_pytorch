@@ -1,5 +1,7 @@
 # Dual Supervised Learning
 
+이번에 소개할 방법은 [Dual Supervised Learning (DSL)]() 입니다. 이 논무
+
 $$
 P(x)P(y|x;\theta_{x \rightarrow y})=P(y)P(x|y;\theta_{y \rightarrow x})
 $$
