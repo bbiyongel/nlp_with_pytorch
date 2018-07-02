@@ -21,8 +21,8 @@ $$
 
 $$
 \begin{aligned}
-\hat{y}_t=argmax{P(y_t|X,y_{<t};\theta)}~where~X=\{x_1,x_2,\cdots,x_n\} \\
-\mathcal{L}=-\sum_{i=1}{n}{\log{P(\hat{y})}}
+\hat{y_t}_t=argmax_{y}{P(y|X,y_{<t};\theta)}~where~X=\{x_1,x_2,\cdots,x_n\} \\
+\mathcal{L}=-\sum_{i=1}{n}{\log{P(y_i)}}
 \end{algiend}
 $$
 
