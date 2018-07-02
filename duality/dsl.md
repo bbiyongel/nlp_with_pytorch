@@ -42,4 +42,4 @@ $$
 \end{aligned}
 $$
 
-여기서 $$ \lambda $$는 라그랑지안 
+여기서 $$ \lambda $$는 Lagrange multipliers로써, 고정된 값의 hyper-parameter 입니다. 
