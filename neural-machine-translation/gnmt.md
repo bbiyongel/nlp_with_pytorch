@@ -47,9 +47,9 @@ $$
 \mathcal{O}_{RL}(\theta)=\sum_{i=1}^N \sum_{Y \in \mathcal{Y}} P_\theta(Y|X^{(i)})r(Y, Y^{*(i)})
 $$
 
-위의 수식도 Minimum Risk Training (MRT) 방식과 비슷합니다. $$ r(Y, Y^{*(i)}) $$ 또한 정답과 sampling 데이터 사이의 유사도(점수)를 의미합니다. 가장 큰 차이점은 기존에는 risk로 취급하여 minimize하는 방향으로 훈련하였지만, 이번에는 reward로 취급하여 maximize하는 방향으로 훈련하게 된다는 것 입니다.
+위의 수식도 Minimum Risk Training (MRT) 방식과 비슷합니다. $$ r(Y, Y^{*(i)}) $$ 또한 정답과 sampling 데이터 사이의 유사도(점수)를 의미합니다. 가장 큰 차이점은 기존에는 risk로 취급하여 최소화(minimize)하는 방향으로 훈련하였지만, 이번에는 reward로 취급하여 최대화(maximize)하는 방향으로 훈련하게 된다는 것 입니다.
 
-이렇게 새롭게 추가된 objective를 아래와 같이 기존의 MLE방식의 objective와 linear combination을 취하여 최종적인 objective function이 완성됩니다.
+이렇게 새롭게 추가된 목적함수(objective)를 아래와 같이 기존의 MLE방식의 목적함수와 선형 결합(linear combination)을 취하여 최종적인 목적함수가 완성됩니다.
 
 $$
 \mathcal{O}_{Mixed}(\theta)=\alpha*\mathcal{O}_{ML}(\theta)+\mathcal{O}_{RL}(\theta)
@@ -59,11 +59,11 @@ $$
 
 ![](/assets/nmt-gnmt-5.png)
 
-$$ En \rightarrow De $$의 경우에는 성능이 약간 하락함을 보였습니다. 하지만 이는 decoder의 length penalty, coverage penalty와 결합되었기 때문이고, 이 panalty들이 없을 때에는 훨씬 큰 성능 향상이 있었다고 합니다.
+$$ En \rightarrow De $$의 경우에는 성능이 약간 하락함을 보였습니다. 하지만 이는 decoder의 length penalty, coverage penalty와 결합되었기 때문이고, 이 페널티(panalty)들이 없을 때에는 훨씬 큰 성능 향상이 있었다고 합니다.
 
 ## Quantization
 
-실제 Neural Network을 사용한 product를 개발할 때에는 여러가지 어려움에 부딪히게 됩니다. 이때, Quantization을 도입함으로써 아래와 같은 여러가지 이점을 얻을 수 있습니다.
+실제 인공신경망을 사용한 제품을 개발할 때에는 여러가지 어려움에 부딪히게 됩니다. 이때, Quantization을 도입함으로써 아래와 같은 여러가지 이점을 얻을 수 있습니다.
 
 - 계산량을 줄여 자원의 효율적 사용과 응답시간의 감소를 얻을 수 있다.
 - 모델의 실제 저장되는 크기를 줄여 deploy를 효율적으로 할 수 있다.
@@ -77,7 +77,7 @@ $$ En \rightarrow De $$의 경우에는 성능이 약간 하락함을 보였습�
 
 ### Length Penalty and Coverage Penalty
 
-Google은 기존에 소개한 ***Length Penalty***에 추가로 ***Coverage Penalty***를 사용하여 좀 더 성능을 끌어올렸습니다. Coverage penalty는 attention weight(probability)의 값의 분포에 따라서 매겨집니다. 이 penalty는 좀 더 attention이 고루 잘 퍼지게 하기 위함입니다.
+Google은 기존에 소개한 ***Length Penalty***에 추가로 ***Coverage Penalty***를 사용하여 좀 더 성능을 끌어올렸습니다. Coverage penalty는 attention weight(probability)의 값의 분포에 따라서 매겨집니다. 이 페널티는 좀 더 attention이 고루 잘 퍼지게 하기 위함입니다.
 
 $$
 \begin{aligned}
@@ -88,9 +88,9 @@ where~p_{i,j}~is~the~attention&~weight~of~the~j\text{-}th~target~word~y_j~on~the
 \end{aligned}
 $$
 
-Coverage penalty의 수식을 들여다보면, 각 source word $$ x_i $$별로 attention weight의 합을 구하고, 그것의 평균(=합)을 내는 것을 볼 수 있습니다. ***log***를 취했기 때문에 그 중에 attention weight가 편중되어 있다면, 편중되지 않은 source word는 매우 작은 음수 값을 가질 것이기 때문에 좋은 점수를 받을 수 없을 겁니다.
+Coverage penalty의 수식을 들여다보면, 각 source word $$ x_i $$별로 attention weight의 합을 구하고, 그것의 평균(=합)을 내는 것을 볼 수 있습니다. 로그(log)를 취했기 때문에 그 중에 attention weight가 편중되어 있다면, 편중되지 않은 source word는 매우 작은 음수 값을 가질 것이기 때문에 좋은 점수를 받을 수 없을 겁니다.
 
-실험에 의하면 $$ \alpha $$와 $$ \beta $$는 각각 $$ 0.6, 0.2 $$ 정도가 좋은것으로 밝혀졌습니다. 하지만, 상기한 Reinforcement Learning 방식을 training criteria에 함께 이용하면 그다지 그 값은 중요하지 않다고 하였습니다.
+실험에 의하면 $$ \alpha $$와 $$ \beta $$는 각각 $$ 0.6, 0.2 $$ 정도가 좋은것으로 밝혀졌습니다. 하지만, 상기한 강화학습 방식을 training criteria에 함께 이용하면 그다지 그 값은 중요하지 않다고 하였습니다.
 
 ## Training Procedure
 
@@ -102,5 +102,4 @@ Google은 stochastic gradient descent (SGD)를 써서 훈련 시키는 것 보�
 
 ![](/assets/nmt-gnmt-6.png)
 
-실제 번역 품질을 측정하기 위하여 BLEU 이외에도 implicit(human) evaluation을 통하여 GNMT의 성능 개선의 정도를 측정하였습니다. 0(Poor)에서 6(Perfect)점 사이로 점수를 매겨 사람의 번역 결과 점수를 Upper Bound로 가정하고 성능의 개선폭을 계산하였습니다. 실제 SMT 방식 대비 엄청난 천지개벽 수준의 성능 개선이 이루어진 것을 알 수 있고, 일부 언어쌍에 대해서는 거의 사람의 수준에 필적하는 성능을 보여주는 것을 알 수 있습니다.
-
+실제 번역 품질을 측정하기 위하여 BLEU 이외에도 정성평가(implicit human evaluation)을 통하여 GNMT의 성능 개선의 정도를 측정하였습니다. 0(Poor)에서 6(Perfect)점 사이로 점수를 매겨 사람의 번역 결과 점수를 최대치로 가정하고 성능의 개선폭을 계산하였습니다. 실제 SMT 방식 대비 엄청난 천지개벽 수준의 성능 개선이 이루어진 것을 알 수 있고, 일부 언어쌍에 대해서는 거의 사람의 수준에 필적하는 성능을 보여주는 것을 알 수 있습니다.
