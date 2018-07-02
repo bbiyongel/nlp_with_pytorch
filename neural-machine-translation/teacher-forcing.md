@@ -7,7 +7,10 @@
 Sequence-to-sequence의 훈련 방식과 추론 방식의 차이는 근본적으로 auto-regressive라는 속성 때문에 생겨납니다. Auto-regressive는 과거의 자신의 값을 참조하여 현재의 값을 추론(또는 예측) 해 내기 때문에 붙은 이름입니다. 이는 수식에서도 확인 할 수 있습니다. 아래는 전체적인 신경망 기계번역의 수식 입니다.
 
 $$
-Y=argmax_{Y}P(Y|X)=argmax_{Y}\prod_{i=1}^{n}{P(y_i|X,y_{<i})}
+\begin{aligned}
+Y&=argmax_{Y}P(Y|X)=argmax_{Y}\prod_{i=1}^{n}{P(y_i|X,y_{<i})} \\
+y_i&=argmax_{y}P(y|X,y_{<i})
+\end{aligned}
 $$
 
 위와 같이 현재 time-step의 출력값 $$ y_t $$는 encoder의 입력 문장(또는 시퀀스) $$ X $$와 이전 time-step까지의 $$ y_{<t} $$를 조건부로 받아 결정 되기 때문에, 과거 자신의 값을 참조하게 되는 것 입니다. 
