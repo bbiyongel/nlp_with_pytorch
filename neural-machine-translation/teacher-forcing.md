@@ -27,6 +27,8 @@ $$
 
 ## Teacher Forcing
 
+따라서 우리는 Teacher Forcing이라고 불리는 방법을 사용하여 훈련 합니다.
+
 중요한 점은 **훈련(training)시에는 decoder의 입력으로 이전 time-step의 decoder의 출력값이 아닌, 실제 $$ Y $$가 들어간다**는 것입니다. 하지만, 추론(inference) 할 때에는 실제 $$ Y $$를 모르기 때문에, 이전 time-step에서 계산되어 나온 $$ \hat{y_{t-1}} $$를 decoder의 입력으로 사용합니다. 이 훈련 방법을 ***Teacher Forcing***이라고 합니다. Teacher Forcing이 필요한 이유는 NMT의 수식을 살펴보면 알 수 있습니다. 해당 time-step의 단어를 구할 때 수식은 아래와 같습니다.
 
 
