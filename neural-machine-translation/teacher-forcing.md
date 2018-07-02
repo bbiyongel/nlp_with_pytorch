@@ -9,8 +9,9 @@ Sequence-to-sequence의 훈련 방식과 추론 방식의 차이는 근본적으
 $$
 \begin{aligned}
 Y&=argmax_{Y}P(Y|X)=argmax_{Y}\prod_{i=1}^{n}{P(y_i|X,y_{<i})} \\
-or\\
-y_i&=argmax_{y}P(y|X,y_{<i})
+or \\
+y_i&=argmax_{y}P(y|X,y_{<i}) \\
+where~y_0=BOS.
 \end{aligned}
 $$
 
