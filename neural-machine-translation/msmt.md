@@ -8,8 +8,8 @@
 Microsoft는 전통적인\(?\) RNN방식의 seq2seq 대신, Google의 Transformer 구조를 사용하여 seq2seq를 구현하였습니다. 이 논문에서 소개한 중점 기술은 아래와 같습니다.
 
 * Back-translation과 Dual learning\(Unsupervised and Supervised, both\)을 통한 단방향(monolingual) corpora의 활용 극대화
-* Auto-regressive 속성\(이전 time-step의 prediction이 다음 time-step의 prediction에 영향을 주는 것\)의 단점을 보완하기 위한 Deliberation Networks\(\[[Xia et al.,2017](https://papers.nips.cc/paper/6775-deliberation-networks-sequence-generation-beyond-one-pass-decoding.pdf)\]\)과 Kullback-Leibler \(KL\) divergence를 이용한 regularization
-* NMT성능을 극대화 하기 위한 훈련 데이터 selection과 filtering
+* Auto-regressive 속성\(이전 time-step의 예측(prediction)이 다음 time-step의 예측에 영향을 주는 것\)의 단점을 보완하기 위한 Deliberation Networks\(\[[Xia et al.,2017](https://papers.nips.cc/paper/6775-deliberation-networks-sequence-generation-beyond-one-pass-decoding.pdf)\]\)과 Kullback-Leibler \(KL\) divergence를 이용한 regularization
+* NMT성능을 극대화 하기 위한 훈련 데이터 선택(selection)과 필터링(filtering)
 
 위의 기술들에 대해서 한 항목씩 차례로 살펴보도록 하겠습니다.
 
