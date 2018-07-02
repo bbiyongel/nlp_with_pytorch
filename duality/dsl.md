@@ -44,4 +44,4 @@ $$
 \end{aligned}
 $$
 
-여기서 $$ \lambda $$는 Lagrange multipliers로써, 고정된 값의 hyper-parameter 입니다. 
+여기서 $$ \lambda $$는 Lagrange multipliers로써, 고정된 값의 hyper-parameter 입니다. 실험 결과 $$ \lambda=0.01 $$ 일 때, 가장 좋은 성능을 나타낼 수 있었다고 합니다.
