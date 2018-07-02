@@ -2,7 +2,7 @@
 (Google’s Neural Machine Translation System: Bridging the Gap between Human and Machine Translation)
 
 Google은 2016년 논문([\[Wo at el.2016\]](https://arxiv.org/pdf/1609.08144.pdf)
-)을 발표하여 그들의 번역시스템에 대해서 상세히 소개하였습니다. 실제 시스템에 적용된 모델 architecture부터 훈련 algorithm 까지 상세히 기술하였기 때문에, 실제 번역 시스템을 구성하고자 할 때에 좋은 reference가 될 수 있습니다. 또한 다른 논문들에서 실험 결과에 대해 설명할 때, GNMT를 upper boundary baseline으로 참조하기도 합니다. 아래의 내용들은 그들의 논문에서 소개한 내용을 다루도록 하겠습니다.
+)을 발표하여 그들의 번역시스템에 대해서 상세히 소개하였습니다. 실제 시스템에 적용된 모델 구조(architecture)부터 훈련 방법까지 상세히 기술하였기 때문에, 실제 번역 시스템을 구성하고자 할 때에 좋은 참고자료(reference)가 될 수 있습니다. 또한 다른 논문들에서 실험 결과에 대해 설명할 때, GNMT를 baseline으로 참조하기도 합니다. 아래의 내용들은 그들의 논문에서 소개한 내용을 다루도록 하겠습니다.
 
 ## Model Architecture
 
@@ -12,13 +12,13 @@ Google도 seq2seq 기반의 모델을 구성하였습니다. 다만, 구글은 �
 
 ![](/assets/nmt-gnmt-1.png)
 
-보통 LSTM layer를 4개 이상 쌓기 시작하면 모델이 deeper해 짐에 따라서 성능 효율이 저하되기 시작합니다. 따라서 Google은 깊은 모델은 효율적으로 훈련시키기 위하여 residual connection을 적용하였습니다.
+보통 LSTM layer를 4개 이상 쌓기 시작하면 모델이 더욱 깊어(deeper)짐에 따라서 성능 효율이 저하되기 시작합니다. 따라서 Google은 깊은 모델은 효율적으로 훈련시키기 위하여 residual connection을 적용하였습니다.
 
 ### Bi-directional Encoder for First Layer
 
 ![](/assets/nmt-gnmt-2.png)
 
-또한, 모든 LSTM stack에 대해서 bi-directional LSTM을 적용하는 대신에, 첫번째 층에 대해서만 bi-directional LSTM을 적용하였습니다. 따라서 training 및 inference 속도에 개선이 있었습니다.
+또한, 모든 LSTM stack에 대해서 bi-directional LSTM을 적용하는 대신에, 첫번째 층에 대해서만 bi-directional LSTM을 적용하였습니다. 따라서 훈련(training) 및 추론(inference) 속도에 개선이 있었습니다.
 
 ## Segmentation Approachs
 
@@ -33,15 +33,15 @@ Google도 seq2seq 기반의 모델을 구성하였습니다. 다만, 구글은 �
 
 ![](/assets/nmt-gnmt-5.png)
 
-Google은 강화학습을 다룬 [챕터](reinforcement-learning/cover.md)에서 설명한 Reinforcement Learning 기법을 사용하여 Maximum Likelihood Estimation (MLE)방식의 훈련된 모델에 fine-tuning을 수행하였습니다. 따라서 위의 테이블과 같은 추가적이 성능 개선을 얻어낼 수 있었습니다.
+Google은 강화학습을 다룬 [챕터](reinforcement-learning/cover.md)에서 설명한 강화학습 기법을 사용하여 Maximum Likelihood Estimation (MLE)방식의 훈련된 모델에 fine-tuning을 수행하였습니다. 따라서 위의 테이블과 같은 추가적이 성능 개선을 얻어낼 수 있었습니다.
 
-기존 MLE 방식의 Objective를 아래와 같이 구성합니다. $$ Y^{*(i)} $$은 optimal 정답 데이터를 의미합니다.
+기존 MLE 방식의 목적함수(objective)를 아래와 같이 구성합니다. $$ Y^{*(i)} $$은 최적(optimal)의 정답 데이터를 의미합니다.
 
 $$
 \mathcal{O}_{ML}(\theta)=\sum_{i=1}^N\log P_\theta(Y^{*(i)}|X^{(i)})
 $$
 
-여기에 추가로 RL방식의 Objective를 추가하였는데 이 방식이 policy gradient 방식과 같습니다.
+여기에 추가로 RL방식의 목적함수(objective)를 추가하였는데 이 방식이 policy gradient 방식과 같습니다.
 
 $$
 \mathcal{O}_{RL}(\theta)=\sum_{i=1}^N \sum_{Y \in \mathcal{Y}} P_\theta(Y|X^{(i)})r(Y, Y^{*(i)})
