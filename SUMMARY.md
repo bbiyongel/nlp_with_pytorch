@@ -61,6 +61,7 @@
 * [Neural Machine Translation](neural-machine-translation/cover.md)
   * [Intro](neural-machine-translation/intro.md)
   * [Sequence-to-Sequence](neural-machine-translation/seq2seq.md)
+  * [Auto-regressive and Teacher Forcing](neural-machine-translation/teacher-forcing.md)
   * [Attention](neural-machine-translation/attention.md)
   * [Input Feeding](neural-machine-translation/input-feeding.md)
   * [Search](neural-machine-translation/beam-search.md)
