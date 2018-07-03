@@ -27,12 +27,12 @@ $$
 
 $$
 \begin{aligned}
-\mathcal{L}(Y)&=-\sum_{i=1}^{m+1}{\log{P(y_i)}} \\
+\mathcal{L}(Y)&=-\sum_{i=1}^{m+1}{\log{P(y_i|X,y_{<i};\theta)}} \\
 \theta &\leftarrow \theta - \lambda\frac{1}{N}\sum_{i=1}^{N}{\mathcal{L}(Y_i)}
 \end{aligned}
 $$
 
-
+또한, 실제 손실함수(loss function)을 계산하여 gradient descent를 수행할 때도, $$ \hat{y_i} $$의 확률을 사용하지 않고, 정답에 해당하는 $$ y_i $$의 index에 있는 log확률값을 사용 합니다.
 
 ## Teacher Forcing
 
