@@ -294,3 +294,16 @@ class Seq2Seq(nn.Module):
 ### Loss function
 
 seq2seq는 기본적으로 각 time-step 별로 가장 확률이 높은 단어를 선택하는 분류 작업(classification task)이므로, cross entropy를 손실함수(loss function)으로 사용합니다. 또한 기본적으로 조건부 언어모델(conditional language model)이라고 볼 수 있기 때문에, 이전 언어모델 챕터에서 다루었듯이 perplexity를 통해 번역 모델의 성능을 나타낼 수 있고, 이 또한 (cross) entropy와 매우 깊은 연관을 가집니다.
+
+```python
+def get_loss(y, y_hat, criterion, do_backward = True):
+    # |y| = (batch_size, length)
+    # |y_hat| = (batch_size, length, output_size)
+    batch_size = y.size(0)
+
+    loss = criterion(y_hat.contiguous().view(-1, y_hat.size(-1)), y.contiguous().view(-1))
+    if do_backward:
+        loss.div(batch_size).backward()
+
+    return loss
+```
