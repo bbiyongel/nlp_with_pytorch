@@ -26,11 +26,10 @@ $$
 훈련 할 때에 각 time-step 별 수식은 다음과 같습니다. 위와 같이 조건부에 $$ \hat{y}_{<t} $$가 들어가는 것이 아닌, $$ y_{<t} $$가 들어가는 것이기 때문에, 훈련시에는 이전 time-step의 출력 $$ \hat{y}_{<t} $$을 현재 time-step의 입력으로 넣어줄 수 없습니다. 만약 넣어주게 된다면 현재 time-step의 decoder에겐 잘못된 것을 가르쳐 주는 꼴이 될 것입니다.
 
 $$
-\mathcal{L}(Y)=-\sum_{i=1}^{m+1}{\log{P(y_i)}}
-$$
-$$
-\theta \leftarrow \theta - \lambda\frac{1}{N}\sum_{i=1}^{N}{\mathcal{L}(Y_i)}
-
+\begin{aligned}
+\mathcal{L}(Y)&=-\sum_{i=1}^{m+1}{\log{P(y_i)}} \\
+\theta &\leftarrow \theta - \lambda\frac{1}{N}\sum_{i=1}^{N}{\mathcal{L}(Y_i)}
+\end{aligned}
 $$
 
 
