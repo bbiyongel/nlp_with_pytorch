@@ -54,7 +54,7 @@ $$
 
 ![](/assets/nmt-productization-msnmt-deliberation-implementation.png)
 
-이 방법을 거치면 기존 번역기의 auto-regressive 속성을 최소화 할 수 있습니다.
+이 방법을 거치면 기존 번역기의 auto-regressive 속성에서 오는 훈련방법과 추론방법 간의 차이로 생기는 손실을 줄일 수 있습니다. 
 
 ### Agreement Regularization of Left-to-Right and Right-to-Left Models
 
