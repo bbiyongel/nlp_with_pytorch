@@ -50,6 +50,8 @@ $$
 
 ## Dual Transfer Learning for NMT with Marginal Distribution Regularization
 
+Dual Supervised Learning (DSL)은 베이즈 정리에 따른 수식을 제약조건으로 사용하였다면, 이 방법은 Marginal 분포(distribution)의 성질을 이용하여 제약조건을 만듭니다.
+
 $$
 P(y)=\sum_{x \in \mathcal{X}}{P(y|x;\theta)P(x)}
 $$
