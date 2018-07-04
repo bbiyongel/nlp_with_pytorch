@@ -1,4 +1,4 @@
-# Characteristic of NLP's RL
+# Reinforcement Learning on Natural Language Generation
 
 ## How to Apply
 
