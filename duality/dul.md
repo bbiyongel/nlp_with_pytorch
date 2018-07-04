@@ -55,7 +55,10 @@ Dual Supervised Learning (DSL)은 베이즈 정리에 따른 수식을 제약조
 $$
 P(y)=\sum_{x \in \mathcal{X}}{P(y|x;\theta)P(x)}
 $$
-<br>
+
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/MultivariateNormal.png/300px-MultivariateNormal.png)<br>
+Marginal Distribution from Wikipedia
+
 $$
 \begin{aligned}
 \sum_{x \in \mathcal{X}}{P(y|x;\theta)P(x)}=E_{x \sim P(x)}P(y|x;\theta) \\
