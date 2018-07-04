@@ -67,7 +67,9 @@ $$
 \approx\frac{1}{K}\sum^K_{i=1}{P(y|x^i;\theta)},~x^i\sim P(x)
 \end{aligned}
 $$
-<br>
+
+이제 위의 수식을 기계번역에 적용해 보도록 하겠습니다. 우리에게 아래와 같이 $$N$$개의 source 문장 $$x$$, target 문장 $$y$$으로 이루어진 양방향, $$S$$개의 target 문장 $$y$$로만 이루어진 단방향 corpus가 있다고 가정 해 보겠습니다. 
+
 $$
 \begin{aligned}
 \mathcal{B}&=\{(x^n, y^n)\}^N_{n=1} \\
