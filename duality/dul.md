@@ -77,11 +77,11 @@ $$
 \end{aligned}
 $$
 
-
+그럼 우리는 아래의 목적함수(objective function)을 최대화(maximize)하는 동시에 marginal 분포에 따른 제약조건 또한 만족시켜야 합니다.
 
 $$
 \begin{aligned}
-\theta=&argmax_{\theta}\sum^N_{n=1}{\log{P(y^n|x^n;\theta)}}, \\
+&Objective: \sum^N_{n=1}{\log{P(y^n|x^n;\theta)}}, \\
 &s.t.~P(y)=E_{x\sim P(x)}P(y|x;\theta), \forall{y}\in\mathcal{M}.
 \end{aligned}
 $$
