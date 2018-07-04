@@ -79,7 +79,7 @@ $$
 \end{aligned}
 $$
 
-MRT는 risk에 대해 minimize 해야 하기 때문에 gradient descent를 해 주는 것을 제외하면 똑같은 수식이 나오는 것을 알 수 있습니다.
+MRT는 risk에 대해 minimize 해야 하기 때문에 gradient descent를 해 주는 것을 제외하면 똑같은 수식이 나오는 것을 알 수 있습니다. 오히려 MRT는 강화학습으로써의 접근을 전혀 하지 않고도, 수식적으로 REINFORCE with baseline 수식을 이끌어내는 것이 주목할만한 점 입니다.
 
 ![](/assets/rl-minimum-risk-training.png)
 
