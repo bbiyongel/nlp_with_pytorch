@@ -72,7 +72,7 @@
   * [Transformer](neural-machine-translation/transformer.md)
 * [Reinforcement Learning for NLP](reinforcement-learning/cover.md)
   * [Intro](reinforcement-learning/intro.md)
-  * [Policy Gradient](reinforcement-learning/policy-gradient.md)
+  * [Policy Gradients](reinforcement-learning/policy-gradient.md)
   * [Characteristic of NLP's RL](reinforcement-learning/characteristic.md)
   * [Supervised NMT](reinforcement-learning/supervised-nmt.md)
   * [Unsupervised NMT](reinforcement-learning/unsupervised-nmt.md)
