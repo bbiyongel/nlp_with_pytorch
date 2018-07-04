@@ -54,6 +54,8 @@ $$
 
 ![](/assets/nmt-productization-msnmt-deliberation-implementation.png)
 
+이 방법을 거치면 기존 번역기의 auto-regressive 속성을 최소화 할 수 있습니다.
+
 ### Agreement Regularization of Left-to-Right and Right-to-Left Models
 
 ![](/assets/nmt-productization-msnmt-kld.png)
