@@ -78,7 +78,7 @@ $$
 \end{aligned}
 $$
 
-$$ \lambda $$를 통해서 linear combination을 취하여 loss를 결합 합니다.
+$$ \lambda $$를 통해서 선형결합(linear combination)을 취하여 기존의 손실함수에 추가 합니다. 이 과정을 pseudo code로 나타내면 아래와 같습니다.
 
 ![](/assets/rl-unsupervised-nmt-5.png)
 
