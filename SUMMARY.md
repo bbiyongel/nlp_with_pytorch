@@ -89,13 +89,5 @@
   * [Google's NMT](neural-machine-translation/gnmt.md)
   * [Edinburgh's NMT](neural-machine-translation/enmt.md)
   * [Microsoft's NMT](neural-machine-translation/msmt.md)
-* [Speech Recognition](speech-recognition/cover.md)
-  * [Intro](speech-recognition/intro.md)
-  * [Traditional methodology](speech-recognition/wfst.md)
-  * [Seq2seq](speech-recognition/seq2seq.md)
 * [Advanced Topic](advanced-topic/cover.md)
   * [Memory Augmented Neural Network](advanced-topic/memory-augmented-neural-network.md)
-    * [Text Summarization](advanced-topic/text-summarization.md)
-    * [Quetional Answering](advanced-topic/question-answering.md)
-  * [Dynamic Memory Network](advanced-topic/dmn.md)
-
