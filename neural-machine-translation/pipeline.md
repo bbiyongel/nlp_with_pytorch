@@ -49,4 +49,4 @@
 1. Tokenization
 1. Inference
 1. De-tokenization
-
+1. 사용자 출력
