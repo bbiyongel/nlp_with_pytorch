@@ -17,7 +17,7 @@ Microsoft는 전통적인\(?\) RNN방식의 seq2seq 대신, Google의 Transforme
 
 ### Dual Learning for NMT
 
-이 논문에서는, 앞 챕터에서 설명한, duality를 활용하여 양방향(bilingual) corpus를 활용한 Dual Supervised Learning (DSL) 방식과, 단방향(monolingual) corpus를 활용한 Dual Unsupervised Learning (DUL) 방식을 모두 사용하였습니다.
+이 논문에서는, 앞 챕터에서 설명한, duality를 활용하여 양방향(bilingual) corpus를 활용한 Dual Supervised Learning (DSL) 방식과, 단방향(monolingual) corpus를 marginal 분포(distribution)에 적용하여 활용한 Dual Unsupervised Learning (DUL) 방식을 모두 사용하였습니다.
 
 #### Dual Unsupervised Learning \(DUL\)
 
