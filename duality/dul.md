@@ -59,7 +59,7 @@ $$
 P(y)=\sum_{x \in \mathcal{X}}{P(x,y)}=\sum_{x \in \mathcal{X}}{P(y|x)P(x)}
 $$
 
-Marginal 분포는 joint 분포를 어떤 한 variable에 대해서 합 또는 적분 한 것을 이릅니다.
+Marginal 분포는 결합확률분포(joint distribution)를 어떤 한 variable에 대해서 합 또는 적분 한 것을 이릅니다.
 
 $$
 \begin{aligned}
