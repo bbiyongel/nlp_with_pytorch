@@ -68,7 +68,9 @@ $$
 - 그리고 $$\theta$$로부터 샘플링(samping) 한 $$y$$와 실제 정답 $$y^{(s)}$$와의 차이(여기서는 주로 BLEU에 $$-1$$을 곱하여 사용)값에서 
 - 또 다시 $$\theta$$로부터 샘플링하여 얻은 $$y'$$와 실제 정답 $$y^{(s)}$$와의 차이(마찬가지로 -BLEU)의 기대값을
 - 빼 준 값을 risk로써 로그확률의 gradient에 곱해 줍니다.
-- 이 과정을 전체 데이터셋(실제로는 mini-batch) $$S$$에 대해서 수행한 후 합(summation)을 구하고 learning rate $$\alpha$$를 구합니다.
+- 이 과정을 전체 데이터셋(실제로는 mini-batch) $$S$$에 대해서 수행한 후 합(summation)을 구하고 learning rate $$\alpha$$를 곱 합니다.
+
+아래는 policy gradients 수식 입니다.
 
 $$
 \begin{aligned}
