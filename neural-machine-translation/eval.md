@@ -70,3 +70,4 @@ BLEU는 정답 문장과 예측 문장 사이에 일치하는 ***n-gram***의 �
 # Future Work
 
 [[Koehn at el.2017]](https://arxiv.org/pdf/1706.03872v1.pdf)에 따르면 신경망기계번역(NMT)에는 아직 다음과 같은 도전 과제들이 남아있습니다.
+
