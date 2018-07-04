@@ -39,9 +39,14 @@
     - 준비된 데이터셋을 사용하여 seq2seq 모델을 훈련 합니다.
 1. Inference
     - 성능 평가(evaluation) 과정도 추론(inference)과정에 속합니다. 이때에는 준비된 테스트셋(훈련 데이터셋에 포함되어 있지 않은)을 사용하여 beam-search를 사용하여 추론을 수행합니다.
-1. Tokenization 복원
-    - 추론 과정이 끝나더라도 BPE를 통한 tokenization이 더해져 있기 때문에 아직 사람이 실제 사용하는 문장 구성과 형태가 다릅니다. 따라서 BPE에 의한 tokenization을 복원 하면 프로세스가 종료됩니다.
+1. De-tokenization
+    - 추론 과정이 끝나더라도 BPE를 통한 tokenization이 더해져 있기 때문에 아직 사람이 실제 사용하는 문장 구성과 형태가 다릅니다. 따라서 BPE에 의한 detokenization을 수행하면 프로세스가 종료됩니다.
 1. Evaluation
 
-## 서비스 적용
+## 서비스
+
+1. 사용자 입력
+1. Tokenization
+1. Inference
+1. De-tokenization
 
