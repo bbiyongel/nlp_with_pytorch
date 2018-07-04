@@ -85,15 +85,19 @@ $$
 &s.t.~P(y)=E_{x\sim P(x)}P(y|x;\theta), \forall{y}\in\mathcal{M}.
 \end{aligned}
 $$
-<br>
+
+위의 수식을 DSL과 마찬가지로 Lagrange multipliers와 함께 기존의 손실함수(loss function)에 추가하여 주기 위하여  $$S(\theta)$$와 같이 표현합니다.
+
 $$
 \mathcal{S}(\theta)=[\log\hat{P}(y)-\log{E_{x\sim\hat{P}(x)}P(y|x;\theta)}]^2
 $$
-<br>
+
 $$
 \mathcal{L}(\theta)=-\sum^N_{n=1}{\log{P(y^n|x^n;\theta)}}+\lambda\sum^S_{s=1}{[\log\hat{P}(y)-\log{E_{x\sim\hat{P}(x)}P(y|x;\theta)}]^2}
 $$
-<br>
+
+이때, DSL과 유사하게 $$\hat{P}(x)$$와 $$\hat{P}(y)$$가 등장합니다. $$\hat{P}(y)$$는 단방향(monolingual) corpus로 만든 언어모델(language model)을 통해 확률값을 구합니다. 위의 수식에 따르면 $$\hat{P}(x)$$를 통해 source 문장 $$x$$를 샘플링(sampling)하여 네트워크 $$\theta$$를 통과시켜 $$P(y|x;\theta)$$를 구해야겠지만, 아래와 같이 좀 더 다른 방법으로 접근합니다.
+
 $$
 \begin{aligned}
 P(y)=E_{x\sim\hat{P}(x)}P(y|x;\theta)&=\sum_{x\in\mathcal{X}}{P(y|x;\theta)\hat{P}(x)} \\
