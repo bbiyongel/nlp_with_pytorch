@@ -56,10 +56,10 @@ Dual Supervised Learning (DSL)은 베이즈 정리에 따른 수식을 제약조
 Marginal Distribution from Wikipedia
 
 $$
-P(y)=\sum_{x \in \mathcal{X}}{P(y|x;\theta)P(x)}
+P(y)=\sum_{x \in \mathcal{X}}{P(x,y)}=\sum_{x \in \mathcal{X}}{P(y|x)P(x)}
 $$
 
-
+Marginal 분포는 joint 분포를 어떤 한 variable에 대해서 합 또는 적분 한 것을 이릅니다.
 
 $$
 \begin{aligned}
