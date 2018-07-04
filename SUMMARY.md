@@ -81,10 +81,11 @@
   * [Duality](duality/intro.md)
   * [Dual Supervised Learning](duality/dsl.md)
   * [Dual Unsupervised Learning](duality/dul.md)
-* [Productization of NMT](neural-machine-translation/productize.md)
-  * [NMT pipeline](neural-machine-translation/pipeline.md)
+* [Productization](neural-machine-translation/productize.md)
+  * [Pipeline](neural-machine-translation/pipeline.md)
   * [Google's NMT](neural-machine-translation/gnmt.md)
   * [Edinburgh's NMT](neural-machine-translation/enmt.md)
   * [Microsoft's NMT](neural-machine-translation/msmt.md)
 * [Advanced Topic](advanced-topic/cover.md)
   * [Memory Augmented Neural Network](advanced-topic/memory-augmented-neural-network.md)
+
