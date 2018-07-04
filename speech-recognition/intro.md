@@ -1,5 +1,0 @@
-# Speech Recognition
-
-## Introduction
-
-## History
