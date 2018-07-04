@@ -29,7 +29,7 @@
 1. Tokenization
     - 각 언어 별 POS tagger 또는 segmenter를 사용하여 띄어쓰기를 정제(normalization) 합니다. 영어의 경우에는 대소문자에 대한 정제 이슈가 있을 수도 있습니다. 한국어의 경우에는 한국어의 특성 상, 인터넷에 공개 되어 있는 corpus 들은 띄어쓰기가 제멋대로일 수 있습니다.
     - 한국어의 경우에는 Mecab과 같은 공개 되어 있는 파서(parser)들이 있습니다.
-    - 띄어쓰기가 정제 된 이후에는 Byte Pair Encoding(BPE by Subword or Wordpiece)를 통해 어휘 목록을 구성합니다.
+    - 띄어쓰기가 정제 된 이후에는 Byte Pair Encoding(BPE by Subword or Wordpiece)를 통해 추가적인 tokenization을 수행하고 어휘 목록을 구성합니다.
 1. Batchfy
     - 전처리 작업이 끝난 corpus에 대해서 훈련을 시작하기 위해서 mini-batch로 만드는 작업이 필요합니다.
     - 여기서 중요한 점은 mini-batch 내의 문장들의 길이를 최대한 통일시켜 주는 것 입니다. 이렇게 하면 문장 길이가 다름으로 인해서 발생하는 훈련 시간 낭비를 최소화 할 수 있습니다. 
@@ -49,8 +49,13 @@
 ## 서비스
 
 1. API 호출 or 사용자로부터의 입력
-    - 대부분 서비스 별 API 서버를 만들어 실제 프론트앤드(front-end)로부터 API 호출을 받아옵니다.
+    - 대부분 서비스 별 API 서버를 만들어 실제 프론트앤드(front-end)로부터 API 호출을 받아 프로세스를 시작 합니다.
+    - 서비스의 스케일(scale)에 따라 load-balancer등을 두어 부하를 적절히 분배하기도 합니다.
+    - 서비스의 형태나 성격에 따라서 실제 모델 추론(inference)을 수행하지 않고, 정해진 응답을 반환하기도 합니다.
 1. Tokenization
+    - 추론을 위해서 실제 모델에 훈련된 데이터셋과 동일한 형태로 tokenization을 수행 합니다.
+    - 언어에 따라서 띄어쓰기 정제를 위한 tokenizer를 사용합니다. (예: 한국어의 경우에는 Mecab)
+    - 띄어쓰기가 정제 된 이후에는 Byte Pair Encoding(BPE by Subword or Wordpiece)를 통해 subword 형태로 추가적인 tokenization을 해 줄 수 있습니다.
 1. Inference
 1. De-tokenization
 1. API 결과 반환 or 사용자에게 결과 반환
