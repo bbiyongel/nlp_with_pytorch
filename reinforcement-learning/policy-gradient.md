@@ -68,7 +68,7 @@ J(\theta) &= \mathbb{E}_{\pi_\theta}[r] = v_\theta(s_0) \\
 $$
 
 
-즉 우리의 목표(objective)는 initial state에서의 expected cumulative reward를 최대\(maximize\)로 하도록 하는 policy\($$\theta$$\)를 찾는 것 입니다. 최소화 하여야 하는 손실(loss)와 달리 보상(reward)는 최대화 하여야 하므로 기존의 gradient descent 대신에 gradient ascent를 사용하여 최적화(optimization)을 수행 합니다.
+우리의 목표(objective)는 최초 상황(initial state)에서의 기대누적보상(expected cumulative reward)을 최대\(maximize\)로 하도록 하는 policy\($$\theta$$\)를 찾는 것 입니다. 최소화 하여야 하는 손실(loss)와 달리 보상(reward)는 최대화 하여야 하므로 기존의 gradient descent 대신에 gradient ascent를 사용하여 최적화(optimization)을 수행 합니다.
 
 $$
 \theta_{t+1}=\theta_t+\alpha\triangledown_\theta J(\theta)
