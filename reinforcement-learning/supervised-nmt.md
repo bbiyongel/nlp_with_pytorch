@@ -53,15 +53,17 @@ $$
 Q(y|x^{(s)};\theta,\alpha)=\frac{P(y|x^{(s)};\theta)^\alpha}{\sum_{y' \in S(x^{(s)})}P(y'|x^{(s)};\theta)^\alpha}
 $$
 
-하지만 주어진 입력에 대한 가능한 정답에 대한 전체 space를 탐색(search)할 수는 없기 때문에, Monte Carlo를 사용하여 sampling하는 것을 택합니다. 그리고 위의 수식에서 $$ \theta $$에 대해서 미분을 수행합니다.
+하지만 주어진 입력에 대한 가능한 정답에 대한 전체 space를 탐색(search)할 수는 없기 때문에, Monte Carlo를 사용하여 서브스페이스(sub-space)를 샘플링(sampling) 하는 것을 택합니다. 그리고 위의 수식에서 $$ \theta $$에 대해서 미분을 수행합니다. 미분을 하여 얻은 수식은 아래와 같습니다.
 
 $$
 \frac{\partial\tilde{R}(\theta)}{\partial\theta_i}=\alpha\sum_{s=1}^{S}{\mathbb{E}_{y|x^{(s)};\theta,\alpha}[\frac{\partial P(y|x^{(s)};\theta)}{\partial\theta_i P(y|x^{(s)};\theta)}\times(\triangle(y,y^{(s)})-\mathbb{E}_{y'|x^{(s)};\theta,\alpha}[\triangle(y',y^{(s)})])]}
 $$
 
-아래는 위와 같이 훈련한 MRT에 대한 성능을 실험한 결과 입니다. 기존의 MLE 방식에 비해서 BLEU가 상승한 것을 확인할 수 있습니다.
+위 수식을 해석하면 
 
 ![](/assets/rl-minimum-risk-training.png)
+
+위와 같이 훈련한 MRT에 대한 성능을 실험한 결과 입니다. 기존의 MLE 방식에 비해서 BLEU가 1.5가량 상승한 것을 확인할 수 있습니다.
 
 ### Implementation
 
