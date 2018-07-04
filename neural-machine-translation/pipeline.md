@@ -48,8 +48,9 @@
 
 ## 서비스
 
-1. 사용자 입력
+1. API 호출 or 사용자로부터의 입력
+    - 대부분 서비스 별 API 서버를 만들어 실제 프론트앤드(front-end)로부터 API 호출을 받아옵니다.
 1. Tokenization
 1. Inference
 1. De-tokenization
-1. 사용자 출력
+1. API 결과 반환 or 사용자에게 결과 반환
