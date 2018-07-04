@@ -1,1 +1,0 @@
-# Sequence Generative Adversarial Networks (SeqGAN)

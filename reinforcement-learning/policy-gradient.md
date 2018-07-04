@@ -20,7 +20,7 @@ $$
 또한, 위의 수식은 아래와 같이 표현 할 수 있습니다.
 
 $$
-E_{X \sim P}[reward(x)]=\sum^6_{x=1}{P(X=x)\times reward(x)}=3.5
+\mathbb{E}_{X \sim P}[reward(x)]=\sum^6_{x=1}{P(X=x)\times reward(x)}=3.5
 $$
 
 주사위의 경우에는 discrete variable을 다루는 확률 분포이고, continuous variable의 경우에는 적분을 통해 우리는 기대값을 구할 수 있습니다.
@@ -34,13 +34,13 @@ Monte Carlo Sampling은 난수를 이용하여 임의의 함수를 근사하는 
 따라서 Monte Carlo sampling을 사용하면 기대값(expectation) 내의 표현을 밖으로 꺼낼 수 있습니다. 즉, 주사위의 reward에 대한 기대값을 아래와 같이 간단히(simplify) 표현할 수 있습니다.
 
 $$
-E_{X \sim P}[reward(x)] \approx \frac{1}{N}\sum^N_{i=1}{reward(x_i)}
+\mathbb{E}_{X \sim P}[reward(x)] \approx \frac{1}{N}\sum^N_{i=1}{reward(x_i)}
 $$
 
 주사위 reward의 기대값은 $$ N $$번 sampling한 주사위 값의 평균이라고 할 수 있습니다. 실제로 $$N$$이 무한대에 가까워질 수록 (커질 수록) 해당 값은 실제 기대값 $$3.5$$에 가까워질 것 입니다. 따라서 우리는 경우에 따라서 $$N=1$$인 경우도 가정 해 볼 수 있습니다. 즉, 아래와 같은 수식이 될 수도 있습니다.
 
 $$
-E_{X \sim P}[reward(x)] \approx reward(x)=x
+\mathbb{E}_{X \sim P}[reward(x)] \approx reward(x)=x
 $$
 
 위와 같은 가정을 가지고 수식을 간단히 표현할 수 있게 되면, 이후 gradient를 구한다거나 할 때에 수식이 간단해져 매우 편리합니다.
@@ -62,7 +62,7 @@ $$
 
 $$
 \begin{aligned}
-J(\theta) &= E_{\pi_\theta}[r] = v_\theta(s_0) \\
+J(\theta) &= \mathbb{E}_{\pi_\theta}[r] = v_\theta(s_0) \\
 &=\sum_{s \in \mathcal{S}}{d(s)}\sum_{a \in \mathcal{A}}{\pi_\theta(s, a)\mathcal{R}_{s, a}}
 \end{aligned}
 $$
@@ -85,13 +85,13 @@ $$
 $$
 
 
-이때, 위와 같이 로그의 미분의 성질을 이용하여 $$ \triangledown_\theta J(\theta) $$를 구할 수 있습니다.
+이때, 위와 같이 로그 미분의 성질을 이용하여 $$ \triangledown_\theta J(\theta) $$를 구할 수 있습니다.
 
 
 $$
 \begin{aligned}
 \triangledown_\theta J(\theta)&=\sum_{s \in \mathcal{S}}{d(s)}\sum_{a \in \mathcal{A}}{\pi_\theta(s,a)}\triangledown_\theta\log{\pi_\theta(s, a)\mathcal{R}_{s,a}} \\
-&= E_{\pi_\theta}[\triangledown_\theta \log{\pi_\theta (a|s)}r]
+&= \mathbb{E}_{\pi_\theta}[\triangledown_\theta \log{\pi_\theta (a|s)}r]
 \end{aligned}
 $$
 
@@ -100,7 +100,7 @@ _**Policy Gradient Theorem**_에 따르면, 여기서 해당 time-step에 대한
 
 
 $$
-\triangledown_\theta J(\theta) = E_{\pi_\theta}[\triangledown_\theta \log{\pi_\theta (a|s)}Q^{\pi_\theta}(s,a)]
+\triangledown_\theta J(\theta) = \mathbb{E}_{\pi_\theta}[\triangledown_\theta \log{\pi_\theta (a|s)}Q^{\pi_\theta}(s,a)]
 $$
 
 

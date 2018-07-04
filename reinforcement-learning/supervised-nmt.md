@@ -56,10 +56,28 @@ $$
 하지만 주어진 입력에 대한 가능한 정답에 대한 전체 space를 탐색(search)할 수는 없기 때문에, Monte Carlo를 사용하여 서브스페이스(sub-space)를 샘플링(sampling) 하는 것을 택합니다. 그리고 위의 수식에서 $$ \theta $$에 대해서 미분을 수행합니다. 미분을 하여 얻은 수식은 아래와 같습니다.
 
 $$
-\frac{\partial\tilde{R}(\theta)}{\partial\theta_i}=\alpha\sum_{s=1}^{S}{\mathbb{E}_{y|x^{(s)};\theta,\alpha}[\frac{\partial P(y|x^{(s)};\theta)}{\partial\theta_i P(y|x^{(s)};\theta)}\times(\triangle(y,y^{(s)})-\mathbb{E}_{y'|x^{(s)};\theta,\alpha}[\triangle(y',y^{(s)})])]}
+\begin{aligned}
+\frac{\partial\tilde{R}(\theta)}{\partial\theta_i}&=\alpha\sum_{s=1}^{S}{\mathbb{E}_{y|x^{(s)};\theta,\alpha}[\frac{\partial P(y|x^{(s)};\theta)}{\partial\theta_i P(y|x^{(s)};\theta)}\times(\triangle(y,y^{(s)})-\mathbb{E}_{y'|x^{(s)};\theta,\alpha}[\triangle(y',y^{(s)})])]} \\
+&=\alpha\sum_{s=1}^{S}{\mathbb{E}_{y|x^{(s)};\theta,\alpha}[\frac{\partial \log{P(y|x^{(s)};\theta)}}{\partial\theta_i}\times(\triangle(y,y^{(s)})-\mathbb{E}_{y'|x^{(s)};\theta,\alpha}[\triangle(y',y^{(s)})])]}
+\end{aligned}
 $$
 
-위 수식을 해석하면 
+이제 미분을 통해 얻은 MRT의 최종 수식을 해석 해 보겠습니다. 이해가 어렵다면 아래의 policy gradients 수식과 비교하며 따라가면 좀 더 이해가 수월할 수 있습니다.
+
+- $$s$$번째 입력 $$x^{(s)}$$를 신경망 $$\theta$$에 넣어 얻은 로그확률 $$\log{P(y|x^{(s)};\theta)}$$을 미분하여 gradient를 얻습니다.
+- 그리고 $$\theta$$로부터 샘플링(samping) 한 $$y$$와 실제 정답 $$y^{(s)}$$와의 차이(여기서는 주로 BLEU에 $$-1$$을 곱하여 사용)값에서 
+- 또 다시 $$\theta$$로부터 샘플링하여 얻은 $$y'$$와 실제 정답 $$y^{(s)}$$와의 차이(마찬가지로 -BLEU)의 기대값을
+- 빼 준 값을 risk로써 로그확률의 gradient에 곱해 줍니다.
+- 이 과정을 전체 데이터셋(실제로는 mini-batch) $$S$$에 대해서 수행한 후 합(summation)을 구하고 learning rate $$\alpha$$를 구합니다.
+
+$$
+\begin{aligned}
+\triangledown_\theta J(\theta)&=\mathbb{E}_{\pi_\theta}[\triangledown_\theta \log{\pi_\theta (a|s)} \times Q^{\pi_\theta}(s,a)] \\
+\theta &\leftarrow \theta + \alpha \triangledown_\theta J(\theta)
+\end{aligned}
+$$
+
+MRT는 risk에 대해 minimize 해야 하기 때문에 gradient descent를 해 주는 것을 제외하면 똑같은 수식이 나오는 것을 알 수 있습니다.
 
 ![](/assets/rl-minimum-risk-training.png)
 

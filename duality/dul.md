@@ -14,12 +14,12 @@
 
 $$
 \begin{aligned}
-\theta_{AB} \leftarrow \theta_{AB} + \gamma \triangledown_{\theta_{AB}}\hat{E}[r] \\
-\theta_{BA} \leftarrow \theta_{BA} + \gamma \triangledown_{\theta_{BA}}\hat{E}[r]
+\theta_{AB} \leftarrow \theta_{AB} + \gamma \triangledown_{\theta_{AB}}\hat{\mathbb{E}}[r] \\
+\theta_{BA} \leftarrow \theta_{BA} + \gamma \triangledown_{\theta_{BA}}\hat{\mathbb{E}}[r]
 \end{aligned}
 $$
 
-$$ \hat{E}[r] $$을 각각의 파라미터에 대해서 미분 해 준 값을 더해주는 것을 볼 수 있습니다. 이 reward의 기대값은 아래와 같이 구할 수 있습니다.
+$$ \hat{\mathbb{E}}[r] $$을 각각의 파라미터에 대해서 미분 해 준 값을 더해주는 것을 볼 수 있습니다. 이 reward의 기대값은 아래와 같이 구할 수 있습니다.
 
 $$
 \begin{aligned}
@@ -33,12 +33,12 @@ $$
 
 $$
 \begin{aligned}
-\triangledown_{\theta_{AB}}\hat{E}[r]&=\frac{1}{K}\sum_{k=1}^K{[r_k\triangledown_{\theta_{AB}}\log{P(s_{mid,k}|s;\theta_{AB})}]} \\
-\triangledown_{\theta_{BA}}\hat{E}[r]&=\frac{1}{K}\sum_{k=1}^K[(1-\alpha)\triangledown_{\theta_{BA}}\log{P(s|s_{mid,k};\theta_{BA})}]
+\triangledown_{\theta_{AB}}\hat{\mathbb{E}}[r]&=\frac{1}{K}\sum_{k=1}^K{[r_k\triangledown_{\theta_{AB}}\log{P(s_{mid,k}|s;\theta_{AB})}]} \\
+\triangledown_{\theta_{BA}}\hat{\mathbb{E}}[r]&=\frac{1}{K}\sum_{k=1}^K[(1-\alpha)\triangledown_{\theta_{BA}}\log{P(s|s_{mid,k};\theta_{BA})}]
 \end{aligned}
 $$
 
-이렇게 얻어진 $$ E[r] $$를 각 파라미터에 대해서 미분하게 되면 위와 같은 수식을 얻을 수 있고, 상기 서술한 파라미터 업데이트 수식에 대입하면 됩니다. 비슷한 방식으로 $$ B \rightarrow A $$를 구할 수 있습니다.
+이렇게 얻어진 $$ \mathbb{E}[r] $$를 각 파라미터에 대해서 미분하게 되면 위와 같은 수식을 얻을 수 있고, 상기 서술한 파라미터 업데이트 수식에 대입하면 됩니다. 비슷한 방식으로 $$ B \rightarrow A $$를 구할 수 있습니다.
 
 ![](/assets/rl-dual-learning-2.png)
 
