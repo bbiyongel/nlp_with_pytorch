@@ -11,7 +11,7 @@ $$
 Y&=argmax_{Y}P(Y|X)=argmax_{Y}\prod_{i=1}^{n}{P(y_i|X,y_{<i})} \\
 or \\
 y_i&=argmax_{y}P(y|X,y_{<i}) \\
-where~y_0=BOS.
+&where~y_0=BOS.
 \end{aligned}
 $$
 
@@ -38,11 +38,9 @@ $$
 
 따라서 우리는 Teacher Forcing이라고 불리는 방법을 사용하여 훈련 합니다.
 
-중요한 점은 **훈련(training)시에는 decoder의 입력으로 이전 time-step의 decoder의 출력값이 아닌, 실제 $$ Y $$가 들어간다**는 것입니다. 하지만, 추론(inference) 할 때에는 실제 $$ Y $$를 모르기 때문에, 이전 time-step에서 계산되어 나온 $$ \hat{y_{t-1}} $$를 decoder의 입력으로 사용합니다. 이 훈련 방법을 ***Teacher Forcing***이라고 합니다. Teacher Forcing이 필요한 이유는 NMT의 수식을 살펴보면 알 수 있습니다. 해당 time-step의 단어를 구할 때 수식은 아래와 같습니다.
+중요한 점은 **훈련(training)시에는 decoder의 입력으로 이전 time-step의 decoder의 출력값이 아닌, 실제 $$ Y $$가 들어간다**는 것입니다. 하지만, 추론(inference) 할 때에는 실제 $$ Y $$를 모르기 때문에, 이전 time-step에서 계산되어 나온 $$ \hat{y_{t-1}} $$를 decoder의 입력으로 사용합니다. 이 훈련 방법을 ***Teacher Forcing***이라고 합니다.
 
-
-
- 따라서 training 할 때에는 모든 time-step을 한번에 계산할 수 있습니다. 그러므로 decoder도 각 time-step별이 아닌 한번에 수식을 정리할 수 있습니다.
+추론(inference) 할 때에는 auto-regressive 속성 때문에 과거 자신을 참조해야 합니다. 따라서 각 time-step 별로 순차적(sequential)으로 진행해야 합니다. 하지만 훈련(training) 할 때에는 입력값이 정해져 있으므로, 모든 time-step을 한번에 계산할 수 있습니다. 그러므로 decoder도 모든 time-step을 합쳐 수식을 정리할 수 있습니다.
 
 $$
 H^{tgt}=RNN_{dec}(emb_{tgt}([BOS;Y[:-1]]),h_{n}^{src})
