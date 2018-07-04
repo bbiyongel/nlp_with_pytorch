@@ -81,7 +81,7 @@ $$
 
 $$
 \begin{aligned}
-\theta=&argmax\sum^N_{n=1}{\log{P(y^n|x^n;\theta)}}, \\
+\theta=&argmax_{\theta}\sum^N_{n=1}{\log{P(y^n|x^n;\theta)}}, \\
 &s.t.~P(y)=E_{x\sim P(x)}P(y|x;\theta), \forall{y}\in\mathcal{M}.
 \end{aligned}
 $$
