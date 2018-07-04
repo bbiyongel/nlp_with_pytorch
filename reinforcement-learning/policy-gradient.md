@@ -85,7 +85,7 @@ $$
 $$
 
 
-이때, 위와 같이 로그 미분의 성질을 이용하여 $$ \triangledown_\theta J(\theta) $$를 구할 수 있습니다.
+이때, 위의 로그 미분의 성질을 이용하여 $$ \triangledown_\theta J(\theta) $$를 구할 수 있습니다.
 
 
 $$
