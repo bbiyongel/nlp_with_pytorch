@@ -106,7 +106,9 @@ P(y)=E_{x\sim\hat{P}(x)}P(y|x;\theta)&=\sum_{x\in\mathcal{X}}{P(y|x;\theta)\hat{
 &=\frac{1}{K}\sum^K_{i=1}{\frac{P(y|x_i;\theta)\hat{P}(x_i)}{P(x_i|y)}}, x_i\sim P(x|y)
 \end{aligned}
 $$
-<br>
+
+위와 같이 target 문장 $$y$$를 반대 방향 번역기($$ y \rightarrow x $$)에 넣어 $$K$$개의 source 문장 $$x$$를 샘플링(sampling)하여 $$P(y)$$를 구합니다.
+
 $$
 \mathcal{L}(\theta)\approx-\sum^N_{n=1}{\log{P(y^n|x^n;\theta)}}+\lambda\sum^S_{s=1}{[\log{\hat{P}(y^s)}-\log{\frac{1}{K}\sum^K_{i=1}\frac{\hat{P}(x^s_i)P(y^s|x^s_i\theta)}{P(x^s_i|y^s)}}]^2}
 $$
