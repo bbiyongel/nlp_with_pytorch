@@ -65,8 +65,8 @@ Marginal 분포는 결합확률분포(joint distribution)를 어떤 한 variable
 
 $$
 \begin{aligned}
-\sum_{x \in \mathcal{X}}{P(y|x;\theta)P(x)}=\mathbb{E}_{x \sim P(x)}P(y|x;\theta) \\
-\approx\frac{1}{K}\sum^K_{i=1}{P(y|x^i;\theta)},~x^i\sim P(x)
+p(y)=\sum_{x \in \mathcal{X}}{P(y|x;\theta)P(x)}&=\mathbb{E}_{x \sim P(x)}P(y|x;\theta) \\
+&\approx\frac{1}{K}\sum^K_{i=1}{P(y|x^i;\theta)},~x^i\sim P(x)
 \end{aligned}
 $$
 
