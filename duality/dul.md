@@ -91,7 +91,7 @@ $$
 위의 수식을 DSL과 마찬가지로 Lagrange multipliers와 함께 기존의 손실함수(loss function)에 추가하여 주기 위하여  $$S(\theta)$$와 같이 표현합니다.
 
 $$
-\mathcal{S}(\theta)=[\log\hat{P}(y)-\log{E_{x\sim\hat{P}(x)}P(y|x;\theta)}]^2
+\mathcal{S}(\theta)=[\log\hat{P}(y)-\log{\mathbb{E}_{x\sim\hat{P}(x)}P(y|x;\theta)}]^2
 $$
 
 $$
