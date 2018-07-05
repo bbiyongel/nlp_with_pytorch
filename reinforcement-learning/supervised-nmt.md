@@ -100,7 +100,9 @@ MRT(or RL)을 PyTorch를 사용하여 구현 해 보도록 하겠습니다. 자�
 
 - git repo url: https://github.com/kh-kim/simple-nmt
 
-#### rl_trainer.py
+#### train.py
+
+#### simple_nmt/rl_trainer.py
 
 ```python
 import time
