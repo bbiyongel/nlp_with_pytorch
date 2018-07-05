@@ -84,7 +84,7 @@ $$
 $$
 \begin{aligned}
 &Objective: \sum^N_{n=1}{\log{P(y^n|x^n;\theta)}}, \\
-&s.t.~P(y)=E_{x\sim P(x)}P(y|x;\theta), \forall{y}\in\mathcal{M}.
+&s.t.~P(y)=\mathbb{E}_{x\sim P(x)}P(y|x;\theta), \forall{y}\in\mathcal{M}.
 \end{aligned}
 $$
 
