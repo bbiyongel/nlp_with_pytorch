@@ -71,6 +71,8 @@ $$
 - 빼 준 값을 risk로써 로그확률의 gradient에 곱해 줍니다.
 - 이 과정을 전체 데이터셋(실제로는 mini-batch) $$S$$에 대해서 수행한 후 합(summation)을 구하고 learning rate $$\alpha$$를 곱 합니다.
 
+최종적으로는 기대값 수식을 monte carlo sampling을 통해 제거할 수 있습니다.
+
 아래는 policy gradients 수식 입니다.
 
 $$
