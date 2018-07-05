@@ -2,6 +2,10 @@
 
 ## Intro
 
+### Feed-forward
+
+### Back-propagation
+
 ## Architecture
 
 ## 수식
