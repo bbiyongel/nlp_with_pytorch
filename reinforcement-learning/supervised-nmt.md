@@ -14,12 +14,12 @@ Cross entropy는 훌륭한 분류(classification) 문제에서 이미 훌륭한 
 
 $$
 \begin{aligned}
-\hat{\theta}_{MLE} &= argmax_\theta(\mathcal{L}(\theta)) \\
-where~\mathcal{L}(\theta)&=\sum_{s=1}^S\log{P(y^{(s)}|x^{(s)};\theta)}
+\hat{\theta}_{MLE} &= argmin_\theta(\mathcal{L}(\theta)) \\
+where~\mathcal{L}(\theta)&=-\sum_{s=1}^S\log{P(y^{(s)}|x^{(s)};\theta)}
 \end{aligned}
 $$
 
-기존의 Maximum Likelihood Estimation (MLE)방식은 위와 같은 손실 함수(Loss function)를 사용하여 $$ |S| $$개의 입력과 출력에 대해서 loss 값을 구하고, 이를 최대화 하는 $$ \theta $$를 찾는 것이 목표(objective)였습니다. 하지만 이 논문에서는 ***Risk***를 아래와 같이 정의하고, 이를 최소화 하는 학습 방식을 Minimum Risk Training (MRT)라고 하였습니다.
+기존의 Maximum Likelihood Estimation (MLE)방식은 위와 같은 손실 함수(Loss function)를 사용하여 $$ |S| $$개의 입력과 출력에 대해서 손실(loss)값을 구하고, 이를 최소화 하는 $$ \theta $$를 찾는 것이 목표(objective)였습니다. 하지만 이 논문에서는 ***Risk***를 아래와 같이 정의하고, 이를 최소화 하는 학습 방식을 Minimum Risk Training (MRT)라고 하였습니다.
 
 $$
 \begin{aligned}
@@ -34,7 +34,7 @@ $$
 \hat{\theta}_{MRT}=argmin_\theta(\mathcal{R}(\theta))
 $$
 
-이렇게 정의된 risk를 최소화(minimize) 하도록 하는 것이 목표(objective)입니다. 사실 risk 대신에 reward로 생각하면, reward를 최대화(maximize) 하는 것이 목표가 됩니다. 결국은 risk를 최소화 할 때에는 gradient descent, reward를 최대화 할 때는 gradient ascent를 사용하게 되므로, 결국 완벽하게 같은 이야기라고 볼 수 있습니다. 따라서 실제 구현에 있어서는 $$ \triangle(y,y^{(s)}) $$ 사용을 위해서 BLEU 점수에 $$ -1 $$을 곱하여 사용 합니다.
+이렇게 정의된 risk를 최소화(minimize) 하도록 하는 것이 목표(objective)입니다. 사실 risk 대신에 reward로 생각하면, reward를 최대화(maximize) 하는 것이 목표가 됩니다. 결국은 risk를 최소화 할 때에는 gradient descent, reward를 최대화 할 때는 gradient ascent를 사용하게 되므로, 수식을 풀어보면 결국 완벽하게 같은 이야기라고 볼 수 있습니다. 따라서 실제 구현에 있어서는 $$ \triangle(y,y^{(s)}) $$ 사용을 위해서 BLEU 점수에 $$ -1 $$을 곱하여 사용 합니다.
 
 $$
 \begin{aligned}
@@ -94,6 +94,25 @@ MRT는 risk에 대해 minimize 해야 하기 때문에 gradient descent를 해 �
 
 ### Implementation
 
+우리는 아래의 방법을 통해 Minimum Risk Training을 PyTorch로 구현 할 겁니다. 
+
+1. 먼저 BLEU를 통해 얻은 reward에 $$-1$$을 곱해주어 risk로 변환 합니다. 
+1. 그리고 로그 확률에 risk를 곱해주고, 기존에 Negative Log Likelihodd Loss (NLLLoss)를 사용했으므로 NLLLoss 값에 $$-1$$을 곱해주어 sum of positive log probability를 구합니다. 
+1. Summation 결과물에 대해서 $$\theta$$에 대해 미분을 수행하면, back-propagation을 통해서 신경망 $$\theta$$ 전체에 gradient가 구해집니다. 
+1. 이 gradient를 사용하여 gradient descent를 통해 최적화(optimize) 하도록 할 겁니다.
+
+$$
+\nabla_\theta J(\theta) = \nabla_\theta\sum_{s=1}^{S}{\bigg( \log{P(y|x^{(s)};\theta)}\times\Big(\triangle(y,y^{(s)})-\frac{1}{K}\sum_{k=1}^{K}{\triangle(y^{(k)},y^{(s)})}\Big)\bigg)}
+$$
+
+$$
+\theta \leftarrow \theta - \lambda\nabla_\theta J(\theta)
+$$
+
+$$
+where~\triangle(\hat{y}, y)=-BLEU(\hat{y}, y)
+$$
+
 ### Code
 
 MRT(or RL)을 PyTorch를 사용하여 구현 해 보도록 하겠습니다. 자세한 전체 코드는 이전의 NMT PyTorch 실습 코드의 git repository에서 다운로드 할 수 있습니다.
@@ -101,6 +120,45 @@ MRT(or RL)을 PyTorch를 사용하여 구현 해 보도록 하겠습니다. 자�
 - git repo url: https://github.com/kh-kim/simple-nmt
 
 #### train.py
+
+```python
+def define_argparser():
+    p = argparse.ArgumentParser()
+
+    p.add_argument('-model', required = True)
+    p.add_argument('-train', required = True)
+    p.add_argument('-valid', required = True)
+    p.add_argument('-lang', required = True)
+    p.add_argument('-gpu_id', type = int, default = -1)
+
+    p.add_argument('-batch_size', type = int, default = 32)
+    p.add_argument('-n_epochs', type = int, default = 18)
+    p.add_argument('-print_every', type = int, default = 50)
+    p.add_argument('-early_stop', type = int, default = -1)
+
+    p.add_argument('-max_length', type = int, default = 80)
+    p.add_argument('-dropout', type = float, default = .2)
+    p.add_argument('-word_vec_dim', type = int, default = 512)
+    p.add_argument('-hidden_size', type = int, default = 768)
+    p.add_argument('-n_layers', type = int, default = 4)   
+    
+    p.add_argument('-max_grad_norm', type = float, default = 5.)
+    p.add_argument('-adam', action = 'store_true', help = 'Use Adam instead of using SGD.')
+    p.add_argument('-lr', type = float, default = 1.)
+    p.add_argument('-min_lr', type = float, default = .000001)
+    p.add_argument('-lr_decay_start_at', type = int, default = 10, help = 'Start learning rate decay from this epoch.')
+    p.add_argument('-lr_slow_decay', action = 'store_true', help = 'Decay learning rate only if there is no improvement on last epoch.')
+    p.add_argument('-lr_decay_rate', type = float, default = .5)
+
+    p.add_argument('-rl_lr', type = float, default = .01)
+    p.add_argument('-n_samples', type = int, default = 1)
+    p.add_argument('-rl_n_epochs', type = int, default = 0)
+    p.add_argument('-rl_ratio_per_epoch', type = float, default = 1.)
+
+    config = p.parse_args()
+
+    return config
+```
 
 #### simple_nmt/rl_trainer.py
 
