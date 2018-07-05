@@ -6,8 +6,6 @@
 
 ### Back-propagation
 
-## Architecture
-
 ## Gradient vanishing & exploding
 
 ## 코드
