@@ -58,7 +58,8 @@ $$
 $$
 \begin{aligned}
 \frac{\partial\tilde{R}(\theta)}{\partial\theta_i}&=\alpha\sum_{s=1}^{S}{\mathbb{E}_{y|x^{(s)};\theta,\alpha}[\frac{\partial P(y|x^{(s)};\theta)}{\partial\theta_i P(y|x^{(s)};\theta)}\times(\triangle(y,y^{(s)})-\mathbb{E}_{y'|x^{(s)};\theta,\alpha}[\triangle(y',y^{(s)})])]} \\
-&=\alpha\sum_{s=1}^{S}{\mathbb{E}_{y|x^{(s)};\theta,\alpha}[\frac{\partial \log{P(y|x^{(s)};\theta)}}{\partial\theta_i}\times(\triangle(y,y^{(s)})-\mathbb{E}_{y'|x^{(s)};\theta,\alpha}[\triangle(y',y^{(s)})])]}
+&=\alpha\sum_{s=1}^{S}{\mathbb{E}_{y|x^{(s)};\theta,\alpha}[\frac{\partial \log{P(y|x^{(s)};\theta)}}{\partial\theta_i}\times(\triangle(y,y^{(s)})-\mathbb{E}_{y'|x^{(s)};\theta,\alpha}[\triangle(y',y^{(s)})])]} \\
+&\approx \alpha \sum_{s=1}^{S}{\frac{\partial \log{P(y|x^{(s)};\theta)}}{\partial\theta_i}\times(\triangle(y,y^{(s)})-\triangle(y',y^{(s)}))}
 \end{aligned}
 $$
 
