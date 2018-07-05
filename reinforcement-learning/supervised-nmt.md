@@ -106,12 +106,14 @@ $$
 $$
 
 $$
-\theta \leftarrow \theta - \lambda\nabla_\theta J(\theta)
+where~\triangle(\hat{y}, y)=-BLEU(\hat{y}, y)
 $$
 
 $$
-where~\triangle(\hat{y}, y)=-BLEU(\hat{y}, y)
+\theta \leftarrow \theta - \lambda\nabla_\theta J(\theta)
 $$
+
+우리는 실험을 통해서 심지어 $$K=1$$일 때도, MRT가 잘 동작함을 확인할 수 있습니다.
 
 ### Code
 
