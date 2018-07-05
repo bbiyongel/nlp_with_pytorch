@@ -63,6 +63,10 @@ $$
 \end{aligned}
 $$
 
+$$
+\theta_{i+1} \leftarrow \theta_i - \frac{\partial\tilde{R}(\theta)}{\partial\theta_i}
+$$
+
 이제 미분을 통해 얻은 MRT의 최종 수식을 해석 해 보겠습니다. 이해가 어렵다면 아래의 policy gradients 수식과 비교하며 따라가면 좀 더 이해가 수월할 수 있습니다.
 
 - $$s$$번째 입력 $$x^{(s)}$$를 신경망 $$\theta$$에 넣어 얻은 로그확률 $$\log{P(y|x^{(s)};\theta)}$$을 미분하여 gradient를 얻습니다.
