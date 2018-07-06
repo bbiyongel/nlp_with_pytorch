@@ -18,7 +18,7 @@ $$
 
 ### Feed-forward
 
-기본적인 RNN을 활용한 feed-forward 계산은 아래와 같습니다.
+기본적인 RNN을 활용한 feed-forward 계산의 흐름은 아래와 같습니다. 아래의 그림은 각 time-step 별로 입력 $$x_t$$와 이전 time-step의 $$h_t$$가 RNN으로 들어가서 출력으로 $$h_t$$를 반환하는 모습입니다. 이렇게 얻어낸 $$h_t$$들을 $$\hat{y}_t$$로 삼아서 정답인 $$y_t$$와 비교하여 손실(loss) $$mathcal{L}$$을 계산 합니다.
 
 ![](/assets/rnn-basic-architecture.png)
 
