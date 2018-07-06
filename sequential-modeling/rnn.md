@@ -19,7 +19,7 @@ $$
 h_t=f(x_t, h_{t-1})
 $$
 
-
+ 
 ### Feed-forward
 
 ![](/assets/rnn-architecture.png)
