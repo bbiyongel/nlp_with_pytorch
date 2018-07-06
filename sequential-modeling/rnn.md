@@ -18,6 +18,8 @@ $$
 
 ### Feed-forward
 
+기본적인 RNN을 활용한 feed-forward 계산은 아래와 같습니다.
+
 ![](/assets/rnn-basic-architecture.png)
 
 $$
