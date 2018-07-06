@@ -4,16 +4,13 @@
 
 ![](/assets/rnn-fc.png)
 
-
 $$
 y=f(x)
 $$
 
-
-하지만 recurrent neural network \(순환신경망, RNN\)은 입력과 직전 출력값을 참조하여 현재 출력값을 반환하는 작업을 여러 time-step에 걸쳐 수행 합니다.
+하지만 recurrent neural network \(순환신경망, RNN\)은 입력과 직전 자신의 상태(hidden state)를 참조하여 현재 자신의 상태를 결정하는 작업을 여러 time-step에 걸쳐 수행 합니다. 각 time-step별 RNN의 상태는 경우에 따라 출력이 되기도 합니다.
 
 ![](/assets/rnn-basic.png)
-
 
 $$
 h_t=f(x_t, h_{t-1})
