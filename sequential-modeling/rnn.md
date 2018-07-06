@@ -30,6 +30,10 @@ $$
 
 ## Back-propagation
 
+## Multi-layer RNN
+
+## Bi-directional RNN
+
 ## Gradient vanishing & exploding
 
 ## 코드
