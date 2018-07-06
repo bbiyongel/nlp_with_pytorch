@@ -45,7 +45,7 @@ $$
 
 ## How to Apply to NLP
 
-### Use only the last hidden state as output
+### Use only last hidden state as output
 
 ![](/assets/rnn-apply-1.png)
 
