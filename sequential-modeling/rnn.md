@@ -78,6 +78,8 @@ $$
 
 ![](/assets/rnn-apply-1.png)
 
+가장 흔한 예제로 그림의 감성분석과 같이 텍스트 분류(text classification)의 경우에 단어(토큰)의 갯수 만큼 입력이 RNN에 들어가고, 마지막 time-step의 결과값을 받아서 softmax 함수를 통해 해당 입력 텍스트의 클래스(class)를 예측하는 확률 분포를 근사(approximate)하도록 동작 하게 됩니다.
+
 $$
 \text{softmax}(x_{i}) = \frac{exp(x_i)}{\sum_j exp(x_j)}
 $$
