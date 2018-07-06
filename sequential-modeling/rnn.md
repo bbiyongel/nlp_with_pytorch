@@ -18,13 +18,15 @@ $$
 
 ### Feed-forward
 
-기본적인 RNN을 활용한 feed-forward 계산의 흐름은 아래와 같습니다. 아래의 그림은 각 time-step 별로 입력 $$x_t$$와 이전 time-step의 $$h_t$$가 RNN으로 들어가서 출력으로 $$h_t$$를 반환하는 모습입니다. 이렇게 얻어낸 $$h_t$$들을 $$\hat{y}_t$$로 삼아서 정답인 $$y_t$$와 비교하여 손실(loss) $$mathcal{L}$$을 계산 합니다.
+기본적인 RNN을 활용한 feed-forward 계산의 흐름은 아래와 같습니다. 아래의 그림은 각 time-step 별로 입력 $$x_t$$와 이전 time-step의 $$h_t$$가 RNN으로 들어가서 출력으로 $$h_t$$를 반환하는 모습입니다. 이렇게 얻어낸 $$h_t$$들을 $$\hat{y}_t$$로 삼아서 정답인 $$y_t$$와 비교하여 손실(loss) $$\mathcal{L}$$을 계산 합니다.
 
 ![](/assets/rnn-basic-architecture.png)
 
+위 그림을 수식으로 표현하면 아래와 같습니다. 함수 $$f$$는 $$x_t$$와 $$h_{t-1}$$을 입력으로 받아서 파라미터 $$\theta$$를 통해 $$h_t$$를 계산 합니다.
+
 $$
 \begin{aligned}
-\hat{y}_t=h_t&=f(x_t;\theta) \\
+\hat{y}_t=h_t&=f(x_t,h_{t-1};\theta) \\
 &=\tanh(w_{ih}x_t+b_{ih}+w_{hh}h_{t−1}+b_{hh}) \\
 &where~\theta=[w_{ih};b_{ih};w_{hh};b_{hh}]. \\
 \\
