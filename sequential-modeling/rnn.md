@@ -52,6 +52,7 @@ $$
 
 ## Gradient Vanishing & Exploding
 
+![](http://mathworld.wolfram.com/images/interactive/TanhReal.gif)
 ## Multi-layer RNN
 
 기본적으로 Time-step별로 RNN이 동작하지만, 아래의 그림과 같이 한 time-step 내에서 RNN을 여러 층을 쌓아올릴 수 있습니다. 그림상으로 시간의 흐름은 왼쪽에서 오른쪽으로 간다면, 여러 layer를 아래에서 위로 쌓아 올릴 수 있습니다. 당연히 각 층 별로 파라미터 $$\theta$$를 공유하지 않고 따로 갖습니다.
