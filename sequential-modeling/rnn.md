@@ -24,6 +24,10 @@ $$
 
 ![](/assets/rnn-architecture.png)
 
+$$
+h_t=\tanh(w_{ih}x_t+b_{ih}+w_{hh}h_{t−1}+b_{hh})
+$$
+
 ## Back-propagation
 
 ## Gradient vanishing & exploding
