@@ -22,7 +22,7 @@ $$
  
 ### Feed-forward
 
-![](/assets/rnn-architecture.png)
+
 
 $$
 \begin{aligned}
