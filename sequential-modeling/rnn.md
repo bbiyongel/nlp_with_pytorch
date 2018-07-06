@@ -68,6 +68,8 @@ $$
 
 ## How to Apply to NLP
 
+그럼 RNN을 NLP를 비롯한 실무에서는 어떻게 적용하는지 알아보도록 하겠습니다.
+
 ### Use only last hidden state as output
 
 ![](/assets/rnn-apply-1.png)
