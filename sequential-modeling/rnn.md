@@ -30,9 +30,6 @@ $$
 \end{aligned}
 $$
 
-$$
-\text{softmax}(x_{i}) = \frac{exp(x_i)}{\sum_j exp(x_j)}
-$$
 
 ## Back-propagation
 
@@ -48,7 +45,15 @@ $$
 
 ## How to Apply to NLP
 
+### Use only the last hidden state as output
+
 ![](/assets/rnn-apply-1.png)
+
+$$
+\text{softmax}(x_{i}) = \frac{exp(x_i)}{\sum_j exp(x_j)}
+$$
+
+### Use all hidden states as output
 
 ![](/assets/rnn-apply-2.png)
 
