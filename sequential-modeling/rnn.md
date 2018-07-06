@@ -46,6 +46,10 @@ $$
 
 위 그림에서는 붉은색이 점점 짙어지는 것으로 그런 RNN back-propagation의 속성을 나타내었습니다. 이 속성을 back-propagation through time(BPTT)이라고 합니다.
 
+이런 RNN back-propagation의 속성으로 인해, 마치 RNN은 time-step의 수 만큼 layer(계층)이 있는 것이나 마찬가지가 됩니다. 따라서 time-step이 길어짐에 따라, 매우 깊은 신경망과 같이 동작 합니다.
+
+## Gradient vanishing & exploding
+
 ## Multi-layer RNN
 
 ![](/assets/rnn-multi-layer.png)
@@ -67,8 +71,6 @@ $$
 ### Use all hidden states as output
 
 ![](/assets/rnn-apply-2.png)
-
-## Gradient vanishing & exploding
 
 ## 코드
 
