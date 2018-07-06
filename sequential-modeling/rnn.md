@@ -19,9 +19,10 @@ $$
 h_t=f(x_t, h_{t-1})
 $$
 
- 
+
 ### Feed-forward
 
+![](/assets/rnn-basic-architecture.png)
 
 
 $$
@@ -34,17 +35,30 @@ $$
 \end{aligned}
 $$
 
+
+
 $$
 \text{softmax}(x_{i}) = \frac{exp(x_i)}{\sum_j exp(x_j)}
 $$
 
+
 ## Back-propagation
+
+![](/assets/rnn-back-prop.png)
 
 ## Multi-layer RNN
 
+![](/assets/rnn-multi-layer.png)
+
 ## Bi-directional RNN
 
+![](/assets/rnn-bidirectional.png)
+
 ## How to Apply to NLP
+
+![](/assets/rnn-apply-1.png)
+
+![](/assets/rnn-apply-2.png)
 
 ## Gradient vanishing & exploding
 
