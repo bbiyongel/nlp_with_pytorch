@@ -54,6 +54,8 @@ $$
 
 ## Multi-layer RNN
 
+Time-step별로 RNN이 동작하지만, 아래의 그림과 같이 한 time-step 내에서 RNN을 여러 층을 쌓아올릴 수 있습니다.
+
 ![](/assets/rnn-multi-layer.png)
 
 ## Bi-directional RNN
