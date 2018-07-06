@@ -38,8 +38,7 @@ $$
 \mathcal{L}=\frac{1}{n}\sum_{t=1}^{n}{loss(y_t,\hat{y}_t)}
 $$
 
-
-## Back-propagation
+## Back-propagation (BPTT)
 
 그럼 이렇게 feed-forward 된 이후에 오류의 back-propagation(역전파)은 어떻게 될까요? 앞서 구한 손실 $$\mathcal{L}$$에 미분을 통해 back-propagation 하게 되면, 각 time-step 별로 뒤($$t$$가 큰 time-step)로부터 gradient가 구해지고, 이전 time-step ($$t-1$$)의 gradient에 더해지게 됩니다. 즉, $$t$$가 $$0$$에 가까워질수록 RNN 파라미터($$\theta$$)의 gradient는 각 time-step 별 gradient가 더해져 점점 커지게 됩니다.
 
