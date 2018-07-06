@@ -82,8 +82,9 @@
 * [Productization](productization/cover.md)
   * [Pipeline](productization/pipeline.md)
   * [Google's NMT](productization/gnmt.md)
-  * [Edinburgh's NMT](productization/enmt.md)
-  * [Microsoft's NMT](productization/msmt.md)
+  * [Edinburgh's NMT](productization/nematus.md)
+  * [Microsoft's NMT](productization/microsoft.md)
+  * [Booking.com's NMT](productization/booking-com.md)
 * [Advanced Topic](advanced-topic/cover.md)
   * [Memory Augmented Neural Network](advanced-topic/memory-augmented-neural-network.md)
 
