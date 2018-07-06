@@ -39,7 +39,7 @@
 * [Sequence Modeling](sequential-problem/cover.md)
   * [Intro](sequential-problem/intro.md)
   * [Hidden Markov Model](sequential-problem/hmm.md)
-  * [Vanila RNN](sequential-problem/rnn.md)
+  * [Recurrent Neural Network](sequential-problem/rnn.md)
   * [Long Short Term Memory](sequential-problem/lstm.md)
   * [Gated Recurrent Unit](sequential-problem/gru.md)
   * [Gradient Clipping](sequential-problem/gradient-clipping.md)
