@@ -82,6 +82,8 @@ $$
 
 ![](/assets/rnn-apply-2.png)
 
+Bi-directional RNN을 쓸 수 없는 경우에 대한 설명
+
 ## Implementation
 
 ### RNN
