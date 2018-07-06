@@ -72,6 +72,8 @@ $$
 
 ### Use only last hidden state as output
 
+가장 쉬운 사용케이스로 마지막 time-step의 출력값만 사용하는 경우입니다.
+
 ![](/assets/rnn-apply-1.png)
 
 $$
