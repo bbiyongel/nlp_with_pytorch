@@ -48,7 +48,7 @@ $$
 
 이런 RNN back-propagation의 속성으로 인해, 마치 RNN은 time-step의 수 만큼 layer(계층)이 있는 것이나 마찬가지가 됩니다. 따라서 time-step이 길어짐에 따라, 매우 깊은 신경망과 같이 동작 합니다.
 
-## Gradient vanishing & exploding
+## Gradient Vanishing & Exploding
 
 ## Multi-layer RNN
 
