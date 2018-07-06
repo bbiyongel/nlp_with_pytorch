@@ -32,9 +32,10 @@ $$
 \end{aligned}
 $$
 
+위와 같이 각 time-step별로 $$y_t$$를 계산하여 아래의 수식처럼 모든 time-step에 대한 손실(loss) $$\mathcal{L}$$을 구합니다.
 
 $$
-\mathcal{L}&=\frac{1}{n}\sum_{t=1}^{n}{loss(y_t,\hat{y}_t)}
+\mathcal{L}=\frac{1}{n}\sum_{t=1}^{n}{loss(y_t,\hat{y}_t)}
 $$
 
 
