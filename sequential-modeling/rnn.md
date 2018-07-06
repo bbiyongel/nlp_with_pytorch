@@ -25,7 +25,10 @@ $$
 ![](/assets/rnn-architecture.png)
 
 $$
-h_t=\tanh(w_{ih}x_t+b_{ih}+w_{hh}h_{t−1}+b_{hh})
+\begin{aligned}
+\hat{y}_t&=h_t=\tanh(w_{ih}x_t+b_{ih}+w_{hh}h_{t−1}+b_{hh}) \\
+\mathcal{L}&=\sum_{t=1}^{n}{loss(y_t,\hat{y}_t)}
+\end{aligned}
 $$
 
 ## Back-propagation
