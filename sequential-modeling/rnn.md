@@ -22,13 +22,13 @@ $$
 
 ![](/assets/rnn-basic-architecture.png)
 
-위 그림을 수식으로 표현하면 아래와 같습니다. 함수 $$f$$는 $$x_t$$와 $$h_{t-1}$$을 입력으로 받아서 파라미터 $$\theta$$를 통해 $$h_t$$를 계산 합니다.
+위 그림을 수식으로 표현하면 아래와 같습니다. 함수 $$f$$는 $$x_t$$와 $$h_{t-1}$$을 입력으로 받아서 파라미터 $$\theta$$를 통해 $$h_t$$를 계산 합니다. 이때, 각 입력과 출력 그리고 내부 파라미터의 크기는 다음과 같습니다. -- $$x_t \in \mathbb{R}^w, h_t \in \mathbb{R}^d, W_{ih} \in \mathbb{R}^{d \times w}, b \in \mathbb{R}^{d}, W_{hh} \in \mathbb{R}^{d \times d}, b_{hh} \in \mathbb{R}^{d}$$
 
 $$
 \begin{aligned}
 \hat{y}_t=h_t&=f(x_t,h_{t-1};\theta) \\
-&=\tanh(w_{ih}x_t+b_{ih}+w_{hh}h_{t−1}+b_{hh}) \\
-&where~\theta=[w_{ih};b_{ih};w_{hh};b_{hh}].
+&=\tanh(W_{ih}x_t+b_{ih}+W_{hh}h_{t−1}+b_{hh}) \\
+&where~\theta=[W_{ih};b_{ih};W_{hh};b_{hh}].
 \end{aligned}
 $$
 
