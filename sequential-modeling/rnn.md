@@ -28,10 +28,13 @@ $$
 \begin{aligned}
 \hat{y}_t=h_t&=f(x_t,h_{t-1};\theta) \\
 &=\tanh(w_{ih}x_t+b_{ih}+w_{hh}h_{t−1}+b_{hh}) \\
-&where~\theta=[w_{ih};b_{ih};w_{hh};b_{hh}]. \\
-\\
-\mathcal{L}&=\frac{1}{n}\sum_{t=1}^{n}{loss(y_t,\hat{y}_t)}
+&where~\theta=[w_{ih};b_{ih};w_{hh};b_{hh}].
 \end{aligned}
+$$
+
+
+$$
+\mathcal{L}&=\frac{1}{n}\sum_{t=1}^{n}{loss(y_t,\hat{y}_t)}
 $$
 
 
