@@ -72,9 +72,11 @@ $$
 
 ![](/assets/rnn-apply-2.png)
 
-## 코드
+## Implementation
 
-## 설명
+### RNN
+
+### RNNCell
 
 
 
