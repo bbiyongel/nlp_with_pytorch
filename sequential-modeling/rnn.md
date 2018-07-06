@@ -44,6 +44,8 @@ $$
 
 ## Bi-directional RNN
 
+## How to Apply to NLP
+
 ## Gradient vanishing & exploding
 
 ## 코드
