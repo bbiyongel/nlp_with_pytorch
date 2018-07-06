@@ -45,7 +45,7 @@ $$
 
 ![](/assets/rnn-back-prop.png)
 
-
+위 그림에서는 붉은색이 점점 짙어지는 것으로 그런 RNN back-propagation의 속성을 나타내었습니다. 이 속성을 back-propagation through time(BPTT)이라고 합니다.
 
 ## Multi-layer RNN
 
