@@ -60,8 +60,6 @@ z = (x + y) + torch.FloatTensor(2, 2)
 
 위의 예제에서처럼 $$x$$와 $$y$$를 생성하고 둘을 더하는 연산을 수행하면 $$x+y$$, 이에 해당하는 tensor가 생성되어 computational graph에 할당 됩니다. 그리고 다시 생성 된 $$2 \times 2$$ tensor를 더해준 뒤, 이를 $$z$$에 assign(할당) 하게 됩니다. 따라서 $$z$$로부터 back-propgation을 수행하게 되면, 이미 생성된 computational graph를 따라서 gradient를 전달 할 수 있게 됩니다.
 
-자동으로 gradient를 계산할 수 있게 하기 위해서, tensor를 wrapping해 주는 class입니다. Variable은 gradient를 저장할 수 있는 **grad**와 tensor를 저장하는 **data** 속성\(attribute\)을 갖고 있습니다. 또한 **grad\_fn**이라는 속성은 variable을 생성한 연산\(또는 함수\)를 가리키고 있어, 연산\(feed-forward\)에 따라 마지막까지 자동으로 생성된 Variable을 사용하여 최초 계산에 사용된 Variable까지의 gradient를 자동으로 계산 해 줍니다.
-
 Gradient를 구할 필요가 없는 연산의 경우에는 아래와 같이 with 문법을 사용하여 연산을 수행할 수 있습니다. back-propagation이 필요 없는 추론(inference) 등을 수행 할 때 유용하며, gradient를 구하기 위한 사전 작업들(computational graph 생성)을 생략할 수 있기 때문에, 연산 속도 및 메모리 사용에 있어서도 큰 이점을 지니게 됩니다.
 
 ```python
@@ -224,7 +222,6 @@ class MyLinear(nn.Module):
 
 ```py
 x = torch.FloatTensor(16, 10)
-x = Variable(x)
 linear = MyLinear(10, 5)
 y = linear(x)
 ```
@@ -237,13 +234,13 @@ y = linear(x)
 []
 ```
 
-아무것도 들어있지 않은 빈 list가 찍혔습니다. 즉, linear module 내에는 learnable parameter가 없다는 이야기 입니다. 그 이유는 __init__() 내에서 Variable로 선언 하였기 때문 입니다. 아래의 웹페이지에 그 이유가 자세히 나와 있습니다.
+아무것도 들어있지 않은 빈 list가 찍혔습니다. 즉, linear module 내에는 learnable parameter가 없다는 이야기 입니다. 아래의 웹페이지에 그 이유가 자세히 나와 있습니다.
 
 참고사이트: http://pytorch.org/docs/master/nn.html?highlight=parameter#parameters
 
->when they’re assigned as Module attributes they are automatically added to the list of its parameters, and will appear e.g. in parameters() iterator. Assigning a Tensor doesn’t have such effect. This is because one might want to cache some temporary state, like last hidden state of the RNN, in the model.
+> A kind of Tensor that is to be considered a module parameter. Parameters are Tensor subclasses, that have a very special property when used with Module s - when they’re assigned as Module attributes they are automatically added to the list of its parameters, and will appear e.g. in parameters() iterator. Assigning a Tensor doesn’t have such effect. This is because one might want to cache some temporary state, like last hidden state of the RNN, in the model. If there was no such class as Parameter, these temporaries would get registered too.
 
-따라서 우리는 Variable 대신에 Parameter라는 class를 사용하여 tensor를 wrapping해야 합니다. 그럼 아래와 같이 될 것 입니다.
+따라서 우리는 Parameter라는 class를 사용하여 tensor를 wrapping해야 합니다. 그럼 아래와 같이 될 것 입니다.
 
 ```py
 class MyLinear(nn.Module):
@@ -268,15 +265,7 @@ class MyLinear(nn.Module):
 [torch.Size([10, 5]), torch.Size([5])]
 ```
 
-잘 들어있는 것을 확인 할 수 있습니다. 그럼 아래와 같이 한번 실행 해 보죠.
-
-```py
->>> print(linear)
-MyLinear(
-)
-```
-
-아쉽게도 Parameter로 선언 된 parameter들은 print로 찍혀 나오지 않습니다. -- 왜 그렇게 구현 해 놓았는지 이유는 잘 모르겠습니다. 그럼 print에서도 확인할 수 있게 깔끔하게 바꾸어 보도록 하겠습니다. 아래와 같이 바꾸면 제대로 된 구현이라고 볼 수 있습니다.
+잘 들어있는 것을 확인 할 수 있습니다. 그럼 깔끔하게 바꾸어 보도록 하겠습니다. 아래와 같이 바꾸면 제대로 된 구현이라고 볼 수 있습니다.
 
 ```py
 class MyLinear(nn.Module):
@@ -305,13 +294,12 @@ MyLinear(
 
 이제까지 원하는 연산을 통해 값을 앞으로 전달(feed-forward)하는 방법을 살펴보았습니다. 이제 이렇게 얻은 값을 우리가 원하는 값과의 차이를 계산하여 error를 뒤로 전달(back-propagation)하는 것을 해 보도록 하겠습니다.
 
-예를 들어 우리가 원하는 값은 아래와 같이 **100**이라고 하였을 때, linear의 결과값 matrix의 합과 목표값과의 거리(error 또는 loss)를 구하고, 그 값에 대해서 **backward()**함수를 사용함으로써 gradient를 구합니다. 이때, error는 Variable class로 된 sclar로 표현 되어야 합니다. vector나 matrix의 형태여서는 안됩니다.
+예를 들어 우리가 원하는 값은 아래와 같이 $$100$$이라고 하였을 때, linear의 결과값 matrix의 합과 목표값과의 거리(error 또는 loss)를 구하고, 그 값에 대해서 **backward()**함수를 사용함으로써 gradient를 구합니다. 이때, error는 sclar로 표현 되어야 합니다. vector나 matrix의 형태여서는 안됩니다.
 
 ```py
 objective = 100
 
 x = torch.FloatTensor(16, 10)
-x = Variable(x)
 linear = MyLinear(10, 5)
 y = linear(x)
 loss = (objective - y.sum())**2
@@ -335,12 +323,12 @@ linear.train()
 
 ## Example
 
-이제까지 배운 것들을 활용하여 임의의 함수를 approximate하는 neural network를 구현 해 보도록 하겠습니다. 
+이제까지 배운 것들을 활용하여 임의의 함수를 근사(approximate)하는 신경망을 구현 해 보도록 하겠습니다. 
 
-1. Random으로 generate한 tensor들을 
-1. 우리가 approximate하고자 하는 ground-truth 함수에 넣어 정답을 구하고, 
-1. 그 정답($$y$$)과 neural network를 통과한 $$\hat{y}$$과의 차이(error)를 Mean Square Error(MSE)를 통해 구하여 
-1. SGD를 통해서 optimize하도록 해 보겠습니다.
+1. Random(임의)으로 생성한 tensor들을 
+1. 우리가 근사하고자 하는 정답 함수에 넣어 정답을 구하고, 
+1. 그 정답($$y$$)과 신경망을 통과한 $$\hat{y}$$과의 차이(error)를 Mean Square Error(MSE)를 통해 구하여 
+1. SGD를 통해서 최적화(optimize)하도록 해 보겠습니다.
 
 MSE의 수식은 아래와 같습니다.
 
@@ -350,14 +338,13 @@ $$
 \end{aligned}
 $$
 
-먼저 1개의 linear layer를 가진 MyModel이라는 module을 선언합니다.
+먼저 1개의 linear layer를 가진 MyModel이라는 모듈(module)을 선언합니다.
 
 ```py
 import random
 
 import torch
 import torch.nn as nn
-from torch.autograd import Variable
 
 class MyModel(nn.Module):
 
@@ -380,7 +367,7 @@ f(x_1, x_2, x_3) &= 3x_1 + x_2 - 2x_3
 \end{aligned}
 $$
 
-해당 함수를 python으로 구현하면 아래와 같습니다. 물론 neural network 입장에서는 내부 동작 내용을 알 수 없는 함수 입니다.
+해당 함수를 python으로 구현하면 아래와 같습니다. 물론 신경망 입장에서는 내부 동작 내용을 알 수 없는 함수 입니다.
 
 ```py
 def ground_truth(x):
@@ -408,7 +395,7 @@ def train(model, x, y, optim):
     return loss.data[0]
 ```
 
-그럼 위의 함수들을 사용 하기 위해서 hyper-parameter를 setting하겠습니다.
+그럼 위의 함수들을 사용 하기 위해서 하이퍼 파라미터(hyper-parameter)를 설정 하겠습니다.
 
 ```py
 batch_size = 1
@@ -421,15 +408,15 @@ optim = torch.optim.SGD(model.parameters(), lr = 0.0001, momentum=0.1)
 print(model)
 ```
 
-위의 setting 값을 사용하여 평균 loss 값이 **.001**보다 작을 때 까지 훈련 시킵니다.
+위의 값을 사용하여 평균 손실(loss)값이 $$.001$$보다 작을 때 까지 훈련 시킵니다.
 
 ```py
 for epoch in range(n_epochs):
     avg_loss = 0
     
     for i in range(n_iter):
-        x = Variable(torch.rand(batch_size, 3))
-        y = Variable(ground_truth(x.data))
+        x = torch.rand(batch_size, 3)
+        y = ground_truth(x.data)
 
         loss = train(model, x, y, optim)
         
@@ -437,8 +424,8 @@ for epoch in range(n_epochs):
     avg_loss = avg_loss / n_iter
 
     # simple test sample to check the network.
-    x_valid = Variable(torch.FloatTensor([[.3, .2, .1]]))
-    y_valid = Variable(ground_truth(x_valid.data))
+    x_valid = torch.FloatTensor([[.3, .2, .1]])
+    y_valid = ground_truth(x_valid.data)
 
     model.eval()
     y_hat = model(x_valid)
@@ -450,26 +437,25 @@ for epoch in range(n_epochs):
         break
 ```
 
-위와 같이 임의의 함수에 대해서 실제로 neural network를 approximate하는 아주 간단한 예제를 살펴 보았습니다. 사실은 neural network라기보단, linear regression이라고 봐야 합니다. 하지만, 앞으로 책에서 다루어질 architecture들과 훈련 방법들도 이 예제의 연장선상에 지나지 않습니다.
+위와 같이 임의의 함수에 대해서 실제로 신경망을 근사(approximate)하는 아주 간단한 예제를 살펴 보았습니다. 사실은 신경망이라기보단, 선형 회귀(linear regression) 함수라고 봐야 합니다. 하지만, 앞으로 책에서 다루어질 구조(architecture)들과 훈련 방법들도 이 예제의 연장선상에 지나지 않습니다.
 
 이제까지 다룬 내용을 바탕으로 PyTorch상에서 딥러닝을 수행하는 과정은 아래와 같이 요약 해 볼 수 있습니다.
 
 1. nn.Module 클래스를 상속받아 Model 아키텍쳐 선언(forward함수를 통해)
 2. Model 객체 생성
 3. SGD나 Adam등의 Optimizer를 생성하고, Model의 parameter를 등록
-4. 데이터로 미니배치를 구성하여 feed-forward --> computation graph 생성o
-5. loss function을 통해 최종 결과값(scalar) loss를 계산
-6. loss에 대해서 backward() 호출 --> computation graph 상의 Variable node들에 gradient가 채워짐 
-7. 3번의 optimizer에서 step()을 호출하여 gradient descent 1step 수행
+4. 데이터로 미니배치를 구성하여 feed-forward --> computation graph 생성
+5. 손실함수(loss function)를 통해 최종 결과값(scalar) loss를 계산
+6. 손실(loss)에 대해서 backward() 호출 --> computation graph 상의 tensor들에 gradient가 채워짐 
+7. 3번의 optimizer에서 step()을 호출하여 gradient descent 1-step 수행
 
 ## Using GPU
 
-PyTorch는 당연히 GPU상에서 훈련하는 방법도 제공합니다. 아래와 같이 **cuda()**함수를 통해서 원하는 객체를 GPU memory상으로 copy(Variable 또는 Tensor의 경우)하거나 move(nn.Module의 하위 클래스인 경우) 시킬 수 있습니다.
+PyTorch는 당연히 GPU상에서 훈련하는 방법도 제공합니다. 아래와 같이 **cuda()**함수를 통해서 원하는 객체를 GPU memory상으로 copy(Tensor의 경우)하거나 move(nn.Module의 하위 클래스인 경우) 시킬 수 있습니다.
 
 ```py
 >>> # Note that tensor is declared in torch.cuda.
 >>> x = torch.cuda.FloatTensor(16, 10)
->>> x = Variable(x)
 >>> linear = MyLinear(10, 5)
 >>> # .cuda() let module move to GPU memory.
 >>> linear.cuda()
