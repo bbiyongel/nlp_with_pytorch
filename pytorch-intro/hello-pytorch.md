@@ -21,7 +21,7 @@ x = np.array(x)
 
 ## Autograd
 
-PyTorch는 tensor들 사이의 연산을 할 때마다 computational graph를 생성하여 연산의 결과물이 어떤 tensor로부터 어떤 연산을 통해서 왔는지 추적 하고 있습니다. 따라서 우리가 최종적으로 나온 스칼라(scalar)에 미분과 back-propagation(역전파)을 수행하도록 하였을 때, 자동으로 각 tensor 별로 자기 자신의 부모노드(parent node)에 해당하는 tensor를 찾아서 계속해서 back-propagation 할 수 있도록 합니다.
+PyTorch는 tensor들 사이의 연산을 할 때마다 computational graph를 생성하여 연산의 결과물이 어떤 tensor로부터 어떤 연산을 통해서 왔는지 추적 하고 있습니다. 따라서 우리가 최종적으로 나온 스칼라(scalar)에 미분과 back-propagation(역전파)을 수행하도록 하였을 때, 자동으로 각 tensor 별로 자기 자신의 부모노드(parent node)에 해당하는 tensor를 찾아서 계속해서 $1$back-propagation 할 수 있도록 합니다.
 
 
 
