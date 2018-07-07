@@ -1,14 +1,16 @@
-# PyTorch Tutorial
+# PyTorch Short Tutorial
 
 ## Tensor
 
-PyTorch의 tensor는 numpy의 array와 같은 개념입니다. 값을 저장하고 그 값들에 대해서 연산을 수행할 수 있는 함수를 제공합니다.
+PyTorch의 tensor는 numpy의 array와 같은 개념입니다. PyTorch 상에서 연산을 수행하기 위한 가장 기본적인 객체로써, 앞으로 우리가 수행할 모든 연산은 이 객체를 통하게 됩니다. 따라서 PyTorch는 tensor를 통해 값을 저장하고 그 값들에 대해서 연산을 수행할 수 있는 함수를 제공합니다.
+
+아래의 예제는 같은 동작을 수행하는 PyTorch 코드와 NumPy 코드 입니다.
 
 ```python
 import torch
 
-x = torch.FloatTensor(2, 2)
-x = torch.FloatTensor([[1, 2], [3, 4]])
+x = torch.Tensor(2, 2)
+x = torch.Tensor([[1, 2], [3, 4]])
 x = torch.from_numpy(x)
 ```
 
@@ -19,35 +21,59 @@ x = [[1, 2], [3, 4]]
 x = np.array(x)
 ```
 
+보시다시피, PyTorch는 굉장히 NumPy와 비슷한 방식의 코딩 스타일을 갖고 있고, 따라서 코드를 보고 해석하거나 새롭게 작성함에 있어서 굉장히 수월합니다.
+
+Tensor는 아래와 같이 다양한 자료형을 제공 합니다.
+
+| Data type | dtype | CPU tensor | GPU tensor | 
+ | --- | --- | --- | --- | 
+| 32-bit floating point | torch.float32 or torch.float | torch.FloatTensor | torch.cuda.FloatTensor
+ | 64-bit floating point | torch.float64 or torch.double | torch.DoubleTensor | torch.cuda.DoubleTensor | 
+ | 16-bit floating point | torch.float16 or torch.half | torch.HalfTensor | torch.cuda.HalfTensor | 
+ | 8-bit integer (unsigned) | torch.uint8 | torch.ByteTensor | torch.cuda.ByteTensor | 
+ | 8-bit integer (signed) | torch.int8 | torch.CharTensor | torch.cuda.CharTensor | 
+ | 16-bit integer (signed) | torch.int16 or torch.short | torch.ShortTensor | torch.cuda.ShortTensor
+ | 32-bit integer (signed) | torch.int32 or torch.int | torch.IntTensor | torch.cuda.IntTensor | 
+ | 64-bit integer (signed) | torch.int64 or torch.long | torch.LongTensor | torch.cuda.LongTensor | 
+
+torch.Tensor를 통해 선언 하게 되면 디폴트 타입인 torch.FloatTensor로 선언하는 것과 같습니다.
+
+좀 더 자세한 참고를 원한다면 [PyTorch docs](https://pytorch.org/docs/stable/tensors.html)를 방문하시면 됩니다.
+
 ## Autograd
 
-PyTorch는 tensor들 사이의 연산을 할 때마다 computational graph를 생성하여 연산의 결과물이 어떤 tensor로부터 어떤 연산을 통해서 왔는지 추적 하고 있습니다. 따라서 우리가 최종적으로 나온 스칼라(scalar)에 미분과 back-propagation(역전파)을 수행하도록 하였을 때, 자동으로 각 tensor 별로 자기 자신의 부모노드(parent node)에 해당하는 tensor를 찾아서 계속해서 $1$back-propagation 할 수 있도록 합니다.
+PyTorch는 자동으로 미분 및 back-propagation을 해주는 Autograd 기능을 갖고 있습니다. 따라서 우리는 대부분의 tensor간의 연산들을 크게 신경 쓸 필요 없이 수행 하고, back-propagation을 수행하는 명령어를 호출 해 주기만 하면 됩니다. 
 
-
-
-자동으로 gradient를 계산할 수 있게 하기 위해서, tensor를 wrapping해 주는 class입니다. Variable은 gradient를 저장할 수 있는 **grad**와 tensor를 저장하는 **data** 속성\(attribute\)을 갖고 있습니다. 또한 **grad\_fn**이라는 속성은 variable을 생성한 연산\(또는 함수\)를 가리키고 있어, 연산\(feed-forward\)에 따라 마지막까지 자동으로 생성된 Variable을 사용하여 최초 계산에 사용된 Variable까지의 gradient를 자동으로 계산 해 줍니다.
-
-![](http://pytorch.org/tutorials/_images/Variable.png)  
-\[Structure of Variable. Image from [PyTorch Tutorial](http://pytorch.org/tutorials/beginner/deep_learning_60min_blitz.html)\]
-
-requires\_grad 속성은 직접 생성한 경우에는 False 값을 default로 갖습니다. 연산을 통해 자동으로 생성된 경우\(위의 코드 예제에서 z\)에는 True 값만 갖도록 됩니다. 따라서 결론적으로 사용자가 지정한 연산/계산을 통해 생성된 computation graph의 leaf node에 해당되는 variable만 requires\_grad 값을 True 또는 False로 지정할 수 있습니다. 만약 gradient 자체를 구할 일이 없을 경우\(inference 모드, 훈련 중이 아닐 때\)에는 volatile 속성을 True 값을 주면 해당 Variable이 속한 computation graph 전체의 gradient를 구하지 않게 됩니다.
+이를 위해서, PyTorch는 tensor들 사이의 연산을 할 때마다 computational graph를 생성하여 연산의 결과물이 어떤 tensor로부터 어떤 연산을 통해서 왔는지 추적 하고 있습니다. 따라서 우리가 최종적으로 나온 스칼라(scalar)에 미분과 back-propagation(역전파)을 수행하도록 하였을 때, 자동으로 각 tensor 별로 자기 자신의 자식노드(child node)에 해당하는 tensor를 찾아서 계속해서 back-propagation 할 수 있도록 합니다.
 
 ```py
 import torch
-from torch.autograd import Variable
 
 x = torch.FloatTensor(2, 2)
-x = Variable(x, requires_grad = True)
-
 y = torch.FloatTensor(2, 2)
-y = Variable(y, requires_grad = False)
+y.requires_grad_(True)
 
-z = (x + y) + Variable(torch.FloatTensor(2, 2), requires_grad = True)
+z = (x + y) + torch.FloatTensor(2, 2)
 ```
 
-위의 코드에서 x와 y를 Variable로 선언하고 더한 후에, 변수로 지정하지 않은 Variable을 더하고 그 값을 z에 저장합니다. 따라서 아래와 같은 computation graph를 가지게 됩니다. x, y, z는 leaf node에 해당하므로 requires_grad를 사용자가 임의로 설정할 수 있습니다. 이후에 z에 gradient가 전달되어 오면, 연산 과정에서 형성된 tree 구조를 통해 chide node들에게 gradient를 전달 할 수 있습니다.
-
 ![](/assets/pytorch-intro-xyz-graph.png)
+
+위의 예제에서처럼 $$x$$와 $$y$$를 생성하고 둘을 더하는 연산을 수행하면 $$x+y$$, 이에 해당하는 tensor가 생성되어 computational graph에 할당 됩니다. 그리고 다시 생성 된 $$2 \times 2$$ tensor를 더해준 뒤, 이를 $$z$$에 assign(할당) 하게 됩니다. 따라서 $$z$$로부터 back-propgation을 수행하게 되면, 이미 생성된 computational graph를 따라서 gradient를 전달 할 수 있게 됩니다.
+
+자동으로 gradient를 계산할 수 있게 하기 위해서, tensor를 wrapping해 주는 class입니다. Variable은 gradient를 저장할 수 있는 **grad**와 tensor를 저장하는 **data** 속성\(attribute\)을 갖고 있습니다. 또한 **grad\_fn**이라는 속성은 variable을 생성한 연산\(또는 함수\)를 가리키고 있어, 연산\(feed-forward\)에 따라 마지막까지 자동으로 생성된 Variable을 사용하여 최초 계산에 사용된 Variable까지의 gradient를 자동으로 계산 해 줍니다.
+
+Gradient를 구할 필요가 없는 연산의 경우에는 아래와 같이 with 문법을 사용하여 연산을 수행할 수 있습니다. back-propagation이 필요 없는 추론(inference) 등을 수행 할 때 유용하며, gradient를 구하기 위한 사전 작업들(computational graph 생성)을 생략할 수 있기 때문에, 연산 속도 및 메모리 사용에 있어서도 큰 이점을 지니게 됩니다.
+
+```python
+import torch
+
+with torch.no_grad():
+    x = torch.FloatTensor(2, 2)
+    y = torch.FloatTensor(2, 2)
+    y.requires_grad_(True)
+
+    z = (x + y) + torch.FloatTensor(2, 2)
+```
 
 ## How to Do Basic Operations \(Forward\)
 
@@ -57,29 +83,36 @@ $$
 y = xW^t + b
 $$
 
+사실 이 수식에서 $$x$$는 vector이지만, 보통 우리는 딥러닝을 수행 할 때에 mini-batch 기준으로 수행하므로, $$x$$가 matrix라고 가정 하겠습니다.
+
+이를 좀 더 구현하기 쉽게 아래와 같이 표현 해 볼 수도 있습니다.
+
+$$
+\begin{aligned}
+y&=f(x; \theta)~where~\theta=\{W, b\}
+\end{aligned}
+$$
+
 이러한 linaer layer의 기능은 아래와 같이 PyTorch로 구현할 수 있습니다.
 
 ```py
 import torch
-from torch.autograd import Variable
 
-def linear(x):
-    W = Variable(torch.FloatTensor(10, 5), requires_grad = True)
-    b = Variable(torch.FloatTensor(5), requires_grad = True)
-    
+def linear(x, W, b):    
     y = torch.mm(x, W) + b
     
     return y
 
 x = torch.FloatTensor(16, 10)
-x = Variable(x)
+W = torch.FloatTensor(10, 5)
+b = torch.FloatTensor(5)
 
-y = linear(x)
+y = linear(x, W, b)
 ```
 
 ### Broadcasting
 
-PyTorch에 새롭게 추가된 기능인 Broadcasting에 대해서 설명 해 보겠습니다. NumPy에서 제공되는 broadcasting과 동일하게 동작합니다. **matmul()**을 사용하면 임의의 차원의 tensor끼리 연산을 가능하게 해 줍니다. 이전에는 강제로 2차원을 만들거나 하여 곱해주는 수 밖에 없었습니다. 다만, 입력으로 주어지는 tensor들의 차원에 따라서 규칙이 적용됩니다. 그 규칙은 아래와 같습니다.
+Broadcasting에 대해서 설명 해 보겠습니다. 역시 NumPy에서 제공되는 broadcasting과 동일하게 동작합니다. **matmul()**을 사용하면 임의의 차원의 tensor끼리 연산을 가능하게 해 줍니다. 이전에는 강제로 2차원을 만들거나 하여 곱해주는 수 밖에 없었습니다. 다만, 입력으로 주어지는 tensor들의 차원에 따라서 규칙이 적용됩니다. 그 규칙은 아래와 같습니다.
 
 ```py
 >>> # vector x vector
@@ -155,7 +188,7 @@ torch.Size([3, 1, 7])
 RuntimeError: The size of tensor a (2) must match the size of tensor b (3) at non-singleton dimension 1
 ```
 
-Broadcasting 연산의 가장 주의해야 할 점은, 의도하지 않은 broadcasting연산으로 인해서 bug가 발생할 가능성 입니다. 원래는 같은 size의 tensor끼리 연산을 해야 하는 부분인데, 코딩하며 실수에 의해서 다른 size가 되었을 때, 덧셈 또는 곱셈을 하고 error가 나서 알아차려야 하지만, error가 나지 않고 넘어가 버린 상태에서, 결국 기대하던 값과 다른 값이 결과로 나오게 되어, 원인을 찾느라 고생할 수도 있습니다. 따라서 코딩 할 때에 요령이 필요합니다.
+Broadcasting 연산의 가장 주의해야 할 점은, 의도하지 않은 broadcasting연산으로 인해서 예상치 못한 버그가 발생할 가능성 입니다. 원래는 같은 크기의 tensor끼리 연산을 해야 하는 부분인데, 실수에 의해서 다른 크기가 되었을 때, 원래대로라면 덧셈 또는 곱셈을 하고 runtime error가 나서 알아차렸겠지만, broadcasting으로 인해서 runtime error가 나지 않고 의도치 않은 연산을 통해 프로그램이 정상적으로 종료 될 수 있습니다. 하지만 실행 결과로는 결국 기대하던 값과 다른 값이 나오게 되어, 이에 대한 원인을 찾느라 고생할 수도 있습니다. 따라서 주의가 필요합니다.
 
 > 참고사이트: 
 > - [http://pytorch.org/docs/master/torch.html?highlight=matmul\#torch.matmul](http://pytorch.org/docs/master/torch.html?highlight=matmul#torch.matmul)
@@ -172,15 +205,14 @@ nn.Module의 상속한 사용자 정의 class는 다시 내부에 nn.Module을 �
 ```py
 import torch
 import torch.nn as nn
-from torch.autograd import Variable
 
 class MyLinear(nn.Module):
 
     def __init__(self, input_size, output_size):
         super(MyLinear, self).__init__()
         
-        self.W = Variable(torch.FloatTensor(input_size, output_size), requires_grad = True)
-        self.b = Variable(torch.FloatTensor(output_size), requires_grad = True)
+        self.W = torch.FloatTensor(input_size, output_size)
+        self.b = torch.FloatTensor(output_size)
         
     def forward(self, x):
         y = torch.mm(x, self.W) + self.b
