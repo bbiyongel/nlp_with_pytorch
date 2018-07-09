@@ -27,7 +27,7 @@ $$
 $$
 \begin{aligned}
 \hat{y}_t=h_t&=f(x_t,h_{t-1};\theta) \\
-&=\tanh(W_{ih}x_t+b_{ih}+W_{hh}h_{t−1}+b_{hh}) \\
+&=\tanh(W_{ih} x_t + b_{ih} + W_{hh} h_{t-1} + b_{hh}) \\
 &where~\theta=[W_{ih};b_{ih};W_{hh};b_{hh}].
 \end{aligned}
 $$
