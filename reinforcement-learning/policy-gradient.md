@@ -263,3 +263,38 @@ $$
 위의 수식에서도 이전 MLE의 gradient descent 수식과 마찬가지로, $$\alpha$$와 $$ Q^{\pi_\theta}(s_t,a_t) $$가 gradient 앞에 붙어서 learning rate역할을 하는 것을 볼 수 있습니다. 따라서 reward에 따라서 해당 action들로부터 배우는 것을 더욱 강화하거나 반대방향으로 부정할 수 있는 것 입니다. 마치 좀 더 쉽게 비약적으로 설명하면 결과에 따라서 동적으로 learning rate를 알맞게 조절해 주는 것이라고 이해할 수 있습니다.
 
 ## REINFORCE with baseline
+
+## Value based vs Policy based
+
+![](/assets/rl-value-vs-policy.png)
+
+- Action-value based method:
+    - Learn the values of actions and then selected actions based on their estimated action values
+    - Its policies would not even exist without the action-value estimates. 
+
+- Policy based method:
+    - Learn a parameterized policy that can select actions without consulting a value function. 
+    - A value function may still be used to learn the policy parameter, but is not required for action selection. 
+
+- Action-value based method:
+    - Pros: better performance
+    - Cons: hard to converge
+
+- Policy based method:
+    - Pros: 
+        - easy to converge
+        - can learn stochastic policy and continuous actions
+    - Cons: lower performance (local minima)
+
+# Exploration vs Exploitation
+
+$$\epsilon$$-greedy
+
+$$
+a=\begin{cases}
+   a^* \text{with probability } 1-\epsilon  \\
+   \text{random sampling with probability } \epsilon
+\end{cases}
+$$
+
+What if $$\epsilon$$ is big or small?
