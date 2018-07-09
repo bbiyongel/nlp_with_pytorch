@@ -40,7 +40,13 @@ $$
 
 ## Back-propagation Through Time (BPTT)
 
-그럼 이렇게 feed-forward 된 이후에 오류의 back-propagation(역전파)은 어떻게 될까요? 앞서 구한 손실 $$\mathcal{L}$$에 미분을 통해 back-propagation 하게 되면, 각 time-step 별로 뒤($$t$$가 큰 time-step)로부터 gradient가 구해지고, 이전 time-step ($$t-1$$)의 gradient에 더해지게 됩니다. 즉, $$t$$가 $$0$$에 가까워질수록 RNN 파라미터($$\theta$$)의 gradient는 각 time-step 별 gradient가 더해져 점점 커지게 됩니다.
+그럼 이렇게 feed-forward 된 이후에 오류의 back-propagation(역전파)은 어떻게 될까요? 우리는 수식보다 좀 더 개념적으로 접근 해 보도록 하겠습니다.
+
+각 time-step의 RNN에 사용된 파라미터 $$\theta$$는 모든 시간에 공유되어 사용 되는 것을 기억 해 봅시다. 따라서, 앞서 구한 손실 $$\mathcal{L}$$에 미분을 통해 back-propagation 하게 되면, 각 time-step 별로 뒤($$t$$가 큰 time-step)로부터 $$\theta$$의 gradient가 구해지고, 이전 time-step ($$t-1$$) $$\theta$$의 gradient에 더해지게 됩니다. 즉, $$t$$가 $$0$$에 가까워질수록 RNN 파라미터 $$\theta$$의 gradient는 각 time-step 별 gradient가 더해져 점점 커지게 됩니다.
+
+$$
+\frac{\partial{\mathcal{L}}}{\partial{\theta}}=\sum_{t}{\frac{\partial{loss(y_t,\hat{y}_t)}}{\partial{\theta}}}
+$$
 
 ![](/assets/rnn-back-prop.png)
 
@@ -50,9 +56,13 @@ $$
 
 ## Gradient Vanishing
 
-
+상기 했듯이, BPTT로 인해 RNN은 마치 time-step 만큼의 layer가 있는 것과 비슷한 속성을 띄게 됩니다. 그런데 위의 RNN의 수식을 보면, 활성함수(activation function)으로 $$\tanh$$가 사용 된 것을 볼 수 있습니다. $$\tanh$$은 아래와 같은 형태를 띄고 있습니다.
 
 ![](http://mathworld.wolfram.com/images/interactive/TanhReal.gif)
+
+$$\tanh$$의 양 끝은 수평에 가깝게되어 점점 $$-1$$ 또는 $$1$$에 근접하는 것을 볼 수 있는데요. 문제는 이렇게 되면, $$\tanh$$ 양 끝의 gradient는 0에 가까워진다는것 입니다. 따라서 $$\tanh$$ 양 끝의 값을 반환하는 layer의 경우에는 gradient가 0에 가깝게 되어, 그 다음으로 back-propgation 되는 layer는 제대로 된 gradient를 전달 받을 수가 없게 됩니다. 이를 gradient vanishing이라고 합니다.
+
+따라서, time-step이 많거나 여러층으로 되어 있는 신경망의 경우에는 이 gradient vanishing 문제가 쉽게 발생하게 되고, 이는 딥러닝 이전의 신경망 학습에 큰 장애가 되곤 하였습니다.
 
 ## Multi-layer RNN
 
