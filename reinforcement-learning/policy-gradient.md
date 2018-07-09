@@ -127,7 +127,7 @@ Policy Gradient에 대한 자세한 설명은 원 논문인 [\[Sutton at el.1999
 
 $$
 \begin{aligned}
-&(X, Y) \in \mathcal{B} \\
+\mathcal{B} &= \{(X_i, Y_i)\}_{i=1}^{N}\\
 X&=\{x_1, x_2, \cdots, x_n\} \\
 Y&=\{y_0, y_1, \cdots, y_m\}
 \end{aligned}
@@ -154,8 +154,8 @@ $$\theta$$에 대해 MLE를 수행하기 위해서 우리는 목적함수(object
 
 $$
 \begin{aligned}
-J(\theta)&=-\sum_{(X, Y) \in \mathcal{B}}{P(Y|X)\log{P(Y|X;\theta)}} \\
-&=-\sum_{(X, Y) \in \mathcal{B}}{\sum_{i = 0}^{m}{\log{P(y_i|X, y_{<i}; \theta)}}}
+J(\theta)&=-\frac{1}{N}\sum_{(X, Y) \in \mathcal{B}}{P(Y|X)\log{P(Y|X;\theta)}} \\
+&=-\frac{1}{N}\sum_{(X, Y) \in \mathcal{B}}{\sum_{i = 0}^{m}{\log{P(y_i|X, y_{<i}; \theta)}}}
 \end{aligned}
 $$
 
@@ -164,7 +164,7 @@ $$
 $$
 \begin{aligned}
 \theta &\leftarrow \theta - \gamma \nabla J(\theta) \\
-\theta &\leftarrow \theta + \gamma \sum_{(X, Y) \in \mathcal{B}}{\sum_{i = 0}^{m}{\nabla_\theta\log{P(y_i|X, y_{i}; \theta)}}}
+\theta &\leftarrow \theta + \gamma \frac{1}{N}\sum_{(X, Y) \in \mathcal{B}}{\sum_{i = 0}^{m}{\nabla_\theta\log{P(y_i|X, y_{i}; \theta)}}}
 \end{aligned}
 $$
 
