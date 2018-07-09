@@ -45,6 +45,89 @@ $$
 
 위와 같은 가정을 가지고 수식을 간단히 표현할 수 있게 되면, 이후 gradient를 구한다거나 할 때에 수식이 간단해져 매우 편리합니다.
 
+# Brief About Reinforcement Learning
+
+## Universe
+
+![](/assets/rl-universe.png)
+
+$$
+S_0,A_0,R_1,S_1,A_1,R_2,S_2,A_2,R_3,S_3,A_3,\cdots
+$$
+
+## Markov Decision Process
+
+WORLD could be simplify by Markov Assumption
+If we are in present(T = t),
+Future(T > t) will be independent with Past(T < t).
+
+In n-gram
+
+$$
+P(x_i|x_1,x_2,\cdots,x_{i-1}) \approx P(x_i|x_{i-k},\cdots,x_{i-1})
+$$
+
+Next word is future state.
+k-words are considered as current state.
+Others are past states.
+
+
+![](/assets/rl-rpc.png)
+
+## Reward
+
+$$G_t$$, is defined as some specific function of the reward sequence. 
+In the simplest case the return is the sum of the rewards
+
+$$
+G_t	\doteq R_{t+1}+R_{t+2}+R_{t+3}+\cdots+R_{T}
+$$
+
+$$
+G_t	\doteq R_{t+1}+\gamma R_{t+2}+\gamma^2 R_{t+3}+\cdots=\sum_{k=0}^\infty{\gamma^k R_{t+k+1}}
+$$
+
+## Policy
+
+A policy is a mapping from states to probabilities of selecting each possible action.
+
+$$
+\pi(a|s)=P(A_t=a|S_t=s)
+$$
+
+![](/assets/rl-policy-choice.png)
+
+## Value Function
+
+The value function of a state $$s$$ under a policy $$\pi$$, denoted $$v_\pi(s)$$, is the expected return when starting in $$s$$ and following $$\pi$$ thereafter.
+
+$$
+v_\pi(s) \doteq \mathbb{E}_\pi[G_t|S_t=s]=\mathbb{E}_\pi\bigg[\sum_{k=0}^\infty{\gamma^k R_{t+k+1}\Big|S_t=s}\bigg], \forall s \in \mathcal{S}
+$$
+
+## Action-Value Function (Q-Function)
+
+value of taking action a in state $$s$$ under a policy $$\pi$$, denoted $$q_\pi(s, a)$$, as the expected return starting from $$s$$, taking the action $$a$$, and thereafter following policy $$\pi$$.
+We call $$q_\pi$$ the action-value function for policy $$\pi$$.
+
+$$
+q_\pi(s,a) \doteq \mathbb{E}_\pi[G_t|S_t=s,A_t=a]=\mathbb{E}_\pi\bigg[\sum_{k=0}^\infty{\gamma^k R_{t+k+1}\Big|S_t=s,A_t=a}\bigg]
+$$
+
+## Q-learning
+
+$$
+Q(S_t,A_t) \leftarrow Q(S_t,A_t)+\alpha\Big[\overbrace{R_{t+1}+\gamma\max_aQ(S_{t+1},a)}^{\text{Target}}-\overbrace{Q(S_t,A_t)}^{\text{Current}}\Big]
+$$
+
+## Deep Q-learning (DQN)
+
+![](/assets/rl-atari.png)
+
+$$
+Q(S_t,A_t) \leftarrow \underbrace{Q(S_t,A_t)}_{\text{Approximated}}+\alpha\Big[R_{t+1}+\gamma\max_aQ(S_{t+1},a)-Q(S_t,A_t)\Big]
+$$
+
 # Policy Gradients
 
 사실 강화학습(RL) 자체는 매우 유서 깊고 방대한 학문입니다. 따라서 이 책에서 깊은 내용을 모두 다루는 것은 어렵습니다. 우리는 NLP에 적용 가능한 방법에 대해서 그 개념을 간단히 다루고 넘어가도록 하겠습니다.
