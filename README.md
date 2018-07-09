@@ -10,9 +10,9 @@
 * Python
 * Calculus, Linear Algebra
 * Basic Probability and Statistics
-* Basic Machine Learning
+* Basic Deep Learning
   * Objective function
-  * Optimization such as gradient descent
+  * Gradient descent
 
 ### Notice
 
