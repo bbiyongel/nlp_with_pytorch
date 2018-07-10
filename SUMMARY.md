@@ -65,7 +65,7 @@
   * [Evaluation](neural-machine-translation/eval.md)
   * [Source Code](neural-machine-translation/code.md)
 * [Advanced Topic on NMT](adv-nmt/cover.md)
-  * [Multilingual NMT](adv-nmtn/multilingual-nmt.md)
+  * [Multilingual NMT](adv-nmt/multilingual-nmt.md)
   * [Using Monolingual Corpora](adv-nmt/monolingual-corpus.md)
   * [Fully Convolutional Seq2seq](adv-nmt/fconv.md)
   * [Transformer](adv-nmt/transformer.md)

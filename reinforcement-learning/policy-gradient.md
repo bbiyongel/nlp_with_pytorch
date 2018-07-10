@@ -91,7 +91,7 @@ $$
 G_t	\doteq R_{t+1}+R_{t+2}+R_{t+3}+\cdots+R_{T}
 $$
 
-이때 우리는 discount factor $$\gamma$$를 도입하여 수식을 다르게 표현 할 수도 있습니다. Discount factor가 도입됨에 따라서 우리는 먼 미래의 보상보다 가까운 미래의 보상을 좀 더 중시해서 다룰 수 있게 됩니다.
+이때 우리는 discount factor $$\gamma$$를 도입하여 수식을 다르게 표현 할 수도 있습니다. $$\gamma$$는 0과 1 사이의 값으로, discount factor가 도입됨에 따라서 우리는 먼 미래의 보상보다 가까운 미래의 보상을 좀 더 중시해서 다룰 수 있게 됩니다.
 
 $$
 G_t	\doteq R_{t+1}+\gamma R_{t+2}+\gamma^2 R_{t+3}+\cdots=\sum_{k=0}^\infty{\gamma^k R_{t+k+1}}
