@@ -1,5 +1,4 @@
 # Preprocessing
 
-![](https://nlp.stanford.edu/manning/images/Christopher_Manning_027_1154x1154.jpg)
-
-[Christopher Manning](https://nlp.stanford.edu/manning/) - Image from Web
+![](https://upload.wikimedia.org/wikipedia/commons/a/a9/Noam_Chomsky_portrait_2017.jpg)<br>
+[Noam Chomsky](https://en.wikipedia.org/wiki/Noam_Chomsky) - Image from Wikipedia

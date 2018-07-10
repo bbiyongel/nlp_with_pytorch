@@ -1,5 +1,4 @@
 # Advanced Topic on Neural Machine Translation
 
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Pieter_Bruegel_the_Elder_-_The_Tower_of_Babel_%28Vienna%29_-_Google_Art_Project_-_edited.jpg/1200px-Pieter_Bruegel_the_Elder_-_The_Tower_of_Babel_%28Vienna%29_-_Google_Art_Project_-_edited.jpg)
-
-[Tower of Babel](https://en.wikipedia.org/wiki/Tower_of_Babel) - Image from Wikipedia
+![](https://nlp.stanford.edu/manning/images/Christopher_Manning_027_1154x1154.jpg)<br>
+[Christopher Manning](https://nlp.stanford.edu/manning/) - Image from Web
