@@ -36,7 +36,7 @@
   * [GloVe](word-embedding-vector/glove.md)
   * [FastText](word-embedding-vector/fasttext.md)
   * [Advanced embedding](word-embedding-vector/advanced-embedding.md)
-* [Sequence Modeling](sequential-problem/cover.md)
+* [Sequence Modeling](sequential-modeling/cover.md)
   * [Intro](sequential-modeling/intro.md)
   * [Recurrent Neural Network](sequential-modeling/rnn.md)
   * [Long Short Term Memory](sequential-modeling/lstm.md)
