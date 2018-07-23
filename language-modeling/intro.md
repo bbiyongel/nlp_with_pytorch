@@ -45,7 +45,11 @@ $$
 우리는 이 수식을 베이즈 정리(Bayes Theorem)에 따라 조건부 확률(Conditional Probability)로 표현할 수 있습니다.
 
 $$
-P(w_1, w_2) = P(w_1)P(w_2|w_1)
+\begin{aligned}
+P(w_1, w_2) &= P(w_1)P(w_2|w_1) \\
+&\text{because} \\
+P(w_2|w_1)&=\frac{P(w_1,w_2)}{P(w_1)}.
+\end{aligned}
 $$
 
 좀 더 나아가서 Chain Rule을 통해, $$ W = \{ w_1, w_2, w_3, w_4 \}$$, 4개의 단어가 한 문장 안에 있을 때를 표현 해 보면 아래와 같습니다.
@@ -53,6 +57,16 @@ $$
 $$
 P(W)=P(w_1, w_2, w_3, w_4)=P(w_1)P(w_2|w_1)P(w_3|w_1, w_2)P(w_4|w_1, w_2, w_3)
 $$
+
+여기서 Chain Rule(연쇄 법칙)이란, 조건부 확률(conditional probability)을 사용하여 결합 확률(joint probability)를 계산 하는 방법으로, 아래와 같이 유도 할 수 있습니다.
+
+$$
+\begin{aligned}
+P(A,B,C,D)&=P(D|A,B,C)P(A,B,C) \\
+&=P(D|A,B,C)P(C|A,B)P(A,B) \\
+&=P(D|A,B,C)P(C|A,B)P(B|A)P(A)
+\end{aligned}
+$$ 
 
 우항을 해석해보면, $$ w_1 $$가 나타날 확률과 $$ w_1 $$가 주어졌을 때 $$ w_2 $$가 나타날 확률, $$ w_1, w_2 $$가 주어졌을 때 $$ w_3 $$가 주어졌을 확률, $$ w_1, w_2, w_3 $$가 주어졌을 때 $$ w_4 $$가 나타날 확률을 곱하는 것을 알 수 있습니다. 이로써 우리는 language model을 통해서 문장에 대한 확률 뿐만 아니라, 단어와 단어 사이의 확률도 정의 할 수 있습니다. 우리는 이를 일반화하여 아래와 같이 표현할 수 있습니다.
 

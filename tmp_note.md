@@ -1,14 +1,23 @@
 # Temporal Note for Markdown Equations
 
-## Chain Rule
+## Add one Smoothing
 
 $$
 \begin{aligned}
-P(A,B,C,D)&=P(D|A,B,C)P(A,B,C) \\
-&=P(D|A,B,C)P(C|A,B)P(A,B) \\
-&=P(D|A,B,C)P(C|A,B)P(B|A)P(A)
+P(w_i|w_{<i}) \approx \frac{C(w_{<i},w_i)+1}{C(w_{<i})+V}
 \end{aligned}
-$$ 
+$$
+
+$$
+\begin{aligned}
+P(w_i|w_{<i}) &\approx \frac{C(w_{<i},w_i)+k}{C(w_{<i})+kV} \\
+&\approx \frac{C(w_{<i},w_i)+(m/V)}{C(w_{<i})+m}
+\end{aligned}
+$$
+
+$$
+P(w_i|w_{<i}) \approx \frac{C(w_{<i},w_i)+m P(w_i)}{C(w_{<i})+m}
+$$
 
 ## Auto-regressive and Teacher Forcing on RNNLM
 
