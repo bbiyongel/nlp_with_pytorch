@@ -18,7 +18,7 @@ $$
 
 $$
 \begin{aligned}
-\mathcal{L}(Y)&=-\sum_{i=1}^{m+1}{\log{P(y_i|X,y_{i};\theta)}} \\
+\mathcal{L}(Y)&=-\sum_{i=1}^{m+1}{\log{P(y_i|X,y_{<i};\theta)}} \\
 \theta &\leftarrow \theta-\lambda\frac{1}{N}\sum_{i=1}^{N}{\mathcal{L}(Y_i)}
 \end{aligned}
 $$
