@@ -8,7 +8,7 @@ P(A,B,C,D)&=P(D|A,B,C)P(A,B,C) \\
 &=P(D|A,B,C)P(C|A,B)P(A,B) \\
 &=P(D|A,B,C)P(C|A,B)P(B|A)P(A)
 \end{aligned}
-$$
+$$ 
 
 ## Auto-regressive and Teacher Forcing on RNNLM
 
