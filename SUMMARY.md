@@ -2,6 +2,7 @@
 
 * [소개글](README.md)
 * [Index](index_list.md)
+* [Temporal Note](tmp_note.md)
 * [Natural Language Processing with Deeplearning](nlp-with-deeplearning/cover.md)
   * [Intro](nlp-with-deeplearning/intro.md)
   * [Deeplearning](nlp-with-deeplearning/deeplearning.md)
