@@ -1,5 +1,6 @@
 # Temporal Note for Markdown Equations
 
+
 $$
 Y=argmax_Y P(Y|X)=argmax_Y \prod_{i=1}^{n}{P(y_i|X,y_{<i})}
 $$
