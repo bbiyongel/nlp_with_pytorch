@@ -1,7 +1,6 @@
 # Summary
 
 * [소개글](README.md)
-* [To read](references.md)
 * [Index](index_list.md)
 * [Natural Language Processing with Deeplearning](nlp-with-deeplearning/cover.md)
   * [Intro](nlp-with-deeplearning/intro.md)
@@ -84,3 +83,4 @@
   * [Edinburgh's NMT](productization/nematus.md)
   * [Booking.com's NMT](productization/booking-com.md)
   * [Microsoft's NMT](productization/microsoft.md)
+* [References](references.md)

@@ -392,7 +392,7 @@ def train(model, x, y, optim):
     # one-step of gradient descent
     optim.step()
     
-    return loss.data[0]
+    return loss.data
 ```
 
 그럼 위의 함수들을 사용 하기 위해서 하이퍼 파라미터(hyper-parameter)를 설정 하겠습니다.
