@@ -14,9 +14,13 @@
 * Python
 * Calculus, Linear Algebra
 * Probability and Statistics
-* Basic Deep Learning
-  * Objective function
+* Basic Machine Learning
+  * Objective / loss function
+  * Linear / logistic regression
   * Gradient descent
+* Basic Deep Learning
+  * Back-propagation
+  * Activation function
 
 ## 지은이: 김기현(Kim, Ki Hyun)
 
