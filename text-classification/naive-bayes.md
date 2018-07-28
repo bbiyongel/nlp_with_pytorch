@@ -43,35 +43,35 @@ $$
 
 $$
 \begin{gathered}
-\mathcal{C}=\{\color{blue}positive\color{default},\color{red}negative\color{default}\} \\
+\mathcal{C}=\{\color{blue}pos\color{default},\color{red}neg\color{default}\} \\
 \mathcal{D}=\{d_1,d_2,\cdots\}
 \end{gathered}
 $$
 
 $$
 \begin{aligned}
-P(\color{blue}positive\color{default}|I,am,happy,to,see,this,movie)&= \frac{P(I,am,happy,to,see,this,movie|\color{blue}positive\color{default})P(\color{blue}positive\color{default})}{P(I,am,happy,to,see,this,movie)}\\
-&\approx \frac{P(I|\color{blue}positive\color{default})P(am|\color{blue}positive\color{default})P(happy|\color{blue}positive\color{default})\cdots P(movie|\color{blue}positive\color{default})P(\color{blue}positive\color{default})}{P(I,am,happy,to,see,this,movie)} \\
+P(\color{blue}pos\color{default}|I,am,happy,to,see,this,movie)&= \frac{P(I,am,happy,to,see,this,movie|\color{blue}pos\color{default})P(\color{blue}pos\color{default})}{P(I,am,happy,to,see,this,movie)}\\
+&\approx \frac{P(I|\color{blue}pos\color{default})P(am|\color{blue}pos\color{default})P(happy|\color{blue}pos\color{default})\cdots P(movie|\color{blue}pos\color{default})P(\color{blue}pos\color{default})}{P(I,am,happy,to,see,this,movie)} \\
 \\
-P(happy|\color{blue}positive\color{default})&\approx\frac{Count(happy, \color{blue}positive\color{default})}{\sum_{j=1}^{|V|}{Count(w_j,\color{blue}positive\color{default})}} \\
-P(\color{blue}positive\color{default})&\approx\frac{Count(\color{blue}positive\color{default})}{|\mathcal{D}|}
+P(happy|\color{blue}pos\color{default})&\approx\frac{Count(happy, \color{blue}pos\color{default})}{\sum_{j=1}^{|V|}{Count(w_j,\color{blue}pos\color{default})}} \\
+P(\color{blue}pos\color{default})&\approx\frac{Count(\color{blue}pos\color{default})}{|\mathcal{D}|}
 \end{aligned}
 $$
 
 $$
 \begin{aligned}
-P(\color{red}negative\color{default}|I,am,happy,to,see,this,movie)&= \frac{P(I,am,happy,to,see,this,movie|\color{red}negative\color{default})P(\color{red}negative\color{default})}{P(I,am,happy,to,see,this,movie)}\\
-&\approx \frac{P(I|\color{red}negative\color{default})P(am|\color{red}negative\color{default})P(happy|\color{red}negative\color{default})\cdots P(movie|\color{red}negative\color{default})P(\color{red}negative\color{default})}{P(I,am,happy,to,see,this,movie)} \\
+P(\color{red}neg\color{default}|I,am,happy,to,see,this,movie)&= \frac{P(I,am,happy,to,see,this,movie|\color{red}neg\color{default})P(\color{red}neg\color{default})}{P(I,am,happy,to,see,this,movie)}\\
+&\approx \frac{P(I|\color{red}neg\color{default})P(am|\color{red}neg\color{default})P(happy|\color{red}neg\color{default})\cdots P(movie|\color{red}neg\color{default})P(\color{red}neg\color{default})}{P(I,am,happy,to,see,this,movie)} \\
 \\
-P(happy|\color{red}negative\color{default})&\approx\frac{Count(happy, \color{red}negative\color{default})}{\sum_{j=1}^{|V|}{Count(w_j,\color{red}negative\color{default})}} \\
-P(\color{red}negative\color{default})&\approx\frac{Count(\color{red}negative\color{default})}{|\mathcal{D}|}
+P(happy|\color{red}neg\color{default})&\approx\frac{Count(happy, \color{red}neg\color{default})}{\sum_{j=1}^{|V|}{Count(w_j,\color{red}neg\color{default})}} \\
+P(\color{red}neg\color{default})&\approx\frac{Count(\color{red}neg\color{default})}{|\mathcal{D}|}
 \end{aligned}
 $$
 
 $$
 \begin{gathered}
-P(\color{blue}positive\color{default}|I,am,not,happy,to,see,this,movie) \\
-P(\color{red}negative\color{default}|I,am,not,happy,to,see,this,movie) \\
+P(\color{blue}pos\color{default}|I,am,not,happy,to,see,this,movie) \\
+P(\color{red}neg\color{default}|I,am,not,happy,to,see,this,movie) \\
 \\
 P(not,happy) \neq P(not)P(happy)
 \end{gathered}
@@ -81,9 +81,9 @@ $$
 
 $$
 \begin{gathered}
-P(happy|\color{blue}positive\color{default})\approx\frac{Count(happy, \color{blue}positive\color{default})}{\sum_{j=1}^{|V|}{Count(w_j,\color{blue}positive\color{default})}}=0, \\
+P(happy|\color{blue}pos\color{default})\approx\frac{Count(happy, \color{blue}pos\color{default})}{\sum_{j=1}^{|V|}{Count(w_j,\color{blue}pos\color{default})}}=0, \\
 \\
-\text{where }Count(happy, \color{blue}positive\color{default})=0.
+\text{where }Count(happy, \color{blue}pos\color{default})=0.
 \end{gathered}
 $$
 
