@@ -43,18 +43,18 @@ $$
 
 $$
 \begin{gathered}
-\mathcal{C}=\{\color{navy}positive\color{default},\color{red}negative\color{default}\} \\
+\mathcal{C}=\{\color{blue}positive\color{default},\color{red}negative\color{default}\} \\
 \mathcal{D}=\{d_1,d_2,\cdots\}
 \end{gathered}
 $$
 
 $$
 \begin{aligned}
-P(\color{navy}positive\color{default}|I,am,happy,to,see,this,movie)&= \frac{P(I,am,happy,to,see,this,movie|\color{navy}positive\color{default})P(\color{navy}positive\color{default})}{P(I,am,happy,to,see,this,movie)}\\
-&\approx \frac{P(I|\color{navy}positive\color{default})P(am|\color{navy}positive\color{default})P(happy|\color{navy}positive\color{default})\cdots P(movie|\color{navy}positive\color{default})P(\color{navy}positive\color{default})}{P(I,am,happy,to,see,this,movie)} \\
+P(\color{blue}positive\color{default}|I,am,happy,to,see,this,movie)&= \frac{P(I,am,happy,to,see,this,movie|\color{blue}positive\color{default})P(\color{blue}positive\color{default})}{P(I,am,happy,to,see,this,movie)}\\
+&\approx \frac{P(I|\color{blue}positive\color{default})P(am|\color{blue}positive\color{default})P(happy|\color{blue}positive\color{default})\cdots P(movie|\color{blue}positive\color{default})P(\color{blue}positive\color{default})}{P(I,am,happy,to,see,this,movie)} \\
 \\
-P(happy|\color{navy}positive\color{default})&\approx\frac{Count(happy, \color{navy}positive\color{default})}{\sum_{j=1}^{|V|}{Count(w_j,\color{navy}positive\color{default})}} \\
-P(\color{navy}positive\color{default})&\approx\frac{Count(\color{navy}positive\color{default})}{|\mathcal{D}|}
+P(happy|\color{blue}positive\color{default})&\approx\frac{Count(happy, \color{blue}positive\color{default})}{\sum_{j=1}^{|V|}{Count(w_j,\color{blue}positive\color{default})}} \\
+P(\color{blue}positive\color{default})&\approx\frac{Count(\color{blue}positive\color{default})}{|\mathcal{D}|}
 \end{aligned}
 $$
 
@@ -70,7 +70,7 @@ $$
 
 $$
 \begin{gathered}
-P(\color{navy}positive\color{default}|I,am,not,happy,to,see,this,movie) \\
+P(\color{blue}positive\color{default}|I,am,not,happy,to,see,this,movie) \\
 P(\color{red}negative\color{default}|I,am,not,happy,to,see,this,movie) \\
 \\
 P(not,happy) \neq P(not)P(happy)
@@ -81,9 +81,9 @@ $$
 
 $$
 \begin{gathered}
-P(happy|\color{navy}positive\color{default})\approx\frac{Count(happy, \color{navy}positive\color{default})}{\sum_{j=1}^{|V|}{Count(w_j,\color{navy}positive\color{default})}}=0, \\
+P(happy|\color{blue}positive\color{default})\approx\frac{Count(happy, \color{blue}positive\color{default})}{\sum_{j=1}^{|V|}{Count(w_j,\color{blue}positive\color{default})}}=0, \\
 \\
-\text{where }Count(happy, \color{navy}positive\color{default})=0.
+\text{where }Count(happy, \color{blue}positive\color{default})=0.
 \end{gathered}
 $$
 
