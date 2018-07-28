@@ -48,7 +48,7 @@ $$
 
 
 $$
-P(x_i|x_{i-2},x_{i-1})=\frac{COUNT(x_{i-2},x_{i-1},x_i)}{COUNT(x_{i-2},x_{i-1})}
+P(x_i|x_{i-2},x_{i-1})=\frac{C(x_{i-2},x_{i-1},x_i)}{C(x_{i-2},x_{i-1})}
 $$
 
 
