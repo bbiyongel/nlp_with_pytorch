@@ -14,7 +14,7 @@
   * [How to install](pytorch-intro/how-to-install.md)
   * [PyTorch tutorial](pytorch-intro/hello-pytorch.md)
 * [Word Sense Disambiguation](wsd/cover.md)
-  * [intro](wsd/intro.md)
+  * [Intro](wsd/intro.md)
   * [Using Thesaurus](wsd/wordnet.md)
   * [Using Feature Vector](wsd/feature-vector.md)
   * [Selectional Preference](wsd/selectional-preference.md)

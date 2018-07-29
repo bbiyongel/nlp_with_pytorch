@@ -11,7 +11,7 @@
 방법은 너무나도 간단합니다. 아래와 같이 기존 parallel corpus의 맨 앞에 artificial token을 삽입함으로써 완성됩니다. 삽입된 token에 따라서 target sentence의 language가 결정됩니다.
 
 - Hello, how are you? $$ \rightarrow $$ Hola, ¿cómo estás?
-- **\<2es\>** Hello, how are you? $$ \rightarrow $$ Hola, ¿cómo estás?
+- $$<2es>$$ Hello, how are you? $$ \rightarrow $$ Hola, ¿cómo estás?
 
 실험의 목표는 단순히 Multi-lingual end2end model을 구현하는 것이 아닌, 다른 언어쌍의 corpus를 활용하여 특정 언어쌍 번역기의 성능을 올릴 수 있는가에 대한 관점도 있습니다. 이에 따라 실험은 크게 4가지 관점에서 수행되었습니다.
 
