@@ -9,6 +9,14 @@
 * Github Repo: [https://github.com/kh-kim/nlp\_with\_pytorch](https://github.com/kh-kim/nlp_with_pytorch)
 * Gitbook: [https://kh-kim.gitbook.io/natural-language-processing-with-pytorch/](https://kh-kim.gitbook.io/natural-language-processing-with-pytorch/)
 
+### 현재 작성 중인 챕터
+
+대부분의 챕터는 작성이 완료되었으며, 아래의 챕터가 아직 작성 중 입니다.
+
+- Word Sense Disambiguation
+- Word Embedding Vector
+- Text Classification
+
 ### Pre-requisites
 
 * Python
