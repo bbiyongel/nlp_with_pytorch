@@ -96,7 +96,7 @@ $$
 \text{softmax}(x_{i}) = \frac{exp(x_i)}{\sum_j exp(x_j)}
 $$
 
-이때, 각 time-step 별 입력 단어 $$x_t$$는 one-hot vector로 표현(encoded)되고 embedding layer를 거쳐 정해진 dimension의 word embedding vector로 표현되어 RNN에 입력으로 주어지게 됩니다. 마찬가지로 정답 클래스 또한 one-hot vector가 되어 cross entropy 손실함수(loss function)를 통해 softmax 결과값인 각 클래스 별 확률을 나타낸 vector와 비교하여 손실(loss)값을 구하게 됩니다.
+이때, 각 time-step 별 입력 단어 $$x_t$$는 one-hot vector로 표현(encoded)되고 embedding layer를 거쳐 정해진 dimension의 word embedding vector로 표현되어 RNN에 입력으로 주어지게 됩니다. 마찬가지로 정답 클래스 또한 one-hot vector가 되어 cross entropy 손실함수(loss function)를 통해 softmax 결과값인 각 클래스 별 확률을 나타낸 ([multinoulli](https://www.statlect.com/probability-distributions/multinoulli-distribution)) 확률 분포 vector와 비교하여 손실(loss)값을 구하게 됩니다.
 
 $$
 \text{CrossEntropy}(y_{1:n}, \hat{y}_{1:n})=\frac{1}{n}\sum_{i=1}^{n}{y_i^T\hat{y}_i}

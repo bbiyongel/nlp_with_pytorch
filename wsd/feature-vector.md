@@ -1,12 +1,6 @@
-# Previous Methods
+# Using Feature Vector
 
-## Using Thesaurus
-
-### WordNet
-
-## Using Feature Vector
-
-### Co-Occurrence
+## Co-Occurrence
 
 
 http://www.let.rug.nl/nerbonne/teach/rema-stats-meth-seminar/presentations/Olango-Naive-Bayes-2009.pdf

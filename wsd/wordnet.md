@@ -1,1 +1,3 @@
-# WordNet
+# Using Thesaurus
+
+## WordNet
