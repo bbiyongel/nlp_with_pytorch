@@ -22,7 +22,7 @@ $$
 ## Auto-regressive and Teacher Forcing on RNNLM
 
 $$
-Y=argmax_Y P(Y|X)=argmax_Y \prod_{i=1}^{n}{P(y_i|X,y_{<i})}
+X=argmax_X P(X)=argmax_Y \prod_{i=1}^{n}{P(x_i|x_{<i})}
 $$
 
 $$
@@ -30,18 +30,18 @@ or
 $$
 $$
 \begin{aligned}
-y_i=&argmax_y{P(y|X,y_{<i})} \\
-&\text{where }y_0=BOS
+x_i=&argmax_y{P(x|x_{<i})} \\
+&\text{where }x_0=BOS
 \end{aligned}
 $$
 
 $$
-\hat{y}_t=argmax_y{P(y|X,y_{<t};\theta)\text{ where }X=\{x_1,x_2,\cdots,x_n\}\text{ and }Y=\{y_0,y_1,\cdots,y_{m+1}\}}
+\hat{x}_t=argmax_x{P(x_t|x_{<t};\theta)}\text{ where }X=\{x_1,x_2,\cdots,x_n\}
 $$
 
 $$
 \begin{aligned}
-\mathcal{L}(Y)&=-\sum_{i=1}^{m+1}{\log{P(y_i|X,y_{<i};\theta)}} \\
-\theta &\leftarrow \theta-\lambda\frac{1}{N}\sum_{i=1}^{N}{\mathcal{L}(Y_i)}
+\mathcal{L}(X)&=-\sum_{t=1}^{n+1}{\log{P(x_t|x_{<t};\theta)}} \\
+\theta &\leftarrow \theta-\lambda\frac{1}{N}\sum_{i=1}^{N}{\mathcal{L}(X_i)}
 \end{aligned}
 $$

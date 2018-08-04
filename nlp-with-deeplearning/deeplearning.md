@@ -30,7 +30,7 @@ Traditional Speech Recognition System
 
 사실 음성인식은 2000년대에 들어 큰 정체기를 맞이하고 있었습니다. GMM\(Gaussian Mixture Model\)을 통해 phone을 인식하고, 이를 HMM\(Hidden Markov Model\)을 통해 sequential 하게 modeling하여 만든 Acoustic Model \(AM\)과 n-gram기반의 Language Model \(LM\)을 WFST\(Weighted Finite State Transeducer\)방식을 통해 결합하는 전통적인 음성인식\(Automatic Speech Recognition, ASR\) 시스템은 위의 설명에서 볼 수 있듯이 너무나도 복잡한 구조와 함께 그 성능의 한계를 보이고 있었습니다.
 
-![Accuracy of ASR](https://media.licdn.com/mpr/mpr/AAEAAQAAAAAAAAlTAAAAJDc0OTI3MzkyLTI2MTktNGE2Ni04MmI1LTJkODZhYjdlZWM1MQ.png)
+![Accuracy of ASR](/assets/intro-asr-accuracy.png)
 
 그러던 중, 2012년 GMM을 DNN으로 대체하며, 십수년간의 정체를 단숨에 뛰어넘는 큰 혁명을 맞이하게 됩니다. \(Vision, NLP에서 모두 보이는 익숙한 패턴입니다.\) 그리고 점차 AM전체를 LSTM으로 대체하고, 또한 end-to-end model\(\[[Chiu et al.2017](https://arxiv.org/pdf/1712.01769.pdf)\]\)이 점점 저변을 넓혀가고 있는 추세입니다.
 

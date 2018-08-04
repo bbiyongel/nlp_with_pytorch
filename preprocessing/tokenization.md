@@ -154,11 +154,15 @@ KoNLPy는 여러 한국어 tokenizer 또는 tagger들을 모아놓은 wrapper를
 
 ## English 
 
-### Tokenizer NLTK (Moses)
+### Moses
 
-영어의 경우에는 위에서 언급했듯이, 기본적인 띄어쓰기가 잘 통일되어 있는 편이기 때문에, 띄어쓰기 자체에 대해서는 큰 normalization 이슈가 없습니다. 다만 comma, period, quotation 등을 띄어주어야 합니다. NLTK를 통해서 이런 처리를 수행하게 됩니다. 아래는 NLTK를 사용한 Python script 예제 입니다.
+영어의 경우에는 위에서 언급했듯이, 기본적인 띄어쓰기가 잘 통일되어 있는 편이기 때문에, 띄어쓰기 자체에 대해서는 큰 normalization 이슈가 없습니다. 다만 comma, period, quotation 등을 띄어주어야 합니다. Moses에서 제공하는 tokenizer를 통해서 이런 처리를 수행하게 됩니다. NLTK 예전 버전(3.2.5)에서는 Moses를 랩핑(wrapping)하여 tokenizer를 제공하였습니다. 3.2.5버전의 NLTK를 설치하기 위한 pip 명령어는 다음과 같습니다.
 
-> 참고사이트: http://www.nltk.org/api/nltk.tokenize.html#module-nltk.tokenize.moses
+```bash
+$ pip install nltk==3.2.5
+```
+
+아래는 NLTK를 사용한 Python script 예제 입니다.
 
 before:
 >North Korea's state mouthpiece, the Rodong Sinmun, is also keeping mum on Kim's summit with Trump while denouncing ever-tougher U.S. sanctions on the rogue state.
