@@ -100,7 +100,7 @@ NMT를 목표로하는 seq2seq를 PyTorch로 구현하는 방법을 소개합니
 
 - github repo url: https://github.com/kh-kim/simple-nmt
 
-### Encoder
+### Encoder Class
 
 ```python
 class Encoder(nn.Module):
@@ -108,6 +108,8 @@ class Encoder(nn.Module):
     def __init__(self, word_vec_dim, hidden_size, n_layers = 4, dropout_p = .2):
         super(Encoder, self).__init__()
 
+        # Be aware of value of 'batch_first' parameter.
+        # Also, its hidden_size is half of original hidden_size, because it is bidirectional.
         self.rnn = nn.LSTM(word_vec_dim, int(hidden_size / 2), num_layers = n_layers, dropout = dropout_p, bidirectional = True, batch_first = True)
 
     def forward(self, emb):
@@ -129,33 +131,25 @@ class Encoder(nn.Module):
         return y, h
 ```
 
-### Decoder
+#### Pack Padded Sequence
+
+아래는 pack_padded_sequence 함수가 동작하는 모습 입니다. 이 함수는 기존의 sample 별 mini-batch를 time-step 별로 표현 해 줍니다. PackedSequence로 표현된 time-step 별 mini-batch는 각 time-step 별 sample의 숫자를 추가적인 정보로 갖고 있습니다. 따라서, 이를 위해서는 mini-batch 내에는 가장 긴 길이의 문장부터 차례대로 정렬되어 있어야 합니다.
 
 ```python
-class Decoder(nn.Module):
-
-    def __init__(self, word_vec_dim, hidden_size, n_layers = 4, dropout_p = .2):
-        super(Decoder, self).__init__()
-
-        self.rnn = nn.LSTM(word_vec_dim + hidden_size, hidden_size, num_layers = n_layers, dropout = dropout_p, bidirectional = False, batch_first = True)
-
-    def forward(self, emb_t, h_t_1_tilde, h_t_1):
-        # |emb_t| = (batch_size, 1, word_vec_dim)
-        # |h_t_1_tilde| = (batch_size, 1, hidden_size)
-        # |h_t_1[0]| = (n_layers, batch_size, hidden_size)
-        batch_size = emb_t.size(0)
-        hidden_size = h_t_1[0].size(-1)
-
-        if h_t_1_tilde is None:
-            h_t_1_tilde = emb_t.new(batch_size, 1, hidden_size).zero_()
-
-        x = torch.cat([emb_t, h_t_1_tilde], dim = -1)
-        y, h = self.rnn(x, h_t_1)
-
-        return y, h
+            a = [torch.tensor([1, 2, 3]), torch.tensor([3, 4])]
+            b = torch.nn.utils.rnn.pad_sequence(a, batch_first=True)
+            >>>>
+            tensor([[ 1,  2,  3],
+                   [ 3,  4,  0]])
+            torch.nn.utils.rnn.pack_padded_sequence(b, batch_first=True, lengths=[3, 2]
+            >>>>PackedSequence(data=tensor([ 1,  3,  2,  4,  3]), batch_sizes=tensor([ 2,  2,  1]))
 ```
 
-### Generator
+### Decoder Class
+
+디코더 클래스의 코드는 이후 섹션에서 다루기로 합니다.
+
+### Generator Class
 
 ```python
 class Generator(nn.Module):
@@ -172,125 +166,8 @@ class Generator(nn.Module):
         y = self.softmax(self.output(x))
         # |y| = (batch_size, length, output_size)
 
+        # Return log-probability instead of just probability.
         return y
-```
-
-### Sequence-to-Sequence (Combine)
-
-![](/assets/nmt-encoder-to-decoder.png)
-
-```python
-class Seq2Seq(nn.Module):
-    
-    def __init__(self, input_size, word_vec_dim, hidden_size, output_size, n_layers = 4, dropout_p = .2):
-        self.input_size = input_size
-        self.word_vec_dim = word_vec_dim
-        self.hidden_size = hidden_size
-        self.output_size = output_size
-        self.n_layers = n_layers
-        self.dropout_p = dropout_p
-
-        super(Seq2Seq, self).__init__()
-
-        self.emb_src = nn.Embedding(input_size, word_vec_dim)
-        self.emb_dec = nn.Embedding(output_size, word_vec_dim)
-        
-        self.encoder = Encoder(word_vec_dim, hidden_size, n_layers = n_layers, dropout_p = dropout_p)
-        self.decoder = Decoder(word_vec_dim, hidden_size, n_layers = n_layers, dropout_p = dropout_p)
-        self.attn = Attention(hidden_size)
-
-        self.concat = nn.Linear(hidden_size * 2, hidden_size)
-        self.tanh = nn.Tanh()
-        self.generator = Generator(hidden_size, output_size)
-
-    def generate_mask(self, x, length):
-        mask = []
-
-        max_length = max(length)
-        for l in length:
-            if max_length - l > 0:
-                mask += [torch.cat([x.new_ones(1, l).zero_(), x.new_ones(1, (max_length - l))], dim = -1)]
-            else:
-                mask += [x.new_ones(1, l).zero_()]
-
-        mask = torch.cat(mask, dim = 0).byte()
-
-        return mask
-
-    def merge_encoder_hiddens(self, encoder_hiddens):
-        new_hiddens = []
-        new_cells = []
-
-        hiddens, cells = encoder_hiddens
-
-        for i in range(0, hiddens.size(0), 2):
-            new_hiddens += [torch.cat([hiddens[i], hiddens[i + 1]], dim = -1)]
-            new_cells += [torch.cat([cells[i], cells[i + 1]], dim = -1)]
-
-        new_hiddens, new_cells = torch.stack(new_hiddens), torch.stack(new_cells)
-
-        return (new_hiddens, new_cells)
-
-    def forward(self, src, tgt):
-        batch_size = tgt.size(0)
-
-        mask = None
-        x_length = None
-        if isinstance(src, tuple):
-            x, x_length = src
-            mask = self.generate_mask(x, x_length)
-            # |mask| = (batch_size, length)
-        else:
-            x = src
-
-        if isinstance(tgt, tuple):
-            tgt = tgt[0]
-
-        emb_src = self.emb_src(x)
-        # |emb_src| = (batch_size, length, word_vec_dim)
-
-        h_src, h_0_tgt = self.encoder((emb_src, x_length))
-        # |h_src| = (batch_size, length, hidden_size)
-        # |h_0_tgt| = (n_layers * 2, batch_size, hidden_size / 2)
-
-        # merge bidirectional to uni-directional
-        h_0_tgt, c_0_tgt = h_0_tgt
-        h_0_tgt = h_0_tgt.transpose(0, 1).contiguous().view(batch_size, -1, self.hidden_size).transpose(0, 1).contiguous()
-        c_0_tgt = c_0_tgt.transpose(0, 1).contiguous().view(batch_size, -1, self.hidden_size).transpose(0, 1).contiguous()
-        # |h_src| = (batch_size, length, hidden_size)
-        # |h_0_tgt| = (n_layers, batch_size, hidden_size)
-        h_0_tgt = (h_0_tgt, c_0_tgt)
-
-        emb_tgt = self.emb_dec(tgt)
-        # |emb_tgt| = (batch_size, length, word_vec_dim)
-        h_tilde = []
-
-        h_t_tilde = None
-        decoder_hidden = h_0_tgt
-        for t in range(tgt.size(1)):
-            emb_t = emb_tgt[:, t, :].unsqueeze(1)
-            # |emb_t| = (batch_size, 1, word_vec_dim)
-            # |h_t_tilde| = (batch_size, 1, hidden_size)
-
-            decoder_output, decoder_hidden = self.decoder(emb_t, h_t_tilde, decoder_hidden)
-            # |decoder_output| = (batch_size, 1, hidden_size)
-            # |decoder_hidden| = (n_layers, batch_size, hidden_size)
-
-            context_vector = self.attn(h_src, decoder_output, mask)
-            # |context_vector| = (batch_size, 1, hidden_size)
-
-            h_t_tilde = self.tanh(self.concat(torch.cat([decoder_output, context_vector], dim = -1)))
-            # |h_t_tilde| = (batch_size, 1, hidden_size)
-
-            h_tilde += [h_t_tilde]
-
-        h_tilde = torch.cat(h_tilde, dim = 1)
-        # |h_tilde| = (batch_size, length, hidden_size)
-
-        y_hat = self.generator(h_tilde)
-        # |y_hat| = (batch_size, length, output_size)
-
-        return y_hat
 ```
 
 ### Loss function
