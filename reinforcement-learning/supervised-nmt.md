@@ -124,42 +124,133 @@ MRT(or RL)을 PyTorch를 사용하여 구현 해 보도록 하겠습니다. 자�
 #### train.py
 
 ```python
+import argparse, sys
+
+import torch
+import torch.nn as nn
+
+from data_loader import DataLoader
+import data_loader
+from simple_nmt.seq2seq import Seq2Seq
+import simple_nmt.trainer as trainer
+import simple_nmt.rl_trainer as rl_trainer
+```
+
+```python
 def define_argparser():
     p = argparse.ArgumentParser()
 
-    p.add_argument('-model', required = True)
-    p.add_argument('-train', required = True)
-    p.add_argument('-valid', required = True)
-    p.add_argument('-lang', required = True)
-    p.add_argument('-gpu_id', type = int, default = -1)
+    p.add_argument('-model', required = True, help = 'Model file name to save. Additional information would be annotated to the file name.')
+    p.add_argument('-train', required = True, help = 'Training set file name except the extention. (ex: train.en --> train)')
+    p.add_argument('-valid', required = True, help = 'Validation set file name except the extention. (ex: valid.en --> valid)')
+    p.add_argument('-lang', required = True, help = 'Set of extention represents language pair. (ex: en + ko --> enko)')
+    p.add_argument('-gpu_id', type = int, default = -1, help = 'GPU ID to train. Currently, GPU parallel is not supported. -1 for CPU. Default = -1')
 
-    p.add_argument('-batch_size', type = int, default = 32)
-    p.add_argument('-n_epochs', type = int, default = 18)
-    p.add_argument('-print_every', type = int, default = 50)
-    p.add_argument('-early_stop', type = int, default = -1)
+    p.add_argument('-batch_size', type = int, default = 32, help = 'Mini batch size for gradient descent. Default = 32')
+    p.add_argument('-n_epochs', type = int, default = 18, help = 'Number of epochs to train. Default = 18')
+    p.add_argument('-print_every', type = int, default = 1000, help = 'Number of gradient descent steps to skip printing the training status. Default = 1000')
+    p.add_argument('-early_stop', type = int, default = -1, help = 'The training will be stopped if there is no improvement this number of epochs. Default = -1')
 
-    p.add_argument('-max_length', type = int, default = 80)
-    p.add_argument('-dropout', type = float, default = .2)
-    p.add_argument('-word_vec_dim', type = int, default = 512)
-    p.add_argument('-hidden_size', type = int, default = 768)
-    p.add_argument('-n_layers', type = int, default = 4)   
+    p.add_argument('-max_length', type = int, default = 80, help = 'Maximum length of the training sequence. Default = 80')
+    p.add_argument('-dropout', type = float, default = .2, help = 'Dropout rate. Default = 0.2')
+    p.add_argument('-word_vec_dim', type = int, default = 512, help = 'Word embedding vector dimension. Default = 512')
+    p.add_argument('-hidden_size', type = int, default = 768, help = 'Hidden size of LSTM. Default = 768')
+    p.add_argument('-n_layers', type = int, default = 4, help = 'Number of layers in LSTM. Default = 4')
     
-    p.add_argument('-max_grad_norm', type = float, default = 5.)
+    p.add_argument('-max_grad_norm', type = float, default = 5., help = 'Threshold for gradient clipping. Default = 5.0')
     p.add_argument('-adam', action = 'store_true', help = 'Use Adam instead of using SGD.')
-    p.add_argument('-lr', type = float, default = 1.)
-    p.add_argument('-min_lr', type = float, default = .000001)
+    p.add_argument('-lr', type = float, default = 1., help = 'Initial learning rate. Default = 1.0')
+    p.add_argument('-min_lr', type = float, default = .000001, help = 'Minimum learning rate. Default = .000001')
     p.add_argument('-lr_decay_start_at', type = int, default = 10, help = 'Start learning rate decay from this epoch.')
     p.add_argument('-lr_slow_decay', action = 'store_true', help = 'Decay learning rate only if there is no improvement on last epoch.')
-    p.add_argument('-lr_decay_rate', type = float, default = .5)
+    p.add_argument('-lr_decay_rate', type = float, default = .5, help = 'Learning rate decay rate. Default = 0.5')
 
-    p.add_argument('-rl_lr', type = float, default = .01)
-    p.add_argument('-n_samples', type = int, default = 1)
-    p.add_argument('-rl_n_epochs', type = int, default = 0)
-    p.add_argument('-rl_ratio_per_epoch', type = float, default = 1.)
+    p.add_argument('-rl_lr', type = float, default = .01, help = 'Learning rate for reinforcement learning. Default = .01')
+    p.add_argument('-n_samples', type = int, default = 1, help = 'Number of samples to get baseline. Default = 1')
+    p.add_argument('-rl_n_epochs', type = int, default = 10, help = 'Number of epochs for reinforcement learning. Default = 10')
+    p.add_argument('-rl_n_gram', type = int, default = 6, help = 'Maximum number of tokens to calculate BLEU for reinforcement learning. Default = 6')
 
     config = p.parse_args()
 
     return config
+```
+
+```python
+if __name__ == "__main__":
+    config = define_argparser()
+
+    import os.path
+    # If the model exists, load model and configuration to continue the training.
+    if os.path.isfile(config.model):
+        saved_data = torch.load(config.model)
+    
+        prev_config = saved_data['config']
+        config = overwrite_config(config, prev_config)
+        config.lr = saved_data['current_lr']
+    else:
+        saved_data = None
+    
+    # Load training and validation data set.
+    loader = DataLoader(config.train, 
+                        config.valid, 
+                        (config.lang[:2], config.lang[-2:]), 
+                        batch_size = config.batch_size, 
+                        device = config.gpu_id, 
+                        max_length = config.max_length
+                        )
+
+    input_size = len(loader.src.vocab) # Encoder's embedding layer input size
+    output_size = len(loader.tgt.vocab) # Decoder's embedding layer input size and Generator's softmax layer output size
+    # Declare the model
+    model = Seq2Seq(input_size,
+                    config.word_vec_dim, # Word embedding vector size
+                    config.hidden_size, # LSTM's hidden vector size
+                    output_size, 
+                    n_layers = config.n_layers, # number of layers in LSTM
+                    dropout_p = config.dropout # dropout-rate in LSTM
+                    )
+
+    # Default weight for loss equals to 1, but we don't need to get loss for PAD token.
+    # Thus, set a weight for PAD to zero.
+    loss_weight = torch.ones(output_size)
+    loss_weight[data_loader.PAD] = 0.
+    # Instead of using Cross-Entropy loss, we can use Negative Log-Likelihood(NLL) loss with log-probability.
+    criterion = nn.NLLLoss(weight = loss_weight, size_average = False) 
+
+    print(model)
+    print(criterion)
+
+    # Pass models to GPU device if it is necessary.
+    if config.gpu_id >= 0:
+        model.cuda(config.gpu_id)
+        criterion.cuda(config.gpu_id)
+
+    # If we have loaded model weight parameters, use that weights for declared model.
+    if saved_data is not None:
+        model.load_state_dict(saved_data['model'])
+
+    # Start training. This function maybe equivalant to 'fit' function in Keras.
+    trainer.train_epoch(model, 
+                        criterion, 
+                        loader.train_iter, 
+                        loader.valid_iter, 
+                        config,
+                        start_epoch = saved_data['epoch'] if saved_data is not None else 1,
+                        others_to_save = {'src_vocab': loader.src.vocab, 'tgt_vocab': loader.tgt.vocab} # We can put any object here to save with model.
+                        )
+```
+
+```python
+    # Start reinforcement learning.
+    if config.rl_n_epochs > 0:
+        rl_trainer.train_epoch(model,
+                            criterion, # Although it does not use cross-entropy loss, but its equation equals to use entropy.
+                            loader.train_iter,
+                            loader.valid_iter,
+                            config,
+                            start_epoch = (saved_data['epoch'] - config.n_epochs) if saved_data is not None else 1,
+                            others_to_save = {'src_vocab': loader.src.vocab, 'tgt_vocab': loader.tgt.vocab}
+                            )
 ```
 
 #### simple_nmt/rl_trainer.py
@@ -180,12 +271,21 @@ import data_loader
 ```
 
 ```python
-def get_reward(y, y_hat):
+def get_reward(y, y_hat, n_gram = 6):
+    # This method gets the reward based on the sampling result and reference sentence.
+    # For now, we uses GLEU in NLTK, but you can used your own well-defined reward function.
+    # In addition, GLEU is variation of BLEU, and it is more fit to reinforcement learning.
+
+    # Since we don't calculate reward score exactly as same as multi-bleu.perl, 
+    # (especialy we do have different tokenization,) I recommend to set n_gram to 6.
+
     # |y| = (batch_size, length1)
     # |y_hat| = (batch_size, length2)
 
     scores = []
 
+    # Actually, below is really far from parallized operations.
+    # Thus, it may cause slow training.
     for b in range(y.size(0)):
         ref = []
         hyp = []
@@ -200,7 +300,10 @@ def get_reward(y, y_hat):
                 break
 
         # for nltk.bleu & nltk.gleu
-        scores += [score_func([ref], hyp) * 100.]
+        scores += [score_func([ref], hyp, max_len = n_gram) * 100.]
+
+        # for utils.score_sentence
+        #scores += [score_func(ref, hyp, 4, smooth = 1)[-1] * 100.]
     scores = torch.FloatTensor(scores).to(y.device)
     # |scores| = (batch_size)
 
@@ -247,20 +350,20 @@ def train_epoch(model, criterion, train_iter, valid_iter, config, start_epoch = 
         # |y_hat| = (batch_size, length, output_size)
         # |indice| = (batch_size, length)
 
-        reward = get_reward(y, indice)
+        reward = get_reward(y, indice, n_gram = config.rl_n_gram)
 
         total_reward += float(reward.sum())
         sample_cnt += batch_size
         if sample_cnt >= len(valid_iter.dataset.examples):
             break
     avg_bleu = total_reward / sample_cnt
-    print("initial valid BLEU: %.4f" % avg_bleu)
-    model.train()
+    print("initial valid BLEU: %.4f" % avg_bleu) # You can figure-out improvement.
+    model.train() # Now, begin training.
 
     # Start RL
     for epoch in range(start_epoch, config.rl_n_epochs + 1):
         #optimizer = optim.Adam(model.parameters(), lr = current_lr)
-        optimizer = optim.SGD(model.parameters(), lr = current_lr)
+        optimizer = optim.SGD(model.parameters(), lr = current_lr) # Default hyper-parameter is set for SGD.
         print("current learning rate: %f" % current_lr)
         print(optimizer)
 
@@ -279,24 +382,29 @@ def train_epoch(model, criterion, train_iter, valid_iter, config, start_epoch = 
             # |x| = (batch_size, length)
             # |y| = (batch_size, length)
 
-            # feed-forward
+            # Take sampling process because set False for is_greedy.
             y_hat, indice = model.search(x, is_greedy = False, max_length = config.max_length)
-            q_actor = get_reward(y, indice)
+            # Based on the result of sampling, get reward.
+            q_actor = get_reward(y, indice, n_gram = config.rl_n_gram)
             # |y_hat| = (batch_size, length, output_size)
             # |indice| = (batch_size, length)
             # |q_actor| = (batch_size)
 
+            # Take samples as many as n_samples, and get average rewards for them.
+            # I figured out that n_samples = 1 would be enough.
             baseline = []
             with torch.no_grad():
                 for i in range(config.n_samples):
                     _, sampled_indice = model.search(x, is_greedy = False, max_length = config.max_length)
-                    baseline += [get_reward(y, sampled_indice)]
+                    baseline += [get_reward(y, sampled_indice, n_gram = config.rl_n_gram)]
                 baseline = torch.stack(baseline).sum(dim = 0).div(config.n_samples)
                 # |baseline| = (n_samples, batch_size) --> (batch_size)
 
-            # calcuate gradients with back-propagation
+            # Now, we have relatively expected cumulative reward.
+            # Which score can be drawn from q_actor subtracted by baseline.
             tmp_reward = q_actor - baseline
             # |tmp_reward| = (batch_size)
+            # calcuate gradients with back-propagation
             get_gradient(indice, y_hat, criterion, reward = tmp_reward)
 
             # simple math to show stats
@@ -330,21 +438,21 @@ def train_epoch(model, criterion, train_iter, valid_iter, config, start_epoch = 
 
                 train_bleu = avg_bleu
 
-            # Another important line in this method.
             # In orther to avoid gradient exploding, we apply gradient clipping.
             torch_utils.clip_grad_norm_(model.parameters(), config.max_grad_norm)
             # Take a step of gradient descent.
             optimizer.step()
 
             sample_cnt += batch_size
-            if sample_cnt >= len(train_iter.dataset.examples) * config.rl_ratio_per_epoch:
+            if sample_cnt >= len(train_iter.dataset.examples):
                 break
 
         sample_cnt = 0
         total_reward = 0
 
+        # Start validation
         with torch.no_grad():
-            model.eval()
+            model.eval() # Turn-off drop-out
 
             for batch_index, batch in enumerate(valid_iter):
                 current_batch_word_cnt = torch.sum(batch.tgt[1])
@@ -359,7 +467,7 @@ def train_epoch(model, criterion, train_iter, valid_iter, config, start_epoch = 
                 # |y_hat| = (batch_size, length, output_size)
                 # |indice| = (batch_size, length)
 
-                reward = get_reward(y, indice)
+                reward = get_reward(y, indice, n_gram = config.rl_n_gram)
 
                 total_reward += float(reward.sum())
                 sample_cnt += batch_size
