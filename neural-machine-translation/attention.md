@@ -143,7 +143,7 @@ $$
 
 원하는 정보를 attention을 통해 encoder에서 획득한 후, 해당 정보를 decoder output과 concatenate하여 $$ tanh $$를 취한 후, softmax 계산을 통해 다음 time-step의 입력이 되는 $$ \hat{y}_{t} $$을 구합니다.
 
-![](/assets/seq2seq_with_attention_architecture.png)
+![](/assets/nmt-seq2seq-with-attention-architecture.png)
 
 ### Linear Transformation
 
@@ -154,19 +154,19 @@ $$
 
 사실 신경망 내부의 각 차원들은 숨겨진 특징값(latent feature)이므로 딱 잘라 정의할 수 없습니다. 하지만 분명한건, source 언어와 target 언어가 다르다는 것 입니다. 따라서 단순히 dot product를 해 주기보단 source 언어와 target 언어 간에 연결고리를 하나 놓아주어야 합니다. 그래서 우리는 두 언어의 embedding hyper plane이 선형(linear) 관계에 있다고 가정하고, dot product 하기 전에 선형 변환(linear transformation)을 해 줍니다.
 
-![](/assets/attention_linear_transform.png)
+![](/assets/nmt-attention-linear-transform.png)
 
 위와 같이 꼭 번역이 아니더라도, 두 다른 도메인(domain) 사이의 비교를 위해서 사용합니다.
 
 ### Why
 
-![](/assets/attention_working_example.png)
+![](/assets/nmt-attention-working-example.png)
 
 왜 Attention이 필요한 것일까요? 기존의 seq2seq는 두 개의 RNN\(encoder와 decoder\)로 이루어져 있습니다. 여기서 압축된 문장의 의미에 해당하는 encoder의 정보를 hidden state \(LSTM의 경우에는 + cell state\)의 vector로 전달해야 합니다. 그리고 decoder는 그 정보를 이용해 다시 새로운 문장을 만들어냅니다. 이 때, hidden state만으로는 문장의 정보를 완벽하게 전달하기 힘들기 때문입니다. 따라서 decoder의 각 time-step 마다, 시간을 뛰어넘어, hidden state의 정보에 따라 필요한 encoder의 정보에 접근하여 끌어다 쓰겠다는 것 입니다.
 
 ### Evaluation
 
-![http://web.stanford.edu/class/cs224n/lectures/cs224n-2017-lecture10.pdf](/assets/attention_better_translation_of_long_sentence.png)  
+![http://web.stanford.edu/class/cs224n/lectures/cs224n-2017-lecture10.pdf](/assets/nmt-attention-evaluation-graph.png)<br>
 [Image from CS224n](http://web.stanford.edu/class/cs224n/syllabus.html)
 
 Attention을 사용하지 않은 seq2seq는 전반적으로 성능이 떨어짐을 알수 있을 뿐만 아니라, 특히 문장이 길어질수록 성능이 더욱 하락함을 알 수 있습니다. 하지만 이에 비해서 attention을 사용하면 문장이 길어지더라도 성능이 크게 하락하지 않음을 알 수 있습니다.

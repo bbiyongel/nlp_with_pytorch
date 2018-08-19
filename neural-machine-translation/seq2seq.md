@@ -2,7 +2,7 @@
 
 ## Architecture Overview
 
-![](/assets/seq2seq_architecture.png)
+![](/assets/nmt-seq2seq-architecture.png)
 
 먼저 번역 또는 seq2seq 모델을 이용한 작업을 간단하게 수식화 해보겠습니다.
 
@@ -17,7 +17,7 @@ $$ P(Y|X;\theta) $$를 최대로 하는 모델 파라미터\($$ \theta $$\)를 M
 
 인코더는 source 문장을 입력으로 받아 문장을 함축하는 의미의 vector로 만들어 냅니다. $$ P(X) $$를 모델링 하는 것이라고 볼 수 있습니다. 사실 새로운 형태라기 보단, 이전 챕터에서 다루었던 텍스트 분류(Text Classificaion)에서 사용되었던 RNN 모델과 거의 같다고 볼 수 있습니다. $$ P(X) $$를 모델링하여, 주어진 문장을 벡터화(vectorize)하여 해당 도메인의 매니폴드(manifold or hyper-plane)의 어떤 한 점에 투영 시키는 작업이라고 할 수 있습니다.
 
-![](/assets/encoder_sentence_projection.png)
+![](/assets/nmt-enc-sent-proj.png)
 
 다만, 기존의 text classification에서는 모든 정보가 필요하지 않기 때문에 \(예를들어 감성분석(Sentiment Analysis)에서는 "나는"과 같이 중립적인 단어는 감성을 분류하는데 필요하지 않기 때문에 해당 정보를 굳이 간직해야 하지 않을 수도 있습니다.\) vector로 만들어내는 과정인 정보를 압축함에 있어서 손실 압축을 해도 되는 작업이지만, 기계번역에 있어서는 이상적으로는 거의 무손실 압축을 해내야 하는 차이는 있습니다.
 
@@ -176,6 +176,8 @@ class Generator(nn.Module):
 ```
 
 ### Sequence-to-Sequence (Combine)
+
+![](/assets/nmt-encoder-to-decoder.png)
 
 ```python
 class Seq2Seq(nn.Module):
