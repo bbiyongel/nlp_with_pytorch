@@ -45,3 +45,9 @@ $$
 \theta &\leftarrow \theta-\lambda\frac{1}{N}\sum_{i=1}^{N}{\mathcal{L}(X_i)}
 \end{aligned}
 $$
+
+## Expectation
+
+$$
+\mathbb{E}_{x \sim P(X)}[reward(x)]=\int{reward(x)P(x)}dx
+$$
