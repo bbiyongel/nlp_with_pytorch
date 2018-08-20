@@ -49,5 +49,9 @@ $$
 ## Expectation
 
 $$
-\mathbb{E}_{x \sim P(X)}[reward(x)]=\int{reward(x)P(x)}dx
+\begin{aligned}
+\mathbb{E}_{x \sim P(X)}[reward(x)]&=\int{reward(x)P(x)}dx \\
+&\approx\frac{1}{K}\sum_{i=1}^{K}{reward(x_i)} \\
+&\approx reward(x_1)
+\end{aligned}
 $$
