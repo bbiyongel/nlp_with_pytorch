@@ -50,8 +50,18 @@ $$
 
 $$
 \begin{aligned}
-\mathbb{E}_{x \sim P(X)}[reward(x)]&=\int{reward(x)P(x)}dx \\
+\mathbb{E}_{x \sim p}[reward(x)]&=\int{reward(x)p(x)}dx \\
 &\approx\frac{1}{K}\sum_{i=1}^{K}{reward(x_i)} \\
 &\approx reward(x)
+\end{aligned}
+$$
+
+## Importance Sampling
+
+$$
+\begin{aligned}
+\mathbb{E}_{X \sim p}[f(x)]&=\int_{x}{f(x)p(x)}dx \\
+&=\int_{x}{f(x)\frac{p(x)}{q(x)}q(x)}dx \\
+&=\mathbb{E}_{X \sim q}[f(x)\frac{p(x)}{q(x)}]
 \end{aligned}
 $$
