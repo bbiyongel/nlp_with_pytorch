@@ -61,7 +61,23 @@ $$
 $$
 \begin{aligned}
 \mathbb{E}_{X \sim p}[f(x)]&=\int_{x}{f(x)p(x)}dx \\
-&=\int_{x}{f(x)\frac{p(x)}{q(x)}q(x)}dx \\
-&=\mathbb{E}_{X \sim q}[f(x)\frac{p(x)}{q(x)}]
+&=\int_{x}{\Big( f(x)\frac{p(x)}{q(x)}\Big)q(x)}dx \\
+&=\mathbb{E}_{X \sim q}[f(x)\frac{p(x)}{q(x)}],
+\end{aligned}
+$$
+
+$$
+\forall q\text{ (pdf) s.t.} q(x)=0 \implies p(x)=0
+$$
+
+$$
+w(x)=\frac{p(x)}{q(x)}
+$$
+
+$$
+\begin{aligned}
+\mathbb{E}_{X \sim q}[f(x)\frac{p(x)}{q(x)}]&\approx\frac{1}{K}\sum_{i=1}^{K}{f(x_i)\frac{p(x_i)}{q(x_i)}} \\
+&=\frac{1}{K}\sum_{i=1}^{K}{f(x_i)w(x_i)} \\
+\text{where }& x_i \sim q
 \end{aligned}
 $$
