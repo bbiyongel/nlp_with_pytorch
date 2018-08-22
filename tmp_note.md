@@ -82,11 +82,10 @@ $$
 \end{aligned}
 $$
 
-## Tricks using Marginal Distribution
+## Some Tricks
+
+## GAN
 
 $$
-\begin{aligned}
-P(y)=\sum_{x \in \mathcal{X}}{P(x,y)}=\sum_{x \in \mathcal{X}}{P(y|x)P(x)}&=\mathbb{E}_{x \sim P(x)}[P(y|x)] \\
-&\approx\frac{1}{K}\sum^K_{i=1}{P(y|x^i)},~x^i\sim P(x)
-\end{aligned}
+\min_{G}\max_{D}\mathcal{L}(D,G)=\mathbb{E}_{x\sim p_r(x)}[\log{D(x)}]+\mathbb{E}_{z\sim p_z(z)}[\log{(1-D(G(z)))}]
 $$
