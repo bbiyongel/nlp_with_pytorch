@@ -17,7 +17,7 @@
 ## Dummy source sentence translation
 
 아래의 내용들은 전부 [Edinburgh 대학의 Nematus 번역시스템](https://arxiv.org/pdf/1708.00726.pdf)  
-에서 제안되고 사용된 내용들입니다. 이 [논문\(\[Sennrich et al.2015\]\)](https://arxiv.org/pdf/1511.06709.pdf)의 저자인 Rico Sennrich는 explicit하게 LM을 ensemble 하는 대신, decoder로 하여금 monolingual corpus를 학습할 수 있게 하는 방법을 제안하였습니다. 예전 챕터에서 다루었듯이, 디코더는 _**Conditional Neural Network Language Model**_이라고 할 수 있는데, source sentence인 $$ X $$를 빈 입력을 넣어줌으로써, \(그리고 Attention등을 모두 dropout 시켜 끊어줌으로써\) condition을 없애는 것이 이 방법의 핵심입니다. 저자는 이 방법을 사용하면 decoder가 monolingual corpus의 language model을 학습하는 것과 같다고 하였습니다.
+에서 제안되고 사용된 내용들입니다. 이 [논문\(\[Sennrich et al.2015\]\)](https://arxiv.org/pdf/1511.06709.pdf)의 저자인 Rico Sennrich는 explicit하게 LM을 ensemble 하는 대신, decoder로 하여금 monolingual corpus를 학습할 수 있게 하는 방법을 제안하였습니다. 예전 챕터에서 다루었듯이, 디코더는 _**Conditional Neural Network Language Model**_이라고 할 수 있는데, source sentence인 $X$를 빈 입력을 넣어줌으로써, \(그리고 Attention등을 모두 dropout 시켜 끊어줌으로써\) condition을 없애는 것이 이 방법의 핵심입니다. 저자는 이 방법을 사용하면 decoder가 monolingual corpus의 language model을 학습하는 것과 같다고 하였습니다.
 
 ## Back translation
 
@@ -32,7 +32,7 @@ $$
 train~to~maximize~P_{\theta_{f \rightarrow e}}(e|\hat{f})
 $$
 
-예를 들어, _**한국어**_ monolingual corpus가 있을 때, 이것을 기존에 훈련된 _**한**_$$ \rightarrow $$_**영**_번역기에 기계번역시켜 한-영 synthetic parallel corpus를 만들고, 이것을 _**영**_$$ \rightarrow $$_**한**_번역기를 훈련시키는데 사용하는 것 입니다. 이러한 방법의 특성 때문에 _**back translation**_ 이라고 명명되었습니다.
+예를 들어, _**한국어**_ monolingual corpus가 있을 때, 이것을 기존에 훈련된 한$\rightarrow$영 번역기에 기계번역시켜 한-영 synthetic parallel corpus를 만들고, 이것을 영$\rightarrow$한 번역기를 훈련시키는데 사용하는 것 입니다. 이러한 방법의 특성 때문에 _**back translation**_ 이라고 명명되었습니다.
 
 ![https://arxiv.org/pdf/1511.06709.pdf](/assets/nmt_back_translation.png)  
 [\[Sennrich at el.2015\]](https://arxiv.org/pdf/1511.06709.pdf)
