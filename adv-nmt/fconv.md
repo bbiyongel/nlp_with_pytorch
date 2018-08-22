@@ -34,7 +34,7 @@ $$
 
 위와 같이 단순히 평균을 내는 것만으로도 어느정도의 성능을 낼 수 있었습니다. 만약 여기서 convolution filter를 사용하여 averaging 대신에 convolution연산을 한다면 어떻게 될까요?
 
-위의 물음에서 출발한 것이 이 논문의 핵심입니다. 따라서 kernel\(or window\) size $$ k $$인 convolution filter가 $$ d $$개 channel의 입력을 받아서 convolution 연산을 수행하여 $$ 2d $$개 channel의 출력을 결과값으로 내놓습니다.
+위의 물음에서 출발한 것이 이 논문의 핵심입니다. 따라서 kernel\(or window\) size $k$인 convolution filter가 $d$개 channel의 입력을 받아서 convolution 연산을 수행하여 $2d$개 channel의 출력을 결과값으로 내놓습니다.
 
 ![](/assets/nmt-fconv-2.png)
 
@@ -60,11 +60,11 @@ thus~[A;B] \in R^{2d}
 $$
 
 
-GLU를 사용하여 직전 convolution layer에서의 결과값인 vector\($$ \in R^{2d} $$\)를 입력으로 삼아 gate 연산을 수행합니다. 이 연산은 LSTM이나 GRU에서의 gate들과 매우 비슷하게 동작을 수행합니다.
+GLU를 사용하여 직전 convolution layer에서의 결과값인 vector\($\in R^{2d}$\)를 입력으로 삼아 gate 연산을 수행합니다. 이 연산은 LSTM이나 GRU에서의 gate들과 매우 비슷하게 동작을 수행합니다.
 
 ### Attention
 
-$$ z^u $$를 encoder의 출력값, $$ h_i^l $$을 decoder의 $$ l $$번째 layer의 $$ i $$번째 결과값이라고 하고, $$ g_i $$를 $$ i-1 $$번째 decoder의 출력값이라고 할 때, attention의 동작은 아래와 같습니다.
+$z^u$를 encoder의 출력값, $h_i^l$을 decoder의 $l$번째 layer의 $i$번째 결과값이라고 하고, $g_i$를 $i-1$번째 decoder의 출력값이라고 할 때, attention의 동작은 아래와 같습니다.
  
 $$
 d_i^l=W_d^l h_i^l+b_d^l+g_i
@@ -78,10 +78,10 @@ $$
 c_i^l=\sum_{j=1}^m{a_{ij}^l(z_j^u+e_j)}
 $$
 
-이렇게 구해진 ***context vector*** $$ c_i^l $$을 (기본적인 attention은 concatenate 하였던 것이 비해서) 아래와 같이 $$ h_i^l $$에 그냥 **더합니다**. 그리고 이것을 다음 decoder layer의 입력으로 사용합니다.
+이렇게 구해진 ***context vector*** $c_i^l$을 (기본적인 attention은 concatenate 하였던 것이 비해서) 아래와 같이 $h_i^l$에 그냥 **더합니다**. 그리고 이것을 다음 decoder layer의 입력으로 사용합니다.
 
 $$
 \tilde{h}_i^l=h_i^l+c_i^l
 $$
 
-이렇게 $$ l $$번째 layer의 attention이 이루어지게 되는데, 이것을 매 layer마다 넣어주게 됩니다. 이전까지의 seq2seq는 attention layer가 전체 구조에서 한 개만 있었던 것에 비해서 Facebook이 제안한 이 구조에서는 모든 layer마다 나타날 수 있습니다.
+이렇게 $l$번째 layer의 attention이 이루어지게 되는데, 이것을 매 layer마다 넣어주게 됩니다. 이전까지의 seq2seq는 attention layer가 전체 구조에서 한 개만 있었던 것에 비해서 Facebook이 제안한 이 구조에서는 모든 layer마다 나타날 수 있습니다.

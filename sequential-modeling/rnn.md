@@ -1,6 +1,6 @@
 # \(Vanilla\) Recurrent Neural Network
 
-기존 신경망은 정해진 입력 $$x$$를 받아 $$y$$를 출력해 주는 형태였습니다.
+기존 신경망은 정해진 입력 $x$를 받아 $y$를 출력해 주는 형태였습니다.
 
 ![](/assets/rnn-fc.png)
 
@@ -8,7 +8,7 @@ $$
 y=f(x)
 $$
 
-하지만 recurrent neural network \(순환신경망, RNN\)은 입력 $$x_t$$와 직전 자신의 상태\(hidden state\) $$h_{t-1}$$를 참조하여 현재 자신의 상태 $$h_t$$를 결정하는 작업을 여러 time-step에 걸쳐 수행 합니다. 각 time-step별 RNN의 상태는 경우에 따라 출력이 되기도 합니다.
+하지만 recurrent neural network \(순환신경망, RNN\)은 입력 $x_t$와 직전 자신의 상태\(hidden state\) $h_{t-1}$를 참조하여 현재 자신의 상태 $h_t$를 결정하는 작업을 여러 time-step에 걸쳐 수행 합니다. 각 time-step별 RNN의 상태는 경우에 따라 출력이 되기도 합니다.
 
 ![](/assets/rnn-basic.png)
 
@@ -18,11 +18,11 @@ $$
 
 ### Feed-forward
 
-기본적인 RNN을 활용한 feed-forward 계산의 흐름은 아래와 같습니다. 아래의 그림은 각 time-step 별로 입력 $$x_t$$와 이전 time-step의 $$h_t$$가 RNN으로 들어가서 출력으로 $$h_t$$를 반환하는 모습입니다. 이렇게 얻어낸 $$h_t$$들을 $$\hat{y}_t$$로 삼아서 정답인 $$y_t$$와 비교하여 손실(loss) $$\mathcal{L}$$을 계산 합니다.
+기본적인 RNN을 활용한 feed-forward 계산의 흐름은 아래와 같습니다. 아래의 그림은 각 time-step 별로 입력 $x_t$와 이전 time-step의 $h_t$가 RNN으로 들어가서 출력으로 $h_t$를 반환하는 모습입니다. 이렇게 얻어낸 $h_t$들을 $\hat{y}_t$로 삼아서 정답인 $y_t$와 비교하여 손실(loss) $\mathcal{L}$을 계산 합니다.
 
 ![](/assets/rnn-basic-architecture.png)
 
-위 그림을 수식으로 표현하면 아래와 같습니다. 함수 $$f$$는 $$x_t$$와 $$h_{t-1}$$을 입력으로 받아서 파라미터 $$\theta$$를 통해 $$h_t$$를 계산 합니다. 이때, 각 입력과 출력 그리고 내부 파라미터의 크기는 다음과 같습니다. -- $$x_t \in \mathbb{R}^w, h_t \in \mathbb{R}^d, W_{ih} \in \mathbb{R}^{d \times w}, b \in \mathbb{R}^{d}, W_{hh} \in \mathbb{R}^{d \times d}, b_{hh} \in \mathbb{R}^{d}$$
+위 그림을 수식으로 표현하면 아래와 같습니다. 함수 $f$는 $x_t$와 $h_{t-1}$을 입력으로 받아서 파라미터 $\theta$를 통해 $h_t$를 계산 합니다. 이때, 각 입력과 출력 그리고 내부 파라미터의 크기는 다음과 같습니다. -- $x_t \in \mathbb{R}^w, h_t \in \mathbb{R}^d, W_{ih} \in \mathbb{R}^{d \times w}, b \in \mathbb{R}^{d}, W_{hh} \in \mathbb{R}^{d \times d}, b_{hh} \in \mathbb{R}^{d}$
 
 $$
 \begin{aligned}
@@ -32,7 +32,7 @@ $$
 \end{aligned}
 $$
 
-위의 수식에서 나타나듯이 RNN에서는 ReLU나 다른 활성함수(activation function)을 사용하기보단 $$\tanh$$를 주로 사용합니다. 최종적으로 각 time-step별로 $$y_t$$를 계산하여 아래의 수식처럼 모든 time-step에 대한 손실(loss) $$\mathcal{L}$$을 구합니다.
+위의 수식에서 나타나듯이 RNN에서는 ReLU나 다른 활성함수(activation function)을 사용하기보단 $\tanh$를 주로 사용합니다. 최종적으로 각 time-step별로 $y_t$를 계산하여 아래의 수식처럼 모든 time-step에 대한 손실(loss) $\mathcal{L}$을 구합니다.
 
 $$
 \mathcal{L}=\frac{1}{n}\sum_{t=1}^{n}{loss(y_t,\hat{y}_t)}
@@ -42,7 +42,7 @@ $$
 
 그럼 이렇게 feed-forward 된 이후에 오류의 back-propagation(역전파)은 어떻게 될까요? 우리는 수식보다 좀 더 개념적으로 접근 해 보도록 하겠습니다.
 
-각 time-step의 RNN에 사용된 파라미터 $$\theta$$는 모든 시간에 공유되어 사용 되는 것을 기억 해 봅시다. 따라서, 앞서 구한 손실 $$\mathcal{L}$$에 미분을 통해 back-propagation 하게 되면, 각 time-step 별로 뒤($$t$$가 큰 time-step)로부터 $$\theta$$의 gradient가 구해지고, 이전 time-step ($$t-1$$) $$\theta$$의 gradient에 더해지게 됩니다. 즉, $$t$$가 $$0$$에 가까워질수록 RNN 파라미터 $$\theta$$의 gradient는 각 time-step 별 gradient가 더해져 점점 커지게 됩니다.
+각 time-step의 RNN에 사용된 파라미터 $\theta$는 모든 시간에 공유되어 사용 되는 것을 기억 해 봅시다. 따라서, 앞서 구한 손실 $\mathcal{L}$에 미분을 통해 back-propagation 하게 되면, 각 time-step 별로 뒤($t$가 큰 time-step)로부터 $\theta$의 gradient가 구해지고, 이전 time-step ($t-1$) $\theta$의 gradient에 더해지게 됩니다. 즉, $t$가 $0$에 가까워질수록 RNN 파라미터 $\theta$의 gradient는 각 time-step 별 gradient가 더해져 점점 커지게 됩니다.
 
 $$
 \frac{\partial{\mathcal{L}}}{\partial{\theta}}=\sum_{t}{\frac{\partial{loss(y_t,\hat{y}_t)}}{\partial{\theta}}}
@@ -56,11 +56,11 @@ $$
 
 ## Gradient Vanishing
 
-상기 했듯이, BPTT로 인해 RNN은 마치 time-step 만큼의 layer가 있는 것과 비슷한 속성을 띄게 됩니다. 그런데 위의 RNN의 수식을 보면, 활성함수(activation function)으로 $$\tanh$$가 사용 된 것을 볼 수 있습니다. $$\tanh$$은 아래와 같은 형태를 띄고 있습니다.
+상기 했듯이, BPTT로 인해 RNN은 마치 time-step 만큼의 layer가 있는 것과 비슷한 속성을 띄게 됩니다. 그런데 위의 RNN의 수식을 보면, 활성함수(activation function)으로 $\tanh$가 사용 된 것을 볼 수 있습니다. $\tanh$은 아래와 같은 형태를 띄고 있습니다.
 
 ![](http://mathworld.wolfram.com/images/interactive/TanhReal.gif)
 
-$$\tanh$$의 양 끝은 수평에 가깝게되어 점점 $$-1$$ 또는 $$1$$에 근접하는 것을 볼 수 있는데요. 문제는 이렇게 되면, $$\tanh$$ 양 끝의 gradient는 0에 가까워진다는것 입니다. 따라서 $$\tanh$$ 양 끝의 값을 반환하는 layer의 경우에는 gradient가 0에 가깝게 되어, 그 다음으로 back-propgation 되는 layer는 제대로 된 gradient를 전달 받을 수가 없게 됩니다. 이를 gradient vanishing이라고 합니다.
+$\tanh$의 양 끝은 수평에 가깝게되어 점점 $-1$ 또는 $1$에 근접하는 것을 볼 수 있는데요. 문제는 이렇게 되면, $\tanh$ 양 끝의 gradient는 0에 가까워진다는것 입니다. 따라서 $\tanh$ 양 끝의 값을 반환하는 layer의 경우에는 gradient가 0에 가깝게 되어, 그 다음으로 back-propgation 되는 layer는 제대로 된 gradient를 전달 받을 수가 없게 됩니다. 이를 gradient vanishing이라고 합니다.
 
 따라서, time-step이 많거나 여러층으로 되어 있는 신경망의 경우에는 이 gradient vanishing 문제가 쉽게 발생하게 되고, 이는 딥러닝 이전의 신경망 학습에 큰 장애가 되곤 하였습니다.
 
@@ -68,13 +68,13 @@ $$\tanh$$의 양 끝은 수평에 가깝게되어 점점 $$-1$$ 또는 $$1$$에 
 
 기본적으로 Time-step별로 RNN이 동작하지만, 아래의 그림과 같이 한 time-step 내에서 RNN을 여러 층을 쌓아올릴 수 있습니다. 그림상으로 시간의 흐름은 왼쪽에서 오른쪽으로 간다면, 여러 layer를 아래에서 위로 쌓아 올릴 수 있습니다. 따라서 여러개의 RNN layer가 쌓여 하나의 RNN을 이루고 있을 때, 가장 위층의 hidden state가 전체 RNN의 출력값이 됩니다.
 
-당연히 각 층 별로 파라미터 $$\theta$$를 공유하지 않고 따로 갖습니다. 보통은 각 layer 사이에 dropout을 끼워 넣기도 합니다.
+당연히 각 층 별로 파라미터 $\theta$를 공유하지 않고 따로 갖습니다. 보통은 각 layer 사이에 dropout을 끼워 넣기도 합니다.
 
 ![](/assets/rnn-multi-layer.png)
 
 ## Bi-directional RNN
 
-여러 층을 쌓는 방법에 대해 이야기 했다면, 이제 RNN의 방향에 대해서 이야기 할 차례 입니다. 이제까지 다룬 RNN은 $$t$$가 $$1$$에서부터 마지막 time-step 까지 차례로 입력을 받아 진행 하였습니다. 하지만, bi-directional(양방향) RNN을 사용하게 되면, 기존의 정방향과 추가적으로 마지막 time-step에서부터 거꾸로 역방향으로 입력을 받아 진행 합니다. Bi-directional RNN의 경우에도 당연히 정방향과 역방향의 파라미터 $$\theta$$는 공유되지 않습니다.
+여러 층을 쌓는 방법에 대해 이야기 했다면, 이제 RNN의 방향에 대해서 이야기 할 차례 입니다. 이제까지 다룬 RNN은 $t$가 $1$에서부터 마지막 time-step 까지 차례로 입력을 받아 진행 하였습니다. 하지만, bi-directional(양방향) RNN을 사용하게 되면, 기존의 정방향과 추가적으로 마지막 time-step에서부터 거꾸로 역방향으로 입력을 받아 진행 합니다. Bi-directional RNN의 경우에도 당연히 정방향과 역방향의 파라미터 $\theta$는 공유되지 않습니다.
 
 ![](/assets/rnn-bidirectional.png)
 
@@ -96,7 +96,7 @@ $$
 \text{softmax}(x_{i}) = \frac{exp(x_i)}{\sum_j exp(x_j)}
 $$
 
-이때, 각 time-step 별 입력 단어 $$x_t$$는 one-hot vector로 표현(encoded)되고 embedding layer를 거쳐 정해진 dimension의 word embedding vector로 표현되어 RNN에 입력으로 주어지게 됩니다. 마찬가지로 정답 클래스 또한 one-hot vector가 되어 cross entropy 손실함수(loss function)를 통해 softmax 결과값인 각 클래스 별 확률을 나타낸 ([multinoulli](https://www.statlect.com/probability-distributions/multinoulli-distribution)) 확률 분포 vector와 비교하여 손실(loss)값을 구하게 됩니다.
+이때, 각 time-step 별 입력 단어 $x_t$는 one-hot vector로 표현(encoded)되고 embedding layer를 거쳐 정해진 dimension의 word embedding vector로 표현되어 RNN에 입력으로 주어지게 됩니다. 마찬가지로 정답 클래스 또한 one-hot vector가 되어 cross entropy 손실함수(loss function)를 통해 softmax 결과값인 각 클래스 별 확률을 나타낸 ([multinoulli](https://www.statlect.com/probability-distributions/multinoulli-distribution)) 확률 분포 vector와 비교하여 손실(loss)값을 구하게 됩니다.
 
 $$
 \text{CrossEntropy}(y_{1:n}, \hat{y}_{1:n})=\frac{1}{n}\sum_{i=1}^{n}{y_i^T\hat{y}_i}

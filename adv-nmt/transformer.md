@@ -43,7 +43,7 @@ Position embedding의 결과값의 dimension은 word embedding의 dimension과 �
 
 이 논문에서의 Attention방식은 여러개의 attention으로 구성된 multi-head attention을 제안합니다. 마치 Convolution layer에서 여러개의 filter가 있어서 여러가지 다양한 feature를 뽑아 내는 것과 같은 원리라고 볼 수 있습니다.
 
-기본적인 attention의 수식은 아래와 같습니다. 기본적인 attention은 원래 그냥 dot-product attention인데 scaled라는 이름이 붙은 이유는 key의 dimension인 $$ \sqrt{d_k} $$로 나누어주었기 때문입니다. 이외에는 이전 섹션에서 다루었던 attention과 같습니다.
+기본적인 attention의 수식은 아래와 같습니다. 기본적인 attention은 원래 그냥 dot-product attention인데 scaled라는 이름이 붙은 이유는 key의 dimension인 $\sqrt{d_k}$로 나누어주었기 때문입니다. 이외에는 이전 섹션에서 다루었던 attention과 같습니다.
 
 
 $$
@@ -87,13 +87,13 @@ $$
 d_{ff} = 2048
 $$
 
-사실 여기에서 소개한 이 layer는 기존의 fully connected feed forward layer라기보단, kernel size가 1인 convolutional layer라고 볼 수 있습니다. Channel숫자가 $$ 512 \rightarrow 2048 $$ 으로 가는 convolution과, $$ 2048 \rightarrow 512 $$로 가는 convolution으로 이루어져 있는 것 입니다.
+사실 여기에서 소개한 이 layer는 기존의 fully connected feed forward layer라기보단, kernel size가 1인 convolutional layer라고 볼 수 있습니다. Channel숫자가 $512 \rightarrow 2048$ 으로 가는 convolution과, $2048 \rightarrow 512$로 가는 convolution으로 이루어져 있는 것 입니다.
 
 ## Evaluation
 
 ![](/assets/nmt-transformer-3.png)
 
-Google은 transformer를 통해서 State of the Art의 성능을 달성했다고 보고하였습니다. 뿐만아니라, 기존의 RNN 및 Facebook의 ConvS2S보다 훨씬 빠른 속도로 훈련이 가능하다고 하였습니다. 실제로 위의 table을 보면, transformer의 training cost의 magnitude는 $$ 10^{18} $$으로, 대부분의 다른 방식 $$ 10^{19} $$와 급격한 차이를 보이는 것을 알 수 있습니다.
+Google은 transformer를 통해서 State of the Art의 성능을 달성했다고 보고하였습니다. 뿐만아니라, 기존의 RNN 및 Facebook의 ConvS2S보다 훨씬 빠른 속도로 훈련이 가능하다고 하였습니다. 실제로 위의 table을 보면, transformer의 training cost의 magnitude는 $10^{18}$으로, 대부분의 다른 방식 $10^{19}$와 급격한 차이를 보이는 것을 알 수 있습니다.
 
 또 하나의 속도 개선의 원인은 input feeding의 부재입니다. RNN기반의 방식은 input feeding이 도입되면서 decoder를 훈련할 때 모든 time-step을 한번에 할 수 없게 되었습니다. 이로 인해서 대부분의 병목이 decoder에서 발생합니다. 하지만 transformer는 input feeding이 없기 때문에 한번에 모든 time-step에 대해서 계산할 수 있게 되었습니다.
 

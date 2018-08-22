@@ -41,7 +41,7 @@ $$
 $$
 
 
-그러므로 우리는 $$ \mathcal{L}_{duality} $$와 같이 베이즈 정리에 따른 제약조건의 양 변의 값의 차이를 최소화\(minimize\)하도록 하는 MSE 손실함수\(loss function\)을 만들 수 있습니다. 위의 수식에서 우리가 동시에 훈련시키는 신경망 네트워크 파라미터를 통해 $$ \log{P(y|x;\theta_{x \rightarrow y})} $$와 $$ \log{P(x|y;\theta_{y \rightarrow x})} $$를 구하고, 단방향\(monolingual\) corpus를 통해 별도로 이미 훈련시켜 놓은 언어모델을 통해 $$ \log{\hat{P}(x)} $$와 $$ \log{\hat{P}(y)} $$를 근사\(approximation\)할 수 있습니다.
+그러므로 우리는 $\mathcal{L}_{duality}$와 같이 베이즈 정리에 따른 제약조건의 양 변의 값의 차이를 최소화\(minimize\)하도록 하는 MSE 손실함수\(loss function\)을 만들 수 있습니다. 위의 수식에서 우리가 동시에 훈련시키는 신경망 네트워크 파라미터를 통해 $\log{P(y|x;\theta_{x \rightarrow y})}$와 $\log{P(x|y;\theta_{y \rightarrow x})}$를 구하고, 단방향\(monolingual\) corpus를 통해 별도로 이미 훈련시켜 놓은 언어모델을 통해 $\log{\hat{P}(x)}$와 $\log{\hat{P}(y)}$를 근사\(approximation\)할 수 있습니다.
 
 이 부가적인 제약조건의 손실함수를 기존의 목적함수\(objective function\)에 추가하여 동시에 minimize 하도록 하면, 아래와 같이 표현 할 수 있습니다.
 
@@ -54,7 +54,7 @@ $$
 $$
 
 
-여기서 $$ \lambda $$는 Lagrange multipliers로써, 고정된 값의 hyper-parameter 입니다. 실험 결과 $$ \lambda=0.01 $$ 일 때, 가장 좋은 성능을 나타낼 수 있었습니다.
+여기서 $\lambda$는 Lagrange multipliers로써, 고정된 값의 hyper-parameter 입니다. 실험 결과 $\lambda=0.01$ 일 때, 가장 좋은 성능을 나타낼 수 있었습니다.
 
 ![](/assets/duality-dsl-eval.png)
 

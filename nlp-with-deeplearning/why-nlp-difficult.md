@@ -52,7 +52,7 @@
 
 ### Curse of Dimensionality
 
-Discrete한 데이터이기 때문에 많은 종류의 데이터를 표현하기 위해서는 엄청난 dimension이 필요합니다. 예전에는 각 단어를 discrete한 symbol로써 다루었기 때문에, 마치 vocabulary size $$ =|V| $$ 만큼의 dimension이 있는 것이나 마찬가지였습니다. 이러한 sparseness를 해결하기 위해서 단어를 적절하게 segmentation하는 등 여러가지 노력이 필요하였습니다. 다행히 적절한 word embedding을 통해서 dimension reduction을 하여 이 문제를 해결함으로써, 이제는 이러한 문제는 예전보다 크게 다가오진 않습니다.
+Discrete한 데이터이기 때문에 많은 종류의 데이터를 표현하기 위해서는 엄청난 dimension이 필요합니다. 예전에는 각 단어를 discrete한 symbol로써 다루었기 때문에, 마치 vocabulary size $=|V|$ 만큼의 dimension이 있는 것이나 마찬가지였습니다. 이러한 sparseness를 해결하기 위해서 단어를 적절하게 segmentation하는 등 여러가지 노력이 필요하였습니다. 다행히 적절한 word embedding을 통해서 dimension reduction을 하여 이 문제를 해결함으로써, 이제는 이러한 문제는 예전보다 크게 다가오진 않습니다.
 
 ### Noise and Normalization
 

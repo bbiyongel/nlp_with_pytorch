@@ -58,7 +58,7 @@ z = (x + y) + torch.FloatTensor(2, 2)
 
 ![](/assets/pytorch-intro-xyz-graph.png)
 
-위의 예제에서처럼 $$x$$와 $$y$$를 생성하고 둘을 더하는 연산을 수행하면 $$x+y$$, 이에 해당하는 tensor가 생성되어 computational graph에 할당 됩니다. 그리고 다시 생성 된 $$2 \times 2$$ tensor를 더해준 뒤, 이를 $$z$$에 assign(할당) 하게 됩니다. 따라서 $$z$$로부터 back-propgation을 수행하게 되면, 이미 생성된 computational graph를 따라서 gradient를 전달 할 수 있게 됩니다.
+위의 예제에서처럼 $x$와 $y$를 생성하고 둘을 더하는 연산을 수행하면 $x+y$, 이에 해당하는 tensor가 생성되어 computational graph에 할당 됩니다. 그리고 다시 생성 된 $2 \times 2$ tensor를 더해준 뒤, 이를 $z$에 assign(할당) 하게 됩니다. 따라서 $z$로부터 back-propgation을 수행하게 되면, 이미 생성된 computational graph를 따라서 gradient를 전달 할 수 있게 됩니다.
 
 Gradient를 구할 필요가 없는 연산의 경우에는 아래와 같이 with 문법을 사용하여 연산을 수행할 수 있습니다. back-propagation이 필요 없는 추론(inference) 등을 수행 할 때 유용하며, gradient를 구하기 위한 사전 작업들(computational graph 생성)을 생략할 수 있기 때문에, 연산 속도 및 메모리 사용에 있어서도 큰 이점을 지니게 됩니다.
 
@@ -81,7 +81,7 @@ $$
 y = xW^t + b
 $$
 
-사실 이 수식에서 $$x$$는 vector이지만, 보통 우리는 딥러닝을 수행 할 때에 mini-batch 기준으로 수행하므로, $$x$$가 matrix라고 가정 하겠습니다.
+사실 이 수식에서 $x$는 vector이지만, 보통 우리는 딥러닝을 수행 할 때에 mini-batch 기준으로 수행하므로, $x$가 matrix라고 가정 하겠습니다.
 
 이를 좀 더 구현하기 쉽게 아래와 같이 표현 해 볼 수도 있습니다.
 
@@ -294,7 +294,7 @@ MyLinear(
 
 이제까지 원하는 연산을 통해 값을 앞으로 전달(feed-forward)하는 방법을 살펴보았습니다. 이제 이렇게 얻은 값을 우리가 원하는 값과의 차이를 계산하여 error를 뒤로 전달(back-propagation)하는 것을 해 보도록 하겠습니다.
 
-예를 들어 우리가 원하는 값은 아래와 같이 $$100$$이라고 하였을 때, linear의 결과값 matrix의 합과 목표값과의 거리(error 또는 loss)를 구하고, 그 값에 대해서 **backward()**함수를 사용함으로써 gradient를 구합니다. 이때, error는 sclar로 표현 되어야 합니다. vector나 matrix의 형태여서는 안됩니다.
+예를 들어 우리가 원하는 값은 아래와 같이 $100$이라고 하였을 때, linear의 결과값 matrix의 합과 목표값과의 거리(error 또는 loss)를 구하고, 그 값에 대해서 **backward()**함수를 사용함으로써 gradient를 구합니다. 이때, error는 sclar로 표현 되어야 합니다. vector나 matrix의 형태여서는 안됩니다.
 
 ```py
 objective = 100
@@ -327,7 +327,7 @@ linear.train()
 
 1. Random(임의)으로 생성한 tensor들을 
 1. 우리가 근사하고자 하는 정답 함수에 넣어 정답을 구하고, 
-1. 그 정답($$y$$)과 신경망을 통과한 $$\hat{y}$$과의 차이(error)를 Mean Square Error(MSE)를 통해 구하여 
+1. 그 정답($y$)과 신경망을 통과한 $\hat{y}$과의 차이(error)를 Mean Square Error(MSE)를 통해 구하여 
 1. SGD를 통해서 최적화(optimize)하도록 해 보겠습니다.
 
 MSE의 수식은 아래와 같습니다.
@@ -408,7 +408,7 @@ optim = torch.optim.SGD(model.parameters(), lr = 0.0001, momentum=0.1)
 print(model)
 ```
 
-위의 값을 사용하여 평균 손실(loss)값이 $$.001$$보다 작을 때 까지 훈련 시킵니다.
+위의 값을 사용하여 평균 손실(loss)값이 $.001$보다 작을 때 까지 훈련 시킵니다.
 
 ```py
 for epoch in range(n_epochs):

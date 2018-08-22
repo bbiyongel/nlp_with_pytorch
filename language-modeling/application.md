@@ -9,7 +9,7 @@
 ![Traditional Speech Recognition System](https://www.esat.kuleuven.be/psi/spraak/demo/Recog/lvr_scheme.gif)<br>
 (Traditional ASR System based on WFST, Image from web)
 
-아래는 음성인식 시스템의 수식을 개략적으로 나타낸 것 입니다. 음성 신호 $$ X $$가 주어졌을 때 확률을 최대로 하는 문장 $$ \hat{Y} $$를 구하는 것이 목표 입니다.
+아래는 음성인식 시스템의 수식을 개략적으로 나타낸 것 입니다. 음성 신호 $X$가 주어졌을 때 확률을 최대로 하는 문장 $\hat{Y}$를 구하는 것이 목표 입니다.
 
 $$
 \begin{aligned}
@@ -18,13 +18,13 @@ $$
 \end{aligned}
 $$
 
-그럼 베이즈 정리(Bayes Theorem)에 의해서 수식은 AM과 LM 부분으로 나뉠 수 있습니다. 그리고 밑변(evidence) $$ P(X) $$는 날려버릴 수 있습니다.
+그럼 베이즈 정리(Bayes Theorem)에 의해서 수식은 AM과 LM 부분으로 나뉠 수 있습니다. 그리고 밑변(evidence) $P(X)$는 날려버릴 수 있습니다.
 
 $$
 argmax\frac{P(X|Y)P(Y)}{P(X)} = argmax P(X|Y)P(Y)
 $$
 
-여기서 $$ P(X|Y) $$가 음향모델(Acoustic Model, AM)을 의미하고, $$ P(Y) $$는 언어모델(LM)을 의미 합니다. 즉, $$ P(Y) $$는 문장의 확률을 의미하고, $$ P(X|Y) $$는 문장(단어 시퀀스 또는 음소 시퀀스)이 주어졌을 때, 해당 음향 시그널이 나타날 확률을 나타냅니다.
+여기서 $P(X|Y)$가 음향모델(Acoustic Model, AM)을 의미하고, $P(Y)$는 언어모델(LM)을 의미 합니다. 즉, $P(Y)$는 문장의 확률을 의미하고, $P(X|Y)$는 문장(단어 시퀀스 또는 음소 시퀀스)이 주어졌을 때, 해당 음향 시그널이 나타날 확률을 나타냅니다.
 
 이처럼 LM은 AM과 결합하여, 문맥 정보에 기반하여 다음 단어를 예측하도록 함으로써, 음성인식의 성능을 더울 향상 시킬 수 있고, 매우 중요한 역할을 차지하고 있습니다.
 

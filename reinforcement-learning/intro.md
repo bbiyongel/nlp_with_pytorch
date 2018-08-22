@@ -8,12 +8,12 @@ $$
 \hat{\theta}=argmax P(y|x;\theta)
 $$
 
-주어진 $$x$$에 대해서 최대의 $$y$$ 값을 갖도록 하는 파라미터 $$\theta$$를 찾아내는 것 입니다. 이러한 조건부 확률 $$P(y|x)$$ 분포를 학습하는 것을 discriminative learning이라고 부릅니다. 하지만 이에 반해 ***Generative Learning***은 확률분포 $$ P(x) $$를 학습하는 것을 이릅니다. 따라서 Generative learning이 훨씬 더 학습하기 어렵습니다. 예를 들어 
+주어진 $x$에 대해서 최대의 $y$ 값을 갖도록 하는 파라미터 $\theta$를 찾아내는 것 입니다. 이러한 조건부 확률 $P(y|x)$ 분포를 학습하는 것을 discriminative learning이라고 부릅니다. 하지만 이에 반해 ***Generative Learning***은 확률분포 $P(x)$를 학습하는 것을 이릅니다. 따라서 Generative learning이 훨씬 더 학습하기 어렵습니다. 예를 들어 
 
-1. 사람의 생김새($$x$$)가 주어졌을 때 성별($$y|x$$)의 확률 분포를 배우는 것
-1. 사람의 생김새($$x$$)와 성별($$y$$) 자체의 확률 분포를 배우는 것
+1. 사람의 생김새($x$)가 주어졌을 때 성별($y|x$)의 확률 분포를 배우는 것
+1. 사람의 생김새($x$)와 성별($y$) 자체의 확률 분포를 배우는 것
 
-두가지 경우를 비교하면 2번째가 훨씬 더 어려움을 알 수 있습니다. Discriminative learning은 $$y$$와 $$x$$와의 관계를 배우는 것이지만, generative learning은 $$x~(and~y)$$ 자체를 배우는 것이기 때문입니다. 그리고 이것을 수식으로 일반화 하면 아래와 같습니다.
+두가지 경우를 비교하면 2번째가 훨씬 더 어려움을 알 수 있습니다. Discriminative learning은 $y$와 $x$와의 관계를 배우는 것이지만, generative learning은 $x~(and~y)$ 자체를 배우는 것이기 때문입니다. 그리고 이것을 수식으로 일반화 하면 아래와 같습니다.
 
 $$
 \hat{\theta}=argmax P(x, y;\theta)
@@ -28,15 +28,15 @@ $$
 ![](https://sthalles.github.io/assets/dcgan/GANs.png)
 Generative Adversarial Network overview - Image from [web](https://sthalles.github.io/intro-to-gans/)
 
-위와 같이 ***Generator($$G$$)***와 ***Discriminator($$D$$)*** 2개의 모델을 각기 다른 목표를 가지고 동시에 훈련시키는 것입니다. $$D$$는 임의의 이미지를 입력으로 받아 이것이 실제 존재하는 이미지인지, 아니면 합성된 이미지인지 탐지 해 내는 역할을 합니다. $$G$$는 어떤 이미지를 생성 해 내되, $$D$$를 속이는 이미지를 만들어 내는 것이 목표입니다. 이렇게 두 모델이 잘 균형을 이루며 min/max 게임을 펼치게 되면, $$G$$는 결국 훌륭한 이미지를 합성 해 내는 Generator가 됩니다.
+위와 같이 ***Generator($G$)***와 ***Discriminator($D$)*** 2개의 모델을 각기 다른 목표를 가지고 동시에 훈련시키는 것입니다. $D$는 임의의 이미지를 입력으로 받아 이것이 실제 존재하는 이미지인지, 아니면 합성된 이미지인지 탐지 해 내는 역할을 합니다. $G$는 어떤 이미지를 생성 해 내되, $D$를 속이는 이미지를 만들어 내는 것이 목표입니다. 이렇게 두 모델이 잘 균형을 이루며 min/max 게임을 펼치게 되면, $G$는 결국 훌륭한 이미지를 합성 해 내는 Generator가 됩니다.
 
 ### Why GAN is important?
 
-마찬가지의 이유로 GAN또한 주목받게 됩니다. 예를 들어, 생성된 이미지와 정답 이미지 간의 차이를 비교하는데 MSE(Mean Square Error)방식을 사용하게 되면, 결국 이미지는 MSE를 최소화 하기 위해서 자신의 학습했던 확률 분포의 중간으로 출력을 낼 수 밖에 없습니다. 예를 들어 사람의 얼굴을 일부 가리고 가려진 부분을 채워 넣도록 훈련한다면, MSE 손실함수(loss function) 아래에서는 각 픽셀마다 가능한 확률 분포의 평균값으로 채워 질 겁니다. 이것이 MSE를 최소화 하는 길이기 때문입니다. 하지만 우리는 그런 흐리멍텅한 이미지를 잘 생성된(채워진) 이미지라고 하지 않습니다. 따라서 사실적인 표현을 위해서는 MSE보다 정교한 목적함수(objective function)를 쓸 수 밖에 없습니다. GAN에서는 그러한 복잡한 함수를 $$D$$가 근사하여 해결한 것 입니다.
+마찬가지의 이유로 GAN또한 주목받게 됩니다. 예를 들어, 생성된 이미지와 정답 이미지 간의 차이를 비교하는데 MSE(Mean Square Error)방식을 사용하게 되면, 결국 이미지는 MSE를 최소화 하기 위해서 자신의 학습했던 확률 분포의 중간으로 출력을 낼 수 밖에 없습니다. 예를 들어 사람의 얼굴을 일부 가리고 가려진 부분을 채워 넣도록 훈련한다면, MSE 손실함수(loss function) 아래에서는 각 픽셀마다 가능한 확률 분포의 평균값으로 채워 질 겁니다. 이것이 MSE를 최소화 하는 길이기 때문입니다. 하지만 우리는 그런 흐리멍텅한 이미지를 잘 생성된(채워진) 이미지라고 하지 않습니다. 따라서 사실적인 표현을 위해서는 MSE보다 정교한 목적함수(objective function)를 쓸 수 밖에 없습니다. GAN에서는 그러한 복잡한 함수를 $D$가 근사하여 해결한 것 입니다.
 
 ## GAN과 NLP
 
-위와 같이 GAN은 컴퓨터 비전(CV)분야에서 대성공을 이루었지만 자연어처리(NLP)에서는 적용이 어려웠습니다. 그 이유는 Natural Language 자체의 특성에 있습니다. 이미지라는 것은 어떠한 continuous한 값들로 채워진 2차원의 matrix입니다. 하지만 이와 달리 단어라는 것은 discrete한 symbol로써, 결국 언어라는 것은 어떠한 descrete한 값들의 순차적인 배열 입니다. 비록 우리는 [**NNLM**](../language-modeling/nnlm.md)이나 [**NMT Decoder**](../neural-machine-translation/seq2seq.md)를 통해서 latent variable로써 언어의 확률을 모델링 $$ P(w_1,w_2,\cdots,w_n)$$ 하고 있지만, 결국 언어를 나타내기 위해서는 해당 확률 모델에서 ***sampling***(또는 argmax)을 하는 과정을 거쳐야 하고 이 과정은 미분이 불가능하거나 미분이 되더라도 gradient가 0이 되어 back-propagation이 불가 합니다.
+위와 같이 GAN은 컴퓨터 비전(CV)분야에서 대성공을 이루었지만 자연어처리(NLP)에서는 적용이 어려웠습니다. 그 이유는 Natural Language 자체의 특성에 있습니다. 이미지라는 것은 어떠한 continuous한 값들로 채워진 2차원의 matrix입니다. 하지만 이와 달리 단어라는 것은 discrete한 symbol로써, 결국 언어라는 것은 어떠한 descrete한 값들의 순차적인 배열 입니다. 비록 우리는 [**NNLM**](../language-modeling/nnlm.md)이나 [**NMT Decoder**](../neural-machine-translation/seq2seq.md)를 통해서 latent variable로써 언어의 확률을 모델링 $P(w_1,w_2,\cdots,w_n)$ 하고 있지만, 결국 언어를 나타내기 위해서는 해당 확률 모델에서 ***sampling***(또는 argmax)을 하는 과정을 거쳐야 하고 이 과정은 미분이 불가능하거나 미분이 되더라도 gradient가 0이 되어 back-propagation이 불가 합니다.
 
 $$
 \hat{w}_t = argmax P(w_t|w_1,\cdots,w_{t-1})

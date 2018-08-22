@@ -30,15 +30,15 @@ $$
 \mathcal{L}_{auto}(\theta_{enc},\theta_{dec},\mathcal{Z},\ell)=\Bbb{E}_{x\sim\mathcal{D}_\ell,\hat{x}\sim d(e(C(x),\ell),\ell)}[\triangle(\hat{x},x)]
 $$
 
-$$ \hat{x}\sim d(e(C(x),\ell),\ell) $$는 source sentence $$ x $$를 $$ C $$를 통해 noise를 추가하고, 같은 언어 $$ \ell $$로 encoding과 decoding을 수행한 것을 의미합니다. $$ \triangle(\hat{x},x) $$는 원문과 복원된 문장과의 차이(error)를 나타냅니다.
+$\hat{x}\sim d(e(C(x),\ell),\ell)$는 source sentence $x$를 $C$를 통해 noise를 추가하고, 같은 언어 $\ell$로 encoding과 decoding을 수행한 것을 의미합니다. $\triangle(\hat{x},x)$는 원문과 복원된 문장과의 차이(error)를 나타냅니다.
 
 #### Noise Model
 
-***Noise Model*** $$ C(x) $$는 임의로 문장 내 단어들을 drop하거나, 순서를 섞어주는 일을 합니다. drop rate는 보통 0.1, 순서를 섞어주는 단어사이의 거리는 3정도가 적당한 것으로 설명 합니다.
+***Noise Model*** $C(x)$는 임의로 문장 내 단어들을 drop하거나, 순서를 섞어주는 일을 합니다. drop rate는 보통 0.1, 순서를 섞어주는 단어사이의 거리는 3정도가 적당한 것으로 설명 합니다.
 
 ### Cross Domain Training (Translation)
 
-이번엔 이전 iteration의 모델 $$ M $$에서 언어($$ \ell_2 $$)의 noisy translated된 문장($$ y $$)을 다시 언어($$ \ell_1 $$) source sentence로 원상복구 하는 task에 대한 objective 입니다.
+이번엔 이전 iteration의 모델 $M$에서 언어($\ell_2$)의 noisy translated된 문장($y$)을 다시 언어($\ell_1$) source sentence로 원상복구 하는 task에 대한 objective 입니다.
 
 $$
 y=M(x)
@@ -51,7 +51,7 @@ $$
 
 Encoder가 언어와 상관없이 항상 같은 분포로 hyper plane에 projection하는지 검사하기 위한 ***discriminator***가 추가되어 Adversarial Training을 진행합니다. 
 
-Discriminator는 latent variable $$ z $$의 언어를 예측하여 아래의 cross-entropy loss를 minimize하도록 훈련됩니다. $$ x_i, \ell_i $$는 같은 언어(language pair)를 의미합니다.
+Discriminator는 latent variable $z$의 언어를 예측하여 아래의 cross-entropy loss를 minimize하도록 훈련됩니다. $x_i, \ell_i$는 같은 언어(language pair)를 의미합니다.
 
 $$
 \mathcal{L}_D(\theta_D|\theta,\mathcal{Z})=-\Bbb{E}_{(x_i,\ell_i)}[\log{p_D(\ell_i|e(x_i,\ell_i))}]
@@ -78,7 +78,7 @@ $$
 \end{aligned}
 $$
 
-$$ \lambda $$를 통해서 선형결합(linear combination)을 취하여 기존의 손실함수에 추가 합니다. 이 과정을 pseudo code로 나타내면 아래와 같습니다.
+$\lambda$를 통해서 선형결합(linear combination)을 취하여 기존의 손실함수에 추가 합니다. 이 과정을 pseudo code로 나타내면 아래와 같습니다.
 
 ![](/assets/rl-unsupervised-nmt-5.png)
 

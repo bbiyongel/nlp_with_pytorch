@@ -10,8 +10,8 @@
 
 방법은 너무나도 간단합니다. 아래와 같이 기존 parallel corpus의 맨 앞에 artificial token을 삽입함으로써 완성됩니다. 삽입된 token에 따라서 target sentence의 language가 결정됩니다.
 
-- Hello, how are you? $$ \rightarrow $$ Hola, ¿cómo estás?
-- $$<2es>$$ Hello, how are you? $$ \rightarrow $$ Hola, ¿cómo estás?
+- Hello, how are you? $\rightarrow$ Hola, ¿cómo estás?
+- $<2es>$ Hello, how are you? $\rightarrow$ Hola, ¿cómo estás?
 
 실험의 목표는 단순히 Multi-lingual end2end model을 구현하는 것이 아닌, 다른 언어쌍의 corpus를 활용하여 특정 언어쌍 번역기의 성능을 올릴 수 있는가에 대한 관점도 있습니다. 이에 따라 실험은 크게 4가지 관점에서 수행되었습니다.
 
@@ -48,13 +48,13 @@
 
 ![](/assets/nmt-zeroshot-4.png)
 
-이 실험은 Zero-shot learning의 성능을 평가하였습니다. ***bridged*** 방법은 중간 언어를 ***영어***로 하여 $$ Portuguese \rightarrow English \rightarrow Spanish $$ 2단계에 걸쳐 번역을 한 경우를 말합니다. (***PBMT***방식은 SMT방식 중의 하나입니다.) $$ NMT~Pt \rightarrow Es $$는 단순 Parallel corpus를 활용하여 기존의 방법대로 훈련한 baseline입니다.
+이 실험은 Zero-shot learning의 성능을 평가하였습니다. ***bridged*** 방법은 중간 언어를 ***영어***로 하여 $Portuguese \rightarrow English \rightarrow Spanish$ 2단계에 걸쳐 번역을 한 경우를 말합니다. (***PBMT***방식은 SMT방식 중의 하나입니다.) $NMT~Pt \rightarrow Es$는 단순 Parallel corpus를 활용하여 기존의 방법대로 훈련한 baseline입니다.
 
-Model 1은 $$ Pt \rightarrow En $$, $$ En \rightarrow Es $$를 한 모델에 훈련 한 version 입니다. 그리고 Model 2는 $$ En \leftrightarrow Pt $$, $$ En \leftrightarrow Es $$ corpus를 한 모델에 훈련 한 version 입니다. Model 2는 ***총 4가지*** corpus를 훈련 한 점을 주의해야 합니다.
+Model 1은 $Pt \rightarrow En$, $En \rightarrow Es$를 한 모델에 훈련 한 version 입니다. 그리고 Model 2는 $En \leftrightarrow Pt$, $En \leftrightarrow Es$ corpus를 한 모델에 훈련 한 version 입니다. Model 2는 ***총 4가지*** corpus를 훈련 한 점을 주의해야 합니다.
 
-마지막으로 Model2 + incremental training 방식은 $$(c)$$ 보다 ***적은양의 parallel corpus***를 기훈련된 Model 2에 추가적으로 훈련한 모델입니다.
+마지막으로 Model2 + incremental training 방식은 $(c)$ 보다 ***적은양의 parallel corpus***를 기훈련된 Model 2에 추가적으로 훈련한 모델입니다.
 
-비록 Model1과 Model2는 훈련 중에 한번도 $$ Pt \rightarrow Es $$ 데이터를 보지 못했지만, 20이 넘는 BLEU를 보여주는 것을 알 수 있습니다. 하지만 bridge 방식의 $$(a),(b)$$ 보다 성능이 떨어지는 것을 알 수 있습니다. 다행히도 $$ (f) $$의 경우에는 $$(c)$$보다 (큰 차이는 아니지만) 성능이 뛰어난 것을 알 수 있습니다. 따라서 우리는 parallel corpus의 양이 얼마 되지 않는 언어쌍의 번역기를 훈련할 때에 위와 같은 방법을 통해서 성능을 끌어올릴 수 있음을 알 수 있습니다.
+비록 Model1과 Model2는 훈련 중에 한번도 $Pt \rightarrow Es$ 데이터를 보지 못했지만, 20이 넘는 BLEU를 보여주는 것을 알 수 있습니다. 하지만 bridge 방식의 $(a),(b)$ 보다 성능이 떨어지는 것을 알 수 있습니다. 다행히도 $(f)$의 경우에는 $(c)$보다 (큰 차이는 아니지만) 성능이 뛰어난 것을 알 수 있습니다. 따라서 우리는 parallel corpus의 양이 얼마 되지 않는 언어쌍의 번역기를 훈련할 때에 위와 같은 방법을 통해서 성능을 끌어올릴 수 있음을 알 수 있습니다.
 
 ### Conclusion
 

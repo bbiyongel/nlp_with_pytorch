@@ -17,27 +17,27 @@ $$
 |P(Y)|Prior|사전 확률|
 |P(X)|Evidence|증거|
 
-우리가 풀고자하는 대부분의 문제들은 $$P(X)$$는 구하기 힘들기 때문에, 보통은 아래와 같이 접근 하기도 합니다.
+우리가 풀고자하는 대부분의 문제들은 $P(X)$는 구하기 힘들기 때문에, 보통은 아래와 같이 접근 하기도 합니다.
 
 $$
 P(Y|X) \varpropto P(X|Y)P(Y)
 $$
 
-위의 성질을 이용하여 주어진 데이터 $$X$$를 만족하며 확률을 최대로 하는 클래스 $$Y$$를 구할 수 있습니다. 이처럼 posterior 확률을 최대화(maximize)하는 $$y$$를 구하는 것을 Maximum A Posterior (MAP)라고 부릅니다. 그 수식은 아래와 같습니다.
+위의 성질을 이용하여 주어진 데이터 $X$를 만족하며 확률을 최대로 하는 클래스 $Y$를 구할 수 있습니다. 이처럼 posterior 확률을 최대화(maximize)하는 $y$를 구하는 것을 Maximum A Posterior (MAP)라고 부릅니다. 그 수식은 아래와 같습니다.
 
 $$
 \hat{y}_{MAP}=argmax_{y\in\mathcal{Y}}P(Y=y|X)
 $$
 
-다시한번 수식을 살펴보면, $$X$$(데이터)가 주어졌을 때, 가능한 클래스의 set $$mathcal{Y}$$ 중에서 posterior를 최대로 하는 클래스 $$y$$를 선택하는 것 입니다.
+다시한번 수식을 살펴보면, $X$(데이터)가 주어졌을 때, 가능한 클래스의 set $mathcal{Y}$ 중에서 posterior를 최대로 하는 클래스 $y$를 선택하는 것 입니다.
 
-이와 마찬가지로 $$X$$(데이터)가 나타날 likelihood 확률을 최대로 하는 클래스 $$y$$를 선택하는 것을 Maximum Likelihood Estimation (MLE)라고 합니다.
+이와 마찬가지로 $X$(데이터)가 나타날 likelihood 확률을 최대로 하는 클래스 $y$를 선택하는 것을 Maximum Likelihood Estimation (MLE)라고 합니다.
 
 $$
 \hat{y}_{MLE}=argmax_{y\in\mathcal{Y}}P(X|Y=y)
 $$
 
-MLE는 주어진 데이터$$X$$와 클래스 레이블(label) $$Y$$가 있을 때, parameter $$\theta$$를 훈련하는 방법으로도 많이 사용 됩니다.
+MLE는 주어진 데이터$X$와 클래스 레이블(label) $Y$가 있을 때, parameter $\theta$를 훈련하는 방법으로도 많이 사용 됩니다.
 
 $$
 \hat{\theta}=argmax_\theta P(Y|X,\theta)
@@ -47,13 +47,13 @@ $$
 
 경우에 따라 MAP는 MLE에 비해서 좀 더 정확할 수 있습니다. prior(사전)확률이 반영되어 있기 때문 입니다. 예를 들어보죠.
 
-만약 범죄현장에서 발자국을 발견하고 사이즈를 측정했더니 범인은 신발사이즈(데이터, $$X$$) 155를 신는 사람인 것으로 의심 됩니다. 이때, 범인의 성별(클래스, $$Y$$)을 예측 해 보도록 하죠.
+만약 범죄현장에서 발자국을 발견하고 사이즈를 측정했더니 범인은 신발사이즈(데이터, $X$) 155를 신는 사람인 것으로 의심 됩니다. 이때, 범인의 성별(클래스, $Y$)을 예측 해 보도록 하죠.
 
-성별 클래스의 set은 $$Y=\{male, female\}$$ 입니다. 신발사이즈 $$X$$는 5단위의 정수로 이루어져 있습니다. $$X=\{\cdots,145,150,155,160,\cdots\}$$
+성별 클래스의 set은 $Y=\{male, female\}$ 입니다. 신발사이즈 $X$는 5단위의 정수로 이루어져 있습니다. $X=\{\cdots,145,150,155,160,\cdots\}$
 
-신발사이즈 155는 남자 신발사이즈 치곤 매우 작은 편 입니다. 따라서 우리는 보통 범인을 여자라고 특정할 것 같습니다. 다시 말하면, 남자일 때 신발사이즈 155일 확률 $$P(X=155|Y=male)$$은 여자일 때 신발사이즈 155일 확률 $$P(X=155|Y=female)$$일 확률 보다 낮습니다.
+신발사이즈 155는 남자 신발사이즈 치곤 매우 작은 편 입니다. 따라서 우리는 보통 범인을 여자라고 특정할 것 같습니다. 다시 말하면, 남자일 때 신발사이즈 155일 확률 $P(X=155|Y=male)$은 여자일 때 신발사이즈 155일 확률 $P(X=155|Y=female)$일 확률 보다 낮습니다.
 
-보통의 경우 남자와 여자의 비율은 $$0.5$$로 같기 때문에, 이는 큰 상관이 없는 예측 입니다. 하지만 범죄현장이 만약 군부대였다면 어떻게 될까요? 남녀 성비는 $$P(Y=male) >> P(Y=female)$$로 매우 불균형 할 것입니다.
+보통의 경우 남자와 여자의 비율은 $0.5$로 같기 때문에, 이는 큰 상관이 없는 예측 입니다. 하지만 범죄현장이 만약 군부대였다면 어떻게 될까요? 남녀 성비는 $P(Y=male) >> P(Y=female)$로 매우 불균형 할 것입니다.
 
 이때, 이미 갖고 있는 likelihood에 prior를 곱해주면 posterior를 최대화 하는 클래스를 더 정확하게 예측 할 수 있습니다.
 
@@ -65,9 +65,9 @@ $$
 
 ## Naive Bayes
 
-Naive Bayes는 MAP를 기반으로 동작합니다. 대부분의 경우 posterior를 바로 구하기 어렵기 때문에, likelihood와 prior의 곱을 통해 클래스 $$Y$$를 예측 합니다.
+Naive Bayes는 MAP를 기반으로 동작합니다. 대부분의 경우 posterior를 바로 구하기 어렵기 때문에, likelihood와 prior의 곱을 통해 클래스 $Y$를 예측 합니다.
 
-이때, $$X$$가 다양한 feature(특징)들로 이루어진 데이터라면, 훈련 데이터에서 매우 희소(rare)할 것이므로 likelihood $$ P(X=w_1,w_2,\cdots,w_n|Y=c) $$를 구하기 어려울 것 입니다. 이때 Naive Bayes가 강력한 힘을 발휘 합니다. 각 feature들이 상호 독립적이라고 가정하는 것 입니다. 그럼 joint probability를 각 확률의 곱으로 근사(approximate)할 수 있습니다. 이 과정을 수식으로 표현하면 아래와 같습니다.
+이때, $X$가 다양한 feature(특징)들로 이루어진 데이터라면, 훈련 데이터에서 매우 희소(rare)할 것이므로 likelihood $P(X=w_1,w_2,\cdots,w_n|Y=c)$를 구하기 어려울 것 입니다. 이때 Naive Bayes가 강력한 힘을 발휘 합니다. 각 feature들이 상호 독립적이라고 가정하는 것 입니다. 그럼 joint probability를 각 확률의 곱으로 근사(approximate)할 수 있습니다. 이 과정을 수식으로 표현하면 아래와 같습니다.
 
 $$
 \begin{aligned}
@@ -111,7 +111,7 @@ $$
 \end{gathered}
 $$
 
-위와 같이 긍정($$\color{blue}pos\color{default}$$)과 부정($$\color{red}neg\color{default}$$)으로 클래스가 구성($$\mathcal{C}$$되어 있고, 문서 $$d$$로 구성된 데이터 $$\mathcal{D}$$가 있습니다.
+위와 같이 긍정($\color{blue}pos\color{default}$)과 부정($\color{red}neg\color{default}$)으로 클래스가 구성($\mathcal{C}$되어 있고, 문서 $d$로 구성된 데이터 $\mathcal{D}$가 있습니다.
 
 이때, 우리에게 "I am happy to see this movie!"라는 문장이 주어졌을 때, 이 문장이 긍정인지 부정인지 판단해 보겠습니다.
 
@@ -122,7 +122,7 @@ P(\color{blue}pos\color{default}|I,am,happy,to,see,this,movie,!)&= \frac{P(I,am,
 \end{aligned}
 $$
 
-Naive Bayes의 수식을 활용하여 단어의 조합에 대한 확률을 각각 분해할 수 있습니다. 그리고 그 확률들은 아래와 같이 데이터 $$\mathcal{D}$$에서의 출현 빈도를 통해 구할 수 있습니다.
+Naive Bayes의 수식을 활용하여 단어의 조합에 대한 확률을 각각 분해할 수 있습니다. 그리고 그 확률들은 아래와 같이 데이터 $\mathcal{D}$에서의 출현 빈도를 통해 구할 수 있습니다.
 
 $$
 \begin{aligned}
@@ -145,7 +145,7 @@ $$
 
 ## Add-one Smoothing
 
-여기에 문제가 하나 있습니다. 만약 훈련 데이터에서 $$Count(happy, \color{red}neg\color{default})$$가 $$0$$이었다면 $$P(happy|\color{red}neg\color{default})=0$$이 되겠지만, 그저 훈련 데이터에 존재하지 않는 경우라고 해서 실제 출현 확률을 $$0$$으로 여기는 것은 매우 위험한 일 입니다.
+여기에 문제가 하나 있습니다. 만약 훈련 데이터에서 $Count(happy, \color{red}neg\color{default})$가 $0$이었다면 $P(happy|\color{red}neg\color{default})=0$이 되겠지만, 그저 훈련 데이터에 존재하지 않는 경우라고 해서 실제 출현 확률을 $0$으로 여기는 것은 매우 위험한 일 입니다.
 
 $$
 \begin{gathered}
@@ -155,7 +155,7 @@ P(happy|\color{red}neg\color{default})\approx\frac{Count(happy, \color{red}neg\c
 \end{gathered}
 $$
 
-따라서 우리는 이런 경우를 위하여 각 출현횟수에 $$1$$을 더해주어 간단하게 문제를 완화 할 수 있습니다. 물론 완벽한 해결법은 아니지만, Naive Bayes의 가정과 마찬가지로 간단하고 강력합니다.
+따라서 우리는 이런 경우를 위하여 각 출현횟수에 $1$을 더해주어 간단하게 문제를 완화 할 수 있습니다. 물론 완벽한 해결법은 아니지만, Naive Bayes의 가정과 마찬가지로 간단하고 강력합니다.
 
 $$
 \tilde{P}(w|c)=\frac{Count(w,c)+1}{\big(\sum_{j=1}^{|V|}{Count(w_j,c)}\big)+|V|}

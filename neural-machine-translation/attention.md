@@ -39,7 +39,7 @@ def is_same(key, query):
         return .0
 ```
 
-코드를 살펴보면, 순차적으로 **dic** 내부의 key값들과 query 값을 비교하여, key가 같을 경우 **weights** 에 1.0을 추가하고, 다를 경우에는 0.0을 추가합니다. 그리고 weights를 weights의 총 합으로 나누어 weights의 합이 1이 되도록 (마치 확률과 같이) normalize하여 줍니다. 다시 **dic** 내부의 value값들과 weights의 값을 inner product \(스칼라곱, dot product\) 합니다. 즉, $$ weight = 1.0 $$ 인 경우에만 value 값을 **answer**에 더합니다.
+코드를 살펴보면, 순차적으로 **dic** 내부의 key값들과 query 값을 비교하여, key가 같을 경우 **weights** 에 1.0을 추가하고, 다를 경우에는 0.0을 추가합니다. 그리고 weights를 weights의 총 합으로 나누어 weights의 합이 1이 되도록 (마치 확률과 같이) normalize하여 줍니다. 다시 **dic** 내부의 value값들과 weights의 값을 inner product \(스칼라곱, dot product\) 합니다. 즉, $weight = 1.0$ 인 경우에만 value 값을 **answer**에 더합니다.
 
 ### Differentiable Key-Value function
 
@@ -141,7 +141,7 @@ $$
 where~hs~is~hidden~size~of~RNN,~and~|V_{tgt}|~is~size~of~output~vocabulary.
 $$
 
-원하는 정보를 attention을 통해 encoder에서 획득한 후, 해당 정보를 decoder output과 concatenate하여 $$ tanh $$를 취한 후, softmax 계산을 통해 다음 time-step의 입력이 되는 $$ \hat{y}_{t} $$을 구합니다.
+원하는 정보를 attention을 통해 encoder에서 획득한 후, 해당 정보를 decoder output과 concatenate하여 $tanh$를 취한 후, softmax 계산을 통해 다음 time-step의 입력이 되는 $\hat{y}_{t}$을 구합니다.
 
 ![](/assets/nmt-seq2seq-with-attention-architecture.png)
 

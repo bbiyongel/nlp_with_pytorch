@@ -10,7 +10,7 @@ $$
 $$
 
 
-번역의 궁극적인 목표는 어떤 언어\($$ f $$, e.g. _french_\)의 문장이 주어졌을 때, 우리가 원하는 언어\($$ e $$, e.g. _english_\)로 확률을 최대로 하는 문장을 찾아내는 것 입니다.
+번역의 궁극적인 목표는 어떤 언어\($f$, e.g. _french_\)의 문장이 주어졌을 때, 우리가 원하는 언어\($e$, e.g. _english_\)로 확률을 최대로 하는 문장을 찾아내는 것 입니다.
 
 ### Why it is so hard?
 
@@ -47,7 +47,7 @@ NMT이전에 세상을 지배하던 번역 방식입니다. 대량의 양방향 
 ![http://web.stanford.edu/class/cs224n/lectures/cs224n-2017-lecture10.pdf](/assets/nmt-autoencoder.png)
 [Image from CS224n](http://web.stanford.edu/class/cs224n/syllabus.html)
 
-사실, 딥러닝 이전의 AI의 전성기\(1980년대\)에도 Neural Network을 사용하여 Machine Translation 문제를 해결하려는 시도는 여럿 있었습니다. 하지만 당시에도 $$ Encoder \longrightarrow Decoder $$ 형태의 구조를 가지고 있었지만, 당연히 지금과 같은 성능을 내기는 어려웠습니다.
+사실, 딥러닝 이전의 AI의 전성기\(1980년대\)에도 Neural Network을 사용하여 Machine Translation 문제를 해결하려는 시도는 여럿 있었습니다. 하지만 당시에도 $Encoder \longrightarrow Decoder$ 형태의 구조를 가지고 있었지만, 당연히 지금과 같은 성능을 내기는 어려웠습니다.
 
 ### Invasion of NMT
 
