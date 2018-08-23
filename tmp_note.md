@@ -100,6 +100,8 @@ v_\pi(s) &\doteq \mathbb{E}_\pi[R_{t+1}+\gamma R_{t+2}+\gamma^2R_{t+3}+\cdots|S_
 \end{aligned}
 $$
 
+### Policy Improvement
+
 $$
 \begin{aligned}
 \pi'(s) &\doteq \underset{a}{\text{argmax }}{q_\pi(s,a)} \\
@@ -107,5 +109,3 @@ $$
 &= \underset{a}{\text{argmax }}{\sum_{s',r}{P(s',r|s,a)\Big[r+\gamma v_\pi(s')\Big]}}
 \end{aligned}
 $$
-
-### Policy Improvement
