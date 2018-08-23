@@ -82,10 +82,30 @@ $$
 \end{aligned}
 $$
 
-## Some Tricks
-
 ## GAN
 
 $$
 \min_{G}\max_{D}\mathcal{L}(D,G)=\mathbb{E}_{x\sim p_r(x)}[\log{D(x)}]+\mathbb{E}_{z\sim p_z(z)}[\log{(1-D(G(z)))}]
 $$
+
+## Policy Iteration
+
+### Policy Evaluation
+
+$$
+\begin{aligned}
+v_\pi(s) &\doteq \mathbb{E}_\pi[R_{t+1}+\gamma R_{t+2}+\gamma^2R_{t+3}+\cdots|S_t=s] \\
+&= \mathbb{E}_\pi[R_{t+1}+\gamma v_\pi(S_{t+1})|S_t=s] \\
+&= \sum_a{\pi(a|s)\sum_{s',r}{P(s',r|s,a)\Big[r+\gamma v_\pi(s')\Big]}}
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\pi'(s) &\doteq \underset{a}{\text{argmax }}{q_\pi(s,a)} \\
+&= \underset{a}{\text{argmax }}{\mathbb{E}[R_{t+1}+\gamma v_\pi(S_{t+1})|S_t=s,A_t=a]} \\
+&= \underset{a}{\text{argmax }}{\sum_{s',r}{P(s',r|s,a)\Big[r+\gamma v_\pi(s')\Big]}}
+\end{aligned}
+$$
+
+### Policy Improvement
