@@ -37,10 +37,9 @@
 
 또한 접사가 붙어 같은 단어가 다양하게 생겨나기 때문에, 하나의 어근에서 생겨난 비슷한 의미의 단어가 정말 많이 생성됩니다. 따라서 이들을 모두 다르게 처리할 수 없기 때문에, 추가적인 segmentation을 통해서 같은 어근에서 생겨난 단어를 처리하게 됩니다. 이와 관련한 내용은 Preprocessing 챕터에서 다루도록 하겠습니다.
 
-> 읽을거리:
->
-> * [http://zomzom.tistory.com/1074](http://zomzom.tistory.com/1074)
-> * [https://m.blog.naver.com/reading0365/221057575669](https://m.blog.naver.com/reading0365/221057575669)
+* 읽을거리:
+  * [http://zomzom.tistory.com/1074](http://zomzom.tistory.com/1074)
+  * [https://m.blog.naver.com/reading0365/221057575669](https://m.blog.naver.com/reading0365/221057575669)
 
 ## 띄어쓰기의 어려움
 
@@ -63,9 +62,9 @@
 
 영어는 기본적으로 특성상 명사가 굉장히 중요시 됩니다. 따라서 정말 특별한 경우를 제외하고는 주어가 생략되는 경우가 없습니다. 하지만 한국어는 동사를 중요시하기 때문에, 주어가 자주 생략됩니다. 인간은 context 정보를 잘 활용하여 생략된 정보를 메꿀 수 있지만, 컴퓨터는 할 수가 없습니다. 따라서 위의 평서문과 의문문의 예에서도 볼 수 있듯이 한국어는 주어가 생략 되었는데, 컴퓨터는 누가 점심을 먹었고 누구에게 점심을 먹었냐고 물어보는지 알 수가 없습니다. 따라서 기계번역을 비롯하여 문장의 정확한 의미를 파악하는데 상당히 어렵게 됩니다.
 
-> 읽을거리: 
-- http://www.hani.co.kr/arti/society/schooling/261322.html
-- https://namu.wiki/w/%EC%A3%BC%EC%96%B4%EB%8A%94%20%EC%97%86%EB%8B%A4
+* 읽을거리: 
+  * http://www.hani.co.kr/arti/society/schooling/261322.html
+  * https://namu.wiki/w/%EC%A3%BC%EC%96%B4%EB%8A%94%20%EC%97%86%EB%8B%A4
 
 ## 한자 기반의 언어
 

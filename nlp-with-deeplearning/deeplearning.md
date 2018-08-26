@@ -48,10 +48,10 @@ Seq2seq를 기반으로 attention mechanism\(\[[Bahdanau et al.2014](https://arx
 
 결국, 기계번역은 가장 늦게 혁명이 이루어졌지만, 가장 먼저 딥러닝만을 사용해 상용화가 된 분야가 되었습니다. 현재의 상용 기계번역 시스템은 모두 딥러닝에 의한 시스템으로 대체되었다고 볼 수 있습니다.
 
-> 읽을거리:
-* [https://devblogs.nvidia.com/introduction-neural-machine-translation-with-gpus/](https://devblogs.nvidia.com/introduction-neural-machine-translation-with-gpus/)
-* [https://devblogs.nvidia.com/introduction-neural-machine-translation-gpus-part-2/](https://devblogs.nvidia.com/introduction-neural-machine-translation-gpus-part-2/)
-* [https://devblogs.nvidia.com/introduction-neural-machine-translation-gpus-part-3/](https://devblogs.nvidia.com/introduction-neural-machine-translation-gpus-part-3/)
+* 읽을거리:
+  * [https://devblogs.nvidia.com/introduction-neural-machine-translation-with-gpus/](https://devblogs.nvidia.com/introduction-neural-machine-translation-with-gpus/)
+  * [https://devblogs.nvidia.com/introduction-neural-machine-translation-gpus-part-2/](https://devblogs.nvidia.com/introduction-neural-machine-translation-gpus-part-2/)
+  * [https://devblogs.nvidia.com/introduction-neural-machine-translation-gpus-part-3/](https://devblogs.nvidia.com/introduction-neural-machine-translation-gpus-part-3/)
 
 ### Generative Learning
 
