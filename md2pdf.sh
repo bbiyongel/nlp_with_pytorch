@@ -1,10 +1,11 @@
 FONT_SIZE=12pt
+DIR_PATH=./pdf/
 
 # * [소개글](README.md)
 # * [Index](index_list.md)
 echo 0
 cd ./nlp-with-deeplearning
-pandoc ../README.md ../index_list.md --latex-engine=xelatex -o ../0.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
+pandoc ../README.md ../index_list.md --latex-engine=xelatex -o ../${DIR_PATH}/0.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
 cd ..
 # * [Temporal Note](tmp_note.md)
 # * [Natural Language Processing with Deeplearning](nlp-with-deeplearning/cover.md)
@@ -15,7 +16,7 @@ cd ..
 #   * [Recent Trends](nlp-with-deeplearning/trends.md)
 echo 1
 cd ./nlp-with-deeplearning
-pandoc ./cover.md ./intro.md ./deeplearning.md ./why-nlp-difficult.md ./korean-is-hell.md ./trends.md --latex-engine=xelatex -o ../1.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
+pandoc ./cover.md ./intro.md ./deeplearning.md ./why-nlp-difficult.md ./korean-is-hell.md ./trends.md --latex-engine=xelatex -o ../${DIR_PATH}/1.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
 cd ..
 # * [Hello PyTorch](pytorch-intro/cover.md)
 #   * [Intro](pytorch-intro/intro.md)
@@ -23,7 +24,7 @@ cd ..
 #   * [PyTorch tutorial](pytorch-intro/hello-pytorch.md)
 echo 2
 cd ./pytorch-intro
-pandoc ./cover.md ./intro.md ./how-to-install.md ./hello-pytorch.md --latex-engine=xelatex -o ../2.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
+pandoc ./cover.md ./intro.md ./how-to-install.md ./hello-pytorch.md --latex-engine=xelatex -o ../${DIR_PATH}/2.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
 cd ..
 # * [Word Sense Disambiguation](wsd/cover.md)
 #   * [Intro](wsd/intro.md)
@@ -32,7 +33,7 @@ cd ..
 #   * [Selectional Preference](wsd/selectional-preference.md)
 echo 3
 cd ./wsd
-pandoc ./cover.md ./wordnet.md ./feature-vector.md ./selectional-preference.md --latex-engine=xelatex -o ../3.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
+pandoc ./cover.md ./wordnet.md ./feature-vector.md ./selectional-preference.md --latex-engine=xelatex -o ../${DIR_PATH}/3.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
 cd ..
 # * [Preprocessing](preprocessing/cover.md)
 #   * [Intro](preprocessing/intro.md)
@@ -45,7 +46,7 @@ cd ..
 #   * [TorchText](preprocessing/torchtext.md)
 echo 4
 cd ./preprocessing
-pandoc ./cover.md ./intro.md ./collecting-corpus.md ./cleaning-corpus.md ./tokenization.md ./align.md ./bpe.md ./detokenization.md ./torchtext.md --latex-engine=xelatex -o ../4.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
+pandoc ./cover.md ./intro.md ./collecting-corpus.md ./cleaning-corpus.md ./tokenization.md ./align.md ./bpe.md ./detokenization.md ./torchtext.md --latex-engine=xelatex -o ../${DIR_PATH}/4.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
 cd ..
 # * [Word Embedding Vector](word-embedding-vector/cover.md)
 #   * [Intro](word-embedding-vector/intro.md)
@@ -57,7 +58,7 @@ cd ..
 #   * [Doc2Vec](word-embedding-vector/doc2vec.md)
 echo 5
 cd ./word-embedding-vector
-pandoc ./cover.md ./intro.md ./one-hot-encoding.md ./previous-methods.md ./word2vec.md ./glove.md ./fasttext.md ./doc2vec.md --latex-engine=xelatex -o ../5.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
+pandoc ./cover.md ./intro.md ./one-hot-encoding.md ./previous-methods.md ./word2vec.md ./glove.md ./fasttext.md ./doc2vec.md --latex-engine=xelatex -o ../${DIR_PATH}/5.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
 cd ..
 # * [Sequence Modeling](sequential-modeling/cover.md)
 #   * [Intro](sequential-modeling/intro.md)
@@ -67,7 +68,7 @@ cd ..
 #   * [Gradient Clipping](sequential-modeling/gradient-clipping.md)
 echo 6
 cd ./sequential-modeling
-pandoc ./cover.md ./intro.md ./rnn.md ./lstm.md ./gru.md ./gradient-clipping.md --latex-engine=xelatex -o ../6.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
+pandoc ./cover.md ./intro.md ./rnn.md ./lstm.md ./gru.md ./gradient-clipping.md --latex-engine=xelatex -o ../${DIR_PATH}/6.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
 cd ..
 # * [Text Classification](text-classification/cover.md)
 #   * [Intro](text-classification/intro.md)
@@ -77,7 +78,7 @@ cd ..
 #   * [Unsupervised Text Classification](text-classification/unsupervised-text-classification.md)
 echo 7
 cd ./text-classification
-pandoc ./cover.md ./intro.md ./naive-bayes.md ./cnn.md ./rnn.md ./unsupervised-text-classification.md --latex-engine=xelatex -o ../7.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
+pandoc ./cover.md ./intro.md ./naive-bayes.md ./cnn.md ./rnn.md ./unsupervised-text-classification.md --latex-engine=xelatex -o ../${DIR_PATH}/7.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
 cd ..
 # * [Language Modeling](language-modeling/cover.md)
 #   * [Intro](language-modeling/intro.md)
@@ -88,7 +89,7 @@ cd ..
 #   * [Applications](language-modeling/application.md)
 echo 8
 cd ./language-modeling
-pandoc ./cover.md ./intro.md ./n-gram.md ./perpexity.md ./srilm.md ./nnlm.md ./application.md --latex-engine=xelatex -o ../8.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
+pandoc ./cover.md ./intro.md ./n-gram.md ./perpexity.md ./srilm.md ./nnlm.md ./application.md --latex-engine=xelatex -o ../${DIR_PATH}/8.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
 cd ..
 # * [Neural Machine Translation](neural-machine-translation/cover.md)
 #   * [Intro](neural-machine-translation/intro.md)
@@ -101,7 +102,7 @@ cd ..
 #   * [Source Code](neural-machine-translation/code.md)
 echo 9
 cd ./neural-machine-translation
-pandoc ./cover.md ./intro.md ./seq2seq.md ./attention.md ./input-feeding.md ./teacher-forcing.md beam-search.md eval.md code.md --latex-engine=xelatex -o ../9.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
+pandoc ./cover.md ./intro.md ./seq2seq.md ./attention.md ./input-feeding.md ./teacher-forcing.md beam-search.md eval.md code.md --latex-engine=xelatex -o ../${DIR_PATH}/9.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
 cd ..
 # * [Advanced Topic on NMT](adv-nmt/cover.md)
 #   * [Multilingual NMT](adv-nmt/multilingual-nmt.md)
@@ -110,7 +111,7 @@ cd ..
 #   * [Transformer](adv-nmt/transformer.md)
 echo 10
 cd ./adv-nmt
-pandoc ./cover.md ./multilingual-nmt.md ./monolingual-corpus.md ./fconv.md transformer.md --latex-engine=xelatex -o ../10.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=12pt
+pandoc ./cover.md ./multilingual-nmt.md ./monolingual-corpus.md ./fconv.md transformer.md --latex-engine=xelatex -o ../${DIR_PATH}/10.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=12pt
 cd ..
 # * [NLP with Reinforcement Learning](reinforcement-learning/cover.md)
 #   * [Intro](reinforcement-learning/intro.md)
@@ -120,7 +121,7 @@ cd ..
 #   * [Unsupervised NMT](reinforcement-learning/unsupervised-nmt.md)
 echo 11
 cd ./reinforcement-learning
-pandoc ./cover.md ./intro.md ./policy-gradient.md ./characteristic.md ./supervised-nmt.md ./unsupervised-nmt.md --latex-engine=xelatex -o ../11.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
+pandoc ./cover.md ./intro.md ./policy-gradient.md ./characteristic.md ./supervised-nmt.md ./unsupervised-nmt.md --latex-engine=xelatex -o ../${DIR_PATH}/11.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
 cd ..
 # * [Exploit Duality](duality/cover.md)
 #   * [Duality](duality/intro.md)
@@ -128,7 +129,7 @@ cd ..
 #   * [Dual Unsupervised Learning](duality/dul.md)
 echo 12
 cd ./duality
-pandoc ./cover.md ./intro.md ./dsl.md ./dul.md --latex-engine=xelatex -o ../12.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
+pandoc ./cover.md ./intro.md ./dsl.md ./dul.md --latex-engine=xelatex -o ../${DIR_PATH}/12.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
 cd ..
 # * [Productization](productization/cover.md)
 #   * [Pipeline](productization/pipeline.md)
@@ -138,8 +139,10 @@ cd ..
 #   * [Microsoft's NMT](productization/microsoft.md)
 echo 13
 cd ./productization
-pandoc ./cover.md ./pipeline.md ./gnmt.md ./nematus.md ./booking-com.md ./microsoft.md --latex-engine=xelatex -o ../13.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
+pandoc ./cover.md ./pipeline.md ./gnmt.md ./nematus.md ./booking-com.md ./microsoft.md --latex-engine=xelatex -o ../${DIR_PATH}/13.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
 cd ..
 # * [References](references.md)
 echo 14
-pandoc references.md --latex-engine=xelatex -o ./14.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
+cd ./productization
+pandoc ../references.md --latex-engine=xelatex -o ../${DIR_PATH}/14.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
+cd ..
