@@ -36,7 +36,7 @@ $$
 
 ### Joint Training of Src2Tgt and Tgt2Src Models
 
-![](/assets/nmt-productization-msnmt-joint-training.png)
+![](../assets/nmt-productization-msnmt-joint-training.png)
 
 ## Beyond the Left-to-Right Bias
 
@@ -44,7 +44,7 @@ $$
 
 Microsoft는 [[Xia et al.2017]](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/12/6775-deliberation-networks-sequence-generation-beyond-one-pass-decoding.pdf)에서 소개한 방식을 통해 번역 성능을 더욱 높이려 하였습니다. 이 방법은 사람이 번역을 하는 방법에서 영감을 얻은 것 입니다. 사람은 번역을 할 때에 source 문장에서 초안(draft) target 문장을 얻고, 그 초안으로부터 최종적인 target 문장을 번역 해 내곤 합니다. 따라서 신경망을 통해 같은 방법을 구현하고자 하였습니다.
 
-![](/assets/nmt-productization-msnmt-deliberation.png)
+![](../assets/nmt-productization-msnmt-deliberation.png)
 
 예를 들어 기존의 번역의 수식은 deliberation networks를 통해 아래와 같이 바뀔 수 있습니다.
 
@@ -52,15 +52,15 @@ $$
 P(Y|X)=\prod{P(y_i|X,y_{<i})} \longrightarrow P(Y|X)=\prod{P(y_i|X,Y_{mid},y_{<i})}
 $$
 
-![](/assets/nmt-productization-msnmt-deliberation-implementation.png)
+![](../assets/nmt-productization-msnmt-deliberation-implementation.png)
 
 ### Agreement Regularization of Left-to-Right and Right-to-Left Models
 
-![](/assets/nmt-productization-msnmt-kld.png)
+![](../assets/nmt-productization-msnmt-kld.png)
 
 ## Data Selection and Filtering
 
 ## Evaluation
 
-![](/assets/nmt-productization-msnmt-evaluation.png)
+![](../assets/nmt-productization-msnmt-evaluation.png)
 

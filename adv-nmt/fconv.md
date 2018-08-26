@@ -4,7 +4,7 @@ Neural Machine Translation의 최강자는 Google이라고 모두가 여기고 �
 
 ## Architecture
 
-![](/assets/nmt-fconv-overview.png)
+![](../assets/nmt-fconv-overview.png)
 
 사실 Facebook의 그림 실력은 그닥 칭찬하고 싶지 않습니다. 논문에 있는 그림이 조금 이해하기 어려울 수 있으나 최대한 따라가보도록 하겠습니다.
 
@@ -36,7 +36,7 @@ $$
 
 위의 물음에서 출발한 것이 이 논문의 핵심입니다. 따라서 kernel\(or window\) size $k$인 convolution filter가 $d$개 channel의 입력을 받아서 convolution 연산을 수행하여 $2d$개 channel의 출력을 결과값으로 내놓습니다.
 
-![](/assets/nmt-fconv-2.png)
+![](../assets/nmt-fconv-2.png)
 
 ### Gated Linear Unit
 

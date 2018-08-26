@@ -56,7 +56,7 @@ y.requires_grad_(True)
 z = (x + y) + torch.FloatTensor(2, 2)
 ```
 
-![](/assets/pytorch-intro-xyz-graph.png)
+![](../assets/pytorch-intro-xyz-graph.png)
 
 위의 예제에서처럼 $x$와 $y$를 생성하고 둘을 더하는 연산을 수행하면 $x+y$, 이에 해당하는 tensor가 생성되어 computational graph에 할당 됩니다. 그리고 다시 생성 된 $2 \times 2$ tensor를 더해준 뒤, 이를 $z$에 assign(할당) 하게 됩니다. 따라서 $z$로부터 back-propgation을 수행하게 되면, 이미 생성된 computational graph를 따라서 gradient를 전달 할 수 있게 됩니다.
 

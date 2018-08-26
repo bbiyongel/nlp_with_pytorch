@@ -10,13 +10,13 @@ Google도 seq2seq 기반의 모델을 구성하였습니다. 다만, 구글은 �
 
 ### Residual Connection
 
-![](/assets/nmt-gnmt-1.png)
+![](../assets/nmt-gnmt-1.png)
 
 보통 LSTM layer를 4개 이상 쌓기 시작하면 모델이 더욱 깊어(deeper)짐에 따라서 성능 효율이 저하되기 시작합니다. 따라서 Google은 깊은 모델은 효율적으로 훈련시키기 위하여 residual connection을 적용하였습니다.
 
 ### Bi-directional Encoder for First Layer
 
-![](/assets/nmt-gnmt-2.png)
+![](../assets/nmt-gnmt-2.png)
 
 또한, 모든 LSTM stack에 대해서 bi-directional LSTM을 적용하는 대신에, 첫번째 층에 대해서만 bi-directional LSTM을 적용하였습니다. 따라서 훈련(training) 및 추론(inference) 속도에 개선이 있었습니다.
 
@@ -31,7 +31,7 @@ Google도 seq2seq 기반의 모델을 구성하였습니다. 다만, 구글은 �
 
 ## Training Criteria
 
-![](/assets/nmt-gnmt-5.png)
+![](../assets/nmt-gnmt-5.png)
 
 Google은 강화학습을 다룬 [챕터](reinforcement-learning/cover.md)에서 설명한 강화학습 기법을 사용하여 Maximum Likelihood Estimation (MLE)방식의 훈련된 모델에 fine-tuning을 수행하였습니다. 따라서 위의 테이블과 같은 추가적이 성능 개선을 얻어낼 수 있었습니다.
 
@@ -57,7 +57,7 @@ $$
 
 이때에 $\alpha$값은 주로 0.017로 셋팅하였습니다. 위와 같은 방법의 성능을 실험한 결과는 다음과 같습니다.
 
-![](/assets/nmt-gnmt-5.png)
+![](../assets/nmt-gnmt-5.png)
 
 $En \rightarrow De$의 경우에는 성능이 약간 하락함을 보였습니다. 하지만 이는 decoder의 length penalty, coverage penalty와 결합되었기 때문이고, 이 페널티(panalty)들이 없을 때에는 훨씬 큰 성능 향상이 있었다고 합니다.
 
@@ -69,7 +69,7 @@ $En \rightarrow De$의 경우에는 성능이 약간 하락함을 보였습니�
 - 모델의 실제 저장되는 크기를 줄여 deploy를 효율적으로 할 수 있다.
 - 부가적으로 regularization의 효과를 볼 수 있다.
 
-![](/assets/nmt-gnmt-3.png)
+![](../assets/nmt-gnmt-3.png)
 
 위의 그래프를 보면 전체적으로 Quantized verion이 더 낮은 loss를 보여주는 것을 확인할 수 있습니다.
 
@@ -94,12 +94,12 @@ Coverage penalty의 수식을 들여다보면, 각 source word $x_i$별로 atten
 
 ## Training Procedure
 
-![](/assets/nmt-gnmt-4.png)
+![](../assets/nmt-gnmt-4.png)
 
 Google은 stochastic gradient descent (SGD)를 써서 훈련 시키는 것 보다, Adam과 섞어 사용하면 (epoch 1까지 Adam) 더 좋은 성능을 발휘하는 것을 확인하였습니다.
 
 ## Evaluation
 
-![](/assets/nmt-gnmt-6.png)
+![](../assets/nmt-gnmt-6.png)
 
 실제 번역 품질을 측정하기 위하여 BLEU 이외에도 정성평가(implicit human evaluation)을 통하여 GNMT의 성능 개선의 정도를 측정하였습니다. 0(Poor)에서 6(Perfect)점 사이로 점수를 매겨 사람의 번역 결과 점수를 최대치로 가정하고 성능의 개선폭을 계산하였습니다. 실제 SMT 방식 대비 엄청난 천지개벽 수준의 성능 개선이 이루어진 것을 알 수 있고, 일부 언어쌍에 대해서는 거의 사람의 수준에 필적하는 성능을 보여주는 것을 알 수 있습니다.

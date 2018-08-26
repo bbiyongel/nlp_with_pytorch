@@ -23,11 +23,11 @@ Python을 처음 접하는 많은 사용자들이 2.7과 3.6 사이에서 어떤
 
 ## 왜 PyTorch 인가?
 
-![](/assets/pytorch-intro-logo.png)
+![](../assets/pytorch-intro-logo.png)
 
 Tensorflow를 개발한 Google에 맞서, PyTorch는 Facebook의 주도하에 개발이 진행되고 있습니다. 자체 딥러닝 전용 H/W인 TPU를 가지고 있어 상대적으로 Nvidia GPU에서 보다 자유로운 Google과 달리, PyTorch는 Nvidia도 참여한 project이기 때문에 Nvidia의 CUDA GPU에 더욱 최적화 되어 있습니다. 실제로도, Nvidia에서도 적극 PyTorch를 권장하는 모습이며, 특히 NLP 분야에서는 Tensorflow에 비하여 적극 권장하기도 합니다.
 
-![](/assets/pytorch-intro-company.png)
+![](../assets/pytorch-intro-company.png)
 
 일찌감치 Tensorflow를 내세운 Google과 달리, PyTorch는 그에비해 훨씬 뒤늦게 deep learning framework 개발에 뛰어들었기 때문에, 상대적으로 훨씬 적은 유저풀을 갖고 있습니다.
 
@@ -36,7 +36,7 @@ Tensorflow를 개발한 Google에 맞서, PyTorch는 Facebook의 주도하에 �
 
 하지만, PyTorch가 가진 장점과 매력 때문에, 산업계보다는 학계에서 적극적으로 PyTorch의 사용을 늘려가고 있는 추세이며, 이러한 트렌드는 산업계에도 점점 퍼져나가고 있습니다. 따라서, Tensorflow는 paper를 구현한 수많은 github source code와 pretrain된 model parameter가 있는 것이 장점이긴 하지만, PyTorch도 빠르게 따라잡고 있는 추세 입니다. -- 하지만 아직은 Tensorflow의 아성을 넘기에는 부족합니다.
 
-![https://twitter.com/karpathy/status/868178954032513024](/assets/pytorch-intro-Karpathy.png)  
+![https://twitter.com/karpathy/status/868178954032513024](../assets/pytorch-intro-Karpathy.png)  
 \[Image from [Karpathy's twitter](https://twitter.com/karpathy/status/868178954032513024)\]
 
 Tesla의 AI 수장인 Karpathy는 자신의 트위터에서 파이토치를 찬양하였습니다. 그럼 무엇이 그를 찬양하도록 만들었는지 좀 더 알아보도록 하겠습니다. PyTorch는 major deep learning framework 중에서 가장 늦게 나온 편인 만큼, 그동안 여러 framework의 장점을 모두 갖고 있습니다.
