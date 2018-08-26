@@ -75,9 +75,7 @@ $$
 먼저 우리가 생각 해 볼 수 있는 가장 간단한 방법은, 모든 n-gram에 $1$을 더하는 것 입니다. 그렇다면 훈련셋에 출현하지 않은 n-gram의 경우에도 작은 확률이나마 가질 수 있을 것 입니다. 이를 수식으로 나타내면 아래와 같습니다.
 
 $$
-\begin{aligned}
 P(w_i|w_{<i}) \approx \frac{C(w_{<i},w_i)+1}{C(w_{<i})+V}
-\end{aligned}
 $$
 
 이처럼 $1$을 더하여 smoothing을 통해 $P(w_i|w_{<i})$를 근사할 수 있습니다. 이 수식을 좀 더 일반화하여 표현하면 아래와 같이 쓸 수 있습니다.
@@ -144,9 +142,7 @@ $$
 Interpolation에 의한 generalization(일반화)을 살펴 보도록 하겠습니다. Interpolation은 두 다른 언어모델을 선형적으로 일정 비율($\lambda$)로 섞어 주는 것 입니다. Interpolation을 통해 얻을 수 있는 효과는, 일반 영역의 corpus를 통해 구축한 언어모델을, 필요에 따라 다른 특정 영역(domain)의 양이 적은 corpus를 통해 구축한 영역 특화(domain specific or adapted) 언어모델과 섞어 주는 것 입니다. 이를 통해 일반적인 언어 모델을 해당 영역에 특화 된 언어 모델로 만들 수 있습니다.
 
 $$
-\begin{aligned}
 \tilde{P}(w_n|w_{n-k}, \cdots , w_{n-1}) = \lambda P_1(w_n|w_{n-k}, \cdots , w_{n-1}) + (1 - \lambda)P_2(w_n|w_{n-k}, \cdots , w_{n-1})
-\end{aligned}
 $$
 
 예를 들어 의료 쪽 음성인식(ASR) 또는 기계번역(MT) 시스템을 구축한다고 가정 해 보겠습니다. 그렇다면 기존의 일반 영역 corpus를 통해 생성한 language model의 경우, 의료 용어 표현이 낯설 수도 있습니다. 하지만 만약 특화 영역의 corpus만 사용하여 언어모델을 생성할 경우, generalization 능력이 너무 떨어질 수도 있습니다.
@@ -174,7 +170,6 @@ $$
 &+ \lambda_2 P(w_n|w_{n-k+1}, \cdots , w_{n-1}) \\
 &+ \cdots \\
 &+ \lambda_k P(w_n), \\ \\
-
 where~&\sum_i{\lambda_i}=1.
 \end{aligned}
 $$

@@ -26,7 +26,7 @@ $ pip install torchtext
 
 ### Reading Corpus with Labeling
 
-첫번째 예제는 한 줄 안에서 클래스(class)와 텍스트(text)가 tab(탭, '\t')으로 구분되어 있는 데이터의 입력을 받기 위한 예제 입니다. 주로 이런 예제는 텍스트 분류(text classification)을 위해 사용 됩니다.
+첫번째 예제는 한 줄 안에서 클래스(class)와 텍스트(text)가 tab(탭, '\\t')으로 구분되어 있는 데이터의 입력을 받기 위한 예제 입니다. 주로 이런 예제는 텍스트 분류(text classification)을 위해 사용 됩니다.
 
 ```python
 class TextClassificationDataLoader():

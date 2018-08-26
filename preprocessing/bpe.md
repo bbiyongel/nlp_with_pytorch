@@ -15,10 +15,10 @@ Sparsity 감소 이외에도, 가장 대표적인 subword segmentation으로 얻
 
 ## Example
 
-아래와 같이 BPE를 적용하면 원래의 띄어쓰기 공백 이외에도 BPE의 적용으로 인한 공백이 추가됩니다. 따라서 원래의 띄어쓰기와 BPE로 인한 띄어쓰기를 구분해야 할 필요성이 있습니다. 그래서 특수문자(▁)를 사용하여 기존의 띄어쓰기(또는 단어의 시작)를 나타냅니다. 이를 통해 후에 설명할 detokenization에서 문장을 BPE이전의 형태로 원상복구 할 수 있습니다.
+아래와 같이 BPE를 적용하면 원래의 띄어쓰기 공백 이외에도 BPE의 적용으로 인한 공백이 추가됩니다. 따라서 원래의 띄어쓰기와 BPE로 인한 띄어쓰기를 구분해야 할 필요성이 있습니다. 그래서 특수문자(기존의 _가 아닌 ▁)를 사용하여 기존의 띄어쓰기(또는 단어의 시작)를 나타냅니다. 이를 통해 후에 설명할 detokenization에서 문장을 BPE이전의 형태로 원상복구 할 수 있습니다.
 
 한글 Mecab에 의해 tokenization 된 원문
-```
+___
 현재 TED 웹 사이트 에 는 1 , 000 개 가 넘 는 TED 강연 들 이 있 습니다 .
 여기 계신 여러분 의 대다수 는 정말 대단 한 일 이 라고 생각 하 시 겠 죠 -- 전 다릅니다 .
 전 그렇게 생각 하 지 않 아요 .
@@ -29,10 +29,10 @@ Sparsity 감소 이외에도, 가장 대표적인 subword segmentation으로 얻
 250 시간 이상 의 시간 이 필요 할 겁니다 .
 간단 한 계산 을 해 봤 는데요 .
 정말 그렇게 하 는 경우 1 인 당 경제 적 손실 은 15 , 000 달러 정도 가 됩니다 .
-```
+___
 
 한글 BPE 적용
-```
+___
 ▁현재 ▁TED ▁웹 ▁사이트 ▁에 ▁는 ▁1 ▁, ▁000 ▁개 ▁가 ▁넘 ▁는 ▁TED ▁강 연 ▁들 ▁이 ▁있 ▁습니다 ▁.
 ▁여기 ▁계 신 ▁여러분 ▁의 ▁대 다 수 ▁는 ▁정말 ▁대단 ▁한 ▁일 ▁이 ▁라고 ▁생각 ▁하 ▁시 ▁겠 ▁죠 ▁-- ▁전 ▁다 릅니다 ▁.
 ▁전 ▁그렇게 ▁생각 ▁하 ▁지 ▁않 ▁아요 ▁.
@@ -43,10 +43,10 @@ Sparsity 감소 이외에도, 가장 대표적인 subword segmentation으로 얻
 ▁2 50 ▁시간 ▁이상 ▁의 ▁시간 ▁이 ▁필요 ▁할 ▁겁니다 ▁.
 ▁간단 ▁한 ▁계산 ▁을 ▁해 ▁봤 ▁는데요 ▁.
 ▁정말 ▁그렇게 ▁하 ▁는 ▁경우 ▁1 ▁인 ▁당 ▁경제 ▁적 ▁손 실 ▁은 ▁15 ▁, ▁000 ▁달러 ▁정도 ▁가 ▁됩니다 ▁.
-```
+___
 
 영어 NLTK에 의해 tokenization이 된 원문
-```
+___
 There 's currently over a thousand TED Talks on the TED website .
 And I guess many of you here think that this is quite fantastic , except for me , I don 't agree with this .
 I think we have a situation here .
@@ -57,10 +57,10 @@ And I did a little calculation of this .
 The damage to the economy for each one who does this is around $ 15,000 .
 So having seen this danger to the economy , I thought , we need to find a solution to this problem .
 Here 's my approach to it all .
-```
+___
 
 영어 BPE 적용
-```
+___
 ▁There ▁'s ▁currently ▁over ▁a ▁thous and ▁TED ▁T al ks ▁on ▁the ▁TED ▁we b site ▁.
 ▁And ▁I ▁guess ▁many ▁of ▁you ▁here ▁think ▁that ▁this ▁is ▁quite ▁f ant as tic ▁, ▁ex cept ▁for ▁me ▁, ▁I ▁don ▁'t ▁agree ▁with ▁this ▁.
 ▁I ▁think ▁we ▁have ▁a ▁situation ▁here ▁.
@@ -71,7 +71,7 @@ Here 's my approach to it all .
 ▁The ▁damage ▁to ▁the ▁economy ▁for ▁each ▁one ▁who ▁does ▁this ▁is ▁around ▁$ ▁15 ,000 ▁.
 ▁So ▁having ▁seen ▁this ▁dang er ▁to ▁the ▁economy ▁, ▁I ▁thought ▁, ▁we ▁need ▁to ▁find ▁a ▁solution ▁to ▁this ▁problem ▁.
 ▁Here ▁'s ▁my ▁approach ▁to ▁it ▁all ▁.
-```
+___
 
 |원문|subword segmentation|
 |-|-|
@@ -83,4 +83,4 @@ Here 's my approach to it all .
 |250|2 + 50|
 |15,000|15 + ,000|
 
-위와 같이 subword segmentation에 의해서 추가적으로 쪼개진 단어들은 적절한 subword의 형태로 나누어진 것을 볼 수 있습니다. 특히, 숫자 같은 경우에는 자주 쓰이는 숫자 **50**이나 **,000**의 경우 성공적으로 하나의 subword로 지정된 것을 볼 수 있습니다.
+위와 같이 subword segmentation에 의해서 추가적으로 쪼개진 단어들은 적절한 subword의 형태로 나누어진 것을 볼 수 있습니다. 특히, 숫자 같은 경우에는 자주 쓰이는 숫자 50이나 ,000의 경우 성공적으로 하나의 subword로 지정된 것을 볼 수 있습니다.
