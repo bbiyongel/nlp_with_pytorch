@@ -2,11 +2,13 @@
 
 자연어처리(natural language processing, NLP) 분야는 인공지능의 큰 줄기 중에 하나입니다. 특히, 컴퓨터에게 사람이 사용하는 언어를 처리하고 이해하도록 함으로써, 사람과 컴퓨터 사이의 매개체 또는 인터페이스 역할을 할 수 있습니다. 따라서 computer science 뿐만 아니라, linguistics와 같은 다른 학문과의 융합적인 요소도 갖고 있습니다. 실제로 NLP는 아래와 같이 세부적인 주제로 나누어 볼 수 있습니다.
 
-- Phonetics and Phonology – the study of linguistic sounds
-- Morphology – the study of the meaning of components of words
-- Syntax – the study of the structural relationships between words
-- Semantics – the study of meaning
-- Discourse – they study of linguistic units larger than a single utterance
+|주제|설명|
+|-|-|
+|Phonetics and Phonology|the study of linguistic sounds|
+|Morphology|the study of the meaning of components of words|
+|Syntax|the study of the structural relationships between words|
+|Semantics|the study of meaning|
+|Discourse|they study of linguistic units larger than a single utterance|
 
 [[Gao et al.2017](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/07/dl-summer-school-2017.-Jianfeng-Gao.v2.pdf)]
 

@@ -17,8 +17,7 @@ Duality란 무엇일까요? 우리가 보통 기계학습을 통해 학습하는
 
 먼저 좀 더 이해하기 쉬운 duality의 활용 예로, 컴퓨터 비전(Computer Vision)쪽 논문[\[Zhu at el.2017\]](https://arxiv.org/pdf/1703.10593.pdf)을 설명 해 볼까 합니다. Cycle GAN은 아래와 같이 unparalleled image set이 여러개 있을 때, $Set~X$의 이미지를 $Set~Y$의 이미지로 합성/변환 시켜주는 방법 입니다. 사진을 전체 구조는 유지하되 모네의 그림풍으로 바꾸어 주기도 하고, 말과 얼룩말을 서로 바꾸어 주기도 합니다. 겨울 풍경을 여름 풍경으로 바꾸어주기도 합니다.
 
-![](https://junyanz.github.io/CycleGAN/images/teaser.jpg)
-Cycle GAN - image from [web](https://junyanz.github.io/CycleGAN/)
+![Cycle GAN - image from [web](https://junyanz.github.io/CycleGAN/)](https://junyanz.github.io/CycleGAN/images/teaser.jpg)
 
 아래에 이 방법을 도식화 하여 나타냈습니다. $Set~X$와 $Set~Y$ 모두 각각 Generator($G, F$)와 Discriminator($D_X, D_Y$)를 가지고 있어서, min/max 게임을 수행합니다. 
 
