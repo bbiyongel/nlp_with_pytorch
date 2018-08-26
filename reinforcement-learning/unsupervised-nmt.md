@@ -14,7 +14,7 @@ Supervised learning 방식은 높은 정확도를 자랑하지만 labeling 데�
 
 GAN을 NLP에 쓰지 못한다고 해 놓고 GAN을 썼다니 이게 무슨 소리인가 싶겠지만, encoder의 출력값인 vector에 대해서 GAN을 적용한 것이라 discrete한 값이 아닌 continuous한 값이기 때문에 가능한 것 입니다.
 
-![](../assets/rl-unsupervised-nmt-3.png)
+![](./assets/rl-unsupervised-nmt-3.png)
 
 이렇게 다른 언어일지라도 동일한 내용에 대해서는 같은 vector로 encoding하도록 훈련 된 encoder의 출력값을 가지고 decoder로 원래의 문장으로 잘 돌아오도록 해 주는 것이 이 논문의 핵심 내용입니다.
 
@@ -66,7 +66,7 @@ $$
 where~j=-(i-1)
 $$
 
-![](../assets/rl-unsupervised-nmt-4.png)
+![](./assets/rl-unsupervised-nmt-4.png)
 
 위의 3가지 objective를 결합하면 ***Final Objective Function***을 얻을 수 있습니다.
 
@@ -80,6 +80,6 @@ $$
 
 $\lambda$를 통해서 선형결합(linear combination)을 취하여 기존의 손실함수에 추가 합니다. 이 과정을 pseudo code로 나타내면 아래와 같습니다.
 
-![](../assets/rl-unsupervised-nmt-5.png)
+![](./assets/rl-unsupervised-nmt-5.png)
 
 이 논문에서 제안한 방식은 오직 단방향(monolingual) corpus만 존재할 때에 번역기를 만드는 방법에 대해서 다룹니다. 병렬(parallel) corpus가 없는 상황에서도 번역기를 만들 수 있다는 점은 매우 고무적이지만, 이 방법 자체만으로는 실제 필드에서 사용될 가능성은 적어 보입니다. 보통의 경우 필드에서 번역기를 구축하는 경우에는 병렬 corpus가 없는 경우는 드물고, 없다고 하더라도 단방향 corpus만으로 번역기를 구축하여 낮은 성능의 번역기를 확보하기보다는 비용을 들여 병렬 corpus를 직접 구축 한 후에, 병렬 corpus와 다수의 단방향 corpus를 합쳐 번역기를 구축하는 방향으로 나아갈 것이기 때문입니다.

@@ -6,7 +6,7 @@
 
 즉, monolingual sentence($s$)에 대해서 번역을 하고 그 문장($s_{mid}$)을 사용하여 복원을 하였을 때($\hat{s}$) 원래의 처음 문장으로 돌아올 수 있도록(처음 문장과의 차이를 최소화 하도록) 훈련하는 것입니다. 이때, 번역된 문장 $s_{mid}$는 자연스러운 해당 언어의 문장이 되었는가도 중요한 지표가 됩니다.
 
-![](../assets/rl-dual-learning-1.png)
+![](./assets/rl-dual-learning-1.png)
 
 위에서 설명한 알고리즘을 따라가 보겠습니다. 이 방법에서는 $Set~X,~Set~Y$ 대신에 $Language~A,~Language~B$로 표기하고 있습니다. $G_{A \rightarrow B}$의 파라미터 $\theta_{AB}$와 $F_{B \rightarrow A}$의 파라미터 $\theta_{BA}$가 등장합니다. 이 $G_{A \rightarrow B}, F_{B \rightarrow A}$는 모두 parallel corpus에 의해서 pre-training이 되어 있는 상태 입니다. 즉, 기본적인 저성능의 번역기 수준이라고 가정합니다.
 
@@ -40,11 +40,11 @@ $$
 
 이렇게 얻어진 $\mathbb{E}[r]$를 각 파라미터에 대해서 미분하게 되면 위와 같은 수식을 얻을 수 있고, 상기 서술한 파라미터 업데이트 수식에 대입하면 됩니다. 비슷한 방식으로 $B \rightarrow A$를 구할 수 있습니다.
 
-![](../assets/rl-dual-learning-2.png)
+![](./assets/rl-dual-learning-2.png)
 
 위의 테이블은 이 방법의 성능을 비교한 결과 입니다. Pseudo-NMT는 이전 챕터에서 설명하였던 back-translation을 의미합니다. 그리고 그 방식보다 더 좋은 성능을 기록한 것을 볼 수 있습니다.
 
-![](../assets/rl-dual-learning-3.png)
+![](./assets/rl-dual-learning-3.png)
 
 또한, 위 그래프에서 문장의 길이와 상관 없이 모든 구간에서 baseline NMT를 성능으로 압도하고 있는 것을 알 수 있습니다. 다만, 병렬(parallel) corpus의 양이 커질수록 단방향(monolingual) corpus에 의한 성능 향상의 폭이 줄어드는 것을 확인 할 수 있습니다.
 
@@ -115,6 +115,6 @@ $$
 \mathcal{L}(\theta)\approx-\sum^N_{n=1}{\log{P(y^n|x^n;\theta)}}+\lambda\sum^S_{s=1}{[\log{\hat{P}(y^s)}-\log{\frac{1}{K}\sum^K_{i=1}\frac{\hat{P}(x^s_i)P(y^s|x^s_i\theta)}{P(x^s_i|y^s)}}]^2}
 $$
 
-![](../assets/duality-dul-eval.png)
+![](./assets/duality-dul-eval.png)
 
 위의 테이블과 같이, 이 방법은 앞 챕터에서 소개한 기존의 단방향 corpus[[Gulcehre et al.2015]](https://arxiv.org/abs/1503.03535)[[Sennrich et al.2016]](https://arxiv.org/abs/1511.06709)를 활용한 방식들과 비교하여 훨씬 더 나은 성능의 개선을 보여주었으며, 바로 앞서 소개한 [Dual Learning[He et al.2016a]](https://arxiv.org/pdf/1611.00179.pdf)보다도 더 나은 성능을 보여줍니다. 마찬가지로, 불안정하고 비효율적인 강화학습을 사용하지 않고도 더 나은 성능을 보여준 것은 주목할 만한 성과라고 할 수 있습니다.

@@ -4,7 +4,7 @@ Facebook에서 CNN을 활용한 번역기에 대한 논문을 내며, 기존의 
 
 ## Architecture
 
-![](../assets/nmt-transformer-1.png)
+![](./assets/nmt-transformer-1.png)
 
 "Attention is all you need"라는 제목의 논문답게 이 논문은 정말로 Attention만 구현해서 모든것을 해냅니다. 그리고 저자는 이 모델 구조를 _**Transformer**_라고 이름 붙였습니다.
 
@@ -39,7 +39,7 @@ Position embedding의 결과값의 dimension은 word embedding의 dimension과 �
 
 ### Attention
 
-![](../assets/nmt-transformer-2.png)
+![](./assets/nmt-transformer-2.png)
 
 이 논문에서의 Attention방식은 여러개의 attention으로 구성된 multi-head attention을 제안합니다. 마치 Convolution layer에서 여러개의 filter가 있어서 여러가지 다양한 feature를 뽑아 내는 것과 같은 원리라고 볼 수 있습니다.
 
@@ -91,7 +91,7 @@ $$
 
 ## Evaluation
 
-![](../assets/nmt-transformer-3.png)
+![](./assets/nmt-transformer-3.png)
 
 Google은 transformer를 통해서 State of the Art의 성능을 달성했다고 보고하였습니다. 뿐만아니라, 기존의 RNN 및 Facebook의 ConvS2S보다 훨씬 빠른 속도로 훈련이 가능하다고 하였습니다. 실제로 위의 table을 보면, transformer의 training cost의 magnitude는 $10^{18}$으로, 대부분의 다른 방식 $10^{19}$와 급격한 차이를 보이는 것을 알 수 있습니다.
 

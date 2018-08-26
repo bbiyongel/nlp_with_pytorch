@@ -33,7 +33,7 @@ $$
 
 ### Perplexity의 해석
 
-![](../assets/lm_rolling_dice.png)
+![](./assets/lm_rolling_dice.png)
 
 Perplexity의 개념을 좀 더 짚고 넘어가도록 해 보겠습니다. 이것은 Perplexity의 수치를 해석하는 방법에 대해서라고 할 수 있습니다. 예를 들어 우리가 6면 주사위를 던져서 나오는 값을 통해 수열을 만들어낸다고 해 보겠습니다. 따라서 1부터 6까지 숫자의 출현 확률은 모두 같다(uniform distribution)고 가정하겠습니다. 그럼 $N$번 주사위를 던져 얻어내는 수열에 대한 perplexity는 아래와 같습니다.
 

@@ -16,7 +16,7 @@ $$
 
 인간의 언어는 컴퓨터의 언어\(e.g. programming language\)와 같이 명확하지 않습니다. 우리는 언어의 모호성\(ambiguity\)을 늘림으로써, 의사소통의 효율을 극대화 시켰습니다. 예를 들어 우리는 정보를 생략하고 말을 짧게 해 버리고, 같은 단어 같은 구절이라고 하더라도 때에 따라 다른 의미로 해석될 수 있습니다. 더욱이 한국어의 경우에는 첫 챕터에서 다루었듯이 어순이 불규칙하고 주어가 생략 되는 등, 더욱 더 난이도가 높아졌습니다. 또한, 언어라는 것은 그 민족의 문화를 담고 있기 때문에, 수천년의 세월동안 쌓여온 사람들의 의식, 철학이 담겨져있고, 그러한 차이들로 하여금 또 다시 번역을 어렵게 만듭니다. 결국, 이러한 점들은 컴퓨터로 하여금 우리의 말을 번역하고자 할 때 큰 장벽으로 다가옵니다.
 
-![아니다, 이 악마야](../assets/nmt-no-evil.png)<br>
+![아니다, 이 악마야](./assets/nmt-no-evil.png)<br>
 대표적인 번역 실패 사례
 
 > In brightest day, in blackest night,  
@@ -44,14 +44,14 @@ NMT이전에 세상을 지배하던 번역 방식입니다. 대량의 양방향 
 
 ### Neural Machine Translation
 
-![http://web.stanford.edu/class/cs224n/lectures/cs224n-2017-lecture10.pdf](../assets/nmt-autoencoder.png)
+![http://web.stanford.edu/class/cs224n/lectures/cs224n-2017-lecture10.pdf](./assets/nmt-autoencoder.png)
 [Image from CS224n](http://web.stanford.edu/class/cs224n/syllabus.html)
 
 사실, 딥러닝 이전의 AI의 전성기\(1980년대\)에도 Neural Network을 사용하여 Machine Translation 문제를 해결하려는 시도는 여럿 있었습니다. 하지만 당시에도 $Encoder \longrightarrow Decoder$ 형태의 구조를 가지고 있었지만, 당연히 지금과 같은 성능을 내기는 어려웠습니다.
 
 ### Invasion of NMT
 
-![http://web.stanford.edu/class/cs224n/lectures/cs224n-2017-lecture10.pdf](../assets/nmt-progress-in-mt.png)
+![http://web.stanford.edu/class/cs224n/lectures/cs224n-2017-lecture10.pdf](./assets/nmt-progress-in-mt.png)
 [Image from CS224n](http://web.stanford.edu/class/cs224n/syllabus.html)
 
 현재의 NMT 방식이 제안되고, 곧 기존의 SMT 방식을 크게 앞질러 버렸습니다. 이제는 구글의 번역기에도 NMT 방식이 사용됩니다.

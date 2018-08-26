@@ -30,7 +30,7 @@
 ```
 [2345cde]
 ```
-![](../assets/preproc-regex-oneof.png)
+![](./assets/preproc-regex-oneof.png)
 ```
 (2|3|4|5|c|d|e)
 ```
@@ -40,28 +40,28 @@
 ```
 [2-5c-e]
 ```
-![](../assets/preproc-regex-dash.png)
+![](./assets/preproc-regex-dash.png)
 
 ### \[^ \]의 사용
 
 ```
 [^2-5c-e]
 ```
-![](../assets/preproc-regex-none_of.png)
+![](./assets/preproc-regex-none_of.png)
 
 ### \( \)의 사용
 
 ```
 (x)(yz)
 ```
-![](../assets/preproc-regex-group.png)
+![](./assets/preproc-regex-group.png)
 
 ### \|의 사용
 
 ```
 (x|y)
 ```
-![](../assets/preproc-regex-or.png)
+![](./assets/preproc-regex-or.png)
 
 ### ?, \*, +의 사용
 
@@ -69,48 +69,48 @@
 ```
 x?
 ```
-![](../assets/preproc-regex-question.png)
+![](./assets/preproc-regex-question.png)
 
 +는 앞의 수식하는 부분이 한 번 이상 나타날 경우 사용 합니다.
 ```
 x+
 ```
-![](../assets/preproc-regex-plus.png)
+![](./assets/preproc-regex-plus.png)
 
 \*는 앞의 수식하는 부분이 나타나지 않거나 여러번 나타날 경우 사용 합니다.
 ```
 x*
 ```
-![](../assets/preproc-regex-star.png)
+![](./assets/preproc-regex-star.png)
 
 ### {n}, {n,}, {n,m}의 사용
 
 ```
 x{n}
 ```
-![](../assets/preproc-regex-n.png)
+![](./assets/preproc-regex-n.png)
 ```
 x{n,}
 ```
-![](../assets/preproc-regex-n_comma.png)
+![](./assets/preproc-regex-n_comma.png)
 ```
 x{n,m}
 ```
-![](../assets/preproc-regex-n_to_m.png)
+![](./assets/preproc-regex-n_to_m.png)
 
 ### . 의 사용
 
 ```
 .
 ```
-![](../assets/preproc-regex-dot.png)
+![](./assets/preproc-regex-dot.png)
 
 ### ^와 $의 사용
 
 ```
 ^x$
 ```
-![](../assets/preproc-regex-start_end.png)
+![](./assets/preproc-regex-start_end.png)
 
 ### 지정문자의 사용
 
@@ -158,7 +158,7 @@ x{n,m}
 
 위의 수식을 그림으로 표현하면 아래와 같습니다.
 
-![](../assets/preproc-regex-phone_number.png)  
+![](./assets/preproc-regex-phone_number.png)  
 \[Image from [regexper.com](https://regexper.com/)\]
 
 ### Python에서의 Regular Expression
@@ -196,7 +196,7 @@ x{n,m}
 
 만약 그냥 **\[0-9\]+**으로 숫자를 찾아서 없애면 두번째 줄의 숫자만 있는 경우와 숫자가 가장자리에 있는 경우도 사라지게 됩니다. 그럼 어떻게 해야 할까요? 이때 유용한 방법이 치환자를 사용하는 것 입니다.
 
-![](../assets/preproc-regex-substitution.png)
+![](./assets/preproc-regex-substitution.png)
 
 괄호로 묶인 부분은 group으로 지정이 되고, 바뀔 문자열 내에서 역슬래시\(\)와 함께 숫자로 가리킬 수 있습니다. 예를 들어 아래와 같이 구현 할 수 있습니다.
 

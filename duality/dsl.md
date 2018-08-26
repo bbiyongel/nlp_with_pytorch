@@ -56,7 +56,7 @@ $$
 
 여기서 $\lambda$는 Lagrange multipliers로써, 고정된 값의 hyper-parameter 입니다. 실험 결과 $\lambda=0.01$ 일 때, 가장 좋은 성능을 나타낼 수 있었습니다.
 
-![](../assets/duality-dsl-eval.png)
+![](./assets/duality-dsl-eval.png)
 
 위의 테이블과 같이 기존의 Teacher Forcing 아래의 cross entropy 방식\(\[1\]번\)과 Minimum Risk Training\(MRT\) 방식\(\[2\]번\) 보다 더 높은 성능을 보입니다.
 

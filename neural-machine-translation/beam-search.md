@@ -75,7 +75,7 @@
 
 ## Beam Search
 
-![](../assets/nmt-beam-search-concept.png)
+![](./assets/nmt-beam-search-concept.png)
 
 하지만 우리는 자료구조, 알고리즘 수업에서 배웠다시피, greedy algorithm은 굉장히 쉽고 간편하지만, 최적의(optimal) 해를 보장하지 않습니다. 따라서 최적의 해에 가까워지기 위해서 우리는 약간의 trick을 첨가합니다. ***Beam Size*** 만큼의 후보를 더 tracking 하는 것 입니다.
 
@@ -99,14 +99,14 @@ Beam Search를 사용하면 좀 더 넓은 path에 대해서 search를 수행하
 
 아래는 [Cho et al.2016]에서 주장한 ***Beam Search***의 성능향상에 대한 실험 결과 입니다. Sampling 방법은 단순한 Greedy Search 보다 더 좋은 성능을 제공하지만, Beam search가 가장 좋은 성능을 보여줍니다. 특기할 점은 Machine Translation task에서는 보통 beam size를 10이하로 사용한다는 것 입니다. 
 
-![http://web.stanford.edu/class/cs224n/lectures/cs224n-2017-lecture10.pdf](../assets/nmt-inference-method-evaluation.png)
+![http://web.stanford.edu/class/cs224n/lectures/cs224n-2017-lecture10.pdf](./assets/nmt-inference-method-evaluation.png)
 En-Cz: 12m training sentence pairs [Cho, arXiv 2016]
 
 ### How to implement
 
 하나의 
 
-![](../assets/nmt-single-sample-beam-search.png)
+![](./assets/nmt-single-sample-beam-search.png)
 
 ### Length Penalty
 
@@ -128,7 +128,7 @@ $$
 
 ### SingleBeamSearchSpace Class
 
-![](../assets/nmt-beam-search-space.png)
+![](./assets/nmt-beam-search-space.png)
 
 #### Initialization
 
@@ -428,7 +428,7 @@ class SingleBeamSearchSpace():
 
 ### Mini-batch Parallelized Beam-Search
 
-![](../assets/nmt-mini-batch-parallelized-beam-search-overview.png)
+![](./assets/nmt-mini-batch-parallelized-beam-search-overview.png)
 
 ```python
     def batch_beam_search(self, src, beam_size = 5, max_length = 255, n_best = 1):
