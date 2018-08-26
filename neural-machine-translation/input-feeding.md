@@ -4,7 +4,7 @@
 
 Decoder output과 Attention 결과값을 concatenate한 이후에 Generator 모듈에서 softmax를 취하여 $\hat{y}_{t}$을 구합니다. 하지만 이러한 softmax 과정에서 많은 정보\(예를 들어 attention 정보 등\)가 손실됩니다. 따라서 단순히 다음 time-step에 $\hat{y}_{t}$을 feeding 하는 것보다, concatenation layer의 출력도 같이 feeding 해주면 정보의 손실 없이 더 좋은 효과를 얻을 수 있습니다.
 
-![](./assets/nmt-seq2seq-with-attention-and-input-feeding-architecture.png)
+![](../assets/nmt-seq2seq-with-attention-and-input-feeding-architecture.png)
 
 $y$와 달리 concatenation layer의 출력은 $y$가 embedding layer에서 dense vector\(=embedding vector\)로 변환되고 난 이후에 embedding vector와 concatenate되어 decoder RNN에 입력으로 주어지게 됩니다. 이러한 과정을 _**input feeding**_이라고 합니다.
 
@@ -151,7 +151,7 @@ class Decoder(nn.Module):
 
 #### Convert Hidden State from Encoder to Decoder
 
-![](./assets/nmt-encoder-to-decoder.png)
+![](../assets/nmt-encoder-to-decoder.png)
 
 ```python
     def merge_encoder_hiddens(self, encoder_hiddens):

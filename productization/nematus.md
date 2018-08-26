@@ -5,7 +5,7 @@ Edinburgh 대학의 Sennrich교수는 매년 열리는 WMT 대회에 참가하�
 
 ## Subword Segmentation
 
-![](./assets/nmt-edinburgh-1.png)<br>
+![](../assets/nmt-edinburgh-1.png)<br>
 [[Sennrich at el.2016]](http://www.aclweb.org/anthology/P16-1162)
 
 이 논문 또한 (그들이 처음으로 제안한 방식이기에) BPE 방식을 사용하여 tokenization을 수행하였습니다. 이제 우리는 subword 기반의 tokenization 방식이 하나의 정석이 되었음을 알 수 있습니다. 위의 code는 BPE algorithm에 대해서 간략하게 소개한 code 입니다. 전처리 챕터에서 소개했지만, subword 방식은 위와 같이 가장 많이 등장한 문자열(character sequence)에 대해서 합쳐주며 iteration을 반복하고, 원하는 어휘(vocabulary) 숫자가 채워질때가지 해당 iteration을 반복합니다.

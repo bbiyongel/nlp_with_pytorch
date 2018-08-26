@@ -28,25 +28,25 @@
 
 ### Many to One
 
-![](./assets/nmt-zeroshot-1.png)
+![](../assets/nmt-zeroshot-1.png)
 
 이 실험에서는 전체적으로 성능이 향상 된 것을 볼 수 있습니다. 하단의 일본어, 한국어, 스페인어, 포르투갈어 실험의 경우에는 모두 oversampling을 기준으로 실험되었습니다.
 
 ### One to Many
 
-![](./assets/nmt-zeroshot-2.png)
+![](../assets/nmt-zeroshot-2.png)
 
 이 실험에서는 이전 실험과 달리 성능의 향상이 있다고 보기 힘듭니다. 게다가 oversampling과 관련해서 corpus의 양이 적은 영어/독일어 corpus는 oversampling의 이득을 본 반면, 양이 충분한 영어/프랑스어 corpus의 경우에는 oversampling을 하면 더 큰 손해를 보는 것을 볼 수 있습니다.
 
 ### Many to Many
 
-![](./assets/nmt-zeroshot-3.png)
+![](../assets/nmt-zeroshot-3.png)
 
 이 실험에서도 대부분의 실험결과가 성능의 하락으로 이어졌습니다. (그렇지만 절대적인 BLEU 수치는 쓸만합니다.)
 
 ### Zero-shot Translation
 
-![](./assets/nmt-zeroshot-4.png)
+![](../assets/nmt-zeroshot-4.png)
 
 이 실험은 Zero-shot learning의 성능을 평가하였습니다. ***bridged*** 방법은 중간 언어를 ***영어***로 하여 $Portuguese \rightarrow English \rightarrow Spanish$ 2단계에 걸쳐 번역을 한 경우를 말합니다. (***PBMT***방식은 SMT방식 중의 하나입니다.) $NMT~Pt \rightarrow Es$는 단순 Parallel corpus를 활용하여 기존의 방법대로 훈련한 baseline입니다.
 

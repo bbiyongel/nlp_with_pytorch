@@ -14,7 +14,7 @@
 
 2012년 이미지넷에서 인공신경망을 이용한 AlexNet\(\[[Krizhevsky at el.2012](https://www.cs.toronto.edu/~kriz/imagenet_classification_with_deep_convolutional.pdf)\]\)은 경쟁자들을 큰 차이로 따돌리며 우승을 하고, 딥러닝의 시대의 서막을 올립니다. AlexNet은 여러 층의 Convolutional Layer을 쌓아서 architecture를 만들었고, 기존의 우승자들과 확연한 실력차를 보여주었습니다. 당시에 AlexNet은 3GB 메모리의 Nvidia GTX580을 2개 사용하여 훈련하였는데, 지금 생각하면 참으로 격세지감이 아닐 수 없습니다.
 
-![Recent History of ImageNet](./assets/intro-imagenet.png)  
+![Recent History of ImageNet](../assets/intro-imagenet.png)  
 Recent History of ImageNet
 
 이후, ImageNet은 딥러닝의 경연장이 되었고, 거의 모든 참가자들이 딥러닝을 이용하여 알고리즘을 구현하였습니다. 결국, ResNet\(\[[He et al.2015](https://arxiv.org/pdf/1512.03385.pdf)\]\)은 Residual Connection을 활용하여 150층이 넘는 deep architecture를 구성하며 우승하였습니다.
@@ -30,13 +30,13 @@ Traditional Speech Recognition System
 
 사실 음성인식은 2000년대에 들어 큰 정체기를 맞이하고 있었습니다. GMM\(Gaussian Mixture Model\)을 통해 phone을 인식하고, 이를 HMM\(Hidden Markov Model\)을 통해 sequential 하게 modeling하여 만든 Acoustic Model \(AM\)과 n-gram기반의 Language Model \(LM\)을 WFST\(Weighted Finite State Transeducer\)방식을 통해 결합하는 전통적인 음성인식\(Automatic Speech Recognition, ASR\) 시스템은 위의 설명에서 볼 수 있듯이 너무나도 복잡한 구조와 함께 그 성능의 한계를 보이고 있었습니다.
 
-![Accuracy of ASR](./assets/intro-asr-accuracy.png)
+![Accuracy of ASR](../assets/intro-asr-accuracy.png)
 
 그러던 중, 2012년 GMM을 DNN으로 대체하며, 십수년간의 정체를 단숨에 뛰어넘는 큰 혁명을 맞이하게 됩니다. \(Vision, NLP에서 모두 보이는 익숙한 패턴입니다.\) 그리고 점차 AM전체를 LSTM으로 대체하고, 또한 end-to-end model\(\[[Chiu et al.2017](https://arxiv.org/pdf/1712.01769.pdf)\]\)이 점점 저변을 넓혀가고 있는 추세입니다.
 
 ### Machine Translation
 
-![](./assets/intro-pepe.png)
+![](../assets/intro-pepe.png)
 
 사실 다른 인공지능의 다른 분야에 비해서 NLP 또는 기계번역 분야는 이렇다할 큰 성과를 거두지는 못하고 있었습니다. 하지만 결국 물밀듯이 밀려오는 딥러닝의 침략 앞에서 기계번역 또한 예외일 순 없었습니다. 딥러닝 이전의 기계번역은 통계 기반 기계번역\(Statistical Machine Translation, SMT\)가 지배하고 있었습니다. 비록 SMT는 규칙기반의 번역방식\(Rule based Machine Translation, RBMT\)에 비해서 언어간 확장이 용이한 장점이 있었고, 성능도 더 뛰어났지만, 음성인식과 마찬가지로 SMT는 역시 너무나도 복잡한 구조를 지니고 있었습니다.
 
@@ -79,24 +79,24 @@ $$
 
 Deep learning 이전의 기존의 전형적인 NLP application의 구조는 보통 아래와 같습니다. Task에 따라서 phonology가 추가되기도 하고, 아래와 같이 여러가지 단계의 module로 구성되어 복잡한 디자인을 구성하게 됩니다. 따라서 매우 무겁고 복잡하여 구현 및 시스템 구성이 어려운 단점이 많았습니다. 더군다나, 각각의 module이 완벽하게 동작할 수 없기 때문에, 각기 발생한 error가 중첩 및 가중되어 뒤로 전파되는 error propagation등의 문제도 가질 수 있었습니다.
 
-![](./assets/intro-traditional-nlp.png)  
+![](../assets/intro-traditional-nlp.png)  
 \[[Gao et al.2017](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/07/dl-summer-school-2017.-Jianfeng-Gao.v2.pdf)\]
 
 하지만, 위에서 언급한 기계번역의 사례 처럼 NLP 전반에 걸쳐 deep learning의 물결이 들어오기 시작했습니다. 처음에는 각 sub-module을 대체하는 형태로 진행되었지만, 점차 기계번역의 사례처럼 결국 end-to-end model들로 대체 되었습니다. 현재에도 chat-bot과 같은 아직 많은 task들에서 end-to-end learning이 이루어지지 않았지만, 최종적으로는 end-to-end model이 제안될 것이라 볼 수 있습니다.
 
-![](./assets/intro-paradigm-shift.png)  
+![](../assets/intro-paradigm-shift.png)  
 \[[Gao et al.2017](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/07/dl-summer-school-2017.-Jianfeng-Gao.v2.pdf)\]
 
 Deep learning이 NLP에서도 주류가 되면서, 위와 같은 접근 방법의 변화들을 꼽을 수 있습니다. 사람의 언어는 Discrete한 symbol로 이루어져 있습니다. 비록 그 symbol간에는 유사성이 있을 수 있지만 기본적으로 모든 단어\(또는 token\)은 다른 symbol이라고 볼 수 있습니다. 따라서 기존의 전통적인 NLP에서는 discrete symbol로써 데이터를 취급하였습니다. 따라서 사람이 데이터를 보고 해석하기는 쉬운 장점이 있었지만, 모호성이나 유의성을 다루는데에는 어려움을 겪을 수 밖에 없었습니다.
 
 하지만 word2vec등의 word embedding을 통해서 단어\(또는 token\)을 continuous한 vector로써 나타낼 수 있게 되고, 모호성과 유의성에서도 이득을 볼 수 있게 되었습니다. 또한, deep learning의 장점을 잘 살려 end-to-end model을 구현함으로써 더욱 높은 성능을 뽑을 수 있게 되었습니다. 또한, RNN의 단점을 보완한 LSTM과 GRU에 대한 활용법이 고도화 되었고, attention의 등장으로 인해서 긴 time-step의 sequential 데이터에 대해서도 어렵지 않게 훈련할 수 있게 된 점도 큰 터닝 포인트라고 볼 수 있습니다.
 
-![](./assets/intro-nlp-symbolic-vs-neural.png)  
+![](../assets/intro-nlp-symbolic-vs-neural.png)  
 \[[Gao et al.2017](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/07/dl-summer-school-2017.-Jianfeng-Gao.v2.pdf)\]
 
 ## Conclusion
 
-![](./assets/intro-end-2-end-nlp-deep-learning.png)  
+![](../assets/intro-end-2-end-nlp-deep-learning.png)  
 \[[Gao et al.2017](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/07/dl-summer-school-2017.-Jianfeng-Gao.v2.pdf)\]
 
 다시 말해, 비록 NLP는 discrete한 symbol로 이루어진 사람의 언어를 다루는 분야이지만, 성공적인 word embedding과 long term sequential data에 대한 효과적인 대응방법이 나옴에 따라서, 점차 다른 인공지능의 분야들처럼 큰 발전이 이루어지게 되었습니다.

@@ -1,6 +1,6 @@
 # Expectation
 
-![](./assets/lm_rolling_dice.png)
+![](../assets/lm_rolling_dice.png)
 
 기대값(expectation)은 보상(reward)과 그 보상을 받을 확률을 곱한 값의 총 합을 통해 얻을 수 있습니다. 즉, reward에 대한 가중합(weighted sum)라고 볼 수 있습니다. 주사위의 경우에는 reward의 경우에는 1부터 6까지 받을 수 있지만, 각 reward에 대한 확률은 ${1}/{6}$로 동일합니다.
 
@@ -53,7 +53,7 @@ $$
 
 먼저, 강화학습은 어떤 형태로 구성이 되어 있는지 이야기 해 보겠습니다. 강화학습은 어떠한 객체가 주어진 환경에서 상황에 따라 어떻게 행동해야 할지 학습하는 방법에 대한 학문입니다. 그러므로 강화학습은 아래와 같은 요소들로 구성되어 동작 합니다.
 
-![](./assets/rl-universe.png)
+![](../assets/rl-universe.png)
 
 처음 상황(state) $S_t$ $(t=0)$을 받아서 agent는 자신의 정책에 따라 행동(action) $A_t$를 선택합니다. 그럼 environment는 agent로부터 action $A_t$를 받아 보상(reward) $R_{t+1}$과 새롭게 바뀐 상황(state) $S_{t+1}$을 반환합니다. 그럼 agent는 다시 그것을 받아 action을 선택하게 됩니다. 따라서 아래와 같이 state, action reward가 시퀀스(sequence)로 주어지게 됩니다.
 
@@ -81,7 +81,7 @@ $$
 
 이제 우리는 MDP 아래에서 environment(환경)와 agent(에이전트)가 state와 reward, action을 주고 받으며 나아가는 과정을 표현 할 수 있습니다.
 
-![](./assets/rl-rpc.png)
+![](../assets/rl-rpc.png)
 
 ## Reward
 
@@ -113,7 +113,7 @@ $$
 
 따라서 우리는 마음속의 정책에 따라 비가 오는 상황(state)에서 자장면과 짬뽕 중에 어떤 음식을 먹을지 확률적으로 선택 할 수 있고, 맑은 날에도 다른 확률 분포 중에서 선택 할 수 있습니다.
 
-![](./assets/rl-policy-choice.png)
+![](../assets/rl-policy-choice.png)
 
 ## Value Function
 
@@ -153,7 +153,7 @@ $$
 
 이처럼 상황과 행동을 근사하여 문제를 해결한다고 할 때, 신경망(neural network)은 매우 훌륭한 해결 방법이 될 수 있습니다. 딥마인드(DeepMind)는 신경망을 사용하여 근사한 큐러닝을 통해 아타리(Atari) 게임을 훌륭하게 플레이하는 강화학습 방법을 제시하였고, 이를 deep Q-learning (or DQN)이라고 이름 붙였습니다.
 
-![](./assets/rl-atari.png)
+![](../assets/rl-atari.png)
 
 $$
 Q(S_t,A_t) \leftarrow \underbrace{Q(S_t,A_t)}_{\text{Approximated}}+\alpha\Big[R_{t+1}+\gamma\max_aQ(S_{t+1},a)-Q(S_t,A_t)\Big]
@@ -230,7 +230,7 @@ $$
 
 따라서 실제 gradient에 따른 local minima(지역최소점)를 찾는 것이 아닌, 아래 그림과 같이 실제 reward-objective function에 따른 최적을 값을 찾게 됩니다. 하지만, 기존의 gradient는 방향과 크기를 나타낼 수 있었던 것에 비해서, policy gradients는 기존의 gradient의 방향에 크기(scalar)값을 곱해줌으로써 방향을 직접 지정해 줄 수는 없습니다. 따라서 실제 목적함수(objective function)에 따른 최적의 방향을 스스로 찾아갈 수는 없습니다. 그러므로 사실 훈련이 어렵고 비효율적인 단점을 갖고 있습니다.
 
-![](./assets/rl_sgd_vs_policy_gradients.png)
+![](../assets/rl_sgd_vs_policy_gradients.png)
 
 Policy Gradient에 대한 자세한 설명은 원 논문인 [\[Sutton at el.1999\]](https://papers.nips.cc/paper/1713-policy-gradient-methods-for-reinforcement-learning-with-function-approximation.pdf), 또는 해당 저자가 쓴 텍스트북 [Reinforcement Learning: An Introduction[Sutton et al.2017]](http://www.incompleteideas.net/book/bookdraft2017nov5.pdf)을 참고하거나, [DeepMind David Silver의 YouTube 강의](https://www.youtube.com/watch?v=2pWv7GOvuf0&list=PL7-jPKtc4r78-wCZcQn5IqyuWhBZ8fOxT)를 참고하면 좋습니다.
 

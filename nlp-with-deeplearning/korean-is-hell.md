@@ -10,7 +10,7 @@
 
 한국어는 **교착어**에 속합니다. 어순이 중요시되는 영어/중국어와 달리 어근에 접사가 붙어 의미와 문법적 기능이 부여됩니다. \(굴절어의 경우에는 형태 자체가 변함으로써, 어근과 접사가 분명하게 구분되는 교착어와 다릅니다.\) 따라서, 아래와 같은 재미있는 예시의 형태도 가능합니다.
 
-![](./assets/intro-why-korean-hell-example.png)  
+![](../assets/intro-why-korean-hell-example.png)  
 \[Image from [나무위키\(교착어\)](https://namu.wiki/w/교착어)\]
 
 위의 예처럼 접사에 따라 단어의 역할이 정의되기 때문에, 상대적으로 어순은 중요하지 않습니다. 아래는 4개의 단어가 나타날 수 있는 모든 조합을 적은 것 입니다. "간다"가 "밥을"뒤에 붙어 수식할 때를 제외하면 모두 같은 의미의 문장이 됩니다.
@@ -45,7 +45,7 @@
 
 ## 띄어쓰기의 어려움
 
-![](./assets/intro-why-korean-hell-my-bro.png) ![](./assets/intro-why-korean-hell-human-meat.png)
+![](../assets/intro-why-korean-hell-my-bro.png) ![](../assets/intro-why-korean-hell-human-meat.png)
 
 애초에 동양권에서는 띄어쓰기라는 것이 존재하지 않았고 근대에 들어와서 도입된 것이기 때문에, 띄어쓰기에 맞춰 발전 해 온 언어는 아닙니다. 따라서 띄어쓰기에 대한 표준이 계속 바뀌어 왔기 때문에, 사람마다 띄어쓰기를 하는 것이 다를 뿐더러, 심지어는 띄어쓰기가 아예 없더라도 해석이 가능하기도 합니다. 결국, 위에서처럼 추가적인 segmentation을 통해서 띄어쓰기를 정제(normalization) 해 주는 process가 마찬가지로 필요하게 됩니다.
 

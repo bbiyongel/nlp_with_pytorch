@@ -4,12 +4,12 @@
 
 ## Language Model Ensemble
 
-![https://arxiv.org/pdf/1503.03535.pdf](./assets/nmt_with_lm_ensemble.png)  
+![https://arxiv.org/pdf/1503.03535.pdf](../assets/nmt_with_lm_ensemble.png)  
 [\[Gulcehre at el.2015\]](https://arxiv.org/pdf/1503.03535.pdf)
 
 이 방법은 Bengio 교수의 연구실에서 쓴 paper인 [\[Gulcehre at el.2015\]](https://arxiv.org/pdf/1503.03535.pdf)에서 제안 된 방법입니다. Language Model을 explicit하게 ensemble하여 디코더의 성능을 올리고자 시도하였습니다. 두개의 다른 모델을 쓴 _**shallow fusion**_ 방법 보다, LM을 Seq2seq에 포함시켜 end2end training을 하여 한개의 모델로 만든 _**deep fusion**_ 방법이 좀 더 나은 성능을 나타냈습니다. 두 방식 모두 Monolingual corpus를 활용하여 Language Model을 pre-train한 이후 실제 번역기를 훈련시킬 때에는 weight를 freeze 한 상태로 seq2seq 모델을 훈련합니다.
 
-![https://arxiv.org/pdf/1503.03535.pdf](./assets/nmt_with_lm_ensemble_evaluation.png)  
+![https://arxiv.org/pdf/1503.03535.pdf](../assets/nmt_with_lm_ensemble_evaluation.png)  
 [\[Gulcehre at el.2015\]](https://arxiv.org/pdf/1503.03535.pdf)
 
 성능상으로는 뒤에 다룰 내용들보다 성능 상의 gain이 적지만, 그 내용이 방법의 장점은 Monolingual corpus를 전부 활용 할 수 있다는 것입니다.
@@ -23,7 +23,7 @@
 
 그리고 같은 [논문](https://arxiv.org/pdf/1511.06709.pdf)에서 좀 더 발전된 다른 방법을 제시하였습니다. 이 방법은 기존의 훈련된 _**반대 방향**_ 번역기를 사용하여 monolingual corpus를 기계번역하여 synthetic parallel corpus를 만들어 이것을 훈련에 사용하는 방식 입니다. 중요한 점은 기계번역에 의해 만들어진 synthetic parallel corpus를 사용할 때, 반대방향의 번역기의 훈련에 사용한다는 것 입니다.
 
-![](./assets/nmt_back_translation_overview.png)
+![](../assets/nmt_back_translation_overview.png)
 
 $$
 \hat{f}=argmaxP_{\theta_{e \rightarrow f}}(f|e)
@@ -34,7 +34,7 @@ $$
 
 예를 들어, _**한국어**_ monolingual corpus가 있을 때, 이것을 기존에 훈련된 한$\rightarrow$영 번역기에 기계번역시켜 한-영 synthetic parallel corpus를 만들고, 이것을 영$\rightarrow$한 번역기를 훈련시키는데 사용하는 것 입니다. 이러한 방법의 특성 때문에 _**back translation**_ 이라고 명명되었습니다.
 
-![https://arxiv.org/pdf/1511.06709.pdf](./assets/nmt_back_translation.png)  
+![https://arxiv.org/pdf/1511.06709.pdf](../assets/nmt_back_translation.png)  
 [\[Sennrich at el.2015\]](https://arxiv.org/pdf/1511.06709.pdf)
 
 위의 Table은 Dummy source translation\(==monolingual\)과 back translation\(==synthetic\) 방식에 대해서 성능을 실험한 결과 입니다. 두가지 방법 모두 사용하였을 때에 성능이 제법 향상된 것을 볼 수 있습니다. Parallel corpus와 거의 같은양의 corpus가 각각 사용되었습니다. 위에서 언급했듯이, explicit한 Language Model Ensemble 방식에서는 corpus양의 제한이 없었지만, 이 방식에서는 기존의 parallel corpus와 차이 없이 섞어서 동시에 훈련에 사용하기 때문에, monolingual corpus의 양이 parallel corpus 보다 많아질 경우 주객전도 현상이 일어날 수 있습니다. 따라서 그 양을 제한하여 훈련에 사용하였습니다.
@@ -44,7 +44,7 @@ $$
 이 방식은 같은 저자인 Rich Sennrich에 의해서 [\[Currey et al.2017\] Copied Monolingual Data Improves Low-Resource Neural Machine  
 Translation](https://kheafield.com/papers/edinburgh/copy_paper.pdf) 에서 제안 되었습니다. 기존의 Dummy source sentence translation 방식에서 좀 더 나아진 방식입니다. 기존의 방식 대신에 source side와 target side에 identical한 같은 데이터를 넣어 훈련시키는 것 입니다. 기존의 dummy source sentence 방식은 encoder에서 decoder로 가는 길을 훈련시에 dropout 처리 해주어야 했지만, 이 방식은 그럴 필요가 없어진 것이 장점입니다. 하지만 source language의 vocabulary에 target language의 vocabulary가 포함되어야 하는 불필요함을 감수해야 합니다.
 
-![https://arxiv.org/pdf/1708.00726.pdf](./assets/nmt_copied_translation.png)  
+![https://arxiv.org/pdf/1708.00726.pdf](../assets/nmt_copied_translation.png)  
 [\[Sennrich at el.2017\]](https://arxiv.org/pdf/1708.00726.pdf)
 
 ## Conclusion
@@ -55,7 +55,7 @@ Translation](https://kheafield.com/papers/edinburgh/copy_paper.pdf) 에서 제�
 
 [\[Artetxe at el.2017\]](https://arxiv.org/pdf/1710.11041.pdf)
 
-![](./assets/rl-unsupervised-nmt-1.png)
+![](../assets/rl-unsupervised-nmt-1.png)
 
-![](./assets/rl-unsupervised-nmt-2.png)
+![](../assets/rl-unsupervised-nmt-2.png)
 
