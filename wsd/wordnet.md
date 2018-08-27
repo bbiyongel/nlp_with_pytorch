@@ -8,7 +8,7 @@
 
 WordNet은 프로그램으로 제공되므로 다운로드 받아 설치할 수도 있고, [웹사이트](http://wordnetweb.princeton.edu/perl/webwn)에서 바로 이용 할 수도 있습니다. 또한, NLTK에 랩핑(wrapping)되어 포함되어 있어, import하여 사용 가능합니다. 아래는 WordNet 웹사이트에서 bank를 검색한 결과 입니다.
 
-![](../assets/wsd-wordnet-screenshot.png)
+![[WordNet 웹사이트](http://wordnetweb.princeton.edu/perl/webwn)에서 단어 'bank'를 검색 한 결과](../assets/wsd-wordnet-screenshot.png)
 
 이처럼 WordNet은 단어 별 여러가지 가능한 의미를 미리 정의 하고, numbering 해 놓았습니다. 또한 각 의미별로 비슷한 의미를 갖는 동의어(Synonym)를 링크 해 놓아, Synset을 제공합니다. 이것은 단어 중의성 해소에 있어서 매우 좋은 labeled data가 될 수 있습니다. 만약 WordNet이 없다면, 각 단어별로 몇 개의 의미가 있는지조차 알 수가 없을 것입니다. 죽, WordNet 덕분에 우리는 이 데이터를 바탕으로 supervised learning(지도 학습)을 통해 단어 중의성 해소 문제를 풀 수 있습니다.
 
