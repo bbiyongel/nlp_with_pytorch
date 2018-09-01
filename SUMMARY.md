@@ -71,7 +71,7 @@
 * [NLP with Reinforcement Learning](reinforcement-learning/cover.md)
   * [Intro](reinforcement-learning/intro.md)
   * [Math Basics](reinforcement-learning/math_basics.md)
-  * [Reinforcement Learning Basics](reinforcement-learning/rl_basics/md)
+  * [Reinforcement Learning Basics](reinforcement-learning/rl_basics.md)
   * [Policy Gradients](reinforcement-learning/policy-gradient.md)
   * [Reinforcement Learning on NLG](reinforcement-learning/characteristic.md)
   * [Supervised NMT](reinforcement-learning/supervised-nmt.md)
