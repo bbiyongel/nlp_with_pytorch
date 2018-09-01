@@ -5,7 +5,7 @@
 2012년 이미지넷 대회(ImageNet competition)에서 딥러닝을 활용한 AlexNet이 우승을 차지한 이래로 컴퓨터 비전(Computer Vision), 음성인식(Speech Recognition), 자연어처리(Natural Language Processing) 등이 차례로 딥러닝에 의해 정복당해 왔습니다. 딥러닝이 뛰어난 능력을 보인 분야는 특히 분류(classification) 분야였습니다. 기존의 전통적인 방식과 달리 패턴 인식(pattern recognition) 분야에서는 압도적인 성능을 보여주었습니다. 이러한 분류(classification) 문제는 보통 ***Discriminative Learning***에 속하는데 이를 일반화 하면 다음과 같습니다.
 
 $$
-\hat{\theta}=argmax P(y|x;\theta)
+\hat{\theta}=\underset{\theta}{\text{argmax }} P(y|x;\theta)
 $$
 
 주어진 $x$에 대해서 최대의 $y$ 값을 갖도록 하는 파라미터 $\theta$를 찾아내는 것 입니다. 이러한 조건부 확률 $P(y|x)$ 분포를 학습하는 것을 discriminative learning이라고 부릅니다. 하지만 이에 반해 ***Generative Learning***은 확률분포 $P(x)$를 학습하는 것을 이릅니다. 따라서 Generative learning이 훨씬 더 학습하기 어렵습니다. 예를 들어 
@@ -16,7 +16,7 @@ $$
 두가지 경우를 비교하면 2번째가 훨씬 더 어려움을 알 수 있습니다. Discriminative learning은 $y$와 $x$와의 관계를 배우는 것이지만, generative learning은 $x~(and~y)$ 자체를 배우는 것이기 때문입니다. 그리고 이것을 수식으로 일반화 하면 아래와 같습니다.
 
 $$
-\hat{\theta}=argmax P(x, y;\theta)
+\hat{\theta}=\underset{\theta}{\text{argmax }} P(x, y;\theta)
 $$
 
 사실 이제는 패턴인식과 같은 discriminative learning은 이제 딥러닝으로 너무나도 당연하게 잘 해결되기 때문에, 사람들의 관심과 연구 트렌드는 위와 같은 generative learning으로 집중되고 있습니다.
@@ -39,7 +39,7 @@ Generative Adversarial Network overview - Image from [web](https://sthalles.gith
 위와 같이 GAN은 컴퓨터 비전(CV)분야에서 대성공을 이루었지만 자연어처리(NLP)에서는 적용이 어려웠습니다. 그 이유는 Natural Language 자체의 특성에 있습니다. 이미지라는 것은 어떠한 continuous한 값들로 채워진 2차원의 matrix입니다. 하지만 이와 달리 단어라는 것은 discrete한 symbol로써, 결국 언어라는 것은 어떠한 descrete한 값들의 순차적인 배열 입니다. 비록 우리는 [**NNLM**](../language-modeling/nnlm.md)이나 [**NMT Decoder**](../neural-machine-translation/seq2seq.md)를 통해서 latent variable로써 언어의 확률을 모델링 $P(w_1,w_2,\cdots,w_n)$ 하고 있지만, 결국 언어를 나타내기 위해서는 해당 확률 모델에서 ***sampling***(또는 argmax)을 하는 과정을 거쳐야 하고 이 과정은 미분이 불가능하거나 미분이 되더라도 gradient가 0이 되어 back-propagation이 불가 합니다.
 
 $$
-\hat{w}_t = argmax P(w_t|w_1,\cdots,w_{t-1})
+\hat{w}_t = \text{argmax }P(w_t|w_1,\cdots,w_{t-1})
 $$
 
 이러한 이유 때문에 Discriminator의 loss를 Generator에 전달 할 수가 업고, 따라서 GAN을 NLP에는 적용할 수 없는 인식이 지배적이었습니다. 하지만 강화학습을 사용함으로써 Adversarial learning을 NLP에도 우회적으로 사용할 수 있게 되었습니다.
