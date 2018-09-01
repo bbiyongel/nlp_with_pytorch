@@ -269,7 +269,7 @@ $\theta$에 대해 MLE를 수행하기 위해서 우리는 목적함수(objectiv
 
 $$
 \begin{aligned}
-J(\theta)&=-\frac{1}{N}\sum_{(X, Y) \in \mathcal{B}}{P(Y|X)\log{P(Y|X;\theta)}} \\
+J(\theta)&=-\sum_{(X, Y) \in \mathcal{B}}{P(Y|X)\log{P(Y|X;\theta)}} \\
 &=-\frac{1}{N}\sum_{(X, Y) \in \mathcal{B}}{\sum_{i = 0}^{m}{\log{P(y_i|X, y_{<i}; \theta)}}}
 \end{aligned}
 $$

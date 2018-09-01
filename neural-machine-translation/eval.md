@@ -66,8 +66,3 @@ BLEU는 정답 문장과 예측 문장 사이에 일치하는 ***n-gram***의 �
 '번역2'의 2-gram BLEU는 ${3}/{7}$가 나왔습니다. 그러므로 (brevity penalty나 1-gram, 2-gram, 3-gram, 4-gram의 점수를 평균내지는 않았지만) 2-gram에 한해서 ${4}/{7}>{3}/{7}$이므로 '번역1'이 더 잘 번역되었다고 볼 수 있습니다. 즉, 위의 예제에서 '번역1'이 '번역2'보다 일치하는 n-gram이 더 많으므로 더 높은 BLEU 점수를 획득할 수 있습니다. 이와 같이 BLEU는 대체로 실제 정성평가의 결과와 일치하는 경향이 있다고 여겨집니다.
 
 결론적으로 우리는 성능 평가 결과를 해석할 때 Perplexity(=Loss)는 낮을수록 좋고, BLEU는 높을수록 좋다고 합니다. 앞으로 설명할 알고리즘들의 성능을 평가할 때 참고 바랍니다. 실제 성능을 측정하기 위해서는 보통 SMT 프레임웍인 MOSES의 [multi-bleu.perl](https://github.com/google/seq2seq/blob/master/bin/tools/multi-bleu.perl)을 주로 사용합니다.
-
-# Future Work
-
-[[Koehn at el.2017]](https://arxiv.org/pdf/1706.03872v1.pdf)에 따르면 신경망기계번역(NMT)에는 아직 다음과 같은 도전 과제들이 남아있습니다.
-
