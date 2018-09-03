@@ -1,4 +1,4 @@
-# RNN을 통한 접근 방법
+# RNN Based Method
 
 ## 구조 설계
 

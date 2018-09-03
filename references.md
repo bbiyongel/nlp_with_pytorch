@@ -35,6 +35,7 @@ http://ruder.io/deep-learning-nlp-best-practices/
   - [Deep Learning for Sentiment Analysis: A Survey](https://arxiv.org/pdf/1801.07883v1.pdf)
   - [Learning to Generate Reviews and Discovering Sentiment](https://arxiv.org/pdf/1704.01444.pdf)
   - https://www.toptal.com/machine-learning/nlp-tutorial-text-classification
+  - [article from WildML](http://www.wildml.com/2015/12/implementing-a-cnn-for-text-classification-in-tensorflow/)
 - Language Modeling
 - Machine Translation
   - [NON-AUTOREGRESSIVE NEURAL MACHINE TRANSLATION](https://arxiv.org/pdf/1711.02281.pdf)
