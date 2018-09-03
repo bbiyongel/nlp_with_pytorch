@@ -1,4 +1,3 @@
 # Advanced Topic on Neural Machine Translation
 
-![](https://nlp.stanford.edu/manning/images/Christopher_Manning_027_1154x1154.jpg)<br>
-[Christopher Manning](https://nlp.stanford.edu/manning/) - Image from Web
+![[Christopher Manning](https://nlp.stanford.edu/manning/) - Image from Web](../assets/cover-manning.jpeg)

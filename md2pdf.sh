@@ -121,7 +121,7 @@ cd ..
 #   * [Unsupervised NMT](reinforcement-learning/unsupervised-nmt.md)
 echo 11
 cd ./reinforcement-learning
-pandoc ./cover.md ./intro.md ./policy-gradient.md ./characteristic.md ./supervised-nmt.md ./unsupervised-nmt.md --latex-engine=xelatex -o ../${DIR_PATH}/11.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
+pandoc ./cover.md ./intro.md ./math_basics.md ./rl_basics.md ./policy-gradient.md ./characteristic.md ./supervised-nmt.md ./unsupervised-nmt.md --latex-engine=xelatex -o ../${DIR_PATH}/11.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
 cd ..
 # * [Exploit Duality](duality/cover.md)
 #   * [Duality](duality/intro.md)
