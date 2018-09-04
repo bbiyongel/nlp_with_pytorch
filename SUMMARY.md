@@ -16,7 +16,7 @@
 * [Word Sense Disambiguation](wsd/cover.md)
   * [Intro](wsd/intro.md)
   * [Using Thesaurus](wsd/wordnet.md)
-  * [Using Feature Vector](wsd/feature-vector.md)
+  * [Similarity Based Methods](wsd/similarity-based.md)
   * [Selectional Preference](wsd/selectional-preference.md)
 * [Preprocessing](preprocessing/cover.md)
   * [Intro](preprocessing/intro.md)

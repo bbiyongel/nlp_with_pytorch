@@ -76,7 +76,15 @@ Synset('physical_entity.n.01')
 Synset('entity.n.01')
 ```
 
+위로 부터 얻어낸 정보들을 취합하여 그래프로 나타내면 아래와 같습니다.
+
 ![](../assets/wsd-wordnet-hierarchy.png)
+
+각 leaf 노드들은 query 단어들이 됩니다. 우리는 여기서 각 leaf 노드 간의 최단 거리를 유사도 정보로 활용할 수 있습니다.
+
+$$
+similarity(w, w')=-\log{distance(w, w')}
+$$
 
 ## Based on Co-Occurrence
 

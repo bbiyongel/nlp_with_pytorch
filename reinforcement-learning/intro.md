@@ -16,7 +16,7 @@ $$
 두가지 경우를 비교하면 2번째가 훨씬 더 어려움을 알 수 있습니다. Discriminative learning은 $y$와 $x$와의 관계를 배우는 것이지만, generative learning은 $x~(and~y)$ 자체를 배우는 것이기 때문입니다. 그리고 이것을 수식으로 일반화 하면 아래와 같습니다.
 
 $$
-\hat{\theta}=\underset{\theta}{\text{argmax }} P(x, y;\theta)
+\hat{\theta}=\underset{\theta}{\text{argmax }} P(x;\theta)
 $$
 
 사실 이제는 패턴인식과 같은 discriminative learning은 이제 딥러닝으로 너무나도 당연하게 잘 해결되기 때문에, 사람들의 관심과 연구 트렌드는 위와 같은 generative learning으로 집중되고 있습니다.
