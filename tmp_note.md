@@ -200,14 +200,6 @@ $$
 \hat{\theta}=\underset{\theta}{\text{argmax }}P(X;\theta)=\underset{\theta}{\text{argmax }}P(X|\theta)
 $$ 
 
-$$
-\begin{aligned}
-P(y)&=\mathbb{E}_{X\sim P}[\mathbb{E}_{Y\sim P_\theta}[P(Y|X;\theta)]] \\
-&=\sum_{x\in\mathcal{X}}{P(x)\sum_{y\in\mathcal{Y}}P(y)P(y|x;\theta)} \\
-&\approx\frac{1}{K_x}\sum_{i=1}^{K_x}{\frac{1}{K_y}\sum_{j=1}^{K_y}P(y_j|x_i;\theta)}
-\end{aligned}
-$$
-
 ### MAP
 
 $$
@@ -236,5 +228,17 @@ $$
 ### KL Divergence
 
 $$
-KL(P||Q)=-\mathbb{E}_{X\sim P}[\log{\frac{Q(X)}{P(X)}}]=H(P,Q)-H(P)
+\begin{aligned}
+KL(P||P_\theta)&=-\mathbb{E}_{X \sim P}[\log{\frac{P_\theta(X)}{P(X)}}] \\
+&=-\sum_{x\in\mathcal{X}}{P(x)\log{\frac{P_\theta(x)}{P(x)}}} \\
+&=-\sum_{x\in\mathcal{X}}{\Big(P(x)\log{P_\theta(x)}-P(x)\log{P(x)}\Big)} \\
+&=H(P,Q)-H(P)
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\nabla_\theta KL(P||P_\theta)&=\nabla_\theta\big(H(P,Q)-H(P)\big) \\
+&=\nabla_\theta H(P,Q)
+\end{aligned}
 $$
