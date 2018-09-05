@@ -155,7 +155,7 @@ $$
 ### Marginal Probability
 
 $$
-P(y)=\sum_{i=1}^N{P(y,x_i)}=\sum_{i=1}^N{P(y|x_i)P(x_i)}
+P(y)=\sum_{x\in\mathcal{X}}{P(y,x)}=\sum_{x\in\mathcal{X}}{P(y|x)P(x)}
 $$
 
 ### Bayes Theorem
@@ -164,7 +164,7 @@ $$
 P(A|B)=\frac{P(B|A)P(A)}{P(B)}
 $$
 
-### Monti-hall Problem
+### Monty-hall Problem
 
 $$
 \begin{aligned}
@@ -184,4 +184,57 @@ P(C=0|A=0,B=1)&=\frac{P(A=0,B=1,C=0)}{P(A=0,B=1)} \\
 &=\frac{\frac{1}{2} \times \frac{1}{3}}{\frac{1}{2}}=\frac{1}{3},\\
 \text{where }&P(B=1|A=0,C=0)=\frac{1}{2}
 \end{aligned}
+$$
+
+## Gradient based Optimizations
+
+## Machine Learning
+
+### MLE
+
+$$
+\hat{\theta}=\underset{\theta}{\text{argmax }}P(Y|X;\theta)=\underset{\theta}{\text{argmax }}P(Y|X,\theta)
+$$
+
+$$
+\hat{\theta}=\underset{\theta}{\text{argmax }}P(X;\theta)=\underset{\theta}{\text{argmax }}P(X|\theta)
+$$ 
+
+$$
+\begin{aligned}
+P(y)&=\mathbb{E}_{X\sim P}[\mathbb{E}_{Y\sim P_\theta}[P(Y|X;\theta)]] \\
+&=\sum_{x\in\mathcal{X}}{P(x)\sum_{y\in\mathcal{Y}}P(y)P(y|x;\theta)} \\
+&\approx\frac{1}{K_x}\sum_{i=1}^{K_x}{\frac{1}{K_y}\sum_{j=1}^{K_y}P(y_j|x_i;\theta)}
+\end{aligned}
+$$
+
+### MAP
+
+$$
+\begin{aligned}
+\hat{\theta}&=\underset{\theta}{\text{argmax }}P(\theta|X,Y) \\
+&=\underset{\theta}{\text{argmax }}P(X,Y,\theta) \\
+&=\underset{\theta}{\text{argmax }}P(Y|X;\theta)P(X,\theta) \\
+&=\underset{\theta}{\text{argmax }}P(Y|X;\theta)P(X;\theta)P(\theta)
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\hat{\theta}&=\underset{\theta}{\text{argmax }}P(\theta|X) \\
+&=\underset{\theta}{\text{argmax }}P(X,\theta) \\
+&=\underset{\theta}{\text{argmax }}P(X;\theta)P(\theta)
+\end{aligned}
+$$
+
+### Ensemble
+
+$$
+P(Y|X)=\mathbb{E}_{\theta\sim P}[P(Y|X;\theta)]\approx\frac{1}{N}\sum_{i=1}^N{P(Y|X;\theta)}
+$$
+
+### KL Divergence
+
+$$
+KL(P||Q)=-\mathbb{E}_{X\sim P}[\log{\frac{Q(X)}{P(X)}}]=H(P,Q)-H(P)
 $$
