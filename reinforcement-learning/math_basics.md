@@ -36,13 +36,13 @@ Monte Carlo Sampling은 난수를 이용하여 임의의 함수를 근사하는 
 따라서 Monte Carlo sampling을 사용하면 기대값(expectation) 내의 표현을 밖으로 꺼낼 수 있습니다. 즉, 주사위의 reward에 대한 기대값을 아래와 같이 간단히(simplify) 표현할 수 있습니다.
 
 $$
-\mathbb{E}_{X \sim P}[reward(x)] \approx \frac{1}{N}\sum^N_{i=1}{reward(x_i)}
+\mathbb{E}_{X \sim P}[reward(X)] \approx \frac{1}{N}\sum^N_{i=1}{reward(x_i)}
 $$
 
 주사위 reward의 기대값은 $N$번 sampling한 주사위 값의 평균이라고 할 수 있습니다. 실제로 $N$이 무한대에 가까워질 수록 (커질 수록) 해당 값은 실제 기대값 $3.5$에 가까워질 것 입니다. 따라서 우리는 경우에 따라서 $N=1$인 경우도 가정 해 볼 수 있습니다. 즉, 아래와 같은 수식이 될 수도 있습니다.
 
 $$
-\mathbb{E}_{X \sim P}[reward(x)] \approx reward(x)=x
+\mathbb{E}_{X \sim P}[reward(X)] \approx reward(x)=x
 $$
 
 위와 같은 가정을 가지고 수식을 간단히 표현할 수 있게 되면, 이후 gradient를 구한다거나 할 때에 수식이 간단해져 매우 편리합니다.

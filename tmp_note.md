@@ -109,3 +109,79 @@ $$
 &= \underset{a}{\text{argmax }}{\sum_{s',r}{P(s',r|s,a)\Big[r+\gamma v_\pi(s')\Big]}}
 \end{aligned}
 $$
+
+## Probability
+
+### Discrete Variable
+
+$$
+P(X=x)
+$$
+
+$$
+\sum_{i=1}^N{P(X=x_i)}=\sum_{i=1}^N{P(x_i)}=1
+$$
+
+### Continuous Variable
+
+$$
+\forall x \in X,~p(x)\ge0.
+$$
+
+$$
+\text{We don not require that }p(x)\le1.
+$$
+
+$$
+\int_{-\infty}^{\infty}{p(x)}~dx=1
+$$
+
+### Conditional Probability
+
+$$
+P(A|B)=\frac{P(A,B)}{P(B)}
+$$
+
+#### Conditional Independence
+
+$$
+P(A,B)=P(A)P(B)
+$$
+
+$$
+P(A|B)=\frac{P(A,B)}{P(B)}=P(A)
+$$
+
+### Marginal Probability
+
+$$
+P(y)=\sum_{i=1}^N{P(y,x_i)}=\sum_{i=1}^N{P(y|x_i)P(x_i)}
+$$
+
+### Bayes Theorem
+
+$$
+P(A|B)=\frac{P(B|A)P(A)}{P(B)}
+$$
+
+### Monti-hall Problem
+
+$$
+\begin{aligned}
+P(C=2|A=0,B=1)&=\frac{P(A=0,B=1,C=2)}{P(A=0,B=1)} \\
+&=\frac{P(B=1|A=0,C=2)P(A=0,C=2)}{P(A=0,B=1)} \\
+&=\frac{P(B=1|A=0,C=2)P(A=0)P(C=2)}{P(B=1|A=0)P(A=0)} \\
+&=\frac{1 \times \frac{1}{3}}{\frac{1}{2}}=\frac{2}{3},\\
+\text{where }P(B=1,A=0)=&\frac{1}{2},~P(C=2)=\frac{1}{3},\text{ and }P(B=1|A=0,C=2)=1.
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+P(C=0|A=0,B=1)&=\frac{P(A=0,B=1,C=0)}{P(A=0,B=1)} \\
+&=\frac{P(B=1|A=0,C=0)P(A=0,C=0)}{P(A=0,B=1)} \\
+&=\frac{P(B=1|A=0,C=0)P(A=0)P(C=0)}{P(B=1|A=0)P(A=0)} \\
+&=\frac{\frac{1}{2} \times \frac{1}{3}}{\frac{1}{2}}=\frac{1}{3},\\
+\text{where }&P(B=1|A=0,C=0)=\frac{1}{2}
+\end{aligned}
+$$

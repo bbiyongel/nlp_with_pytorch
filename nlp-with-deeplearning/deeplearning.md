@@ -62,13 +62,13 @@ Neural Network은 pattern classification에 있어서 타 알고리즘에 비해
 * Discriminative learning
 
 $$
-\hat{\theta} = \underset{\theta}{argmax}{P(Y|X;\theta)}
+\hat{\theta} = \underset{\theta}{\text{argmax }}{P(Y|X;\theta)}
 $$
 
 * Generative learning
 
 $$
-\hat{\theta} = \underset{\theta}{argmax}{P(X;\theta)}
+\hat{\theta} = \underset{\theta}{\text{argmax }}{P(X;\theta)}
 $$
 
 따라서, 곧 연구자들은 또 다른 흥미거리를 찾아 나섰는데, 그것은 Generative Learning이었습니다. 기존의 classification 문제는 $X$가 주어졌을 때, 알맞은 $Y$를 찾아내는 것에 집중했다면, 이제는 $X$ 자체에 집중하기 시작한 것 입니다. 예를 들어 기존에는 사람의 얼굴 사진이 주어지면 남자인지 여자인지, 또는 더 나아가 이 사람이 누구인지 알아내는 것이었다면, 이제는 얼굴 자체를 묘사할 수 있는 모델을 훈련하고자 하였습니다.
