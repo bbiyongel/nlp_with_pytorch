@@ -232,13 +232,13 @@ $$
 KL(P||P_\theta)&=-\mathbb{E}_{X \sim P}[\log{\frac{P_\theta(X)}{P(X)}}] \\
 &=-\sum_{x\in\mathcal{X}}{P(x)\log{\frac{P_\theta(x)}{P(x)}}} \\
 &=-\sum_{x\in\mathcal{X}}{\Big(P(x)\log{P_\theta(x)}-P(x)\log{P(x)}\Big)} \\
-&=H(P,Q)-H(P)
+&=H(P,P_\theta)-H(P)
 \end{aligned}
 $$
 
 $$
 \begin{aligned}
-\nabla_\theta KL(P||P_\theta)&=\nabla_\theta\big(H(P,Q)-H(P)\big) \\
-&=\nabla_\theta H(P,Q)
+\nabla_\theta KL(P||P_\theta)&=\nabla_\theta\big(H(P,P_\theta)-H(P)\big) \\
+&=\nabla_\theta H(P,P_\theta)
 \end{aligned}
 $$
