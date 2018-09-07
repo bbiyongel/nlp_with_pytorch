@@ -278,16 +278,20 @@ $$
 In addition, another objective function by Mean Square Error (MSE) is defined like as below:
 
 $$
-f(\mu,\sigma)=\frac{1}{\sigma\sqrt{2\pi}}\exp{(-\frac{(x-\mu)^2}{2\sigma^2})}
+\mathcal{N}(\mu,\sigma^2)=\frac{1}{\sigma\sqrt{2\pi}}\exp{(-\frac{(x-\mu)^2}{2\sigma^2})}
+$$
+
+$$
+f_\theta(x)=\mathcal{N}\big(\mu_\phi(x), \sigma_\psi(x)^2\big)
 $$
 
 $$
 \begin{aligned}
 J(\theta)=-\frac{1}{N}\sum_{i=1}^N{\log{f_\theta(x_i)}}
-&=-\frac{1}{N}\sum_{i=1}^N{\log{\Big(\frac{1}{\sigma\sqrt{2\pi}}\exp{(-\frac{(x_i-\mu)^2}{2\sigma^2})}\Big)}}, \\
-&=-\frac{1}{N}\sum_{i=1}^N\Big(\log{\frac{1}{\sigma\sqrt{2\pi}}}-\frac{(x_i-\mu)^2}{2\sigma^2}\Big) \\
-&=\log{\sigma}+\frac{1}{2}\log{2\pi}+\frac{1}{2\sigma^2\cdot N}\sum_{i=1}^N(x_i-\mu)^2\\
-&\text{where }\theta^*=\{\mu,\sigma\}\text{, but }\theta=\{\mu\}.
+&=-\frac{1}{N}\sum_{i=1}^N{\log{\Big(\frac{1}{\sigma_\psi(x_i)\sqrt{2\pi}}\exp{(-\frac{\big(x_i-\mu_\phi(x_i)\big)^2}{2\sigma_\psi(x_i)^2})}\Big)}}, \\
+&=-\frac{1}{N}\sum_{i=1}^N\Big(\log{\frac{1}{\sigma_\psi(x_i)\sqrt{2\pi}}}-\frac{\big(x_i-\mu_\phi(x_i)\big)^2}{2\sigma_\psi(x_i)^2}\Big) \\
+&=\log{\sigma_\psi(x_i)}+\frac{1}{2}\log{2\pi}+\frac{1}{2\sigma_\psi(x_i)^2\cdot N}\sum_{i=1}^N\big(x_i-\mu_\phi(x_i)\big)^2\\
+&\text{where }\theta^*=\{\phi,\psi\}\text{, but ignore }\psi\text{ and }\theta=\{\phi\}.
 \end{aligned}
 $$
 
@@ -299,9 +303,9 @@ $$
 $$
 
 $$
-\nabla_\theta{J(\theta)}=\nabla_\theta{\frac{1}{2\sigma^2\cdot N}\sum_{i=1}^N(x_i-\mu)^2}
+\nabla_\theta{J(\theta)}=\nabla_\theta{\frac{1}{2\sigma^2\cdot N}\sum_{i=1}^N\big(x_i-\mu_\phi(x_i)\big)^2}
 $$
 
 $$
-\tilde{J}(\theta)=\frac{1}{N}\sum_{i=1}^N(x_i-\mu)^2
+\tilde{J}(\theta)=\frac{1}{N}\sum_{i=1}^N\big(x_i-\mu_\phi(x_i)\big)^2
 $$
