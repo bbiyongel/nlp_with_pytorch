@@ -243,12 +243,18 @@ $$
 
 ## Gradient based Optimizations
 
+### Cross Entropy Loss
+
+An objective function by Cross Entropy is
+
 $$
 \begin{aligned}
-J(\theta)=H(P,P_\theta)&=-\mathbb{E}_{X\sim P(X)}\mathbb{E}_{Y\sim P(Y|X)}[\log{P(Y|X;\theta)}] \\
+J(\theta)=H(P,P_\theta)&=-\mathbb{E}_{X\sim P(X)}\Big[\mathbb{E}_{Y\sim P(Y|X)}[\log{P(Y|X;\theta)}]\Big] \\
 &=-\sum_{x\in\mathcal{X}}{P(x)\sum_{y\in\mathcal{Y}}{P(y|x)\log{P(y|x;\theta)}}} \\
 \end{aligned}
 $$
+
+By Monte-Carlo Sampling,
 
 $$
 \begin{gathered}
@@ -257,9 +263,17 @@ J(\theta)\approx-\frac{1}{N}\sum_{i=1}^N{\frac{1}{K}\sum_{j=1}^K{\log{P(y_j|x_i;
 \end{gathered}
 $$
 
+To minimize the objective function,
+
 $$
 \begin{gathered}
 \hat{\theta}=\underset{\theta}{\text{argmin }}J(\theta) \\ \\
 \theta \leftarrow \theta-\lambda\nabla_\theta J(\theta)
 \end{gathered}
+$$
+
+In addition, another objective function by Mean Square Error (MSE) is
+
+$$
+J(\theta)=\mathbb{E}_{X\sim P(X)}\Big[\mathbb{E}_{Y\sim P(Y|X)}[(p(y|x)-q_\theta(y|x))^2]\Big]
 $$
