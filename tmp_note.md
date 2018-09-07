@@ -186,8 +186,6 @@ P(C=0|A=0,B=1)&=\frac{P(A=0,B=1,C=0)}{P(A=0,B=1)} \\
 \end{aligned}
 $$
 
-## Gradient based Optimizations
-
 ## Machine Learning
 
 ### MLE
@@ -243,7 +241,7 @@ $$
 \end{aligned}
 $$
 
-## Gradient Descent
+## Gradient based Optimizations
 
 $$
 \begin{aligned}
