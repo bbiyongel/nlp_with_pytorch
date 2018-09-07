@@ -198,6 +198,24 @@ $$
 \hat{\theta}=\underset{\theta}{\text{argmax }}P(X;\theta)=\underset{\theta}{\text{argmax }}P(X|\theta)
 $$ 
 
+#### Example
+
+$$
+K\sim\mathcal{B}(n,\theta)
+$$
+
+$$
+\begin{aligned}
+P(K=k)&=
+\begin{pmatrix}
+   n \\
+   k
+\end{pmatrix}
+\theta^k(1-\theta)^{n-k} \\
+&=\frac{n!}{k!(n-k)!}\cdot\theta^k(1-\theta)^{n-k}
+\end{aligned}
+$$
+
 ### MAP
 
 $$
