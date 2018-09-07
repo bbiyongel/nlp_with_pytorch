@@ -257,10 +257,13 @@ $$
 By Monte-Carlo Sampling,
 
 $$
-\begin{gathered}
-\mathcal{B}=\{x,y\}_{i=1}^N \\ \\
-J(\theta)\approx-\frac{1}{N}\sum_{i=1}^N{\frac{1}{K}\sum_{j=1}^K{\log{P(y_j|x_i;\theta)}}}
-\end{gathered}
+\mathcal{B}=\{x,y\}_{i=1}^N
+$$
+$$
+\begin{aligned}
+J(\theta)&\approx-\frac{1}{N}\sum_{i=1}^N{\frac{1}{K}\sum_{j=1}^K{\log{P(y_j|x_i;\theta)}}} \\
+&\approx-\frac{1}{N}\sum_{i=1}^N{\log{P(y|x_i;\theta)}}
+\end{aligned}
 $$
 
 To minimize the objective function,
@@ -272,8 +275,33 @@ $$
 \end{gathered}
 $$
 
-In addition, another objective function by Mean Square Error (MSE) is
+In addition, another objective function by Mean Square Error (MSE) is defined like as below:
 
 $$
-J(\theta)=\mathbb{E}_{X\sim P(X)}\Big[\mathbb{E}_{Y\sim P(Y|X)}[(p(y|x)-q_\theta(y|x))^2]\Big]
+f(\mu,\sigma)=\frac{1}{\sigma\sqrt{2\pi}}\exp{(-\frac{(x-\mu)^2}{2\sigma^2})}
+$$
+
+$$
+\begin{aligned}
+J(\theta)=-\frac{1}{N}\sum_{i=1}^N{\log{f_\theta(x_i)}}
+&=-\frac{1}{N}\sum_{i=1}^N{\log{\Big(\frac{1}{\sigma\sqrt{2\pi}}\exp{(-\frac{(x_i-\mu)^2}{2\sigma^2})}\Big)}}, \\
+&=-\frac{1}{N}\sum_{i=1}^N\Big(\log{\frac{1}{\sigma\sqrt{2\pi}}}-\frac{(x_i-\mu)^2}{2\sigma^2}\Big) \\
+&=\log{\sigma}+\frac{1}{2}\log{2\pi}+\frac{1}{2\sigma^2\cdot N}\sum_{i=1}^N(x_i-\mu)^2\\
+&\text{where }\theta^*=\{\mu,\sigma\}\text{, but }\theta=\{\mu\}.
+\end{aligned}
+$$
+
+$$
+\begin{gathered}
+\hat{\theta}=\underset{\theta}{\text{argmin }}J(\theta) \\ \\
+\theta \leftarrow \theta-\lambda\nabla_\theta J(\theta)
+\end{gathered}
+$$
+
+$$
+\nabla_\theta{J(\theta)}=\nabla_\theta{\frac{1}{2\sigma^2\cdot N}\sum_{i=1}^N(x_i-\mu)^2}
+$$
+
+$$
+\tilde{J}(\theta)=\frac{1}{N}\sum_{i=1}^N(x_i-\mu)^2
 $$
