@@ -242,3 +242,26 @@ $$
 &=\nabla_\theta H(P,P_\theta)
 \end{aligned}
 $$
+
+## Gradient Descent
+
+$$
+\begin{aligned}
+J(\theta)=H(P,P_\theta)&=-\mathbb{E}_{X\sim P(X)}\mathbb{E}_{Y\sim P(Y|X)}[\log{P(Y|X;\theta)}] \\
+&=-\sum_{x\in\mathcal{X}}{P(x)\sum_{y\in\mathcal{Y}}{P(y|x)\log{P(y|x;\theta)}}} \\
+\end{aligned}
+$$
+
+$$
+\begin{gathered}
+\mathcal{B}=\{x,y\}_{i=1}^N \\ \\
+J(\theta)\approx-\frac{1}{N}\sum_{i=1}^N{\frac{1}{K}\sum_{j=1}^K{\log{P(y_j|x_i;\theta)}}}
+\end{gathered}
+$$
+
+$$
+\begin{gathered}
+\hat{\theta}=\underset{\theta}{\text{argmin }}J(\theta) \\ \\
+\theta \leftarrow \theta-\lambda\nabla_\theta J(\theta)
+\end{gathered}
+$$
