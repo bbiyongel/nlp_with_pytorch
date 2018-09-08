@@ -277,10 +277,11 @@ By Monte-Carlo Sampling,
 $$
 \mathcal{B}=\{x,y\}_{i=1}^N
 $$
+
 $$
 \begin{aligned}
 J(\theta)&\approx-\frac{1}{N}\sum_{i=1}^N{\frac{1}{K}\sum_{j=1}^K{\log{P(y_j|x_i;\theta)}}} \\
-&\approx-\frac{1}{N}\sum_{i=1}^N{\log{P(y|x_i;\theta)}}
+&\approx-\frac{1}{N}\sum_{i=1}^N{\log{P(y_i|x_i;\theta)}}
 \end{aligned}
 $$
 
