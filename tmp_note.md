@@ -56,60 +56,6 @@ $$
 \end{aligned}
 $$
 
-## Importance Sampling
-
-$$
-\begin{aligned}
-\mathbb{E}_{X \sim p}[f(x)]&=\int_{x}{f(x)p(x)}dx \\
-&=\int_{x}{\Big( f(x)\frac{p(x)}{q(x)}\Big)q(x)}dx \\
-&=\mathbb{E}_{X \sim q}[f(x)\frac{p(x)}{q(x)}],
-\end{aligned}
-$$
-
-$$
-\forall q\text{ (pdf) s.t.} q(x)=0 \implies p(x)=0
-$$
-
-$$
-w(x)=\frac{p(x)}{q(x)}
-$$
-
-$$
-\begin{aligned}
-\mathbb{E}_{X \sim q}[f(x)\frac{p(x)}{q(x)}]&\approx\frac{1}{K}\sum_{i=1}^{K}{f(x_i)\frac{p(x_i)}{q(x_i)}} \\
-&=\frac{1}{K}\sum_{i=1}^{K}{f(x_i)w(x_i)} \\
-\text{where }& x_i \sim q
-\end{aligned}
-$$
-
-## GAN
-
-$$
-\min_{G}\max_{D}\mathcal{L}(D,G)=\mathbb{E}_{x\sim p_r(x)}[\log{D(x)}]+\mathbb{E}_{z\sim p_z(z)}[\log{(1-D(G(z)))}]
-$$
-
-## Policy Iteration
-
-### Policy Evaluation
-
-$$
-\begin{aligned}
-v_\pi(s) &\doteq \mathbb{E}_\pi[R_{t+1}+\gamma R_{t+2}+\gamma^2R_{t+3}+\cdots|S_t=s] \\
-&= \mathbb{E}_\pi[R_{t+1}+\gamma v_\pi(S_{t+1})|S_t=s] \\
-&= \sum_a{\pi(a|s)\sum_{s',r}{P(s',r|s,a)\Big[r+\gamma v_\pi(s')\Big]}}
-\end{aligned}
-$$
-
-### Policy Improvement
-
-$$
-\begin{aligned}
-\pi'(s) &\doteq \underset{a}{\text{argmax }}{q_\pi(s,a)} \\
-&= \underset{a}{\text{argmax }}{\mathbb{E}[R_{t+1}+\gamma v_\pi(S_{t+1})|S_t=s,A_t=a]} \\
-&= \underset{a}{\text{argmax }}{\sum_{s',r}{P(s',r|s,a)\Big[r+\gamma v_\pi(s')\Big]}}
-\end{aligned}
-$$
-
 ## Probability
 
 ### Discrete Variable
@@ -162,28 +108,6 @@ $$
 
 $$
 P(A|B)=\frac{P(B|A)P(A)}{P(B)}
-$$
-
-### Monty-hall Problem
-
-$$
-\begin{aligned}
-P(C=2|A=0,B=1)&=\frac{P(A=0,B=1,C=2)}{P(A=0,B=1)} \\
-&=\frac{P(B=1|A=0,C=2)P(A=0,C=2)}{P(A=0,B=1)} \\
-&=\frac{P(B=1|A=0,C=2)P(A=0)P(C=2)}{P(B=1|A=0)P(A=0)} \\
-&=\frac{1 \times \frac{1}{3}}{\frac{1}{2}}=\frac{2}{3},\\
-\text{where }P(B=1,A=0)=&\frac{1}{2},~P(C=2)=\frac{1}{3},\text{ and }P(B=1|A=0,C=2)=1.
-\end{aligned}
-$$
-
-$$
-\begin{aligned}
-P(C=0|A=0,B=1)&=\frac{P(A=0,B=1,C=0)}{P(A=0,B=1)} \\
-&=\frac{P(B=1|A=0,C=0)P(A=0,C=0)}{P(A=0,B=1)} \\
-&=\frac{P(B=1|A=0,C=0)P(A=0)P(C=0)}{P(B=1|A=0)P(A=0)} \\
-&=\frac{\frac{1}{2} \times \frac{1}{3}}{\frac{1}{2}}=\frac{1}{3},\\
-\text{where }&P(B=1|A=0,C=0)=\frac{1}{2}
-\end{aligned}
 $$
 
 ## Machine Learning
@@ -239,92 +163,4 @@ $$
 
 $$
 P(Y|X)=\mathbb{E}_{\theta\sim P}[P(Y|X;\theta)]\approx\frac{1}{N}\sum_{i=1}^N{P(Y|X;\theta)}
-$$
-
-### KL Divergence
-
-$$
-\begin{aligned}
-KL(P||P_\theta)&=-\mathbb{E}_{X \sim P}[\log{\frac{P_\theta(X)}{P(X)}}] \\
-&=-\sum_{x\in\mathcal{X}}{P(x)\log{\frac{P_\theta(x)}{P(x)}}} \\
-&=-\sum_{x\in\mathcal{X}}{\Big(P(x)\log{P_\theta(x)}-P(x)\log{P(x)}\Big)} \\
-&=H(P,P_\theta)-H(P)
-\end{aligned}
-$$
-
-$$
-\begin{aligned}
-\nabla_\theta KL(P||P_\theta)&=\nabla_\theta\big(H(P,P_\theta)-H(P)\big) \\
-&=\nabla_\theta H(P,P_\theta)
-\end{aligned}
-$$
-
-## Gradient based Optimizations
-
-### Cross Entropy Loss
-
-An objective function by Cross Entropy is
-
-$$
-\begin{aligned}
-J(\theta)=H(P,P_\theta)&=-\mathbb{E}_{X\sim P(X)}\Big[\mathbb{E}_{Y\sim P(Y|X)}[\log{P(Y|X;\theta)}]\Big] \\
-&=-\sum_{x\in\mathcal{X}}{P(x)\sum_{y\in\mathcal{Y}}{P(y|x)\log{P(y|x;\theta)}}} \\
-\end{aligned}
-$$
-
-By Monte-Carlo Sampling,
-
-$$
-\mathcal{B}=\{x,y\}_{i=1}^N
-$$
-
-$$
-\begin{aligned}
-J(\theta)&\approx-\frac{1}{N}\sum_{i=1}^N{\frac{1}{K}\sum_{j=1}^K{\log{P(y_j|x_i;\theta)}}} \\
-&\approx-\frac{1}{N}\sum_{i=1}^N{\log{P(y_i|x_i;\theta)}}
-\end{aligned}
-$$
-
-To minimize the objective function,
-
-$$
-\begin{gathered}
-\hat{\theta}=\underset{\theta}{\text{argmin }}J(\theta) \\ \\
-\theta \leftarrow \theta-\lambda\nabla_\theta J(\theta)
-\end{gathered}
-$$
-
-In addition, another objective function by Mean Square Error (MSE) is defined like as below:
-
-$$
-\mathcal{N}(\mu,\sigma^2)=\frac{1}{\sigma\sqrt{2\pi}}\exp{(-\frac{(x-\mu)^2}{2\sigma^2})}
-$$
-
-$$
-f_\theta(x)=\mathcal{N}\big(\mu_\phi(x), \sigma_\psi(x)^2\big)
-$$
-
-$$
-\begin{aligned}
-J(\theta)=-\frac{1}{N}\sum_{i=1}^N{\log{f_\theta(x_i)}}
-&=-\frac{1}{N}\sum_{i=1}^N{\log{\Big(\frac{1}{\sigma_\psi(x_i)\sqrt{2\pi}}\exp{(-\frac{\big(x_i-\mu_\phi(x_i)\big)^2}{2\sigma_\psi(x_i)^2})}\Big)}}, \\
-&=-\frac{1}{N}\sum_{i=1}^N\Big(\log{\frac{1}{\sigma_\psi(x_i)\sqrt{2\pi}}}-\frac{\big(x_i-\mu_\phi(x_i)\big)^2}{2\sigma_\psi(x_i)^2}\Big) \\
-&=\log{\sigma_\psi(x_i)}+\frac{1}{2}\log{2\pi}+\frac{1}{2\sigma_\psi(x_i)^2\cdot N}\sum_{i=1}^N\big(x_i-\mu_\phi(x_i)\big)^2\\
-&\text{where }\theta^*=\{\phi,\psi\}\text{, but ignore }\psi\text{ and }\theta=\{\phi\}.
-\end{aligned}
-$$
-
-$$
-\begin{gathered}
-\hat{\theta}=\underset{\theta}{\text{argmin }}J(\theta) \\ \\
-\theta \leftarrow \theta-\lambda\nabla_\theta J(\theta)
-\end{gathered}
-$$
-
-$$
-\nabla_\theta{J(\theta)}=\nabla_\theta{\frac{1}{2\sigma^2\cdot N}\sum_{i=1}^N\big(x_i-\mu_\phi(x_i)\big)^2}
-$$
-
-$$
-\tilde{J}(\theta)=\frac{1}{N}\sum_{i=1}^N\big(x_i-\mu_\phi(x_i)\big)^2
 $$

@@ -117,3 +117,29 @@ $$
 ![](../assets/duality-dul-eval.png)
 
 위의 테이블과 같이, 이 방법은 앞 챕터에서 소개한 기존의 단방향 corpus[[Gulcehre et al.2015]](https://arxiv.org/abs/1503.03535)[[Sennrich et al.2016]](https://arxiv.org/abs/1511.06709)를 활용한 방식들과 비교하여 훨씬 더 나은 성능의 개선을 보여주었으며, 바로 앞서 소개한 [Dual Learning[He et al.2016a]](https://arxiv.org/pdf/1611.00179.pdf)보다도 더 나은 성능을 보여줍니다. 마찬가지로, 불안정하고 비효율적인 강화학습을 사용하지 않고도 더 나은 성능을 보여준 것은 주목할 만한 성과라고 할 수 있습니다.
+
+### Appendix: Importance Sampling
+
+$$
+\begin{aligned}
+\mathbb{E}_{X \sim p}[f(x)]&=\int_{x}{f(x)p(x)}dx \\
+&=\int_{x}{\Big( f(x)\frac{p(x)}{q(x)}\Big)q(x)}dx \\
+&=\mathbb{E}_{X \sim q}[f(x)\frac{p(x)}{q(x)}],
+\end{aligned}
+$$
+
+$$
+\forall q\text{ (pdf) s.t.} q(x)=0 \implies p(x)=0
+$$
+
+$$
+w(x)=\frac{p(x)}{q(x)}
+$$
+
+$$
+\begin{aligned}
+\mathbb{E}_{X \sim q}[f(x)\frac{p(x)}{q(x)}]&\approx\frac{1}{K}\sum_{i=1}^{K}{f(x_i)\frac{p(x_i)}{q(x_i)}} \\
+&=\frac{1}{K}\sum_{i=1}^{K}{f(x_i)w(x_i)} \\
+\text{where }& x_i \sim q
+\end{aligned}
+$$
