@@ -10,8 +10,6 @@ https://web.stanford.edu/class/cs124/lec/sem
 
 https://www.cs.princeton.edu/courses/archive/fall16/cos402/lectures/402-lec10.pdf
 
-
-
 ### Term-Context Matrix
 
 ## Pointwise Mutual Information
