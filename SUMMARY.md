@@ -21,6 +21,7 @@
   * [Word Sense Disambiguation](word-senses/wsd.md)
   * [Appendix: Monty-Hall Problem](word-senses/monty-hall.md)
   * [Selectional Preference](word-senses/selectional-preference.md)
+  * [Conclusion](word-senses/conclusion.md)
 * [Preprocessing](preprocessing/cover.md)
   * [Intro](preprocessing/intro.md)
   * [Collecting corpus](preprocessing/collecting-corpus.md)
