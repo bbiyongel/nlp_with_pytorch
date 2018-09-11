@@ -4,13 +4,11 @@
 
 ## Collecting Features
 
-https://web.stanford.edu/class/cs124/lec/sem
-
-https://www.cs.princeton.edu/courses/archive/fall16/cos402/lectures/402-lec10.pdf
+먼저, feature vector를 구성하는 방법들에 대해 살펴보고자 합니다. 결국 아래의 방법들이 하고자 하는 일은 같은 조건에 대해서 비슷한 수치를 반환하는 단어는 비슷한 유사도를 갖도록 벡터를 구성하는 것이라고 할 수 있습니다.
 
 ### Term-Frequency Matrix
 
-앞서 우리는 TF-IDF에 대해서 살펴 보았습니다. TF-IDF에서 사용되었던 TF (term frequency)는 훌륭한 피쳐(feature)가 될 수 있습니다. 예를 들어 어떤 단어가 각 문서별로 출현한 횟수가 차원별로 구성되면, 하나의 feature vector를 이룰 수 있습니다. 물론 각 문서별 TF-IDF 자체를 사용하는 것도 가능합니다.
+앞서 우리는 TF-IDF에 대해서 살펴 보았습니다. TF-IDF에서 사용되었던 TF (term frequency)는 훌륭한 피쳐(feature)가 될 수 있습니다. 예를 들어 어떤 단어가 각 문서별로 출현한 횟수가 차원별로 구성되면, 하나의 feature vector를 이룰 수 있습니다. 물론 각 문서별 TF-IDF 자체를 사용하는 것도 좋습니다.
 
 ```python
 vocab = {}
@@ -99,7 +97,7 @@ python 코드를 통해 아래와 같은 문장들에 대해서 우리는 window
 
 ## Get Similarity between Feature Vectors
 
-### L1 distance
+### Manhattan Distance (L1 distance)
 
 $$
 \text{d}_{\text{L1}}(w,v)=\sum_{i=1}^d{|w_i-v_i|},\text{ where }w,v\in\mathbb{R}^d.
@@ -110,6 +108,16 @@ $$
 $$
 \text{d}_{\text{L2}}(w,v)=\sqrt{\sum_{i=1}^d{(w_i-v_i)^2}},\text{ where }w,v\in\mathbb{R}^d.
 $$
+
+![L1 vs L2(초록색)](https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Manhattan_distance.svg/283px-Manhattan_distance.svg.png)
+
+### Using Infinity Norm
+
+$$
+d_{\infty}(w,v)=\max(|w_1-v_1|,|w_2-v_2|,\cdots,|w_d-v_d|),\text{ where }w,v\in\mathbb{R}^d
+$$
+
+![](../assets/wsd-distance.png)
 
 ### Pointwise Mutual Information
 
@@ -139,10 +147,18 @@ $$
 ### Jaccard Similarity
 
 $$
-\begin{gathered}
-\text{sim}_{\text{jaccard}}(w,v)=\frac{\sum_{i=1}^d{\min(w_i,v_i)}}{\sum_{i=1}^d{\max(w_i,v_i)}} \\
-\text{where }w,v\in\mathbb{R}^d.
-\end{gathered}
+\begin{aligned}
+\text{sim}_{\text{jaccard}}(w,v)&=\frac{|w \cap v|}{|w \cup v|} \\
+&=\frac{|w \cap v|}{|w|+|v|-|w \cap v|} \\
+&\approx\frac{\sum_{i=1}^d{\min(w_i,v_i)}}{\sum_{i=1}^d{\max(w_i,v_i)}} \\
+\text{where }&w,v\in\mathbb{R}^d.
+\end{aligned}
 $$
 
+Jaccard similarity는 두 집합 간의 유사도를 구하는 방법 입니다. 수식의 윗변에는 두 집합의 교집합의 크기가 있고, 이를 밑변에서 두 집합의 합집합의 크기로 나누어 줍니다. 이때, Feature vector의 각 차원이 집합의 element가 될 것 입니다. 다만, 각 차원에서의 값이 $0$ 또는 $0$이 아닌 값이 아니라, 수치 자체에 대해서 Jaccard similarity를 구하고자 할 때에는, 두번째 줄의 수식과 같이 두 벡터의 각 차원의 숫자에 대해서 $\min$, $\max$ 연산을 통해서 계산 할 수 있습니다.
+
 ## Appendix: Similarity between Documents
+
+https://web.stanford.edu/class/cs124/lec/sem
+
+https://www.cs.princeton.edu/courses/archive/fall16/cos402/lectures/402-lec10.pdf
