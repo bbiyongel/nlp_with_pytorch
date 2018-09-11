@@ -91,7 +91,7 @@ for v, freq in sorted_vocab:
             tfidfs += [tfs[idx][v] * np.log(len(docs) / df[v])]
         else:
             tfidfs += [0]
-    
+
     stats += [(v, freq, tfidfs, max(tfidfs))]
 
 sorted_tfidfs = sorted(stats, key=itemgetter(3), reverse=True)[:top_k]

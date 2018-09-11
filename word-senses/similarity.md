@@ -90,6 +90,21 @@ for v, freq in sorted_vocab:
 
 python 코드를 통해 아래와 같은 문장들에 대해서 우리는 windowing을 수행 할 수 있습니다.
 
+|번호|내용|
+|-|-|
+|1|왜 냐고요 ?|
+|2|산소 의 낭비 였 지요 .|
+|3|어느 날 , 저 는 요요 를 샀 습니다 .|
+|4|저 는 회사 의 가치 에 따른 가격 책정 을 돕 습니다 .|
+|5|하지만 내게 매우 내부 적 인 문제 가 생겼 다 .|
+|...|...|
+|95|고독 은 여러분 스스로 찾 을 수 있 는 곳 에 있 어서 다른 사람 들 에게 도 다가 갈 수 있 습니다 .|
+|96|두 번 째 로 이 발견 은 새로운 치료 방법 의 아주 분명 한 행로 를 제시 합니다 . 여기 서부터 무엇 을 해야 하 는지 는 로켓 과학자 가 아니 더라도 알 수 있 잖아요 .|
+|97|전쟁 전 에 는 시리아 도시 에서 그런 요구 들 이 완전히 무시 되 었 습니다 .|
+|98|세로 로 된 아찔 한 암석 벽 에 둘러쌓 여 있 으며 숲 에 숨겨진 은빛 폭포 도 있 죠 .|
+|99|얼마간 시간 이 지나 면 큰 소리 는 더 이상 큰 소리 가 아니 게 될 겁니다 .|
+|100|이러 한 마을 차원 의 아이디어 는 정말 훌륭 한 아이디어 입니다 .|
+
 ```python
 ```
 
@@ -119,17 +134,24 @@ $$
 
 ![](../assets/wsd-distance.png)
 
-### Pointwise Mutual Information
+### Pointwise Mutual Information (PMI)
 
 $$
-\text{PMI}(w,v)=\log{\frac{P(w,v)}{P(w)P(v)}}
+\begin{aligned}
+\text{PMI}(w,v)&=\log{\frac{P(w,v)}{P(w)P(v)}} \\
+&=\log{\frac{P(w|v)}{P(w)}}=\log{\frac{P(v|w)}{P(v)}}
+\end{aligned}
 $$
+
+PMI는 두 random variable 사이의 독립성을 평가하여 유사성의 지표로 삼습니다. 만약 $w$와 $v$가 독립이라면, PMI는 0이 될 것 입니다.
 
 ### Positive PMI (PPMI)
 
 $$
 \text{PPMI}(w,v)=\max(0, \text{PMI}(w, v))
 $$
+
+PPMI는 PMI의 값이 0보다 작을 때는 0으로 치환해 버리고 양수만 취하는 방법 입니다.
 
 ### Cosine Similarity
 
