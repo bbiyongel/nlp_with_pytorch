@@ -76,9 +76,11 @@ for v, freq in sorted_vocab:
 |몸짓|3|0|0|3|
 |거짓말|3|0|0|3|
 
-여기서 마지막 3개 column이 각 단어별 문서에 대한 출현횟수를 활용한 feature vector가 될 것 입니다. 지금은 문서가 3개밖에 없기 때문에, 사실 정확한 feature vector를 구성했다고 하기엔 무리가 있습니다. 하지만, 문서가 많다면 우리는 지금보다 더 나은 feature vector를 구할 수 있을 것 입니다.
+여기서 마지막 3개 column이 각 단어별 문서에 대한 출현횟수를 활용한 feature vector가 될 것 입니다. 지금은 문서가 3개밖에 없기 때문에, 사실 정확한 feature vector를 구성했다고 하기엔 무리가 있습니다. 따라서 문서가 많다면 우리는 지금보다 더 나은 feature vector를 구할 수 있을 것 입니다. 
 
-물론, 문서가 많아도 아직 한계가 있습니다. 단순히 문서에서의 출현 횟수를 가지고 feature vector를 구성하였기 때문에, 많은 정보가 유실되었고, 굉장히 단순화되어 여전히 매우 정확한 feature vector를 구성하였다고 하기엔 무리가 있습니다.
+하지만 문서가 너무나도 많을 경우에는 벡터의 차원이 너무 커져버릴 수 있습니다. 예를 들어 문서가 10,000개가 있다고 하면 단어 당 10,000차원의 벡터가 만들어질 것 입니다. 문제는 이 10,000차원의 벡터 대부분은 값이 없이 0으로 채워져 있을 것 입니다. 이렇게 벡터의 극히 일부분에만 의미있는 값들로 채워져 있는 벡터를 sparse vector라고 합니다.
+
+또한, 단순히 문서에서의 출현 횟수를 가지고 feature vector를 구성하였기 때문에, 많은 정보가 유실되었고, 굉장히 단순화되어 여전히 매우 정확한 feature vector를 구성하였다고 하기엔 무리가 있습니다.
 
 ### Based on Context Window (Co-occurrence)
 
@@ -98,19 +100,78 @@ python 코드를 통해 아래와 같은 문장들에 대해서 우리는 window
 |4|저 는 회사 의 가치 에 따른 가격 책정 을 돕 습니다 .|
 |5|하지만 내게 매우 내부 적 인 문제 가 생겼 다 .|
 |...|...|
-|95|고독 은 여러분 스스로 찾 을 수 있 는 곳 에 있 어서 다른 사람 들 에게 도 다가 갈 수 있 습니다 .|
-|96|두 번 째 로 이 발견 은 새로운 치료 방법 의 아주 분명 한 행로 를 제시 합니다 . 여기 서부터 무엇 을 해야 하 는지 는 로켓 과학자 가 아니 더라도 알 수 있 잖아요 .|
-|97|전쟁 전 에 는 시리아 도시 에서 그런 요구 들 이 완전히 무시 되 었 습니다 .|
-|98|세로 로 된 아찔 한 암석 벽 에 둘러쌓 여 있 으며 숲 에 숨겨진 은빛 폭포 도 있 죠 .|
-|99|얼마간 시간 이 지나 면 큰 소리 는 더 이상 큰 소리 가 아니 게 될 겁니다 .|
-|100|이러 한 마을 차원 의 아이디어 는 정말 훌륭 한 아이디어 입니다 .|
+|9995|고독 은 여러분 스스로 찾 을 수 있 는 곳 에 있 어서 다른 사람 들 에게 도 다가 갈 수 있 습니다 .|
+|9996|두 번 째 로 이 발견 은 새로운 치료 방법 의 아주 분명 한 행로 를 제시 합니다 . 여기 서부터 무엇 을 해야 하 는지 는 로켓 과학자 가 아니 더라도 알 수 있 잖아요 .|
+|9997|전쟁 전 에 는 시리아 도시 에서 그런 요구 들 이 완전히 무시 되 었 습니다 .|
+|9998|세로 로 된 아찔 한 암석 벽 에 둘러쌓 여 있 으며 숲 에 숨겨진 은빛 폭포 도 있 죠 .|
+|9999|얼마간 시간 이 지나 면 큰 소리 는 더 이상 큰 소리 가 아니 게 될 겁니다 .|
+|10000|이러 한 마을 차원 의 아이디어 는 정말 훌륭 한 아이디어 입니다 .|
 
 ```python
+def read(fn):
+    lines = []
+
+    f = open(fn, 'r')
+    for line in f:
+        if line.strip() != '':
+            lines += [line]
+    f.close()
+
+    return lines
 ```
 
-그리고 이 코드를 통해 얻은 결과는 아래와 같습니다.
+```python
+def get_context_counts(lines, w_size=3):
+    co_dict = {}
+    for line in lines:
+        words = line.split()
+
+        for i, w in enumerate(words):
+            for c in words[i - w_size:i + w_size]:
+                if w != c:
+                    co_dict[(w, c)] = 1 + (0 if co_dict.get((w, c)) is None else co_dict[(w, c)])
+
+    return co_dict
+```
+
+```python
+from operator import itemgetter
+
+fn = 'ted.aligned.ko.refined.tok.rl-10k.txt'
+min_cnt, max_cnt = 50, 51
+
+lines = read(fn)
+co_dict = get_context_counts(lines)
+tfs = get_term_frequency(' '.join(lines))
+sorted_tfs = sorted(tfs.items(), key=itemgetter(1), reverse=True)
+
+context_matrix = []
+row_heads = []
+col_heads = [w for w, f in sorted_tfs if f >= min_cnt and f<= max_cnt]
+for w, f in sorted_tfs:
+    row = []
+    if f >= min_cnt and f <= max_cnt:
+        row_heads += [w]
+        for w_, f_ in sorted_tfs:
+            if f_ >= min_cnt and f_ <= max_cnt:
+                if co_dict.get((w, w_)) is not None:
+                    row += [co_dict[(w, w_)]]
+                else:
+                    row += [0]
+        context_matrix += [row]
+
+import pandas as pd
+
+p = pd.DataFrame(data=context_matrix, index=row_heads, columns=col_heads)
+```
+
+그리고 이 코드를 통해 얻은 결과는 아래와 같습니다. 이 결과에 따르면 1000개의 문장(문서)에서는 '습니다'의 context window 내에 마침표가 3616번 등장 합니다.
+
+![1000문장에 대해 100번 이상 나타난 단어들을 대상으로 window size 7(-3~+3)을 적용한 결과](../assets/wsd-context-window.png)
 
 ## Get Similarity between Feature Vectors
+
+그럼 이렇게 구해진 feature vector를 어떻게 사용할 수 있을까요? Feature vector는 단어 사이의 유사도를 구할 때 아주 유용하게 쓸 수 있습니다. 그럼 벡터 사이의 유사도 또는 거리는 어떻게 구할 수 있을까요? 아래에서는 두 벡터가 주어졌을 때, 벡터 사이의 유사도 또는 거리를 구하는 방법들에 대해 다루어 보겠습니다.
 
 ### Manhattan Distance (L1 distance)
 
@@ -118,13 +179,19 @@ $$
 \text{d}_{\text{L1}}(w,v)=\sum_{i=1}^d{|w_i-v_i|},\text{ where }w,v\in\mathbb{R}^d.
 $$
 
+L1 norm을 시용한 Manhattan distance (맨하튼 거리) 입니다. 이 방법은 두 벡터의 각 차원별 값의 차이의 절대값을 모두 합한 값 입니다.
+
 ### Euclidean Distance (L2 distance)
 
 $$
 \text{d}_{\text{L2}}(w,v)=\sqrt{\sum_{i=1}^d{(w_i-v_i)^2}},\text{ where }w,v\in\mathbb{R}^d.
 $$
 
+우리가 가장 친숙한 거리 방법 중의 하나인 Euclidean distance (유클리드 거리)입니다. 각 차원별 값 차이의 제곱의 합에 루트를 취한 형태 입니다.
+
 ![L1 vs L2(초록색) from wikipedia](https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Manhattan_distance.svg/283px-Manhattan_distance.svg.png)
+
+위의 그림은 Manhanttan distance와 Euclidean distance의 차이를 쉽게 나타낸 그림 입니다. Euclidean distance를 의미하는 초록색 선을 제외하고 나머지 Manhattan distance를 나타내는 세가지 선의 길이는 모두 같습니다. Manhattan distance는 그 이름답게 마치 잘 계획된 도시의 길을 지나가는 듯한 선의 형태를 나타내고 있습니다.
 
 ### Using Infinity Norm
 
@@ -132,7 +199,11 @@ $$
 d_{\infty}(w,v)=\max(|w_1-v_1|,|w_2-v_2|,\cdots,|w_d-v_d|),\text{ where }w,v\in\mathbb{R}^d
 $$
 
-![](../assets/wsd-distance.png)
+$L_1$, $L_2$ distance가 있다면 $L_\infty$ distance도 있습니다. 재미있게도 infinity norm을 이용한 distance는 각 차원별 값의 차이 중 가장 큰 값을 나타냅니다.
+
+![같은 값 $r$ 크기를 갖는 $L_1$, $L_2$, $L_\infty$ 거리를 그림으로 나타낸 모습](../assets/wsd-distance.png)
+
+위의 그림은 각 $L_1$, $L_2$, $L_\infty$ 별로 거리의 크기가 $r$일때 모습 입니다.
 
 ### Pointwise Mutual Information (PMI)
 
@@ -141,6 +212,10 @@ $$
 \text{PMI}(w,v)&=\log{\frac{P(w,v)}{P(w)P(v)}} \\
 &=\log{\frac{P(w|v)}{P(w)}}=\log{\frac{P(v|w)}{P(v)}}
 \end{aligned}
+$$
+
+$$
+P(w_0)=\frac{\text{Count}(w_0)}{\sum_{w\in\mathcal{W}}{\text{Count}(w)}}
 $$
 
 PMI는 두 random variable 사이의 독립성을 평가하여 유사성의 지표로 삼습니다. 만약 $w$와 $v$가 독립이라면, PMI는 0이 될 것 입니다.
