@@ -141,3 +141,7 @@ for h in query_h:
 
 print(selectional_associations)
 ```
+
+```
+[tensor(3.9986), tensor(3.5938), tensor(3.7237)]
+```
