@@ -2,6 +2,16 @@
 
 이번 섹션에서는 단어의 유사도가 아닌, 모호성에 대해 다루어 보겠습니다. 하나의 단어는 여러가지 의미를 지닐 수 있습니다. 비슷한 의미의 동형이의어(homonym)인 경우에는 비교적 그 문제가 크지 않을 수 있습니다. 조금은 어색한 문장 표현이나 이해가 될 수 있겟지만, 큰 틀에서는 벗어나지 않기 때문입니다. 하지만 다의어(polysemy)의 경우에는 문제가 커집니다. 앞서 예를 들었던 '차'의 경우에 'tea'의 의미로 해석되느냐, 'car'의 의미로 해석되느냐에 따라 문장의 의미가 매우 달라질것이기 때문입니다. 따라서 이와 같이 단어가 주어졌을 때, 그 의미의 모호성을 없애고 해석하는 것이 매우 중요합니다. 이를 단어 중의성 해소(word sense disambiguation)이라고 합니다.
 
+|원문|차를 마시러 공원에 가던 차 안에서 나는 그녀에게 차였다.|
+|-|-|
+|G*|I was kicking her in the car that went to the park for tea.|
+|M*|I was a car to her, in the car I had a car and went to the park.|
+|N*|I got dumped by her on the way to the park for tea.|
+|K*|I was in the car going to the park for tea and I was in her car.|
+|S*|I got dumped by her in the car that was going to the park for a cup of tea.|
+
+위와 같이 다양한 '차'가 문장에 나타났을 때, 실제 기계번역에 있어서 심각한 성능저하의 원인이 되기도 합니다.
+
 ## Thesaurus Based Method: Lesk Algorithm
 
 Lesk 알고리즘은 가장 간단한 사전 기반 중의성 해소 방법입니다. 주어진 문장에서 특정 단어에 대해서 의미를 명확히 하고자 할 때 사용 할 수 있습니다. 이를 위해서 Lesk 알고리즘은 간단한 가정을 하나 만듭니다. 문장 내에 같이 등장하는 단어(context)들은 공통 토픽을 공유한다는 것 입니다.
@@ -136,6 +146,10 @@ $$
 ## Naive Bayes
 
 Naive Bayes는 MAP를 기반으로 동작합니다. 대부분의 경우 posterior를 바로 구하기 어렵기 때문에, likelihood와 prior의 곱을 통해 클래스 $Y$를 예측 합니다.
+
+$$
+P(Y=c|X=w_1,w_2,\cdots,w_n)
+$$
 
 이때, $X$가 다양한 feature(특징)들로 이루어진 데이터라면, 훈련 데이터에서 매우 희소(rare)할 것이므로 likelihood $P(X=w_1,w_2,\cdots,w_n|Y=c)$를 구하기 어려울 것 입니다. 이때 Naive Bayes가 강력한 힘을 발휘 합니다. 각 feature들이 상호 독립적이라고 가정하는 것 입니다. 그럼 joint probability를 각 확률의 곱으로 근사(approximate)할 수 있습니다. 이 과정을 수식으로 표현하면 아래와 같습니다.
 

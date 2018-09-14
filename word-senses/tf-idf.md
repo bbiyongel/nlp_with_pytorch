@@ -2,7 +2,7 @@
 
 이번 섹션에서는 텍스트 마이닝(Text Mining)에서 중요하게 사용되는 TF-IDF를 다뤄보겠습니다. TF-IDF는 어떤 단어 $w$가 문서 $d$ 내에서 얼마나 중요한지 나타내는 수치 입니다. 이 수치가 높을 수록 $w$는 $d$를 대표하는 성격을 띄게 된다고 볼 수도 있습니다.
 
-TF-IDF의 TF는 Term Frequency로 문서 내에 출현한 단어의 횟수를 의미 합니다. 그리고 IDF는 Inverse Document Frequency로 그 단어가 출현한 문서의 숫자의 역수(inverse)를 의미 합니다. 다시 설명하면, Document Frequency (DF)는 해당 단어가 출현한 문서의 수가 되고, inverse가 붙어 역수를 취한 것 입니다.
+TF-IDF의 TF는 Term Frequency로 단어의 문서 내에 출현한 횟수를 의미 합니다. 그리고 IDF는 Inverse Document Frequency로 그 단어가 출현한 문서의 숫자의 역수(inverse)를 의미 합니다. 다시 설명하면, Document Frequency (DF)는 해당 단어가 출현한 문서의 수가 되고, inverse가 붙어 역수를 취한 것 입니다.
 
 $$
 \text{TF-IDF}(w,d)=\frac{\text{TF}(w,d)}{\text{DF}(w)}

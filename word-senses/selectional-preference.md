@@ -90,3 +90,54 @@ $$
 
 ## Example
 
+```python
+from konlpy.tag import Mecab
+
+def count_seen_headwords(lines, predicate='VV', headword='NNG'):
+    mecab = Mecab()
+    seen_dict = {}
+
+    for line in lines:
+        pos_result = mecab.pos(line)
+
+        word_h = None
+        word_p = None
+        for word, pos in pos_result:
+            if pos == predicate or pos[:3] == predicate + '+':
+                word_p = word
+                break
+            if pos == headword:
+                word_h = word
+
+        if word_h is not None and word_p is not None:
+            seen_dict[word_p] = [word_h] + ([] if seen_dict.get(word_p) is None else seen_dict[word_p])
+
+    return seen_dict
+```
+
+```python
+def get_selectional_association(predicate, headword, lines, dataframe, metric):
+    v1 = torch.FloatTensor(dataframe.loc[headword].values)
+    seens = count_seen_headwords(lines)[predicate]
+
+    total = 0
+    for seen in seens:
+        try:
+            v2 = torch.FloatTensor(dataframe.loc[seen].values)
+            total += metric(v1, v2)
+        except:
+            pass
+
+    return total
+```
+
+```python
+query_p = '피웠'
+query_h = ['담배', '맥주', '자동차']
+
+selectional_associations = []
+for h in query_h:
+    selectional_associations += [get_selectional_association(query_p, h, lines, p, get_cosine_similarity)]
+
+print(selectional_associations)
+```

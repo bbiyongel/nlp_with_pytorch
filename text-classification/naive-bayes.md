@@ -1,5 +1,24 @@
 # Naive Bayes
 
+이전 챕터 중 단어 중의성 해소(Word Sense Disambiguation, WSD)를 다룰 때, 우리는 Naive Bayes에 대해서 살펴보았습니다. 출현 빈도를 기반으로 확률을 추정하기 때문에, 희소성(sparsity)문제를 해결하기 위한 방법으로 Naive Bayes는 likelihood의 각 feature들을 각각 독립이라 가정하고, joint probability를 분해 합니다.
+
+$$
+\begin{aligned}
+P(Y=c|X=w_1,w_2,\cdots,w_n) &\varpropto P(X=w_1,w_2,\cdots,w_n|Y=c)P(Y=c) \\
+&\approx P(w_1|c)P(w_2|c)\cdots P(w_n|c)P(c) \\
+&=\prod_{i=1}^{n}{P(w_i|c)}P(c)
+\end{aligned}
+$$
+
+이를 통해 우리는 Maximum A Posterior(MAP)를 사용하여 주어진 feature들을 만족하는 클래스 $\hat{c}_{\text{MAP}}$를 구하였습니다.
+
+$$
+\begin{aligned}
+\hat{c}_{\text{MAP}} &= \underset{c \in \mathcal{C}}{\text{argmax }}{P(Y=c|X=w_1,w_2,\cdots,w_n)} \\
+&=\underset{c \in \mathcal{C}}{\text{argmax }}{\prod_{i=1}^{n}{P(w_i|c)}P(c)}
+\end{aligned}
+$$
+
 ## Example: Sentiment Analysis
 
 그럼 실제 예제로 접근해 보죠. 감성분석은 가장 많이 활용되는 텍스트 분류 기법 입니다. 사용자의 댓글이나 리뷰 등을 긍정 또는 부정으로 분류하여 마케팅이나 서비스 향상에 활용하고자 하는 방법 입니다. 물론 실제로 딥러닝 이전에는 Naive Bayes를 통해 접근하기보단, 각 클래스 별 어휘 사전(vocabulary)을 만들어 해당 어휘의 등장 여부에 따라 판단하는 방법을 주로 사용하곤 하였습니다.
@@ -61,7 +80,7 @@ $$
 \tilde{P}(w|c)=\frac{Count(w,c)+1}{\big(\sum_{j=1}^{|V|}{Count(w_j,c)}\big)+|V|}
 $$
 
-## Conclusion
+## Pros and Cons
 
 위와 같이 Naive Bayes를 통해서 단순히 출현빈도를 세는 것처럼 쉽고 간단하지만 강력하게 감성분석을 구현 할 수 있습니다. 하지만 문장 "I am not happy to see this movie!"라는 문장이 주어지면 어떻게 될까요? "not"이 추가 되었을 뿐이지만 문장의 뜻은 반대가 되었습니다. 
 
