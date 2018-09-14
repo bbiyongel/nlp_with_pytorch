@@ -181,6 +181,13 @@ $$
 
 L1 norm을 시용한 Manhattan distance (맨하튼 거리) 입니다. 이 방법은 두 벡터의 각 차원별 값의 차이의 절대값을 모두 합한 값 입니다.
 
+```python
+def get_l1_distance(x1, x2):
+    return ((x1 - x2).abs()).sum()**.5
+```
+
+위의 코드는 torch tensor $x_1$, $x_2$를 입력으로 받아 L1 distance를 리턴해 주는 코드 입니다.
+
 ### Euclidean Distance (L2 distance)
 
 $$
@@ -188,6 +195,13 @@ $$
 $$
 
 우리가 가장 친숙한 거리 방법 중의 하나인 Euclidean distance (유클리드 거리)입니다. 각 차원별 값 차이의 제곱의 합에 루트를 취한 형태 입니다.
+
+```python
+def get_l2_distance(x1, x2):
+    return ((x1 - x2)**2).sum()**.5
+```
+
+L2 distance를 구하기 위해 torch tensor들읍 입력으로 받아 계산하는 함수의 코드는 위와 같습니다.
 
 ![L1 vs L2(초록색) from wikipedia](https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Manhattan_distance.svg/283px-Manhattan_distance.svg.png)
 
@@ -199,7 +213,12 @@ $$
 d_{\infty}(w,v)=\max(|w_1-v_1|,|w_2-v_2|,\cdots,|w_d-v_d|),\text{ where }w,v\in\mathbb{R}^d
 $$
 
-$L_1$, $L_2$ distance가 있다면 $L_\infty$ distance도 있습니다. 재미있게도 infinity norm을 이용한 distance는 각 차원별 값의 차이 중 가장 큰 값을 나타냅니다.
+$L_1$, $L_2$ distance가 있다면 $L_\infty$ distance도 있습니다. 재미있게도 infinity norm을 이용한 distance는 각 차원별 값의 차이 중 가장 큰 값을 나타냅니다. 위의 수식을 torch tensor에 대해서 계산하는 코드는 아래와 같습니다.
+
+```python
+def get_infinity_distance(x1, x2):
+    return ((x1 - x2).abs()).max()
+```
 
 ![같은 값 $r$ 크기를 갖는 $L_1$, $L_2$, $L_\infty$ 거리를 그림으로 나타낸 모습](../assets/wsd-distance.png)
 
@@ -241,6 +260,13 @@ $$
 
 위와 같은 수식을 갖는 cosine similarity(코사인 유사도)함수는 두 벡터 사이의 방향과 크기를 모두 고려하는 방법 입니다. 수식에서 분수의 윗변은 두 벡터 사이의 element-wise 곱을 사용하므로 벡터의 내적과 같습니다. 따라서 cosine similarity의 결과가 $1$에 가까울수록 방향은 일치하고, $0$에 가까울수록 수직(orthogonal)이며, $-1$에 가까울수록 반대 방향임을 의미 합니다. 위와 같이 cosine similarity는 크기와 방향 모두를 고려하기 때문에, 자연어처리에서 가장 널리 쓰이는 유사도 측정 방법 입니다. 하지만 수식 내 윗변의 벡터 내적 연산이나 밑변 각 벡터의 크기(L2 norm)를 구하는 연산이 비싼 편에 속합니다. 따라서 vector 차원의 크기가 클수록 연산량이 부담이 됩니다.
 
+Cosine similarity는 아래와 같이 PyTorch 코드로 나타낼 수 있습니다.
+
+```python
+def get_cosine_similarity(x1, x2):
+    return (x1 * x2).sum() / ((x1**2).sum()**.5 * (x2**2).sum()**.5)
+```
+
 ### Jaccard Similarity
 
 $$
@@ -252,7 +278,12 @@ $$
 \end{aligned}
 $$
 
-Jaccard similarity는 두 집합 간의 유사도를 구하는 방법 입니다. 수식의 윗변에는 두 집합의 교집합의 크기가 있고, 이를 밑변에서 두 집합의 합집합의 크기로 나누어 줍니다. 이때, Feature vector의 각 차원이 집합의 element가 될 것 입니다. 다만, 각 차원에서의 값이 $0$ 또는 $0$이 아닌 값이 아니라, 수치 자체에 대해서 Jaccard similarity를 구하고자 할 때에는, 두번째 줄의 수식과 같이 두 벡터의 각 차원의 숫자에 대해서 $\min$, $\max$ 연산을 통해서 계산 할 수 있습니다.
+Jaccard similarity는 두 집합 간의 유사도를 구하는 방법 입니다. 수식의 윗변에는 두 집합의 교집합의 크기가 있고, 이를 밑변에서 두 집합의 합집합의 크기로 나누어 줍니다. 이때, Feature vector의 각 차원이 집합의 element가 될 것 입니다. 다만, 각 차원에서의 값이 $0$ 또는 $0$이 아닌 값이 아니라, 수치 자체에 대해서 Jaccard similarity를 구하고자 할 때에는, 두번째 줄의 수식과 같이 두 벡터의 각 차원의 숫자에 대해서 $\min$, $\max$ 연산을 통해서 계산 할 수 있습니다. 이를 PyTorch 코드로 나타내면 아래와 같습니다.
+
+```python
+def get_jaccard_similarity(x1, x2):
+    return torch.stack([x1, x2]).min(dim=0)[0].sum() / torch.stack([x1, x2]).max(dim=1)[0].sum()
+```
 
 ## Appendix: Similarity between Documents
 

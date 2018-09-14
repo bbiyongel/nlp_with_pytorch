@@ -1,10 +1,10 @@
 # Word Sense from Thesaurus
 
-단어 중의성해소(WSD)에는 여러가지 방법이 있습니다. 첫 번째 다룰 방법은 어휘 분류 사전(thesaurus, 시소러스)을 활용한 방법 입니다. 기존에 구축 된 사전은 해당 단어에 대한 자세한 풀이와 의미, 동의어 등의 자세한 정보를 담고 있기 마련입니다. 이렇게 기존에 구축된 공개되어 있는 사전을 활용하여 중의성을 해소하고자 하는 방법 입니다.
+이전 섹션에서, 단어는 내부에 의미를 지니고 있고 그 의미는 개념과 같아서 계층적 구조를 지닌다고 하였습니다. 만약 그 계층구조를 잘 분석하고 분류하여 데이터베이스로 구축한다면, 우리가 자연어처리를 하고자 할 때 매우 큰 도움이 될 것 입니다. 이런 용도로 구축된 데이터베이스를 어휘분류사전(thesaurus)라고 부릅니다. 이번 섹션에서는 thesaurus의 대표인 WordNet에 대해 다루어 보겠습니다.
 
 ## WordNet
 
-[WordNet](https://wordnet.princeton.edu/)(워드넷)은 심리학 교수인 George Armitage Miller 교수가 지도하에 프린스턴 대학에서 1985년 부터 만들어진 프로그램 입니다. 처음에는 주로 기계번역(Machine Translation)을 돕기 위한 목적으로 만들어졌으며, 따라서 동의어 집합(Synset) 또는 상위어(Hypernym)나 하위어(Hyponym)에 대한 정보가 특히 잘 구축되어 있는 것이 장점 입니다. 단어에 대한 상위어와 하위어 정보를 구축하게 됨으로써, Directed Acyclic Graph(유방향 비순환 그래프)를 이루게 됩니다. (Tree구조가 아닌 이유는 하나의 노드가 여러 상위 노드를 가질 수 있기 때문입니다.)
+[WordNet](https://wordnet.princeton.edu/)(워드넷)은 1985년부터 심리학 교수인 George Armitage Miller 교수의 지도하에 프린스턴 대학에서 만든 프로그램 입니다. 처음에는 주로 기계번역(Machine Translation)을 돕기 위한 목적으로 만들어졌으며, 따라서 동의어 집합(Synset) 또는 상위어(Hypernym)나 하위어(Hyponym)에 대한 정보가 특히 잘 구축되어 있는 것이 장점 입니다. 단어에 대한 상위어와 하위어 정보를 구축하게 됨으로써, Directed Acyclic Graph(유방향 비순환 그래프)를 이루게 됩니다. (Tree구조가 아닌 이유는 하나의 노드가 여러 상위 노드를 가질 수 있기 때문입니다.)
 
 ![각 단어별 top-1 sense의 top-1 hypernym만 선택하여 tree로 나타낸 경우](../assets/wsd-wordnet-hierarchy.png)
 
@@ -106,5 +106,7 @@ Synset('entity.n.01')
 각 leaf 노드들은 query 단어들이 됩니다. 우리는 여기서 각 leaf 노드 간의 최단 거리를 유사도 정보로 활용할 수 있습니다.
 
 $$
-\text{similarity}(w, w')=-\log{\text{distance(w, w')}}
+\text{similarity}(w, w')=-\log{\text{distance}(w, w')}
 $$
+
+위와 같이 사전(thesaurus) 기반의 정보를 활용하여 단어간의 유사도를 구할 수 있습니다. 하지만 사전을 구축하는데는 너무 많은 비용과 시간이 소요 됩니다. 또한, 아무 사전이나 되는 것이 아닌, hypernym과 hyponym이 잘 반영되어 있어야 할 것 입니다. 이처럼, 사전에 기반한 유사도를 구하는 방식은 비교적 정확한 값을 구할 수 있으나, 한계가 뚜렷합니다.
