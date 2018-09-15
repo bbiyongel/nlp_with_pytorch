@@ -132,16 +132,15 @@ def get_selectional_association(predicate, headword, lines, dataframe, metric):
 ```
 
 ```python
-query_p = '피웠'
-query_h = ['담배', '맥주', '자동차']
+def wsd(predicate, headwords):
+    selectional_associations = []
+    for h in query_h:
+        selectional_associations += [get_selectional_association(query_p, h, lines, p, get_cosine_similarity)]
 
-selectional_associations = []
-for h in query_h:
-    selectional_associations += [get_selectional_association(query_p, h, lines, p, get_cosine_similarity)]
-
-print(selectional_associations)
+    print(selectional_associations)
 ```
 
-```
-[tensor(3.9986), tensor(3.5938), tensor(3.7237)]
+```python
+>>> wsd('피우', ['담배', '맥주', '사과'])
+[tensor(6.1853), tensor(3.9723), tensor(3.8503)]
 ```

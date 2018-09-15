@@ -11,26 +11,31 @@
 앞서 우리는 TF-IDF에 대해서 살펴 보았습니다. TF-IDF에서 사용되었던 TF (term frequency)는 훌륭한 피쳐(feature)가 될 수 있습니다. 예를 들어 어떤 단어가 각 문서별로 출현한 횟수가 차원별로 구성되면, 하나의 feature vector를 이룰 수 있습니다. 물론 각 문서별 TF-IDF 자체를 사용하는 것도 좋습니다.
 
 ```python
-vocab = {}
-tfs = []
-for d in docs:
-    vocab = get_term_frequency(d, vocab)
-    tfs += [get_term_frequency(d)]
+def get_tf(docs):
+    vocab = {}
+    tfs = []
+    for d in docs:
+        vocab = get_term_frequency(d, vocab)
+        tfs += [get_term_frequency(d)]
 
-from operator import itemgetter
-import numpy as np
-sorted_vocab = sorted(vocab.items(), key=itemgetter(1), reverse=True)
+    from operator import itemgetter
+    import numpy as np
+    sorted_vocab = sorted(vocab.items(), key=itemgetter(1), reverse=True)
 
-stats = []
-for v, freq in sorted_vocab:
-    tf_v = []
-    for idx in range(len(docs)):
-        if tfs[idx].get(v) is not None:
-            tf_v += [tfs[idx][v]]
-        else:
-            tf_v += [0]
+    stats = []
+    for v, freq in sorted_vocab:
+        tf_v = []
+        for idx in range(len(docs)):
+            if tfs[idx].get(v) is not None:
+                tf_v += [tfs[idx][v]]
+            else:
+                tf_v += [0]
 
-    print('%s\t%d\t%s' % (v, freq, '\t'.join(['%d' % tf for tf in tf_v])))
+        print('%s\t%d\t%s' % (v, freq, '\t'.join(['%d' % tf for tf in tf_v])))
+```
+
+```python
+>>> get_tf([doc1, doc2, doc3])
 ```
 
 위의 코드를 사용하여 단어들의 각 문서별 출현횟수를 나타내면 아래와 같습니다.
@@ -114,7 +119,7 @@ def read(fn):
     f = open(fn, 'r')
     for line in f:
         if line.strip() != '':
-            lines += [line]
+            lines += [line.strip()]
     f.close()
 
     return lines
@@ -167,11 +172,23 @@ p = pd.DataFrame(data=context_matrix, index=row_heads, columns=col_heads)
 
 그리고 이 코드를 통해 얻은 결과의 일부는 아래와 같습니다. 이 결과에 따르면 1000개의 문장(문서)에서는 '습니다'의 context window 내에 마침표가 3616번 등장 합니다.
 
-![1000문장에 대해 100번 이상 나타난 단어들을 대상으로 window size 7(-3~+3)을 적용한 결과](../assets/wsd-context-window.png)
+![context windowing을 수행한 결과](../assets/wsd-context-window.png)
+
+앞쪽 출현빈도가 많은 단어들은 대부분 값이 잘 채워져 있는 것을 볼 수 있습니다. 하지만 뒤쪽 출현빈도가 낮은 단어들은 많은 부분이 0으로 채워져 있는 것을 볼 수 있습니다. 출현빈도가 낮은 단어들의 row로 갈 경우에는 그 문제가 더욱 심각해 집니다.
+
+![대부분의 값이 0으로 채워진 sparse vector](../assets/wsd-sparse-vector.png)
+
+위의 context windowing 실행 결과 얻은 feature vector들을 tSNE로 시각화 한 모습은 아래와 같습니다. 딱히 비슷한 단어끼리 모이지 않은 것도 많지만, 운좋게 비슷한 단어끼리 붙어 있는 경우도 종종 볼 수 있습니다.
+
+![feature vector들을 tSNE로 표현한 모습](../assets/wsd-feature-vector-tsne.png)
 
 ## Get Similarity between Feature Vectors
 
-그럼 이렇게 구해진 feature vector를 어떻게 사용할 수 있을까요? Feature vector는 단어 사이의 유사도를 구할 때 아주 유용하게 쓸 수 있습니다. 그럼 벡터 사이의 유사도 또는 거리는 어떻게 구할 수 있을까요? 아래에서는 두 벡터가 주어졌을 때, 벡터 사이의 유사도 또는 거리를 구하는 방법들에 대해 다루어 보겠습니다.
+그럼 이렇게 구해진 feature vector를 어떻게 사용할 수 있을까요? Feature vector는 단어 사이의 유사도를 구할 때 아주 유용하게 쓸 수 있습니다. 그럼 벡터 사이의 유사도 또는 거리는 어떻게 구할 수 있을까요? 아래에서는 두 벡터가 주어졌을 때, 벡터 사이의 유사도 또는 거리를 구하는 방법들에 대해 다루어 보겠습니다. 그리고 PyTorch를 사용하여 해당 수식들을 직접 구현 해 보겠습니다.
+
+```python
+import torch
+```
 
 ### Manhattan Distance (L1 distance)
 
@@ -224,29 +241,6 @@ def get_infinity_distance(x1, x2):
 
 위의 그림은 각 $L_1$, $L_2$, $L_\infty$ 별로 거리의 크기가 $r$일때 모습 입니다.
 
-### Pointwise Mutual Information (PMI)
-
-$$
-\begin{aligned}
-\text{PMI}(w,v)&=\log{\frac{P(w,v)}{P(w)P(v)}} \\
-&=\log{\frac{P(w|v)}{P(w)}}=\log{\frac{P(v|w)}{P(v)}}
-\end{aligned}
-$$
-
-$$
-P(w_0)=\frac{\text{Count}(w_0)}{\sum_{w\in\mathcal{W}}{\text{Count}(w)}}
-$$
-
-PMI는 두 random variable 사이의 독립성을 평가하여 유사성의 지표로 삼습니다. 만약 $w$와 $v$가 독립이라면, PMI는 0이 될 것 입니다.
-
-### Positive PMI (PPMI)
-
-$$
-\text{PPMI}(w,v)=\max(0, \text{PMI}(w, v))
-$$
-
-PPMI는 PMI의 값이 0보다 작을 때는 0으로 치환해 버리고 양수만 취하는 방법 입니다.
-
 ### Cosine Similarity
 
 $$
@@ -287,6 +281,4 @@ def get_jaccard_similarity(x1, x2):
 
 ## Appendix: Similarity between Documents
 
-https://web.stanford.edu/class/cs124/lec/sem
-
-https://www.cs.princeton.edu/courses/archive/fall16/cos402/lectures/402-lec10.pdf
+방금은 단어에 대한 feature를 수집하고 유사도를 구하였다면, 마찬가지로 문서에 대해 feature를 추출하여 문서간의 유사도를 구할 수 있습니다. 예를 들어 문서내의 단어들에 대해 출현 빈도(term frequency)나 TF-IDF를 구하여 vector를 구성하고, 이를 활용하여 vector 사이의 유사도를 구할 수도 있을 것 입니다.

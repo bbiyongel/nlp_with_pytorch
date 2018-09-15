@@ -67,36 +67,36 @@ doc3 = '''
 ```
 
 ```python
-docs = (doc1, doc2, doc3)
-top_k = 30
+def get_tfidf(docs, top_k=30):
+    vocab = {}
+    tfs = []
+    for d in docs:
+        vocab = get_term_frequency(d, vocab)
+        tfs += [get_term_frequency(d)]
+    df = get_document_frequency(docs)
+
+    from operator import itemgetter
+    import numpy as np
+    sorted_vocab = sorted(vocab.items(), key=itemgetter(1), reverse=True)
+
+    stats = []
+    for v, freq in sorted_vocab:
+        tfidfs = []
+        for idx in range(len(docs)):
+            if tfs[idx].get(v) is not None:
+                tfidfs += [tfs[idx][v] * np.log(len(docs) / df[v])]
+            else:
+                tfidfs += [0]
+
+        stats += [(v, freq, tfidfs, max(tfidfs))]
+
+    sorted_tfidfs = sorted(stats, key=itemgetter(3), reverse=True)[:top_k]
+    for v, freq, tfidfs, max_tfidfs in sorted_tfidfs:
+        print('%s\t%d\t%s' % (v, freq, '\t'.join(['%.4f' % tfidfs[i] for i in range(len(docs))])))
 ```
 
 ```python
-vocab = {}
-tfs = []
-for d in docs:
-    vocab = get_term_frequency(d, vocab)
-    tfs += [get_term_frequency(d)]
-df = get_document_frequency(docs)
-
-from operator import itemgetter
-import numpy as np
-sorted_vocab = sorted(vocab.items(), key=itemgetter(1), reverse=True)
-
-stats = []
-for v, freq in sorted_vocab:
-    tfidfs = []
-    for idx in range(len(docs)):
-        if tfs[idx].get(v) is not None:
-            tfidfs += [tfs[idx][v] * np.log(len(docs) / df[v])]
-        else:
-            tfidfs += [0]
-
-    stats += [(v, freq, tfidfs, max(tfidfs))]
-
-sorted_tfidfs = sorted(stats, key=itemgetter(3), reverse=True)[:top_k]
-for v, freq, tfidfs, max_tfidfs in sorted_tfidfs:
-    print('%s\t%d\t%s' % (v, freq, '\t'.join(['%.4f' % tfidfs[i] for i in range(len(docs))])))
+>>> get_tfidf([doc1, doc2, doc3])
 ```
 
 위의 코드를 차례대로 실행한 결과는 아래와 같습니다. 첫번째 문서에서 가장 중요한 단어는 '남자'임을 알 수 있고, 마찬가지로 두번째 문서는 '요인'인 것을 알 수 있습니다.
