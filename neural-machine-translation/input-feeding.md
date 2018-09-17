@@ -11,12 +11,12 @@ $y$와 달리 concatenation layer의 출력은 $y$가 embedding layer에서 dens
 $$
 \begin{gathered}
 h_{t}^{src} = \text{RNN}_{enc}(\text{emb}_{src}(x_t), h_{t-1}^{src}) \\
-H^{src} = [h_{1}^{src}; h_{2}^{src}; \cdots; h_{n}^{src}] \\
-h_{t}^{tgt} = \text{RNN}_{dec}([\text{emb}_{tgt}(y_{t-1});\tilde{h}_{t-1}^{tgt}], h_{t-1}^{tgt})\text{ where}h_{0}^{tgt}=h_{n}^{src}\text{ and }y_{0}=BOS. \\
+H^{src} = [h_{1}^{src}; h_{2}^{src}; \cdots; h_{n}^{src}] \\ \\
+h_{t}^{tgt} = \text{RNN}_{dec}([\text{emb}_{tgt}(y_{t-1});\tilde{h}_{t-1}^{tgt}], h_{t-1}^{tgt})\text{ where}h_{0}^{tgt}=h_{n}^{src}\text{ and }y_{0}=BOS. \\ \\
 w=\text{softmax}({h_{t}^{tgt}}^T W \cdot H^{src}) \\
-c = H^{src} \cdot w\text{ and }c\text{ is a context vector}. \\
-\tilde{h}_{t}^{tgt}=\tanh(\text{linear}_{2hs \rightarrow hs}([h_{t}^{tgt}; c])) \\
-\hat{y}_{t}=\text{softmax}(\text{linear}_{hs \rightarrow |V_{tgt}|}(\tilde{h}_{t}^{tgt})) \\
+c = H^{src} \cdot w\text{ and }c\text{ is a context vector}. \\ \\
+\tilde{h}_{t}^{tgt}=\tanh(\text{linear}_{2hs \rightarrow hs}([h_{t}^{tgt}; c])) \\ \\
+\hat{y}_{t}=\text{softmax}(\text{linear}_{hs \rightarrow |V_{tgt}|}(\tilde{h}_{t}^{tgt})) \\ \\
 \text{where }hs\text{ is hidden size of RNN, and }|V_{tgt}|\text{ is size of output vocabulary}.
 \end{gathered}
 $$
