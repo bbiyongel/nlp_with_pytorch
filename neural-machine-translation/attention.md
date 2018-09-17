@@ -156,7 +156,7 @@ $$
 
 ![](../assets/nmt-attention-linear-transform.png)
 
-위와 같이 꼭 번역이 아니더라도, 두 다른 도메인(domain) 사이의 비교를 위해서 사용합니다.
+위와 같이 꼭 번역이 아니더라도, 두 다른 도메인(domain) 사이의 변환을 위해서 사용합니다.
 
 ### Why
 
@@ -166,8 +166,7 @@ $$
 
 ### Evaluation
 
-![http://web.stanford.edu/class/cs224n/lectures/cs224n-2017-lecture10.pdf](../assets/nmt-attention-evaluation-graph.png)<br>
-[Image from CS224n](http://web.stanford.edu/class/cs224n/syllabus.html)
+![[Image from CS224n](http://web.stanford.edu/class/cs224n/syllabus.html)](../assets/nmt-attention-evaluation-graph.png)
 
 Attention을 사용하지 않은 seq2seq는 전반적으로 성능이 떨어짐을 알수 있을 뿐만 아니라, 특히 문장이 길어질수록 성능이 더욱 하락함을 알 수 있습니다. 하지만 이에 비해서 attention을 사용하면 문장이 길어지더라도 성능이 크게 하락하지 않음을 알 수 있습니다.
 
