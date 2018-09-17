@@ -28,16 +28,14 @@
 예를 들어, 번역1은 cross entropy loss에 의하면 매우 높은 loss값을 가집니다. 하지만 번역2는 번역1에 비해 완전 틀린 번역이지만 loss가 훨씬 낮을 겁니다. 따라서 실제 번역문의 품질과 cross entropy 사이에는 (특히 teacher forcing 방식이 더해져) 괴리가 있습니다. 이러한 간극을 줄이기 위해 여러가지 방법들이 제시되었습니다 -- [METEOR](https://en.wikipedia.org/wiki/METEOR), [BLEU](https://en.wikipedia.org/wiki/BLEU). 이번 섹션은 그 중 가장 널리 쓰이는 BLEU에 대해 짚고 넘어가겠습니다.
 
 $$
-BLEU=brevity\text{-}penalty*\prod_{n=1}^{N}{p_n^{w_n}}
-$$
-$$
-\begin{aligned}
-&where~brevity\text{-}penalty=\min(1, \frac{|prediction|}{|reference|}) \\
-&and~p_n~is~precision~of~n\text{-}gram~and~w_n~is~weight~that~w_n=\frac{1}{2^n}
-\end{aligned}
+\begin{gathered}
+BLEU=\text{brevity-penalty}*\prod_{n=1}^{N}{p_n^{w_n}} \\
+\text{where brevity penalty}=\min(1, \frac{|\text{prediction}|}{|\text{reference}|}) \\
+\text{and }p_n\text{ is precision of }n\text{-gram and }w_n\text{ is weight that }w_n=\frac{1}{2^n}.
+\end{gathered}
 $$
 
-BLEU는 정답 문장과 예측 문장 사이에 일치하는 ***n-gram***의 갯수의 비율의 기하평균에 따라 점수가 매겨집니다. brevity penalty는 예측 된 번역문이 정답 문장보다 짧을 경우 점수가 좋아지는 것을 방지하기 위함입니다. 보통 위 수식의 결과 값에 100을 곱하여 0-100의 scale로 점수를 표현합니다. 실제 위의 예제 '번역1'에서 나타난 2-gram을 count하여 간단하게 BLEU를 측정 하여 보겠습니다.
+BLEU는 정답 문장과 예측 문장 사이에 일치하는 n-gram의 갯수의 비율의 기하평균에 따라 점수가 매겨집니다. brevity penalty는 예측 된 번역문이 정답 문장보다 짧을 경우 점수가 좋아지는 것을 방지하기 위함입니다. 보통 위 수식의 결과 값에 100을 곱하여 0-100의 scale로 점수를 표현합니다. 실제 위의 예제 '번역1'에서 나타난 2-gram을 count하여 간단하게 BLEU를 측정 하여 보겠습니다.
 
 |2-gram|count|hit count|
 |-|-|-|

@@ -19,9 +19,9 @@ Neural Network LM은 많은 형태를 가질 수 있지만 우리는 가장 효�
 
 ## Recurrent Neural Network LM
 
-![](../assets/rnn_lm_architecture.png)
+![Recurrent Neural Language Model 아키텍처](../assets/rnn_lm_architecture.png)
 
-Recurrent Neural Network Lauguage Model \(RNNLM\)은 위와 같은 구조를 지니고 있습니다. 기존의 언어모델은 각각의 단어를 descrete한 존재로써 처리하였기 때문에, 문장(word sequence)의 길이가 길어지면 희소성(sparseness)문제가 발생하여 어려운 부분이 있었습니다. 따라서, $n-1$ 이전까지의 단어만 (주로 $n=3$) 조건부로 잡아 확률을 근사(approximation) 하였습니다. 하지만, RNN LM은 단어를 embedding하여 벡터화(vectorize)함으로써, 희소성 문제를 해소하였기 때문에, 문장의 첫 단어부터 모두 조건부에 넣어 확률을 근사 할 수 있습니다.
+Recurrent Neural Network Lauguage Model (RNNLM)은 위와 같은 구조를 지니고 있습니다. 기존의 언어모델은 각각의 단어를 descrete한 존재로써 처리하였기 때문에, 문장(word sequence)의 길이가 길어지면 희소성(sparseness)문제가 발생하여 어려운 부분이 있었습니다. 따라서, $n-1$ 이전까지의 단어만 (주로 $n=3$) 조건부로 잡아 확률을 근사(approximation) 하였습니다. 하지만, RNN LM은 단어를 embedding하여 벡터화(vectorize)함으로써, 희소성 문제를 해소하였기 때문에, 문장의 첫 단어부터 모두 조건부에 넣어 확률을 근사 할 수 있습니다.
 
 $$
 P(w_1,w_2,\cdots,w_k) = \prod_{i=1}^{k}{P(w_i|w_{<i})}
@@ -35,16 +35,16 @@ $$
 
 ## Implementation
 
-이제 RNN을 활용한 언어모델을 구현 해 보도록 하겠습니다. PyTorch로 구현하기에 앞서, 이를 수식화 해보면 아래와 같습니다. -- ***language_model.py*** 가 이를 구현 한 코드 입니다.
+이제 RNN을 활용한 언어모델을 구현 해 보도록 하겠습니다. PyTorch로 구현하기에 앞서, 이를 수식화 해보면 아래와 같습니다. -- language_model.py가 이를 구현 한 코드 입니다.
 
 $$
-\begin{aligned}
-X&=\{x_0,x_1,\cdots,x_n,x_{n+1}\} \\
-&where~x_0=BOS~and~x_{n+1}=EOS. \\ \\
-\hat{x}_{i+1}&=Softmax(Linear_{hidden \rightarrow |V|}(RNN(Emb(x_i)))) \\
-\hat{X}[1:]&=Softmax(Linear_{hidden \rightarrow |V|}(RNN(Emb(X[:-1])))), \\
-&where~|V|~is~size~of~vocabulary.
-\end{aligned}
+\begin{gathered}
+X=\{x_0,x_1,\cdots,x_n,x_{n+1}\} \\
+\text{where }x_0=BOS\text{ and }x_{n+1}=EOS. \\ \\
+\hat{x}_{i+1}=\text{softmax}(\text{linear}_{hidden \rightarrow |V|}(\text{RNN}(\text{emb}(x_i)))) \\
+\hat{X}[1:]=\text{softmax}(\text{linear}_{hidden \rightarrow |V|}(\text{RNN}(\text{emb}(X[:-1])))), \\
+\text{where }|V|\text{ is size of vocabulary}.
+\end{gathered}
 $$
 
 위의 수식을 따라가 보면, 문장 $X$를 입력으로 받아 각 time-step 별($x_i$)로 Emb(embedding layer)에 넣어 정해진 차원(dimension)의 embedding vector를 얻습니다. RNN은 해당 embedding vector를 입력으로 받아, hidden size의 vector 형태로 반환 합니다. 이 RNN 출력 vector를 linear layer를 통해 어휘(vocabulary)수 dimension의 vector로 변환 한 후, softmax를 취하여 $\hat{x}_{i+1}$을 구합니다.

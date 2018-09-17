@@ -1,12 +1,10 @@
 # Fully Convolutional Seq2seq
 
-Neural Machine Translation의 최강자는 Google이라고 모두가 여기고 있을 때, Facebook이 과감하게 이 논문[\[Gehring at el.2017\]](https://arxiv.org/pdf/1705.03122.pdf)을 들고 도전장을 내밀었습니다. RNN방식의 seq2seq 대신에 오직 convolutional layer만을 이용한 방식의 seq2seq를 들고 나와, 기존의 방식에 대비해서 성능과 속도 두마리 토끼를 모두 잡았다고 주장하였습니다.
+Neural Machine Translation의 최강자는 Google이라고 모두가 여기고 있을 때, Facebook이 과감하게 이 논문[[Gehring at el.2017]](https://arxiv.org/pdf/1705.03122.pdf)을 들고 도전장을 내밀었습니다. RNN방식의 seq2seq 대신에 오직 convolutional layer만을 이용한 방식의 seq2seq를 들고 나와, 기존의 방식에 대비해서 성능과 속도 두마리 토끼를 모두 잡았다고 주장하였습니다.
 
 ## Architecture
 
-![](../assets/nmt-fconv-overview.png)
-
-사실 Facebook의 그림 실력은 그닥 칭찬하고 싶지 않습니다. 논문에 있는 그림이 조금 이해하기 어려울 수 있으나 최대한 따라가보도록 하겠습니다.
+![Fully Convolutional Sequence-to-Sequence 아키텍처](../assets/nmt-fconv-overview.png)
 
 ### Position Embedding
 
@@ -18,67 +16,48 @@ Neural Machine Translation의 최강자는 Google이라고 모두가 여기고 �
 
 ### Convolutional Layer
 
-Convolutional Layer를 사용한 encoder를 설명하기 이전에, 먼저 [\[Ranzato at el.2015\]](https://arxiv.org/pdf/1511.06732.pdf)에서는 단순히 이전 layer의 결과값을 averaging하는 encoder를 제안하였습니다.
-
-
-$$
-e_j=w_j+l_j,~z_j=\frac{1}{k}\sum_{t=-\lfloor k/2 \rfloor}^{\lfloor k/2 \rfloor}{e_{j+t}}
-$$
-
-
+Convolutional Layer를 사용한 encoder를 설명하기 이전에, 먼저 [[Ranzato at el.2015]](https://arxiv.org/pdf/1511.06732.pdf)에서는 단순히 이전 layer의 결과값을 averaging하는 encoder를 제안하였습니다.
 
 $$
-where~w_j~is~word~vector~and~l_j~is~position~embedding~vector
+\begin{gathered}
+e_j=w_j+l_j,~z_j=\frac{1}{k}\sum_{t=-\lfloor k/2 \rfloor}^{\lfloor k/2 \rfloor}{e_{j+t}} \\
+\text{where }w_j\text{ is word vector and }l_j\text{ is position embedding vector}.
+\end{gathered}
 $$
-
 
 위와 같이 단순히 평균을 내는 것만으로도 어느정도의 성능을 낼 수 있었습니다. 만약 여기서 convolution filter를 사용하여 averaging 대신에 convolution연산을 한다면 어떻게 될까요?
 
-위의 물음에서 출발한 것이 이 논문의 핵심입니다. 따라서 kernel\(or window\) size $k$인 convolution filter가 $d$개 channel의 입력을 받아서 convolution 연산을 수행하여 $2d$개 channel의 출력을 결과값으로 내놓습니다.
+위의 물음에서 출발한 것이 이 논문의 핵심입니다. 따라서 kernel(or window) size $k$인 convolution filter가 $d$개 channel의 입력을 받아서 convolution 연산을 수행하여 $2d$개 channel의 출력을 결과값으로 내놓습니다.
 
-![](../assets/nmt-fconv-2.png)
+![fconv 내에서 연산 과정을 도식화](../assets/nmt-fconv-2.png)
 
 ### Gated Linear Unit
 
-이 논문에서는 [\[Dauphine et al.2016\]](https://arxiv.org/pdf/1612.08083.pdf)에서 제안한 Gated Linear Unit\(GLU\)을 사용하였습니다.
-
-
-$$
-v([A;B])=A \otimes \sigma(B)
-$$
-
-
+이 논문에서는 [[Dauphine et al.2016]](https://arxiv.org/pdf/1612.08083.pdf)에서 제안한 Gated Linear Unit(GLU)을 사용하였습니다.
 
 $$
-where~A \in R^{d}~and~B \in R^{d}
+\begin{gathered}
+v([A;B])=A \otimes \sigma(B) \\
+\text{where }A\in\mathbb{R}^{d}\text{ and }B\in\mathbb{R}^{d} \\
+\text{thus }[A;B]\in\mathbb{R}^{2d}
+\end{gathered}
 $$
 
-
-
-$$
-thus~[A;B] \in R^{2d}
-$$
-
-
-GLU를 사용하여 직전 convolution layer에서의 결과값인 vector\($\in R^{2d}$\)를 입력으로 삼아 gate 연산을 수행합니다. 이 연산은 LSTM이나 GRU에서의 gate들과 매우 비슷하게 동작을 수행합니다.
+GLU를 사용하여 직전 convolution layer에서의 결과값인 vector($\in\mathbb{R}^{2d}$\)를 입력으로 삼아 gate 연산을 수행합니다. 이 연산은 LSTM이나 GRU에서의 gate들과 매우 비슷하게 동작을 수행합니다.
 
 ### Attention
 
-$z^u$를 encoder의 출력값, $h_i^l$을 decoder의 $l$번째 layer의 $i$번째 결과값이라고 하고, $g_i$를 $i-1$번째 decoder의 출력값이라고 할 때, attention의 동작은 아래와 같습니다.
- 
-$$
-d_i^l=W_d^l h_i^l+b_d^l+g_i
-$$
+$z^u$를 인코더의 출력값, $h_i^l$을 디코더의 $l$번째 layer의 $i$번째 결과값이라고 하고, $g_i$를 $i-1$번째 디코더의 출력값이라고 할 때, attention의 동작은 아래와 같습니다.
 
 $$
-a_{ij}^l=\frac{\exp{(d_i^l z_j^u)}}{\sum_{t=1}^m \exp{(d_i^l z_t^u)}}
-$$
-
-$$
+\begin{gathered}
+d_i^l=W_d^l h_i^l+b_d^l+g_i \\
+a_{ij}^l=\frac{\exp{(d_i^l z_j^u)}}{\sum_{t=1}^m \exp{(d_i^l z_t^u)}} \\
 c_i^l=\sum_{j=1}^m{a_{ij}^l(z_j^u+e_j)}
+\end{gathered}
 $$
 
-이렇게 구해진 ***context vector*** $c_i^l$을 (기본적인 attention은 concatenate 하였던 것이 비해서) 아래와 같이 $h_i^l$에 그냥 **더합니다**. 그리고 이것을 다음 decoder layer의 입력으로 사용합니다.
+이렇게 구해진 context vector $c_i^l$을 (기본적인 attention은 concatenate 하였던 것이 비해서) 아래와 같이 $h_i^l$에 그냥 더합니다. 그리고 이것을 다음 decoder layer의 입력으로 사용합니다.
 
 $$
 \tilde{h}_i^l=h_i^l+c_i^l

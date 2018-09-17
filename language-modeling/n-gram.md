@@ -8,22 +8,17 @@
 
 따라서 희소성(sparseness) 문제를 해결하기 위해서 Markov Assumption을 도입합니다.
 
-
 $$
 P(x_i|x_1,x_2,\cdots,x_{i-1}) \approx P(x_i|x_{i-k},\cdots,x_{i-1})
 $$
 
-
 Markov Assumption을 통해, 다음 단어의 출현 확률을 구하기 위해서, 이전에 출현한 모든 단어를 볼 필요 없이, 앞에 $k$ 개의 단어만 상관하여 다음 단어의 출현 확률을 구하도록 하는 것 입니다. 이렇게 가정을 간소화 하여, 우리가 구하고자 하는 확률을 근사(approximation) 하겠다는 것 입니다. 보통 $k$는 0에서 3의 값을 갖게 됩니다. 즉, $k = 2$ 일 경우에는 앞 단어 2개를 참조하여 다음 단어($x_i$)의 확률을 근사하여 나타내게 됩니다.
-
 
 $$
 P(x_i|x_{i-2},x_{i-1})
 $$
 
-
 이를 이전 chain rule(연쇄법칙) 수식에 적용하여, 문장에 대한 확률도 다음과 같이 표현 할 수 있습니다.
-
 
 $$
 P(x_1,x_2,\cdots,x_n) \approx \prod_{j=1}^{n}{P(x_j|x_{j-k},\cdots,x_{j-1})}
@@ -35,11 +30,10 @@ $$
 \log{P(x_1,x_2,\cdots,x_n)} \approx \sum_{j=1}^{n}{log{P(x_j|x_{j-k},\cdots,x_{j-1})}}
 $$
 
-
 우리는 이렇게 전체 문장 대신에 바로 앞 몇 개의 단어만 상관하여 확률 계산을 간소화 하는 방법을 $n=k+1$으로 n-gram 이라고 부릅니다.
 
 | k | n-gram | 명칭 |
-| --- | --- | --- |
+|-|-|-|
 | 0 | 1-gram | uni-gram |
 | 1 | 2-gram | bi-gram |
 | 2 | 3-gram | tri-gram |
@@ -48,7 +42,7 @@ $$
 
 
 $$
-P(x_i|x_{i-2},x_{i-1})=\frac{C(x_{i-2},x_{i-1},x_i)}{C(x_{i-2},x_{i-1})}
+P(x_i|x_{i-2},x_{i-1})=\frac{\text{Count}(x_{i-2},x_{i-1},x_i)}{\text{Count}(x_{i-2},x_{i-1})}
 $$
 
 
@@ -75,22 +69,22 @@ $$
 먼저 우리가 생각 해 볼 수 있는 가장 간단한 방법은, 모든 n-gram에 $1$을 더하는 것 입니다. 그렇다면 훈련셋에 출현하지 않은 n-gram의 경우에도 작은 확률이나마 가질 수 있을 것 입니다. 이를 수식으로 나타내면 아래와 같습니다.
 
 $$
-P(w_i|w_{<i}) \approx \frac{C(w_{<i},w_i)+1}{C(w_{<i})+V}
+P(w_i|w_{<i}) \approx \frac{\text{Count}(w_{<i},w_i)+1}{\text{Count}(w_{<i})+V}
 $$
 
 이처럼 $1$을 더하여 smoothing을 통해 $P(w_i|w_{<i})$를 근사할 수 있습니다. 이 수식을 좀 더 일반화하여 표현하면 아래와 같이 쓸 수 있습니다.
 
 $$
 \begin{aligned}
-P(w_i|w_{<i}) &\approx \frac{C(w_{<i},w_i)+k}{C(w_{<i})+kV} \\
-&\approx \frac{C(w_{<i},w_i)+(m/V)}{C(w_{<i})+m}
+P(w_i|w_{<i}) &\approx \frac{\text{Count}(w_{<i},w_i)+k}{\text{Count}(w_{<i})+kV} \\
+&\approx \frac{\text{Count}(w_{<i},w_i)+(m/V)}{\text{Count}(w_{<i})+m}
 \end{aligned}
 $$
 
 이처럼, 1보다 작은 상수값을 더하여 smoothing을 구현 해 볼 수도 있을 것 입니다. 그렇다면 여기서 또 한발 더 나아가 1-gram prior 확률을 이용하여 좀 더 동적으로 대처 해 볼 수도 있을 것 입니다.
 
 $$
-P(w_i|w_{<i}) \approx \frac{C(w_{<i},w_i)+m P(w_i)}{C(w_{<i})+m}
+P(w_i|w_{<i}) \approx \frac{\text{Count}(w_{<i},w_i)+m P(w_i)}{\text{Count}(w_{<i})+m}
 $$
 
 이처럼 add-one smoothing은 매우 간단하지만, 사실 언어모델처럼 희소성(sparseness) 문제가 큰 경우에는 부족합니다. 따라서 언어모델에 쓰이기에는 알맞은 방법은 아닙니다.
@@ -119,22 +113,22 @@ KN discounting의 주요 아이디어는 단어 $w$가 누군가($v$)의 뒤에�
 KN discounting은 $P_{continuation}$을 아래와 같이 모델링 합니다. 즉, $w$와 같이 나타난 $v$들의 집합의 크기가 클 수록 $P_{continuation}$은 클 것이라고 가정 합니다.
 
 $$
-P_{continuation}(w) \varpropto |\{ v : C(v, w) > 0 \}|
+P_{\text{continuation}}(w)\varpropto|\{ v : \text{Count}(v, w) > 0 \}|
 $$
 
 위의 수식은 이렇게 나타내 볼 수 있습니다. $w$와 같이 나타난 $v$들의 집합의 크기를, $v$, $w'$가 함께 나타난 집합의 크기의 합으로 나누어 줍니다.
 
 $$
-P_{continuation}(w) = \frac{|\{ v : C(v, w) > 0 \}|}{\sum_{w'}{|\{ v : C(v, w') > 0 \}|}}
+P_{\text{continuation}}(w)=\frac{|\{ v : \text{Count}(v, w) > 0 \}|}{\sum_{w'}{|\{ v : \text{Count}(v, w') > 0 \}|}}
 $$
 
 이렇게 우리는 $P_{KN}$를 정의 할 수 있습니다.
 
 $$
-\begin{aligned}
-P_{KN}(w_i|w_{i-1})=\frac{\max{(C(w_{i-1}, w_i) - d, 0)}}{C(w_{i-1})}+\lambda(w_{i-1})P_{continuation}(w_i), \\
-where~\lambda(w_{i-1})=\frac{d}{\sum_v{C(w_{i-1}, v)}}\times|\{ w: c(w_{i-1}, w)>0 \}|.
-\end{aligned}
+\begin{gathered}
+P_{\text{KN}}(w_i|w_{i-1})=\frac{\max{(C(w_{i-1}, w_i) - d, 0)}}{C(w_{i-1})}+\lambda(w_{i-1})P_{\text{continuation}}(w_i), \\
+\text{where }\lambda(w_{i-1})=\frac{d}{\sum_v{C(w_{i-1}, v)}}\times|\{ w: c(w_{i-1}, w)>0 \}|.
+\end{gathered}
 $$
 
 ### Interpolation
@@ -148,13 +142,13 @@ $$
 예를 들어 의료 쪽 음성인식(ASR) 또는 기계번역(MT) 시스템을 구축한다고 가정 해 보겠습니다. 그렇다면 기존의 일반 영역 corpus를 통해 생성한 language model의 경우, 의료 용어 표현이 낯설 수도 있습니다. 하지만 만약 특화 영역의 corpus만 사용하여 언어모델을 생성할 경우, generalization 능력이 너무 떨어질 수도 있습니다.
 
 - 일반 영역(general domain)
-    - $P(진정제 | 준비, 된) = 0.00001$
-    - $P(사나이 | 준비, 된) = 0.01$
+    - $P(\text{진정제}|\text{준비},\text{된}) = 0.00001$
+    - $P(\text{사나이}|\text{준비},\text{된}) = 0.01$
 - 특화 영역(specialized domain)
-    - $P(진정제 | 준비, 된) = 0.09$
-    - $P(약 | 준비, 된) = 0.04$
+    - $P(\text{진정제}|\text{준비},\text{된}) = 0.09$
+    - $P(\text{약}|\text{준비},\text{된}) = 0.04$
 - Interpolated
-    - $P(진정제 | 준비, 된) = 0.5 * 0.09 + (1 – 0.5) * 0.00001 = 0.045005$
+    - $P(\text{진정제}|\text{준비},\text{된}) = 0.5 * 0.09 + (1 – 0.5) * 0.00001 = 0.045005$
 
 따라서 일반적인 대화에서와 다른 의미를 지닌 단어가 나올 수도 있고, 일반적인 대화에서는 희소(rare)한 표현(word sequence)가 훨씬 더 자주 등장 할 수 있습니다. 이런 상황들에 잘 대처하기 위해서 해당 영역 corpus로 생성한 언어모델을 섞어주어 해당 영역(domain)에 특화 시킬 수 있습니다.
 
@@ -170,7 +164,7 @@ $$
 &+ \lambda_2 P(w_n|w_{n-k+1}, \cdots , w_{n-1}) \\
 &+ \cdots \\
 &+ \lambda_k P(w_n), \\ \\
-where~&\sum_i{\lambda_i}=1.
+\text{where }&\sum_i{\lambda_i}=1.
 \end{aligned}
 $$
 

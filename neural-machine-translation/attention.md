@@ -2,7 +2,7 @@
 
 ## Motivation
 
-한 문장으로 Attention을 정의하면 ***쿼리(Query)와 비슷한 값을 가진 키(Key)를 찾아서 그 값(Value)을 얻는 과정*** 입니다. 따라서, 우리가 흔히 json이나 프로그래밍에서 널리 사용하는 Key-Value 방식과 비교하며 attention에 대해서 설명 하겠습니다.
+한 문장으로 Attention을 정의하면 쿼리(Query)와 비슷한 값을 가진 키(Key)를 찾아서 그 값(Value)을 얻는 과정입니다. 따라서, 우리가 흔히 json이나 프로그래밍에서 널리 사용하는 Key-Value 방식과 비교하며 attention에 대해서 설명 하겠습니다.
 
 ### Key-Value function
 
@@ -12,7 +12,7 @@ Attention을 본격 소개하기 전에 먼저 우리가 알고 있는 자료형
 >>> dic = {'computer': 9, 'dog': 2, 'cat': 3}
 ```
 
-위와 같이 Key와 Value에 해당하는 값들을 넣고 Key를 통해 Value 값에 접근 할 수 있습니다. 좀 더 바꿔 말하면, Query가 주어졌을 때, Key 값에 따라 Value 값에 접근 할 수 있습니다. 위의 작업을 함수로 나타낸다면, 아래와 같이 표현할 수 있을겁니다. \(물론 실제 Python Dictionary 동작은 매우 다릅니다.\)
+위와 같이 Key와 Value에 해당하는 값들을 넣고 Key를 통해 Value 값에 접근 할 수 있습니다. 좀 더 바꿔 말하면, Query가 주어졌을 때, Key 값에 따라 Value 값에 접근 할 수 있습니다. 위의 작업을 함수로 나타낸다면, 아래와 같이 표현할 수 있을겁니다. (물론 실제 Python Dictionary 동작은 매우 다릅니다.)
 
 ```py
 def key_value_func(query):
@@ -39,11 +39,11 @@ def is_same(key, query):
         return .0
 ```
 
-코드를 살펴보면, 순차적으로 **dic** 내부의 key값들과 query 값을 비교하여, key가 같을 경우 **weights** 에 1.0을 추가하고, 다를 경우에는 0.0을 추가합니다. 그리고 weights를 weights의 총 합으로 나누어 weights의 합이 1이 되도록 (마치 확률과 같이) normalize하여 줍니다. 다시 **dic** 내부의 value값들과 weights의 값을 inner product \(스칼라곱, dot product\) 합니다. 즉, $weight = 1.0$ 인 경우에만 value 값을 **answer**에 더합니다.
+코드를 살펴보면, 순차적으로 dic 내부의 key값들과 query 값을 비교하여, key가 같을 경우 weights에 1.0을 추가하고, 다를 경우에는 0.0을 추가합니다. 그리고 weights를 weights의 총 합으로 나누어 weights의 합이 1이 되도록 (마치 확률과 같이) normalize하여 줍니다. 다시 dic 내부의 value값들과 weights의 값을 inner product (스칼라곱, dot product) 합니다. 즉, $weight = 1.0$ 인 경우에만 value 값을 answer에 더합니다.
 
 ### Differentiable Key-Value function
 
-좀 더 발전시켜서, 만약 **is same** 함수 대신에 다른 함수를 써 보면 어떻게 될까요? **how similar** 라는 key와 query 사이의 유사도를 리턴 해 주는 가상의 함수가 있다고 가정해 봅시다.
+좀 더 발전시켜서, 만약 is_same 함수 대신에 다른 함수를 써 보면 어떻게 될까요? how_similar 라는 key와 query 사이의 유사도를 리턴 해 주는 가상의 함수가 있다고 가정해 봅시다.
 
 ```py
 >>> query = 'puppy'
@@ -63,16 +63,16 @@ def is_same(key, query):
 2.823 # = .1 / (.9 + .7 + .1) * 9 + .9 / (.9 + .7 + .1) * 2 + .7 / (.9 + .7 + .1) * 3
 ```
 
-**2.823** 라는 값이 나왔습니다. 강아지와 고양이, 그리고 컴퓨터의 유사도의 비율에 따른 dic의 값의 비율을 지녔다라고 볼 수 있습니다. **is same** 함수를 쓸 때에는 두 값이 같은지 if문을 통해 검사하고 값을 할당했기 때문에, 미분을 할 수 없거나 할 수 있더라도 gradient가 0이 됩니다. 하지만, 이제 우리는 key\_value\_func을 미분 할 수 있습니다.
+$2.823$ 라는 값이 나왔습니다. 강아지와 고양이, 그리고 컴퓨터의 유사도의 비율에 따른 dic의 값의 비율을 지녔다라고 볼 수 있습니다. is_same 함수를 쓸 때에는 두 값이 같은지 if문을 통해 검사하고 값을 할당했기 때문에, 미분을 할 수 없거나 할 수 있더라도 gradient가 0이 됩니다. 하지만, 이제 우리는 key_value_func을 딥러닝에 사용할 수 있습니다.
 
 ### Differentiable Key-Value Vector function
 
-* 만약, **dic** 의 value에는 100차원의 vector로 들어있었다면 어떻게 될까요? 
+* 만약, dic의 value에는 100차원의 vector로 들어있었다면 어떻게 될까요? 
 * 거기에, query와 key 값 모두 vector라면 어떻게 될까요? 즉, Word Embedding Vector라면?
-* **how similar** 함수는 이 vector 들 간의 cosine similarity를 반환 해 주는 함수라면?
-* 그리고, **dic** 의 key 값과 value 값이 서로 같다면 어떻게 될까요?
+* how_similar 함수는 이 vector 들 간의 cosine similarity를 반환 해 주는 함수라면?
+* 그리고, dic의 key 값과 value 값이 서로 같다면 어떻게 될까요?
 
-그럼 다시 가상의 함수를 만들어보겠습니다. **word2vec** 함수는 단어를 입력으로 받아서 그 단어에 해당하는 미리 정해진 word embedding vector를 반환 해 준다고 가정하겠습니다. 그럼 좀 전의 **how similar** 함수는 두 vector 간의 cosine similarity 값을 반환 할 겁니다.
+그럼 다시 가상의 함수를 만들어보겠습니다. word2vec 함수는 단어를 입력으로 받아서 그 단어에 해당하는 미리 정해진 word embedding vector를 반환 해 준다고 가정하겠습니다. 그럼 좀 전의 how similar 함수는 두 vector 간의 cosine similarity 값을 반환 할 겁니다.
 
 ```py
 def key_value_func(query):
@@ -90,7 +90,7 @@ def key_value_func(query):
     return answer
 ```
 
-이번에 key\_value\_func는 그럼 그 값을 받아서 weights에 저장 한 후, 모든 weights의 값이 채워지면 softmax를 취할 겁니다. 여기서 softmax는 weights의 합의 크기를 1로 고정시키는 normalization의 역할을 합니다. 따라서 similarity의 총 합에서 차지하는 비율 만큼 weight의 값이 채워질 겁니다.
+이번에 key_value_func는 그럼 그 값을 받아서 weights에 저장 한 후, 모든 weights의 값이 채워지면 softmax를 취할 겁니다. 여기서 softmax는 weights의 합의 크기를 1로 고정시키는 normalization의 역할을 합니다. 따라서 similarity의 총 합에서 차지하는 비율 만큼 weight의 값이 채워질 겁니다.
 
 ```py
 >>> len(word2vec('computer'))
@@ -115,9 +115,11 @@ def key_value_func(query):
 
 그럼 번역에서 attention은 어떻게 작용할까요? 번역 과정에서는 encoder의 각 time-step 별 출력을 Key와 Value로 삼고, 현재 time-step의 decoder 출력을 Query로 삼아 attention을 취합니다.
 
-* Query: 현재 time-step의 decoder output
-* Keys: 각 time-step 별 encoder output
-* Values: 각 time-step 별 encoder output
+|항목|구성|
+|-|-|
+|Query|현재 time-step의 decoder output|
+|Keys|각 time-step 별 encoder output|
+|Values|각 time-step 별 encoder output|
 
 ```py
 >>> context_vector = attention(query = decoder_output, keys = encoder_outputs, values = encoder_outputs)
@@ -126,43 +128,39 @@ def key_value_func(query):
 Attention을 추가한 seq2seq의 수식은 아래와 같은부분이 추가/수정 됩니다.
 
 $$
-w = softmax({h_{t}^{tgt}}^T W \cdot H^{src})
-$$
-$$
-c = H^{src} \cdot w~~~~~and~c~is~a~context~vector
-$$
-$$
-\tilde{h}_{t}^{tgt}=\tanh(linear_{2hs \rightarrow hs}([h_{t}^{tgt}; c]))
-$$
-$$
-\hat{y}_{t}=softmax(linear_{hs \rightarrow |V_{tgt}|}(\tilde{h}_{t}^{tgt}))
-$$
-$$
-where~hs~is~hidden~size~of~RNN,~and~|V_{tgt}|~is~size~of~output~vocabulary.
+\begin{gathered}
+w = \text{softmax}({h_{t}^{tgt}}^T W \cdot H^{src}) \\
+c = H^{src}\cdot w\text{ and }c\text{ is a context vector}. \\
+\tilde{h}_{t}^{tgt}=\tanh(\text{linear}_{2hs \rightarrow hs}([h_{t}^{tgt}; c])) \\
+\hat{y}_{t}=\text{softmax}(\text{linear}_{hs \rightarrow |V_{tgt}|}(\tilde{h}_{t}^{tgt})) \\
+\text{where }hs\text{ is hidden size of RNN, and }|V_{tgt}|\text{ is size of output vocabulary}.
+\end{gathered}
 $$
 
 원하는 정보를 attention을 통해 encoder에서 획득한 후, 해당 정보를 decoder output과 concatenate하여 $tanh$를 취한 후, softmax 계산을 통해 다음 time-step의 입력이 되는 $\hat{y}_{t}$을 구합니다.
 
-![](../assets/nmt-seq2seq-with-attention-architecture.png)
+![Attention이 추가된 Sequence-to-Sequence의 아키텍처](../assets/nmt-seq2seq-with-attention-architecture.png)
 
 ### Linear Transformation
 
 이때, 각 input parameter들은 다음을 의미한다고 볼 수 있습니다.
 
-1. decoder\_output: 현재 time-step 까지 번역 된 target language 단어들 또는 문장, 의미
-2. encoder\_outputs: 각 time-step 에서의 source language 단어 또는 문장, 의미
+|항목|의미|
+|-|-|
+|decoder_output|현재 time-step 까지 번역 된 target language 단어들 또는 문장, 의미|
+|encoder_outputs|각 time-step 에서의 source language 단어 또는 문장, 의미|
 
 사실 신경망 내부의 각 차원들은 숨겨진 특징값(latent feature)이므로 딱 잘라 정의할 수 없습니다. 하지만 분명한건, source 언어와 target 언어가 다르다는 것 입니다. 따라서 단순히 dot product를 해 주기보단 source 언어와 target 언어 간에 연결고리를 하나 놓아주어야 합니다. 그래서 우리는 두 언어의 embedding hyper plane이 선형(linear) 관계에 있다고 가정하고, dot product 하기 전에 선형 변환(linear transformation)을 해 줍니다.
 
-![](../assets/nmt-attention-linear-transform.png)
+![인코더의 출력값과 디코더의 출력값 사이의 선형 맵핑](../assets/nmt-attention-linear-transform.png)
 
 위와 같이 꼭 번역이 아니더라도, 두 다른 도메인(domain) 사이의 변환을 위해서 사용합니다.
 
 ### Why
 
-![](../assets/nmt-attention-working-example.png)
+![Attention이 번역에서 동작하는 직관적인 예](../assets/nmt-attention-working-example.png)
 
-왜 Attention이 필요한 것일까요? 기존의 seq2seq는 두 개의 RNN\(encoder와 decoder\)로 이루어져 있습니다. 여기서 압축된 문장의 의미에 해당하는 encoder의 정보를 hidden state \(LSTM의 경우에는 + cell state\)의 vector로 전달해야 합니다. 그리고 decoder는 그 정보를 이용해 다시 새로운 문장을 만들어냅니다. 이 때, hidden state만으로는 문장의 정보를 완벽하게 전달하기 힘들기 때문입니다. 따라서 decoder의 각 time-step 마다, 시간을 뛰어넘어, hidden state의 정보에 따라 필요한 encoder의 정보에 접근하여 끌어다 쓰겠다는 것 입니다.
+왜 Attention이 필요한 것일까요? 기존의 seq2seq는 두 개의 RNN(encoder와 decoder)로 이루어져 있습니다. 여기서 압축된 문장의 의미에 해당하는 encoder의 정보를 hidden state (LSTM의 경우에는 + cell state)의 vector로 전달해야 합니다. 그리고 decoder는 그 정보를 이용해 다시 새로운 문장을 만들어냅니다. 이 때, hidden state만으로는 문장의 정보를 완벽하게 전달하기 힘들기 때문입니다. 따라서 decoder의 각 time-step 마다, 시간을 뛰어넘어, hidden state의 정보에 따라 필요한 encoder의 정보에 접근하여 끌어다 쓰겠다는 것 입니다.
 
 ### Evaluation
 

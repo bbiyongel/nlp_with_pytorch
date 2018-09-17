@@ -1,4 +1,4 @@
-# Neural Network equals to Probability Function
+# Appendix: Neural Network is a Probability Function
 
 ## KL Divergence
 

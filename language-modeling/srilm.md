@@ -4,7 +4,7 @@ SRILM은 음성인식, segmentation, 기계번역 등에 사용되는 통계 언
 
 ## Install SRILM
 
-> 다운로드: http://www.speech.sri.com/projects/srilm/download.html
+- 다운로드: http://www.speech.sri.com/projects/srilm/download.html
 
 위의 주소에서 SRILM은 간단한 정보를 기입 한 후, 다운로드 가능합니다. 이후에 아래와 같이 디렉터리를 만들고 그 안에 압축을 풀어 놓습니다.
 
@@ -75,7 +75,7 @@ $ time ngram-count -order 3 -kndiscount -text <text_fn> -lm <output_lm_fn> -writ
 $ ngram -lm <input_lm_fn> -gen <n_sentence_to_generate> | sed "s/ //g" | sed "s/▁▁/ /g" | sed "s/▁//g" | sed "s/^\s//g"
 ```
 
-위와 같이 매번 sed와 regular expression을 통하는 것이 번거롭다면, preprocessing 챕터에서 구현한 ***detokenization.py*** python script를 통하여 detokenization을 수행 할 수도 있습니다.
+위와 같이 매번 sed와 regular expression을 통하는 것이 번거롭다면, preprocessing 챕터에서 구현한 detokenization.py python script를 통하여 detokenization을 수행 할 수도 있습니다.
 
 ### Evaluation
 
@@ -91,7 +91,8 @@ $ ngram -ppl <test_fn> -lm <input_lm_fn> -order 3 -debug 2
 $ ngram -ppl ./data/test.refined.tok.bpe.txt -lm ./data/ted.aligned.en.refined.tok.bpe.lm -order 3 -debug 2
 ...
 ...
-file ./data/test.refined.tok.bpe.txt: 1000 sentences, 13302 words, 32 OOVs0 zeroprobs, logprob= -36717.49 ppl= 374.1577 ppl1= 584.7292
+file ./data/test.refined.tok.bpe.txt: 1000 sentences, 13302 words, 32 OOVs
+0 zeroprobs, logprob= -36717.49 ppl= 374.1577 ppl1= 584.7292
 ```
 
 위의 evaluation에서는 1,000개의 테스트 문장에 대해서 13,302개의 단어가 포함되어 있었고, 개중에 32개의 OOV가 발생하였습니다. 결국 이 테스트에 대해서는 약 374의 ppl이 측정되었습니다. 이 ppl을 여러가지 hyper-parameter 튜닝 또는 적절한 훈련데이터 추가를 통해서 낮추는 것이 관건이 될 것 입니다.

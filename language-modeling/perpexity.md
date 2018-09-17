@@ -8,7 +8,7 @@ Perplexity 측정 방법은 explicit evaluation 방법의 하나입니다. 줄�
 
 $$
 \begin{aligned}
-PPL(w_1,w_2,\cdots,w_n)=&P(w_1,w_2,\cdots,w_N)^{-\frac{1}{N}} \\
+\text{PPL}(w_1,w_2,\cdots,w_n)=&P(w_1,w_2,\cdots,w_N)^{-\frac{1}{N}} \\
 =&\sqrt[N]{\frac{1}{P(w_1,w_2,\cdots,w_N)}}
 \end{aligned}
 $$
@@ -37,13 +37,11 @@ $$
 
 Perplexity의 개념을 좀 더 짚고 넘어가도록 해 보겠습니다. 이것은 Perplexity의 수치를 해석하는 방법에 대해서라고 할 수 있습니다. 예를 들어 우리가 6면 주사위를 던져서 나오는 값을 통해 수열을 만들어낸다고 해 보겠습니다. 따라서 1부터 6까지 숫자의 출현 확률은 모두 같다(uniform distribution)고 가정하겠습니다. 그럼 $N$번 주사위를 던져 얻어내는 수열에 대한 perplexity는 아래와 같습니다.
 
-
 $$
 PPL(x)=({\frac{1}{6}}^{N})^{-\frac{1}{N}}=6
 $$
 
-
-매 time-step 가능한 경우의 수인 6이 PPL로 나왔습니다. 즉, PPL은 우리가 뻗어나갈 수 있는 branch\(가지\)의 숫자를 의미하기도 합니다. 다른 예를 들어 만약 20,000개의 어휘로 이루어진 뉴스 기사에 대해서 PPL을 측정한다고 하였을 때, 단어의 출현 확률이 모두 동일하다면 PPL은 20,000이 될 것입니다. 하지만 3-gram을 사용한 언어모델을 만들어 측정한 PPL이 30이 나왔다면, 우리는 이 언어모델을 통해 해당 신문기사에서 매번 기사의 앞 부분을 통해 다음 단어를 예측 할 때, 평균적으로 30개의 후보 단어 중에서 선택할 수 있다는 얘기가 됩니다. 따라서 우리는 perplexity를 통해서 언어모델의 성능을 단순히 측정할 뿐만 아니라 실제 어느정도인지 가늠 해 볼 수도 있습니다.
+매 time-step 가능한 경우의 수인 6이 PPL로 나왔습니다. 즉, PPL은 우리가 뻗어나갈 수 있는 branch(가지)의 숫자를 의미하기도 합니다. 다른 예를 들어 만약 $20,000$개의 어휘로 이루어진 뉴스 기사에 대해서 PPL을 측정한다고 하였을 때, 단어의 출현 확률이 모두 동일하다면 PPL은 $20,000$이 될 것입니다. 하지만 3-gram을 사용한 언어모델을 만들어 측정한 PPL이 30이 나왔다면, 우리는 이 언어모델을 통해 해당 신문기사에서 매번 기사의 앞 부분을 통해 다음 단어를 예측 할 때, 평균적으로 30개의 후보 단어 중에서 선택할 수 있다는 얘기가 됩니다. 따라서 우리는 perplexity를 통해서 언어모델의 성능을 단순히 측정할 뿐만 아니라 실제 어느정도인지 가늠 해 볼 수도 있습니다.
 
 ### Entropy와 Perplexity의 관계
 
@@ -54,10 +52,12 @@ $$
 
 위의 예를 실제 사례를 들어 적용 해 보겠습니다.
 
-- 내일 아침에는 해가 동쪽에서 뜬다.
-- 내일 아침에는 해가 서쪽에서 뜬다.
-- 대한민국 올 여름의 평균 기온은 섭씨 28도로 예상 된다.
-- 대한민국 올 여름의 평균 기온은 섭씨 5도로 예상 된다.
+|번호|문장|
+|-|-|
+|1|내일 아침에는 해가 동쪽에서 뜬다.|
+|2|내일 아침에는 해가 서쪽에서 뜬다.|
+|3|대한민국 올 여름의 평균 기온은 섭씨 28도로 예상 된다.|
+|4|대한민국 올 여름의 평균 기온은 섭씨 5도로 예상 된다.|
 
 누군가에게 위와 같은 말을 들었을 때, 어떤 말이 우리에게 큰 도움이 될까요? 몇십억년 동안 반복되온 아침 해가 뜨는 위치가 내일은 바뀐다는 정보는 정말 천지 개벽의 정보가 될 겁니다. 따라서 우리는 이처럼 확률이 낮을 수록 그 안에 포함된 정보량은 높다고 생각 할 수 있습니다.
 
@@ -72,7 +72,7 @@ $-\log{}$를 취하였기 때문에, 0과 1 사이로 표현되는 확률은 0�
 우리는 이러한 정보량의 기대값을 엔트로피(entropy)라고 부릅니다.
 
 $$
-H(P) = -E_{X \sim P}[\log{P(x)}] = -\sum_{\forall x}{P(x)\log{P(x)}}
+H(P) = -\mathbb{E}_{X \sim P}[\log{P(x)}] = -\sum_{\forall x}{P(x)\log{P(x)}}
 $$
 
 위 식을 해석 해 보면, 우리는 확률 분포 $P$로부터 발생한 사건 $X$의 정보량에 대한 기대값을 구하는 것이라고 할 수 있습니다.
@@ -82,20 +82,20 @@ $$
 크로스 엔트로피(Cross entropy)는 entropy로부터 한 걸음 더 나아가, 우리가 구하고자 하는 ground-truth 확률분포 $P$를 통해 우리가 학습중인 확률분포 $Q$의 정보량의 기대값을 이릅니다. 크로스 엔트로피의 수식은 아래와 같습니다.
 
 $$
-H(P,Q)=-E_{X \sim P}[\log{Q(x)}]=-{\sum_{\forall x}{P(x)\log{Q(x)}}}
+H(P,Q)=-\mathbb{E}_{X \sim P}[\log{Q(x)}]=-{\sum_{\forall x}{P(x)\log{Q(x)}}}
 $$
 
 이것을 $Q$ 대신, 우리의 모델($P_\theta$)을 최적화 하기 위해 최소화(minimize)해야 하는 loss(손실)함수로 적용하여 보면 아래와 같습니다.
 
 $$
-L=H(P,P_\theta)=-E_{Y|X \sim P}[\log{P_\theta(y|x)}]
+\mathcal{L}=H(P,P_\theta)=-\mathbb{E}_{Y|X \sim P}[\log{P_\theta(y|x)}]
 $$
 
 여기서 우리는 N번의 Sampling 하는 과정을 통해 expectation을 제거할 수 있습니다. -- 강화학습(Reinforcement Learning) 챕터 참고
 
 $$
 \begin{aligned}
-H(P, P_\theta)&=-E_{Y|X \sim P}[\log{P_\theta(w_i|w_{<i})}] \\ 
+H(P, P_\theta)&=-\mathbb{E}_{Y|X \sim P}[\log{P_\theta(w_i|w_{<i})}] \\ 
 &\approx -\frac{1}{N}\sum_{i=1}^{N}{\log{P_\theta(w_i|w_{<i})}}
 \end{aligned}
 $$
@@ -104,31 +104,26 @@ $$
 
 $$
 \begin{aligned}
-L&=-\frac{1}{N}\sum_{i=1}^{N}{\log{P_\theta(w_i|w_{<i})}} \\
-&=\log{((\prod_{i=1}^{N}{P_\theta(w_i|w_{<i})})^{-\frac{1}{N}})} \\
-&=\log{(\sqrt[N]{\frac{1}{\prod_{i=1}^{N}{P_\theta(w_i|w_{<i})}}})} \\
+\mathcal{L}&=-\frac{1}{N}\sum_{i=1}^{N}{\log{P_\theta(w_i|w_{<i})}} \\
+&=\log{\Big(\prod_{i=1}^{N}{P_\theta(w_i|w_{<i})}\Big)^{-\frac{1}{N}}} \\
+&=\log{\sqrt[N]{\frac{1}{\prod_{i=1}^{N}{P_\theta(w_i|w_{<i})}}}} \\
 \end{aligned}
 $$
 
 여기에 PPL 수식을 다시 떠올려 보겠습니다.
 
 $$
-PPL(W)=P(w_1, w_2, \cdots, w_N)^{-\frac{1}{N}}
-=\sqrt[N]{\frac{1}{P(w_1,w_2,\cdots,w_N)}}
+\begin{gathered}
+\text{PPL}(W)=P(w_1, w_2, \cdots, w_N)^{-\frac{1}{N}}=\sqrt[N]{\frac{1}{P(w_1,w_2,\cdots,w_N)}} \\
+\text{by chain rule},\\
+\text{PPL}(W)=\sqrt[N]{\prod_{i=1}^{N}{\frac{1}{P(w_i|w_1,\cdots,w_{i-1})}}}
+\end{gathered}
 $$
 
-$$
-By~chain~rule,
-$$
+앞서 정리했던 Cross Entropy와 수식이 비슷한 형태임을 알 수 있습니다. 따라서 PPL과 Cross Entropy의 관계는 아래와 같습니다.
 
 $$
-PPL(W)=\sqrt[N]{\prod_{i=1}^{N}{\frac{1}{P(w_i|w_1,\cdots,w_{i-1})}}}
+\text{PPL}=\exp(\text{Cross Entropy})
 $$
 
-앞서 정리했던 Cross Entropy와 수식이 비슷한 형태임을 알 수 있습니다. 따라서 ***PPL***과 ***Cross Entropy***의 관계는 아래와 같습니다.
-
-$$
-PPL = \exp(Cross~Entropy)
-$$
-
-따라서, 우리는 반복적인(iterative) 학습을 통해 parameter $\theta$를 배울 때, cross entropy를 통해 얻은 ($P_\theta$의 로그 확률 값) loss 값에 exponential을 취함으로써, perplexity를 얻어 언어모델의 성능을 나타낼 수 있습니다.
+따라서, 우리는 Maximum Likelihood Estimation(MLE)을 통해 parameter($\theta$)를 배울 때, cross entropy를 통해 얻은 ($P_\theta$의 로그 확률 값) loss 값에 $\exp$를 취함으로써, perplexity를 얻어 언어모델의 성능을 나타낼 수 있습니다.
