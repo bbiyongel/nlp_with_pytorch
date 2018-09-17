@@ -13,7 +13,6 @@
 
 대부분의 챕터는 작성이 완료되었으며, 아래의 챕터가 아직 작성 중 입니다.
 
-- Word Sense Disambiguation
 - Word Embedding Vector
 - Text Classification
 
