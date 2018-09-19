@@ -2,7 +2,7 @@
 
 ## Architecture Overview
 
-![](../assets/nmt-seq2seq-architecture.png)
+![기본적인 Sequence-to-Sequence 아키텍처](../assets/nmt-seq2seq-architecture.png)
 
 먼저 번역 또는 seq2seq 모델을 이용한 작업을 간단하게 수식화 해보겠습니다.
 
@@ -10,15 +10,15 @@ $$
 \theta^* \approx \underset{\theta}{\text{argmax }}P(Y|X;\theta)\text{ where }X=\{x_1,x_2,\cdots,x_n\},~Y=\{y_1,y_2,\cdots,y_m\}
 $$
 
-$P(Y|X;\theta)$를 최대로 하는 모델 파라미터\($\theta$\)를 Maximum Likelihood Estimation(MLE)를 통해 찾아야 합니다. 즉, 모델 파라미터가 주어졌을 때, source 문장 $X$를 받아서 target 문장 $Y$를 반환할 확률을 최대로 하는 모델 파라미터를 학습하는 것 입니다. 이를 위해서 seq2seq는 크게 3개 서브 모듈(encoder, decoder, generator)로 구성되어 있습니다.
+$P(Y|X;\theta)$를 최대로 하는 모델 파라미터\($\theta$\)를 Maximum Likelihood Estimation(MLE)를 통해 찾아야 합니다. 즉, 모델 파라미터가 주어졌을 때, source 문장 $X$를 받아서 target 문장 $Y$를 반환할 확률을 최대로 하는 모델 파라미터를 학습하는 것 입니다. 이를 위해서 seq2seq는 크게 3개의 서브 모듈(encoder, decoder, generator)로 구성되어 있습니다.
 
 ### Encoder
 
-인코더는 source 문장을 입력으로 받아 문장을 함축하는 의미의 vector로 만들어 냅니다. $P(X)$를 모델링 하는 것이라고 볼 수 있습니다. 사실 새로운 형태라기 보단, 이전 챕터에서 다루었던 텍스트 분류(Text Classificaion)에서 사용되었던 RNN 모델과 거의 같다고 볼 수 있습니다. $P(X)$를 모델링하여, 주어진 문장을 벡터화(vectorize)하여 해당 도메인의 매니폴드(manifold or hyper-plane)의 어떤 한 점에 투영 시키는 작업이라고 할 수 있습니다.
+인코더는 source 문장을 입력으로 받아 문장을 함축하는 sentence embedding vector로 만들어 냅니다. $P(X)$를 모델링 하는 것이라고 볼 수 있습니다. 사실 새로운 형태라기 보단, 이전 챕터에서 다루었던 텍스트 분류(Text Classificaion)에서 사용되었던 RNN 모델과 거의 같다고 볼 수 있습니다. $P(X)$를 모델링하여, 주어진 문장을 벡터화(vectorize)하여 해당 도메인의 매니폴드(manifold or hyper-plane)의 어떤 한 점에 투영 시키는 작업이라고 할 수 있습니다.
 
 ![3개의 구성요소로 이루어진 Sequence-to-Sequence 아키텍처](../assets/nmt-enc-sent-proj.png)
 
-다만, 기존의 text classification에서는 모든 정보가 필요하지 않기 때문에 (예를들어 감성분석(Sentiment Analysis)에서는 "나는"과 같이 중립적인 단어는 감성을 분류하는데 필요하지 않기 때문에 해당 정보를 굳이 간직해야 하지 않을 수도 있습니다.) vector로 만들어내는 과정인 정보를 압축함에 있어서 손실 압축을 해도 되는 작업이지만, 기계번역에 있어서는 이상적으로는 거의 무손실 압축을 해내야 하는 차이는 있습니다.
+다만, 기존의 텍스트 분류 문제에서는 모든 정보가 필요하지 않기 때문에 (예를들어 감성분석(Sentiment Analysis)에서는 "나는"과 같이 중립적인 단어는 감성을 분류하는데 필요하지 않기 때문에 해당 정보를 굳이 간직해야 하지 않을 수도 있습니다.) vector로 만들어내는 과정에서 많은 정보를 간직하지 않아도 되지만, 기계번역을 위한 sentence embedding vector를 생성하기 위해서는 최대한 많은 정보를 간직해야 할 것 입니다.
 
 $$
 \begin{gathered}
@@ -27,7 +27,7 @@ H^{src} = [h_{1}^{src}; h_{2}^{src}; \cdots; h_{n}^{src}]
 \end{gathered}
 $$
 
-Encoder를 수식으로 나타내면 위와 같습니다. $[;]$는 concatenate를 의미합니다. 위의 수식은 time-step 별로 GRU를 통과시킨 것을 나타낸 것이고, 사실상 실제 코딩을 하게 되면 아래와 같이 됩니다.
+인코더(encoder)를 수식으로 나타내면 위와 같습니다. $[;]$는 concatenate를 의미합니다. 위의 수식은 time-step 별로 GRU를 통과시킨 것을 나타낸 것이고, 사실상 실제 구현을 하면 아래와 같이 됩니다.
 
 $$
 H^{src} = \text{RNN}_{enc}(\text{emb}_{src}(X), h_{0}^{src})
@@ -35,7 +35,7 @@ $$
 
 ### Decoder
 
-마찬가지로 디코더도 사실 새로운 개념이 아닙니다. 이전 챕터에서 다루었던 신경망언어모델(Nerual Network Langauge Model, NNLM)의 연장선으로써, 조건부 신경망언어모델(Conditional Neural Network Language Model)이라고 할 수 있습니다. 위에서 다루었던 seq2seq모델의 수식을 좀 더 time-step에 대해서 풀어서 써보면 아래와 같습니다.
+마찬가지로 디코더(decoder)도 사실 새로운 개념이 아닙니다. 이전 챕터에서 다루었던 신경망언어모델(Nerual Network Langauge Model, NNLM)의 연장선으로써, 조건부 신경망언어모델(Conditional Neural Network Language Model)이라고 할 수 있습니다. 위에서 다루었던 seq2seq모델의 수식을 좀 더 time-step에 대해서 풀어서 써보면 아래와 같습니다.
 
 $$
 P_\theta(Y|X)=\prod_{t=1}^{m}P_\theta(y_t|X,y_{<t})
@@ -45,17 +45,17 @@ $$
 \log P_\theta(Y|X) = \sum_{t=1}^{m}\log P_\theta(y_t|X, y_{<t})
 $$
 
-보면 RNNLM의 수식에서 조건부에 $X$가 추가 된 것을 확인 할 수 있습니다. 즉, 이제까지 번역 한 (이전 time-step의) 단어들과 encoder의 결과에 기반해서 현재 time-step의 단어를 유추해 내는 작업을 수행합니다.
+보면 RNNLM의 수식에서 조건부 랜덤 변수(random variable) 부분에 $X$가 추가 된 것을 확인 할 수 있습니다. 즉, 이제까지 번역하여 생성한 (이전 time-step의) 단어들과 인코더의 결과에 기반해서 현재 time-step의 단어를 생성하기 위헤 유추하는 작업을 수행합니다.
 
 $$
 h_{t}^{tgt} = \text{RNN}_{dec}(\text{emb}_{tgt}(y_{t-1}), h_{t-1}^{tgt})\text{ where }h_{0}^{tgt}=h_{n}^{src}\text{ and }y_{0}=BOS
 $$
 
-위의 수식은 decoder를 나타낸 것입니다. 특기할 점은 decoder 입력의 초기값으로써, $y_0$에 $BOS$를 넣어준다는 것 입니다. 
+위 수식은 디코더를 나타낸 것입니다. 특기할 점은 디코더 입력의 초기값으로써, $y_0$에 $BOS$를 넣어준다는 것 입니다. 
 
 ### Generator
 
-이 모듈은 아래와 같이 Decoder에서 vector를 받아 softmax를 계산하여 최고 확률을 가진 단어를 선택하는 단순한 작업을 하는 모듈 입니다. $|Y|=m$일때, $y_{m}$은 $EOS$ 토큰이 됩니다. 주의할 점은 이 마지막 $y_{m}$은 decoder 계산의 종료를 나타내기 때문에, 이론상으로는 decoder의 입력으로 들어가는 일이 없습니다.
+이 모듈은 아래와 같이 디코더에서 벡터를 받아 softmax를 계산하여 최고 확률을 가진 단어를 선택하는 단순한 작업을 하는 모듈 입니다. $|Y|=m$일때, $y_{m}$은 $EOS$ 토큰이 됩니다. 주의할 점은 이 마지막 $y_{m}$은 디코더 계산의 종료를 나타내기 때문에, 이론상으로는 디코더의 입력으로 들어가는 일이 없습니다.
 
 $$
 \begin{gathered}
@@ -66,21 +66,21 @@ $$
 
 ## Applications of seq2seq
 
-이와 같이 구성된 Seq2seq 모델은 꼭 기계번역의 task에서만 사용해야 하는 것이 아니라 정말 많은 분야에 적용할 수 있습니다. 특정 도메인의 sequential한 입력을 다른 도메인의 sequential한 데이터로 출력하는데 탁월한 능력을 발휘합니다.
+이와 같이 구성된 Seq2seq 모델은 꼭 기계번역 문제에서만 사용해야 하는 것이 아니라 정말 많은 분야에 적용할 수 있습니다. 특정 도메인의 time-series 데이터 또는 sequential한 입력을 다른 도메인의 sequential한 데이터로 출력하는데 탁월한 능력을 발휘합니다.
 
-| Seq2seq Applications | Task \(From-To\) |
+| Seq2seq Applications | Task (From-To) |
 | --- | --- |
-| Neural Machine Translation \(NMT\) | 특정 언어 문장을 입력으로 받아 다른 언어의 문장으로 출력 |
+| Neural Machine Translation (NMT) | 특정 언어 문장을 입력으로 받아 다른 언어의 문장으로 출력 |
 | Chatbot | 사용자의 문장 입력을 받아 대답을 출력 |
 | Summarization | 긴 문장을 입력으로 받아 같은 언어의 요약된 문장으로 출력 |
 | Other NLP Task | 사용자의 문장 입력을 받아 프로그래밍 코드로 출력 등 |
-| Automatic Speech Recognition \(ASR\) | 사용자의 음성을 입력으로 받아 해당 언어의 문자열\(문장\)으로 출력 |
+| Automatic Speech Recognition (ASR) | 사용자의 음성을 입력으로 받아 해당 언어의 문자열(문장)으로 출력 |
 | Lip Reading | 입술 움직임의 동영상을 입력으로 받아 해당 언어의 문장으로 출력 |
 | Image Captioning | 변형된 seq2seq를 사용하여 이미지를 입력으로 받아 그림을 설명하는 문장을 출력 |
 
 ## Limitation
 
-사실 seq2seq는 [AutoEncoder](https://en.wikipedia.org/wiki/Autoencoder)와 굉장히 역할이 비슷하다고 볼 수 있습니다. 그 중에서도 특히 Sequential한 데이터에 대한 task에 강점이 있는 모델이라고 볼 수 있습니다. 하지만 아래와 같은 한계점들이 있습니다.
+사실 seq2seq는 [AutoEncoder](https://en.wikipedia.org/wiki/Autoencoder)와 굉장히 역할이 비슷하다고 볼 수 있습니다. 그 중에서도 특히 time-series 데이터에 대한 강점이 있는 모델이라고 볼 수 있습니다. 하지만 아래와 같은 한계점들이 있습니다.
 
 ### Memorization
 
@@ -88,11 +88,11 @@ Neural Network 모델은 데이터를 압축하는데에 탁월한 성능([Manif
 
 ### Lack of Structural Information
 
-현재 주류의 Deeplearning NLP는 문장을 이해함에 있어서 구조 정보를 사용하기보단, 단순히 시계열(time-series) 데이터로 다루는 경향이 있습니다. 비록 이러한 접근방법은 현재까지 대성공을 거두고 있지만, 다음 단계로 나아가기 위해서는 구조 정보도 필요할 것이라 생각하는 사람들이 많습니다.
+현재 주류의 딥러닝 자연어처리에서는 문장을 이해함에 있어서 구조 정보를 사용하기보단, 단순히 시계열(time-series) 데이터로 다루는 경향이 있습니다. 비록 이러한 접근방법은 현재까지 대성공을 거두고 있지만, 다음 단계로 나아가기 위해서는 구조 정보도 필요할 것이라 생각하는 사람들이 많습니다.
 
 ### Chatbot?
 
-사실 이 항목은 단점이라기보다는 그냥 당연한 이야기일 수 있습니다. seq2seq는 sequential한 데이터를 입력으로 받아서 다른 도메인의 sequential한 데이터로 출력하는 능력이 뛰어납니다. 따라서, 처음에는 많은 사람들이 seq2seq를 잘 훈련시키면 Chatbot의 기능도 어느정도 할 수 있지 않을까 하는 기대를 했습니다. 하지만 자세히 생각해보면, 대화의 흐름에서 대답은 질문에 비해서 새로운 정보(지식-knowledge, 문맥-context)가 추가 된 경우가 많습니다. 따라서 기존의 전형적인 seq2seq의 문제(번역, 요약)등은 새로운 정보의 추가가 없기 때문에 잘 해결할 수 있었지만, 대화의 경우에는 좀 더 발전된 구조가 필요할 것 입니다.
+사실 이 항목은 단점이라기보다는 그냥 당연한 이야기일 수 있습니다. seq2seq는 시계열 데이터를 입력으로 받아서 다른 도메인의 시계열 데이터로 출력하는 능력이 뛰어납니다. 따라서, 처음에는 많은 사람들이 seq2seq를 잘 훈련시키면 챗봇의 기능도 어느정도 할 수 있지 않을까 하는 기대를 했습니다. 하지만 자세히 생각해보면, 대화의 흐름에서 대답은 질문에 비해서 새로운 정보(지식-knowledge, 문맥-context)가 추가 된 경우가 많습니다. 따라서 기존의 전형적인 seq2seq의 문제(번역, 요약)등은 새로운 정보의 추가가 없기 때문에 잘 해결할 수 있었지만, 대화의 경우에는 좀 더 발전된 구조가 필요할 것 입니다.
 
 ## Code
 
