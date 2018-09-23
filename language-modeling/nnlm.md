@@ -63,14 +63,19 @@ $$
 import torch
 import torch.nn as nn
 
+import data_loader
+
+
 class LanguageModel(nn.Module):
 
-    def __init__(self, vocab_size, word_vec_dim = 512, 
-                                    hidden_size = 512, 
-                                    n_layers = 4, 
-                                    dropout_p = .2, 
-                                    max_length = 255
-                                    ):
+    def __init__(self, 
+                 vocab_size,
+                 word_vec_dim=512,
+                 hidden_size=512,
+                 n_layers=4,
+                 dropout_p=.2,
+                 max_length=255
+                 ):
         self.vocab_size = vocab_size
         self.word_vec_dim = word_vec_dim
         self.hidden_size = hidden_size
@@ -80,10 +85,18 @@ class LanguageModel(nn.Module):
 
         super(LanguageModel, self).__init__()
 
-        self.emb = nn.Embedding(vocab_size, word_vec_dim, padding_idx = 0)
-        self.rnn = nn.LSTM(word_vec_dim, hidden_size, n_layers, batch_first = True, dropout = dropout_p)
-        self.out = nn.Linear(hidden_size, vocab_size, bias = True)
-        self.log_softmax = nn.LogSoftmax(dim = 2)
+        self.emb = nn.Embedding(vocab_size, 
+                                word_vec_dim,
+                                padding_idx=data_loader.PAD
+                                )
+        self.rnn = nn.LSTM(word_vec_dim,
+                           hidden_size,
+                           n_layers,
+                           batch_first=True,
+                           dropout=dropout_p
+                           )
+        self.out = nn.Linear(hidden_size, vocab_size, bias=True)
+        self.log_softmax = nn.LogSoftmax(dim=2)
 
     def forward(self, x):
         # |x| = (batch_size, length)
@@ -96,6 +109,40 @@ class LanguageModel(nn.Module):
         y_hat = self.log_softmax(x)
 
         return y_hat
+
+    def search(self, batch_size=64, max_length=255):
+        x = torch.LongTensor(batch_size, 1).to(next(self.parameters()).device).zero_() + data_loader.BOS
+        # |x| = (batch_size, 1)
+        is_undone = x.new_ones(batch_size, 1).float()
+
+        y_hats, indice = [], []
+        h, c = None, None
+        while is_undone.sum() > 0 and len(indice) < max_length:
+            x = self.emb(x)
+            # |emb_t| = (batch_size, 1, word_vec_dim)
+
+            x, (h, c) = self.rnn(x, (h, c)) if h is not None and c is not None else self.rnn(x)
+            # |x| = (batch_size, 1, hidden_size)
+            y_hat = self.log_softmax(x)
+            # |y_hat| = (batch_size, 1, output_size)
+            y_hats += [y_hat]
+
+            # y = torch.topk(y_hat, 1, dim = -1)[1].squeeze(-1)
+            y = torch.multinomial(y_hat.exp().view(batch_size, -1), 1)
+            y = y.masked_fill_((1. - is_undone).byte(), data_loader.PAD)
+            is_undone = is_undone * torch.ne(y, data_loader.EOS).float()            
+            # |y| = (batch_size, 1)
+            # |is_undone| = (batch_size, 1)
+            indice += [y]
+
+            x = y
+
+        y_hats = torch.cat(y_hats, dim=1)
+        indice = torch.cat(indice, dim=-1)
+        # |y_hat| = (batch_size, length, output_size)
+        # |indice| = (batch_size, length)
+
+        return y_hats, indice
 ```
 
 ### data_loader.py
@@ -103,59 +150,63 @@ class LanguageModel(nn.Module):
 ```python
 from torchtext import data, datasets
 
-BOS = 2
-EOS = 3
+PAD, BOS, EOS = 1, 2, 3
+
 
 class DataLoader():
 
-    def __init__(self, train_fn, valid_fn, batch_size = 64, 
-                                            device = -1, 
-                                            max_vocab = 99999999, 
-                                            max_length = 255, 
-                                            fix_length = None, 
-                                            use_bos = True, 
-                                            use_eos = True, 
-                                            shuffle = True
-                                            ):
+    def __init__(self, 
+                 train_fn,
+                 valid_fn, 
+                 batch_size=64, 
+                 device='cpu', 
+                 max_vocab=99999999, 
+                 max_length=255, 
+                 fix_length=None, 
+                 use_bos=True, 
+                 use_eos=True, 
+                 shuffle=True
+                 ):
+        
         super(DataLoader, self).__init__()
 
-        self.text = data.Field(sequential = True, 
-                                use_vocab = True, 
-                                batch_first = True, 
-                                include_lengths = True, 
-                                fix_length = fix_length, 
-                                init_token = '<BOS>' if use_bos else None, 
-                                eos_token = '<EOS>' if use_eos else None
-                                )
+        self.text = data.Field(sequential=True, 
+                               use_vocab=True, 
+                               batch_first=True, 
+                               include_lengths=True, 
+                               fix_length=fix_length, 
+                               init_token='<BOS>' if use_bos else None, 
+                               eos_token='<EOS>' if use_eos else None
+                               )
 
-        train = LanguageModelDataset(path = train_fn, 
-                                        fields = [('text', self.text)], 
-                                        max_length = max_length
-                                        )
-        valid = LanguageModelDataset(path = valid_fn, 
-                                        fields = [('text', self.text)], 
-                                        max_length = max_length
-                                        )
+        train = LanguageModelDataset(path=train_fn, 
+                                     fields=[('text', self.text)], 
+                                     max_length=max_length
+                                     )
+        valid = LanguageModelDataset(path=valid_fn, 
+                                     fields=[('text', self.text)], 
+                                     max_length=max_length
+                                     )
 
         self.train_iter = data.BucketIterator(train, 
-                                                batch_size = batch_size, 
-                                                device = device, 
-                                                shuffle = shuffle, 
-                                                sort_key=lambda x: -len(x.text), 
-                                                sort_within_batch = True
-                                                )
+                                              batch_size=batch_size, 
+                                              device='cuda:%d' % device if device >= 0 else 'cpu', 
+                                              shuffle=shuffle, 
+                                              sort_key=lambda x: -len(x.text), 
+                                              sort_within_batch=True
+                                              )
         self.valid_iter = data.BucketIterator(valid, 
-                                                batch_size = batch_size, 
-                                                device = device, 
-                                                shuffle = False, 
-                                                sort_key=lambda x: -len(x.text), 
-                                                sort_within_batch = True
-                                                )
+                                              batch_size=batch_size, 
+                                              device='cuda:%d' % device if device >= 0 else 'cpu', 
+                                              shuffle=False, 
+                                              sort_key=lambda x: -len(x.text), 
+                                              sort_within_batch=True
+                                              )
 
-        self.text.build_vocab(train, max_size = max_vocab)
+        self.text.build_vocab(train, max_size=max_vocab)
+
 
 class LanguageModelDataset(data.Dataset):
-    """Defines a dataset for machine translation."""
 
     def __init__(self, path, fields, max_length=None, **kwargs):
         if not isinstance(fields[0], (tuple, list)):
@@ -172,18 +223,6 @@ class LanguageModelDataset(data.Dataset):
                         [line], fields))
 
         super(LanguageModelDataset, self).__init__(examples, fields, **kwargs)
-
-
-if __name__ == '__main__':
-    import sys
-    loader = DataLoader(sys.argv[1], sys.argv[2])
-
-    for batch_index, batch in enumerate(loader.train_iter):
-        print(batch.text)
-
-        if batch_index > 1:
-            break
-
 ```
 
 ### trainer.py
@@ -199,15 +238,19 @@ import torch.nn.utils as torch_utils
 
 import utils
 
-def get_loss(y, y_hat, criterion, do_backward = True):
+
+def get_loss(y, y_hat, criterion, do_backward=True):
     batch_size = y.size(0)
 
-    loss = criterion(y_hat.contiguous().view(-1, y_hat.size(-1)), y.contiguous().view(-1))
+    loss = criterion(y_hat.contiguous().view(-1, y_hat.size(-1)), 
+                     y.contiguous().view(-1)
+                     )
     if do_backward:
         # since size_average parameter is off, we need to devide it by batch size before back-prop.
         loss.div(batch_size).backward()
 
     return loss
+
 
 def train_epoch(model, criterion, train_iter, valid_iter, config):
     current_lr = config.lr
@@ -215,8 +258,11 @@ def train_epoch(model, criterion, train_iter, valid_iter, config):
     lowest_valid_loss = np.inf
     no_improve_cnt = 0
 
-    for epoch in range(1, config.n_epochs):
-        optimizer = optim.SGD(model.parameters(), lr = current_lr)
+    for epoch in range(1, config.n_epochs + 1):
+        # optimizer = optim.Adam(model.parameters(), lr = current_lr)
+        optimizer = optim.SGD(model.parameters(),
+                              lr=current_lr
+                              )
         print("current learning rate: %f" % current_lr)
         print(optimizer)
 
@@ -253,15 +299,15 @@ def train_epoch(model, criterion, train_iter, valid_iter, config):
                 elapsed_time = time.time() - start_time
 
                 print("epoch: %d batch: %d/%d\t|param|: %.2f\t|g_param|: %.2f\tloss: %.4f\tPPL: %.2f\t%5d words/s %3d secs" % (epoch, 
-                                                                                                            batch_index + 1, 
-                                                                                                            int((len(train_iter.dataset.examples) // config.batch_size)  * config.iter_ratio_in_epoch), 
-                                                                                                            avg_parameter_norm, 
-                                                                                                            avg_grad_norm, 
-                                                                                                            avg_loss,
-                                                                                                            np.exp(avg_loss),
-                                                                                                            total_word_count // elapsed_time,
-                                                                                                            elapsed_time
-                                                                                                            ))
+                                                                                                                               batch_index + 1, 
+                                                                                                                               int((len(train_iter.dataset.examples) // config.batch_size)  * config.iter_ratio_in_epoch), 
+                                                                                                                               avg_parameter_norm, 
+                                                                                                                               avg_grad_norm, 
+                                                                                                                               avg_loss,
+                                                                                                                               np.exp(avg_loss),
+                                                                                                                               total_word_count // elapsed_time,
+                                                                                                                               elapsed_time
+                                                                                                                               ))
 
                 total_loss, total_word_count, total_parameter_norm, total_grad_norm = 0, 0, 0, 0
                 start_time = time.time()
@@ -270,7 +316,9 @@ def train_epoch(model, criterion, train_iter, valid_iter, config):
 
             # Another important line in this method.
             # In orther to avoid gradient exploding, we apply gradient clipping.
-            torch_utils.clip_grad_norm_(model.parameters(), config.max_grad_norm)
+            torch_utils.clip_grad_norm_(model.parameters(), 
+                                        config.max_grad_norm
+                                        )
             # Take a step of gradient descent.
             optimizer.step()
 
@@ -288,7 +336,7 @@ def train_epoch(model, criterion, train_iter, valid_iter, config):
             y = batch.text[0][:, 1:]
             y_hat = model(x)
 
-            loss = get_loss(y, y_hat, criterion, do_backward = False)
+            loss = get_loss(y, y_hat, criterion, do_backward=False)
 
             total_loss += float(loss)
             total_word_count += int(current_batch_word_cnt)
@@ -305,13 +353,16 @@ def train_epoch(model, criterion, train_iter, valid_iter, config):
             no_improve_cnt = 0
         else:
             # decrease learing rate if there is no improvement.
-            current_lr /= 10.
+            current_lr = max(config.min_lr, current_lr * config.lr_decay_rate)
             no_improve_cnt += 1
 
         model.train()
 
         model_fn = config.model.split(".")
-        model_fn = model_fn[:-1] + ["%02d" % epoch, "%.2f-%.2f" % (train_loss, np.exp(train_loss)), "%.2f-%.2f" % (avg_loss, np.exp(avg_loss))] + [model_fn[-1]]
+        model_fn = model_fn[:-1] + ["%02d" % epoch, 
+                                    "%.2f-%.2f" % (train_loss, np.exp(train_loss)), 
+                                    "%.2f-%.2f" % (avg_loss, np.exp(avg_loss))
+                                    ] + [model_fn[-1]]
 
         # PyTorch provides efficient method for save and load model, which uses python pickle.
         torch.save({"model": model.state_dict(),
@@ -320,16 +371,13 @@ def train_epoch(model, criterion, train_iter, valid_iter, config):
                     "current_lr": current_lr
                     }, ".".join(model_fn))
 
-        if config.early_stop > 0 and no_improve_cnt > config.early_stop:
+        if config.early_stop > 0 and no_improve_cnt >= config.early_stop:
             break
 ```
 
 ### utils.py
 
 ```python
-
-import torch
-
 def get_grad_norm(parameters, norm_type = 2):
     parameters = list(filter(lambda p: p.grad is not None, parameters))
     
@@ -372,65 +420,105 @@ import data_loader
 from language_model import LanguageModel as LM
 import trainer
 
+
 def define_argparser():
     p = argparse.ArgumentParser()
 
-    p.add_argument('-model', required = True)
-    p.add_argument('-train', required = True)
-    p.add_argument('-valid', required = True)
-    p.add_argument('-gpu_id', type = int, default = -1)
+    p.add_argument('-model', required=True)
+    p.add_argument('-train', required=True)
+    p.add_argument('-valid', required=True)
+    p.add_argument('-gpu_id', type=int, default=-1)
 
-    p.add_argument('-batch_size', type = int, default = 64)
-    p.add_argument('-n_epochs', type = int, default = 20)
-    p.add_argument('-print_every', type = int, default = 50)
-    p.add_argument('-early_stop', type = int, default = 3)
-    p.add_argument('-iter_ratio_in_epoch', type = float, default = 1.)
+    p.add_argument('-batch_size', type=int, default=64)
+    p.add_argument('-n_epochs', type=int, default=20)
+    p.add_argument('-print_every', type=int, default=50)
+    p.add_argument('-early_stop', type=int, default=3)
+    p.add_argument('-iter_ratio_in_epoch', type=float, default=1.)
+    p.add_argument('-lr_decay_rate', type=float, default=.5)
     
-    p.add_argument('-dropout', type = float, default = .1)
-    p.add_argument('-word_vec_dim', type = int, default = 256)
-    p.add_argument('-hidden_size', type = int, default = 256)
-    p.add_argument('-max_length', type = int, default = 80)
+    p.add_argument('-dropout', type=float, default=.3)
+    p.add_argument('-word_vec_dim', type=int, default=256)
+    p.add_argument('-hidden_size', type=int, default=256)
+    p.add_argument('-max_length', type=int, default=80)
 
-    p.add_argument('-n_layers', type = int, default = 4)
-    p.add_argument('-max_grad_norm', type = float, default = 5.)
-    p.add_argument('-lr', type = float, default = 1.)
-    p.add_argument('-min_lr', type = float, default = .000001)
+    p.add_argument('-n_layers', type=int, default=4)
+    p.add_argument('-max_grad_norm', type=float, default=5.)
+    p.add_argument('-lr', type=float, default=1.)
+    p.add_argument('-min_lr', type=float, default=.000001)
+
+    p.add_argument('-gen', type=int, default=32)
     
     config = p.parse_args()
 
     return config
+
+
+def to_text(indice, vocab):
+    lines = []
+
+    for i in range(len(indice)):
+        line = []
+        for j in range(len(indice[i])):
+            index = indice[i][j]
+
+            if index == data_loader.EOS:
+                # line += ['<EOS>']
+                break
+            else:
+                line += [vocab.itos[index]]
+
+        line = ' '.join(line)
+        lines += [line]
+
+    return lines
+
 
 if __name__ == '__main__':
     config = define_argparser()
 
     loader = DataLoader(config.train, 
                         config.valid, 
-                        batch_size = config.batch_size, 
-                        device = config.gpu_id,
-                        max_length = config.max_length
+                        batch_size=config.batch_size, 
+                        device=config.gpu_id,
+                        max_length=config.max_length
                         )
     model = LM(len(loader.text.vocab), 
-                word_vec_dim = config.word_vec_dim, 
-                hidden_size = config.hidden_size, 
-                n_layers = config.n_layers, 
-                dropout_p = config.dropout, 
-                max_length = config.max_length
-                )
+               word_vec_dim=config.word_vec_dim, 
+               hidden_size=config.hidden_size, 
+               n_layers=config.n_layers, 
+               dropout_p=config.dropout, 
+               max_length=config.max_length
+               )
 
-    # Let criterion cannot count EOS as right prediction, because EOS is easy to predict.
+    # Let criterion cannot count PAD as right prediction, because PAD is easy to predict.
     loss_weight = torch.ones(len(loader.text.vocab))
-    loss_weight[data_loader.EOS] = 0
-    criterion = nn.NLLLoss(weight = loss_weight, size_average = False)
+    loss_weight[data_loader.PAD] = 0
+    criterion = nn.NLLLoss(weight=loss_weight, size_average=False)
 
     print(model)
     print(criterion)
 
-    trainer.train_epoch(model, 
-                        criterion, 
-                        loader.train_iter, 
-                        loader.valid_iter, 
-                        config
-                        )
+    if config.gpu_id >= 0:
+        model.cuda(config.gpu_id)
+        criterion.cuda(config.gpu_id)
+
+    if config.n_epochs > 0:
+        trainer.train_epoch(model, 
+                            criterion, 
+                            loader.train_iter, 
+                            loader.valid_iter, 
+                            config
+                            )
+
+    if config.gen > 0:
+        total_gen = 0
+        while total_gen < config.gen:
+            current_gen = min(config.batch_size, config.gen - total_gen)
+            _, indice = model.search(batch_size=current_gen)
+            total_gen += current_gen
+
+            lines = to_text(indice, loader.text.vocab)
+            print('\n'.join(lines))
 ```
 
 ## Conclusion
