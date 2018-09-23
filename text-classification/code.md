@@ -1,10 +1,16 @@
-# Code
+# Implementation
 
 아래는 텍스트 분류를 위한 학습 및 추론 프로그램 전체 소스코드 입니다. 최신 소스코드는 저자의 깃허브에서 다운로드 받을 수 있습니다.
 
 - Github Repo: https://github.com/kh-kim/simple-ntc
 
-## train.py
+## Usage
+
+## Evaluation
+
+## Code
+
+### train.py
 
 ```python
 import argparse
@@ -128,7 +134,7 @@ if __name__ == '__main__':
     main(config)
 ```
 
-## data_loader.py
+### data_loader.py
 
 ```python
 from torchtext import data, datasets
@@ -174,7 +180,7 @@ class DataLoader(object):
         self.text.build_vocab(train, max_size=max_vocab, min_freq=min_freq)
 ```
 
-## trainer.py
+### trainer.py
 
 ```python
 from tqdm import tqdm
@@ -356,7 +362,7 @@ class Trainer():
             return y_hats, avg_loss
 ```
 
-## rnn.py
+### rnn.py
 
 ```python
 import torch
@@ -405,7 +411,7 @@ class RNNClassifier(nn.Module):
         return y
 ```
 
-## cnn.py
+### cnn.py
 
 ```python
 import torch
@@ -475,7 +481,7 @@ class CNNClassifier(nn.Module):
         return y
 ```
 
-## utils.py
+### utils.py
 
 ```python
 def get_grad_norm(parameters, norm_type=2):
@@ -508,7 +514,7 @@ def get_parameter_norm(parameters, norm_type=2):
     return total_norm
 ```
 
-## classify.py
+### classify.py
 
 ```python
 import sys
