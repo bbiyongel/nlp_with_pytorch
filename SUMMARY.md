@@ -50,7 +50,7 @@
   * [Naive Bayes](text-classification/naive-bayes.md)
   * [Using RNN](text-classification/rnn.md)
   * [Using CNN](text-classification/cnn.md)
-  * [Unsupervised Text Classification](text-classification/unsupervised-text-classification.md)
+  * [Source Code](text-classification/code.md)
 * [Language Modeling](language-modeling/cover.md)
   * [Intro](language-modeling/intro.md)
   * [n-gram](language-modeling/n-gram.md)

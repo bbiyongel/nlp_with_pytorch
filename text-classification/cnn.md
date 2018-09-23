@@ -64,3 +64,73 @@ $$
 여러 단어로 이루어진 가변 길이의 문장을 입력으로 받아, 각 단어들을 embedding vector로 변환 후, 단어별로 여러가지 필터를 적용하여 필요한 패턴을 감지합니다. 문제는 문장의 길이가 문장마다 다르기 때문에, 필터를 적용한 결과물의 크기도 다를 것 입니다. 이때, max pooling layer를 적용하여 가변 길이의 변수를 제거할 수 있습니다. Max pooling 결과의 크기는 필터의 갯수와 같을 것 입니다. 이제 이 위에 linear layer + softmax를 사용하여 각 class 별 확률을 구할 수 있습니다.
 
 ## 코드
+
+```python
+import torch
+import torch.nn as nn
+
+
+class CNNClassifier(nn.Module):
+
+    def __init__(self,
+                 input_size,
+                 word_vec_dim,
+                 n_classes,
+                 dropout_p=.2,
+                 window_sizes=[3, 4, 5],
+                 n_filters=[10, 10, 10]
+                 ):
+        self.input_size = input_size
+        self.word_vec_dim = word_vec_dim
+        self.n_classes = n_classes
+        self.dropout_p = dropout_p
+        self.window_sizes = window_sizes
+        self.n_filters = n_filters
+
+        super().__init__()
+
+        self.emb = nn.Embedding(input_size, word_vec_dim)
+        for window_size, n_filter in zip(window_sizes, n_filters):
+            cnn = nn.Conv2d(in_channels=1,
+                            out_channels=n_filter,
+                            kernel_size=(window_size, word_vec_dim)
+                            )
+            setattr(self, 'cnn-%d-%d' % (window_size, n_filter), cnn)
+        self.relu = nn.ReLU()
+        self.dropout = nn.Dropout(dropout_p)
+        self.generator = nn.Linear(sum(n_filters), n_classes)
+        self.activation = nn.LogSoftmax(dim=-1)
+
+    def forward(self, x):
+        # |x| = (batch_size, length)
+        x = self.emb(x)
+        # |x| = (batch_size, length, word_vec_dim)
+        min_length = max(self.window_sizes)
+        if min_length > x.size(1):
+            pad = x.new(x.size(0), min_length - x.size(1), self.word_vec_dim).zero_()
+            # |pad| = (batch_size, min_length - length, word_vec_dim)
+            x = torch.cat([x, pad], dim=1)
+            # |x| = (batch_size, min_length, word_vec_dim)
+        
+        x = x.unsqueeze(1)
+        # |x| = (batch_size, 1, length, word_vec_dim)
+
+        cnn_outs = []
+        for window_size, n_filter in zip(self.window_sizes, self.n_filters):
+            cnn = getattr(self, 'cnn-%d-%d' % (window_size, n_filter))
+            cnn_out = self.dropout(self.relu(cnn(x)))
+            # |x| = (batch_size, n_filter, length - window_size + 1, 1)
+            cnn_out = nn.functional.max_pool1d(input=cnn_out.squeeze(-1),
+                                            kernel_size=cnn_out.size(-2)
+                                            ).squeeze(-1)
+            # |cnn_out| = (batch_size, n_filter)
+            cnn_outs += [cnn_out]
+        cnn_outs = torch.cat(cnn_outs, dim=-1)
+        # |cnn_outs| = (batch_size, sum(n_filters))
+        y = self.activation(self.generator(cnn_outs))
+        # |y| = (batch_size, n_classes)
+
+        return y
+```
+
+https://arxiv.org/pdf/1510.03820.pdf
