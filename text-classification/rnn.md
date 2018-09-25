@@ -1,10 +1,14 @@
 # RNN Based Method
 
-## 구조 설계
+그럼 이제 딥러닝을 통한 텍스트 분류 문제를 살펴 보겠습니다. 딥러닝을 통해 텍스트 분류를 하기 위한 가장 간단한 방법은 Recurrent Neural Network(RNN)를 활용하는것 입니다. 문장은 단어들의 시퀀스로 이루어진 시계열(time-series) 데이터 입니다. 따라서, 각 위치(또는 time-step)의 단어들은 다른 위치의 단어들과 영향을 주고 받습니다. RNN은 이런 문장의 특성을 가장 잘 활용할 수 있는 neural network 아키텍쳐입니다.
 
-## 설명
+이전 챕터에서 다루었듯이, RNN은 각 time-step의 단어를 입력으로 받아 hidden state를 업데이트 합니다. 우리는 이때, 가장 마지막 hidden state를 활용하여 텍스트의 클래스를 분류할 수 있습니다. 따라서, 마치 RNN은 입력으로 주어진 문장을 분류 문제에 맞게 인코딩 한다고 볼 수 있습니다. 즉, RNN의 출력값은 문장 임베딩 벡터(sentence embedding vector)라고 볼 수 있습니다.
 
-## 코드
+![RNN의 마지막 time-step의 출력을 사용 하는 경우](../assets/rnn-apply-1.png)
+
+우리가 텍스트 분류를 RNN을 통해 구현한다면 위와 같은 구조가 될 것 입니다. One-hot 벡터로 주어진 
+
+## Implementation
 
 ```python
 import torch
