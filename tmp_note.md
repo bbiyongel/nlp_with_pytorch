@@ -239,9 +239,9 @@ $$
 $$
 \begin{aligned}
 \mathcal{L}(\theta,\phi)&\le-\sum_{n=1}^N{\log{P(y^{n}|x^{n};\theta)}}-\sum_{n=1}^N{\log{P(x^{n}|y^{n};\phi)}}-\sum_{s=1}^S{\Big(\mathbb{E}_{y\sim P(y|x^s)}[\log{P(x^s|y;\phi)}]-\text{KL}\big(P(y|x^s;\theta)||P(y)\big)\Big)}-\sum_{t=1}^T{\Big(\mathbb{E}_{x\sim P(x|y^t)}[\log{P(y^t|x;\theta)}]-\text{KL}\big(P(x|y^t;\phi)||P(x)\big)\Big)} \\
-&=\Big(-\sum_{n=1}^N{\log{P(y^{n}|x^{n};\theta)}}-\sum_{t=1}^T{\sum_{x\in\mathcal{X}}{P(x|y^t;\phi)\cdot\log{P(y^t|x;\theta)}}}+\sum_{s=1}^S{\text{KL}\big(P(y|x^s;\theta)||P(y)\big)}\Big)+\Big(-\sum_{n=1}^N{\log{P(x^{n}|y^{n};\phi)}}-\sum_{s=1}^S{\sum_{y\in\mathcal{Y}}{P(y|x^s;\theta)\cdot\log{P(x^s|y;\phi)}}}+\sum_{t=1}^T{\text{KL}\big(P(x|y^t;\phi)||P(y)\big)}\Big) \\
+&=\Big(-\sum_{n=1}^N{\log{P(y^{n}|x^{n};\theta)}}-\sum_{t=1}^T{\sum_{x\in\mathcal{X}}{P(x|y^t;\phi)\cdot\log{P(y^t|x;\theta)}}}+\sum_{s=1}^S{\text{KL}\big(P(y|x^s;\theta)||P(y)\big)}\Big)+\Big(-\sum_{n=1}^N{\log{P(x^{n}|y^{n};\phi)}}-\sum_{s=1}^S{\sum_{y\in\mathcal{Y}}{P(y|x^s;\theta)\cdot\log{P(x^s|y;\phi)}}}+\sum_{t=1}^T{\text{KL}\big(P(x|y^t;\phi)||P(x)\big)}\Big) \\
 &=\mathcal{L}(\theta)+\mathcal{L}(\phi) \\
-&\approx\Big(-\sum_{n=1}^N{\log{P(y^{n}|x^{n};\theta)}}-\frac{1}{K}\sum_{t=1}^T{\sum_{i=1}^K{\log{P(y^t|x_i;\theta)}}}+\sum_{s=1}^S{\text{KL}\big(P(y|x^s;\theta)||P(y)\big)}\Big)+\Big(-\sum_{n=1}^N{\log{P(x^{n}|y^{n};\phi)}}-\frac{1}{K}\sum_{s=1}^S{\sum_{i=1}^K{\log{P(x^s|y_i;\phi)}}}+\sum_{t=1}^T{\text{KL}\big(P(x|y^t;\phi)||P(y)\big)}\Big) \\
+&\approx\Big(-\sum_{n=1}^N{\log{P(y^{n}|x^{n};\theta)}}-\frac{1}{K}\sum_{t=1}^T{\sum_{i=1}^K{\log{P(y^t|x_i;\theta)}}}+\sum_{s=1}^S{\text{KL}\big(P(y|x^s;\theta)||P(y)\big)}\Big)+\Big(-\sum_{n=1}^N{\log{P(x^{n}|y^{n};\phi)}}-\frac{1}{K}\sum_{s=1}^S{\sum_{i=1}^K{\log{P(x^s|y_i;\phi)}}}+\sum_{t=1}^T{\text{KL}\big(P(x|y^t;\phi)||P(x)\big)}\Big) \\
 &=\tilde{\mathcal{L}}(\theta)+\tilde{\mathcal{L}}(\phi)=\tilde{\mathcal{L}}(\theta,\phi)
 \end{aligned}
 $$
@@ -265,6 +265,10 @@ $$
 
 $$
 \nabla_\theta\tilde{\mathcal{L}}(\theta,\phi)=\nabla_\theta\tilde{\mathcal{L}}(\theta)+\nabla_\theta\tilde{\mathcal{L}}(\phi)=\nabla_\theta\tilde{\mathcal{L}}(\theta)
+$$
+
+$$
+\nabla_\phi\tilde{\mathcal{L}}(\theta,\phi)=\nabla_\phi\tilde{\mathcal{L}}(\theta)+\nabla_\phi\tilde{\mathcal{L}}(\phi)=\nabla_\phi\tilde{\mathcal{L}}(\phi)
 $$
 
 -->
