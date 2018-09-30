@@ -1,4 +1,4 @@
-# Segmentation using Subword (Byte Pare Encoding, BPE)
+# Segmentation using Subword (Byte Pair Encoding, BPE)
 
 Byte Pair Encoding (BPE) 알고리즘을 통한 subword segmentation은 [[Sennrich at el.2015]](https://arxiv.org/pdf/1508.07909.pdf)에서 처음 제안되었고, 현재는 주류 전처리 방법으로 자리잡아 사용되고 있습니다.
 

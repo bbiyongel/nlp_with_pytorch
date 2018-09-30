@@ -228,6 +228,47 @@ $$
 \nabla_\theta\tilde{\mathcal{L}}(\theta)=-\sum_{n=1}^N{\nabla_\theta\log{P(y^n|x^n;\theta)}}-\frac{1}{K}\sum_{s=1}^S{\sum_{i=1}^K{\nabla_\theta\log{P(y^s|x_i;\theta)}}}
 $$
 
+<!--
+
+### Upgrade
+
+$$
+\mathcal{L}(\theta,\phi)=-\sum_{n=1}^N{\log{P(y^{n}|x^{n};\theta)}}-\sum_{n=1}^N{\log{P(x^{n}|y^{n};\phi)}}-\sum_{s=1}^S{\log{P(x^s)}}-\sum_{t=1}^T{\log{P(y^t)}}
+$$
+
+$$
+\begin{aligned}
+\mathcal{L}(\theta,\phi)&\le-\sum_{n=1}^N{\log{P(y^{n}|x^{n};\theta)}}-\sum_{n=1}^N{\log{P(x^{n}|y^{n};\phi)}}-\sum_{s=1}^S{\Big(\mathbb{E}_{y\sim P(y|x^s)}[\log{P(x^s|y;\phi)}]-\text{KL}\big(P(y|x^s;\theta)||P(y)\big)\Big)}-\sum_{t=1}^T{\Big(\mathbb{E}_{x\sim P(x|y^t)}[\log{P(y^t|x;\theta)}]-\text{KL}\big(P(x|y^t;\phi)||P(x)\big)\Big)} \\
+&=\Big(-\sum_{n=1}^N{\log{P(y^{n}|x^{n};\theta)}}-\sum_{t=1}^T{\sum_{x\in\mathcal{X}}{P(x|y^t;\phi)\cdot\log{P(y^t|x;\theta)}}}+\sum_{s=1}^S{\text{KL}\big(P(y|x^s;\theta)||P(y)\big)}\Big)+\Big(-\sum_{n=1}^N{\log{P(x^{n}|y^{n};\phi)}}-\sum_{s=1}^S{\sum_{y\in\mathcal{Y}}{P(y|x^s;\theta)\cdot\log{P(x^s|y;\phi)}}}+\sum_{t=1}^T{\text{KL}\big(P(x|y^t;\phi)||P(y)\big)}\Big) \\
+&=\mathcal{L}(\theta)+\mathcal{L}(\phi) \\
+&\approx\Big(-\sum_{n=1}^N{\log{P(y^{n}|x^{n};\theta)}}-\frac{1}{K}\sum_{t=1}^T{\sum_{i=1}^K{\log{P(y^t|x_i;\theta)}}}+\sum_{s=1}^S{\text{KL}\big(P(y|x^s;\theta)||P(y)\big)}\Big)+\Big(-\sum_{n=1}^N{\log{P(x^{n}|y^{n};\phi)}}-\frac{1}{K}\sum_{s=1}^S{\sum_{i=1}^K{\log{P(x^s|y_i;\phi)}}}+\sum_{t=1}^T{\text{KL}\big(P(x|y^t;\phi)||P(y)\big)}\Big) \\
+&=\tilde{\mathcal{L}}(\theta)+\tilde{\mathcal{L}}(\phi)=\tilde{\mathcal{L}}(\theta,\phi)
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\nabla_\theta J(\theta,\phi)&=\sum_{y\in\mathcal{Y}}{\nabla_\theta P(y|x;\theta)\cdot\log{P(x|y;\phi)}} \\
+&=\sum_{y\in\mathcal{Y}}{P(y|x;\theta)\nabla_\theta\log{P(y|x;\theta)}\cdot\log{P(x|y;\phi)}} \\
+&=\mathbb{E}_{y\sim P(y|x;\theta)}[\nabla_\theta\log{P(y|x;\theta)}\log{P(x|y;\phi)}] \\
+&\approx\frac{1}{K}\sum_{i=1}^K{\log{P(x|y_i;\phi)\nabla_\theta\log{P(y_i|x;\theta)}}}
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\nabla_\theta\mathcal{L}(\theta,\phi)&=\nabla_\theta\mathcal{L}(\theta)+\nabla_\phi\mathcal{L}(\phi) \\
+&\approx\nabla_\theta\tilde{\mathcal{L}}(\theta)-\nabla_\theta J(\theta,\phi) \\
+&=\nabla_\theta\tilde{\mathcal{L}}(\theta)-\frac{1}{K}\sum_{s=1}^S{\sum_{i=1}^K{\log{P(x^s|y_i;\phi)\nabla_\theta\log{P(y_i|x^s;\theta)}}}}
+\end{aligned}
+$$
+
+$$
+\nabla_\theta\tilde{\mathcal{L}}(\theta,\phi)=\nabla_\theta\tilde{\mathcal{L}}(\theta)+\nabla_\theta\tilde{\mathcal{L}}(\phi)=\nabla_\theta\tilde{\mathcal{L}}(\theta)
+$$
+
+-->
+
 ### DUL
 
 $$
