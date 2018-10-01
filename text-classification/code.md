@@ -4,10 +4,6 @@
 
 - Github Repo: https://github.com/kh-kim/simple-ntc
 
-## Usage
-
-## Evaluation
-
 ## Code
 
 ### train.py

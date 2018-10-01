@@ -14,7 +14,6 @@
 대부분의 챕터는 작성이 완료되었으며, 아래의 챕터가 아직 작성 중 입니다.
 
 - Word Embedding Vector
-- Text Classification
 
 ### Pre-requisites
 
@@ -35,9 +34,11 @@
 
 ### 연락처
 
-* linkedin: [https://www.linkedin.com/in/ki-hyun-kim/](https://www.linkedin.com/in/ki-hyun-kim/)
-* github: [https://github.com/kh-kim/](https://github.com/kh-kim/)
-* email: pointzz.ki@gmail.com
+|Name|Kim, Ki Hyun|
+|-|-|
+|email|pointzz.ki@gmail.com|
+|linkedin|[https://www.linkedin.com/in/ki-hyun-kim/](https://www.linkedin.com/in/ki-hyun-kim/)|
+|github:|[https://github.com/kh-kim/](https://github.com/kh-kim/)|
 
 ### 이력
 
