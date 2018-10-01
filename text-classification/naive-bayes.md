@@ -93,13 +93,13 @@ $$
 이때 사용되는 prior 확률은 아래와 같이 실제 데이터에서 나타난 횟수를 세어 구할 수 있습니다.
 
 $$
-\tilde{P}(Y=c)=\frac{Count(c)}{\sum_{i=1}^{|\mathcal{C}|}{Count(c_i)}}
+P(Y=c)\approx\frac{\text{Count}(c)}{\sum_{i=1}^{|\mathcal{C}|}{\text{Count}(c_i)}}
 $$
 
 또한, 각 feature 별 likelihood 확률도 데이터에서 바로 구할 수 있습니다. 만약 모든 feature들의 조합이 데이터에서 나타난 횟수를 통해 확률을 구하려 하였다면 sparseness(희소성) 문제 때문에 구할 수 없었을 것 입니다. 하지만 Naive Bayes의 가정(각 feature들은 독립적)을 통해서 쉽게 데이터에서 출현 빈도를 활용할 수 있게 되었습니다.
 
 $$
-\tilde{P}(w|c)=\frac{Count(w,c)}{\sum_{j=1}^{|V|}{Count(w_j,c)}}
+P(w|c)\approx\frac{\text{Count}(w,c)}{\sum_{j=1}^{|V|}{\text{Count}(w_j,c)}}
 $$
 
 이처럼 간단한 가정을 통하여 데이터의 sparsity를 해소하여, 간단하지만 강력한 방법으로 우리는 posterior를 최대화하는 클래스를 예측 할 수 있게 되었습니다.
@@ -130,8 +130,8 @@ Naive Bayes의 수식을 활용하여 단어의 조합에 대한 확률을 각�
 
 $$
 \begin{aligned}
-P(happy|\color{blue}pos\color{default})&\approx\frac{Count(happy, \color{blue}pos\color{default})}{\sum_{j=1}^{|V|}{Count(w_j,\color{blue}pos\color{default})}} \\
-P(\color{blue}pos\color{default})&\approx\frac{Count(\color{blue}pos\color{default})}{|\mathcal{D}|}
+P(happy|\color{blue}pos\color{default})&\approx\frac{\text{Count}(happy, \color{blue}pos\color{default})}{\sum_{j=1}^{|V|}{\text{Count}(w_j,\color{blue}pos\color{default})}} \\
+P(\color{blue}pos\color{default})&\approx\frac{\text{Count}(\color{blue}pos\color{default})}{|\mathcal{D}|}
 \end{aligned}
 $$
 
@@ -142,27 +142,27 @@ $$
 P(\color{red}neg\color{default}|I,am,happy,to,see,this,movie,!)&= \frac{P(I,am,happy,to,see,this,movie,!|\color{red}neg\color{default})P(\color{red}neg\color{default})}{P(I,am,happy,to,see,this,movie,!)}\\
 &\approx \frac{P(I|\color{red}neg\color{default})P(am|\color{red}neg\color{default})P(happy|\color{red}neg\color{default})\cdots P(!|\color{red}neg\color{default})P(\color{red}neg\color{default})}{P(I,am,happy,to,see,this,movie,!)} \\
 \\
-P(happy|\color{red}neg\color{default})&\approx\frac{Count(happy, \color{red}neg\color{default})}{\sum_{j=1}^{|V|}{Count(w_j,\color{red}neg\color{default})}} \\
-P(\color{red}neg\color{default})&\approx\frac{Count(\color{red}neg\color{default})}{|\mathcal{D}|}
+P(happy|\color{red}neg\color{default})&\approx\frac{\text{Count}(happy, \color{red}neg\color{default})}{\sum_{j=1}^{|V|}{\text{Count}(w_j,\color{red}neg\color{default})}} \\
+P(\color{red}neg\color{default})&\approx\frac{\text{Count}(\color{red}neg\color{default})}{|\mathcal{D}|}
 \end{aligned}
 $$
 
 ## Add-one Smoothing
 
-여기에 문제가 하나 있습니다. 만약 훈련 데이터에서 $Count(happy, \color{red}neg\color{default})$가 $0$이었다면 $P(happy|\color{red}neg\color{default})=0$이 되겠지만, 그저 훈련 데이터에 존재하지 않는 경우라고 해서 실제 출현 확률을 $0$으로 여기는 것은 매우 위험한 일 입니다.
+여기에 문제가 하나 있습니다. 만약 훈련 데이터에서 $\text{Count}(happy, \color{red}neg\color{default})$가 $0$이었다면 $P(happy|\color{red}neg\color{default})=0$이 되겠지만, 그저 훈련 데이터에 존재하지 않는 경우라고 해서 실제 출현 확률을 $0$으로 여기는 것은 매우 위험한 일 입니다.
 
 $$
 \begin{gathered}
-P(happy|\color{red}neg\color{default})\approx\frac{Count(happy, \color{red}neg\color{default})}{\sum_{j=1}^{|V|}{Count(w_j,\color{red}neg\color{default})}}=0, \\
+P(happy|\color{red}neg\color{default})\approx\frac{\text{Count}(happy, \color{red}neg\color{default})}{\sum_{j=1}^{|V|}{\text{Count}(w_j,\color{red}neg\color{default})}}=0, \\
 \\
-\text{where }Count(happy, \color{red}neg\color{default})=0.
+\text{where }\text{Count}(happy, \color{red}neg\color{default})=0.
 \end{gathered}
 $$
 
 따라서 우리는 이런 경우를 위하여 각 출현횟수에 $1$을 더해주어 간단하게 문제를 완화 할 수 있습니다. 물론 완벽한 해결법은 아니지만, Naive Bayes의 가정과 마찬가지로 간단하고 강력합니다.
 
 $$
-\tilde{P}(w|c)=\frac{Count(w,c)+1}{\big(\sum_{j=1}^{|V|}{Count(w_j,c)}\big)+|V|}
+\tilde{P}(w|c)=\frac{\text{Count}(w,c)+1}{\big(\sum_{j=1}^{|V|}{\text{Count}(w_j,c)}\big)+|V|}
 $$
 
 ## Pros and Cons
