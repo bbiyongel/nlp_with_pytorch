@@ -11,7 +11,6 @@
 ## Implementation
 
 ```python
-import torch
 import torch.nn as nn
 
 
@@ -23,9 +22,9 @@ class RNNClassifier(nn.Module):
                  hidden_size, 
                  n_classes,
                  n_layers=4, 
-                 dropout_p=.2
+                 dropout_p=.3
                  ):
-        self.input_size = input_size
+        self.input_size = input_size  # vocabulary_size
         self.word_vec_dim = word_vec_dim
         self.hidden_size = hidden_size
         self.n_classes = n_classes
@@ -43,6 +42,7 @@ class RNNClassifier(nn.Module):
                            bidirectional=True
                            )
         self.generator = nn.Linear(hidden_size * 2, n_classes)
+        # We use LogSoftmax + NLLLoss instead of Softmax + CrossEntropy
         self.activation = nn.LogSoftmax(dim=-1)
 
     def forward(self, x):
