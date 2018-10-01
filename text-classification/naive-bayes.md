@@ -86,7 +86,7 @@ $$
 $$
 \begin{aligned}
 \hat{c}_{MAP} &= \underset{c \in \mathcal{C}}{\text{argmax }}{P(Y=c|X=w_1,w_2,\cdots,w_n)} \\
-&=\underset{c \in \mathcal{C}}{\text{argmax }}{\prod_{i=1}^{n}{P(w_i|c)}P(c)}
+&\approx\underset{c \in \mathcal{C}}{\text{argmax }}{\prod_{i=1}^{n}{P(w_i|c)}P(c)}
 \end{aligned}
 $$
 
