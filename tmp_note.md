@@ -287,3 +287,35 @@ $$
 $$
 \mathcal{L}(\theta)\approx-\sum^N_{n=1}{\log{P(y^n|x^n;\theta)}}+\lambda\sum^S_{s=1}{[\log{\hat{P}(y^s)}-\log{\frac{1}{K}\sum^K_{i=1}\frac{\hat{P}(x^s_i)P(y^s|x^s_i\theta)}{P(x^s_i|y^s)}}]^2}
 $$
+
+## AnoGAN
+
+$$
+\underset{\theta}{\text{argmin }}\underset{\phi}{\text{argmax }}V(\theta,\phi)=\mathbb{E}_{x\sim p(x)}\bigg[\log{D\big(x;\phi\big)}\bigg]+\mathbb{E}_{z\sim \mathcal{N}(0,1)}\bigg[\log{\Big(1-D\big(G(z;\theta);\phi\big)\Big)}\bigg]
+$$
+
+$$
+\begin{aligned}
+\mathcal{L}_R(x;\theta)&=\big(x-G_\theta(\tilde{z})\big)^2 \\
+\mathcal{L}_D(x;\phi)&=\sum_{i=1}^L{\Big(D_{\phi_{1:i}}(x)-D_{\phi_{1:i}}\big(G(\tilde{z})\big)\Big)^2}
+\end{aligned}
+$$
+
+$$
+\begin{gathered}
+\text{and}\\
+\tilde{z}=\underset{z\sim \mathcal{N}(0,1)}{\text{argmin }}{P(x|z;\theta)} \\
+\text{where }\tilde{z}\text{ is estimated }z\text{ by back-propagation, and }L\text{ is a number of layers in }D.
+\end{gathered}
+$$
+
+$$
+\begin{gathered}
+z_{t+1}\leftarrow z_t-\alpha\nabla_{z}J(z,x), \\
+\text{where }J(z,x)=(x-G(z))^2.
+\end{gathered}
+$$
+
+$$
+\text{Anomaly Score }A(x)=(1-\lambda)\cdot\mathcal{L}_R(x;\theta)+\lambda\cdot\mathcal{L}_D(x;\phi)
+$$
