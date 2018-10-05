@@ -312,7 +312,7 @@ $$
 $$
 \begin{gathered}
 z_{t+1}\leftarrow z_t-\alpha\nabla_{z}J(z,x), \\
-\text{where }J(z,x)=(x-G(z))^2.
+\text{where }J(z,x)=|x-G(z)|_2.
 \end{gathered}
 $$
 
