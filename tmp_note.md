@@ -304,7 +304,7 @@ $$
 $$
 \begin{gathered}
 \text{and}\\
-\tilde{z}=\underset{z\sim \mathcal{N}(0,1)}{\text{argmin }}{P(x|z;\theta)} \\
+\tilde{z}=\underset{z\sim \mathcal{N}(0,1)}{\text{argmin }}{-\log{P(x|z;\theta)}} \\
 \text{where }\tilde{z}\text{ is estimated }z\text{ by back-propagation, and }L\text{ is a number of layers in }D.
 \end{gathered}
 $$
