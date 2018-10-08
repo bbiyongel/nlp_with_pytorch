@@ -37,6 +37,7 @@
   * [Dimension Reduction](word-embedding-vector/dimension-reduction.md)
   * [Word2Vec](word-embedding-vector/word2vec.md)
   * [GloVe](word-embedding-vector/glove.md)
+  * [Myth](word-embedding-vector/myth.md)
   * [Example](word-embedding-vector/example.md)
 * [Sequence Modeling](sequential-modeling/cover.md)
   * [Intro](sequential-modeling/intro.md)
