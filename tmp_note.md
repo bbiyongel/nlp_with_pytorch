@@ -296,8 +296,8 @@ $$
 
 $$
 \begin{aligned}
-\mathcal{L}_R(x;\theta)&=\big(x-G_\theta(\tilde{z})\big)^2 \\
-\mathcal{L}_D(x;\phi)&=\sum_{i=1}^L{\Big(D_{\phi_{1:i}}(x)-D_{\phi_{1:i}}\big(G(\tilde{z})\big)\Big)^2}
+\mathcal{L}_R(x;\theta)&=\big|x-G_\theta(\tilde{z})\big|_2 \\
+\mathcal{L}_D(x;\phi)&=\sum_{i=1}^L{\Big|D_{\phi_{1:i}}(x)-D_{\phi_{1:i}}\big(G(\tilde{z})\big)\Big|_2}
 \end{aligned}
 $$
 
@@ -312,7 +312,7 @@ $$
 $$
 \begin{gathered}
 z_{t+1}\leftarrow z_t-\alpha\nabla_{z}J(z,x), \\
-\text{where }J(z,x)=(x-G(z))^2.
+\text{where }J(z,x)=|x-G(z)|_2.
 \end{gathered}
 $$
 
