@@ -1,8 +1,8 @@
 # Myth
 
-우리는 이번 챕터를 통해 단어를 벡터로 표현하는 방법에 대해서 살펴보았습니다. One-hot encoding의 sparse 벡터를 차원 축소하여 훨씬 작은 차원의 dense 벡터로 표현하는 방법에 대해 다루었습니다. 
+우리는 이번 챕터를 통해 단어를 벡터로 표현하는 방법에 대해서 살펴보고 있습니다. 이어지는 섹션에서 skip-gram 또는 GloVe를 사용하여 One-hot encoding의 sparse 벡터를 차원 축소(dimension reduction)하여 훨씬 작은 차원의 dense 벡터로 표현하는 방법에 대해 다룰 것 입니다. 
 
-하지만 많은 분들이 헷갈려 하는 부분이 있다면, 이렇게 훈련한 단어 임베딩 벡터를 추후 우리가 다룰 텍스트 분류, 언어모델, 번역 등의 딥러닝 모델들의 입력으로 사용할 것이라고 생각한다는 점 입니다.
+이에 앞서, 하지만 많은 분들이 헷갈려 하는 부분이 있다면, 이렇게 훈련한 단어 임베딩 벡터를 추후 우리가 다룰 텍스트 분류, 언어모델, 번역 등의 딥러닝 모델들의 입력으로 사용할 것이라고 생각한다는 점 입니다.
 
 Word2Vec을 통해 얻은 단어 임베딩 벡터는 훌륭하게 단어의 특성을 잘 반영하고 있지만, 텍스트 분류, 언어모델, 번역의 문제 해결을 위한 최적의 벡터 임베딩이라고는 볼 수 없습니다.
 
@@ -15,10 +15,13 @@ Word2Vec을 통해 얻은 단어 임베딩 벡터는 훌륭하게 단어의 특�
 이 레이어는 아래와 같이 bias가 없는 Linear Layer와 같은 형태를 갖고 있습니다.
 
 $$
-y=\text{emb}(x)=Wx
+\begin{gathered}
+y=\text{emb}(x)=Wx, \\
+\text{where }W\in\mathbb{R}^{d\times|V|}\text{ and }|V|\text{ is size of vocabulary}.
+\end{gathered}
 $$
 
-따라서 입력으로 one-hot vector가 주어지게 되면, $W$의 특정 column(구현 방법에 따라 또는 row)만 반환하게 됩니다.
+쉽게 생각하면 $W$는 $d\times|V|$ 크기의 2차원의 매트릭스입니다. 따라서 입력으로 one-hot vector가 주어지게 되면, $W$의 특정 column(구현 방법에 따라 또는 row)만 반환하게 됩니다.
 
 ![](../assets/w2v-embedding-layer.png)
 

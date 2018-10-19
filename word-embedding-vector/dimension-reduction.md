@@ -12,7 +12,7 @@
 
 ![3차원에서 2차원, 다시 1차원으로 PCA를 수행하는 예](../assets/w2v-pca-example.png)
 
-위와 같이 고차원(high-dimension)의 데이터를 보다 낮은 차원으로 표현하는 것이 가능합니다.
+위와 같이 고차원(high-dimension)의 데이터를 보다 낮은 차원으로 표현하는 것이 가능합니다. 주로 Singular Vector Decomposition (SVD)를 통해 PCA를 수행 할 수 있습니다.
 
 ![주성분의 조건](../assets/w2v-pca-principles.png)
 
@@ -55,3 +55,5 @@ PCA를 통해 우리는 효과적으로 고차원의 데이터를 보다 낮은 
 <!--
 ![](../assets/w2v-manifold-surface-projection.png)
 -->
+
+우리는 이 오토인코더를 사용하여 이전 챕터에서 구해진 sparse word feature 벡터를 dense word embedding 벡터로 변환할 수 있을 것 입니다.
