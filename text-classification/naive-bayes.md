@@ -110,19 +110,19 @@ $$
 
 $$
 \begin{gathered}
-\mathcal{C}=\{\color{blue}pos\color{default},\color{red}neg\color{default}\} \\
+\mathcal{C}=\{\color{blue}pos\color{black},\color{red}neg\color{black}\} \\
 \mathcal{D}=\{d_1,d_2,\cdots\}
 \end{gathered}
 $$
 
-위와 같이 긍정($\color{blue}pos\color{default}$)과 부정($\color{red}neg\color{default}$)으로 클래스가 구성($\mathcal{C}$되어 있고, 문서 $d$로 구성된 데이터 $\mathcal{D}$가 있습니다.
+위와 같이 긍정($\color{blue}pos\color{black}$)과 부정($\color{red}neg\color{black}$)으로 클래스가 구성($\mathcal{C}$되어 있고, 문서 $d$로 구성된 데이터 $\mathcal{D}$가 있습니다.
 
 이때, 우리에게 "I am happy to see this movie!"라는 문장이 주어졌을 때, 이 문장이 긍정인지 부정인지 판단해 보겠습니다.
 
 $$
 \begin{aligned}
-P(\color{blue}pos\color{default}|I,am,happy,to,see,this,movie,!)&= \frac{P(I,am,happy,to,see,this,movie,!|\color{blue}pos\color{default})P(\color{blue}pos\color{default})}{P(I,am,happy,to,see,this,movie,!)}\\
-&\approx \frac{P(I|\color{blue}pos\color{default})P(am|\color{blue}pos\color{default})P(happy|\color{blue}pos\color{default})\cdots P(!|\color{blue}pos\color{default})P(\color{blue}pos\color{default})}{P(I,am,happy,to,see,this,movie,!)}
+P(\color{blue}pos\color{black}|I,am,happy,to,see,this,movie,!)&= \frac{P(I,am,happy,to,see,this,movie,!|\color{blue}pos\color{black})P(\color{blue}pos\color{black})}{P(I,am,happy,to,see,this,movie,!)}\\
+&\approx \frac{P(I|\color{blue}pos\color{black})P(am|\color{blue}pos\color{black})P(happy|\color{blue}pos\color{black})\cdots P(!|\color{blue}pos\color{black})P(\color{blue}pos\color{black})}{P(I,am,happy,to,see,this,movie,!)}
 \end{aligned}
 $$
 
@@ -130,8 +130,8 @@ Naive Bayes의 수식을 활용하여 단어의 조합에 대한 확률을 각�
 
 $$
 \begin{aligned}
-P(happy|\color{blue}pos\color{default})&\approx\frac{\text{Count}(happy, \color{blue}pos\color{default})}{\sum_{j=1}^{|V|}{\text{Count}(w_j,\color{blue}pos\color{default})}} \\
-P(\color{blue}pos\color{default})&\approx\frac{\text{Count}(\color{blue}pos\color{default})}{|\mathcal{D}|}
+P(happy|\color{blue}pos\color{black})&\approx\frac{\text{Count}(happy, \color{blue}pos\color{black})}{\sum_{j=1}^{|V|}{\text{Count}(w_j,\color{blue}pos\color{black})}} \\
+P(\color{blue}pos\color{black})&\approx\frac{\text{Count}(\color{blue}pos\color{black})}{|\mathcal{D}|}
 \end{aligned}
 $$
 
@@ -139,23 +139,23 @@ $$
 
 $$
 \begin{aligned}
-P(\color{red}neg\color{default}|I,am,happy,to,see,this,movie,!)&= \frac{P(I,am,happy,to,see,this,movie,!|\color{red}neg\color{default})P(\color{red}neg\color{default})}{P(I,am,happy,to,see,this,movie,!)}\\
-&\approx \frac{P(I|\color{red}neg\color{default})P(am|\color{red}neg\color{default})P(happy|\color{red}neg\color{default})\cdots P(!|\color{red}neg\color{default})P(\color{red}neg\color{default})}{P(I,am,happy,to,see,this,movie,!)} \\
+P(\color{red}neg\color{black}|I,am,happy,to,see,this,movie,!)&= \frac{P(I,am,happy,to,see,this,movie,!|\color{red}neg\color{black})P(\color{red}neg\color{black})}{P(I,am,happy,to,see,this,movie,!)}\\
+&\approx \frac{P(I|\color{red}neg\color{black})P(am|\color{red}neg\color{black})P(happy|\color{red}neg\color{black})\cdots P(!|\color{red}neg\color{black})P(\color{red}neg\color{black})}{P(I,am,happy,to,see,this,movie,!)} \\
 \\
-P(happy|\color{red}neg\color{default})&\approx\frac{\text{Count}(happy, \color{red}neg\color{default})}{\sum_{j=1}^{|V|}{\text{Count}(w_j,\color{red}neg\color{default})}} \\
-P(\color{red}neg\color{default})&\approx\frac{\text{Count}(\color{red}neg\color{default})}{|\mathcal{D}|}
+P(happy|\color{red}neg\color{black})&\approx\frac{\text{Count}(happy, \color{red}neg\color{black})}{\sum_{j=1}^{|V|}{\text{Count}(w_j,\color{red}neg\color{black})}} \\
+P(\color{red}neg\color{black})&\approx\frac{\text{Count}(\color{red}neg\color{black})}{|\mathcal{D}|}
 \end{aligned}
 $$
 
 ## Add-one Smoothing
 
-여기에 문제가 하나 있습니다. 만약 훈련 데이터에서 $\text{Count}(happy, \color{red}neg\color{default})$가 $0$이었다면 $P(happy|\color{red}neg\color{default})=0$이 되겠지만, 그저 훈련 데이터에 존재하지 않는 경우라고 해서 실제 출현 확률을 $0$으로 여기는 것은 매우 위험한 일 입니다.
+여기에 문제가 하나 있습니다. 만약 훈련 데이터에서 $\text{Count}(happy, \color{red}neg\color{black})$가 $0$이었다면 $P(happy|\color{red}neg\color{black})=0$이 되겠지만, 그저 훈련 데이터에 존재하지 않는 경우라고 해서 실제 출현 확률을 $0$으로 여기는 것은 매우 위험한 일 입니다.
 
 $$
 \begin{gathered}
-P(happy|\color{red}neg\color{default})\approx\frac{\text{Count}(happy, \color{red}neg\color{default})}{\sum_{j=1}^{|V|}{\text{Count}(w_j,\color{red}neg\color{default})}}=0, \\
+P(happy|\color{red}neg\color{black})\approx\frac{\text{Count}(happy, \color{red}neg\color{black})}{\sum_{j=1}^{|V|}{\text{Count}(w_j,\color{red}neg\color{black})}}=0, \\
 \\
-\text{where }\text{Count}(happy, \color{red}neg\color{default})=0.
+\text{where }\text{Count}(happy, \color{red}neg\color{black})=0.
 \end{gathered}
 $$
 
@@ -171,8 +171,8 @@ $$
 
 $$
 \begin{gathered}
-P(\color{blue}pos\color{default}|I,am,not,happy,to,see,this,movie,!) \\
-P(\color{red}neg\color{default}|I,am,not,happy,to,see,this,movie,!)
+P(\color{blue}pos\color{black}|I,am,not,happy,to,see,this,movie,!) \\
+P(\color{red}neg\color{black}|I,am,not,happy,to,see,this,movie,!)
 \end{gathered}
 $$
 

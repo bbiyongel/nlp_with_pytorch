@@ -39,6 +39,8 @@ $$
 
 ![Skip-gram을 통해 얻은 word embedding 벡터를 t-SNE를 통해 visualization 한 예제](../assets/intro-word-embedding.png)
 
+<!--
 ## Negative Sampling
 
 사실 위의 방법은 나름 괜찮은 방법이지만, $|V|$가 매우 클 경우에 $W$와 $W'$가 커짐으로 인해서 메모리와 연산량에 있어 부하로 작용할 수 있습니다. 따라서, 이때 negative sampling 방법을 사용하여 우리는 좀 더 효율적으로 skip-gram을 구현할 수 있습니다.
+-->

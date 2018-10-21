@@ -26,14 +26,18 @@ echo 2
 cd ./pytorch-intro
 pandoc ./cover.md ./intro.md ./how-to-install.md ./hello-pytorch.md --latex-engine=xelatex -o ../${DIR_PATH}/2.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
 cd ..
-# * [Word Sense Disambiguation](wsd/cover.md)
-#   * [Intro](wsd/intro.md)
-#   * [Using Thesaurus](wsd/wordnet.md)
-#   * [Using Feature Vector](wsd/feature-vector.md)
-#   * [Selectional Preference](wsd/selectional-preference.md)
+# * [Word Senses: Similarity and Ambiguity](word-senses/cover.md)
+#   * [Intro](word-senses/intro.md)
+#   * [WordNet](word-senses/wordnet.md)
+#   * [Appendix: TF-IDF](word-senses/tf-idf.md)
+#   * [How to get Similarity](word-senses/similarity.md)
+#   * [Word Sense Disambiguation](word-senses/wsd.md)
+#   * [Appendix: Monty-Hall Problem](word-senses/monty-hall.md)
+#   * [Selectional Preference](word-senses/selectional-preference.md)
+#   * [Conclusion](word-senses/conclusion.md)
 echo 3
-cd ./wsd
-pandoc ./cover.md ./wordnet.md ./feature-vector.md ./selectional-preference.md --latex-engine=xelatex -o ../${DIR_PATH}/3.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
+cd ./word-senses
+pandoc ./cover.md ./wordnet.md ./tf-idf.md ./similarity.md ./wsd.md ./monty-hall.md ./selectional-preference.md ./conclusion.md --latex-engine=xelatex -o ../${DIR_PATH}/3.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
 cd ..
 # * [Preprocessing](preprocessing/cover.md)
 #   * [Intro](preprocessing/intro.md)
@@ -50,15 +54,15 @@ pandoc ./cover.md ./intro.md ./collecting-corpus.md ./cleaning-corpus.md ./token
 cd ..
 # * [Word Embedding Vector](word-embedding-vector/cover.md)
 #   * [Intro](word-embedding-vector/intro.md)
-#   * [One-hot encoding](word-embedding-vector/one-hot-encoding.md)
-#   * [Previous methods](word-embedding-vector/previous-methods.md)
+#   * [One-hot Encoding](word-embedding-vector/one-hot-encoding.md)
+#   * [Dimension Reduction](word-embedding-vector/dimension-reduction.md)
+#   * [Myth](word-embedding-vector/myth.md)
 #   * [Word2Vec](word-embedding-vector/word2vec.md)
 #   * [GloVe](word-embedding-vector/glove.md)
-#   * [FastText](word-embedding-vector/fasttext.md)
-#   * [Doc2Vec](word-embedding-vector/doc2vec.md)
+#   * [Example](word-embedding-vector/example.md)
 echo 5
 cd ./word-embedding-vector
-pandoc ./cover.md ./intro.md ./one-hot-encoding.md ./previous-methods.md ./word2vec.md ./glove.md ./fasttext.md ./doc2vec.md --latex-engine=xelatex -o ../${DIR_PATH}/5.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
+pandoc ./cover.md ./intro.md ./one-hot-encoding.md ./dimension-reduction.md ./myth.md ./glove.md ./example.md --latex-engine=xelatex -o ../${DIR_PATH}/5.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
 cd ..
 # * [Sequence Modeling](sequential-modeling/cover.md)
 #   * [Intro](sequential-modeling/intro.md)
@@ -75,10 +79,10 @@ cd ..
 #   * [Naive Bayes](text-classification/naive-bayes.md)
 #   * [Using CNN](text-classification/cnn.md)
 #   * [Using RNN](text-classification/rnn.md)
-#   * [Unsupervised Text Classification](text-classification/unsupervised-text-classification.md)
+#   * [Implementation](text-classification/code.md)
 echo 7
 cd ./text-classification
-pandoc ./cover.md ./intro.md ./naive-bayes.md ./cnn.md ./rnn.md ./unsupervised-text-classification.md --latex-engine=xelatex -o ../${DIR_PATH}/7.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
+pandoc ./cover.md ./intro.md ./naive-bayes.md ./cnn.md ./rnn.md ./code.md --latex-engine=xelatex -o ../${DIR_PATH}/7.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
 cd ..
 # * [Language Modeling](language-modeling/cover.md)
 #   * [Intro](language-modeling/intro.md)
@@ -115,8 +119,10 @@ pandoc ./cover.md ./multilingual-nmt.md ./monolingual-corpus.md ./fconv.md trans
 cd ..
 # * [NLP with Reinforcement Learning](reinforcement-learning/cover.md)
 #   * [Intro](reinforcement-learning/intro.md)
+#   * [Math Basics](reinforcement-learning/math_basics.md)
+#   * [Reinforcement Learning Basics](reinforcement-learning/rl_basics.md)
 #   * [Policy Gradients](reinforcement-learning/policy-gradient.md)
-#   * [RL on NLG](reinforcement-learning/characteristic.md)
+#   * [Reinforcement Learning on NLG](reinforcement-learning/characteristic.md)
 #   * [Supervised NMT](reinforcement-learning/supervised-nmt.md)
 #   * [Unsupervised NMT](reinforcement-learning/unsupervised-nmt.md)
 echo 11
