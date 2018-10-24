@@ -14,11 +14,11 @@ $P(Y|X;\theta)$를 최대로 하는 모델 파라미터\($\theta$\)를 Maximum L
 
 ### Encoder
 
-인코더는 source 문장을 입력으로 받아 문장을 함축하는 sentence embedding vector로 만들어 냅니다. $P(X)$를 모델링 하는 것이라고 볼 수 있습니다. 사실 새로운 형태라기 보단, 이전 챕터에서 다루었던 텍스트 분류(Text Classificaion)에서 사용되었던 RNN 모델과 거의 같다고 볼 수 있습니다. $P(X)$를 모델링하여, 주어진 문장을 벡터화(vectorize)하여 해당 도메인의 매니폴드(manifold or hyper-plane)의 어떤 한 점에 투영 시키는 작업이라고 할 수 있습니다.
+인코더는 source 문장을 입력으로 받아 문장을 함축하는 문장 임베딩 벡터(sentence embedding vector)로 만들어 냅니다. $P(X)$를 모델링 하는 것이라고 볼 수 있습니다. 사실 새로운 형태라기 보단, 이전 챕터에서 다루었던 텍스트 분류(Text Classificaion)에서 사용되었던 RNN 모델과 거의 같다고 볼 수 있습니다. $P(X)$를 모델링하여, 주어진 문장을 벡터화(vectorize)하여 해당 도메인의 latent space(manifold or hyper-plane)의 어떤 한 점에 투영 시키는 작업이라고 할 수 있습니다.
 
 ![3개의 구성요소로 이루어진 Sequence-to-Sequence 아키텍처](../assets/nmt-enc-sent-proj.png)
 
-다만, 기존의 텍스트 분류 문제에서는 모든 정보가 필요하지 않기 때문에 (예를들어 감성분석(Sentiment Analysis)에서는 "나는"과 같이 중립적인 단어는 감성을 분류하는데 필요하지 않기 때문에 해당 정보를 굳이 간직해야 하지 않을 수도 있습니다.) vector로 만들어내는 과정에서 많은 정보를 간직하지 않아도 되지만, 기계번역을 위한 sentence embedding vector를 생성하기 위해서는 최대한 많은 정보를 간직해야 할 것 입니다.
+다만, 기존의 텍스트 분류 문제에서는 모든 정보가 필요하지 않기 때문에 (예를들어 감성분석(Sentiment Analysis)에서는 "나는"과 같이 중립적인 단어는 감성을 분류하는데 필요하지 않기 때문에 해당 정보를 굳이 간직해야 하지 않을 수도 있습니다.) 벡터로 만들어내는 과정에서 많은 정보를 간직하지 않아도 되지만, 기계번역을 위한 문장 임베딩 벡터를 생성하기 위해서는 최대한 많은 정보를 간직해야 할 것 입니다.
 
 $$
 \begin{gathered}
@@ -66,7 +66,7 @@ $$
 
 ## Applications of seq2seq
 
-이와 같이 구성된 Seq2seq 모델은 꼭 기계번역 문제에서만 사용해야 하는 것이 아니라 정말 많은 분야에 적용할 수 있습니다. 특정 도메인의 time-series 데이터 또는 sequential한 입력을 다른 도메인의 sequential한 데이터로 출력하는데 탁월한 능력을 발휘합니다.
+이와 같이 구성된 Seq2seq 모델은 꼭 기계번역 문제에서만 사용해야 하는 것이 아니라 정말 많은 분야에 적용할 수 있습니다. 특정 도메인의 time-series 데이터 또는 순차적(sequential)인 입력을 다른 도메인의 순차적인 데이터로 출력하는데 탁월한 능력을 발휘합니다.
 
 | Seq2seq Applications | Task (From-To) |
 | --- | --- |
@@ -84,7 +84,7 @@ $$
 
 ### Memorization
 
-Neural Network 모델은 데이터를 압축하는데에 탁월한 성능([Manifold Assumption 참고](https://en.wikipedia.org/wiki/Semi-supervised_learning#Manifold_assumption))을 지녔습니다.  하지만, seq2seq를 통하여도 [도라에몽의 주머니](https://namu.wiki/w/4차원 주머니#toc)처럼 무한하게 정보를 압축 할 수 없습니다. 따라서 압축 할 수 있는 정보는 한계가 있기 때문에, 문장(또는 sequence)이 길어질수록 압축 성능이 떨어지게 됩니다. 비록 LSTM이나 GRU를 사용함으로써 RNN에 비하여 성능을 끌어올릴 수 있었지만, 한계가 있기 마련입니다.
+신경망 모델은 차원축소(dimension reduction)을 통해 데이터를 압축하는데에 탁월한 성능([Manifold Assumption 참고](https://en.wikipedia.org/wiki/Semi-supervised_learning#Manifold_assumption))을 지녔습니다.  하지만, seq2seq를 통하여도 [도라에몽의 주머니](https://namu.wiki/w/4차원 주머니#toc)처럼 무한하게 정보를 압축 할 수 없습니다. 따라서 압축 할 수 있는 정보는 한계가 있기 때문에, 문장(또는 sequence)이 길어질수록 압축 성능이 떨어지게 됩니다. 비록 LSTM이나 GRU를 사용함으로써 RNN에 비하여 성능을 끌어올릴 수 있었지만, 한계가 있기 마련입니다.
 
 ### Lack of Structural Information
 
