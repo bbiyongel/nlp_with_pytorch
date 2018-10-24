@@ -60,15 +60,15 @@ $$
 
 ![Hyperbolic Tangent의 형태](http://mathworld.wolfram.com/images/interactive/TanhReal.gif)
 
-$\tanh$의 양 끝은 수평에 가깝게되어 점점 $-1$ 또는 $1$에 근접하는 것을 볼 수 있습니다. 문제는 이렇게 되면, $\tanh$ 양 끝의 gradient는 0에 가까워진다는것 입니다. 따라서 $\tanh$ 양 끝의 값을 반환하는 layer의 경우에는 gradient가 0에 가깝게 되어, 그 다음으로 back-propgation 되는 layer는 제대로 된 gradient를 전달 받을 수가 없게 됩니다. 이를 gradient vanishing이라고 합니다.
+$\tanh$의 양 끝은 수평에 가깝게되어 점점 $-1$ 또는 $1$에 근접하는 것을 볼 수 있습니다. 문제는 이렇게 되면, $\tanh$ 양 끝의 gradient는 0에 가까워진다는것 입니다. 따라서 $\tanh$ 양 끝의 값을 반환하는 레이어의 경우에는 gradient가 0에 가깝게 되어, 그 다음으로 back-propgation 되는 레이어는 제대로 된 gradient를 전달 받을 수가 없게 됩니다. 이를 gradient vanishing이라고 합니다.
 
 따라서, time-step이 많거나 여러층으로 되어 있는 신경망의 경우에는 이 gradient vanishing 문제가 쉽게 발생하게 되고, 이는 딥러닝 이전의 신경망 학습에 큰 장애가 되곤 하였습니다.
 
 ## Multi-layer RNN
 
-기본적으로 Time-step별로 RNN이 동작하지만, 아래의 그림과 같이 한 time-step 내에서 RNN을 여러 층을 쌓아올릴 수 있습니다. 그림상으로 시간의 흐름은 왼쪽에서 오른쪽으로 간다면, 여러 layer를 아래에서 위로 쌓아 올릴 수 있습니다. 따라서 여러개의 RNN layer가 쌓여 하나의 RNN을 이루고 있을 때, 가장 위층의 hidden state가 전체 RNN의 출력값이 됩니다.
+기본적으로 Time-step별로 RNN이 동작하지만, 아래의 그림과 같이 한 time-step 내에서 RNN을 여러 층을 쌓아올릴 수 있습니다. 그림상으로 시간의 흐름은 왼쪽에서 오른쪽으로 간다면, 여러 레이러를 아래에서 위로 쌓아 올릴 수 있습니다. 따라서 여러개의 RNN 레이어가 쌓여 하나의 RNN을 이루고 있을 때, 가장 위층의 hidden state가 전체 RNN의 출력값이 됩니다.
 
-당연히 각 층 별로 파라미터 $\theta$를 공유하지 않고 따로 갖습니다. 보통은 각 layer 사이에 dropout을 끼워 넣기도 합니다.
+당연히 각 층 별로 파라미터 $\theta$를 공유하지 않고 따로 갖습니다. 보통은 각 레이어 사이에 dropout을 끼워 넣기도 합니다.
 
 ![여러 층이 쌓인 RNN의 형태](../assets/rnn-multi-layer.png)
 
@@ -80,7 +80,7 @@ $\tanh$의 양 끝은 수평에 가깝게되어 점점 $-1$ 또는 $1$에 근접
 
 ![두 방향으로 hidden state를 전달 및 계산하는 RNN의 형태](../assets/rnn-bidirectional.png)
 
-보통은 여러 층의 bi-directional RNN을 쌓게 되면, 각 층마다 두 방향의 각 time-step 별 출력(hidden state)값을 이어붙여(concatenate) 다음 층(layer)의 각 방향 별 입력으로 사용하게 됩니다. 경우에 따라서 전체 RNN layer들 중에서 일부 층만 bi-directional을 사용하기도 합니다.
+보통은 여러 층의 bi-directional RNN을 쌓게 되면, 각 층마다 두 방향의 각 time-step 별 출력(hidden state)값을 이어붙여(concatenate) 다음 층(layer)의 각 방향 별 입력으로 사용하게 됩니다. 경우에 따라서 전체 RNN 레이어들 중에서 일부 층만 bi-directional을 사용하기도 합니다.
 
 ## How to Apply to NLP
 
@@ -98,7 +98,7 @@ $$
 \text{softmax}(x_{i}) = \frac{exp(x_i)}{\sum_j exp(x_j)}
 $$
 
-이때, 각 time-step 별 입력 단어 $x_t$는 one-hot vector로 표현(encoded)되고 embedding layer를 거쳐 정해진 dimension의 word embedding vector로 표현되어 RNN에 입력으로 주어지게 됩니다. 마찬가지로 정답 클래스 또한 one-hot vector가 되어 cross entropy 손실함수(loss function)를 통해 softmax 결과값인 각 클래스 별 확률을 나타낸 ([multinoulli](https://www.statlect.com/probability-distributions/multinoulli-distribution)) 확률 분포 vector와 비교하여 손실(loss)값을 구하게 됩니다.
+이때, 각 time-step 별 입력 단어 $x_t$는 one-hot vector로 표현(encoded)되고 임베딩 레이어(embedding layer)를 거쳐 정해진 차원의 word 임베딩 벡터로 표현되어 RNN에 입력으로 주어지게 됩니다. 마찬가지로 정답 클래스 또한 one-hot 벡터가 되어 cross entropy 손실함수(loss function)를 통해 softmax 결과값인 각 클래스 별 확률을 나타낸 ([multinoulli](https://www.statlect.com/probability-distributions/multinoulli-distribution)) 확률 분포 벡터와 비교하여 손실(loss)값을 구하게 됩니다.
 
 $$
 \text{CrossEntropy}(y_{1:n}, \hat{y}_{1:n})=\frac{1}{n}\sum_{i=1}^{n}{y_i^T\hat{y}_i}
@@ -110,7 +110,7 @@ $$
 
 ![모든 time-step의 출력을 사용 하는 경우](../assets/rnn-apply-2.png)
 
-그림과 같이 각 time-step 별로 입력을 받아 RNN을 거치고 나서, 각 time-step별로 어떠한 결과물을 출력 하여, 각 time-step 별 정답과 비교하여 손실(loss)를 구합니다. 이때에도 각 단어는 one-hot vector로 표현 될 수 있으며, 그 경우에는 embedding layer를 거쳐 word embedding vector로 변환 된 후, RNN에 입력으로 주어지게 됩니다.
+그림과 같이 각 time-step 별로 입력을 받아 RNN을 거치고 나서, 각 time-step별로 어떠한 결과물을 출력 하여, 각 time-step 별 정답과 비교하여 손실(loss)를 구합니다. 이때에도 각 단어는 one-hot 벡터로 표현 될 수 있으며, 그 경우에는 임베딩 레이어를 거쳐 word 임베딩 벡터로 변환 된 후, RNN에 입력으로 주어지게 됩니다.
 
 대부분의 경우 RNN은 여러 층(layer)과 양방향(bi-directional)으로 구현 될 수 있습니다. 하지만 입력과 출력이 같은 데이터를 공유 하는 경우에는 bi-directional RNN을 사용할 수 없습니다. 좀 더 구체적으로 설명하면 이전 time-step이 현재 time-step의 입력으로 사용되는 모델 구조의 경우에는 bi-directional RNN을 사용할 수 없습니다. 위의 그림도 그 경우에 해당 합니다. 하지만 형태소 분류기와 같이 출력이 다음 time-step에 입력에 영향을 끼치지 않는 경우에는 bi-directional RNN을 사용할 수 있습니다.
 
