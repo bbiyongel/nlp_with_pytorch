@@ -1,22 +1,4 @@
-# Appendix: Neural Network is a Probability Function
-
-## KL Divergence
-
-$$
-\begin{aligned}
-KL(P||P_\theta)&=-\mathbb{E}_{X \sim P}[\log{\frac{P_\theta(X)}{P(X)}}] \\
-&=-\sum_{x\in\mathcal{X}}{P(x)\log{\frac{P_\theta(x)}{P(x)}}} \\
-&=-\sum_{x\in\mathcal{X}}{\Big(P(x)\log{P_\theta(x)}-P(x)\log{P(x)}\Big)} \\
-&=H(P,P_\theta)-H(P)
-\end{aligned}
-$$
-
-$$
-\begin{aligned}
-\nabla_\theta KL(P||P_\theta)&=\nabla_\theta\big(H(P,P_\theta)-H(P)\big) \\
-&=\nabla_\theta H(P,P_\theta)
-\end{aligned}
-$$
+# Appendix: Neural Network is a Function to Approximate Probability Distiribution
 
 ## Cross Entropy Loss
 
@@ -51,7 +33,23 @@ $$
 \end{gathered}
 $$
 
-## Negative Log-likelihood Function
+## KL Divergence
+
+$$
+\begin{aligned}
+KL(P||P_\theta)&=-\mathbb{E}_{X \sim P}[\log{\frac{P_\theta(X)}{P(X)}}] \\
+&=-\sum_{x\in\mathcal{X}}{P(x)\log{\frac{P_\theta(x)}{P(x)}}} \\
+&=-\sum_{x\in\mathcal{X}}{\Big(P(x)\log{P_\theta(x)}-P(x)\log{P(x)}\Big)} \\
+&=H(P,P_\theta)-H(P)
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\nabla_\theta KL(P||P_\theta)&=\nabla_\theta\big(H(P,P_\theta)-H(P)\big) \\
+&=\nabla_\theta H(P,P_\theta)
+\end{aligned}
+$$
 
 ## Mean Square Error (MSE) Loss
 
