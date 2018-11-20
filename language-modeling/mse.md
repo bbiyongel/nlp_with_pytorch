@@ -26,6 +26,7 @@ $$
 \begin{aligned}
 J(\theta)=H(P,P_\theta)&=-\mathbb{E}_{X\sim P(X)}\Big[\mathbb{E}_{Y\sim P(Y|X)}[\log{P(Y|X;\theta)}]\Big] \\
 &=-\sum_{x\in\mathcal{X}}{P(x)\sum_{y\in\mathcal{Y}}{P(y|x)\log{P(y|x;\theta)}}} \\
+&\approx-\frac{1}{K}\sum_{i=1}^K{\sum_{y\in\mathcal{Y}}{P(y|x)\log{P(y|x;\theta)}}}
 \end{aligned}
 $$
 
@@ -35,16 +36,11 @@ $$
 \mathcal{B}=\{x,y\}_{i=1}^N
 $$
 
-By Monte-Carlo Sampling,
+In case of $y$ is one-hot encoded vector, if $j$ is index of $1$ in one-hot encoded $y$, 
 
 $$
-\begin{aligned}
-J(\theta)&\approx-\frac{1}{N}\sum_{i=1}^N{\frac{1}{K}\sum_{j=1}^K{\log{P(y_j|x_i;\theta)}}} \\
-&\approx-\frac{1}{N}\sum_{i=1}^N{\log{P(y_i|x_i;\theta)}}
-\end{aligned}
+J(\theta)\approx-\frac{1}{N}\sum_{i=1}^N{{\log{P(y_j|x_i;\theta)}}}
 $$
-
-Note that $K=1$, in our data set. 
 
 To minimize the objective function,
 
@@ -77,9 +73,9 @@ $$
 \begin{aligned}
 J(\theta)=-\frac{1}{N}\sum_{i=1}^N{\log{f_\theta(x_i)}}
 &=-\frac{1}{N}\sum_{i=1}^N{\log{\Big(\frac{1}{\sigma_\psi(x_i)\sqrt{2\pi}}\exp{(-\frac{\big(x_i-\mu_\phi(x_i)\big)^2}{2\sigma_\psi(x_i)^2})}\Big)}}, \\
-&=-\frac{1}{N}\sum_{i=1}^N\Big(\log{\frac{1}{\sigma_\psi(x_i)\sqrt{2\pi}}}-\frac{\big(x_i-\mu_\phi(x_i)\big)^2}{2\sigma_\psi(x_i)^2}\Big) \\
-&=\log{\sigma_\psi(x_i)}+\frac{1}{2}\log{2\pi}+\frac{1}{2\sigma_\psi(x_i)^2\cdot N}\sum_{i=1}^N\big(x_i-\mu_\phi(x_i)\big)^2\\
-&\text{where }\theta^*=\{\phi,\psi\}\text{, but ignore }\psi\text{ and }\theta=\{\phi\}.
+&=-\frac{1}{N}\sum_{i=1}^N\Big(\log{\frac{1}{\sigma_\psi(x_i)\sqrt{2\pi}}}-\frac{\big(x_i-\mu_\phi(x_i)\big)^2}{2\sigma_\psi(x_i)^2}\Big) \\ \\
+&\text{Since }\theta^*=\{\phi,\psi\}\text{, but ignore }\psi\text{ and }\theta=\{\phi\}. \text{ Thus,} \\
+&\approx\log{\sigma}+\frac{1}{2}\log{2\pi}+\frac{1}{2\sigma\cdot N}\sum_{i=1}^N\big(x_i-\mu_\phi(x_i)\big)^2
 \end{aligned}
 $$
 

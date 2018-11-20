@@ -334,7 +334,7 @@ MSE의 수식은 아래와 같습니다.
 
 $$
 \begin{aligned}
-&\mathcal{L}_{MSE}(x, y)=\frac{1}{N}\sum^N_{i=1}{(x_n - y_n)^2}
+&\mathcal{L}_{MSE}(\hat{y}, y)=\frac{1}{N}\sum^N_{i=1}{(\hat{y}_n - y_n)^2}
 \end{aligned}
 $$
 
