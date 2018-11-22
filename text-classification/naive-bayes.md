@@ -7,40 +7,40 @@ Naive Bayes는 매우 간단하지만 정말 강력한 방법 입니다. 의외�
 Naive Bayes를 소개하기에 앞서 Bayes Theorem(베이즈 정리)을 짚고 넘어가지 않을 수 없습니다. Thomas Bayes(토마스 베이즈)가 정립한 이 정리에 따르면 조건부 확률은 아래와 같이 표현 될 수 있으며, 각 부분은 명칭을 갖고 있습니다. 이 이름들에 대해서는 앞으로 매우 친숙해져야 합니다.
 
 $$
-\underbrace{P(Y|X)}_{posterior}=\frac{\overbrace{P(X|Y)}^{likelihood}\overbrace{P(Y)}^{prior}}{\underbrace{P(X)}_{evidence}}
+\underbrace{P(c|\mathcal{D})}_{posterior}=\frac{\overbrace{P(\mathcal{D}|c)}^{likelihood}\overbrace{P(c)}^{prior}}{\underbrace{P(\mathcal{D})}_{evidence}}
 $$
 
 |수식|영어 명칭|한글 명칭|
 |-|-|-|
-|P(Y\|X)|Posterior|사후 확률|
-|P(X\|Y)|Likelihood|가능도(우도)|
-|P(Y)|Prior|사전 확률|
-|P(X)|Evidence|증거|
+|P(c\|D)|Posterior|사후 확률|
+|P(D\|c)|Likelihood|가능도(우도)|
+|P(c)|Prior|사전 확률|
+|P(D)|Evidence|증거|
 
-우리가 풀고자하는 대부분의 문제들은 $P(X)$는 구하기 힘들기 때문에, 보통은 아래와 같이 접근 하기도 합니다.
-
-$$
-P(Y|X) \varpropto P(X|Y)P(Y)
-$$
-
-위의 성질을 이용하여 주어진 데이터 $X$를 만족하며 확률을 최대로 하는 클래스 $Y$를 구할 수 있습니다. 이처럼 posterior 확률을 최대화(maximize)하는 $y$를 구하는 것을 Maximum A Posterior (MAP)라고 부릅니다. 그 수식은 아래와 같습니다.
+우리가 풀고자하는 대부분의 문제들은 $P(\mathcal{D})$는 구하기 힘들기 때문에, 보통은 아래와 같이 접근 하기도 합니다.
 
 $$
-\hat{y}_{MAP}=\underset{y\in\mathcal{Y}}{\text{argmax }}P(Y=y|X)
+P(c|\mathcal{D}) \varpropto P(c|\mathcal{D})P(c)
 $$
 
-다시한번 수식을 살펴보면, $X$(데이터)가 주어졌을 때, 가능한 클래스의 set $mathcal{Y}$ 중에서 posterior를 최대로 하는 클래스 $y$를 선택하는 것 입니다.
-
-이와 마찬가지로 $X$(데이터)가 나타날 likelihood 확률을 최대로 하는 클래스 $y$를 선택하는 것을 Maximum Likelihood Estimation (MLE)라고 합니다.
+위의 성질을 이용하여 주어진 데이터 $\mathcal{D}$를 만족하며 확률을 최대로 하는 클래스 $c$를 구할 수 있습니다. 이처럼 posterior 확률을 최대화(maximize)하는 $c$를 구하는 것을 Maximum A Posterior (MAP)라고 부릅니다. 그 수식은 아래와 같습니다.
 
 $$
-\hat{y}_{MLE}=\underset{y\in\mathcal{Y}}{\text{argmax }}P(X|Y=y)
+\hat{c}_{MAP}=\underset{c\in\mathcal{C}}{\text{argmax }}P(C=c|\mathcal{D})
 $$
 
-MLE는 주어진 데이터$X$와 클래스 레이블(label) $Y$가 있을 때, parameter $\theta$를 훈련하는 방법으로도 많이 사용 됩니다.
+다시한번 수식을 살펴보면, $\mathcal{D}$(데이터)가 주어졌을 때, 가능한 클래스의 set $mathcal{C}$ 중에서 posterior를 최대로 하는 클래스 $c$를 선택하는 것 입니다.
+
+이와 마찬가지로 $\mathcal{D}$(데이터)가 나타날 likelihood 확률을 최대로 하는 클래스 $c$를 선택하는 것을 Maximum Likelihood Estimation (MLE)라고 합니다.
 
 $$
-\hat{\theta}=\underset{\theta}{\text{argmax }}P(Y|X,\theta)
+\hat{c}_{MLE}=\underset{c\in\mathcal{C}}{\text{argmax }}P(\mathcal{D}|C=c)
+$$
+
+MLE는 주어진 데이터$\mathcal{D}$와 클래스 레이블(label) $C$가 있을 때, parameter $\theta$를 훈련하는 방법으로도 많이 사용 됩니다.
+
+$$
+\hat{\theta}=\underset{\theta}{\text{argmax }}P(C|\mathcal{D},\theta)
 $$
 
 ### MLE vs MAP
@@ -49,16 +49,16 @@ $$
 
 만약 범죄현장에서 발자국을 발견하고 사이즈를 측정했더니 범인은 신발사이즈(데이터, $X$) 155를 신는 사람인 것으로 의심 됩니다. 이때, 범인의 성별(클래스, $Y$)을 예측 해 보도록 하죠.
 
-성별 클래스의 set은 $Y=\{male, female\}$ 입니다. 신발사이즈 $X$는 5단위의 정수로 이루어져 있습니다. $X=\{\cdots,145,150,155,160,\cdots\}$
+성별 클래스의 set은 $Y=\{\text{male}, \text{female}\}$ 입니다. 신발사이즈 $X$는 5단위의 정수로 이루어져 있습니다. $X=\{\cdots,145,150,155,160,\cdots\}$
 
-신발사이즈 155는 남자 신발사이즈 치곤 매우 작은 편 입니다. 따라서 우리는 보통 범인을 여자라고 특정할 것 같습니다. 다시 말하면, 남자일 때 신발사이즈 155일 확률 $P(X=155|Y=male)$은 여자일 때 신발사이즈 155일 확률 $P(X=155|Y=female)$일 확률 보다 낮습니다.
+신발사이즈 155는 남자 신발사이즈 치곤 매우 작은 편 입니다. 따라서 우리는 보통 범인을 여자라고 특정할 것 같습니다. 다시 말하면, 남자일 때 신발사이즈 155일 확률 $P(X=155|Y=\text{male})$은 여자일 때 신발사이즈 155일 확률 $P(X=155|Y=\text{female})$일 확률 보다 낮습니다.
 
-보통의 경우 남자와 여자의 비율은 $0.5$로 같기 때문에, 이는 큰 상관이 없는 예측 입니다. 하지만 범죄현장이 만약 군부대였다면 어떻게 될까요? 남녀 성비는 $P(Y=male) >> P(Y=female)$로 매우 불균형 할 것입니다.
+보통의 경우 남자와 여자의 비율은 $0.5$로 같기 때문에, 이는 큰 상관이 없는 예측 입니다. 하지만 범죄현장이 만약 군부대였다면 어떻게 될까요? 남녀 성비는 $P(Y=\text{male}) >> P(Y=\text{female})$로 매우 불균형 할 것입니다.
 
 이때, 이미 갖고 있는 likelihood에 prior를 곱해주면 posterior를 최대화 하는 클래스를 더 정확하게 예측 할 수 있습니다.
 
 $$
-P(Y=male|X=155) \varpropto P(X=155|Y=male)P(Y=male)
+P(Y=\text{male}|X=155) \varpropto P(X=155|Y=\text{male})P(Y=\text{male})
 $$
 
 ## Naive Bayes
