@@ -21,7 +21,16 @@ x = [[1, 2], [3, 4]]
 x = np.array(x)
 ```
 
-보시다시피, PyTorch는 굉장히 NumPy와 비슷한 방식의 코딩 스타일을 갖고 있고, 따라서 코드를 보고 해석하거나 새롭게 작성함에 있어서 굉장히 수월합니다.
+두 코드 모두 아래와 같이 x라는 변수에 $2\times2$ matrix를 만들어내는 것을 볼 수 있습니다.
+
+$$
+x=\begin{bmatrix}
+1, 2 \\
+3, 4
+\end{bmatrix}
+$$
+
+보다시피, PyTorch는 굉장히 NumPy와 비슷한 방식의 코딩 스타일을 갖고 있고, 따라서 코드를 보고 해석하거나 새롭게 작성함에 있어서 굉장히 수월합니다.
 
 Tensor는 아래와 같이 다양한 자료형을 제공 합니다.
 
@@ -36,9 +45,7 @@ Tensor는 아래와 같이 다양한 자료형을 제공 합니다.
  | 32-bit integer (signed) | torch.int32 or torch.int | torch.IntTensor | torch.cuda.IntTensor | 
  | 64-bit integer (signed) | torch.int64 or torch.long | torch.LongTensor | torch.cuda.LongTensor | 
 
-torch.Tensor를 통해 선언 하게 되면 디폴트 타입인 torch.FloatTensor로 선언하는 것과 같습니다.
-
-좀 더 자세한 참고를 원한다면 [PyTorch docs](https://pytorch.org/docs/stable/tensors.html)를 방문하시면 됩니다.
+torch.Tensor를 통해 선언 하게 되면 디폴트 타입인 torch.FloatTensor로 선언하는 것과 같습니다. 좀 더 자세한 참고를 원한다면 [PyTorch docs](https://pytorch.org/docs/stable/tensors.html)를 방문하면 됩니다.
 
 ## Autograd
 
@@ -59,6 +66,8 @@ z = (x + y) + torch.FloatTensor(2, 2)
 ![Computational Graph의 예](../assets/pytorch-intro-xyz-graph.png)
 
 위의 예제에서처럼 $x$와 $y$를 생성하고 둘을 더하는 연산을 수행하면 $x+y$, 이에 해당하는 tensor가 생성되어 computational graph에 할당 됩니다. 그리고 다시 생성 된 $2 \times 2$ tensor를 더해준 뒤, 이를 $z$에 assign(할당) 하게 됩니다. 따라서 $z$로부터 back-propgation을 수행하게 되면, 이미 생성된 computational graph를 따라서 gradient를 전달 할 수 있게 됩니다.
+
+이것이 바로 기존의 케라스(Keras)와 텐서플로우(Tensorflow)와 다른점 입니다. 케라스와 텐서플로우에서는 미리 정의 한 연산들을 컴파일(compile)을 통해 고정한 후, 정해진 입력에 맞춰 텐서(tensor)를 feed-forward하는 반면, PyTorch는 정해진 연산이라는 것은 없고, 단지 모델은 배워야 하는 파라미터 값만 미리 알고 있을 뿐, 그 웨이트(weight) 파라미터들이 어떠한 연산을 통해서 학습 또는 연산에 관여하는지는 알 수 없는 것 입니다.
 
 Gradient를 구할 필요가 없는 연산의 경우에는 아래와 같이 'with' 문법을 사용하여 연산을 수행할 수 있습니다. back-propagation이 필요 없는 추론(inference) 등을 수행 할 때 유용하며, gradient를 구하기 위한 사전 작업들(computational graph 생성)을 생략할 수 있기 때문에, 연산 속도 및 메모리 사용에 있어서도 큰 이점을 지니게 됩니다.
 
@@ -207,14 +216,14 @@ import torch.nn as nn
 class MyLinear(nn.Module):
 
     def __init__(self, input_size, output_size):
-        super(MyLinear, self).__init__()
-        
+        super().__init__()
+
         self.W = torch.FloatTensor(input_size, output_size)
         self.b = torch.FloatTensor(output_size)
-        
+
     def forward(self, x):
         y = torch.mm(x, self.W) + self.b
-        
+
         return y
 ```
 
@@ -238,7 +247,7 @@ forward()에서 정의 해 준대로 잘 동작 하는 것을 볼 수 있습니�
 
 참고사이트: http://pytorch.org/docs/master/nn.html?highlight=parameter#parameters
 
-> A kind of Tensor that is to be considered a module parameter. Parameters are Tensor subclasses, that have a very special property when used with Module s - when they’re assigned as Module attributes they are automatically added to the list of its parameters, and will appear e.g. in parameters() iterator. Assigning a Tensor doesn’t have such effect. This is because one might want to cache some temporary state, like last hidden state of the RNN, in the model. If there was no such class as Parameter, these temporaries would get registered too.
+> Parameters are Tensor subclasses, that have a very special property when used with Module s - when they’re assigned as Module attributes they are automatically added to the list of its parameters, and will appear e.g. in parameters() iterator. Assigning a Tensor doesn’t have such effect. This is because one might want to cache some temporary state, like last hidden state of the RNN, in the model. If there was no such class as Parameter, these temporaries would get registered too.
 
 따라서 우리는 Parameter라는 클래스를 사용하여 tensor를 감싸야 합니다. 그럼 아래와 같이 될 것 입니다.
 
@@ -247,13 +256,13 @@ class MyLinear(nn.Module):
 
     def __init__(self, input_size, output_size):
         super(MyLinear, self).__init__()
-        
-        self.W = nn.Parameter(torch.FloatTensor(input_size, output_size), requires_grad = True)
-        self.b = nn.Parameter(torch.FloatTensor(output_size), requires_grad = True)
-        
+
+        self.W = nn.Parameter(torch.FloatTensor(input_size, output_size), requires_grad=True)
+        self.b = nn.Parameter(torch.FloatTensor(output_size), requires_grad=True)
+
     def forward(self, x):
         y = torch.mm(x, self.W) + self.b
-        
+
         return y
 ```
 
@@ -272,16 +281,16 @@ class MyLinear(nn.Module):
 
     def __init__(self, input_size, output_size):
         super(MyLinear, self).__init__()
-        
+
         self.linear = nn.Linear(input_size, output_size)
-                
+
     def forward(self, x):
         y = self.linear(x)
-        
+
         return y
 ```
 
-nn.Linear 클래스를 사용하여 $W$와 $b$를 대체하였습니다. 그리고 아래와 같이 출력 해 보면 내부의 Linear Layer가 잘 찍혀 나오는 것을 확인 할 수 있습니다.
+위에서 nn.Module을 상속받은 클래스는 nn.Module의 자식 클래스를 멤버 변수로 가지고 있을 수 있다고 하였습니다. 따라서 nn.Linear 클래스를 사용하여 $W$와 $b$를 대체하였습니다. 그리고 아래와 같이 출력 해 보면 내부의 Linear Layer가 잘 찍혀 나오는 것을 확인 할 수 있습니다.
 
 ```py
 >>> print(linear)
