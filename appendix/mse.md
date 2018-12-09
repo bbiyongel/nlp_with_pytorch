@@ -56,3 +56,5 @@ $$
 $$
 \text{MSE}(\theta)=\frac{1}{N}\sum_{i=1}^N\big(y_i-\mu_\theta(x_i)\big)^2
 $$
+
+즉, 기존의 discrete 확률 분포는 $x$로부터 확률 값을 얻을 수 있기 때문에, 크로스 엔트로피를 적용하여 ground-truth 확률 분포에 뉴럴 네트워크 확률 분포를 근사(approximate)할 수 있었습니다. 하지만 continuous 확률 분포는 확률 값을 알 수 없기 때문에, 뉴럴 네트워크의 출력값이 가우시한 분포의 $\mu$라는 가정을 하면 MSE를 통해 ground-truth 확률 분포에 뉴럴 네트워크 확률 분포를 근사할 수 있게 되는 것 입니다.
