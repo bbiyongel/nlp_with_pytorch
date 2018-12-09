@@ -10,6 +10,7 @@
   * [왜 한국어 자연어처리는 더욱 어려울까](nlp-with-deeplearning/korean-is-hell.md)
   * [최근 추세](nlp-with-deeplearning/trends.md)
 * [기초 수학](basic-math/cover.md)
+  * [서문](basic-math/intro.md)
   * [랜덤 변수와 확률 분포](basic-math/prob-dist.md)
   * [쉬어가기: 몬티홀 문제](appendix/monty-hall.md)
   * [기대값과 샘플링](basic-math/sampling.md)

@@ -64,10 +64,6 @@ $$
 P(X=x)
 $$
 
-$$
-\sum_{i=1}^N{P(X=x_i)}=\sum_{i=1}^N{P(x_i)}=1
-$$
-
 ### Continuous Variable
 
 $$
@@ -136,21 +132,7 @@ $$
 
 #### Example
 
-$$
-K\sim\mathcal{B}(n,\theta)
-$$
 
-$$
-\begin{aligned}
-P(K=k)&=
-\begin{pmatrix}
-   n \\
-   k
-\end{pmatrix}
-\theta^k(1-\theta)^{n-k} \\
-&=\frac{n!}{k!(n-k)!}\cdot\theta^k(1-\theta)^{n-k}
-\end{aligned}
-$$
 
 ### MAP
 
