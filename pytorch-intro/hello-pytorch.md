@@ -1,10 +1,10 @@
-# PyTorch Short Tutorial
+# 파이토치 짧은 튜토리얼
 
-## Tensor
+## 텐서(Tensor)
 
-PyTorch의 tensor는 numpy의 array와 같은 개념입니다. PyTorch 상에서 연산을 수행하기 위한 가장 기본적인 객체로써, 앞으로 우리가 수행할 모든 연산은 이 객체를 통하게 됩니다. 따라서 PyTorch는 tensor를 통해 값을 저장하고 그 값들에 대해서 연산을 수행할 수 있는 함수를 제공합니다.
+파이토치의 텐서(tensor)는 numpy의 array와 같은 개념입니다. 파이토치 상에서 연산을 수행하기 위한 가장 기본적인 객체로써, 앞으로 우리가 수행할 모든 연산은 이 객체를 통하게 됩니다. 따라서 파이토치는 텐서를 통해 값을 저장하고 그 값들에 대해서 연산을 수행할 수 있는 함수를 제공합니다.
 
-아래의 예제는 같은 동작을 수행하는 PyTorch 코드와 NumPy 코드 입니다.
+아래의 예제는 같은 동작을 수행하는 파이토치 코드와 NumPy 코드 입니다.
 
 ```python
 import torch
@@ -21,7 +21,7 @@ x = [[1, 2], [3, 4]]
 x = np.array(x)
 ```
 
-두 코드 모두 아래와 같이 x라는 변수에 $2\times2$ matrix를 만들어내는 것을 볼 수 있습니다.
+두 코드 모두 아래와 같이 x라는 변수에 $2\times2$ 행렬(matrix)를 만들어내는 것을 볼 수 있습니다.
 
 $$
 x=\begin{bmatrix}
@@ -30,9 +30,9 @@ x=\begin{bmatrix}
 \end{bmatrix}
 $$
 
-보다시피, PyTorch는 굉장히 NumPy와 비슷한 방식의 코딩 스타일을 갖고 있고, 따라서 코드를 보고 해석하거나 새롭게 작성함에 있어서 굉장히 수월합니다.
+보다시피, 파이토치는 굉장히 NumPy와 비슷한 방식의 코딩 스타일을 갖고 있고, 따라서 코드를 보고 해석하거나 새롭게 작성함에 있어서 굉장히 수월합니다.
 
-Tensor는 아래와 같이 다양한 자료형을 제공 합니다.
+텐서는 아래와 같이 다양한 자료형을 제공 합니다.
 
 | Data type | dtype | CPU tensor | GPU tensor | 
  | --- | --- | --- | --- | 
@@ -49,9 +49,7 @@ torch.Tensor를 통해 선언 하게 되면 디폴트 타입인 torch.FloatTenso
 
 ## Autograd
 
-PyTorch는 자동으로 미분 및 back-propagation을 해주는 Autograd 기능을 갖고 있습니다. 따라서 우리는 대부분의 tensor간의 연산들을 크게 신경 쓸 필요 없이 수행 하고, back-propagation을 수행하는 명령어를 호출 해 주기만 하면 됩니다. 
-
-이를 위해서, PyTorch는 tensor들 사이의 연산을 할 때마다 computational graph를 생성하여 연산의 결과물이 어떤 tensor로부터 어떤 연산을 통해서 왔는지 추적 하고 있습니다. 따라서 우리가 최종적으로 나온 스칼라(scalar)에 미분과 back-propagation(역전파)을 수행하도록 하였을 때, 자동으로 각 tensor 별로 자기 자신의 자식노드(child node)에 해당하는 tensor를 찾아서 계속해서 back-propagation 할 수 있도록 합니다.
+파이토치는 자동으로 미분 및 back-propagation을 해주는 Autograd 기능을 갖고 있습니다. 따라서 우리는 대부분의 텐서 간의 연산들을 크게 신경 쓸 필요 없이 수행 하고, back-propagation을 수행하는 명령어를 호출 해 주기만 하면 됩니다. 이를 위해서, 파이토치는 텐서들 사이의 연산을 할 때마다 연산 그래프(computation graph)를 생성하여 연산의 결과물이 어떤 텐서로부터 어떤 연산을 통해서 왔는지 추적 하고 있습니다. 따라서 우리가 최종적으로 나온 스칼라(scalar)에 미분과 back-propagation을 수행하도록 하였을 때, 자동으로 각 텐서 별로 자기 자신의 자식노드(child node)에 해당하는 텐서를 찾아서 계속해서 back-propagation 할 수 있도록 합니다.
 
 ```py
 import torch
@@ -63,13 +61,13 @@ y.requires_grad_(True)
 z = (x + y) + torch.FloatTensor(2, 2)
 ```
 
-![Computational Graph의 예](../assets/pytorch-intro-xyz-graph.png)
+![연산에 의해 생성된 그래프의 예](../assets/pytorch_intro-computation_graph.png)
 
-위의 예제에서처럼 $x$와 $y$를 생성하고 둘을 더하는 연산을 수행하면 $x+y$, 이에 해당하는 tensor가 생성되어 computational graph에 할당 됩니다. 그리고 다시 생성 된 $2 \times 2$ tensor를 더해준 뒤, 이를 $z$에 assign(할당) 하게 됩니다. 따라서 $z$로부터 back-propgation을 수행하게 되면, 이미 생성된 computational graph를 따라서 gradient를 전달 할 수 있게 됩니다.
+위의 예제에서처럼 $x$와 $y$를 생성하고 둘을 더하는 연산을 수행하면 $x+y$, 이에 해당하는 텐서가 생성되어 연산 그래프에 할당 됩니다. 그리고 다시 생성 된 $2 \times 2$ 텐서를 더해준 뒤, 이를 $z$에 할당하게 됩니다. 따라서 $z$로부터 back-propgation을 수행하게 되면, 이미 생성된 연산 그래프를 따라서 그래디언트를 전달 할 수 있게 됩니다.
 
-이것이 바로 기존의 케라스(Keras)와 텐서플로우(Tensorflow)와 다른점 입니다. 케라스와 텐서플로우에서는 미리 정의 한 연산들을 컴파일(compile)을 통해 고정한 후, 정해진 입력에 맞춰 텐서(tensor)를 feed-forward하는 반면, PyTorch는 정해진 연산이라는 것은 없고, 단지 모델은 배워야 하는 파라미터 값만 미리 알고 있을 뿐, 그 웨이트(weight) 파라미터들이 어떠한 연산을 통해서 학습 또는 연산에 관여하는지는 알 수 없는 것 입니다.
+이것이 바로 기존의 케라스(Keras)와 텐서플로우(Tensorflow)와 다른점 입니다. 케라스와 텐서플로우에서는 미리 정의 한 연산들을 컴파일(compile)을 통해 고정한 후, 정해진 입력에 맞춰 텐서(tensor)를 feed-forward하는 반면, 파이토치는 정해진 연산이라는 것은 없고, 단지 모델은 배워야 하는 파라미터 값만 미리 알고 있을 뿐, 그 웨이트(weight) 파라미터들이 어떠한 연산을 통해서 학습 또는 연산에 관여하는지는 알 수 없는 것 입니다.
 
-Gradient를 구할 필요가 없는 연산의 경우에는 아래와 같이 'with' 문법을 사용하여 연산을 수행할 수 있습니다. back-propagation이 필요 없는 추론(inference) 등을 수행 할 때 유용하며, gradient를 구하기 위한 사전 작업들(computational graph 생성)을 생략할 수 있기 때문에, 연산 속도 및 메모리 사용에 있어서도 큰 이점을 지니게 됩니다.
+그래디언트를 구할 필요가 없는 연산의 경우에는 아래와 같이 'with' 문법을 사용하여 연산을 수행할 수 있습니다. back-propagation이 필요 없는 추론(inference) 등을 수행 할 때 유용하며, 그래디언트를 구하기 위한 사전 작업들(연산 그래프 생성)을 생략할 수 있기 때문에, 연산 속도 및 메모리 사용에 있어서도 큰 이점을 지니게 됩니다.
 
 ```python
 import torch
@@ -82,25 +80,23 @@ with torch.no_grad():
     z = (x + y) + torch.FloatTensor(2, 2)
 ```
 
-## How to Do Basic Operations \(Forward\)
+## 기본 연산 방법(feed-forward)
 
-이번에는 Linear Layer(또는 fully-connected layer, dense layer)를 구현 해 보도록 하겠습니다. $M\times N$의 입력 행렬 $x$가 주어지면, $N\times P$의 행렬 $W$를 곱한 후, P차원의 벡터 $b$를 bias로 더하도록 하겠습니다. 수식은 아래와 같을 것 입니다.
+이번에는 Linear 레이어(또는 fully-connected layer, dense layer)를 구현 해 보도록 하겠습니다. $M\times N$의 입력 행렬 $x$가 주어지면, $N\times P$의 행렬 $W$를 곱한 후, P차원의 벡터 $b$를 bias로 더하도록 하겠습니다. 수식은 아래와 같을 것 입니다.
 
 $$
 y = xW^t + b
 $$
 
-사실 이 수식에서 $x$는 vector이지만, 보통 우리는 딥러닝을 수행 할 때에 mini-batch 기준으로 수행하므로, $x$가 매트릭스(matrix, 행렬)라고 가정 하겠습니다.
-
-이를 좀 더 구현하기 쉽게 아래와 같이 표현 해 볼 수도 있습니다.
+사실 이 수식에서 $x$는 벡터이지만, 보통 우리는 딥러닝을 수행 할 때에 미니배치(mini-batch) 기준으로 수행하므로, $x$가 매트릭스(matrix, 행렬)라고 가정 하겠습니다. 이를 좀 더 구현하기 쉽게 아래와 같이 표현 해 볼 수도 있습니다.
 
 $$
 \begin{aligned}
-y&=f(x; \theta)~where~\theta=\{W, b\}
+y&=f(x; \theta)\text{ where }\theta=\{W, b\}
 \end{aligned}
 $$
 
-이러한 linaer layer의 기능은 아래와 같이 PyTorch로 구현할 수 있습니다.
+이러한 linaer 레이어의 기능은 아래와 같이 파이토치로 구현할 수 있습니다.
 
 ```py
 import torch
@@ -117,9 +113,10 @@ b = torch.FloatTensor(5)
 y = linear(x, W, b)
 ```
 
-### Broadcasting
+<!--
+### 브로드캐스팅(Broadcasting)
 
-Broadcasting에 대해서 설명 해 보겠습니다. 역시 NumPy에서 제공되는 broadcasting과 동일하게 동작합니다. matmul()을 사용하면 임의의 차원의 tensor끼리 연산을 가능하게 해 줍니다. 이전에는 강제로 2차원을 만들거나 하여 곱해주는 수 밖에 없었습니다. 다만, 입력으로 주어지는 tensor들의 차원에 따라서 규칙이 적용됩니다. 그 규칙은 아래와 같습니다.
+브로드캐스팅(broadcasting)에 대해서 설명 해 보겠습니다. 역시 NumPy에서 제공되는 브로드캐스팅과 동일하게 동작합니다. matmul()을 사용하면 임의의 차원의 tensor끼리 연산을 가능하게 해 줍니다. 이전에는 강제로 2차원을 만들거나 하여 곱해주는 수 밖에 없었습니다. 다만, 입력으로 주어지는 tensor들의 차원에 따라서 규칙이 적용됩니다. 그 규칙은 아래와 같습니다.
 
 ```py
 >>> # vector x vector
@@ -200,12 +197,13 @@ Broadcasting 연산의 가장 주의해야 할 점은, 의도하지 않은 broad
 > 참고사이트: 
 > - [http://pytorch.org/docs/master/torch.html?highlight=matmul\#torch.matmul](http://pytorch.org/docs/master/torch.html?highlight=matmul#torch.matmul)
 > - http://pytorch.org/docs/master/notes/broadcasting.html#broadcasting-semantics
+-->
 
 ## nn.Module
 
-이제까지 우리가 원하는 수식을 어떻게 어떻게 feed-forward 구현 하는지 살펴 보았습니다. 이것을 좀 더 편리하고 깔끔하게 사용하는 방법에 대해서 다루어 보도록 하겠습니다. PyTorch는 nn.Module이라는 클래스를 제공하여 사용자가 이 위에서 자신이 필요로 하는 모델 구조를 구현할 수 있도록 하였습니다. 
+이제까지 우리가 원하는 수식을 어떻게 어떻게 feed-forward 구현 하는지 살펴 보았습니다. 이것을 좀 더 편리하고 깔끔하게 사용하는 방법에 대해서 다루어 보도록 하겠습니다. 파이토치는 nn.Module이라는 클래스를 제공하여 사용자가 이 위에서 자신이 필요로 하는 모델 구조를 구현할 수 있도록 하였습니다. 
 
-nn.Module의 상속한 사용자 정의 클래스는 다시 내부에 nn.Module을 상속한 클래스를 선언하여 소유 할 수 있습니다. 즉, nn.Module 안에 nn.Module 객체를 선언하여 사용 할 수 있습니다. 그리고 nn.Module의 forward() 함수를 override하여 feed-forward를 구현할 수 있습니다. 이외에도 nn.Module의 특성을 이용하여 한번에 weight parameter를 save/load할 수도 있습니다.
+nn.Module의 상속한 사용자 정의 클래스는 다시 내부에 nn.Module을 상속한 클래스를 선언하여 소유 할 수 있습니다. 즉, nn.Module 안에 nn.Module 객체를 선언하여 사용 할 수 있습니다. 그리고 nn.Module의 forward() 함수를 오버라이드(override)하여 feed-forward를 구현할 수 있습니다. 이외에도 nn.Module의 특성을 이용하여 한번에 네트워크 웨이트 파라미터들를 저장 및 로딩 할 수도 있습니다.
 
 그럼 앞서 구현한 linear 함수 대신에 MyLinear라는 클래스를 nn.Module을 상속받아 선언하고, 사용하여 똑같은 기능을 구현 해 보겠습니다.
 
@@ -235,7 +233,7 @@ linear = MyLinear(10, 5)
 y = linear(x)
 ```
 
-forward()에서 정의 해 준대로 잘 동작 하는 것을 볼 수 있습니다. 하지만, 위와 같이 $W$와 $b$를 선언하면 문제점이 있습니다. parameters() 함수는 module 내에 선언 된 학습이 필요한 파라미터들을 반환하는 iterator 입니다. 한번, linear module 내의 학습이 필요한 파라미터들의 크기를 size()함수를 통해 확인 해 보도록 하겠습니다.
+forward()에서 정의 해 준대로 잘 동작 하는 것을 볼 수 있습니다. 하지만, 위와 같이 $W$와 $b$를 선언하면 문제점이 있습니다. parameters() 함수는 모듈 내에 선언 된 학습이 필요한 파라미터들을 반환하는 이터레이터(iterator) 입니다. 한번, linear 모듈 내의 학습이 필요한 파라미터들의 크기를 size()함수를 통해 확인 해 보도록 하겠습니다.
 
 ```py
 >>> params = [p.size() for p in linear.parameters()]
@@ -243,13 +241,13 @@ forward()에서 정의 해 준대로 잘 동작 하는 것을 볼 수 있습니�
 []
 ```
 
-아무것도 들어있지 않은 빈 list가 찍혔습니다. 즉, linear module 내에는 학습 가능한 파라미터가 없다는 이야기 입니다. 아래의 웹페이지에 그 이유가 자세히 나와 있습니다.
+아무것도 들어있지 않은 빈 리스트(list)가 찍혔습니다. 즉, linear 모듈 내에는 학습 가능한 파라미터가 없다는 이야기 입니다. 아래의 웹페이지에 그 이유가 자세히 나와 있습니다.
 
 참고사이트: http://pytorch.org/docs/master/nn.html?highlight=parameter#parameters
 
 > Parameters are Tensor subclasses, that have a very special property when used with Module s - when they’re assigned as Module attributes they are automatically added to the list of its parameters, and will appear e.g. in parameters() iterator. Assigning a Tensor doesn’t have such effect. This is because one might want to cache some temporary state, like last hidden state of the RNN, in the model. If there was no such class as Parameter, these temporaries would get registered too.
 
-따라서 우리는 Parameter라는 클래스를 사용하여 tensor를 감싸야 합니다. 그럼 아래와 같이 될 것 입니다.
+따라서 우리는 Parameter라는 클래스를 사용하여 텐서를 감싸야 합니다. 그럼 아래와 같이 될 것 입니다.
 
 ```py
 class MyLinear(nn.Module):
@@ -266,7 +264,7 @@ class MyLinear(nn.Module):
         return y
 ```
 
-그럼 아까와 같이 다시 linear module 내부의 학습 가능한 파라미터들의 size를 확인 해 보도록 하겠습니다.
+그럼 아까와 같이 다시 linear 모듈 내부의 학습 가능한 파라미터들의 사이즈(size)를 확인 해 보도록 하겠습니다.
 
 ```py
 >>> params = [p.size() for p in linear.parameters()]
@@ -290,7 +288,7 @@ class MyLinear(nn.Module):
         return y
 ```
 
-위에서 nn.Module을 상속받은 클래스는 nn.Module의 자식 클래스를 멤버 변수로 가지고 있을 수 있다고 하였습니다. 따라서 nn.Linear 클래스를 사용하여 $W$와 $b$를 대체하였습니다. 그리고 아래와 같이 출력 해 보면 내부의 Linear Layer가 잘 찍혀 나오는 것을 확인 할 수 있습니다.
+위에서 nn.Module을 상속받은 클래스는 nn.Module의 자식 클래스를 멤버 변수로 가지고 있을 수 있다고 하였습니다. 따라서 nn.Linear 클래스를 사용하여 $W$와 $b$를 대체하였습니다. 그리고 아래와 같이 출력 해 보면 내부의 Linear 레이어가 잘 찍혀 나오는 것을 확인 할 수 있습니다.
 
 ```py
 >>> print(linear)
@@ -301,9 +299,9 @@ MyLinear(
 
 ## Backward (Back-propagation)
 
-이제까지 원하는 연산을 통해 값을 앞으로 전달(feed-forward)하는 방법을 살펴보았습니다. 이제 이렇게 얻은 값을 우리가 원하는 값과의 차이를 계산하여 error를 뒤로 전달(back-propagation)하는 것을 해 보도록 하겠습니다.
+이제까지 원하는 연산을 통해 값을 앞으로 전달(feed-forward)하는 방법을 살펴보았습니다. 이제 이렇게 얻은 값을 우리가 원하는 값과의 차이를 계산하여 오류(손실)를 뒤로 전달(back-propagation)하는 것을 해 보도록 하겠습니다.
 
-예를 들어 우리가 원하는 값은 아래와 같이 $100$이라고 하였을 때, linear의 결과값 matrix의 합과 목표값과의 거리(error 또는 loss)를 구하고, 그 값에 대해서 backward()함수를 사용함으로써 gradient를 구합니다. 이때, error는 sclar로 표현 되어야 합니다. 벡터나 행렬의 형태여서는 안됩니다.
+예를 들어 우리가 원하는 값은 아래와 같이 $100$이라고 하였을 때, linear의 결과값 텐서의 합과 목표값과의 거리(error 또는 loss)를 구하고, 그 값에 대해서 backward()함수를 사용함으로써 그래디언트를 구합니다. 이때, 애러값은 스칼라(sclar)로 표현 되어야 합니다. 벡터나 행렬의 형태여서는 안됩니다.
 
 ```py
 objective = 100
@@ -316,7 +314,7 @@ loss = (objective - y.sum())2
 loss.backward()
 ```
 
-위와 같이 구해진 각 파라미터들의 gradient에 대해서 gradient descent 방법을 사용하여 error(loss)를 줄여나갈 수 있을 것 입니다.
+위와 같이 구해진 각 파라미터들의 그래디언트 대해서 그래디언트 디센트 방법을 사용하여 오류(손실)를 줄여나갈 수 있을 것 입니다.
 
 ## train() and eval()
 
@@ -328,16 +326,16 @@ linear.train()
 # Restart training, again.
 ```
 
-위와 같이 PyTorch는 train()과 eval() 함수를 제공하여 사용자가 필요에 따라 model에 대해서 훈련시와 추론시의 모드 전환을 쉽게 할 수 있도록 합니다. nn.Module을 상속받아 구현하고 생성한 객체는 기본적으로 훈련 모드로 되어 있는데, eval()을 사용하여 추론 모드로 바꾸어주게 되면, (gradient를 계산하지 않도록 함으로써) 추론 속도 뿐만 아니라, dropout 또는 batch-normalization과 같은 학습과 추론 시에 다른 forward() 동작을 하는 모듈들에 대해서 각기 때에 따라 올바른 동작을 하도록 합니다. 다만, 추론이 끝나면 다시 train()을 선언 해 주어, 원래의 훈련 모드로 돌아가게 해 주어야 합니다.
+위와 같이 파이토치는 train()과 eval() 함수를 제공하여 사용자가 필요에 따라 모델에 대해서 훈련시와 추론시의 모드 전환을 쉽게 할 수 있도록 합니다. nn.Module을 상속받아 구현하고 생성한 객체는 기본적으로 훈련 모드로 되어 있는데, eval()을 사용하여 추론 모드로 바꾸어주게 되면, (그래디언트를 계산하지 않도록 함으로써) 추론 속도 뿐만 아니라, dropout 또는 batch-normalization과 같은 학습과 추론 시에 다른 forward() 동작을 하는 모듈들에 대해서 각기 때에 따라 올바른 동작을 하도록 합니다. 다만, 추론이 끝나면 다시 train()을 선언 해 주어, 원래의 훈련 모드로 돌아가게 해 주어야 합니다.
 
 ## Example
 
-이제까지 배운 것들을 활용하여 임의의 함수를 근사(approximate)하는 신경망을 구현 해 보도록 하겠습니다. 
+이제까지 배운 것들을 활용하여 임의의 함수를 근사(approximate)하는 신경망을 구현 해 보도록 하겠습니다. -- 사실은 선형회귀분석 입니다.
 
-1. 임의로 생성한 tensor들을 
+1. 임의로 생성한 텐서들을 
 1. 우리가 근사하고자 하는 정답 함수에 넣어 정답을 구하고, 
 1. 그 정답($y$)과 신경망을 통과한 $\hat{y}$과의 차이(error)를 Mean Square Error(MSE)를 통해 구하여 
-1. SGD를 통해서 최적화(optimize)하도록 해 보겠습니다.
+1. SGD(Stochastic Gradient Descent)를 통해서 최적화(optimize)하도록 해 보겠습니다.
 
 MSE의 수식은 아래와 같습니다.
 
@@ -347,7 +345,7 @@ $$
 \end{aligned}
 $$
 
-먼저 1개의 linear layer를 가진 MyModel이라는 모듈(module)을 선언합니다.
+먼저 1개의 linear 레이어를 가진 MyModel이라는 모듈(module)을 선언합니다.
 
 ```py
 import random
@@ -376,14 +374,14 @@ f(x_1, x_2, x_3) &= 3x_1 + x_2 - 2x_3
 \end{aligned}
 $$
 
-해당 함수를 python으로 구현하면 아래와 같습니다. 물론 신경망 입장에서는 내부 동작 내용을 알 수 없는 함수 입니다.
+해당 함수를 파이썬으로 구현하면 아래와 같습니다. 물론 신경망 입장에서는 내부 동작 내용을 알 수 없는 함수 입니다.
 
 ```py
 def ground_truth(x):
     return 3 * x[:, 0] + x[:, 1] - 2 * x[:, 2]
 ```
 
-아래는 입력을 받아 feed-forward 시킨 후, back-propagation하여 gradient descent까지 하는 함수 입니다.
+아래는 입력을 받아 feed-forward 시킨 후, back-propagation하여 그래디언트 디센트까지 수행 하는 함수 입니다.
 
 ```py
 def train(model, x, y, optim):
@@ -404,7 +402,7 @@ def train(model, x, y, optim):
     return loss.data
 ```
 
-그럼 위의 함수들을 사용 하기 위해서 하이퍼 파라미터(hyper-parameter)를 설정 하겠습니다.
+그럼 위의 함수들을 사용 하기 위해서 하이퍼파라미터(hyper-parameter)를 설정 하겠습니다.
 
 ```py
 batch_size = 1
@@ -448,19 +446,19 @@ for epoch in range(n_epochs):
 
 위와 같이 임의의 함수에 대해서 실제로 신경망을 근사(approximate)하는 아주 간단한 예제를 살펴 보았습니다. 사실은 신경망이라기보단, 선형 회귀(linear regression) 함수라고 봐야 합니다. 하지만, 앞으로 책에서 다루어질 구조(architecture)들과 훈련 방법들도 이 예제의 연장선상에 지나지 않습니다.
 
-이제까지 다룬 내용을 바탕으로 PyTorch상에서 딥러닝을 수행하는 과정은 아래와 같이 요약 해 볼 수 있습니다.
+이제까지 다룬 내용을 바탕으로 파이토치 상에서 딥러닝을 수행하는 과정은 아래와 같이 요약 해 볼 수 있습니다.
 
 1. nn.Module 클래스를 상속받아 모델 아키텍쳐 선언(forward함수를 통해)
-2. Model 객체 생성
+2. 모델 객체 생성
 3. SGD나 Adam등의 Optimizer를 생성하고, 생성한 모델의 파라미터를 등록
-4. 데이터로 미니배치를 구성하여 feed-forward --> computation graph 생성
-5. 손실함수(loss function)를 통해 최종 결과값(scalar) loss를 계산
-6. 손실(loss)에 대해서 backward() 호출 --> computation graph 상의 tensor들에 gradient가 채워짐 
-7. 3번의 optimizer에서 step()을 호출하여 gradient descent 1-step 수행
+4. 데이터로 미니배치를 구성하여 feed-forward --> 연산 그래프 생성
+5. 손실함수(loss function)를 통해 최종 결과값(scalar) 손실값(loss)을 계산
+6. 손실(loss)에 대해서 backward() 호출 --> computation graph 상의 텐서들에 그래디언트가 채워짐 
+7. 3번의 optimizer에서 step()을 호출하여 그래디언트 디센트 1 스텝 수행
 
-## Using GPU
+## GPU 사용하기
 
-PyTorch는 당연히 GPU상에서 훈련하는 방법도 제공합니다. 아래와 같이 cuda()함수를 통해서 원하는 객체를 GPU 메모리상에 복사(Tensor의 경우)하거나 이동(nn.Module의 하위 클래스인 경우) 시킬 수 있습니다.
+파이토치는 당연히 GPU상에서 훈련하는 방법도 제공합니다. 아래와 같이 cuda()함수를 통해서 원하는 객체를 GPU 메모리상에 복사(텐서의 경우)하거나 이동(nn.Module의 하위 클래스인 경우) 시킬 수 있습니다.
 
 ```py
 >>> # Note that tensor is declared in torch.cuda.
@@ -471,4 +469,4 @@ PyTorch는 당연히 GPU상에서 훈련하는 방법도 제공합니다. 아래
 >>> y = linear(x)
 ```
 
-또한, cpu()함수를 통해서 다시 PC의 메모리로 복사 하거나 이동 시킬 수 있습니다.
+또한, cpu()함수를 통해서 다시 PC의 메모리로 복사 하거나 이동 시킬 수 있습니다. 이 밖에도 to() 메서드를 사용하여 원하는 디바이스로 보낼 수 있습니다.
