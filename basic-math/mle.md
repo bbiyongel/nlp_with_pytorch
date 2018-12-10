@@ -57,6 +57,8 @@ $$
 P(\text{x};\theta)
 $$
 
+> 여기서 세미콜론은 수학적으로는 조건부 표기와 비슷합니다. 따라서 약간의 관점 차이가 존재할 뿐, $P(\text{x};\theta)=P(\text{x}|\theta)$라고 볼 수 있습니다. 또한 $P(\text{y}|\text{x};\theta)$의 경우에는 $P(\text{y}|\text{x},\theta)$와 같습니다.
+
 따라서 discrete 랜덤 변수 확률 분포에서는 확률값 자체가 likelihood로 표현 될 수 있으며, continuous 랜덤 변수 확률 분포의 경우에는 확률 밀도(probability density)값이 likelihood를 대신합니다. 서로 독립인 $n$번 시행을 거쳐 얻은 데이터($x_1, x_2, \cdots, x_n$)에 대한 likelihood는 아래와 같이 표현 할 수 있습니다.
 
 $$
