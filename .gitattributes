@@ -1,0 +1,17 @@
+*.pdf filter=lfs diff=lfs merge=lfs -text
+pdf/1.introduction.pdf filter=lfs diff=lfs merge=lfs -text
+pdf/3.pytorch-intro.pdf filter=lfs diff=lfs merge=lfs -text
+pdf/7.sequential-modeling.pdf filter=lfs diff=lfs merge=lfs -text
+pdf/10.nmt.pdf filter=lfs diff=lfs merge=lfs -text
+pdf/12.rl.pdf filter=lfs diff=lfs merge=lfs -text
+pdf/14.productization.pdf filter=lfs diff=lfs merge=lfs -text
+pdf/4.preprocessing.pdf filter=lfs diff=lfs merge=lfs -text
+pdf/0.cover.pdf filter=lfs diff=lfs merge=lfs -text
+pdf/11.adv-nmt.pdf filter=lfs diff=lfs merge=lfs -text
+pdf/13.duality.pdf filter=lfs diff=lfs merge=lfs -text
+pdf/2.basic-math.pdf filter=lfs diff=lfs merge=lfs -text
+pdf/5.word-senses.pdf filter=lfs diff=lfs merge=lfs -text
+pdf/6.word-embedding.pdf filter=lfs diff=lfs merge=lfs -text
+pdf/9.language-modeling.pdf filter=lfs diff=lfs merge=lfs -text
+pdf/8.text-classification.pdf filter=lfs diff=lfs merge=lfs -text
+pdf/merged.pdf filter=lfs diff=lfs merge=lfs -text

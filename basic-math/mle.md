@@ -2,7 +2,7 @@
 
 머신러닝의 목표는 보지 못한 데이터(unseen data)에 대한 좋은 예측(prediction)을 하는 것 입니다. 이것을 우리는 generalization(일반화)라고 합니다. 좋은 generalization 성능을 얻기 위해서 우리는 알고자 하는 ground-truth 확률 분포로부터 데이터를 수집(샘플링)하여, 수집된 데이터를 가장 잘 설명하는 확률 분포 모델을 추정함으로써, 알고자 하는 ground-truth 확률 분포를 근사(approximate) 합니다.
 
-![](/assets/basic_math-push_pin.png)
+![어느 평범한 압정](../assets/basic_math-push_pin.png)
 
 어느날 당신에게 얄미운 친구녀석이 내기를 제안합니다. 압정을 던졌을 때, 압정의 납작한 면이 바닥을 향해 떨어지면 50원을 받고, 반대의 경우에는 20원을 내야하는 게임 입니다. 우리는 이 게임을 참여할지 말아야 할지 결정해야 합니다. 그래서 게임에서 사용 될 압정과 똑같은 압정을 하나 구해서 집에서 100번 던져 봅니다. 그랬더니 납작한 면이 바닥으로 30번 떨어졌습니다. 그럼 우리는 추측해 볼 수 있죠.
 
@@ -49,7 +49,7 @@ $$
 
 이 함수를 실제로 $\theta$에 대해서 그래프로 나타내면 아래와 같습니다. $0.3$에서 $J(\theta)$가 최대가 되는 것을 볼 수 있습니다. 즉, $\theta=0.3$일 때, bionomial 분포는 우리가 수집한 데이터 또는 현상을 가장 잘 설명(재현)합니다.
 
-![Likelihood 함수 곡선](/assets/basic_math-binomial.png)
+![Likelihood 함수 곡선](../assets/basic_math-binomial.png)
 
 앞서 $J(\theta)$는 likelihood라고 하였습니다. 따라서 우리는 likelihood를 최대화(maximize)하도록 $\theta$를 추정하기 때문에 maximum likelihood estimation이라고 부르는 것 입니다. 이처럼 likelihood는 주어진 데이터 $\text{x}$를 설명하기위한 확률분포 파라미터($\theta$)에 대한 함수이고, 아래와 같이 표현 합니다.
 
