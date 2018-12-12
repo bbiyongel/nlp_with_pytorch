@@ -58,6 +58,7 @@
 * [텍스트 분류](text-classification/cover.md)
   * [서문](text-classification/intro.md)
   * [Naive Bayes](text-classification/naive-bayes.md)
+  * [흔한 오해 2](text-classification/myth.md)
   * [RNN을 활용한 텍스트 분류](text-classification/rnn.md)
   * [CNN을 활용한 텍스트 분류](text-classification/cnn.md)
   * [구현 예제](text-classification/code.md)
