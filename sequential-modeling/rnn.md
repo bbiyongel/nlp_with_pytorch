@@ -1,26 +1,26 @@
-# \(Vanilla\) Recurrent Neural Network
+# 리커런트 뉴럴 네트워크
 
-기존 신경망은 정해진 입력 $x$를 받아 $y$를 출력해 주는 형태였습니다.
+기존의 뉴럴 네트워크의 구조는 정해진 입력 $x$를 받아 $y$를 출력해 주는 형태였습니다.
 
-![기존의 뉴럴넷 구조](../assets/rnn-fc.png)
+![기존 뉴럴 네트워크 구조](../assets/rnn-fc.png)
 
 $$
-y=f(x)
+y=f(x;\theta)
 $$
 
-하지만 recurrent neural network \(순환신경망, RNN\)은 입력 $x_t$와 직전 자신의 상태\(hidden state\) $h_{t-1}$를 참조하여 현재 자신의 상태 $h_t$를 결정하는 작업을 여러 time-step에 걸쳐 수행 합니다. 각 time-step별 RNN의 상태는 경우에 따라 출력이 되기도 합니다.
+하지만 리커런트 뉴럴 네트워크(recurrent neural network, RNN)는 입력 $x_t$와 직전 자신의 히든 스테이트(hidden state) $h_{t-1}$를 참조하여 현재 자신의 상태 $h_t$를 결정하는 작업을 여러 time-step에 걸쳐 수행 합니다. 각 time-step별 RNN의 히든 스테이트는 경우에 따라 출력이 되기도 합니다.
 
 ![Recursive한 속성이 부여된 뉴럴넷 구조](../assets/rnn-basic.png)
 
 $$
-h_t=f(x_t, h_{t-1})
+h_t=f(x_t, h_{t-1};\theta)
 $$
 
-### Feed-forward
+## 값이 앞으로 전달되는 과정: 피드포워드(feed-forward)
 
-기본적인 RNN을 활용한 feed-forward 계산의 흐름은 아래와 같습니다. 아래의 그림은 각 time-step 별로 입력 $x_t$와 이전 time-step의 $h_t$가 RNN으로 들어가서 출력으로 $h_t$를 반환하는 모습입니다. 이렇게 얻어낸 $h_t$들을 $\hat{y}_t$로 삼아서 정답인 $y_t$와 비교하여 손실(loss) $\mathcal{L}$을 계산 합니다.
+기본적인 RNN을 활용한 피드포워드(feed-forward) 계산의 흐름은 아래와 같습니다. 아래의 그림은 각 time-step 별로 입력 $x_t$와 이전 time-step의 $h_t$가 RNN으로 들어가서 출력으로 $h_t$를 반환하는 모습입니다. 이렇게 얻어낸 $h_t$들을 $\hat{y}_t$로 삼아서 정답인 $y_t$와 비교하여 손실(loss) $\mathcal{L}$을 계산 합니다.
 
-![기본적인 RNN의 feed-forward 형태](../assets/rnn-basic-architecture.png)
+![기본적인 RNN의 피드포워드 형태](../assets/rnn-basic-architecture.png)
 
 위 그림을 수식으로 표현하면 아래와 같습니다. 함수 $f$는 $x_t$와 $h_{t-1}$을 입력으로 받아서 파라미터 $\theta$를 통해 $h_t$를 계산 합니다. 이때, 각 입력과 출력 그리고 내부 파라미터의 크기는 다음과 같습니다. 
 
@@ -28,18 +28,43 @@ $$
 x_t \in \mathbb{R}^w, h_t \in \mathbb{R}^d, W_{ih} \in \mathbb{R}^{d \times w}, b \in \mathbb{R}^{d}, W_{hh} \in \mathbb{R}^{d \times d}, b_{hh} \in \mathbb{R}^{d}
 $$
 
+입력 $x_t$를 받아서 입력에 대한 웨이트 $W_{ih}, b_{ih}$를 곱하고 더한 후, 같이 입력으로 받은 이전 time-step의 히든 스테이트 $h_{t-1}$과 웨이트 $W_{hh}, b_{hh}$를 곱하고 더해 준 값을 모두 더합니다. 이후에 활성함수(activation function) tanh를 거쳐 현재 time-step의 히든 스테이트 $h_t$를 반환 합니다.
+
 $$
 \begin{aligned}
 \hat{y}_t=h_t&=f(x_t,h_{t-1};\theta) \\
 &=\tanh(W_{ih} x_t + b_{ih} + W_{hh} h_{t-1} + b_{hh}) \\
-&\text{where }\theta=[W_{ih};b_{ih};W_{hh};b_{hh}].
+&\text{where }\theta=\{W_{ih},b_{ih},W_{hh},b_{hh}\}.
 \end{aligned}
 $$
 
-위의 수식에서 나타나듯이 RNN에서는 ReLU나 다른 활성함수(activation function)을 사용하기보단 $\tanh$를 주로 사용합니다. 최종적으로 각 time-step별로 $y_t$를 계산하여 아래의 수식처럼 모든 time-step에 대한 손실(loss) $\mathcal{L}$을 구합니다.
+위의 수식에서 나타나듯이 RNN에서는 ReLU나 다른 활성함수들을 사용하기보단 $\tanh$를 주로 사용합니다. 최종적으로 각 time-step별로 $y_t$를 계산하여 아래의 수식처럼 모든 time-step에 대한 손실(loss) $\mathcal{L}$을 구한 후, time-step의 수만큼 평균 내어 줍니다.
 
 $$
 \mathcal{L}=\frac{1}{n}\sum_{t=1}^{n}{\mathcal{L}(y_t,\hat{y}_t)}
+$$
+
+### RNN의 입력 텐서와 히든 스테이트 텐서의 크기
+
+이때 입력으로 주어지는 $x_t$의 미니배치(mini-batch)까지 감안한 사이즈는 아래와 같습니다. 사실 수식에서는 벡터로 표현되었지만 우리는 미니배치 단위로 피드포워드 및 학습을 수행하기 때문에 벡터 대신에 미니배치 내부의 샘플 인덱스의 차원이 추가된 텐서(tensor)가 실제 구현에서는 사용 됩니다.
+
+$$
+x_t \in \mathbb{R}^{\text{batch\_size}, 1, \text{input\_size}}
+$$
+
+앞으로는 표현의 편의성을 위하여 위의 수식은 아래와 같이 표현하겠습니다. <comment> 마치 파이토치의 텐서에 대해서 size() 함수를 호출 하였을 때 반환되는 튜플(tuple)값과 같다고 보면 좋을 것 같습니다. </comment>
+
+$$
+|x_t|=(\text{batch\_size},1,\text{input\_size})
+$$
+
+텐서에서 첫 번째 차원은 미니배치 내에서의 샘플의 인덱스를 나타내며, 마지막 차원은 미리 정해진 입력 벡터의 차원<comment> 예를들어 임베딩 레이어의 출력 벡터의 차원 수 </comment>을 가리킵니다. 두 번째 차원은 시퀀스 내에서 현재 time-step의 인덱스를 나타냅니다. 현재는 하나의 time-step에 대한 텐서였으므로 1이 들어가있는 것을 알 수 있습니다. <comment> 총 1개의 시퀀스에 대해서 첫 번째 time-step </comment> 그럼 $n$개의 time-step을 가진 전체 시퀀스를 텐서로 나타낸다면 아래와 같을 것 입니다.
+
+$$
+\begin{gathered}
+|X|=(\text{batch\_size},n,\text{input\_size}) \\
+\text{where }X=\{x_1, x_2, \cdots, x_n\}
+\end{gathered}
 $$
 
 ## Back-propagation Through Time (BPTT)
