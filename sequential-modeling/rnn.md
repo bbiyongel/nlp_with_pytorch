@@ -22,20 +22,24 @@ $$
 
 ![기본적인 RNN의 feed-forward 형태](../assets/rnn-basic-architecture.png)
 
-위 그림을 수식으로 표현하면 아래와 같습니다. 함수 $f$는 $x_t$와 $h_{t-1}$을 입력으로 받아서 파라미터 $\theta$를 통해 $h_t$를 계산 합니다. 이때, 각 입력과 출력 그리고 내부 파라미터의 크기는 다음과 같습니다. -- $x_t \in \mathbb{R}^w, h_t \in \mathbb{R}^d, W_{ih} \in \mathbb{R}^{d \times w}, b \in \mathbb{R}^{d}, W_{hh} \in \mathbb{R}^{d \times d}, b_{hh} \in \mathbb{R}^{d}$
+위 그림을 수식으로 표현하면 아래와 같습니다. 함수 $f$는 $x_t$와 $h_{t-1}$을 입력으로 받아서 파라미터 $\theta$를 통해 $h_t$를 계산 합니다. 이때, 각 입력과 출력 그리고 내부 파라미터의 크기는 다음과 같습니다. 
+
+$$
+x_t \in \mathbb{R}^w, h_t \in \mathbb{R}^d, W_{ih} \in \mathbb{R}^{d \times w}, b \in \mathbb{R}^{d}, W_{hh} \in \mathbb{R}^{d \times d}, b_{hh} \in \mathbb{R}^{d}
+$$
 
 $$
 \begin{aligned}
 \hat{y}_t=h_t&=f(x_t,h_{t-1};\theta) \\
 &=\tanh(W_{ih} x_t + b_{ih} + W_{hh} h_{t-1} + b_{hh}) \\
-&where~\theta=[W_{ih};b_{ih};W_{hh};b_{hh}].
+&\text{where }\theta=[W_{ih};b_{ih};W_{hh};b_{hh}].
 \end{aligned}
 $$
 
 위의 수식에서 나타나듯이 RNN에서는 ReLU나 다른 활성함수(activation function)을 사용하기보단 $\tanh$를 주로 사용합니다. 최종적으로 각 time-step별로 $y_t$를 계산하여 아래의 수식처럼 모든 time-step에 대한 손실(loss) $\mathcal{L}$을 구합니다.
 
 $$
-\mathcal{L}=\frac{1}{n}\sum_{t=1}^{n}{loss(y_t,\hat{y}_t)}
+\mathcal{L}=\frac{1}{n}\sum_{t=1}^{n}{\mathcal{L}(y_t,\hat{y}_t)}
 $$
 
 ## Back-propagation Through Time (BPTT)

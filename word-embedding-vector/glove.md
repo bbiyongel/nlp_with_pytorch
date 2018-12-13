@@ -1,10 +1,10 @@
 # GloVe
 
-이전 섹션에서는 Word2Vec에 대해서 다루어 보았습니다. 이번 섹션에서는 또 하나의 대표적인 word embedding 방법인 GloVe (Global Vectors for Word Representation) [Pennington et al.2014]에 대해 다루어보고자 합니다. 
+이전 섹션에서는 Word2Vec에 대해서 다루어 보았습니다. 이번 섹션에서는 또 하나의 대표적인 워드 임베딩 방법인 GloVe (Global Vectors for Word Representation) [Pennington et al.2014]에 대해 다루어보고자 합니다. 
 
-## Arhitecture
+## 알고리즘
 
-이전에 다루었던 skip-gram은 대상 단어를 통해 주변 단어를 예측하도록 네트워크를 구성하여 word embedding 벡터를 학습하였습니다. GloVe는 대신에 대상 단어에 대해서 코퍼스에 함꼐 나타난 각 단어별 출현 빈도를 예측하도록 합니다. GloVe를 구하기 위한 파라미터를 구하는 수식은 아래와 같습니다.
+이전에 다루었던 skip-gram은 대상 단어를 통해 주변 단어를 예측하도록 네트워크를 구성하여 단어 임베딩 벡터를 학습하였습니다. GloVe는 대신에 대상 단어에 대해서 코퍼스(corpus)에 함꼐 나타난 각 단어별 출현 빈도를 예측하도록 합니다. GloVe 알고리즘의 네트워크 파라미터를 구하는 수식은 아래와 같습니다.
 
 $$
 \begin{gathered}
@@ -14,7 +14,7 @@ $$
 \end{gathered}
 $$
 
-Skip-gram을 위한 네트워크와 거의 유사한 형태임을 알 수 있습니다. 다만, 여기서는 classification이 아닌, 출현 빈도에 근사(approximation)하는 regression에 가깝기 때문에, Mean Square Error (MSE)를 사용한 것을 볼 수 있습니다. 
+Skip-gram을 위한 네트워크와 거의 유사한 형태임을 알 수 있습니다. 다만, 여기서는 분류(classification) 문제 <comment> Skip-gram은 마지막 레이어가 소프트맥스로 구성되어 있었습니다. </comment>가 아닌, 출현 빈도를 근사(approximation)하는 리그레션(regression)문제에 가깝기 때문에, Mean Square Error (MSE)를 사용한 것을 볼 수 있습니다. 
 
 마찬가지로 one-hot 인코딩 벡터 $x$를 입력으로 받아 한 개의 hidden layer $W$를 거쳐 output layer $W'$를 통해 출력 벡터를 반환 합니다. 이 출력 벡터는 단어 $x$와 함께 코퍼스에 출현했던 모든 단어들의 각 동시 출현 빈도들을 나타낸 벡터인 $C_x$를 근사해야 합니다. 따라서 이 둘의 차이를 손실(loss)로 삼아 back-propagation 및 gradient descent를 통해 학습을 할 수 있습니다.
 

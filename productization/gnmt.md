@@ -24,7 +24,7 @@ Google도 seq2seq 기반의 모델을 구성하였습니다. 다만, 구글은 �
 
 ### Wordpiece Model
 
-구글도 마찬가지로 BPE 모델을 사용하여 tokenization을 수행하였습니다. 그리고 그들은 그들의 tokenizer를 오픈소스로 공개하였습니다. -- [SentencePiece: https://github.com/google/sentencepiece](https://github.com/google/sentencepiece) 마찬가지로 아래와 같이 띄어쓰기는 underscore로 치환하고, 단어를 subword별로 통계에 따라 segmentation 합니다.
+구글도 마찬가지로 BPE 모델을 사용하여 tokenization을 수행하였습니다. 그리고 그들은 그들의 tokenizer를 오픈소스로 공개하였습니다. <comment> [SentencePiece: https://github.com/google/sentencepiece](https://github.com/google/sentencepiece) </comment> 마찬가지로 아래와 같이 띄어쓰기는 underscore로 치환하고, 단어를 subword별로 통계에 따라 segmentation 합니다.
 
 - original: Jet makers feud over seat width with big orders at stake
 - wordpieces: _J et _makers _fe ud _over _seat _width _with _big _orders _at _stake

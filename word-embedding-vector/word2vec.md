@@ -18,7 +18,7 @@ Word2Vec은 단어를 임베딩 하는 방법을 2가지 제시하였습니다. 
 
 ## 훈련 방법 상세
 
-Skip-gram의 방법을 좀 더 자세하게 살펴보도록 하겠습니다. 먼저 skip-gram을 학습하는 과정은 아래와 같습니다. Maximum Likelihood Estimation (MLE)를 통해 아래의 수식을 최대로 하는 파라미터 $\theta$를 찾습니다. 이를 통해, $w_t$가 주어졌을떄, 앞뒤 $n$개의 단어($w_{t-\frac{n}{2}},\cdots,w_{t+\frac{n}{2}}$)를 예측하도록 훈련 됩니다. -- 이때 윈도우의 크기는 $n$ 입니다.
+Skip-gram의 방법을 좀 더 자세하게 살펴보도록 하겠습니다. 먼저 skip-gram을 학습하는 과정은 아래와 같습니다. Maximum Likelihood Estimation (MLE)를 통해 아래의 수식을 최대로 하는 파라미터 $\theta$를 찾습니다. 이를 통해, $w_t$가 주어졌을떄, 앞뒤 $n$개의 단어($w_{t-\frac{n}{2}},\cdots,w_{t+\frac{n}{2}}$)를 예측하도록 훈련 됩니다. <comment> 이때 윈도우의 크기는 $n$ 입니다. </comment>
 
 $$
 \hat{\theta}=\underset{\theta}{\text{argmax}}\sum_{t=1}^T{\Big(\sum_{i=1}^n{\log{P(w_{t-i}|w_t;\theta)}}+\sum_{i=1}^n{\log{P(w_{t+i}|w_t;\theta)}}\Big)}
@@ -33,9 +33,11 @@ $$
 \end{gathered}
 $$
 
-위의 수식을 그림으로 표현하면 아래와 같습니다. 수식에서 볼 수 있듯이 1개의 hidden layer를 갖고 있으며, 매우 간단한 구조입니다.
+위의 수식을 그림으로 표현하면 아래와 같습니다. 수식에서 볼 수 있듯이 1개의 히든 레이어를 갖고 있으며, 매우 간단한 구조입니다. <comment> 소프트맥스 레이어는 출력 레이어 입니다. </comment>
 
-이때, $W$의 각 row(그림에서는 column)가 skip-gram을 통해 얻은 단어 $x$에 대한 word embedding 벡터가 됩니다.
+![Skip-gram의 아키텍쳐](../assets/wsd-skip_gram_architecture.png)
+
+이때 이전에 설명한 임베딩 레이어의 동작 원리와 같이 $W$의 각 row가 skip-gram을 통해 얻은 단어 x에 대한 워드 임베딩 벡터가 됩니다.
 
 ![Skip-gram을 통해 얻은 word embedding 벡터를 t-SNE를 통해 visualization 한 예제](../assets/intro-word-embedding.png)
 

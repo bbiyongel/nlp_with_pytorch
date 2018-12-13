@@ -35,7 +35,7 @@ $$
 
 ## Implementation
 
-이제 RNN을 활용한 언어모델을 구현 해 보도록 하겠습니다. PyTorch로 구현하기에 앞서, 이를 수식화 해보면 아래와 같습니다. -- language_model.py가 이를 구현 한 코드 입니다.
+이제 RNN을 활용한 언어모델을 구현 해 보도록 하겠습니다. PyTorch로 구현하기에 앞서, 이를 수식화 해보면 아래와 같습니다. <comment> language_model.py가 이를 구현 한 코드 입니다. </comment>
 
 $$
 \begin{gathered}

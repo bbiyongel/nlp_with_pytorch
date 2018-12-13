@@ -21,7 +21,7 @@ $$
 H(P)=-\mathbb{E}_{\text{x}\sim P(\text{x})}[\log{P(\text{x})}]=-\sum_{x\in\mathcal{X}}{P(x)\log{P(x)}}
 $$
 
-이때, 엔트로피는 분포가 얼마나 퍼져(flat)있는지, 샤프(sharp)한지를 가늠해 볼 수 있는 척도라고 볼 수 있습니다. -- 작을수록 샤프한 모양을 갖게 됩니다. 여기서 다시한번 하나의 개념이 추가 됩니다.
+이때, 엔트로피는 분포가 얼마나 퍼져(flat)있는지, 샤프(sharp)한지를 가늠해 볼 수 있는 척도라고 볼 수 있습니다.<comment> 작을수록 샤프한 모양을 갖게 됩니다. </comment> 여기서 다시한번 하나의 개념이 추가 됩니다.
 
 $$
 H(P, Q)=-\mathbb{E}_{\text{x}\sim P(\text{x})}[\log{Q(\text{x})}]=-\sum_{x\in\mathcal{X}}{P(x)\log{Q(x)}}
@@ -82,7 +82,7 @@ $$
 \end{gathered}
 $$
 
-그리고 뉴럴 네트워크는 마지막 레이어를 softmax 레이어를 가짐으로써, 샘플당 각 클래스에 대한 확률값을 반환하는 함수 형태가 될 것 입니다. -- $P(\hat{\text{y}}|x_i;\theta)$
+그리고 뉴럴 네트워크는 마지막 레이어를 softmax 레이어를 가짐으로써, 샘플당 각 클래스에 대한 확률값을 반환하는 함수 형태가 될 것 입니다. <comment> $P(\hat{\text{y}}|x_i;\theta)$ </comment>
 
 $$
 \begin{gathered}

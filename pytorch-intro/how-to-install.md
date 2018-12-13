@@ -29,7 +29,7 @@ $ sudo which python
 
 ![시간별 딥러닝 프레임워크의 점유율 변화 출처: [Karpathy's medium](https://medium.com/@karpathy/a-peek-at-trends-in-machine-learning-ab8a1085a106)](../assets/pytorch_intro-growth.png)
 
-하지만, 파이토치가 가진 장점과 매력 때문에, 산업계보다는 학계에서 적극적으로 파이토치의 사용을 늘려가고 있는 추세이며, 이러한 트렌드는 산업계에도 점점 퍼져나가고 있습니다. 따라서, 파이토치는 논문을 구현한 수많은 github 소스코드와 pretrain된 모델 웨이트가 있는 것이 장점이긴 하지만, 파이토치도 빠르게 따라잡고 있는 추세 입니다. -- 물론 아직은 텐서플로우를 넘기에는 부족합니다.
+하지만, 파이토치가 가진 장점과 매력 때문에, 산업계보다는 학계에서 적극적으로 파이토치의 사용을 늘려가고 있는 추세이며, 이러한 트렌드는 산업계에도 점점 퍼져나가고 있습니다. 따라서, 파이토치는 논문을 구현한 수많은 github 소스코드와 pretrain된 모델 웨이트가 있는 것이 장점이긴 하지만, 파이토치도 빠르게 따라잡고 있는 추세 입니다. <comment> 물론 아직은 텐서플로우를 넘기에는 부족합니다. </comment>
 
 ![[Image from [Karpathy's twitter](https://twitter.com/karpathy/status/868178954032513024)](../assets/pytorch_intro-Karpathy.png)
 

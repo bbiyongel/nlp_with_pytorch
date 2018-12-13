@@ -9,7 +9,7 @@
 1. 소스 언어(source language)와 타겟 언어(target language) 사이의 단어 사전을 준비 합니다.
     1. 만약 준비된 단어 사전이 없다면 아래와 같은 작업을 수행 합니다.
     1. 각 언어에 대해서 코퍼스를 수집 및 정제 합니다.
-    1. 각 언어에 대해서 워드 임베딩 벡터를 구합니다. -- 워드 임베딩 벡터에 대해서는 추후 다루도록 하겠습니다.
+    1. 각 언어에 대해서 워드 임베딩 벡터를 구합니다. <comment>워드 임베딩 벡터에 대해서는 추후 다루도록 하겠습니다. </comment>
     1. [MUSE](https://github.com/facebookresearch/MUSE)를 통해 단어 레벨 번역기를 훈련합니다.
     1. 훈련된 단어 레벨 번역기를 통해 단어 사전을 생성합니다.
 1. [Champollion](https://github.com/LowResourceLanguages/champollion)을 통해 기존에 수집된 bilingual 코퍼스를 정렬 합니다.

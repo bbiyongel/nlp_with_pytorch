@@ -91,7 +91,7 @@ $$
 \mathcal{L}=H(P,P_\theta)=-\mathbb{E}_{Y|X \sim P}[\log{P_\theta(y|x)}]
 $$
 
-여기서 우리는 N번의 Sampling 하는 과정을 통해 expectation을 제거할 수 있습니다. -- 강화학습(Reinforcement Learning) 챕터 참고
+여기서 우리는 N번의 Sampling 하는 과정을 통해 expectation을 제거할 수 있습니다. <comment> 강화학습(Reinforcement Learning) 챕터 참고 </comment>
 
 $$
 \begin{aligned}

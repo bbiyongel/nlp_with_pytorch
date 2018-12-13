@@ -28,7 +28,7 @@ $$
 
 ![주사위의 확률 질량 함수(probability mass function)](../assets/basic_math-pmf.png)
 
-우리는 이와 같이 discrete한 랜덤 변수에 대한 확률 함수를 확률 질량 함수(probability mass function)이라 합니다. 위의 분포에서 알 수 있듯이, 우리는 어떤 값에 대한 확률값을 바로 알 수 있습니다. -- $P(\text{x}=3)=1/6$
+우리는 이와 같이 discrete한 랜덤 변수에 대한 확률 함수를 확률 질량 함수(probability mass function)이라 합니다. 위의 분포에서 알 수 있듯이, 우리는 어떤 값에 대한 확률값을 바로 알 수 있습니다. <comment> $P(\text{x}=3)=1/6$ </comment>
 
 Discrete한 랜덤 변수를 갖는 확률 분포로는 베르누이(Bernoulli) 확률 분포와 멀티눌리(Multinoulli) 확률 분포가 있습니다. 베르누이 확률 분포는 $0$과 $1$ 두 개의 값만 가질 수 있는 확률 분포이고, 멀티눌리 확률 분포는 주사위의 경우와 같이 여러개의 discrete한 값을 가질 수 있는 경우를 말합니다. 두 확률 분포를 좀 더 일반화하여 여러번 일어날 수 있는 확률에 대하여 이야기 할 때, binomial 확률 분포와 mulinomial 확률 분포라고 이릅니다.
 
