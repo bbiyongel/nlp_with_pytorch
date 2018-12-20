@@ -71,43 +71,55 @@ $$
 
 그럼 이렇게 feed-forward 된 이후에 오류의 back-propagation(역전파)은 어떻게 될까요? 우리는 수식보다 좀 더 개념적으로 접근 해 보도록 하겠습니다.
 
-각 time-step의 RNN에 사용된 파라미터 $\theta$는 모든 시간에 공유되어 사용 되는 것을 기억 해 봅시다. 따라서, 앞서 구한 손실 $\mathcal{L}$에 미분을 통해 back-propagation 하게 되면, 각 time-step 별로 뒤($t$가 큰 time-step)로부터 $\theta$의 gradient가 구해지고, 이전 time-step ($t-1$) $\theta$의 gradient에 더해지게 됩니다. 즉, $t$가 $0$에 가까워질수록 RNN 파라미터 $\theta$의 gradient는 각 time-step 별 gradient가 더해져 점점 커지게 됩니다.
+각 time-step의 RNN에 사용된 파라미터 $\theta$는 모든 시간에 공유되어 사용 되는 것을 기억 해 봅시다. 따라서, 앞서 구한 손실 $\mathcal{L}$에 미분을 통해 back-propagation 하게 되면, 각 time-step 별로 뒤($t$가 큰 time-step)로부터 $\theta$의 그래디언트가 구해지고, 이전 time-step ($t-1$) $\theta$의 그래디언트에 더해지게 됩니다. 즉, $t$가 $0$에 가까워질수록 RNN 파라미터 $\theta$의 그래디언트는 각 time-step 별 그래디언트가 더해져 점점 커지게 됩니다.
 
 $$
-\frac{\partial{\mathcal{L}}}{\partial{\theta}}=\sum_{t}{\frac{\partial{loss(y_t,\hat{y}_t)}}{\partial{\theta}}}
+\frac{\partial{\mathcal{L}}}{\partial{\theta}}=\sum_{t}{\frac{\partial{\mathcal{L}(y_t,\hat{y}_t)}}{\partial{\theta}}}
 $$
 
 ![RNN에서 BPTT가 되는 모습](../assets/rnn-back-prop.png)
 
 위 그림에서는 붉은색이 점점 짙어지는 것으로 그런 RNN back-propagation의 속성을 나타내었습니다. 이 속성을 back-propagation through time(BPTT)이라고 합니다.
 
-이런 RNN back-propagation의 속성으로 인해, 마치 RNN은 time-step의 수 만큼 layer(계층)이 있는 것이나 마찬가지가 됩니다. 따라서 time-step이 길어짐에 따라, 매우 깊은 신경망과 같이 동작 합니다.
+이런 RNN back-propagation의 속성으로 인해, 마치 RNN은 time-step의 수 만큼 레이어가 있는 것이나 마찬가지가 됩니다. 따라서 time-step이 길어짐에 따라, 매우 깊은 신경망과 같이 동작 합니다.
 
-## Gradient Vanishing
+## 그래디언트 소실 (그래디언트 Vanishing)
 
-상기 했듯이, BPTT로 인해 RNN은 마치 time-step 만큼의 layer가 있는 것과 비슷한 속성을 띄게 됩니다. 그런데 위의 RNN의 수식을 보면, 활성함수(activation function)으로 $\tanh$(Hyperbolic Tangent, '탄에이치'라고 읽기도 합니다.)가 사용 된 것을 볼 수 있습니다. $\tanh$은 아래와 같은 형태를 띄고 있습니다.
+상기 했듯이, BPTT로 인해 RNN은 마치 time-step 만큼의 레이어가 있는 것과 비슷한 속성을 띄게 됩니다. 그런데 위의 RNN의 수식을 보면, 활성함수(activation function)으로 $\tanh$(Hyperbolic Tangent, '탄에이치'라고 읽기도 합니다.)가 사용 된 것을 볼 수 있습니다. $\tanh$은 아래와 같은 형태를 띄고 있습니다.
 
-![Hyperbolic Tangent의 형태](http://mathworld.wolfram.com/images/interactive/TanhReal.gif)
+$$
+\begin{aligned}
+tanh(x)&=\frac{1-e^{-x}}{1+e^{-x}} \\ 
+sigmoid(x)&=\frac{1}{1+e^{-x}} \\
+&=2\times tanh(2x) - 1
+\end{aligned}
+$$
 
-$\tanh$의 양 끝은 수평에 가깝게되어 점점 $-1$ 또는 $1$에 근접하는 것을 볼 수 있습니다. 문제는 이렇게 되면, $\tanh$ 양 끝의 gradient는 0에 가까워진다는것 입니다. 따라서 $\tanh$ 양 끝의 값을 반환하는 레이어의 경우에는 gradient가 0에 가깝게 되어, 그 다음으로 back-propgation 되는 레이어는 제대로 된 gradient를 전달 받을 수가 없게 됩니다. 이를 gradient vanishing이라고 합니다.
+![빨간색: tanh, 파란색: sigmoid](../assets/rnn-tanh_sigmoid.png)
 
-따라서, time-step이 많거나 여러층으로 되어 있는 신경망의 경우에는 이 gradient vanishing 문제가 쉽게 발생하게 되고, 이는 딥러닝 이전의 신경망 학습에 큰 장애가 되곤 하였습니다.
+$\tanh$의 양 끝은 점점 기울기가 0에 가깝게되어 점점 $-1$ 또는 $1$에 근접하는 것을 볼 수 있습니다. 문제는 이렇게 되면, $\tanh$ 양 끝의 그래디언트는 0에 가까워진다는것 입니다. 따라서 $\tanh$ 양 끝의 값을 반환하는 레이어의 경우에는 그래디언트가 0에 가깝게 되어, 그 다음으로 back-propgation 되는 레이어는 제대로 된 그래디언트를 전달 받을 수가 없게 됩니다.
+
+![빨간색: tanh의 도함수, 파란색: sigmoid의 도함수](../assets/rnn-tanh_sigmoid_gradient.png)
+
+더욱이, 위의 도함수 그래프에서 볼 수 있듯이, tanh와 sigmoid의 도함수 모두 그래디언트의 값이 1보다 작거나 같기 때문에, 레이어를 거칠수록 그래디언트의 크기는 작아질 수 밖에 없습니다.
+
+이를 그래디언트 소실(vanishing)이라고 합니다. 따라서, RNN과 같이 time-step이 많거나, RNN이 아니더라도 여러층으로 되어 있는 신경망(multi-layered perceptron, MLP)의 경우에는 이 그래디언트 소실 문제가 쉽게 발생하게 되고, 이는 딥러닝 이전의 신경망 학습에 큰 장애가 되곤 하였습니다. <comment> 하지만 MLP에서는 ReLU의 등장으로 그래디언트 소실 문제는 더이상 어려운 문제가 아닙니다. </comment>
 
 ## Multi-layer RNN
 
-기본적으로 Time-step별로 RNN이 동작하지만, 아래의 그림과 같이 한 time-step 내에서 RNN을 여러 층을 쌓아올릴 수 있습니다. 그림상으로 시간의 흐름은 왼쪽에서 오른쪽으로 간다면, 여러 레이러를 아래에서 위로 쌓아 올릴 수 있습니다. 따라서 여러개의 RNN 레이어가 쌓여 하나의 RNN을 이루고 있을 때, 가장 위층의 hidden state가 전체 RNN의 출력값이 됩니다.
+기본적으로 time-step별로 RNN이 동작하지만, 아래의 그림과 같이 한 time-step 내에서 RNN을 여러 층을 쌓아올릴 수 있습니다. 그림상으로 시간의 흐름은 왼쪽에서 오른쪽으로 간다면, 여러 레이러를 아래에서 위로 쌓아 올릴 수 있습니다. 따라서 여러개의 RNN 레이어가 쌓여 하나의 RNN을 이루고 있을 때, 가장 위층의 히든 스테이트가 전체 RNN의 출력값이 됩니다.
 
-당연히 각 층 별로 파라미터 $\theta$를 공유하지 않고 따로 갖습니다. 보통은 각 레이어 사이에 dropout을 끼워 넣기도 합니다.
+당연히 각 층 별로 파라미터 $\theta$를 공유하지 않고 따로 갖습니다. 보통은 각 레이어 사이에 드랍아웃(dropout)을 끼워 넣기도 합니다.
 
 ![여러 층이 쌓인 RNN의 형태](../assets/rnn-multi-layer.png)
 
-기존의 단층 RNN의 경우에는 hidden state와 출력값이 같은 값이었지만, 여러 층이 쌓여 이루어진 RNN의 경우에는 각 time-step의 출력값이 맨 윗층의 hidden state가 됩니다.
+기존의 단층 RNN의 경우에는 히든 스테이트와 출력값이 같은 값이었지만, 여러 층이 쌓여 이루어진 RNN의 경우에는 각 time-step의 출력 값은 맨 윗층의 히든 스테이트가 됩니다.
 
 ## Bi-directional RNN
 
 여러 층을 쌓는 방법에 대해 이야기 했다면, 이제 RNN의 방향에 대해서 이야기 할 차례 입니다. 이제까지 다룬 RNN은 $t$가 $1$에서부터 마지막 time-step 까지 차례로 입력을 받아 진행 하였습니다. 하지만, bi-directional(양방향) RNN을 사용하게 되면, 기존의 정방향과 추가적으로 마지막 time-step에서부터 거꾸로 역방향으로 입력을 받아 진행 합니다. Bi-directional RNN의 경우에도 당연히 정방향과 역방향의 파라미터 $\theta$는 공유되지 않습니다.
 
-![두 방향으로 hidden state를 전달 및 계산하는 RNN의 형태](../assets/rnn-bidirectional.png)
+![두 방향으로 히든 스테이트를 전달 및 계산하는 RNN의 형태](../assets/rnn-bidirectional.png)
 
 보통은 여러 층의 bi-directional RNN을 쌓게 되면, 각 층마다 두 방향의 각 time-step 별 출력(hidden state)값을 이어붙여(concatenate) 다음 층(layer)의 각 방향 별 입력으로 사용하게 됩니다. 경우에 따라서 전체 RNN 레이어들 중에서 일부 층만 bi-directional을 사용하기도 합니다.
 
