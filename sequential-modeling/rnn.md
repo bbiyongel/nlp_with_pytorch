@@ -67,6 +67,8 @@ $$
 \end{gathered}
 $$
 
+위 크기의 텐서를 입력으로 받아 RNN은 매 time-step 마다 히든 스테이트를 갱신합니다. 이 히든 스테이트 텐서의 크기는 아래와 같습니다.
+
 ## Back-propagation Through Time (BPTT)
 
 그럼 이렇게 feed-forward 된 이후에 오류의 back-propagation(역전파)은 어떻게 될까요? 우리는 수식보다 좀 더 개념적으로 접근 해 보도록 하겠습니다.
