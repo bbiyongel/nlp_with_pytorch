@@ -105,7 +105,7 @@ $\tanh$의 양 끝은 점점 기울기가 0에 가깝게되어 점점 $-1$ 또�
 
 이를 그래디언트 소실(vanishing)이라고 합니다. 따라서, RNN과 같이 time-step이 많거나, RNN이 아니더라도 여러층으로 되어 있는 신경망(multi-layered perceptron, MLP)의 경우에는 이 그래디언트 소실 문제가 쉽게 발생하게 되고, 이는 딥러닝 이전의 신경망 학습에 큰 장애가 되곤 하였습니다. <comment> 하지만 MLP에서는 ReLU의 등장으로 그래디언트 소실 문제는 더이상 어려운 문제가 아닙니다. </comment>
 
-## Multi-layer RNN
+## RNN으로 여러 레이어 쌓기 (Multi-layered RNN)
 
 기본적으로 time-step별로 RNN이 동작하지만, 아래의 그림과 같이 한 time-step 내에서 RNN을 여러 층을 쌓아올릴 수 있습니다. 그림상으로 시간의 흐름은 왼쪽에서 오른쪽으로 간다면, 여러 레이러를 아래에서 위로 쌓아 올릴 수 있습니다. 따라서 여러개의 RNN 레이어가 쌓여 하나의 RNN을 이루고 있을 때, 가장 위층의 히든 스테이트가 전체 RNN의 출력값이 됩니다.
 
@@ -113,21 +113,31 @@ $\tanh$의 양 끝은 점점 기울기가 0에 가깝게되어 점점 $-1$ 또�
 
 ![여러 층이 쌓인 RNN의 형태](../assets/rnn-multi-layer.png)
 
-기존의 단층 RNN의 경우에는 히든 스테이트와 출력값이 같은 값이었지만, 여러 층이 쌓여 이루어진 RNN의 경우에는 각 time-step의 출력 값은 맨 윗층의 히든 스테이트가 됩니다.
+기존의 하나의 레이어만 갖는 RNN의 경우에는 히든 스테이트와 출력 값이 같은 값이었지만, 여러 층이 쌓여 이루어진 RNN의 경우에는 각 time-step의 RNN 전체 출력 값은 맨 윗층의 히든 스테이트가 됩니다.
 
-## Bi-directional RNN
+## 양방향(Bi-directional) RNN
 
-여러 층을 쌓는 방법에 대해 이야기 했다면, 이제 RNN의 방향에 대해서 이야기 할 차례 입니다. 이제까지 다룬 RNN은 $t$가 $1$에서부터 마지막 time-step 까지 차례로 입력을 받아 진행 하였습니다. 하지만, bi-directional(양방향) RNN을 사용하게 되면, 기존의 정방향과 추가적으로 마지막 time-step에서부터 거꾸로 역방향으로 입력을 받아 진행 합니다. Bi-directional RNN의 경우에도 당연히 정방향과 역방향의 파라미터 $\theta$는 공유되지 않습니다.
+여러 층을 쌓는 방법에 대해 이야기 했다면, 이제 RNN의 방향에 대해서 이야기 할 차례 입니다. 이제까지 이야기한 RNN은 time-step t가 1에서부터 마지막 time-step 까지 차례로 입력을 받아 진행 하였습니다. 하지만, 양방향(bi-directional) RNN을 사용하게 되면, 기존의 정방향과 추가적으로 마지막 time-step에서부터 거꾸로 역방향(reverse direction)으로 입력을 받아 진행 합니다. 양방향 RNN의 경우에도 당연히 정방향과 역방향의 파라미터 $\theta$는 공유되지 않습니다.
 
 ![두 방향으로 히든 스테이트를 전달 및 계산하는 RNN의 형태](../assets/rnn-bidirectional.png)
 
-보통은 여러 층의 bi-directional RNN을 쌓게 되면, 각 층마다 두 방향의 각 time-step 별 출력(hidden state)값을 이어붙여(concatenate) 다음 층(layer)의 각 방향 별 입력으로 사용하게 됩니다. 경우에 따라서 전체 RNN 레이어들 중에서 일부 층만 bi-directional을 사용하기도 합니다.
+보통은 여러 층의 양방향 RNN을 쌓게 되면, 각 층마다 두 방향의 각 time-step 별 출력(hidden state)값을 이어붙여(concatenate) 다음 층(layer)의 각 방향 별 입력으로 사용하게 됩니다. <comment> 경우에 따라서 전체 RNN 레이어들 중에서 일부 층만 양방향 RNN 레이어를 사용하기도 합니다. </comment>
 
-## How to Apply to NLP
+## 자연어처리에 RNN을 적용하는 사례
 
-그럼 위에서 다룬 내용을 바탕으로 RNN을 NLP를 비롯한 실무에서는 어떻게 적용하는지 알아보도록 하겠습니다. 여기서는 RNN을 한개 층만 쌓아 정방향으로만 다룬 것 처럼 묘사하였지만, 여러 층을 양방향으로 쌓아 사용하는 것도 대부분의 경우 가능 합니다.
+그럼 위에서 다룬 내용을 바탕으로 RNN을 자연어처리를 비롯한 실무에서는 어떻게 적용하는지 알아보도록 하겠습니다. 기본적으로 적용 분야를 떠나 RNN의 입력과 출력은 아래와 같이 분류할 수 있습니다.
 
-### Use only last hidden state as output
+|입력|출력|비고|
+|-|-|-|
+|다수|단일|many to one|
+|다수|다수|many to many|
+|단일|다수|one to many|
+
+![각 타입 별 RNN의 형태](추가필요)
+
+앞으로 표현 할 그림에서는 RNN을 한개 층만 쌓아 정방향으로만 다룬 것 처럼 묘사하였지만, 여러 층을 양방향으로 쌓아 사용하는 것도 대부분의 경우 가능 합니다.
+
+### 하나의 출력을 사용하는 경우
 
 가장 쉬운 사용케이스로 마지막 time-step의 출력값만 사용하는 경우입니다.
 
@@ -136,25 +146,33 @@ $\tanh$의 양 끝은 점점 기울기가 0에 가깝게되어 점점 $-1$ 또�
 가장 흔한 예제로 그림의 감성분석과 같이 텍스트 분류(text classification)의 경우에 단어(토큰)의 갯수 만큼 입력이 RNN에 들어가고, 마지막 time-step의 결과값을 받아서 softmax 함수를 통해 해당 입력 텍스트의 클래스(class)를 예측하는 확률 분포를 근사(approximate)하도록 동작 하게 됩니다.
 
 $$
-\text{softmax}(x_{i}) = \frac{exp(x_i)}{\sum_j exp(x_j)}
+\text{softmax}(x_{i}) = \frac{e^{x_i}}{\sum_{j=1}^{|\mathcal{C}|}{e^{x_j}}}
 $$
 
-이때, 각 time-step 별 입력 단어 $x_t$는 one-hot vector로 표현(encoded)되고 임베딩 레이어(embedding layer)를 거쳐 정해진 차원의 word 임베딩 벡터로 표현되어 RNN에 입력으로 주어지게 됩니다. 마찬가지로 정답 클래스 또한 one-hot 벡터가 되어 cross entropy 손실함수(loss function)를 통해 softmax 결과값인 각 클래스 별 확률을 나타낸 ([multinoulli](https://www.statlect.com/probability-distributions/multinoulli-distribution)) 확률 분포 벡터와 비교하여 손실(loss)값을 구하게 됩니다.
+앞에서부터 계속 언급하였다시피, 자연어처리에서 단어는 discrete한 값을 지닌다고 하였습니다. 따라서 이때, 각 time-step 별 입력 단어 $x_t$는 discrete한 분포로부터 샘플링 된 샘플로, one-hot 벡터로 표현(encoded)되고, 임베딩 레이어(embedding layer)를 거쳐 정해진 차원의 단어 임베딩 벡터(dense vector)로 표현되어 RNN에 입력으로 주어지게 됩니다. 마찬가지로 정답 또한 discrete한 값인 단어 또는 클래스가 될 것 입니다. 따라서 우리는 softmax 함수를 통해 [multinoulli](https://www.statlect.com/probability-distributions/multinoulli-distribution) 확률 분포를 표현 합니다. 또한 원래의 정답도 one-hot 벡터가 되어 크로스 엔트로피(cross entropy) 손실함수(loss function)를 통해 softmax 결과값 벡터와 비교하여 손실(loss)값을 구하게 됩니다.
 
 $$
-\text{CrossEntropy}(y_{1:n}, \hat{y}_{1:n})=\frac{1}{n}\sum_{i=1}^{n}{y_i^T\hat{y}_i}
+\begin{gathered}
+\text{CrossEntropy}(y, \hat{y})=-\sum_{i=1}^{|\mathcal{C}|}{y_i\log{\hat{y}_i}} \\
+\text{where }y\text{ and }\hat{y}\text{ is probability distribution, such as }\hat{y}=P(\text{y}|x;\theta). \\
+\text{thus, }y_i=P(\text{y}=i|x)\text{ and }\hat{y}_i=P(\text{y}=i|x;\theta).
+\end{gathered}
 $$
 
-### Use all hidden states as output
+이때, 사실 RNN은 모든 time-step에 대해서 출력을 반환하지만, 우리는 여기서 나머지는 버리고 하나의 time-step에 대해서만 값을 취합니다. 따라서 뉴럴 네트워크는 back-propagation을 통해서 해당 time-step의 출력값에 필요한 정보를 모아주도록 훈련 될 것 입니다.
 
-그리고 또 다른 많이 이용되는 방법은 모든 time-step의 출력값을 모두 사용하는 것 입니다. 우리는 이 방법을 언어모델(language modeling)이나 기계번역(machine translation)으로 실습 해 볼 것이지만, 굳이 그런 방법이 아니어도, 문장을 입력으로 주고, 각 단어 별 형태소를 분류(classification)하는 문제라던지 여러가지 방법으로 응용이 가능합니다.
+### 모든 출력을 사용하는 경우
+
+그리고 많이 이용되는 방법은 모든 time-step의 출력값을 모두 사용하는 것 입니다. 우리는 이 방법을 언어모델(language modeling)이나 기계번역(machine translation)으로 실습 해 볼 것이지만, 굳이 그런 방법이 아니어도, 문장을 입력으로 주고, 각 단어 별 형태소를 분류(classification)하는 문제라던지 여러가지 방법으로 응용이 가능합니다.
 
 ![모든 time-step의 출력을 사용 하는 경우](../assets/rnn-apply-2.png)
 
-그림과 같이 각 time-step 별로 입력을 받아 RNN을 거치고 나서, 각 time-step별로 어떠한 결과물을 출력 하여, 각 time-step 별 정답과 비교하여 손실(loss)를 구합니다. 이때에도 각 단어는 one-hot 벡터로 표현 될 수 있으며, 그 경우에는 임베딩 레이어를 거쳐 word 임베딩 벡터로 변환 된 후, RNN에 입력으로 주어지게 됩니다.
+여전히 입력은 discrete한 값이 될 것이고, 출력 또한 discrete한 값이 될 것 입니다. 따라서 그림과 같이 각 time-step 별로 discrete한 샘플인 one-hot 벡터를 입력으로 받아 임베딩 레이어를 거쳐 dense 벡터를 만들어 RNN을 거치고, RNN은 각 time-step별로 결과물을 출력 하여, 각 time-step 별로 softmax 함수를 거쳐 discrete 확률 분포의 형태로 만듭니다. 이후 discrete한 one-hot 벡터로 구성된 정답과 비교하여 손실(loss)를 구합니다.
 
-대부분의 경우 RNN은 여러 층(layer)과 양방향(bi-directional)으로 구현 될 수 있습니다. 하지만 입력과 출력이 같은 데이터를 공유 하는 경우에는 bi-directional RNN을 사용할 수 없습니다. 좀 더 구체적으로 설명하면 이전 time-step이 현재 time-step의 입력으로 사용되는 모델 구조의 경우에는 bi-directional RNN을 사용할 수 없습니다. 위의 그림도 그 경우에 해당 합니다. 하지만 형태소 분류기와 같이 출력이 다음 time-step에 입력에 영향을 끼치지 않는 경우에는 bi-directional RNN을 사용할 수 있습니다.
+대부분의 경우 RNN은 여러 층(layer)과 양방향(bi-directional)으로 구현 될 수 있습니다. 하지만 위의 그림에서와 같이 입력과 출력이 같은 데이터를 공유 하는 경우에는 양방향 RNN을 사용할 수 없습니다. 즉, 좀 더 구체적으로 설명하면 이전 time-step의 출력값이 현재 time-step의 입력으로 사용되는 모델 구조의 경우에는 양방향 RNN을 사용할 수 없습니다. 우리는 이렇게 이전 자신의 상태(출력)가 현재 자신의 상태를 결정하는 모델을 auto-regressive모델이라고 합니다. 하지만 형태소 분석기와 같이 출력이 다음 time-step에 입력에 영향을 끼치지 않는 경우에는 양방향 RNN을 사용할 수 있습니다.
 
 ## Conclusion
 
-위와 같이 RNN은 가변길이의 입력을 받아 가변길이의 출력을 내어줄 수 있는 모델 입니다. 하지만 기본(Vanilla) RNN은 time-step이 길어질 수록 앞의 데이터를 기억하지 못하는 치명적인 단점이 있습니다. 이를 해결하기 위해서 Long Short Term Memory (LSTM)이나 Gated Recurrent Unit (GRU)와 같은 응용 아키텍쳐들이 나왔고 훌륭한 개선책이 되어 널리 사용되고 있습니다.
+보다시피, 자연어처리에서의 입력과 출력의 거의 대부분의 형태는 모두 discrete한 값을 띄고 있습니다. 따라서 리그레션(regression) 문제가 아닌 분류 문제에 가깝습니다. 따라서 우리는 쉽게 크로스 엔트로피(cross entropy) 손실 함수를 사용하여 뉴럴 네트워크를 훈련 할 수 있습니다.
+
+이처럼 RNN은 가변길이의 입력을 받아 가변길이의 출력을 내어줄 수 있는 모델 입니다. 하지만 기본(Vanilla) RNN은 time-step이 길어질 수록 앞의 데이터를 기억하지 못하는 치명적인 단점이 있습니다. 이를 해결하기 위해서 Long Short Term Memory (LSTM)이나 Gated Recurrent Unit (GRU)와 같은 응용 아키텍쳐들이 나왔고 훌륭한 개선책이 되어 널리 사용되고 있습니다. 다음 섹션에서 이에 대해 알아보도록 하겠습니다.
