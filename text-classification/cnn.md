@@ -55,12 +55,19 @@ $$
 
 ## 텍스트 분류에 CNN을 적용하는 방법
 
-그렇다면 텍스트 분류과정에는 어떻게 CNN을 적용하는 것일까요? 텍스트에 무슨 윤곽선과 같은 패턴이 있는 것일까요? 사실 one-hot 벡터를 표현하는 인덱스 값을 단어 임베딩 벡터로 변환하면, 1차원(vector)이 됩니다. 그럼 문장 내의 모든 time-step의 단어 임베딩 벡터를 합치면 2차원의 행렬이 됩니다. 이때 컨볼루션을 수행하면, 이제 텍스트에서도 CNN이 효과를 발휘할 수 있게 됩니다.
+그렇다면 텍스트 분류과정에는 어떻게 CNN을 적용하는 것일까요? 텍스트에 무슨 윤곽선과 같은 패턴이 있는 것일까요? 지금은 일단 미니배치(mini-batch)를 고려하지 않겠습니다. 먼저, One-hot 벡터를 표현하는 인덱스 값을 단어 임베딩 벡터로 변환하면, 1차원(vector)이 됩니다. 그럼 문장 내의 모든 time-step의 단어 임베딩 벡터를 합치면 2차원의 행렬이 됩니다. 이때 컨볼루션을 수행하면, 이제 텍스트에서도 CNN이 효과를 발휘할 수 있게 됩니다.
 
-![1D Convolutional neural network](../assets/tc-cnn-architecture.png)
+![두 단어(토큰)의 패턴을 찾는 CNN](../assets/tc-cnn-architecture.png)
+
+위의 각 텐서별 크기에서 맨 앞 차원에 미니배치를 위한 차원을 추가하면, 실제 구현에서의 텐서 크기가 될 것 입니다. 이는 아래와 같습니다.
 
 $$
-y_{n,m}=\sum_{i=1}^{d}{k_i*x_{n,i}},\text{ where }d=\text{word vec dim}.
+\begin{aligned}
+|\text{input}|&=(m,n,d) \\
+|k|&=(\text{\#filters},w,d) \\
+|\text{output}|&=(m,\text{\#filters},n-w+1,d), \\
+\text{where }m&=\text{batch\_size}.
+\end{aligned}
 $$
 
 좀 더 구체적으로 예를 들어, 주어진 문장에 대해서 긍정/부정 분류를 하는 문제를 생각 해 볼 수 있습니다. 그럼 문장은 여러 단어로 이루어져 있고, 각각의 단어는 embedding layer를 통해 embedding vector로 변환 된 상태 입니다. 각 단어의 embedding vector는 비슷한 의미를 가진 단어일 수록 비슷한 값의 vector 값을 가지도록 될 것 입니다. 
