@@ -1,4 +1,4 @@
-# RNN을 활용한 텍스트 분류
+# RNN을 활용하기
 
 그럼 이제 딥러닝을 통한 텍스트 분류 문제를 살펴 보겠습니다. 딥러닝을 통해 텍스트 분류를 하기 위한 가장 간단한 방법은 Recurrent Neural Network(RNN)를 활용하는것 입니다. 문장은 단어들의 시퀀스로 이루어진 시퀀셜(sequential) 데이터 입니다. 따라서, 각 위치(또는 time-step)의 단어들은 다른 위치의 단어들과 영향을 주고 받습니다. RNN은 이런 문장의 특성을 가장 잘 활용할 수 있는 뉴럴 네트워크 아키텍쳐입니다.
 
@@ -106,6 +106,8 @@ $$
 ## 파이토치 구현 예제
 
 아래는 위의 수식을 파이토치로 구현한 예제 입니다. 위의 수식에서와 달리 아래의 코드에서는 여러 레이어로 이루어진 LSTM을 사용하였습니다. 또한 LSTM 내부의 각 레이어 사이에는 드랍아웃(dropout)이 추가되어 있습니다. 또한 위의 크로스 엔트로피 손실 함수 설명에서 언급하였듯이, 네가티브 로그 라이클리후드(negative log-likelihood, NLL) 손실함수를 사용하여 최적화 하기 위하여, 일반적인 softmax 함수 대신에 로그 확률(log-probability)를 반환하는 log-softmax를 사용합니다.
+
+텍스트 분류기(text classifier)의 전체 소스코드는 저자의 [깃허브](https://github.com/kh-kim/simple-ntc)(https://github.com/kh-kim/simple-ntc)에서 볼 수 있습니다. 코드는 업데이트 될 수 있으므로, 자세한 내용은 깃허브의 코드를 직접 참고 바랍니다. 아래의 코드는 https://github.com/kh-kim/simple-ntc/blob/master/simple_ntc/rnn.py 입니다.
 
 ```python
 import torch.nn as nn
