@@ -4,6 +4,8 @@
 
 좀 더 비약적으로 표현하면 $t$ time-step에 등장하는 단어 $w_t$는 이전 time-step에 등장한 단어들 $w_1,\cdots,w_{t_1}$에 의존하기 때문입니다. (물론 실제로는 $t$ 이후에 등장하는 단어들로부터도 영향을 받습니다.) 따라서 시간 개념이 도입되어야 하기 때문에, RNN의 사용은 불가피하다고 생각되었습니다. 하지만 앞서 소개한 [[Kim at el.2014]](https://arxiv.org/pdf/1408.5882.pdf) 논문에 의해서 새로운 시각이 열리게 됩니다.
 
+![CNN for text classification arthictecture [[Kim at el.2014]](https://arxiv.org/pdf/1408.5882.pdf)](../assets/tc-cnn-text-classification.png)
+
 ## 컨볼루션 연산 (Convolution Operation)
 
 CNN은 영상처리(or Computer Vision) 분야에서 매우 큰 성과를 거두고 있었습니다. CNN의 동기 자체가, 기존의 전통적인 영상처리에서 사용되던 각종 컨볼루션 필터(filter or kernel)를 자동으로 학습하기 위함이기 때문입니다.
@@ -114,10 +116,6 @@ $$
 위의 CNN 텍스트 분류 뉴럴 네트워크에 대해서 좀 더 직접적으로 예를 들어 보겠습니다. 우리는 주어진 문장에 대해서 긍정/부정 분류를 하는 문제를 생각 해 볼 수 있습니다. 그럼 문장은 여러 단어로 이루어져 있고, 각각의 단어는 임베딩 레이어를 통해 단어 임베딩 벡터로 변환 된 상태 입니다. 각 단어의 임베딩 벡터는 비슷한 의미를 가진 단어일 수록 비슷한 값의 벡터 값을 가지도록 될 것 입니다. 예를 들어 'good'이라는 단어는 그에 해당하는 임베딩 벡터로 구성되어 있을 것 입니다. 그리고 'better', 'best', 'great'등의 단어들도 'good'과 비슷한 벡터 값을 갖고 있을 것 입니다. 이때, 쉽게 예상할 수 있듯이, 'good'은 긍정/부정 분류에 있어서 긍정을 나타내는 매우 중요한 신호로 작용 할 수 있을 것 입니다.
 
 그렇다면 'good'에 해당하는 임베딩 벡터의 패턴을 감지하는 필터를 가질 수 있다면, 'good' 뿐만 아니라, 'better', 'best', 'great'등의 단어들도 함께 감지할 수 있을 것 입니다. 한발 더 나아가, 단어들의 조합(시퀀스)의 패턴을 감지하는 필터들도 학습할 수 있을 것 입니다. 예를 들어 'good taste', 'worst ever' 등과 비슷한 임베딩 벡터들로 구성된 매트릭스($M\in\mathbb{R}^{w\times d}$)를 감지할 수 있을 것 입니다.
-
-<!--
-![CNN for text classification arthictecture [[Kim at el.2014]](https://arxiv.org/pdf/1408.5882.pdf)](../assets/tc-cnn-text-classification.png)
--->
 
 ## 파이토치 구현 예제
 
