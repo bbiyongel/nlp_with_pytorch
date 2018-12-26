@@ -59,32 +59,71 @@ $$
 
 ![두 단어(토큰)의 패턴을 찾는 CNN](../assets/tc-cnn-architecture.png)
 
-위의 각 텐서별 크기에서 맨 앞 차원에 미니배치를 위한 차원을 추가하면, 실제 구현에서의 텐서 크기가 될 것 입니다. 이는 아래와 같습니다.
+위의 각 텐서별 크기에서 맨 앞 차원에 미니배치를 위한 차원을 추가하면, 실제 구현에서의 텐서 크기가 될 것 입니다. 이는 아래와 같습니다. 필터들은 우리가 배워야 하는 뉴럴 네트워크 웨이트 파라미터가 될 것이기 때문에 아래에서는 $\theta$로 표현 합니다. 그리고 $\text{input}$은 RNN의 경우와 같이 임베딩 레이어를 거친 결과 값이라고 가정하겠습니다.
 
 $$
 \begin{aligned}
-|\text{input}|&=(m,n,d) \\
-|k|&=(\text{\#filters},w,d) \\
-|\text{output}|&=(m,\text{\#filters},n-w+1,d), \\
-\text{where }m&=\text{batch\_size}.
+\text{cnn\_out}&=\text{CNN}(\text{input}, \theta) \\
+\\
+|\text{input}|&=(n,m,d) \\
+|\theta|&=(\text{\#filters},w,d) \\
+|\text{cnn\_out}|&=(n,\text{\#filters},m-w+1,\underbrace{1}_{d-d+1}), \\
+\text{where }n&=\text{batch\_size}.
 \end{aligned}
 $$
 
-<stop>
+이처럼 우리는 정해진 길이 w의 단어 조합 패턴을 검사할 수 있습니다. 이때 w를 한 개가 아니라 여러 개로 다양하게 설정하여, 다양한 길이의 단어 조합 패턴을 찾아낼 수 있을 것 입니다. 논문에서는 아래와 같이 3, 4, 5개 단어 조합에 대해서 각각 100개 필터를 갖는 것이 좋은 성능을 나타냈다고 하였습니다. 이는 영어의 경우에 해당하며, 한국어의 경우에는 전처리를 통해 접사를 분리하기 때문에 좀 더 긴 길이의 조합에 대해서 필터를 감지해야 할 수도 있습니다.
 
-좀 더 구체적으로 예를 들어, 주어진 문장에 대해서 긍정/부정 분류를 하는 문제를 생각 해 볼 수 있습니다. 그럼 문장은 여러 단어로 이루어져 있고, 각각의 단어는 embedding layer를 통해 embedding vector로 변환 된 상태 입니다. 각 단어의 embedding vector는 비슷한 의미를 가진 단어일 수록 비슷한 값의 vector 값을 가지도록 될 것 입니다. 
+$$
+w\in\mathcal{W}=\{3,4,5\}
+$$
 
-예를 들어 'good'이라는 단어는 그에 해당하는 embedding vector로 구성되어 있을 것 입니다. 그리고 'better', 'best', 'great'등의 단어들도 'good'과 비슷한 vector 값을 갖고 있을 것 입니다. 이때, 쉽게 예상할 수 있듯이, 'good'은 긍정/부정 분류에 있어서 긍정을 나타내는 매우 중요한 신호로 작용 할 수 있을 것 입니다.
+CNN 레이어의 결과값은 각 필터(filter)별 점수(score)라고 볼 수 있습니다. 즉, 필터가 각각의 피쳐(feature)를 나타낸다고 생각했을 때, 각 피쳐 별 점수가 될 것 입니다. 따라서 우리는 문장 내에서 각 피쳐 또는 원하는 단어 조합 패턴이 나타나는지 확인해야 합니다. 이를 위해서 이전 단계에서 구한 cnn_out을 맥스 풀링(max pooling)을 통해서 문장당 각 피쳐의 최고 점수를 구합니다. 맥스 풀링 레이어는 각 피쳐별 최고 점수를 뽑아주지만, 이 과정에서 가변길이의 cnn_out을 고정 길이로 바꿔주는 역할도 합니다. 맥스 풀링 레이어의 결과는 문장의 임베딩 벡터가 될 것인데, 이 벡터의 크기는 피쳐의 갯수와 같을 것 입니다.
 
-그렇다면 'good'에 해당하는 embedding vector의 패턴을 감지하는 filter를 가질 수 있다면, 'good' 뿐만 아니라, 'better', 'best', 'great'등의 단어들도 함께 감지할 수 있을 것 입니다. 한발 더 나아가, 단어들의 조합(시퀀스)의 패턴을 감지하는 filter도 학습할 수 있을 것 입니다. 예를 들어 'good taste', 'worst ever' 등과 비슷한 embedding vector들로 구성된 매트릭스($M\in\mathbb{R}^{w\times d}$)를 감지할 수 있을 것 입니다.
+![cnn_out에서 맥스 풀링을 통해 각 피쳐 별 최고 점수를 뽑아내는 과정](../assets/tc-max_pooling.png)
 
-[[Kim at el.2014]](https://arxiv.org/pdf/1408.5882.pdf)에서는 이를 이용하여 CNN 레이어만을 사용한 훌륭한 성능의 텍스트 분류 방법을 제시하였습니다.
+$$
+\begin{gathered}
+\text{cnn\_out}_i=\text{CNN}(\text{input},\theta_i) \\
+\text{where }|\theta_i|=(\text{\#filters},w_i,d)\text{ and }w_i\in\{w_1,w_2,\cdots,w_h\}. \\
+\\
+\text{pool\_out}_i=\text{max\_pooling}(\text{cnn\_out}_i) \\
+|\text{pool\_out}_i|=(n,\#\text{filters}) \\
+\\
+\text{pool\_out}=[\text{pool\_out}_1;\text{pool\_out}_2;\cdots;\text{pool\_out}_h] \\
+|\text{pool\_out}|=(n,h\times\text{\#filters}). \\
+\\
+\text{We can consider pool\_out as sentence embedding vectors.}
+\end{gathered}
+$$
 
+이렇게 얻어진 문장 별 임베딩 벡터(또는 latent 벡터)에서 softmax 함수를 통해, 각 클래스 별 확률 값을 가진 discrete한 확률 분포를 반환하면 분류를 위한 피드포워드(feed-forward)는 끝이 납니다.
+
+$$
+\begin{gathered}
+\hat{y}=\text{softmax}(\text{pool\_out}\cdot W+b) \\
+\text{where }W\in\mathbb{R}^{(h\times\text{\#filters})\times|\mathcal{C}|}\text{ and }b\in\mathbb{R}^{|\mathcal{C}|}. \\
+\\
+|\hat{y}|=(n,|\mathcal{C}|) \\
+\text{where }\hat{y}=P(\text{y}|x)\text{ and }x=\text{input}.
+\end{gathered}
+$$
+
+여기에 RNN을 활용한 텍스트 분류 때와 마찬가지로 크로스 엔트로피 손실 함수를 적용하여, 이를 최소화하도록 최적화를 수행하면 CNN 뉴럴 네트워크 또한 훈련 될 것 입니다.
+
+위의 CNN 텍스트 분류 뉴럴 네트워크에 대해서 좀 더 직접적으로 예를 들어 보겠습니다. 우리는 주어진 문장에 대해서 긍정/부정 분류를 하는 문제를 생각 해 볼 수 있습니다. 그럼 문장은 여러 단어로 이루어져 있고, 각각의 단어는 임베딩 레이어를 통해 단어 임베딩 벡터로 변환 된 상태 입니다. 각 단어의 임베딩 벡터는 비슷한 의미를 가진 단어일 수록 비슷한 값의 벡터 값을 가지도록 될 것 입니다. 예를 들어 'good'이라는 단어는 그에 해당하는 임베딩 벡터로 구성되어 있을 것 입니다. 그리고 'better', 'best', 'great'등의 단어들도 'good'과 비슷한 벡터 값을 갖고 있을 것 입니다. 이때, 쉽게 예상할 수 있듯이, 'good'은 긍정/부정 분류에 있어서 긍정을 나타내는 매우 중요한 신호로 작용 할 수 있을 것 입니다.
+
+그렇다면 'good'에 해당하는 임베딩 벡터의 패턴을 감지하는 필터를 가질 수 있다면, 'good' 뿐만 아니라, 'better', 'best', 'great'등의 단어들도 함께 감지할 수 있을 것 입니다. 한발 더 나아가, 단어들의 조합(시퀀스)의 패턴을 감지하는 필터들도 학습할 수 있을 것 입니다. 예를 들어 'good taste', 'worst ever' 등과 비슷한 임베딩 벡터들로 구성된 매트릭스($M\in\mathbb{R}^{w\times d}$)를 감지할 수 있을 것 입니다.
+
+<!--
 ![CNN for text classification arthictecture [[Kim at el.2014]](https://arxiv.org/pdf/1408.5882.pdf)](../assets/tc-cnn-text-classification.png)
+-->
 
-여러 단어로 이루어진 가변 길이의 문장을 입력으로 받아, 각 단어들을 embedding vector로 변환 후, 단어 별로 여러가지 필터를 적용하여 필요한 패턴을 감지합니다. 문제는 문장의 길이가 문장마다 다르기 때문에, 필터를 적용한 결과물의 크기도 다를 것 입니다. 이때, max pooling layer를 적용하여 가변 길이의 변수를 제거할 수 있습니다. Max pooling 결과의 크기는 필터의 갯수와 같을 것 입니다. 이제 이 위에 linear layer + softmax를 사용하여 각 class 별 확률을 구할 수 있습니다.
+## 파이토치 구현 예제
 
-## 코드
+아래는 위의 수식을 파이토치로 구현한 예제 입니다. 또한 RNN 텍스트 분류 모델 처럼, 네가티브 로그 라이클리후드(negative log-likelihood, NLL) 손실함수를 사용하여 최적화 하기 위하여, 일반적인 softmax 함수 대신에 로그 확률(log-probability)를 반환하는 log-softmax를 사용합니다.
+
+텍스트 분류기(text classifier)의 전체 소스코드는 저자의 [깃허브](https://github.com/kh-kim/simple-ntc)(https://github.com/kh-kim/simple-ntc)에서 볼 수 있습니다. 코드는 업데이트 될 수 있으므로, 자세한 내용은 깃허브의 코드를 직접 참고 바랍니다. 아래의 코드는 https://github.com/kh-kim/simple-ntc/blob/master/simple_ntc/cnn.py 입니다.
 
 ```py
 import torch
@@ -173,5 +212,3 @@ class CNNClassifier(nn.Module):
 
         return y
 ```
-
-https://arxiv.org/pdf/1510.03820.pdf

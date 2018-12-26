@@ -25,32 +25,32 @@ $$
 
 우리가 텍스트 분류를 RNN을 통해 구현한다면 위와 같은 구조가 될 것 입니다. 내부를 구성하고 있는 레이어들을 하나씩 따라가면서 살펴보도록 하겠습니다.
 
-우리 모두는 잘 알다시피, 텍스트에서 단어(word)는 discrete한 값 입니다. 따라서 이런 단어들이 모여 문장이 되어도 여전히 discrete한 값 입니다. 즉, discrete 확률 분포에서 문장을 샘플링 한 것이라고 볼 수 있습니다. 따라서 입력으로 One-hot 벡터들이 여러 time-step으로 주어집니다. 따라서 미니배치(mini-batch)까지 고려했을 때, 입력은 3차원의 텐서이며 사이즈는 $m \times n \times |V|$가 될 것 입니다. 여기서 $m$은 미니배치 사이즈를 가리킵니다.
+우리 모두는 잘 알다시피, 텍스트에서 단어(word)는 discrete한 값 입니다. 따라서 이런 단어들이 모여 문장이 되어도 여전히 discrete한 값 입니다. 즉, discrete 확률 분포에서 문장을 샘플링 한 것이라고 볼 수 있습니다. 따라서 입력으로 One-hot 벡터들이 여러 time-step으로 주어집니다. 따라서 미니배치(mini-batch)까지 고려했을 때, 입력은 3차원의 텐서이며 사이즈는 $n \times m \times |V|$가 될 것 입니다. 여기서 $n$은 미니배치 사이즈, $m$은 문장의 길이를 가리킵니다.
 
 $$
 \begin{gathered}
 x\sim P(\text{x}) \\
 \text{where }x=\{w_1,w_2,\cdots,w_n\}\text{ and }w_i\in\{0,1\}^{|V|}. \\
 \\
-\text{Thus, }|x_{1:m}|= (m,n,|V|)\\
-\text{where }x_{1:m}=[x_1,x_2,\cdots,x_m]\text{ and }m=\text{batch\_size}.
+\text{Thus, }|x_{1:n}|= (n,m,|V|)\\
+\text{where }x_{1:n}=[x_1,x_2,\cdots,x_n]\text{ and }n=\text{batch\_size}.
 \end{gathered}
 $$
 
 하지만 여러분도 잘 알다시피 one-hot 벡터는 주어진 $|V|$차원에서, 단 한 개의 1과 $|V|-1$개의 0으로 이루어져 있습니다. 우리는 추후 임베딩 레이어와의 연산 뿐만 아니라, one-hot 벡터 자체를 효율적으로 저장하기 위해서 굳이 one-hot 벡터 전체를 가지고 있을 필요가 없습니다. <comment> 워드 임베딩 벡터 챕터 참조 바랍니다. </comment> 따라서 각 벡터 별로 1의 위치 인덱스(index)만 기억하고 있으면 됩니다.
 
 $$
-|x_{1:m}|=(m,n,1)=(m,n)
+|x_{1:n}|=(n,m,1)=(n,m)
 $$
 
-즉, 0부터 $|V|$ 사이의 정수로 나타낼 수 있고, 이는 3차원 텐서가 아니라 2차원의 행렬(matrix) $m \times n$으로 충분합니다.
+즉, 0부터 $|V|$ 사이의 정수로 나타낼 수 있고, 이는 3차원 텐서가 아니라 2차원의 행렬(matrix) $n \times m$으로 충분합니다.
 
-이렇게 입력으로 주어진 one-hot 인코딩 된 $m \times n$ 텐서를 임베딩 레이어에 통과시키면 워드 임베딩 텐서를 얻을 수 있습니다. 워드 임베딩 텐서의 크기는 아래와 같습니다.
+이렇게 입력으로 주어진 one-hot 인코딩 된 $n \times m$ 텐서를 임베딩 레이어에 통과시키면 워드 임베딩 텐서를 얻을 수 있습니다. 워드 임베딩 텐서의 크기는 아래와 같습니다.
 
 $$
 \begin{gathered}
-\tilde{x}_{1:m}=\text{emb}_\theta(x_{1:m}) \\
-|x_{1:m}|=(m,n,d)\text{ where }d=\text{word\_vec\_dim}.
+\tilde{x}_{1:n}=\text{emb}_\theta(x_{1:n}) \\
+|x_{1:n}|=(n,m,d)\text{ where }d=\text{word\_vec\_dim}.
 \end{gathered}
 $$
 
@@ -59,31 +59,31 @@ $$
 $$
 \begin{gathered}
 h_t=\text{RNN}_\theta(x_t,h_{t-1}) \\
-\text{where }|x_t|=(m,1,d)\text{, }|h_t|=(m,1,h)\text{ and }h=\text{hidden\_size}. \\
+\text{where }|x_t|=(n,1,d)\text{, }|h_t|=(n,1,h)\text{ and }h=\text{hidden\_size}. \\
 \end{gathered}
 $$
 
-이때, 우리는 RNN에 각 time-step 별로, 각 레이어 별로 구분하여 워드 임베딩 텐서 또는 히든 스테이트를 넣어줄 필요가 없습니다. 지금과 같은 상황에서는 단지 초기 히든 스테이트 $h_0$와 전체 입력(워드 임베딩 텐서 $x_{1:m}$)을 RNN에 넣어주면, 파이토치가 최적화된 구현을 통해 매우 빠른 속도로 RNN의 모든 time-step에 대한 출력과 마지막 히든 스테이트를 반환 합니다.
+이때, 우리는 RNN에 각 time-step 별로, 각 레이어 별로 구분하여 워드 임베딩 텐서 또는 히든 스테이트를 넣어줄 필요가 없습니다. 지금과 같은 상황에서는 단지 초기 히든 스테이트 $h_0$와 전체 입력(워드 임베딩 텐서 $x_{1:n}$)을 RNN에 넣어주면, 파이토치가 최적화된 구현을 통해 매우 빠른 속도로 RNN의 모든 time-step에 대한 출력과 마지막 히든 스테이트를 반환 합니다.
 
 $$
 \begin{gathered}
 H=RNN_\theta(x_t, h_0) \\
-\text{where }H=[h_1;h_2;\cdots;h_n]\text{ and }|H|=(m,n,h). \\
+\text{where }H=[h_1;h_2;\cdots;h_m]\text{ and }|H|=(n,m,h). \\
 \end{gathered}
 $$
 
 우리는 파이토치 RNN을 통해 얻은 모든 time-step에 대한 RNN의 출력 값 중에서 제일 마지막 time-step만 선택하여 softmax 레이어를 통과시켜 discrete 확률 분포 $P(\text{y}|x;\theta)$로 나타냅니다.
 
 $$
-h_n=H[:, -1]
+h_m=H[:, -1]
 $$
 
 우리는 위와 같이 time-step의 차원(dimension)에서 맨 마지막 인덱스를 슬라이싱(slicing) 할 수 있습니다. 이것을 리니어 레이어를 거친 이후에 softmax를 취합니다.
 
 $$
 \begin{gathered}
-\hat{y}=\text{softmax}(h_n\cdot W+b) \\
-\text{where }|h_n|=(m,1,h)\text{, }W\in\mathbb{R}^{h\times|\mathcal{C}|}\text{ and }b\in\mathbb{R}^{|\mathcal{C}|}.
+\hat{y}=\text{softmax}(h_m\cdot W+b) \\
+\text{where }|\hat{y}|=(n,|\mathcal{C}|),|h_m|=(n,1,h)\text{, }W\in\mathbb{R}^{h\times|\mathcal{C}|}\text{ and }b\in\mathbb{R}^{|\mathcal{C}|}.
 \end{gathered}
 $$
 
