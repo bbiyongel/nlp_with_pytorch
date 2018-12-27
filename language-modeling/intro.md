@@ -97,5 +97,5 @@ $$
 이제 문장을 어떻게 확률로 나타내는지 알았으니, 확률을 직접 구하는 방법에 대해서 알아보겠습니다. 우리는 앞 챕터에서 문장을 수집하는 방법에 대해서 논의 했습니다. 수집한 말뭉치 내에서 직접 단어들의 출현 빈도를 계산함으로써, 우리가 원하는 확률을 추정할 수 있습니다. 예를 들어 아래의 확률은 다음과 같이 추정할 수 있습니다.
 
 $$
-P(\text{갑니다}|]\text{BOS},\text{나는},\text{학교에})\approx\frac{\text{Count}(\text{BOS},\text{나는},\text{학교에},\text{갑니다})}{\text{Count}(\text{BOS},\text{나는},\text{학교에})}
+P(\text{갑니다}|\text{BOS},\text{나는},\text{학교에})\approx\frac{\text{Count}(\text{BOS},\text{나는},\text{학교에},\text{갑니다})}{\text{Count}(\text{BOS},\text{나는},\text{학교에})}
 $$
