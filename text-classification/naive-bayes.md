@@ -37,7 +37,7 @@ $$
 위의 성질을 이용하여 주어진 데이터 $\mathcal{D}$를 만족하며 확률을 최대로 하는 클래스 $c$를 구할 수 있습니다. 이처럼 posterior 확률을 최대화(maximize)하는 클래스 $c$를 구하는 것을 Maximum A Posterior (MAP)라고 부릅니다. 그 수식은 아래와 같습니다.
 
 $$
-\hat{c}_{MAP}=\underset{c\in\mathcal{C}}{\text{argmax }}P(C=c|\mathcal{D})
+\hat{c}_{\text{MAP}}=\underset{c\in\mathcal{C}}{\text{argmax }}P(C=c|\mathcal{D})
 $$
 
 다시 한번 수식을 살펴보면, $\mathcal{D}$(데이터)가 주어졌을 때, 가능한 클래스의 집합 $\mathcal{C}$ 중에서 사후 확률을 최대로 하는 클래스 $c$를 선택하는 것 입니다.
@@ -45,7 +45,7 @@ $$
 이와 마찬가지로 데이터 $\mathcal{D}$가 나타날 라이클리후드(likelihood) 확률을 최대로 하는 클래스 $c$를 선택하는 것을 Maximum Likelihood Estimation (MLE)라고 합니다. <comment> 우리는 MLE에 대해서 앞선 챕터에서 살펴보았습니다. </comment>
 
 $$
-\hat{c}_{MLE}=\underset{c\in\mathcal{C}}{\text{argmax }}P(\mathcal{D}|C=c)
+\hat{c}_{\text{MLE}}=\underset{c\in\mathcal{C}}{\text{argmax }}P(\mathcal{D}|C=c)
 $$
 
 MLE는 주어진 데이터 $\mathcal{D}$와 클래스 레이블(label) $C$가 있을 때, 확률 분포를 근사하기 위한 함수 파라미터 $\theta$를 훈련하는 방법으로 사용 됩니다.
