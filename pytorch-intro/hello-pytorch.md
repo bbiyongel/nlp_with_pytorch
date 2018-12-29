@@ -89,7 +89,8 @@ with torch.no_grad():
 $$
 \begin{gathered}
 y = xW+ b \\
-\text{where }x\in\mathbb{R}^{M\times N},W\in\mathbb{R}^{N\times P}\text{ and }b
+\text{where }x\in\mathbb{R}^{M\times N},W\in\mathbb{R}^{N\times P}\text{ and }b\in\mathbb{R}^P. \\
+\text{Thus, }y\in\mathbb{R}^{M\times P}
 \end{gathered}
 $$
 
@@ -476,5 +477,5 @@ for epoch in range(n_epochs):
 
 또한, cpu()함수를 통해서 다시 PC의 메모리로 복사 하거나 이동 시킬 수 있습니다. 이 밖에도 to() 메서드를 사용하여 원하는 디바이스로 보낼 수 있습니다.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTcxODE4MzI1MV19
+eyJoaXN0b3J5IjpbNTkyMTY5Nzc4XX0=
 -->
