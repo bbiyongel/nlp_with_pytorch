@@ -30,6 +30,8 @@ $$
 
 앞어 언급하였듯이 단어는 discrete한 심볼로써, discrete 랜덤변수(random variable)로써 나타내게 됩니다. Discrete 랜덤 변수는 그 값을 불연속적으로 가질 수 밖에 없습니다. 따라서 one-hot 벡터는 discrete 확률 분포(probability distribution)로부터 샘플링(sampling)한 샘플이라고 할 수 있습니다. <comment> 주로 multinoulli 확률 분포가 될 것 입니다. </comment>
 
+![](이미지)
+
 위처럼 사전(dictionary)내의 각 단어를 one-hot 인코딩 방식을 통해 벡터로 나타낼 수 있습니다. 이 표현 방식은 여러가지 문제점을 갖고 있습니다. 먼저 벡터의 차원이 너무 커졌습니다. 각 벡터는 단 하나의 1을 갖고, 나머지는 0으로 가득 차 있습니다. 이처럼 벡터의 많은 부분이 0으로 채워져 있는 벡터를 sparse(희소) 벡터라고 합니다. 이러한 sparse 벡터의 가장 큰 문제점은 벡터 사이의 (유사도 구하기 등의) 연산을 할 때에 결과값이 0이 된다는 것 입니다. 즉, 서로 orthogonal한 경우가 많아지게 됩니다.
 
 $$
@@ -45,3 +47,6 @@ $$
 ![차원의 저주: 차원이 높을 수록 같은 정보를 표현하는데 불리합니다.](picture)
 
 차원이 늘어날수록 이와 같은 문제가 지수적으로(exponential) 늘어나게 됩니다. 우리는 이런 문제를 차원의 저주(curse of dimensionailty)라고 부릅니다. 따라서 우리는 위와 같이 one-hot encoding의 한계를 실감할 수 밖에 없습니다. 따라서 우리는 차원의 저주로부터 벗어나기 위해 차원을 축소하여 단어를 표현해야 할 필요성을 느낍니다.
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTE5MjE3NjM2MzBdfQ==
+-->
