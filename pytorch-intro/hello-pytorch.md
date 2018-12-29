@@ -378,7 +378,7 @@ $$
 \begin{gathered}
 y=f(x_1, x_2, x_3) = 3x_1 + x_2 - 2x_3 \\
 \hat{y}=f(x_1,x_2,x_3;\theta) \\
-\hat{\theta}=\underset{\theta\in\varTheta}{\text{argmax }}
+\hat{\theta}=\underset{\theta\in\varTheta}{\text{argmax }}f(
 \end{gathered}
 $$
 
@@ -479,6 +479,6 @@ for epoch in range(n_epochs):
 
 또한, cpu()함수를 통해서 다시 PC의 메모리로 복사 하거나 이동 시킬 수 있습니다. 이 밖에도 to() 메서드를 사용하여 원하는 디바이스로 보낼 수 있습니다.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExMDQ5ODYyODIsLTE3NzA0ODM0OTRdfQ
+eyJoaXN0b3J5IjpbLTEwOTAxNDQ3NDQsLTE3NzA0ODM0OTRdfQ
 ==
 -->
