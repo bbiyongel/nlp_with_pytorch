@@ -87,7 +87,8 @@ with torch.no_grad():
 이번에는 Linear 레이어(또는 fully-connected layer, dense layer)를 구현 해 보도록 하겠습니다. $M\times N$의 입력 행렬 $x$가 주어지면, $N\times P$의 행렬 $W$를 곱한 후, P차원의 벡터 $b$를 bias로 더하도록 하겠습니다. 수식은 아래와 같을 것 입니다.
 
 $$
-y = xW^t + b
+y = xW+ b
+
 $$
 
 사실 이 수식에서 $x$는 벡터이지만, 보통 우리는 딥러닝을 수행 할 때에 미니배치(mini-batch) 기준으로 수행하므로, $x$가 매트릭스(matrix, 행렬)라고 가정 하겠습니다. 이를 좀 더 구현하기 쉽게 아래와 같이 표현 해 볼 수도 있습니다.
@@ -472,3 +473,6 @@ for epoch in range(n_epochs):
 ```
 
 또한, cpu()함수를 통해서 다시 PC의 메모리로 복사 하거나 이동 시킬 수 있습니다. 이 밖에도 to() 메서드를 사용하여 원하는 디바이스로 보낼 수 있습니다.
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTExMTMxNTM2NDVdfQ==
+-->
