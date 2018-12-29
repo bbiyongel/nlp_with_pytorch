@@ -372,7 +372,7 @@ class MyModel(nn.Module):
         return y
 ```
 
-그리고 아래와 같이, 임의의 함수 $f$가 동작한다고 가정하겠습니다. 우리는 그럼 손실함수를 최소롷파라미터 $\theta$를
+그리고 아래와 같이, 임의의 함수 $f$가 동작한다고 가정하겠습니다. 우리는 그럼 손실함수를 최소로 만드는 파라미터 $\theta$를 찾아서 함수 $f$를 근사해야 합니다.
 
 $$
 \begin{gathered}
@@ -479,6 +479,5 @@ for epoch in range(n_epochs):
 
 또한, cpu()함수를 통해서 다시 PC의 메모리로 복사 하거나 이동 시킬 수 있습니다. 이 밖에도 to() 메서드를 사용하여 원하는 디바이스로 보낼 수 있습니다.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzMjYxMzU4MTksLTE3NzA0ODM0OTRdfQ
-==
+eyJoaXN0b3J5IjpbNjkzMzU2NDk3LC0xNzcwNDgzNDk0XX0=
 -->
