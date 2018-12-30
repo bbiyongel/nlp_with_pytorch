@@ -49,7 +49,7 @@
   * Automatic Speech Translation: GenieTalk \[[Android](https://play.google.com/store/apps/details?id=com.hancom.interfree.genietalk&hl=ko)\], \[[iOS](https://itunes.apple.com/kr/app/지니톡-genietalk/id1104930501?mt=8)\], \[[TV Ads](https://www.youtube.com/watch?v=Jda0G0yhWpM)\]
 
 ## 패스트캠퍼스 강의 소개
-![자연어처리 심화 캠프](http://cdn.www.fastcampus.co.kr/wp-content/uploads/2018/03/main.png)
+![자연어처리 심화 캠프](./assets/fastcampus_lecture.png)
 
 현재 이 책을 바탕으로 패스트캠퍼스에서 [자연어처리 입문 캠프](https://www.fastcampus.co.kr/data_camp_nlpbasic/), [자연어처리 심화 캠프](http://www.fastcampus.co.kr/data_camp_nlpadv/)도 진행하고 있습니다.
 
