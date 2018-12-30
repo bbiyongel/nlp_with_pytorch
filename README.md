@@ -38,7 +38,7 @@
 |linkedin|[https://www.linkedin.com/in/ki-hyun-kim/](https://www.linkedin.com/in/ki-hyun-kim/)|
 |github:|[https://github.com/kh-kim/](https://github.com/kh-kim/)|
 
-### 이력
+### 약력
 
 * Principal Machine Learning Engineer @ [Makinarocks](http://makinarocks.ai)
 * Machine Learning Researcher @ SKPlanet 
@@ -57,5 +57,5 @@
 
 ![저작자표시-비영리-동일조건변경허락(BY-NC-SA)](../assets/ccl.png)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwNTM0NTk1NjBdfQ==
+eyJoaXN0b3J5IjpbMTIyMzAzODE3N119
 -->
