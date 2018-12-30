@@ -28,7 +28,7 @@
 
 ## 지은이: 김기현(Kim, Ki Hyun)
 
-![김기현](../assets/author.gif)
+![김기현](./assets/me.jpeg)
 
 ### 연락처
 
@@ -38,7 +38,7 @@
 |linkedin|[https://www.linkedin.com/in/ki-hyun-kim/](https://www.linkedin.com/in/ki-hyun-kim/)|
 |github:|[https://github.com/kh-kim/](https://github.com/kh-kim/)|
 
-### 이력
+### 약력
 
 * Principal Machine Learning Engineer @ [Makinarocks](http://makinarocks.ai)
 * Machine Learning Researcher @ SKPlanet 
@@ -56,3 +56,6 @@
 이 저작물은 크리에이티브 커먼즈 [저작자표시-비영리-동일조건변경허락(BY-NC-SA)](https://creativecommons.org/licenses/by-nc-sa/2.0/kr/)에 따라 이용할 수 있습니다.
 
 ![저작자표시-비영리-동일조건변경허락(BY-NC-SA)](../assets/ccl.png)
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMTIyMzAzODE3N119
+-->
