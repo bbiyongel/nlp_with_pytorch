@@ -47,7 +47,7 @@ $$
 
 ### 엔트로피와 Perplexity의 관계
 
-우리는 앞서 책 초반부에서 엔트로피에 대해서 다루었습니다. 엔트로피는 정보량의 평균을 의미하였고, 정보량이 낮으면 확률 분포는 날카로운(sharp) 모양을 하여 확률이 높았으며, 반대로 정보
+우리는 앞서 책 초반부에서 엔트로피에 대해서 다루었습니다. 엔트로피는 정보량의 평균을 의미하였고, 정보량이 낮으면 확률 분포는 날카로운(sharp) 모양을 하여 확률이 높았으며, 반대로 정보량이 높으면 확률 분포는 납작(flat)해진다고 하였습니다.
 
 엔트로피(Entropy)는 물리학에서 중요하게 사용되는 개념이지만, 정보이론(Information Theory)에서도 굉장히 중요하게 사용 됩니다. 정보이론에서 엔트로피는 어떤 정보의 불확실성을 나타내는 수치로 사용 될 수 있습니다. 정보량과 불확실성은 어떤 관계를 가질까요? 불확실성은 일어날 것 같은 사건(likely event)의 확률로 정의할 수 있습니다. 따라서 불확실성과 정보량은 아래와 같은 관계를 가집니다.
 
@@ -132,6 +132,6 @@ $$
 
 따라서, 우리는 Maximum Likelihood Estimation(MLE)을 통해 parameter($\theta$)를 배울 때, cross entropy를 통해 얻은 ($P_\theta$의 로그 확률 값) loss 값에 $\exp$를 취함으로써, perplexity를 얻어 언어모델의 성능을 나타낼 수 있습니다.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4NzcyMjQ5NjksMTU2MDkxOTY2NywyMT
-AzODM5MzgxXX0=
+eyJoaXN0b3J5IjpbLTE3ODEyOTY5MiwxNTYwOTE5NjY3LDIxMD
+M4MzkzODFdfQ==
 -->
