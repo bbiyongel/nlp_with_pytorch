@@ -37,10 +37,10 @@ $$
 
 <stop>
 
-Perplexity의 개념을 좀 더 짚고 넘어가도록 해 보겠습니다. 이것은 Perplexity의 수치를 해석하는 방법에 대해서라고 할 수 있습니다. 예를 들어 우리가 6면 주사위를 던져서 나오는 값을 통해 수열을 만들어낸다고 해 보겠습니다. 따라서 1부터 6까지 숫자의 출현 확률은 모두 같다(uniform distribution)고 가정하겠습니다. 그럼 $N$번 주사위를 던져 얻어내는 수열에 대한 perplexity는 아래와 같습니다.
+Perplexity(의 개념을 좀 더 짚고 넘어가도록 해 보겠습니다. 예를 들어 우리가 6면 주사위를 던져서 나오는 값을 통해 수열을 만들어낸다고 해 보겠습니다. 따라서 1부터 6까지 숫자의 출현 확률은 모두 같다(uniform distribution)고 가정하겠습니다. 그럼 N번 주사위를 던져 얻어내는 수열에 대한 perplexity는 아래와 같습니다.
 
 $$
-PPL(x)=({\frac{1}{6}}^{N})^{-\frac{1}{N}}=6
+\text{PPL}(x)=({\frac{1}{6}}^{N})^{-\frac{1}{N}}=6
 $$
 
 매 time-step 가능한 경우의 수인 6이 PPL로 나왔습니다. 즉, PPL은 우리가 뻗어나갈 수 있는 branch(가지)의 숫자를 의미하기도 합니다. 다른 예를 들어 만약 $20,000$개의 어휘로 이루어진 뉴스 기사에 대해서 PPL을 측정한다고 하였을 때, 단어의 출현 확률이 모두 동일하다면 PPL은 $20,000$이 될 것입니다. 하지만 3-gram을 사용한 언어모델을 만들어 측정한 PPL이 30이 나왔다면, 우리는 이 언어모델을 통해 해당 신문기사에서 매번 기사의 앞 부분을 통해 다음 단어를 예측 할 때, 평균적으로 30개의 후보 단어 중에서 선택할 수 있다는 얘기가 됩니다. 따라서 우리는 perplexity를 통해서 언어모델의 성능을 단순히 측정할 뿐만 아니라 실제 어느정도인지 가늠 해 볼 수도 있습니다.
@@ -130,5 +130,6 @@ $$
 
 따라서, 우리는 Maximum Likelihood Estimation(MLE)을 통해 parameter($\theta$)를 배울 때, cross entropy를 통해 얻은 ($P_\theta$의 로그 확률 값) loss 값에 $\exp$를 취함으로써, perplexity를 얻어 언어모델의 성능을 나타낼 수 있습니다.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU2MDkxOTY2NywyMTAzODM5MzgxXX0=
+eyJoaXN0b3J5IjpbMTU5ODgwMDkzNSwxNTYwOTE5NjY3LDIxMD
+M4MzkzODFdfQ==
 -->
