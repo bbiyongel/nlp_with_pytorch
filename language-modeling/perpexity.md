@@ -49,12 +49,42 @@ $$
 
 우리는 앞서 책 초반부에서 엔트로피에 대해서 다루었습니다. 엔트로피는 정보량의 평균을 의미하였고, 정보량이 낮으면 확률 분포는 날카로운(sharp) 모양을 하여 확률이 높았으며, 반대로 정보량이 높으면 확률 분포는 납작(flat)해진다고 하였습니다.
 
+그리고 정보량은 놀람의 정도를 나타내는 수치라고 하였습니다. Perplexity 또한 사전의 정의를 보면 "곤혹" 또는 "당혹" 이라는 단어를 나타낸다고 되어 있습니다. 이름부터 정보량과 연관이 있어보이는대로, 엔트로피와 perpelxity의 관계에 대해 살펴보겠습니다.
+
+먼저 실제 ground-truth 언어모델의 분포 $P(\text{x})$ 또는 출현 가능한 문장들의 집합 $\mathcal{W}$에서 길이 n의 문장 $w_{1:n}$을 샘플링 하였을 때, 우리의 언어모델 분포 $P_\theta(\text{x})$의 엔트로피를 나타내면 아래와 같습니다.
+
+$$
+H_n(P, P_\theta)-\sum_{w_{1:n}\in\mathcal{W}}{P(w_{1:n})\log{P(w_{1:n})}}
+$$
+
+여기서 우리는 몬테카를로 샘플링을 통해서 위의 수식을 근사할 수 있습니다. 그리고 샘플링 횟수 k가 1일 때도 생각 해 볼 수 있습니다.
+
 $$
 \begin{aligned}
-\mathcal{L}&=-P(w_1^n)\log{P_\theta(w_1^n)} \\
-&\approx-\frac{1}{N}\sum_{i=1}^{N}{\log{P_\theta(w_i|w_{<i})}} \\
-&=\log{\Big(\prod_{i=1}^{N}{P_\theta(w_i|w_{<i})}\Big)^{-\frac{1}{N}}} \\
-&=\log{\sqrt[N]{\frac{1}{\prod_{i=1}^{N}{P_\theta(w_i|w_{<i})}}}} \\
+H_n(P, P_\theta)&=-\sum_{w_{1:n}\in\mathcal{W}}{P(w_{1:n})\log{P(w_{1:n})}} \\
+&\approx-\frac{1}{k}\sum_{i=1}^k{\log{P_\theta(w_{1:n}^k)}} \\
+&\approx-\log{P_\theta(w_{1:n})} \\
+&=-\sum_{i=1}^n{\log{P_\theta(w_i|w_{<i})}}
+\end{aligned}
+$$
+
+문장은 시퀀셜(sequence) 데이터이기 때문에 우리는 [엔트로피 레이트(entropy rate)](https://en.wikipedia.org/wiki/Entropy_rate)라는 개념을 사용하여 단어 당 평균 엔트로피로 나타낼 수 있습니다. 그리고 위를 응용하여 마찬가지로 몬테카를로 샘플링을 적용할 수도 있습니다.
+
+$$
+\begin{aligned}
+H_n(P, P_\theta)&\approx-\frac{1}{n}\sum_{w_{1:n}\in\mathcal{W}}{\sum_{i=1}^n{P(w_i|w_{<i})\log{P_\theta(w_i|w_{<i})}}} \\
+&\approx-\frac{1}{n}\sum_{i=1}^n{\log{P(w_i|w_{<i})}}=\mathcal{L}(w_{1:n})
+\end{aligned}
+$$
+
+이 수식을 조금만 더 바꿔 보도록 하겠습니다.
+
+$$
+\begin{aligned}
+\mathcal{L}(w_{1:n})&=-\frac{1}{n}\sum_{i=1}^n{\log{P(w_i|w_{<i})}} \\
+&=-\frac{1}{n}\log{\prod_{i=1}^n{P_\theta(w_i|w_{<i})}} \\
+&=\log{\Big(\prod_{i=1}^n{P_\theta(w_i|w_{<i})}\Big)^{-\frac{1}{n}}} \\
+&=\log{\sqrt[n]{\frac{1}{\prod_{i=1}^n{P_\theta(w_i|w_{<i})}}}}
 \end{aligned}
 $$
 
@@ -62,20 +92,16 @@ $$
 
 $$
 \begin{gathered}
-\text{PPL}(W)=P(w_1, w_2, \cdots, w_N)^{-\frac{1}{N}}=\sqrt[N]{\frac{1}{P(w_1,w_2,\cdots,w_N)}} \\
+\text{PPL}(w_{1:n})=P(w_1, w_2, \cdots, w_n)^{-\frac{1}{n}}=\sqrt[n]{\frac{1}{P(w_1,w_2,\cdots,w_n)}} \\
 \text{by chain rule},\\
-\text{PPL}(W)=\sqrt[N]{\prod_{i=1}^{N}{\frac{1}{P(w_i|w_1,\cdots,w_{i-1})}}}
+\text{PPL}(w_{1:n})=\sqrt[n]{\prod_{i=1}^{n}{\frac{1}{P(w_i|w_1,\cdots,w_{i-1})}}}
 \end{gathered}
 $$
 
-앞서 정리했던 Cross Entropy와 수식이 비슷한 형태임을 알 수 있습니다. 따라서 PPL과 Cross Entropy의 관계는 아래와 같습니다.
+앞서 크로스 엔트로피로부터 이끌어냈던 수식과 비슷한 형태임을 알 수 있습니다. 따라서 perlexity(PPL)와 크로스 엔트로피의 관계는 아래와 같습니다.
 
 $$
 \text{PPL}=\exp(\text{Cross Entropy})
 $$
 
-따라서, 우리는 Maximum Likelihood Estimation(MLE)을 통해 parameter($\theta$)를 배울 때, cross entropy를 통해 얻은 ($P_\theta$의 로그 확률 값) loss 값에 $\exp$를 취함으로써, perplexity를 얻어 언어모델의 성능을 나타낼 수 있습니다.
-
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU5Njg5NDU2NV19
--->
+따라서, 우리는 Maximum Likelihood Estimation(MLE)을 통해 파라미터 $\theta$를 학습 할 때, 크로스 엔트로피를 통해 얻은 손실값($P_\theta$의 로그 확률 값)에 $\exp$를 취함으로써, perplexity를 얻어 언어모델의 성능을 나타낼 수 있습니다.
