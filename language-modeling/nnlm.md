@@ -58,8 +58,8 @@ $$
 $$
 \begin{gathered}
 x_{1:n}[:-1]=\{x_0,x_1,\cdots,x_n\} \\
-\\
 x_{\text{emb}}=\text{emb}(x_{1:n}[:-1]) \\
+\\
 \text{where }|x_{1:n}[:-1]|=(\text{batch\_size},n+1) \\
 \text{ and }|x_\text{emb}|=(\text{batch\_size},n+1,\text{word\_vec\_dim}).
 \end{gathered}
@@ -77,11 +77,12 @@ $$
 이 벡터를 리니어 레이어(linear layer)와 softmax 함수를 통해 각 단어에 대한 확률 분포인 $\hat{x}_{i+1}$을 구합니다.
 
 $$
-\begin{aligned}
+\begin{gathered}
 \hat{x}_{1:n}[1:]=\text{softmax}(\text{linear}_{\text{hidden\_size} \rightarrow |V|}(h_{0:n})) \\
+\\
 \text{where }|\hat{x}_{1:n}[1:]|=(\text{batch\_size},n+1,|V|) \\
 \text{and }x_{1:n}[1:]=\{x_1,x_2,\cdots,x_{n+1}\}
-\end{aligned}
+\end{gathered}
 $$
 
 여기서 우리는 LSTM을 사용하여 RNN을 대체 할 것이고, LSTM은 여러 층(layer)로 구성되어 있으며, 각 층 사이에는 드랍아웃(dropout)이 들어갈 수 있습니다. 우리는 테스트 데이터셋에 대해서 perplexity를 최소화 하는 것이 목표이기 때문에, 이전 섹션에서 perplexity와 엔트로피(entropy)와의 관계를 설명하였듯이, 크로스 엔트로피 손실 함수를 사용하여 최적화를 수행 합니다. <comment> one-hot 벡터의 크로스 엔트로피 연산은 이전 기초 수학 챕터를 참고 바랍니다. </comment> 이때 주의할 점은 입력과 반대로 BOS를 제거한 정답 $x_{1:n}[1:]$와 비교한다는 것 입니다.
