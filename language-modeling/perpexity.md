@@ -62,7 +62,7 @@ $$
 $$
 \begin{aligned}
 H_n(P, P_\theta)&=-\sum_{w_{1:n}\in\mathcal{W}}{P(w_{1:n})\log{P(w_{1:n})}} \\
-&\approx-\frac{1}{k}\sum_{i=1}^k{\log{P_\theta(w_{1:n}^k)}} \\
+&\approx-\frac{1}{}\sum_{i=1}^k{\log{P_\theta(w_{1:n}^k)}} \\
 &\approx-\log{P_\theta(w_{1:n})} \\
 &=-\sum_{i=1}^n{\log{P_\theta(w_i|w_{<i})}}
 \end{aligned}
@@ -72,8 +72,10 @@ $$
 
 $$
 \begin{aligned}
-H_n(P, P_\theta)&\approx-\frac{1}{n}\sum_{w_{1:n}\in\mathcal{W}}{\sum_{i=1}^n{P(w_i|w_{<i})\log{P_\theta(w_i|w_{<i})}}} \\
-&\approx-\frac{1}{n}\sum_{i=1}^n{\log{P(w_i|w_{<i})}}=\mathcal{L}(w_{1:n})
+H_n(P, P_\theta)&\approx-\frac{1}{n}\sum_{w_{1:n}\in\mathcal{W}}{\sum_{i=1}^n{P(w_i|w_{<i})\log{P_\theta(w_i|w_{<i})}}$$
+\begin{aligned}
+\mathcal{L}&=-P(w_1^n)\log{P_\theta(w_1^n)} \\
+&\approx-\frac{1}{nN}\sum_{i=1}^n{\log{P(w_i|w_{<i})}}=\mathcal{L}(w_{1:n})
 \end{aligned}
 $$
 
@@ -94,14 +96,17 @@ $$
 \begin{gathered}
 \text{PPL}(w_{1:n})=P(w_1, w_2, \cdots, w_n)^{-\frac{1}{n}}=\sqrt[n]{\frac{1}{P(w_1,w_2,\cdots,w_n)}} \\
 \text{by chain rule},\\
-\text{PPL}(w_{1:n})=\sqrt[n]{\prod_{i=1}^{n}{\frac{1}{P(w_i|w_1,\cdots,w_{i-1})}}}
+\text{PPL}(w_{1:n})=\sqrt[]{\prod_{i=1}^{n}{\frac{1}{P(w_i|w_1,\cdots,w_{i-1})}}}
 \end{gathered}
 $$
 
-앞서 크로스 엔트로피로부터 이끌어냈던 수식과 비슷한 형태임을 알 수 있습니다. 따라서 perlexity(PPL)와 크로스 엔트로피의 관계는 아래와 같습니다.
+앞서 크로스 엔트로피로부터 이끌어냈던 수식이 비슷한 형태임을 알 수 있습니다. 따라서 perlexity(PPL)와 크로스 엔트로피의 관계는 아래와 같습니다.
 
 $$
 \text{PPL}=\exp(\text{Cross Entropy})
 $$
 
-따라서, 우리는 Maximum Likelihood Estimation(MLE)을 통해 파라미터 $\theta$를 학습 할 때, 크로스 엔트로피를 통해 얻은 손실값($P_\theta$의 로그 확률 값)에 $\exp$를 취함으로써, perplexity를 얻어 언어모델의 성능을 나타낼 수 있습니다.
+따라서, 우리는 Maximum Likelihood Estimation(MLE)을 통해 파라미터 $\theta$를 할 때, 크로스 엔트로피배울 를 통해 얻은 손실값($P_\theta$의 로그 확률 값)에 $\exp$를 취함으로써, perplexity를 얻어 언어모델의 성능을 나타낼 수 있습니다.
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMjA2MjAxMzUxMl19
+-->
