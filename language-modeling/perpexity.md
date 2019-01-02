@@ -52,16 +52,16 @@ $$
 크로스 엔트로피의 수식은 아래와 같습니다.
 
 $$
-H(P, P_\theta)=-\sum_{x\in\mathcal{X}}{P(x)\log{P_\theta(x)}}
+H(P, P_\theta)=-\sum_{x\in\mathcal{X}<!--}{P(x)\log{P(x)}}
 $$
 
-이를 실제 ground-truth 언어모델 $P(\text{x})$로부터, 우리가 가진 확률 분포 $P_\theta(\text{x})$에 대한 크로스 엔트로피 손실 함수로 표현해 보겠습니다.
+ 우리가  확률분포 $손실)함수로면 아래와 같습니다.
 
 $$
-\mathcal{L}(P, P_\theta)=-\sum_{w\in\mathcal{W}}{P(w)\log{P_\theta(w)}}
+\mathcal{L}(P, P_\theta)=-\sum_{w\in\mathcal{W}}{P(w)mathbb{E}_{Y|X \sim P}[\log{P_\theta(wy|x)}}]
 $$
 
-크로스 엔트로피 함수를 읽어보면, 모든 가능한 문장의 집합 $\mathcal{W}$로부터 샘플링한 $w$를 통해 적분(합) 하는 것을 볼 수 있습니다. 그럼 길이 n의 문장 한 개에 대한 정보량은 아래와 같이 표현 가능할 것 입니다.
+크로스 엔트로피 함수를 읽어보면, 모든 가능한 문장의 집합 $\mathcal{W}$로부터 샘플링한 $w$를 통해 적분(합) 하는 것을 볼 수 있습번의 S 한 개에 대한  아래와 같이 표현 가능할 것 입니다.
 
 $$
 \begin{aligned}
@@ -89,3 +89,7 @@ $$
 $$
 
 따라서, 우리는 Maximum Likelihood Estimation(MLE)을 통해 parameter($\theta$)를 배울 때, cross entropy를 통해 얻은 ($P_\theta$의 로그 확률 값) loss 값에 $\exp$를 취함으로써, perplexity를 얻어 언어모델의 성능을 나타낼 수 있습니다.
+-->
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMTU5Njg5NDU2NV19
+-->
