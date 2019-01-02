@@ -1,24 +1,30 @@
-# Sequence to Sequence
+# Sequence-to-Sequence (시퀀스 투 시퀀스, Seq2seq)
 
-## Architecture Overview
+## 구조 소개
 
-![기본적인 Sequence-to-Sequence 아키텍처](../assets/nmt-seq2seq-architecture.png)
-
-먼저 번역 또는 seq2seq 모델을 이용한 작업을 간단하게 수식화 해보겠습니다.
+우리는 sequence-to-sequence를 모델 구조를 활용하여 MLE를 수행하여 주어진 데이터를 가장 잘 설명하는 파라미터 $\theta$를 찾아내야 합니다. 그것을 수식으로 나타내면 아래와 같습니다.
 
 $$
-\theta^* \approx \underset{\theta}{\text{argmax }}P(Y|X;\theta)\text{ where }X=\{x_1,x_2,\cdots,x_n\},~Y=\{y_1,y_2,\cdots,y_m\}
+\hat{\theta}=\underset{\theta}{\text{argmax }}P(Y|X;\theta)\text{ where }=\{x_1,x_2,\cdots,x_n\},~Y=\{y_1,y_2,\cdots,y_m\}
 $$
 
-$P(Y|X;\theta)$를 최대로 하는 모델 파라미터\($\theta$\)를 Maximum Likelihood Estimation(MLE)를 통해 찾아야 합니다. 즉, 모델 파라미터가 주어졌을 때, source 문장 $X$를 받아서 target 문장 $Y$를 반환할 확률을 최대로 하는 모델 파라미터를 학습하는 것 입니다. 이를 위해서 seq2seq는 크게 3개의 서브 모듈(encoder, decoder, generator)로 구성되어 있습니다.
+$P(Y|X;\theta)$를 최대로 하는 모델 파라미터를 찾는 작업 입니다. 이렇게 파라미터에 대한 학습이 완료되면, 사후확률을 최대로 하는 $Y$를 찾아야 합니다.
 
-### Encoder
+$$
+\hat{Y}=\underset{Y\in\mathcal{Y}}{\text{argmax }}P(Y|X;\theta)
+$$
 
-인코더는 source 문장을 입력으로 받아 문장을 함축하는 문장 임베딩 벡터(sentence embedding vector)로 만들어 냅니다. $P(X)$를 모델링 하는 것이라고 볼 수 있습니다. 사실 새로운 형태라기 보단, 이전 챕터에서 다루었던 텍스트 분류(Text Classificaion)에서 사용되었던 RNN 모델과 거의 같다고 볼 수 있습니다. $P(X)$를 모델링하여, 주어진 문장을 벡터화(vectorize)하여 해당 도메인의 latent space(manifold or hyper-plane)의 어떤 한 점에 투영 시키는 작업이라고 할 수 있습니다.
+이를 위해서 sequence-to-sequence는 크게 3개의 서브 모듈(인코더, 디코더, 제너레이터)로 구성되어 있습니다.
 
-![3개의 구성요소로 이루어진 Sequence-to-Sequence 아키텍처](../assets/nmt-enc-sent-proj.png)
+![3개의 구성요소로 이루어진 기본적인 Sequence-to-Sequence 구조](../assets/nmt-seq2seq-architecture.png)
 
-다만, 기존의 텍스트 분류 문제에서는 모든 정보가 필요하지 않기 때문에 (예를들어 감성분석(Sentiment Analysis)에서는 "나는"과 같이 중립적인 단어는 감성을 분류하는데 필요하지 않기 때문에 해당 정보를 굳이 간직해야 하지 않을 수도 있습니다.) 벡터로 만들어내는 과정에서 많은 정보를 간직하지 않아도 되지만, 기계번역을 위한 문장 임베딩 벡터를 생성하기 위해서는 최대한 많은 정보를 간직해야 할 것 입니다.
+### 인코더 (Encoder)
+
+인코더는 주어진 소스(source) 문장을 입력으로 받아 문장을 함축하는 문장 임베딩 벡터(sentence embedding vector)로 만들어 냅니다. $P(\text{z}|X)$를 모델링 하는 것이라고 볼 수 있습니다. 사실 새로운 형태라기 보단, 이전 챕터에서 다루었던 텍스트 분류(Text Classificaion)에서 사용되었던 RNN 모델과 거의 같다고 볼 수 있습니다. $P(\text{z}|X)$를 모델링하여, 주어진 문장을 차원축소(dimension reduction)하여 해당 도메인의 latent 공간(매니폴드)의 어떤 한 점에 투영하는 작업 입니다.
+
+![인코더의 문장 임베딩](../assets/nmt-enc-sent-proj.png)
+
+다만 기존의 텍스트 분류 문제에서는 모든 정보가 필요하지 않기 때문에 <comment> 예를들어 감성분석(Sentiment Analysis)에서는 "나는"과 같이 중립적인 단어는 감성을 분류하는데 필요하지 않기 때문에 해당 정보를 굳이 간직해야 하지 않을 수도 있습니다. </comment> 벡터로 만들어내는 과정에서 많은 정보를 간직하지 않아도 되지만, 기계번역을 위한 문장 임베딩 벡터를 생성하기 위해서는 최대한 많은 정보를 간직해야 할 것 입니다.
 
 $$
 \begin{gathered}

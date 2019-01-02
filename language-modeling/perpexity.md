@@ -107,6 +107,3 @@ $$
 $$
 
 따라서, 우리는 Maximum Likelihood Estimation(MLE)을 통해 파라미터 $\theta$를 할 때, 크로스 엔트로피배울 를 통해 얻은 손실값($P_\theta$의 로그 확률 값)에 $\exp$를 취함으로써, perplexity를 얻어 언어모델의 성능을 나타낼 수 있습니다.
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbMjA2MjAxMzUxMl19
--->
