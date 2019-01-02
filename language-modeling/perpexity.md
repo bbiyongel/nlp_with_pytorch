@@ -52,7 +52,7 @@ $$
 크로스 엔트로피의 수식은 아래와 같습니다.
 
 $$
-H(P, P_\theta)=-\sum_{x\in\mathcal{X}<!--}{P(x)\log{P(x)}}
+H(P, P_\theta)=-\sum_{x\in\mathcal{X}}{P(x)\log{P(x)}}
 $$
 
  우리가  확률분포 $손실)함수로면 아래와 같습니다.
@@ -89,7 +89,7 @@ $$
 $$
 
 따라서, 우리는 Maximum Likelihood Estimation(MLE)을 통해 parameter($\theta$)를 배울 때, cross entropy를 통해 얻은 ($P_\theta$의 로그 확률 값) loss 값에 $\exp$를 취함으로써, perplexity를 얻어 언어모델의 성능을 나타낼 수 있습니다.
--->
+
 <!--stackedit_data:
 eyJoaXN0b3J5IjpbMTU5Njg5NDU2NV19
 -->
