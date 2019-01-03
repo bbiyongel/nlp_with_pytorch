@@ -2,19 +2,19 @@
 
 ## Overview
 
-이제까지 $X$와 $Y$가 모두 주어진 훈련상황을 가정하였습니다만, 이제부터는 $X$만 주어진 상태에서 $\hat{Y}$을 예측하는 방법에 대해서 서술하겠습니다. 이러한 과정을 우리는 추론(inference) 또는 탐색(search)이라고 부릅니다. 우리가 기본적으로 이 방식을 탐색이라고 부르는 이유는 탐색 알고리즘(search algorithm)에 기반하기 때문입니다. 결국 우리가 원하는 것은 state로 이루어진 단어(word)들 사이에서 최고의 확률을 갖는 경로(path)를 찾는 것이기 때문입니다.
+이제까지 $X$ 와 $Y$ 가 모두 주어진 훈련상황을 가정하였습니다만, 이제부터는 $X$ 만 주어진 상태에서 $\hat{Y}$ 을 예측하는 방법에 대해서 서술하겠습니다. 이러한 과정을 우리는 추론(inference) 또는 탐색(search)이라고 부릅니다. 우리가 기본적으로 이 방식을 탐색이라고 부르는 이유는 탐색 알고리즘(search algorithm)에 기반하기 때문입니다. 결국 우리가 원하는 것은 state로 이루어진 단어(word)들 사이에서 최고의 확률을 갖는 경로(path)를 찾는 것이기 때문입니다.
 
 ## Sampling
 
-사실 먼저 우리가 생각할 수 있는 가장 정확한 방법은 각 time-step별 $\hat{y}_t$를 고를 때, 마지막 softmax 레이어에서의 확률 분포(probability distribution)대로 랜덤 샘플링을 하는 것 입니다. 그리고 다음 time-step에서 그 선택($\hat{y}_t$)을 기반으로 다음 $\hat{y}_{t+1}$을 또 다시 샘플링하여 최종적으로 $EOS$가 나올 때 까지 샘플링을 반복하는 것 입니다. 이렇게 하면 우리가 원하는 $P(Y|X)$ 에 가장 가까운 형태의 번역이 완성될 겁니다. 하지만, 이러한 방식은 같은 입력에 대해서 매번 다른 출력 결과물을 만들어낼 수 있습니다. 따라서 우리가 원하는 형태의 결과물이 아닙니다.
+사실 먼저 우리가 생각할 수 있는 가장 정확한 방법은 각 time-step별 $\hat{y}_t$ 를 고를 때, 마지막 softmax 레이어에서의 확률 분포(probability distribution)대로 랜덤 샘플링을 하는 것 입니다. 그리고 다음 time-step에서 그 선택( $\hat{y}_t$ )을 기반으로 다음 $\hat{y}_{t+1}$ 을 또 다시 샘플링하여 최종적으로 $EOS$ 가 나올 때 까지 샘플링을 반복하는 것 입니다. 이렇게 하면 우리가 원하는 $P(Y|X)$ 에 가장 가까운 형태의 번역이 완성될 겁니다. 하지만, 이러한 방식은 같은 입력에 대해서 매번 다른 출력 결과물을 만들어낼 수 있습니다. 따라서 우리가 원하는 형태의 결과물이 아닙니다.
 
 ## Gready Search
 
-우리는 자료구조, 알고리즘 수업에서 DFS, BFS, Dynamic Programming 등 수많은 탐색 기법에 대해 배웠습니다. 우리는 이중에서 Greedy 알고리즘을 기반으로 탐색을 구현합니다. 즉, softmax 레이어에서 가장 값이 큰 인덱스(index)를 뽑아 해당 time-step의 $\hat{y}_t$로 사용하게 되는 것 입니다.
+우리는 자료구조, 알고리즘 수업에서 DFS, BFS, Dynamic Programming 등 수많은 탐색 기법에 대해 배웠습니다. 우리는 이중에서 Greedy 알고리즘을 기반으로 탐색을 구현합니다. 즉, softmax 레이어에서 가장 값이 큰 인덱스(index)를 뽑아 해당 time-step의 $\hat{y}_t$ 로 사용하게 되는 것 입니다.
 
 ## Code
 
-아래의 코드는 샘플링 또는 greedy 탐색을 위한 코드 입니다. 사실 인코더가 동작하는 부분까지는 완전히 똑같습니다. 다만, 이후 추론을 위한 부분은 기존 훈련 코드와 상이합니다. Teacher Forcing을 사용하였던 훈련 방식(실제 정답 $y_{t-1}$을 $t$ time-step의 입력으로 사용함)과 달리, 실제 이전 time-step의 출력을 현재 time-step의 입력으로 사용 합니다.
+아래의 코드는 샘플링 또는 greedy 탐색을 위한 코드 입니다. 사실 인코더가 동작하는 부분까지는 완전히 똑같습니다. 다만, 이후 추론을 위한 부분은 기존 훈련 코드와 상이합니다. Teacher Forcing을 사용하였던 훈련 방식(실제 정답 $y_{t-1}$ 을 $t$ time-step의 입력으로 사용함)과 달리, 실제 이전 time-step의 출력을 현재 time-step의 입력으로 사용 합니다.
 
 ```python
     def search(self, src, is_greedy = True, max_length = 255):
@@ -79,15 +79,13 @@
 
 하지만 우리는 자료구조, 알고리즘 수업에서 배웠다시피, greedy 알고리즘은 굉장히 쉽고 간편하지만, 최적의(optimal) 해를 보장하지 않습니다. 따라서 최적의 해에 가까워지기 위해서 우리는 약간의 트릭을 첨가합니다. Beam Size 만큼의 후보를 더 추적하는 것 입니다.
 
-현재 time-step에서 Top-k개를 뽑아서 (여기서 k는 beam size와 같습니다) 다음 time-step에 대해서 k번 추론을 수행합니다. 그리고 총 $k * |V|$ 개의 softmax 결과 값 중에서 다시 top-k개를 뽑아 다음 time-step으로 넘깁니다. ($|V|$는 Vocabulary size) 여기서 중요한 점은 두가지 입니다.
+현재 time-step에서 Top-k개를 뽑아서 (여기서 k는 beam size와 같습니다) 다음 time-step에 대해서 k번 추론을 수행합니다. 그리고 총 $k * |V|$ 개의 softmax 결과 값 중에서 다시 top-k개를 뽑아 다음 time-step으로 넘깁니다. ( $|V|$ 는 Vocabulary size) 여기서 중요한 점은 두가지 입니다.
 
-$$
-\begin{gathered}
+$$\begin{gathered}
 \hat{y}_{t}^{k} = \underset{k\text{-th}}{\text{argmax}}\hat{Y}_t \\
 \hat{Y}_{t} = f_\theta(X, y_{<t}^{1}) \cup f_\theta(X, y_{<t}^{2}) \cup \cdots \cup f_\theta(X, y_{<t}^{k}) \\
 X=\{x_1, x_2, \cdots, x_n\}
-\end{gathered}
-$$
+\end{gathered}$$
 
 1. 누적 확률을 사용하여 top-k를 뽑습니다. 이때, 보통 로그 확률을 사용하므로 현재 time-step 까지의 로그확률에 대한 합을 추적하고 있어야 합니다.
 2. top-k를 뽑을 때, 현재 time-step에 대해 k번 계산한 모든 결과물 중에서 뽑습니다.
@@ -100,23 +98,21 @@ Beam Search를 사용하면 좀 더 넓은 경로에 대해서 search를 수행�
 
 ### How to implement
 
-하나의 샘플에 대해서 추론을 수행하기 위한 beam search를 나타낸 그림 입니다. 여기서 beam size는 3이 되는 것을 알 수 있습니다. 보통 beam search는 $EOS$가 beam size의 크기만큼 추론 될 때까지 수행 됩니다. 즉, 아래에서는 3개 이상의 $EOS$가 출현하면 beam search는 종료 됩니다. 아래의 그림에서는 마지막 직전의 time-step에서 1개의 $EOS$가 발생한 것을 볼 수 있고, $EOS$로부터 다시 이어지는 추론 대신에, 다른 2개의 추론 중에서 top-3를 다시 선택 하는 것을 볼 수 있습니다. Top-k개를 뽑을 때는 누적 확률이 높은 순서대로 뽑게 됩니다.
+하나의 샘플에 대해서 추론을 수행하기 위한 beam search를 나타낸 그림 입니다. 여기서 beam size는 3이 되는 것을 알 수 있습니다. 보통 beam search는 $EOS$ 가 beam size의 크기만큼 추론 될 때까지 수행 됩니다. 즉, 아래에서는 3개 이상의 $EOS$ 가 출현하면 beam search는 종료 됩니다. 아래의 그림에서는 마지막 직전의 time-step에서 1개의 $EOS$ 가 발생한 것을 볼 수 있고, $EOS$ 로부터 다시 이어지는 추론 대신에, 다른 2개의 추론 중에서 top-3를 다시 선택 하는 것을 볼 수 있습니다. Top-k개를 뽑을 때는 누적 확률이 높은 순서대로 뽑게 됩니다.
 
 ![1 sample beam search (beam size=3)](../assets/nmt-single-sample-beam-search.png)
 
-좀 더 자세하게 예를 들면, $|V|=30,000$이고 $k=3$일 때, 한 time-step의 예측 결과의 갯수는 $|V|\times k=90,000$가 됩니다. 이 9만개의 softmax 레이어 출력 유닛(vocabulary의 각 단어)들의 각각의 확률 값에 이전 time-step에서 선택된 k개의 누적 확률 값을 더해 최종 누적 확률 값 $90,000$개를 얻습니다. 여기서 총 $90,000$개의 누적 확률 값 중에서 top-k개를 뽑아 다음 time-step의 예측을 위한 디코더의 입력으로 사용하게 됩니다.
+좀 더 자세하게 예를 들면, $|V|=30,000$ 이고 $k=3$ 일 때, 한 time-step의 예측 결과의 갯수는 $|V|\times k=90,000$ 가 됩니다. 이 9만개의 softmax 레이어 출력 유닛(vocabulary의 각 단어)들의 각각의 확률 값에 이전 time-step에서 선택된 k개의 누적 확률 값을 더해 최종 누적 확률 값 90,000개를 얻습니다. 여기서 총 90,000개의 누적 확률 값 중에서 top-k개를 뽑아 다음 time-step의 예측을 위한 디코더의 입력으로 사용하게 됩니다.
 
 ### Length Penalty
 
 위의 탐색 알고리즘을 직접 짜서 수행시켜 보면 한가지 문제점이 발견됩니다. 현재 time-step 까지의 확률을 모두 곱(로그 확률의 경우에는 합)하기 때문에 문장이 길어질 수록 확률이 낮아진다는 점 입니다. 따라서 짧은 문장일수록 더 높은 점수를 획득하는 경향이 있습니다. 우리는 이러한 현상을 방지하기 위해서 예측한 문장의 길이에 따른 페널티를 주어 탐색이 조기 종료되는 것을 막습니다. 수식은 아래와 같습니다. 불행히도 우리는 2개의 추가적인 hyper-parameter가 필요합니다.
 
-$$
-\begin{gathered}
+$$\begin{gathered}
 \log{\tilde{P}(\hat{Y}|X)}=\log{P(\hat{Y}|X)}\times\text{penalty} \\
 \text{penalty}=\frac{(1+\text{length})^\alpha}{(1+\beta)^\alpha} \\
 \text{where }\beta\text{ is hyper-parameter of minimum length}.
-\end{gathered}
-$$
+\end{gathered}$$
 
 ## Code
 

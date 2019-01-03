@@ -63,7 +63,7 @@ def is_same(key, query):
 2.823 # = .1 / (.9 + .7 + .1) * 9 + .9 / (.9 + .7 + .1) * 2 + .7 / (.9 + .7 + .1) * 3
 ```
 
-$2.823$ 라는 값이 나왔습니다. 강아지와 고양이, 그리고 컴퓨터의 유사도의 비율에 따른 dic의 값의 비율을 지녔다라고 볼 수 있습니다. is_same 함수를 쓸 때에는 두 값이 같은지 if문을 통해 검사하고 값을 할당했기 때문에, 미분을 할 수 없거나 할 수 있더라도 gradient가 0이 됩니다. 하지만, 이제 우리는 key_value_func을 딥러닝에 사용할 수 있습니다.
+2.823라는 값이 나왔습니다. 강아지와 고양이, 그리고 컴퓨터의 유사도의 비율에 따른 dic의 값의 비율을 지녔다라고 볼 수 있습니다. is_same 함수를 쓸 때에는 두 값이 같은지 if문을 통해 검사하고 값을 할당했기 때문에, 미분을 할 수 없거나 할 수 있더라도 gradient가 0이 됩니다. 하지만, 이제 우리는 key_value_func을 딥러닝에 사용할 수 있습니다.
 
 ### Differentiable Key-Value Vector function
 
@@ -127,17 +127,15 @@ def key_value_func(query):
 
 Attention을 추가한 seq2seq의 수식은 아래와 같은 부분이 추가/수정 됩니다.
 
-$$
-\begin{gathered}
+$$\begin{gathered}
 w = \text{softmax}({h_{t}^{tgt}}^T W \cdot H^{src}) \\
 c = H^{src}\cdot w\text{ and }c\text{ is a context vector}. \\
 \tilde{h}_{t}^{tgt}=\tanh(\text{linear}_{2hs \rightarrow hs}([h_{t}^{tgt}; c])) \\
 \hat{y}_{t}=\text{softmax}(\text{linear}_{hs \rightarrow |V_{tgt}|}(\tilde{h}_{t}^{tgt})) \\
 \text{where }hs\text{ is hidden size of RNN, and }|V_{tgt}|\text{ is size of output vocabulary}.
-\end{gathered}
-$$
+\end{gathered}$$
 
-원하는 정보를 attention을 통해 인코더에서 획득한 후, 해당 정보를 디코더의 출력과 concatenate하여 $tanh$를 취한 후, softmax 계산을 통해 다음 time-step의 입력이 되는 $\hat{y}_{t}$을 구합니다.
+원하는 정보를 attention을 통해 인코더에서 획득한 후, 해당 정보를 디코더의 출력과 concatenate하여 $tanh$ 를 취한 후, softmax 계산을 통해 다음 time-step의 입력이 되는 $\hat{y}_{t}$ 을 구합니다.
 
 ![Attention이 추가된 Sequence-to-Sequence의 아키텍처](../assets/nmt-seq2seq-with-attention-architecture.png)
 

@@ -18,31 +18,27 @@ Word2Vec은 단어를 임베딩 하는 방법을 2가지 제시하였습니다. 
 
 ## 훈련 방법 상세
 
-Skip-gram의 방법을 좀 더 자세하게 살펴보도록 하겠습니다. 먼저 skip-gram을 학습하는 과정은 아래와 같습니다. Maximum Likelihood Estimation (MLE)를 통해 아래의 수식을 최대로 하는 파라미터 $\theta$를 찾습니다. 이를 통해, $w_t$가 주어졌을떄, 앞뒤 $n$개의 단어($w_{t-\frac{n}{2}},\cdots,w_{t+\frac{n}{2}}$)를 예측하도록 훈련 됩니다. <comment> 이때 윈도우의 크기는 $n$ 입니다. </comment>
+Skip-gram의 방법을 좀 더 자세하게 살펴보도록 하겠습니다. 먼저 skip-gram을 학습하는 과정은 아래와 같습니다. Maximum Likelihood Estimation (MLE)를 통해 아래의 수식을 최대로 하는 파라미터 $\theta$ 를 찾습니다. 이를 통해, $w_t$ 가 주어졌을떄, 앞뒤 $n$ 개의 단어( $w_{t-\frac{n}{2}},\cdots,w_{t+\frac{n}{2}}$ )를 예측하도록 훈련 됩니다. <comment> 이때 윈도우의 크기는 $n$ 입니다. </comment>
 
-$$
-\hat{\theta}=\underset{\theta}{\text{argmax}}\sum_{t=1}^T{\Big(\sum_{i=1}^n{\log{P(w_{t-i}|w_t;\theta)}}+\sum_{i=1}^n{\log{P(w_{t+i}|w_t;\theta)}}\Big)}
-$$
+$$\hat{\theta}=\underset{\theta}{\text{argmax}}\sum_{t=1}^T{\Big(\sum_{i=1}^n{\log{P(w_{t-i}|w_t;\theta)}}+\sum_{i=1}^n{\log{P(w_{t+i}|w_t;\theta)}}\Big)}$$
 
 우리는 이전 섹션에서 임베딩 레이어를 통해서 one-hot 인코딩 벡터를 덴스(dense) 벡터인 워드 임베딩 벡터로 변환하는 방법에 대해서 다루었습니다. Skip-gram에서도 마찬가지 방법을 사용 합니다.
 
-$$
-\begin{gathered}
+$$\begin{gathered}
 \hat{y}=\underset{y\in\mathcal{Y}}{\text{argmax }}\text{softmax}(W'Wx) \\
 \text{where }W'\in\mathbb{R}^{|V|\times d}, W\in\mathbb{R}^{d\times|V|}\text{ and }x\in\mathbb\{0,1\}^{|V|}.
-\end{gathered}
-$$
+\end{gathered}$$
 
 위의 수식을 그림으로 표현하면 아래와 같습니다. 수식에서 볼 수 있듯이 1개의 히든 레이어를 갖고 있으며, 매우 간단한 구조입니다. <comment> 소프트맥스 레이어는 출력 레이어 입니다. </comment>
 
 ![Skip-gram의 아키텍쳐](../assets/wsd-skip_gram_architecture.png)
 
-이때 이전에 설명한 임베딩 레이어의 동작 원리와 같이 $W$의 각 row가 skip-gram을 통해 얻은 단어 x에 대한 워드 임베딩 벡터가 됩니다.
+이때 이전에 설명한 임베딩 레이어의 동작 원리와 같이 $W$ 의 각 row가 skip-gram을 통해 얻은 단어 x에 대한 워드 임베딩 벡터가 됩니다.
 
 ![Skip-gram을 통해 얻은 word embedding 벡터를 t-SNE를 통해 visualization 한 예제](../assets/intro-word-embedding.png)
 
 <!--
 ## Negative Sampling
 
-사실 위의 방법은 나름 괜찮은 방법이지만, $|V|$가 매우 클 경우에 $W$와 $W'$가 커짐으로 인해서 메모리와 연산량에 있어 부하로 작용할 수 있습니다. 따라서, 이때 negative sampling 방법을 사용하여 우리는 좀 더 효율적으로 skip-gram을 구현할 수 있습니다.
+사실 위의 방법은 나름 괜찮은 방법이지만, $|V|$ 가 매우 클 경우에 $W$ 와 $W'$ 가 커짐으로 인해서 메모리와 연산량에 있어 부하로 작용할 수 있습니다. 따라서, 이때 negative sampling 방법을 사용하여 우리는 좀 더 효율적으로 skip-gram을 구현할 수 있습니다.
 -->

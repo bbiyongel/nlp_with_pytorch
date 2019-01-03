@@ -6,29 +6,25 @@
 
 이전에 다루었던 skip-gram은 대상 단어를 통해 주변 단어를 예측하도록 네트워크를 구성하여 단어 임베딩 벡터를 학습하였습니다. GloVe는 대신에 대상 단어에 대해서 코퍼스(corpus)에 함꼐 나타난 각 단어별 출현 빈도를 예측하도록 합니다. GloVe 알고리즘의 네트워크 파라미터를 구하는 수식은 아래와 같습니다.
 
-$$
-\begin{gathered}
+$$\begin{gathered}
 \hat{\theta}=\underset{\theta}{\text{argmin}}\sum_{x\in\mathcal{X}}f(x)\times\big|W'Wx-\log{C_x}\big|_2 \\
 \text{where }C_x\text{ is vector of co-occurences with }x \\ 
 \text{Also, }x\in\{0,1\}^{|V|}, W\in\mathbb{R}^{d\times|V|}\text{ and }W'\in\mathbb{R}^{|V|\times d}.
-\end{gathered}
-$$
+\end{gathered}$$
 
 Skip-gram을 위한 네트워크와 거의 유사한 형태임을 알 수 있습니다. 다만, 여기서는 분류(classification) 문제 <comment> Skip-gram은 마지막 레이어가 소프트맥스로 구성되어 있었습니다. </comment>가 아닌, 출현 빈도를 근사(approximation)하는 리그레션(regression)문제에 가깝기 때문에, Mean Square Error (MSE)를 사용한 것을 볼 수 있습니다. 
 
-마찬가지로 one-hot 인코딩 벡터 $x$를 입력으로 받아 한 개의 히든 레이어 $W$를 거쳐 출력 레이어 $W'$를 통해 출력 벡터를 반환 합니다. 이 출력 벡터는 단어 $x$와 함께 코퍼스에 출현했던 모든 단어들의 각 동시 출현 빈도들을 나타낸 벡터인 $C_x$를 근사해야 합니다. 따라서 이 둘의 차이값인 손실(loss)를 최소화 하도록 back-propagation 및 그래디언트 디센트를 통해 학습을 할 수 있습니다.
+마찬가지로 one-hot 인코딩 벡터 $x$ 를 입력으로 받아 한 개의 히든 레이어 $W$ 를 거쳐 출력 레이어 $W'$ 를 통해 출력 벡터를 반환 합니다. 이 출력 벡터는 단어 $x$ 와 함께 코퍼스에 출현했던 모든 단어들의 각 동시 출현 빈도들을 나타낸 벡터인 $C_x$ 를 근사해야 합니다. 따라서 이 둘의 차이값인 손실(loss)를 최소화 하도록 back-propagation 및 그래디언트 디센트를 통해 학습을 할 수 있습니다.
 
-이때 단어 $x$ 자체의 출현빈도 또는 사전확률(prior probability)에 따라서 MSE 손실함수의 값이 매우 달라질 것 입니다. 예를 들어, $C_x$가 클수록 손실값은 커질것이기 때문입니다. 따라서 $f(x)​$는 단어의 빈도에 따라 아래와 같이 손실 함수에 가중치를 부여합니다.
+이때 단어 $x$ 자체의 출현빈도 또는 사전확률(prior probability)에 따라서 MSE 손실함수의 값이 매우 달라질 것 입니다. 예를 들어, $C_x$ 가 클수록 손실값은 커질것이기 때문입니다. 따라서 $f(x)​$ 는 단어의 빈도에 따라 아래와 같이 손실 함수에 가중치를 부여합니다.
 
-$$
-f(x)=
+$$f(x)=
 \begin{cases}
 \big({\text{Count}(x)}/{\text{thres}}\big)^\alpha & \text{Count}(x)<\text{thres} \\
 1 & \text{otherwise}.
-\end{cases}
-$$
+\end{cases}$$
 
-이 논문에서는 실험에 의해 $\text{thres}=100$, $\alpha=3/4$ 일때 가장 좋은 결과가 나온다고 언급하였습니다.
+이 논문에서는 실험에 의해 $\text{thres}=100$ , $\alpha=3/4$ 일때 가장 좋은 결과가 나온다고 언급하였습니다.
 
 ## 장점
 

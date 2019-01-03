@@ -14,7 +14,7 @@
 
 ## Dummy source sentence translation
 
-아래의 내용들은 전부 [Edinburgh 대학의 Nematus 번역시스템](https://arxiv.org/pdf/1708.00726.pdf)에서 제안되고 사용된 내용들입니다. 이 페이퍼[[Sennrich et al.2015]](https://arxiv.org/pdf/1511.06709.pdf)의 저자인 Rico Sennrich는 좀 전의 내용처럼 명시적으로 언어모델을 앙상블하는 대신, 디코더로 하여금 monolingual corpus를 학습할 수 있게 하는 방법을 제안하였습니다. 예전 챕터에서 다루었듯이, 디코더는 Conditional Neural Network Language Model이라고 할 수 있는데, source 문장인 $X$를 빈 입력을 넣어줌으로써, (그리고 Attention등을 모두 dropout 시켜 끊어줌으로써) condition을 없애는 것이 이 방법의 핵심입니다. 저자는 이 방법을 사용하면 decoder가 monolingual corpus의 language model을 학습하는 것과 같다고 하였습니다.
+아래의 내용들은 전부 [Edinburgh 대학의 Nematus 번역시스템](https://arxiv.org/pdf/1708.00726.pdf)에서 제안되고 사용된 내용들입니다. 이 페이퍼[[Sennrich et al.2015]](https://arxiv.org/pdf/1511.06709.pdf)의 저자인 Rico Sennrich는 좀 전의 내용처럼 명시적으로 언어모델을 앙상블하는 대신, 디코더로 하여금 monolingual corpus를 학습할 수 있게 하는 방법을 제안하였습니다. 예전 챕터에서 다루었듯이, 디코더는 Conditional Neural Network Language Model이라고 할 수 있는데, source 문장인 $X$ 를 빈 입력을 넣어줌으로써, (그리고 Attention등을 모두 dropout 시켜 끊어줌으로써) condition을 없애는 것이 이 방법의 핵심입니다. 저자는 이 방법을 사용하면 decoder가 monolingual corpus의 language model을 학습하는 것과 같다고 하였습니다.
 
 ## Back translation
 
@@ -22,14 +22,12 @@
 
 ![Back Translation 개요](../assets/nmt_back_translation_overview.png)
 
-$$
-\begin{gathered}
+$$\begin{gathered}
 \hat{\theta}_e=\underset{\theta}{\text{argmax}}P_{f \rightarrow e}(e|\hat{f};\theta_e) \\
 \text{where }\hat{f}=\underset{f}{\text{argmax}}P_{e \rightarrow f}(f|e;\theta_f)
-\end{gathered}
-$$
+\end{gathered}$$
 
-예를 들어, 한국어 monolingual corpus가 있을 때, 이것을 기존에 훈련된 한$\rightarrow$영 번역기에 기계번역시켜 한-영 합성 parallel corpus를 만들고, 이것을 영$\rightarrow$한 번역기를 훈련시키는데 사용하는 것 입니다. 이러한 방법의 특성 때문에 back translation이라고 명명되었습니다.
+예를 들어, 한국어 monolingual corpus가 있을 때, 이것을 기존에 훈련된 한 $\rightarrow$ 영 번역기에 기계번역시켜 한-영 합성 parallel corpus를 만들고, 이것을 영 $\rightarrow$ 한 번역기를 훈련시키는데 사용하는 것 입니다. 이러한 방법의 특성 때문에 back translation이라고 명명되었습니다.
 
 ![[[Sennrich at el.2015]](https://arxiv.org/pdf/1511.06709.pdf)](../assets/nmt_back_translation.png)  
 
@@ -37,7 +35,7 @@ $$
 
 ## Copied translation
 
-이 방식은 같은 저자인 Rich Sennrich에 의해서 [\[Currey et al.2017\] Copied Monolingual Data Improves Low-Resource Neural Machine  
+이 방식은 같은 저자인 Rich Sennrich에 의해서 [[Currey et al.2017] Copied Monolingual Data Improves Low-Resource Neural Machine  
 Translation](https://kheafield.com/papers/edinburgh/copy_paper.pdf)에서 제안 되었습니다. 기존의 Dummy source sentence translation 방식에서 좀 더 나아진 방식입니다. 기존의 방식 대신에 source 쪽과 target 쪽에 똑같은 데이터를 넣어 훈련시키는 것 입니다. 기존의 dummy source sentence 방식은 encoder에서 decoder로 가는 길을 훈련 시에 dropout 처리 해주어야 했지만, 이 방식은 그럴 필요가 없어진 것이 장점입니다. 하지만 source 언어의 vocabulary에 target language의 vocabulary가 포함되어야 하는 불필요함을 감수해야 합니다.
 
 ![[[Sennrich at el.2017]](https://arxiv.org/pdf/1708.00726.pdf)](../assets/nmt_copied_translation.png)  

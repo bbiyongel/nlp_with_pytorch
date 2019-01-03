@@ -2,32 +2,35 @@
 
 ## Overview
 
-각 time-step의 디코더 출력값과 Attention 결과값을 concatenate한 이후에 제너레이터 모듈에서 softmax를 취하여 $\hat{y}_{t}$을 구합니다. 하지만 이러한 softmax 과정에서 많은 정보(예를 들어 attention 정보 등)가 손실됩니다. 따라서 단순히 다음 time-step에 $\hat{y}_{t}$을 입력으로 넣어 주는 것보다, concatenation 레이어의 출력도 같이 넣어주어 계산한다면, 좀 더 정보의 손실 없이 더 좋은 효과를 얻을 수 있습니다.
+각 time-step의 디코더 출력값과 Attention 결과값을 concatenate한 이후에 제너레이터 모듈에서 softmax를 취하여 $\hat{y}_{t}$ 을 구합니다. 하지만 이러한 softmax 과정에서 많은 정보(예를 들어 attention 정보 등)가 손실됩니다. 따라서 단순히 다음 time-step에 $\hat{y}_{t}$ 을 입력으로 넣어 주는 것보다, concatenation 레이어의 출력도 같이 넣어주어 계산한다면, 좀 더 정보의 손실 없이 더 좋은 효과를 얻을 수 있습니다.
 
 ![Input Feeding이 추가 된 Sequence-to-Sequence 아키텍처](../assets/nmt-seq2seq-with-attention-and-input-feeding-architecture.png)
 
-$y$와 달리 concatenation 레이어의 출력은 $y$가 임베딩 레이어에서 dense 벡터로 변환되고 난 이후에 임베딩 벡터와 concatenate되어 디코더 RNN에 입력으로 주어지게 됩니다. 이러한 과정을 input feeding이라고 합니다.
+ $y$ 와 달리 concatenation 레이어의 출력은 $ y$가 임베딩 레이어에서 dense 벡터로 변환되고 난 이후에 임베딩 벡터와 concatenate되어 디코더 RNN에 입력으로 주어지게 됩니다. 이러한 과정을 input feeding이라고 합니다.
 
-$$
-\begin{gathered}
+$$\begin{gathered}
 h_{t}^{src} = \text{RNN}_{enc}(\text{emb}_{src}(x_t), h_{t-1}^{src}) \\
-H^{src} = [h_{1}^{src}; h_{2}^{src}; \cdots; h_{n}^{src}] \\ \\
-h_{t}^{tgt} = \text{RNN}_{dec}([\text{emb}_{tgt}(y_{t-1});\tilde{h}_{t-1}^{tgt}], h_{t-1}^{tgt})\text{ where}h_{0}^{tgt}=h_{n}^{src}\text{ and }y_{0}=BOS. \\ \\
+H^{src} = [h_{1}^{src}; h_{2}^{src}; \cdots; h_{n}^{src}] \\ 
+\\
+h_{t}^{tgt} = \text{RNN}_{dec}([\text{emb}_{tgt}(y_{t-1});\tilde{h}_{t-1}^{tgt}], h_{t-1}^{tgt})\text{ where}h_{0}^{tgt}=h_{n}^{src}\text{ and }y_{0}=BOS. \\ 
+\\
 w=\text{softmax}({h_{t}^{tgt}}^T W \cdot H^{src}) \\
-c = H^{src} \cdot w\text{ and }c\text{ is a context vector}. \\ \\
-\tilde{h}_{t}^{tgt}=\tanh(\text{linear}_{2hs \rightarrow hs}([h_{t}^{tgt}; c])) \\ \\
-\hat{y}_{t}=\text{softmax}(\text{linear}_{hs \rightarrow |V_{tgt}|}(\tilde{h}_{t}^{tgt})) \\ \\
+c = H^{src} \cdot w\text{ and }c\text{ is a context vector}. \\ 
+\\
+\tilde{h}_{t}^{tgt}=\tanh(\text{linear}_{2hs \rightarrow hs}([h_{t}^{tgt}; c])) \\ 
+\\
+\hat{y}_{t}=\text{softmax}(\text{linear}_{hs \rightarrow |V_{tgt}|}(\tilde{h}_{t}^{tgt})) \\ 
+\\
 \text{where }hs\text{ is hidden size of RNN, and }|V_{tgt}|\text{ is size of output vocabulary}.
-\end{gathered}
-$$
+\end{gathered}$$
 
-위는 attention과 input feeding이 추가된 seq2seq의 처음부터 끝까지를 수식으로 나타낸 것 입니다. $\text{RNN}_{dec}$는 이제 $\tilde{h}_{t-1}^{tgt}$를 입력으로 받기 때문에, 모든 time-step을 한번에 처리하도록 구현할 수 없다는 점이 구현상의 차이점 입니다. 그리고 실제 이전 time-step의 예측값을 사용할 수 없는 teacher forcing의 단점은 어느정도 보완해 주는 역할을 합니다.
+위는 attention과 input feeding이 추가된 seq2seq의 처음부터 끝까지를 수식으로 나타낸 것 입니다. $\text{RNN}_{dec}$ 는 이제 $\tilde{h}_{t-1}^{tgt}$ 를 입력으로 받기 때문에, 모든 time-step을 한번에 처리하도록 구현할 수 없다는 점이 구현상의 차이점 입니다. 그리고 실제 이전 time-step의 예측값을 사용할 수 없는 teacher forcing의 단점은 어느정도 보완해 주는 역할을 합니다.
 
 ## Disadvantage
 
-이 방식은 훈련 속도 저하라는 단점을 가집니다. input feeding 이전의 방식에서는 훈련 할 때, teacher forcing 방식을 사용하여, 인코더와 마찬가지로 디코더도 모든 time-step에 대해서 한번에 계산하는 작업이 가능했습니다. 하지만 input feeding으로 인해, 디코더 RNN의 입력으로 이전 time-step의 결과($\tilde{h}_t^{tgt}$)가 필요하게 되어, 마치 추론(inference)할때 처럼 auto-regressive 속성으로 인해 각 time-step 별로 순차적으로 계산을 해야 합니다.
+이 방식은 훈련 속도 저하라는 단점을 가집니다. input feeding 이전의 방식에서는 훈련 할 때, teacher forcing 방식을 사용하여, 인코더와 마찬가지로 디코더도 모든 time-step에 대해서 한번에 계산하는 작업이 가능했습니다. 하지만 input feeding으로 인해, 디코더 RNN의 입력으로 이전 time-step의 결과( $\tilde{h}_t^{tgt}$ )가 필요하게 되어, 마치 추론(inference)할때 처럼 auto-regressive 속성으로 인해 각 time-step 별로 순차적으로 계산을 해야 합니다.
 
-하지만 이 단점이 크게 부각되지 않는 이유는 어차피 추론(inference)단계에서는 디코더는 input feeding이 아니더라도 time-step 별로 순차적으로 계산되어야 하기 때문입니다. 추론 단계에서는 이전 time-step의 출력값인 $\hat{y}_t$를 디코더(정확하게는 디코더 RNN이전의 임베딩 레이어)의 입력으로 사용해야 하기 때문에, 어쩔 수 없이 병렬(parallel)처리가 아닌 순차적으로 계산해야 합니다. 따라서 추론 할 때, input feeding으로 인한 속도 저하는 거의 없습니다.
+하지만 이 단점이 크게 부각되지 않는 이유는 어차피 추론(inference)단계에서는 디코더는 input feeding이 아니더라도 time-step 별로 순차적으로 계산되어야 하기 때문입니다. 추론 단계에서는 이전 time-step의 출력값인 $\hat{y}_t$ 를 디코더(정확하게는 디코더 RNN이전의 임베딩 레이어)의 입력으로 사용해야 하기 때문에, 어쩔 수 없이 병렬(parallel)처리가 아닌 순차적으로 계산해야 합니다. 따라서 추론 할 때, input feeding으로 인한 속도 저하는 거의 없습니다.
 
 ## Evaluation
 

@@ -1,7 +1,7 @@
-# Google Neural Machine Translation \(GNMT\)
+# Google Neural Machine Translation (GNMT)
 (Google’s Neural Machine Translation System: Bridging the Gap between Human and Machine Translation)
 
-Google은 2016년 논문([\[Wo at el.2016\]](https://arxiv.org/pdf/1609.08144.pdf)
+Google은 2016년 논문([[Wo at el.2016]](https://arxiv.org/pdf/1609.08144.pdf)
 )을 발표하여 그들의 번역시스템에 대해서 상세히 소개하였습니다. 실제 시스템에 적용된 모델 구조(architecture)부터 훈련 방법까지 상세히 기술하였기 때문에, 실제 번역 시스템을 구성하고자 할 때에 좋은 참고자료(reference)가 될 수 있습니다. 또한 다른 논문들에서 실험 결과에 대해 설명할 때, GNMT를 baseline으로 참조하기도 합니다. 아래의 내용들은 그들의 논문에서 소개한 내용을 다루도록 하겠습니다.
 
 ## Model Architecture
@@ -35,31 +35,25 @@ Google도 seq2seq 기반의 모델을 구성하였습니다. 다만, 구글은 �
 
 Google은 강화학습을 다룬 [챕터](reinforcement-learning/cover.md)에서 설명한 강화학습 기법을 사용하여 Maximum Likelihood Estimation (MLE)방식의 훈련된 모델에 fine-tuning을 수행하였습니다. 따라서 위의 테이블과 같은 추가적이 성능 개선을 얻어낼 수 있었습니다.
 
-기존 MLE 방식의 목적함수(objective)를 아래와 같이 구성합니다. $Y^{*(i)}$은 최적(optimal)의 정답 데이터를 의미합니다.
+기존 MLE 방식의 목적함수(objective)를 아래와 같이 구성합니다. $Y^{*(i)}$ 은 최적(optimal)의 정답 데이터를 의미합니다.
 
-$$
-\mathcal{O}_{ML}(\theta)=\sum_{i=1}^N\log P_\theta(Y^{*(i)}|X^{(i)})
-$$
+$$\mathcal{O}_{ML}(\theta)=\sum_{i=1}^N\log P_\theta(Y^{*(i)}|X^{(i)})$$
 
 여기에 추가로 RL방식의 목적함수(objective)를 추가하였는데 이 방식이 policy gradient 방식과 같습니다.
 
-$$
-\mathcal{O}_{RL}(\theta)=\sum_{i=1}^N \sum_{Y \in \mathcal{Y}} P_\theta(Y|X^{(i)})r(Y, Y^{*(i)})
-$$
+$$\mathcal{O}_{RL}(\theta)=\sum_{i=1}^N \sum_{Y \in \mathcal{Y}} P_\theta(Y|X^{(i)})r(Y, Y^{*(i)})$$
 
 위의 수식도 Minimum Risk Training (MRT) 방식과 비슷합니다. $r(Y, Y^{*(i)})$ 또한 정답과 sampling 데이터 사이의 유사도(점수)를 의미합니다. 가장 큰 차이점은 기존에는 risk로 취급하여 최소화(minimize)하는 방향으로 훈련하였지만, 이번에는 reward로 취급하여 최대화(maximize)하는 방향으로 훈련하게 된다는 것 입니다.
 
 이렇게 새롭게 추가된 목적함수(objective)를 아래와 같이 기존의 MLE방식의 목적함수와 선형 결합(linear combination)을 취하여 최종적인 목적함수가 완성됩니다.
 
-$$
-\mathcal{O}_{Mixed}(\theta)=\alpha*\mathcal{O}_{ML}(\theta)+\mathcal{O}_{RL}(\theta)
-$$
+$$\mathcal{O}_{Mixed}(\theta)=\alpha*\mathcal{O}_{ML}(\theta)+\mathcal{O}_{RL}(\theta)$$
 
-이때에 $\alpha$값은 주로 0.017로 셋팅하였습니다. 위와 같은 방법의 성능을 실험한 결과는 다음과 같습니다.
+이때에 $\alpha$ 값은 주로 0.017로 셋팅하였습니다. 위와 같은 방법의 성능을 실험한 결과는 다음과 같습니다.
 
 ![](../assets/nmt-gnmt-5.png)
 
-$En \rightarrow De$의 경우에는 성능이 약간 하락함을 보였습니다. 하지만 이는 decoder의 length penalty, coverage penalty와 결합되었기 때문이고, 이 페널티(panalty)들이 없을 때에는 훨씬 큰 성능 향상이 있었다고 합니다.
+En $\rightarrow$ De의 경우에는 성능이 약간 하락함을 보였습니다. 하지만 이는 decoder의 length penalty, coverage penalty와 결합되었기 때문이고, 이 페널티(panalty)들이 없을 때에는 훨씬 큰 성능 향상이 있었다고 합니다.
 
 ## Quantization
 
@@ -77,20 +71,18 @@ $En \rightarrow De$의 경우에는 성능이 약간 하락함을 보였습니�
 
 ### Length Penalty and Coverage Penalty
 
-Google은 기존에 소개한 ***Length Penalty***에 추가로 ***Coverage Penalty***를 사용하여 좀 더 성능을 끌어올렸습니다. Coverage penalty는 attention weight(probability)의 값의 분포에 따라서 매겨집니다. 이 페널티는 좀 더 attention이 고루 잘 퍼지게 하기 위함입니다.
+Google은 기존에 소개한 Length Penalty에 추가로 Coverage Penalty를 사용하여 좀 더 성능을 끌어올렸습니다. Coverage penalty는 attention weight(probability)의 값의 분포에 따라서 매겨집니다. 이 페널티는 좀 더 attention이 고루 잘 퍼지게 하기 위함입니다.
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 s(Y, X) &= \log{P(Y|X)}/lp(Y) + cp(X; Y) \\
 lp(Y) &= \frac{(5+|Y|)^\alpha}{(5+1)^\alpha} \\
 cp(X; Y) &= \beta * \sum_{i=1}^{|X|}{\log{(\min{(\sum_{j=1}^{|Y|}{p_{i,j}}, 1.0)})}} \\
 where~p_{i,j}~is~the~attention&~weight~of~the~j\text{-}th~target~word~y_j~on~the~i\text{-}th~source~word~x_i.
-\end{aligned}
-$$
+\end{aligned}$$
 
-Coverage penalty의 수식을 들여다보면, 각 source word $x_i$별로 attention weight의 합을 구하고, 그것의 평균(=합)을 내는 것을 볼 수 있습니다. 로그(log)를 취했기 때문에 그 중에 attention weight가 편중되어 있다면, 편중되지 않은 source word는 매우 작은 음수 값을 가질 것이기 때문에 좋은 점수를 받을 수 없을 겁니다.
+Coverage penalty의 수식을 들여다보면, 각 source word $x_i$ 별로 attention weight의 합을 구하고, 그것의 평균(=합)을 내는 것을 볼 수 있습니다. 로그(log)를 취했기 때문에 그 중에 attention weight가 편중되어 있다면, 편중되지 않은 source word는 매우 작은 음수 값을 가질 것이기 때문에 좋은 점수를 받을 수 없을 겁니다.
 
-실험에 의하면 $\alpha$와 $\beta$는 각각 $0.6, 0.2$ 정도가 좋은것으로 밝혀졌습니다. 하지만, 상기한 강화학습 방식을 training criteria에 함께 이용하면 그다지 그 값은 중요하지 않다고 하였습니다.
+실험에 의하면 $\alpha$ 와 $\beta$ 는 각각 0.6, 0.2 정도가 좋은것으로 밝혀졌습니다. 하지만, 상기한 강화학습 방식을 training criteria에 함께 이용하면 그다지 그 값은 중요하지 않다고 하였습니다.
 
 ## Training Procedure
 

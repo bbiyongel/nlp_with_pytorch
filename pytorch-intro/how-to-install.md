@@ -47,6 +47,3 @@ $ sudo which python
   * 단지 값을 앞으로 전달(feed-forward)시키며 차례차례 계산 한 것일 뿐인데, backward() 호출 한번에 그래디언트를 구할 수 있습니다.
 * Dynamic Graph
   * 텐서플로우의 경우 세션(session)이라는 개념이 있어서, 세션이 시작되면 모델 아키텍처등의 연산 그래프 구조의 수정이 어려웠습니다. 하지만, 파이토치는 연산과 동시에 그래프가 생성되기 때문에 매우 자유롭습니다.
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0MTIxODA1MV19
--->

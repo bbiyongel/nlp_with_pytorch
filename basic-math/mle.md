@@ -17,7 +17,7 @@ $$\begin{aligned}
 
 $$K\sim\mathcal{B}(n,\theta)$$
 
-Binomial 분포의 파라미터  $\theta$ 가 있을 때,  $n$ 번 압정을 던져  $k$ 번 납작한 면이 바닥으로 떨어질 확률은 아래와 같이 구할 수 있습니다.
+Binomial 분포의 파라미터 $\theta$ 가 있을 때, $n$ 번 압정을 던져 $k$ 번 납작한 면이 바닥으로 떨어질 확률은 아래와 같이 구할 수 있습니다.
 
 $$\begin{aligned}
 P(K=k)&=
@@ -29,7 +29,7 @@ P(K=k)&=
 &=\frac{n!}{k!(n-k)!}\cdot\theta^k(1-\theta)^{n-k}
 \end{aligned}$$
 
-우리는 아까 압정을 실제로 던져 얻은 데이터를 통해  $n=100$ 이고,  $k=30$ 임을 알 수 있었습니다. 그럼 이 압정을 던졌을 때 평평한 면이 바닥으로 떨어질 확률을 가장 잘 설명하는 binomial 확률 분포를 위한 파라미터  $\theta$ 에 대한 함수는 아래와 같이 구할 수 있습니다.
+우리는 아까 압정을 실제로 던져 얻은 데이터를 통해 $n=100$ 이고, $k=30$ 임을 알 수 있었습니다. 그럼 이 압정을 던졌을 때 평평한 면이 바닥으로 떨어질 확률을 가장 잘 설명하는 binomial 확률 분포를 위한 파라미터 $\theta$ 에 대한 함수는 아래와 같이 구할 수 있습니다.
 
 $$J(\theta)=\frac{100!}{30!(100-30)!}\cdot\theta^{30}(1-\theta)^{100-30}$$
 
@@ -37,17 +37,17 @@ $$J(\theta)=\frac{100!}{30!(100-30)!}\cdot\theta^{30}(1-\theta)^{100-30}$$
 
 $$J(\theta)=P(n=100,k=30|\theta)$$
 
-이 함수를 실제로  $\theta$ 에 대해서 그래프로 나타내면 아래와 같습니다.  $0.3$ 에서  $J(\theta)$ 가 최대가 되는 것을 볼 수 있습니다. 즉,  $\theta=0.3$ 일 때, bionomial 분포는 우리가 수집한 데이터 또는 현상을 가장 잘 설명(재현)합니다.
+이 함수를 실제로 $\theta$ 에 대해서 그래프로 나타내면 아래와 같습니다. $0.3$ 에서 $J(\theta)$ 가 최대가 되는 것을 볼 수 있습니다. 즉, $\theta=0.3$ 일 때, bionomial 분포는 우리가 수집한 데이터 또는 현상을 가장 잘 설명(재현)합니다.
 
 ![Likelihood 함수 곡선](../assets/basic_math-binomial.png)
 
-앞서  $J(\theta)$ 는 likelihood라고 하였습니다. 따라서 우리는 likelihood를 최대화(maximize)하도록  $\theta$ 를 추정하기 때문에 maximum likelihood estimation이라고 부르는 것 입니다. 이처럼 likelihood는 주어진 데이터  $\text{x}$ 를 설명하기위한 확률분포 파라미터( $\theta$ )에 대한 함수이고, 아래와 같이 표현 합니다.
+앞서 $J(\theta)$ 는 likelihood라고 하였습니다. 따라서 우리는 likelihood를 최대화(maximize)하도록 $\theta$ 를 추정하기 때문에 maximum likelihood estimation이라고 부르는 것 입니다. 이처럼 likelihood는 주어진 데이터 $\text{x}$ 를 설명하기위한 확률분포 파라미터( $\theta$ )에 대한 함수이고, 아래와 같이 표현 합니다.
 
 $$P(\text{x};\theta)$$
 
-> 여기서 세미콜론은 수학적으로는 조건부 표기와 비슷합니다. 따라서 약간의 관점 차이가 존재할 뿐,  $P(\text{x};\theta)=P(\text{x}|\theta)$ 라고 볼 수 있습니다. 또한  $P(\text{y}|\text{x};\theta)$ 의 경우에는  $P(\text{y}|\text{x},\theta)$ 와 같습니다.
+> 여기서 세미콜론은 수학적으로는 조건부 표기와 비슷합니다. 따라서 약간의 관점 차이가 존재할 뿐, $P(\text{x};\theta)=P(\text{x}|\theta)$ 라고 볼 수 있습니다. 또한 $P(\text{y}|\text{x};\theta)$ 의 경우에는 $P(\text{y}|\text{x},\theta)$ 와 같습니다.
 
-따라서 discrete 랜덤 변수 확률 분포에서는 확률값 자체가 likelihood로 표현 될 수 있으며, continuous 랜덤 변수 확률 분포의 경우에는 확률 밀도(probability density)값이 likelihood를 대신합니다. 서로 독립인  $n$ 번 시행을 거쳐 얻은 데이터( $x_1, x_2, \cdots, x_n$ )에 대한 likelihood는 아래와 같이 표현 할 수 있습니다.
+따라서 discrete 랜덤 변수 확률 분포에서는 확률값 자체가 likelihood로 표현 될 수 있으며, continuous 랜덤 변수 확률 분포의 경우에는 확률 밀도(probability density)값이 likelihood를 대신합니다. 서로 독립인 $n$ 번 시행을 거쳐 얻은 데이터( $x_1, x_2, \cdots, x_n$ )에 대한 likelihood는 아래와 같이 표현 할 수 있습니다.
 
 $$P(x_1,x_2,\cdots,x_n|\theta)=P(x_1;\theta)P(x_2;\theta)\cdots P(x_n;\theta)=\prod_{i=1}^n{P(x_i;\theta)}$$
 
@@ -62,11 +62,11 @@ J(\theta)=\log{\mathcal{N}(x|\mu,\sigma^2)}=-\frac{1}{2}\log{2\pi\sigma^2}-\frac
 \text{where }\mathcal{N}(x|\mu,\sigma^2)=\frac{1}{(2\pi\sigma^2)^{1/2}}\exp{\Big\{-\frac{1}{2\sigma^2}(x-\mu)^2\Big\}}.
 \end{gathered}$$
 
-위와 같이 우리는 likelihood에 로그를 취하여 log-likelihood를 최대화 하도록 합니다. 만약 여기에  $-1$ 을 곱하면 최소화 문제로 치환할 수 있습니다.
+위와 같이 우리는 likelihood에 로그를 취하여 log-likelihood를 최대화 하도록 합니다. 만약 여기에 $-1$ 을 곱하면 최소화 문제로 치환할 수 있습니다.
 
 ## 뉴럴네트워크: 확률분포함수
 
-사실은 지금까지 likelihood 이야기를 한 이유가 바로 뉴럴 네트워크 또한 확률분포함수이기 때문입니다. 기존에 MNIST 분류 문제를 훈련한 classifier 네트워크의 경우에는 0부터 9까지의 레이블(클래스)를 리턴하게 되므로 discrete 랜덤 변수를 다루는 multinoulli 확률 분포가 됩니다. 따라서 마지막 softmax 레이어의 결과값은 각 클래스별 확률  $\hat{y}$ 을 반환 합니다. 또한 실제 정답 레이블  $y$ 의 경우에는 discrete 값이기 때문에 one-hot 벡터가 되는 것 입니다. 우리는 그러므로 뉴럴 네트워크 웨이트 파라미터  $\theta$ 를 통해 훈련 데이터  $X$ 를 잘 설명하도록 그래디언트 디센트(gradient descent, 경사하강법)를 통해 maximum likelihood estimation을 수행 하는 것 입니다.
+사실은 지금까지 likelihood 이야기를 한 이유가 바로 뉴럴 네트워크 또한 확률분포함수이기 때문입니다. 기존에 MNIST 분류 문제를 훈련한 classifier 네트워크의 경우에는 0부터 9까지의 레이블(클래스)를 리턴하게 되므로 discrete 랜덤 변수를 다루는 multinoulli 확률 분포가 됩니다. 따라서 마지막 softmax 레이어의 결과값은 각 클래스별 확률 $\hat{y}$ 을 반환 합니다. 또한 실제 정답 레이블 $y$ 의 경우에는 discrete 값이기 때문에 one-hot 벡터가 되는 것 입니다. 우리는 그러므로 뉴럴 네트워크 웨이트 파라미터 $\theta$ 를 통해 훈련 데이터 $X$ 를 잘 설명하도록 그래디언트 디센트(gradient descent, 경사하강법)를 통해 maximum likelihood estimation을 수행 하는 것 입니다.
 
 $$\begin{gathered}
 \theta \leftarrow \theta-\lambda\nabla_\theta J(\theta) \\

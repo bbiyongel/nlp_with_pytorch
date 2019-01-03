@@ -46,13 +46,13 @@
 
 ![Zero-shot Translation](../assets/nmt-zeroshot-4.png)
 
-이 실험은 Zero-shot learning의 성능을 평가하였습니다. bridged 방법은 중간 언어를 영어로 하여 $Portuguese \rightarrow English \rightarrow Spanish$ 2단계에 걸쳐 번역을 한 경우를 말합니다. (PBMT 방식은 SMT방식 중의 하나입니다.) $NMT~Pt \rightarrow Es$는 단순 parallel 코퍼스를 활용하여 기존의 방법대로 훈련한 baseline입니다.
+이 실험은 Zero-shot learning의 성능을 평가하였습니다. bridged 방법은 중간 언어를 영어로 하여 Portuguese $\rightarrow$ English $\rightarrow$ Spanish 2단계에 걸쳐 번역을 한 경우를 말합니다. (PBMT 방식은 SMT방식 중의 하나입니다.) NMT Pt $\rightarrow$ Es는 단순 parallel 코퍼스를 활용하여 기존의 방법대로 훈련한 baseline입니다.
 
-모델1은 $Pt \rightarrow En$, $En \rightarrow Es$를 한 모델에 훈련한 버전 입니다. 그리고 모델2는 $En \leftrightarrow Pt$, $En \leftrightarrow Es$ 코퍼스를 한 모델에 훈련한 버전 입니다. 모델2는 총 4가지 코퍼스를 훈련 한 점을 주의해야 합니다.
+모델1은 Pt $\rightarrow$ En, En $\rightarrow$ Es를 한 모델에 훈련한 버전 입니다. 그리고 모델2는 En $\leftrightarrow$ Pt, En $\leftrightarrow$ Es 코퍼스를 한 모델에 훈련한 버전 입니다. 모델2는 총 4가지 코퍼스를 훈련 한 점을 주의해야 합니다.
 
 마지막으로 모델2 + incremental 학습 방식은 $(c)$ 보다 적은양의 parallel 코퍼스를 기존에 훈련한 모델2에 추가적으로 훈련한 모델입니다.
 
-비록 모델1과 모델l2는 훈련 중에 한번도 $Pt \rightarrow Es$ 데이터를 보지 못했지만, 20이 넘는 BLEU를 보여주는 것을 알 수 있습니다. 하지만 bridge 방식의 $(a),(b)$ 보다 성능이 떨어지는 것을 알 수 있습니다. 다행히도 $(f)$의 경우에는 $(c)$보다 (큰 차이는 아니지만) 성능이 뛰어난 것을 알 수 있습니다. 따라서 우리는 parallel 코퍼스의 양이 얼마 되지 않는 언어쌍의 번역기를 훈련할 때에 위와 같은 방법을 통해서 성능을 끌어올릴 수 있음을 알 수 있습니다.
+비록 모델1과 모델l2는 훈련 중에 한번도 Pt $\rightarrow$ Es 데이터를 보지 못했지만, 20이 넘는 BLEU를 보여주는 것을 알 수 있습니다. 하지만 bridge 방식의 $(a),(b)$ 보다 성능이 떨어지는 것을 알 수 있습니다. 다행히도 $(f)$의 경우에는 $(c)$보다 (큰 차이는 아니지만) 성능이 뛰어난 것을 알 수 있습니다. 따라서 우리는 parallel 코퍼스의 양이 얼마 되지 않는 언어쌍의 번역기를 훈련할 때에 위와 같은 방법을 통해서 성능을 끌어올릴 수 있음을 알 수 있습니다.
 
 ### Conclusion
 

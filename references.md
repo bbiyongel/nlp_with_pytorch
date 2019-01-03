@@ -62,3 +62,4 @@ http://ruder.io/deep-learning-nlp-best-practices/
   - [Stanford Lecture @ Youtube](https://www.youtube.com/watch?v=3MjIkWxXigM&t=2223s)
   - [Deep Speech Recognition @ MS](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/02/deepsr-chinasip-july6.pdf)
   - [A Deep Reinforcement Learning Chatbot (Short Version)](https://arxiv.org/pdf/1801.06700v1.pdf)
+  

@@ -25,12 +25,10 @@ x = np.array(x)
 
 두 코드 모두 아래와 같이 x라는 변수에 $2\times2$ 행렬(matrix)를 만들어내는 것을 볼 수 있습니다.
 
-$$
-x=\begin{bmatrix}
+$$x=\begin{bmatrix}
 1, 2 \\
 3, 4
-\end{bmatrix}
-$$
+\end{bmatrix}$$
 
 보다시피, 파이토치는 굉장히 NumPy와 비슷한 방식의 코딩 스타일을 갖고 있고, 따라서 코드를 보고 해석하거나 새롭게 작성함에 있어서 굉장히 수월합니다.
 
@@ -65,7 +63,7 @@ z = (x + y) + torch.FloatTensor(2, 2)
 
 ![연산에 의해 생성된 그래프의 예](../assets/pytorch_intro-computation_graph.png)
 
-위의 예제에서처럼 $x$와 $y$를 생성하고 둘을 더하는 연산을 수행하면 $x+y$, 이에 해당하는 텐서가 생성되어 연산 그래프에 할당 됩니다. 그리고 다시 생성 된 $2 \times 2$ 텐서를 더해준 뒤, 이를 $z$에 할당하게 됩니다. 따라서 $z$로부터 back-propgation을 수행하게 되면, 이미 생성된 연산 그래프를 따라서 그래디언트를 전달 할 수 있게 됩니다.
+위의 예제에서처럼 $x$ 와 $y$ 를 생성하고 둘을 더하는 연산을 수행하면 $x+y$ , 이에 해당하는 텐서가 생성되어 연산 그래프에 할당 됩니다. 그리고 다시 생성 된 $2 \times 2$ 텐서를 더해준 뒤, 이를 $z$ 에 할당하게 됩니다. 따라서 $z$ 로부터 back-propgation을 수행하게 되면, 이미 생성된 연산 그래프를 따라서 그래디언트를 전달 할 수 있게 됩니다.
 
 이것이 바로 기존의 케라스(Keras)와 텐서플로우(Tensorflow)와 다른점 입니다. 케라스와 텐서플로우에서는 미리 정의 한 연산들을 컴파일(compile)을 통해 고정한 후, 정해진 입력에 맞춰 텐서(tensor)를 feed-forward하는 반면, 파이토치는 정해진 연산이라는 것은 없고, 단지 모델은 배워야 하는 파라미터 값만 미리 알고 있을 뿐, 그 웨이트(weight) 파라미터들이 어떠한 연산을 통해서 학습 또는 연산에 관여하는지는 알 수 없는 것 입니다.
 
@@ -84,23 +82,19 @@ with torch.no_grad():
 
 ## 기본 연산 방법(feed-forward)
 
-이번에는 Linear 레이어(또는 fully-connected layer, dense layer)를 구현 해 보도록 하겠습니다. $M\times N$의 입력 행렬 $x$가 주어지면, $N\times P$의 행렬 $W$를 곱한 후, P차원의 벡터 $b$를 bias로 더하도록 하겠습니다. 수식은 아래와 같을 것 입니다.
+이번에는 Linear 레이어(또는 fully-connected layer, dense layer)를 구현 해 보도록 하겠습니다. $M\times N$ 의 입력 행렬 $x$ 가 주어지면, $N\times P$ 의 행렬 $W$ 를 곱한 후, P차원의 벡터 $b$ 를 bias로 더하도록 하겠습니다. 수식은 아래와 같을 것 입니다.
 
-$$
-\begin{gathered}
+$$\begin{gathered}
 y = xW+ b \\
 \text{where }x\in\mathbb{R}^{M\times N},W\in\mathbb{R}^{N\times P}\text{ and }b\in\mathbb{R}^P. \\
 \text{Thus, }y\in\mathbb{R}^{M\times P}.
-\end{gathered}
-$$
+\end{gathered}$$
 
-사실 이 수식에서 $x$는 벡터이지만, 보통 우리는 딥러닝을 수행 할 때에 미니배치(mini-batch) 기준으로 수행하므로, $x$가 매트릭스(matrix, 행렬)라고 가정 하겠습니다. 이를 좀 더 구현하기 쉽게 아래와 같이 표현 해 볼 수도 있습니다.
+사실 이 수식에서 $x$ 는 벡터이지만, 보통 우리는 딥러닝을 수행 할 때에 미니배치(mini-batch) 기준으로 수행하므로, $x$ 가 매트릭스(matrix, 행렬)라고 가정 하겠습니다. 이를 좀 더 구현하기 쉽게 아래와 같이 표현 해 볼 수도 있습니다.
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 y&=f(x; \theta)\text{ where }\theta=\{W, b\}
-\end{aligned}
-$$
+\end{aligned}$$
 
 이러한 linaer 레이어의 기능은 아래와 같이 파이토치로 구현할 수 있습니다.
 
@@ -239,7 +233,7 @@ linear = MyLinear(10, 5)
 y = linear(x)
 ```
 
-forward()에서 정의 해 준대로 잘 동작 하는 것을 볼 수 있습니다. 하지만, 위와 같이 $W$와 $b$를 선언하면 문제점이 있습니다. parameters() 함수는 모듈 내에 선언 된 학습이 필요한 파라미터들을 반환하는 이터레이터(iterator) 입니다. 한번, linear 모듈 내의 학습이 필요한 파라미터들의 크기를 size()함수를 통해 확인 해 보도록 하겠습니다.
+forward()에서 정의 해 준대로 잘 동작 하는 것을 볼 수 있습니다. 하지만, 위와 같이 $W$ 와 $b$ 를 선언하면 문제점이 있습니다. parameters() 함수는 모듈 내에 선언 된 학습이 필요한 파라미터들을 반환하는 이터레이터(iterator) 입니다. 한번, linear 모듈 내의 학습이 필요한 파라미터들의 크기를 size()함수를 통해 확인 해 보도록 하겠습니다.
 
 ```py
 >>> params = [p.size() for p in linear.parameters()]
@@ -294,7 +288,7 @@ class MyLinear(nn.Module):
         return y
 ```
 
-위에서 nn.Module을 상속받은 클래스는 nn.Module의 자식 클래스를 멤버 변수로 가지고 있을 수 있다고 하였습니다. 따라서 nn.Linear 클래스를 사용하여 $W$와 $b$를 대체하였습니다. 그리고 아래와 같이 출력 해 보면 내부의 Linear 레이어가 잘 찍혀 나오는 것을 확인 할 수 있습니다.
+위에서 nn.Module을 상속받은 클래스는 nn.Module의 자식 클래스를 멤버 변수로 가지고 있을 수 있다고 하였습니다. 따라서 nn.Linear 클래스를 사용하여 $W$ 와 $b$ 를 대체하였습니다. 그리고 아래와 같이 출력 해 보면 내부의 Linear 레이어가 잘 찍혀 나오는 것을 확인 할 수 있습니다.
 
 ```py
 >>> print(linear)
@@ -307,7 +301,7 @@ MyLinear(
 
 이제까지 원하는 연산을 통해 값을 앞으로 전달(feed-forward)하는 방법을 살펴보았습니다. 이제 이렇게 얻은 값을 우리가 원하는 값과의 차이를 계산하여 오류(손실)를 뒤로 전달(back-propagation)하는 것을 해 보도록 하겠습니다.
 
-예를 들어 우리가 원하는 값은 아래와 같이 $100$이라고 하였을 때, linear의 결과값 텐서의 합과 목표값과의 거리(error 또는 loss)를 구하고, 그 값에 대해서 backward()함수를 사용함으로써 그래디언트를 구합니다. 이때, 애러값은 스칼라(sclar)로 표현 되어야 합니다. 벡터나 행렬의 형태여서는 안됩니다.
+예를 들어 우리가 원하는 값은 아래와 같이 100 이라고 하였을 때, linear의 결과값 텐서의 합과 목표값과의 거리(error 또는 loss)를 구하고, 그 값에 대해서 backward()함수를 사용함으로써 그래디언트를 구합니다. 이때, 애러값은 스칼라(sclar)로 표현 되어야 합니다. 벡터나 행렬의 형태여서는 안됩니다.
 
 ```py
 objective = 100
@@ -340,16 +334,14 @@ linear.train()
 
 1. 임의로 생성한 텐서들을 
 1. 우리가 근사하고자 하는 정답 함수에 넣어 정답을 구하고, 
-1. 그 정답($y$)과 신경망을 통과한 $\hat{y}$과의 차이(error)를 Mean Square Error(MSE)를 통해 구하여 
+1. 그 정답( $y$ )과 신경망을 통과한 $\hat{y}$ 과의 차이(error)를 Mean Square Error(MSE)를 통해 구하여 
 1. SGD(Stochastic Gradient Descent)를 통해서 최적화(optimize)하도록 해 보겠습니다.
 
 MSE의 수식은 아래와 같습니다.
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 &\mathcal{L}_{\text{MSE}}(\hat{y}, y)=\frac{1}{N}\sum^N_{i=1}{(\hat{y}_i - y_i)^2}
-\end{aligned}
-$$
+\end{aligned}$$
 
 먼저 1개의 linear 레이어를 가진 MyModel이라는 모듈(module)을 선언합니다.
 
@@ -372,15 +364,13 @@ class MyModel(nn.Module):
         return y
 ```
 
-그리고 아래와 같이, 임의의 함수 $f$가 동작한다고 가정하겠습니다. 우리는 그럼 손실함수를 최소로 만드는 파라미터 $\theta$를 찾아서 함수 $f$를 근사해야 합니다.
+그리고 아래와 같이, 임의의 함수 $f$ 가 동작한다고 가정하겠습니다. 우리는 그럼 손실함수를 최소로 만드는 파라미터 $\theta$ 를 찾아서 함수 $f$ 를 근사해야 합니다.
 
-$$
-\begin{gathered}
+$$\begin{gathered}
 y=f(x_1, x_2, x_3) = 3x_1 + x_2 - 2x_3 \\
 \hat{y}=\tilde{f}(x_1,x_2,x_3;\theta) \\
 \hat{\theta}=\underset{\theta\in\varTheta}{\text{argmin}}\mathcal{L}(\hat{y},y)
-\end{gathered}
-$$
+\end{gathered}$$
 
 해당 함수를 파이썬으로 구현하면 아래와 같습니다. 물론 신경망 입장에서는 내부 동작 내용을 알 수 없는 함수 입니다.
 
@@ -423,7 +413,7 @@ optim = torch.optim.SGD(model.parameters(), lr = 0.0001, momentum=0.1)
 print(model)
 ```
 
-위의 값을 사용하여 평균 손실(loss)값이 $.001$보다 작을 때 까지 훈련 시킵니다.
+위의 값을 사용하여 평균 손실(loss)값이 .001 보다 작을 때 까지 훈련 시킵니다.
 
 ```py
 for epoch in range(n_epochs):
@@ -478,7 +468,3 @@ for epoch in range(n_epochs):
 ```
 
 또한, cpu()함수를 통해서 다시 PC의 메모리로 복사 하거나 이동 시킬 수 있습니다. 이 밖에도 to() 메서드를 사용하여 원하는 디바이스로 보낼 수 있습니다.
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbODUyOTU2ODM3LDY5MzM1NjQ5NywtMTc3MD
-Q4MzQ5NF19
--->

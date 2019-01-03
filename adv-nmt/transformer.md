@@ -1,6 +1,6 @@
 # Transformer (Attention is All You Need)
 
-Facebook에서 CNN을 활용한 번역기에 대한 논문을 내며, 기존의 GNMT 보다 속도나 성능면에서 뛰어남을 자랑하자, 이에 질세라 Google에서 바로 곧이어 발표한 [Attention is all you need \[Vaswani at el.2017\]](https://arxiv.org/pdf/1706.03762.pdf) 논문입니다. 실제로 ArXiv에 Facebook이 5월에 해당 논문을 발표한데 이어서 6월에 이 논문이 발표되었습니다. 이 논문에서 Google은 아직까지 번역에 있어서 자신들의 기술력 우위성을 주장하였습니다.
+Facebook에서 CNN을 활용한 번역기에 대한 논문을 내며, 기존의 GNMT 보다 속도나 성능면에서 뛰어남을 자랑하자, 이에 질세라 Google에서 바로 곧이어 발표한 [Attention is all you need [Vaswani at el.2017]](https://arxiv.org/pdf/1706.03762.pdf) 논문입니다. 실제로 ArXiv에 Facebook이 5월에 해당 논문을 발표한데 이어서 6월에 이 논문이 발표되었습니다. 이 논문에서 Google은 아직까지 번역에 있어서 자신들의 기술력 우위성을 주장하였습니다.
 
 ## Architecture
 
@@ -20,12 +20,10 @@ Encoder는 다수의 self-attention layer와 feed forward layer로 이루어져 
 
 이전 Facebook 논문과 마찬가지로, RNN을 이용하지 않기 때문에, 위치정보를 단어와 함께 주는 것이 필요합니다. 따라서 Google에서도 마찬가지로 position embedding을 통해서 위치 정보를 나타내고자 하였으며, 그 수식은 약간 다릅니다.
 
-$$
-\begin{gathered}
+$$\begin{gathered}
 \text{PE}(\text{pos}, 2i) = \sin(\text{pos} / 10000^{2i / d_{model}}) \\
 \text{PE}(\text{pos}, 2i + 1) = \cos(\text{pos} / 10000^{2i / d_{model}})
-\end{gathered}
-$$
+\end{gathered}$$
 
 Position embedding의 결과값의 dimension은 word embedding의 dimension과 같으며, 두 값을 더하여 encoder 또는 decoder의 입력으로 넘겨주게 됩니다.
 
@@ -37,22 +35,18 @@ Position embedding의 결과값의 dimension은 word embedding의 dimension과 �
 
 기본적인 attention의 수식은 아래와 같습니다. 기본적인 attention은 원래 그냥 dot-product attention인데 scaled라는 이름이 붙은 이유는 key의 dimension인 $\sqrt{d_k}$로 나누어주었기 때문입니다. 이외에는 이전 섹션에서 다루었던 attention과 같습니다.
 
-$$
-\text{Attention}(Q, K, V) = \text{softmax}(\frac{QK^T}{\sqrt{d_k}})V
-$$
+$$\text{Attention}(Q, K, V) = \text{softmax}(\frac{QK^T}{\sqrt{d_k}})V$$
 
 이렇게 구성된 attention을 하나의 head로 삼아 Multi-Head Attention을 구성합니다.
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 \text{MultiHead}(Q, K, V) &= [head_1;head_2;\cdots;head_h]W^O \\
 \text{where }head_i &= \text{Attention}(QW_i^Q, KW_i^K, VW_i^V) \\
 \text{where }W_i^Q &\in \mathbb{R}^{d_{model}\times d_k}, W_i^K \in \mathbb{R}^{d_{model}\times d_k}, \\
 W_i^V &\in \mathbb{R}^{d_{model}\times d_v}\text{ and }W^O \in \mathbb{R}^{hd_{v}\times d_{model}} \\ \\
 d_k = d_v &= d_{model}/h = 64 \\
 h &= 8\text{ and }d_{model} = 512 \\
-\end{aligned}
-$$
+\end{aligned}$$
 
 이때에 각 head의 Q, K, V 마다 다른 W를 곱해줌으로써 각각 linear transformation형태를 취해 줍니다. 즉, head마다 필요한 다른 정보(feature)를 attention을 통해 encoding 할 수 있게 됩니다. 해당 논문에서는 hidden size를 512로 하고 이를 8개의 head로 나누어 각 head의 hidden size는 64가 되도록 하였습니다.
 
@@ -64,17 +58,15 @@ Decoder의 self-attention은 encoder의 그것과 조금 다릅니다. 이전 �
 
 ### Position-wise Feed Forward Layer
 
-$$
-\text{FFN}(x) = \max{(0, xW_1 + b_1)}W_2 + b_2\text{ where }d_{ff} = 2048
-$$
+$$\text{FFN}(x) = \max{(0, xW_1 + b_1)}W_2 + b_2\text{ where }d_{ff} = 2048$$
 
-사실 여기에서 소개한 이 layer는 기존의 fully connected feed forward layer라기보단, kernel size가 1인 convolutional layer라고 볼 수 있습니다. Channel숫자가 $512 \rightarrow 2048$ 으로 가는 convolution과, $2048 \rightarrow 512$로 가는 convolution으로 이루어져 있는 것 입니다.
+사실 여기에서 소개한 이 layer는 기존의 fully connected feed forward layer라기보단, kernel size가 1인 convolutional layer라고 볼 수 있습니다. Channel숫자가 512 $\rightarrow$ 2048 으로 가는 convolution과, 2048 $\rightarrow$ 512로 가는 convolution으로 이루어져 있는 것 입니다.
 
 ## Evaluation
 
 ![Transformer의 성능 비교](../assets/nmt-transformer-3.png)
 
-Google은 transformer를 통해서 State of the Art의 성능을 달성했다고 보고하였습니다. 뿐만아니라, 기존의 RNN 및 Facebook의 ConvS2S보다 훨씬 빠른 속도로 훈련이 가능하다고 하였습니다. 실제로 위의 table을 보면, transformer의 training cost의 magnitude는 $10^{18}$으로, 대부분의 다른 방식 $10^{19}$와 급격한 차이를 보이는 것을 알 수 있습니다.
+Google은 transformer를 통해서 State of the Art의 성능을 달성했다고 보고하였습니다. 뿐만아니라, 기존의 RNN 및 Facebook의 ConvS2S보다 훨씬 빠른 속도로 훈련이 가능하다고 하였습니다. 실제로 위의 table을 보면, transformer의 training cost의 magnitude는 $10^{18}$ 으로, 대부분의 다른 방식 $10^{19}$ 와 급격한 차이를 보이는 것을 알 수 있습니다.
 
 또 하나의 속도 개선의 원인은 input feeding의 부재입니다. RNN기반의 방식은 input feeding이 도입되면서 decoder를 훈련할 때 모든 time-step을 한번에 할 수 없게 되었습니다. 이로 인해서 대부분의 병목이 decoder에서 발생합니다. 하지만 transformer는 input feeding이 없기 때문에 한번에 모든 time-step에 대해서 계산할 수 있게 되었습니다.
 

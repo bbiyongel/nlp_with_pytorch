@@ -1,71 +1,55 @@
 # 리커런트 뉴럴 네트워크
 
-기존의 뉴럴 네트워크의 구조는 정해진 입력 $x$를 받아 $y$를 출력해 주는 형태였습니다.
+기존의 뉴럴 네트워크의 구조는 정해진 입력 $x$ 를 받아 $y$ 를 출력해 주는 형태였습니다.
 
 ![기존 뉴럴 네트워크 구조](../assets/rnn-fc.png)
 
-$$
-y=f(x;\theta)
-$$
+$$y=f(x;\theta)$$
 
-하지만 리커런트 뉴럴 네트워크(recurrent neural network, RNN)는 입력 $x_t$와 직전 자신의 히든 스테이트(hidden state) $h_{t-1}$를 참조하여 현재 자신의 상태 $h_t$를 결정하는 작업을 여러 time-step에 걸쳐 수행 합니다. 각 time-step별 RNN의 히든 스테이트는 경우에 따라 출력이 되기도 합니다.
+하지만 리커런트 뉴럴 네트워크(recurrent neural network, RNN)는 입력 $x_t$ 와 직전 자신의 히든 스테이트(hidden state) $h_{t-1}$ 를 참조하여 현재 자신의 상태 $h_t$ 를 결정하는 작업을 여러 time-step에 걸쳐 수행 합니다. 각 time-step별 RNN의 히든 스테이트는 경우에 따라 출력이 되기도 합니다.
 
 ![Recursive한 속성이 부여된 뉴럴넷 구조](../assets/rnn-basic.png)
 
-$$
-h_t=f(x_t, h_{t-1};\theta)
-$$
+$$h_t=f(x_t, h_{t-1};\theta)$$
 
 ## 값이 앞으로 전달되는 과정: 피드포워드(feed-forward)
 
-기본적인 RNN을 활용한 피드포워드(feed-forward) 계산의 흐름은 아래와 같습니다. 아래의 그림은 각 time-step 별로 입력 $x_t$와 이전 time-step의 $h_t$가 RNN으로 들어가서 출력으로 $h_t$를 반환하는 모습입니다. 이렇게 얻어낸 $h_t$들을 $\hat{y}_t$로 삼아서 정답인 $y_t$와 비교하여 손실(loss) $\mathcal{L}$을 계산 합니다.
+기본적인 RNN을 활용한 피드포워드(feed-forward) 계산의 흐름은 아래와 같습니다. 아래의 그림은 각 time-step 별로 입력 $x_t$ 와 이전 time-step의 $h_t$ 가 RNN으로 들어가서 출력으로 $h_t$ 를 반환하는 모습입니다. 이렇게 얻어낸 $h_t$ 들을 $\hat{y}_t$ 로 삼아서 정답인 $y_t$ 와 비교하여 손실(loss) $\mathcal{L}$ 을 계산 합니다.
 
 ![기본적인 RNN의 피드포워드 형태](../assets/rnn-basic-architecture.png)
 
-위 그림을 수식으로 표현하면 아래와 같습니다. 함수 $f$는 $x_t$와 $h_{t-1}$을 입력으로 받아서 파라미터 $\theta$를 통해 $h_t$를 계산 합니다. 이때, 각 입력과 출력 그리고 내부 파라미터의 크기는 다음과 같습니다. 
+위 그림을 수식으로 표현하면 아래와 같습니다. 함수 $f$ 는 $x_t$ 와 $h_{t-1}$ 을 입력으로 받아서 파라미터 $\theta$ 를 통해 $h_t$ 를 계산 합니다. 이때, 각 입력과 출력 그리고 내부 파라미터의 크기는 다음과 같습니다. 
 
-$$
-x_t \in \mathbb{R}^w, h_t \in \mathbb{R}^d, W_{ih} \in \mathbb{R}^{d \times w}, b \in \mathbb{R}^{d}, W_{hh} \in \mathbb{R}^{d \times d}, b_{hh} \in \mathbb{R}^{d}
-$$
+$$x_t \in \mathbb{R}^w, h_t \in \mathbb{R}^d, W_{ih} \in \mathbb{R}^{d \times w}, b \in \mathbb{R}^{d}, W_{hh} \in \mathbb{R}^{d \times d}, b_{hh} \in \mathbb{R}^{d}$$
 
-입력 $x_t$를 받아서 입력에 대한 웨이트 $W_{ih}, b_{ih}$를 곱하고 더한 후, 같이 입력으로 받은 이전 time-step의 히든 스테이트 $h_{t-1}$과 웨이트 $W_{hh}, b_{hh}$를 곱하고 더해 준 값을 모두 더합니다. 이후에 활성함수(activation function) tanh를 거쳐 현재 time-step의 히든 스테이트 $h_t$를 반환 합니다.
+입력 $x_t$ 를 받아서 입력에 대한 웨이트 $W_{ih}, b_{ih}$ 를 곱하고 더한 후, 같이 입력으로 받은 이전 time-step의 히든 스테이트 $h_{t-1}$ 과 웨이트 $W_{hh}, b_{hh}$ 를 곱하고 더해 준 값을 모두 더합니다. 이후에 활성함수(activation function) tanh를 거쳐 현재 time-step의 히든 스테이트 $h_t$ 를 반환 합니다.
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 \hat{y}_t=h_t&=f(x_t,h_{t-1};\theta) \\
 &=\tanh(W_{ih} x_t + b_{ih} + W_{hh} h_{t-1} + b_{hh}) \\
 &\text{where }\theta=\{W_{ih},b_{ih},W_{hh},b_{hh}\}.
-\end{aligned}
-$$
+\end{aligned}$$
 
-위의 수식에서 나타나듯이 RNN에서는 ReLU나 다른 활성함수들을 사용하기보단 $\tanh$를 주로 사용합니다. 최종적으로 각 time-step별로 $y_t$를 계산하여 아래의 수식처럼 모든 time-step에 대한 손실(loss) $\mathcal{L}$을 구한 후, time-step의 수만큼 평균 내어 줍니다.
+위의 수식에서 나타나듯이 RNN에서는 ReLU나 다른 활성함수들을 사용하기보단 $\tanh$ 를 주로 사용합니다. 최종적으로 각 time-step별로 $y_t$ 를 계산하여 아래의 수식처럼 모든 time-step에 대한 손실(loss) $\mathcal{L}$ 을 구한 후, time-step의 수만큼 평균 내어 줍니다.
 
-$$
-\mathcal{L}=\frac{1}{n}\sum_{t=1}^{n}{\mathcal{L}(y_t,\hat{y}_t)}
-$$
+$$\mathcal{L}=\frac{1}{n}\sum_{t=1}^{n}{\mathcal{L}(y_t,\hat{y}_t)}$$
 
 ### RNN의 입력 텐서와 히든 스테이트 텐서의 크기
 
-이때 입력으로 주어지는 $x_t$의 미니배치(mini-batch)까지 감안한 사이즈는 아래와 같습니다. 사실 수식에서는 벡터로 표현되었지만 우리는 미니배치 단위로 피드포워드 및 학습을 수행하기 때문에 벡터 대신에 미니배치 내부의 샘플 인덱스의 차원이 추가된 텐서(tensor)가 실제 구현에서는 사용 됩니다.
+이때 입력으로 주어지는 $x_t$ 의 미니배치(mini-batch)까지 감안한 사이즈는 아래와 같습니다. 사실 수식에서는 벡터로 표현되었지만 우리는 미니배치 단위로 피드포워드 및 학습을 수행하기 때문에 벡터 대신에 미니배치 내부의 샘플 인덱스의 차원이 추가된 텐서(tensor)가 실제 구현에서는 사용 됩니다.
 
-$$
-x_t \in \mathbb{R}^{\text{batch\_size}, 1, \text{input\_size}}
-$$
+$$x_t \in \mathbb{R}^{\text{batch\_size}, 1, \text{input\_size}}$$
 
 앞으로는 표현의 편의성을 위하여 위의 수식은 아래와 같이 표현하겠습니다. <comment> 마치 파이토치의 텐서에 대해서 size() 함수를 호출 하였을 때 반환되는 튜플(tuple)값과 같다고 보면 좋을 것 같습니다. </comment>
 
-$$
-|x_t|=(\text{batch\_size},1,\text{input\_size})
-$$
+$$|x_t|=(\text{batch\_size},1,\text{input\_size})$$
 
-텐서에서 첫 번째 차원은 미니배치 내에서의 샘플의 인덱스를 나타내며, 마지막 차원은 미리 정해진 입력 벡터의 차원<comment> 예를들어 임베딩 레이어의 출력 벡터의 차원 수 </comment>을 가리킵니다. 두 번째 차원은 시퀀스 내에서 현재 time-step의 인덱스를 나타냅니다. 현재는 하나의 time-step에 대한 텐서였으므로 1이 들어가있는 것을 알 수 있습니다. <comment> 총 1개의 시퀀스에 대해서 첫 번째 time-step </comment> 그럼 $n$개의 time-step을 가진 전체 시퀀스를 텐서로 나타낸다면 아래와 같을 것 입니다.
+텐서에서 첫 번째 차원은 미니배치 내에서의 샘플의 인덱스를 나타내며, 마지막 차원은 미리 정해진 입력 벡터의 차원<comment> 예를들어 임베딩 레이어의 출력 벡터의 차원 수 </comment>을 가리킵니다. 두 번째 차원은 시퀀스 내에서 현재 time-step의 인덱스를 나타냅니다. 현재는 하나의 time-step에 대한 텐서였으므로 1이 들어가있는 것을 알 수 있습니다. <comment> 총 1개의 시퀀스에 대해서 첫 번째 time-step </comment> 그럼 $n$ 개의 time-step을 가진 전체 시퀀스를 텐서로 나타낸다면 아래와 같을 것 입니다.
 
-$$
-\begin{gathered}
+$$\begin{gathered}
 |X|=(\text{batch\_size},n,\text{input\_size}) \\
 \text{where }X=\{x_1, x_2, \cdots, x_n\}
-\end{gathered}
-$$
+\end{gathered}$$
 
 위 크기의 텐서를 입력으로 받아 RNN은 매 time-step 마다 히든 스테이트를 갱신합니다. 이 히든 스테이트 텐서의 크기는 아래와 같습니다.
 
@@ -73,11 +57,9 @@ $$
 
 그럼 이렇게 feed-forward 된 이후에 오류의 back-propagation(역전파)은 어떻게 될까요? 우리는 수식보다 좀 더 개념적으로 접근 해 보도록 하겠습니다.
 
-각 time-step의 RNN에 사용된 파라미터 $\theta$는 모든 시간에 공유되어 사용 되는 것을 기억 해 봅시다. 따라서, 앞서 구한 손실 $\mathcal{L}$에 미분을 통해 back-propagation 하게 되면, 각 time-step 별로 뒤($t$가 큰 time-step)로부터 $\theta$의 그래디언트가 구해지고, 이전 time-step ($t-1$) $\theta$의 그래디언트에 더해지게 됩니다. 즉, $t$가 $0$에 가까워질수록 RNN 파라미터 $\theta$의 그래디언트는 각 time-step 별 그래디언트가 더해져 점점 커지게 됩니다.
+각 time-step의 RNN에 사용된 파라미터 $\theta$ 는 모든 시간에 공유되어 사용 되는 것을 기억 해 봅시다. 따라서, 앞서 구한 손실 $\mathcal{L}$ 에 미분을 통해 back-propagation 하게 되면, 각 time-step 별로 뒤( $t$ 가 큰 time-step)로부터 $\theta$ 의 그래디언트가 구해지고, 이전 time-step ( $t-1$ ) $\theta$ 의 그래디언트에 더해지게 됩니다. 즉, $t$ 가 0에 가까워질수록 RNN 파라미터 $\theta$ 의 그래디언트는 각 time-step 별 그래디언트가 더해져 점점 커지게 됩니다.
 
-$$
-\frac{\partial{\mathcal{L}}}{\partial{\theta}}=\sum_{t}{\frac{\partial{\mathcal{L}(y_t,\hat{y}_t)}}{\partial{\theta}}}
-$$
+$$\frac{\partial{\mathcal{L}}}{\partial{\theta}}=\sum_{t}{\frac{\partial{\mathcal{L}(y_t,\hat{y}_t)}}{\partial{\theta}}}$$
 
 ![RNN에서 BPTT가 되는 모습](../assets/rnn-back-prop.png)
 
@@ -87,19 +69,17 @@ $$
 
 ## 그래디언트 소실 (그래디언트 Vanishing)
 
-상기 했듯이, BPTT로 인해 RNN은 마치 time-step 만큼의 레이어가 있는 것과 비슷한 속성을 띄게 됩니다. 그런데 위의 RNN의 수식을 보면, 활성함수(activation function)으로 $\tanh$(Hyperbolic Tangent, '탄에이치'라고 읽기도 합니다.)가 사용 된 것을 볼 수 있습니다. $\tanh$은 아래와 같은 형태를 띄고 있습니다.
+상기 했듯이, BPTT로 인해 RNN은 마치 time-step 만큼의 레이어가 있는 것과 비슷한 속성을 띄게 됩니다. 그런데 위의 RNN의 수식을 보면, 활성함수(activation function)으로 $\tanh$ (Hyperbolic Tangent, '탄에이치'라고 읽기도 합니다.)가 사용 된 것을 볼 수 있습니다. $\tanh$ 은 아래와 같은 형태를 띄고 있습니다.
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 tanh(x)&=\frac{1-e^{-x}}{1+e^{-x}} \\ 
 sigmoid(x)&=\frac{1}{1+e^{-x}} \\
 &=2\times tanh(2x) - 1
-\end{aligned}
-$$
+\end{aligned}$$
 
 ![빨간색: tanh, 파란색: sigmoid](../assets/rnn-tanh_sigmoid.png)
 
-$\tanh$의 양 끝은 점점 기울기가 0에 가깝게되어 점점 $-1$ 또는 $1$에 근접하는 것을 볼 수 있습니다. 문제는 이렇게 되면, $\tanh$ 양 끝의 그래디언트는 0에 가까워진다는것 입니다. 따라서 $\tanh$ 양 끝의 값을 반환하는 레이어의 경우에는 그래디언트가 0에 가깝게 되어, 그 다음으로 back-propgation 되는 레이어는 제대로 된 그래디언트를 전달 받을 수가 없게 됩니다.
+ $\tanh$ 의 양 끝은 점점 기울기가 0에 가깝게되어 점점 -1 또는 1에 근접하는 것을 볼 수 있습니다. 문제는 이렇게 되면, $\tanh$ 양 끝의 그래디언트는 0에 가까워진다는것 입니다. 따라서 $\tanh$ 양 끝의 값을 반환하는 레이어의 경우에는 그래디언트가 0에 가깝게 되어, 그 다음으로 back-propgation 되는 레이어는 제대로 된 그래디언트를 전달 받을 수가 없게 됩니다.
 
 ![빨간색: tanh의 도함수, 파란색: sigmoid의 도함수](../assets/rnn-tanh_sigmoid_gradient.png)
 
@@ -111,7 +91,7 @@ $\tanh$의 양 끝은 점점 기울기가 0에 가깝게되어 점점 $-1$ 또�
 
 기본적으로 time-step별로 RNN이 동작하지만, 아래의 그림과 같이 한 time-step 내에서 RNN을 여러 층을 쌓아올릴 수 있습니다. 그림상으로 시간의 흐름은 왼쪽에서 오른쪽으로 간다면, 여러 레이러를 아래에서 위로 쌓아 올릴 수 있습니다. 따라서 여러개의 RNN 레이어가 쌓여 하나의 RNN을 이루고 있을 때, 가장 위층의 히든 스테이트가 전체 RNN의 출력값이 됩니다.
 
-당연히 각 층 별로 파라미터 $\theta$를 공유하지 않고 따로 갖습니다. 보통은 각 레이어 사이에 드랍아웃(dropout)을 끼워 넣기도 합니다.
+당연히 각 층 별로 파라미터 $\theta$ 를 공유하지 않고 따로 갖습니다. 보통은 각 레이어 사이에 드랍아웃(dropout)을 끼워 넣기도 합니다.
 
 ![여러 층이 쌓인 RNN의 형태](../assets/rnn-multi-layer.png)
 
@@ -119,7 +99,7 @@ $\tanh$의 양 끝은 점점 기울기가 0에 가깝게되어 점점 $-1$ 또�
 
 ## 양방향(Bi-directional) RNN
 
-여러 층을 쌓는 방법에 대해 이야기 했다면, 이제 RNN의 방향에 대해서 이야기 할 차례 입니다. 이제까지 이야기한 RNN은 time-step t가 1에서부터 마지막 time-step 까지 차례로 입력을 받아 진행 하였습니다. 하지만, 양방향(bi-directional) RNN을 사용하게 되면, 기존의 정방향과 추가적으로 마지막 time-step에서부터 거꾸로 역방향(reverse direction)으로 입력을 받아 진행 합니다. 양방향 RNN의 경우에도 당연히 정방향과 역방향의 파라미터 $\theta$는 공유되지 않습니다.
+여러 층을 쌓는 방법에 대해 이야기 했다면, 이제 RNN의 방향에 대해서 이야기 할 차례 입니다. 이제까지 이야기한 RNN은 time-step t가 1에서부터 마지막 time-step 까지 차례로 입력을 받아 진행 하였습니다. 하지만, 양방향(bi-directional) RNN을 사용하게 되면, 기존의 정방향과 추가적으로 마지막 time-step에서부터 거꾸로 역방향(reverse direction)으로 입력을 받아 진행 합니다. 양방향 RNN의 경우에도 당연히 정방향과 역방향의 파라미터 $\theta$ 는 공유되지 않습니다.
 
 ![두 방향으로 히든 스테이트를 전달 및 계산하는 RNN의 형태](../assets/rnn-bidirectional.png)
 
@@ -147,19 +127,15 @@ $\tanh$의 양 끝은 점점 기울기가 0에 가깝게되어 점점 $-1$ 또�
 
 가장 흔한 예제로 그림의 감성분석과 같이 텍스트 분류(text classification)의 경우에 단어(토큰)의 갯수 만큼 입력이 RNN에 들어가고, 마지막 time-step의 결과값을 받아서 softmax 함수를 통해 해당 입력 텍스트의 클래스(class)를 예측하는 확률 분포를 근사(approximate)하도록 동작 하게 됩니다.
 
-$$
-\text{softmax}(x_{i}) = \frac{e^{x_i}}{\sum_{j=1}^{|\mathcal{C}|}{e^{x_j}}}
-$$
+$$\text{softmax}(x_{i}) = \frac{e^{x_i}}{\sum_{j=1}^{|\mathcal{C}|}{e^{x_j}}}$$
 
-앞에서부터 계속 언급하였다시피, 자연어처리에서 단어는 discrete한 값을 지닌다고 하였습니다. 따라서 이때, 각 time-step 별 입력 단어 $x_t$는 discrete한 분포로부터 샘플링 된 샘플로, one-hot 벡터로 표현(encoded)되고, 임베딩 레이어(embedding layer)를 거쳐 정해진 차원의 단어 임베딩 벡터(dense vector)로 표현되어 RNN에 입력으로 주어지게 됩니다. 마찬가지로 정답 또한 discrete한 값인 단어 또는 클래스가 될 것 입니다. 따라서 우리는 softmax 함수를 통해 [multinoulli](https://www.statlect.com/probability-distributions/multinoulli-distribution) 확률 분포를 표현 합니다. 또한 원래의 정답도 one-hot 벡터가 되어 크로스 엔트로피(cross entropy) 손실함수(loss function)를 통해 softmax 결과값 벡터와 비교하여 손실(loss)값을 구하게 됩니다.
+앞에서부터 계속 언급하였다시피, 자연어처리에서 단어는 discrete한 값을 지닌다고 하였습니다. 따라서 이때, 각 time-step 별 입력 단어 $x_t$ 는 discrete한 분포로부터 샘플링 된 샘플로, one-hot 벡터로 표현(encoded)되고, 임베딩 레이어(embedding layer)를 거쳐 정해진 차원의 단어 임베딩 벡터(dense vector)로 표현되어 RNN에 입력으로 주어지게 됩니다. 마찬가지로 정답 또한 discrete한 값인 단어 또는 클래스가 될 것 입니다. 따라서 우리는 softmax 함수를 통해 [multinoulli](https://www.statlect.com/probability-distributions/multinoulli-distribution) 확률 분포를 표현 합니다. 또한 원래의 정답도 one-hot 벡터가 되어 크로스 엔트로피(cross entropy) 손실함수(loss function)를 통해 softmax 결과값 벡터와 비교하여 손실(loss)값을 구하게 됩니다.
 
-$$
-\begin{gathered}
+$$\begin{gathered}
 \text{CrossEntropy}(y, \hat{y})=-\sum_{i=1}^{|\mathcal{C}|}{y_i\log{\hat{y}_i}} \\
 \text{where }y\text{ and }\hat{y}\text{ is probability distribution, such as }\hat{y}=P(\text{y}|x;\theta). \\
 \text{thus, }y_i=P(\text{y}=i|x)\text{ and }\hat{y}_i=P(\text{y}=i|x;\theta).
-\end{gathered}
-$$
+\end{gathered}$$
 
 이때, 사실 RNN은 모든 time-step에 대해서 출력을 반환하지만, 우리는 여기서 나머지는 버리고 하나의 time-step에 대해서만 값을 취합니다. 따라서 뉴럴 네트워크는 back-propagation을 통해서 해당 time-step의 출력값에 필요한 정보를 모아주도록 훈련 될 것 입니다.
 

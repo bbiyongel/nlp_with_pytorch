@@ -43,59 +43,43 @@
 
 ## 문장의 확률 표현
 
-주어진 문장에 대해서 어떻게 확률을 구할 수 있을까요? $w_1$, $w_2$라는 2개의 단어가 한 문장 안에 순서대로 나타났을 때, 이 문장의 확률은 아래와 같이 표현 가능합니다.
+주어진 문장에 대해서 어떻게 확률을 구할 수 있을까요? $w_1$ , $w_2$ 라는 2개의 단어가 한 문장 안에 순서대로 나타났을 때, 이 문장의 확률은 아래와 같이 표현 가능합니다.
 
-$$
-P(w_1, w_2)
-$$
+$$P(w_1, w_2)$$
 
 우리는 이 수식을 베이즈 정리(Bayes Theorem)에 따라 조건부 확률(Conditional Probability)로 표현할 수 있습니다.
 
-$$
-\begin{gathered}
+$$\begin{gathered}
 P(w_1, w_2)=P(w_1)P(w_2|w_1), \\
 \text{because }P(w_2|w_1)=\frac{P(w_1,w_2)}{P(w_1)}.
-\end{gathered}
-$$
+\end{gathered}$$
 
 좀 더 나아가서 체인룰(연쇄법칙, Chain Rule)을 통해, 여러 단어가 나타날 확률을 분리하여 표현할 수 있습니다.
 
-$$
-P(w_1,w_2,\cdots,w_n)=P(w_1)P(w_2|w_1)P(w_3|w_1, w_2)\cdots P(w_n|w_1,w_2,\cdots,w_{n-1})
-$$
+$$P(w_1,w_2,\cdots,w_n)=P(w_1)P(w_2|w_1)P(w_3|w_1, w_2)\cdots P(w_n|w_1,w_2,\cdots,w_{n-1})$$
 
 여기서 체인룰이란, 조건부 확률을 사용하여 결합 확률을 계산 하는 방법으로, 아래와 같이 유도 할 수 있습니다.
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 P(A,B,C,D)&=P(D|A,B,C)P(A,B,C) \\
 &=P(D|A,B,C)P(C|A,B)P(A,B) \\
 &=P(D|A,B,C)P(C|A,B)P(B|A)P(A)
-\end{aligned}
-$$ 
+\end{aligned}$$
 
-다시 n개의 단어가 주어졌을때 문장의 확률을 나타낸 수식에서 우항을 해석해보면, $w_1$가 나타날 확률과 $w_1$가 주어졌을 때 $w_2$가 나타날 확률, $w_1, w_2$가 주어졌을 때 $w_3$가 주어졌을 확률, $w_1, w_2,\cdots,w_{n-1}$이 주어졌을 때 $w_n$가 나타날 확률을 곱하는 것을 알 수 있습니다. 이로써 우리는 언어모델을 활용하여 문장에 대한 확률 뿐만 아니라, 단어와 단어 사이의 확률도 정의 할 수 있습니다. 우리는 위의 수식을 일반화하여 아래와 같이 표현할 수 있습니다.
+다시 n개의 단어가 주어졌을때 문장의 확률을 나타낸 수식에서 우항을 해석해보면, $w_1$ 가 나타날 확률과 $w_1$ 가 주어졌을 때 $w_2$ 가 나타날 확률, $w_1, w_2$ 가 주어졌을 때 $w_3$ 가 주어졌을 확률, $w_1, w_2,\cdots,w_{n-1}$ 이 주어졌을 때 $w_n$ 가 나타날 확률을 곱하는 것을 알 수 있습니다. 이로써 우리는 언어모델을 활용하여 문장에 대한 확률 뿐만 아니라, 단어와 단어 사이의 확률도 정의 할 수 있습니다. 우리는 위의 수식을 일반화하여 아래와 같이 표현할 수 있습니다.
 
-$$
-P(w_1,w_2,\cdots,w_n)=\prod_{i=1}^{n}{P(w_i|w_{<i})}
-$$
+$$P(w_1,w_2,\cdots,w_n)=\prod_{i=1}^{n}{P(w_i|w_{<i})}$$
 
 또는 로그 확률(log probability)로 표현하여 곱셈 대신 덧셈으로 표현할 수 있습니다. 참고로, 문장이 길어지게 된다면 당연히 확률에 대한 곱셈이 거듭되면서 확률이 매우 작아지게 되어 정확한 계산 또는 표현이 힘들어지게 됩니다. <comment>또한, 곱셈 연산보다 덧셈 연산이 더 빠릅니다.</comment> 따라서 우리는 로그를 취하여 덧셈으로 바꾸어 더 나은 조건을 취할 수 있습니다. 
 
-$$
-\log{P(w_1,w_2,\cdots,w_n)}=\sum_{i=1}^{n}{\log{P(w_i|w_{<i})}}
-$$
+$$\log{P(w_1,w_2,\cdots,w_n)}=\sum_{i=1}^{n}{\log{P(w_i|w_{<i})}}$$
 
-이제 우리는 실제 예제를 가지고 표현 해 보도록 하겠습니다. 코퍼스 $\mathcal{C}=\{s_1,s_2,\cdots,s_n\}$에서 $i$번째 문장 $s_i = \{\text{BOS}, \text{나는}, \text{학교에}, \text{갑니다}, \text{EOS}\}$에 대한 확률을 체인룰을 통해 표현하면 아래와 같습니다.
+이제 우리는 실제 예제를 가지고 표현 해 보도록 하겠습니다. 코퍼스 $\mathcal{C}=\{s_1,s_2,\cdots,s_n\}$ 에서 $i$ 번째 문장 $s_i = \{\text{BOS}, \text{나는}, \text{학교에}, \text{갑니다}, \text{EOS}\}$ 에 대한 확률을 체인룰을 통해 표현하면 아래와 같습니다.
 
-$$
-P(\text{BOS},\text{나는},\text{학교에},\text{갑니다},\text{EOS})=P(\text{BOS})P(\text{나는}|\text{BOS})P(\text{학교에}|\text{BOS},\text{나는})P(\text{갑니다}|\text{BOS},\text{나는},\text{학교에})P(\text{EOS}|\text{BOS},\cdots,\text{갑니다})
-$$
+$$P(\text{BOS},\text{나는},\text{학교에},\text{갑니다},\text{EOS})=P(\text{BOS})P(\text{나는}|\text{BOS})P(\text{학교에}|\text{BOS},\text{나는})P(\text{갑니다}|\text{BOS},\text{나는},\text{학교에})P(\text{EOS}|\text{BOS},\cdots,\text{갑니다})$$
 
-여기서 BOS는 Beginning of Sentence(문장의 시작)라는 의미의 토큰이고, EOS는 End of sentence(문장의 종료)라는 의미의 토큰입니다. $P(\text{BOS})$의 경우에는 항상 문장의 시작에 오게 되므로 상수가 될 것 입니다. $P(\text{나는}|\text{BOS})$ 경우에는 문장의 시작 후 첫 단어로 "나는"이 올 확률을 나타내게 됩니다. 
+여기서 BOS는 Beginning of Sentence(문장의 시작)라는 의미의 토큰이고, EOS는 End of sentence(문장의 종료)라는 의미의 토큰입니다. $P(\text{BOS})$ 의 경우에는 항상 문장의 시작에 오게 되므로 상수가 될 것 입니다. $P(\text{나는}|\text{BOS})$ 경우에는 문장의 시작 후 첫 단어로 "나는"이 올 확률을 나타내게 됩니다. 
 
 이제 문장을 어떻게 확률로 나타내는지 알았으니, 확률을 직접 구하는 방법에 대해서 알아보겠습니다. 우리는 앞 챕터에서 문장을 수집하는 방법에 대해서 논의 했습니다. 수집한 말뭉치 내에서 직접 단어들의 출현 빈도를 계산함으로써, 우리가 원하는 확률을 추정할 수 있습니다. 예를 들어 아래의 확률은 다음과 같이 추정할 수 있습니다.
 
-$$
-P(\text{갑니다}|\text{BOS},\text{나는},\text{학교에})\approx\frac{\text{Count}(\text{BOS},\text{나는},\text{학교에},\text{갑니다})}{\text{Count}(\text{BOS},\text{나는},\text{학교에})}
-$$
+$$P(\text{갑니다}|\text{BOS},\text{나는},\text{학교에})\approx\frac{\text{Count}(\text{BOS},\text{나는},\text{학교에},\text{갑니다})}{\text{Count}(\text{BOS},\text{나는},\text{학교에})}$$
