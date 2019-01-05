@@ -78,7 +78,7 @@
   * [탐색(추론)](neural-machine-translation/beam-search.md)
   * [성능 평가 방법](neural-machine-translation/eval.md)
   * [구현 예제](neural-machine-translation/code.md)
-* [신경망 기계 번역 심화 주제](adv-nmt/cover.md)
+* [신경망 기계번역 심화 주제](adv-nmt/cover.md)
   * [다국어 번역](adv-nmt/multilingual-nmt.md)
   * [단방향 코퍼스를 활용하기](adv-nmt/monolingual-corpus.md)
   * [트랜스포머](adv-nmt/transformer.md)

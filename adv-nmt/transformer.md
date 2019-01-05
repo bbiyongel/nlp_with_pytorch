@@ -1,56 +1,73 @@
-# Transformer (Attention is All You Need)
+# 트랜스포머(Transformer, Attention is All You Need)
 
-Facebook에서 CNN을 활용한 번역기에 대한 논문을 내며, 기존의 GNMT 보다 속도나 성능면에서 뛰어남을 자랑하자, 이에 질세라 Google에서 바로 곧이어 발표한 [Attention is all you need [Vaswani at el.2017]](https://arxiv.org/pdf/1706.03762.pdf) 논문입니다. 실제로 ArXiv에 Facebook이 5월에 해당 논문을 발표한데 이어서 6월에 이 논문이 발표되었습니다. 이 논문에서 Google은 아직까지 번역에 있어서 자신들의 기술력 우위성을 주장하였습니다.
+페이스북에서 CNN을 활용한 번역기에 대한 논문 <comment> [[Gehring et al.2017]](https://arxiv.org/pdf/1705.03122.pdf) </comment>을 내며, 기존의 구글 신경망 번역기보다 속도나 성능면에서 뛰어남을 자랑하자, 이에 질세라 구글에서 바로 곧이어 발표한 [Attention is all you need [Vaswani at el.2017]](https://arxiv.org/pdf/1706.03762.pdf) 논문입니다. 실제로 아카이브(ArXiv)에 페이스북이 5월에 해당 논문을 발표한데 이어서 6월에 이 논문이 발표되었습니다. 이 논문에서 구글은 아직까지 번역에 있어서 자신들의 기술력 우위성을 주장하였습니다.
 
-## Architecture
+논문의 제목에서 알 수 있듯이, 이 방법은 기존의 어텐션 연산만을 활용하여 sequence-to-sequence를 구현하였고, 성능과 속도 두마리 토끼를 성공적으로 잡아냈습니다. 하지만 이 모델은 기존의 어텐션을 활용한 것이기 때문에, 어텐션에 대한 정확한 이해가 있다면 따라가는데 크게 어려움이 없습니다.
 
-![Transformer 아키텍처](../assets/nmt-transformer-1.png)
+## 구조
 
-"Attention is all you need"라는 제목의 논문답게 이 논문은 정말로 Attention만 구현해서 모든것을 해냅니다. 그리고 저자는 이 모델 구조를 Transformer라고 이름 붙였습니다. Encoder와 decoder를 설명하기에 앞서, sub-module부터 소개하겠습니다. Encoder와 decoder를 이루고 있는 sub-module은 크게 3가지로 나뉘어 집니다.
+![트랜스포머의 구조](../assets/nmt-transformer-1.png)
+
+"Attention is all you need"라는 제목답게 이 구조는 정말로 어텐선만 사용하여 인코딩과 디코딩을 전부 수행합니다. 그리고 저자는 이 모델 구조를 트랜스포머(transformer)라고 이름 붙였습니다. 트랜스포머의 인코더와 디코더를 이루고 있는 서브모듈(sub-module)은 크게 3가지로 나뉘어 집니다.
 
 |명칭|역할|
 |-|-|
-|Self-attention|이전 layer의 output에 대해서 attention을 수행합니다.|
-|Attention|Encoder의 output에 대해서 기존의 seq2seq와 같이 attention을 수행합니다.|
-|Feed Forward Layer|attention layer을 거쳐 얻은 결과물을 최종적으로 정리합니다.|
+|셀프 어텐션|이전 레이어의 출력에 대해서 어텐션 연산을 수행합니다.|
+|어텐션|기존의 sequence-to-sequence와 같이 인코더의 결과에 대해서 어텐션 연산을 수행 합니다.|
+|피드포워드 레이어|어텐션 레이어를 거쳐 얻은 결과물을 최종적으로 정리합니다.|
 
-Encoder는 다수의 self-attention layer와 feed forward layer로 이루어져 있습니다. Decoder는 다수의 self-attention과 attention이 번갈아 나타나고, feed forward layer가 있습니다. 이처럼 Transformer는 구성되며 각 모듈에 대한 자세한 설명은 아래와 같습니다.
+인코더는 다수의 셀프 어텐션 레이어와 피드포워드 레이어로 이루어져 있습니다. 디코더는 다수의 셀프 어텐션과 일반 어텐션이 번갈아 나타나고 피드포워드 레이어가 나타납니다.
 
-### Position Embedding
+### 포지션 임베딩 (Position Embedding)
 
-이전 Facebook 논문과 마찬가지로, RNN을 이용하지 않기 때문에, 위치정보를 단어와 함께 주는 것이 필요합니다. 따라서 Google에서도 마찬가지로 position embedding을 통해서 위치 정보를 나타내고자 하였으며, 그 수식은 약간 다릅니다.
+RNN은 데이터를 순차적으로 받으면서 자동적으로 순서에 대한 정보를 기록하게 됩니다. 하지만 트랜스포머는 RNN을 이용하지 않기 때문에, 순서 정보를 단어와 함께 주는 것이 필요합니다. 왜냐하면 같은 단어라 하더라도 위치에 따라서 그 쓰임새와 역할 의미가 달라질 수 있기 때문입니다. 따라서 포지션 임베딩이라는 방법을 통해서 위치 정보를 나타내고자 하였습니다.
+
+![포지션 임베딩의 직관적인 설명](image_needed)
 
 $$\begin{gathered}
 \text{PE}(\text{pos}, 2i) = \sin(\text{pos} / 10000^{2i / d_{model}}) \\
 \text{PE}(\text{pos}, 2i + 1) = \cos(\text{pos} / 10000^{2i / d_{model}})
 \end{gathered}$$
 
-Position embedding의 결과값의 dimension은 word embedding의 dimension과 같으며, 두 값을 더하여 encoder 또는 decoder의 입력으로 넘겨주게 됩니다.
+포지션 임베딩의 결과값의 차원은 단어 임베딩 벡터의 차원과 같으며, 두 벡터를 더하여 인코더 또는 디코더의 입력으로 넘겨주게 됩니다.
 
-### Attention
+### 어텐션
 
-![Transformer의 Attention 구성](../assets/nmt-transformer-2.png)
+![트랜스포머의 어텐션 구성](../assets/nmt-transformer-2.png)
 
-이 논문에서의 Attention방식은 여러개의 attention으로 구성된 multi-head attention을 제안합니다. 마치 Convolution layer에서 여러개의 filter가 있어서 여러가지 다양한 feature를 뽑아 내는 것과 같은 원리라고 볼 수 있습니다.
+트랜스포머의 어텐션 방식은 여러 개의 어텐션으로 구성된 멀티헤드(multi-head) 어텐션을 제안합니다. 이는 마치 CNN에서 여러 개의 필터(커널)가 다양한 피쳐들를 뽑아 내는 것과 같은 원리라고 볼 수 있습니다. 이전 챕터에서 어텐션에 대해서 설명 할 때, 어텐션은 쿼리(query)를 만들기 위한 선형 변환을 배우는 과정이라고 하였습니다. 이때, 다양한 쿼리들을 만들어내어 다양한 정보들을 추출할 수 있다면 훨씬 더 유용할 것 입니다. 따라서 멀티헤드를 통해 어텐션 여럿을 동시에 수행합니다.
 
-기본적인 attention의 수식은 아래와 같습니다. 기본적인 attention은 원래 그냥 dot-product attention인데 scaled라는 이름이 붙은 이유는 key의 dimension인 $\sqrt{d_k}$로 나누어주었기 때문입니다. 이외에는 이전 섹션에서 다루었던 attention과 같습니다.
+기본적인 어텐션의 수식은 아래와 같습니다. 기본적인 어텐션은 원래 그냥 행렬 곱 연산인데, 'scaled'라는 이름이 붙은 이유는 키(key)의 차원 $d_k$ 이 주어졌을 때, 행렬 곱 연산 결과값을 $\sqrt{d_k}$로 나누어주었기 때문입니다. 이 나눗셈을 통해 좀 더 안정적인 학습 결과를 얻을 수 있다고 논문에서는 밝히고 있습니다. 이외에는 이전 챕터에서 다루었던 어텐션과 동일합니다.
+
+아래와 같이 우리는 쿼리(query), 키(key), 밸류(value)를 입력으로 받는 어텐션 함수를 정의할 수 있습니다. 스칼라(scalar) 값으로 행렬 곱의 결과를 나누어 주는 것을 제외하면 이전에 배운 내용과 동일함을 알 수 있습니다.
 
 $$\text{Attention}(Q, K, V) = \text{softmax}(\frac{QK^T}{\sqrt{d_k}})V$$
 
-이렇게 구성된 attention을 하나의 head로 삼아 Multi-Head Attention을 구성합니다.
+위의 어텐션 함수를 활용하여 아래의 멀티헤드 함수를 따라가보도록 하겠습니다.
 
-$$\begin{aligned}
-\text{MultiHead}(Q, K, V) &= [head_1;head_2;\cdots;head_h]W^O \\
-\text{where }head_i &= \text{Attention}(QW_i^Q, KW_i^K, VW_i^V) \\
-\text{where }W_i^Q &\in \mathbb{R}^{d_{model}\times d_k}, W_i^K \in \mathbb{R}^{d_{model}\times d_k}, \\
-W_i^V &\in \mathbb{R}^{d_{model}\times d_v}\text{ and }W^O \in \mathbb{R}^{hd_{v}\times d_{model}} \\ \\
-d_k = d_v &= d_{model}/h = 64 \\
-h &= 8\text{ and }d_{model} = 512 \\
-\end{aligned}$$
+$$\begin{gathered}
+\text{MultiHead}(Q,K,V)=[head_1;head_2;\cdots;head_h]W^O \\
+\text{where }head_i=\text{Attention}(QW_i^Q, KW_i^K, VW_i^V) \\
+\end{gathered}$$
 
-이때에 각 head의 Q, K, V 마다 다른 W를 곱해줌으로써 각각 linear transformation형태를 취해 줍니다. 즉, head마다 필요한 다른 정보(feature)를 attention을 통해 encoding 할 수 있게 됩니다. 해당 논문에서는 hidden size를 512로 하고 이를 8개의 head로 나누어 각 head의 hidden size는 64가 되도록 하였습니다.
+여기서 Q, K, V는 쿼리와 키, 밸류를 의미 합니다. 셀프 어텐션의 경우에는 Q, K, V 모두 같은 값으로써, 이전 레이어의 결과를 받아오게 됩니다. 그리고 일반 어텐션의 경우에는 쿼리 Q는 이전 레이어의 결과가 되고, K와 V는 인코더의 마지막 레이어 결과가 됩니다. 이 경우 Q, K, V 텐서의 크기는 아래와 같습니다. 여기서 n은 소스(source) 문장의 길이, m은 타겟(target) 문장의 길이를 의미 합니다.
 
-실제 구현을 할 때에는 self attention의 경우에는 이전 layer의 출력값이 모두 Q, K, V를 이루게 됩니다. 같은 값이 Q, K, V로 들어가지만 linear transform을 해주기 때문에 상관이 없습니다. Decoder에서 수행하는 encoder에 대한 attention을 할 때에는, Q는 decoder의 이전 layer의 출력값이 되지만, K, V는 encoder의 출력값이 됩니다.
+$$\begin{gathered}
+|Q|=(\text{batch\_size},m,\text{hidden\_size}) \\
+|K|=|V|=(\text{batch\_size},m,\text{hidden\_size}) \\
+\text{where }n\text{ is length of source sentence, and }m\text{ is length of target sentence.}
+\end{gathered}$$
+
+그리고 멀티헤드 함수에는 선형변환을 위한 수많은 뉴럴 네트워크 웨이트 파라미터 $W_i^Q, W_i^K, W_i^V \text{ and } W^O$ 들이 존재하는 것을 볼 수 있습니다. 이들의 크기는 아래와 같습니다.
+
+$$\begin{gathered}
+|W_i^Q|=|W_i^K|=|W_i^V|=(\text{hidden\_size},\text{head\_size}) \\
+|W^O|=(\text{head\_size}\times{h},\text{hidden\_size}) \\
+\\
+\text{where }\text{hidden\_size}=512,h=8\text{ and }\text{hidden\_size}=\text{head\_size}\times{h}
+\end{gathered}$$
+
+위와 같이 구글은 하이퍼 파라미터인 hidden_size와 head의 갯수를 논문에 제시하였습니다. 좀 더 자세한 셋팅 값은 논문을 참고하기 바랍니다.
 
 ### Self Attention for Decoder
 
@@ -72,5 +89,4 @@ Google은 transformer를 통해서 State of the Art의 성능을 달성했다고
 
 비록 transformer가 최고 성능을 달성하긴 헀지만 그 모델 구조의 과격함 때문인지 (Facebook의 모델과 함께) 아직 주류로 편입되지 않았습니다. 아직 대부분의 논문들은 이 구조를 비교대상으로 논하기보다, RNN구조의 seq2seq를 대상으로 실험을 비교/진행 하곤 합니다.
 
-## 읽을거리
-
+## 결론
