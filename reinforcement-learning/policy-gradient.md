@@ -1,35 +1,30 @@
-# Policy Based Reinforcement Learning
+# 정책 기반 강화학습
 
-## Policy Gradients
+## 폴리시 그래디언트 (Policy Gradients)
 
-Policy Gradients는 정책기반 강화학습(Policy based Reinforcement Learning) 방식에 속합니다. 알파고를 개발했던 DeepMind에 의해서 유명해진 Deep Q-Learning은 가치기반 강화학습(Value based Reinforcement Learning) 방식에 속합니다. 실제 딥러닝을 사용하여 두 방식을 사용 할 때에 가장 큰 차이점은, Value based방식은 인공신경망을 사용하여 어떤 action을 하였을 때에 얻을 수 있는 보상을 예측 하도록 훈련하는 것과 달리, policy based 방식은 인공신경망은 어떤 action을 할지 훈련되고 해당 action에 대한 보상(reward)를 back-propagation 할 때에 gradient를 통해서 전달해 주는 것이 가장 큰 차이점 입니다. 따라서 어떤 Deep Q-learning의 경우에는 action을 선택하는 것이 deterministic한 것에 비해서, Policy Gradient 방식은 action을 선택 할 때에 stochastic한 process를 거치게 됩니다. Policy Gradient에 대한 수식은 아래와 같습니다.
+폴리시 그래디언트는 정책기반 강화학습(Policy based Reinforcement Learning) 방식에 속합니다. 알파고를 개발했던 딥마인드에 의해서 유명해진 딥-큐 학습법(Deep Q-learning)은 가치기반 강화학습(Value based Reinforcement Learning) 방식에 속합니다. 실제 딥러닝을 사용하여 두 방식을 사용 할 때에 가장 큰 차이점은, 가치기반 학습 방식은 인공신경망을 사용하여 어떤 행동(action)을 선택 하였을 때에 얻을 수 있는 보상을 예측 하도록 훈련하는 것과 달리, 정책 기반 방식은 인공신경망은 어떤 행동을 선택 할지 훈련되고 해당 행동에 대한 보상(reward)을 back-propagation 할 때에 그래디언트(gradient)를 통해서 전달해 주는 것이 가장 큰 차이점 입니다. 따라서 어떤 딥-큐러닝의 경우에는 행동을 선택하는 것이 확률적으로 나오지 않는 것에 비해서, 폴리시 그래디언트 방식은 행동을 선택 할 때에 확률적인(stochastic) 프로세스를 거치게 됩니다. 폴리시 그래디언트에 대한 수식은 아래와 같습니다.
 
 $$\pi_\theta(a|s) = P_\theta(a|s) = P(a|s; \theta)$$
 
-위의 $\pi$ 는 정책(policy)을 의미합니다. 즉, 신경망 $\theta$ 는 현재 상황(state) $s$ 가 주어졌을 때, 어떤 선택(action) $a$ 를 해야할 지 확률을 반환 합니다.
-
+위의 $\pi$ 는 정책(policy)을 의미합니다. 즉, 뉴럴 네트워크 웨이트 파라미터 $\theta$ 는 현재 상태 $s$ 가 주어졌을 때, 어떤 행동 $a$ 을 선택해야하는지 확률 분포를 반환 합니다.
 
 $$\begin{aligned}
 J(\theta) &= \mathbb{E}_{\pi_\theta}[r] = v_\theta(s_0) \\
 &=\sum_{s \in \mathcal{S}}{d(s)}\sum_{a \in \mathcal{A}}{\pi_\theta(s, a)\mathcal{R}_{s, a}}
 \end{aligned}$$
 
-
-우리의 목표(objective)는 최초 상황(initial state)에서의 기대누적보상(expected cumulative reward)을 최대(maximize)로 하도록 하는 policy $\theta$ 를 찾는 것 입니다. 최소화 하여야 하는 손실(loss)와 달리 보상(reward)는 최대화 하여야 하므로 기존의 gradient descent 대신에 gradient ascent를 사용하여 최적화(optimization)을 수행 합니다.
+우리의 목표(objective)는 최초 상태(initial state)에서의 기대누적보상(expected cumulative reward)을 최대(maximize)로 하도록 하는 정책 $\theta$ 를 찾는 것 입니다. 최소화 하여야 하는 손실(loss)와 달리 보상은 최대화 하여야 하므로 기존의 그래디언트 디센트 대신에 그래디언트 어센트(ascent)를 사용하여 최적화를 수행 합니다.
 
 $$\theta_{t+1}=\theta_t+\alpha\triangledown_\theta J(\theta)$$
 
-Gradient ascent에 따라서, $\triangledown_\theta J(\theta)$ 를 구하여 $\theta$ 를 업데이트 해야 합니다. 여기서 $d(s)$ 는 markov chain의 stationary distribution으로써 시작점에 상관없이 전체의 trajecotry에서 $s$에 머무르는 시간의 proportion을 의미합니다.
-
+그래디언트 어센트에 따라, $\triangledown_\theta J(\theta)$ 를 구하여 $\theta$ 를 업데이트 해야 합니다. <comment> 여기서 $d(s)$ 는 마코프 체인의 stationary distribution으로써 시작점에 상관없이 전체의 경로(trajecotry)에서 $s$ 에 머무르는 시간의 proportion을 의미합니다. </comment>
 
 $$\begin{aligned}
 \triangledown_\theta\pi_\theta(s,a)&=\pi_\theta(s,a)\frac{\triangledown_\theta\pi_\theta(s,a)}{\pi_\theta(s,a)} \\
 &=\pi_\theta(s,a)\triangledown_\theta\log{\pi_\theta(s,a)}
 \end{aligned}$$
 
-
-이때, 위의 로그 미분의 성질을 이용하여 아래와 같이 $\triangledown_\theta J(\theta)$ 를 구할 수 있습니다. 이 수식을 해석하면 매 time-step 별 상황 $s$ 이 주어졌을 때 선택 $a$ 할 로그 확률의 gradient에, 그에 따른 보상(reward)을 곱한 값의 기대값이 됩니다.
-
+이때, 위의 로그 미분의 성질을 이용하여 아래와 같이 $\triangledown_\theta J(\theta)$ 를 구할 수 있습니다. 이 수식을 해석하면 매 time-step 별 상황 $s$ 이 주어졌을 때 선택 $a$ 할 로그 확률의 그래디언트와 그에 따른 보상(reward)을 곱한 값의 기대값이 됩니다.
 
 $$\begin{aligned}
 \triangledown_\theta J(\theta)&=\sum_{s \in \mathcal{S}}{d(s)}\sum_{a \in \mathcal{A}}{\triangledown_\theta\pi_\theta(s,a)\mathcal{R}_{s,a}}  \\
@@ -37,19 +32,15 @@ $$\begin{aligned}
 &= \mathbb{E}_{\pi_\theta}[\triangledown_\theta \log{\pi_\theta (a|s)}r]
 \end{aligned}$$
 
-
-Policy Gradient Theorem에 따르면, 여기서 해당 time-step에 대한 즉각적인 reward $r$ 대신에 episode의 종료까지의 총 reward, 즉 $Q$ function을 사용할 수 있습니다.
-
+폴리시 그래디언트 정리(Policy Gradient Theorem)에 따르면, 여기서 해당 time-step에 대한 즉각적인 보상 $r$ 대신에 에피소드의 종료까지의 기대 누적 보상, 즉 큐함수(Q function)을 사용할 수 있습니다.
 
 $$\triangledown_\theta J(\theta) = \mathbb{E}_{\pi_\theta}[\triangledown_\theta \log{\pi_\theta (a|s)}Q^{\pi_\theta}(s,a)]$$
 
-
-여기서 바로 Policy Gradients의 진가가 드러납니다. 우리는 policy network에 대해서 gradient를 구하지만, Q-function에 대해서는 gradient를 구할 필요가 없습니다. 즉, 미분의 가능 여부를 떠나서 임의의 어떠한 함수라도 보상 함수(reward function)로 사용할 수 있는 것입니다. 이렇게 어떠한 함수도 reward로 사용할 수 있게 됨에 따라, 기존의 단순히 cross entropy와 같은 손실 함수(loss function)에 학습(fitting) 시키는 대신에 좀 더 실제 문제에 부합하는 함수\(번역의 경우에는 BLEU\)를 사용하여 $\theta$를 훈련시킬 수 있게 되었습니다. 위의 수식에서 기대값 수식을 Monte Carlo sampling으로 대체하면 아래와 같이 parameter update를 수행 할 수 있습니다.
+여기서 바로 폴리시 그래디언트의 진가가 드러납니다. 우리는 폴리시 그래디언트의 뉴럴 네트워크에 대해서는 미분을 계산해야 하지만, 큐함수에 대해서는 미분을 할 필요가 없습니다. 즉, 미분의 가능 여부를 떠나서 임의의 어떠한 함수라도 보상 함수(reward function)로 사용할 수 있는 것입니다. 이렇게 어떠한 함수도 보상 함수로 사용할 수 있게 됨에 따라, 기존의 크로스 엔트로피나 MSE와 같은 손실 함수를 통해 학습(fitting) 시키는 대신, 좀 더 실제 문제에 부합하는 함수(번역의 경우에는 BLEU)를 사용하여 $\theta$ 를 훈련시킬 수 있게 되었습니다. 위의 수식에서 기대값 수식을 몬테카를로 샘플링으로 대체하면 아래와 같이 뉴럴 네트워크 파라미터 업데이트를 수행 할 수 있습니다.
 
 $$\theta \leftarrow \theta + \alpha Q^{\pi_\theta}(s_t,a_t)\triangledown_\theta\log{\pi_\theta(a_t|s_t)}$$
 
-
-위의 수식을 좀 더 쉽게 설명 해 보면, Monte Carlo 방식을 통해 sampling 된 action들에 대해서 gradient를 구하고, 그 gradient에 reward를 곱하여 주는 형태입니다. 만약 샘플링 된 해당 action들이 좋은 (큰 양수) reward를 받았다면 learning rate $\alpha$ 에 추가적인 곱셈을 통해서 더 큰 step으로 gradient ascending을 할 수 있을 겁니다. 하지만 negative reward를 받게 된다면, gradient의 반대방향으로 step을 갖도록 값이 곱해지게 될 겁니다. 따라서 해당 샘플링 된 action들이 앞으로는 잘 나오지 않도록 parameter $\theta$ 가 update 됩니다.
+위의 수식을 좀 더 쉽게 설명 해 보면, 몬테카를로 방식을 통해 샘플링 된 행동(action)들에 대해서 그래디언트를 구하고, 그 그래디언트에 보상을 곱하게 됩니다. 만약 샘플링 된 해당 행동들이 좋은 보상을 받았다면 learning rate $\alpha$ 에 추가적인 곱셈을 통해서 더 큰 스텝으로 그래디언트 어센딩을 수행 할 수 있을 겁니다. 하지만 나쁜 보상값을 받게 된다면, 그래디언트의 반대방향으로 스텝을 갖도록 값이 곱해지게 될 겁니다. 즉, 그래디언트 어센트 대신에 그래디언트 디센트를 수행하는 것과 같은 효과가 날 것 입니다. 따라서 해당 샘플링 된 행동들이 앞으로는 잘 나오지 않도록 뉴럴 네트워크 파라미터 $\theta$ 가 업데이트 됩니다.
 
 따라서 실제 gradient에 따른 local minima(지역최소점)를 찾는 것이 아닌, 아래 그림과 같이 실제 reward-objective function에 따른 최적을 값을 찾게 됩니다. 하지만, 기존의 gradient는 방향과 크기를 나타낼 수 있었던 것에 비해서, policy gradients는 기존의 gradient의 방향에 크기(scalar)값을 곱해줌으로써 방향을 직접 지정해 줄 수는 없습니다. 따라서 실제 목적함수(objective function)에 따른 최적의 방향을 스스로 찾아갈 수는 없습니다. 그러므로 사실 훈련이 어렵고 비효율적인 단점을 갖고 있습니다.
 
