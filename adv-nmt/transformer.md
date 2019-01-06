@@ -67,26 +67,58 @@ $$\begin{gathered}
 \text{where }\text{hidden\_size}=512,h=8\text{ and }\text{hidden\_size}=\text{head\_size}\times{h}
 \end{gathered}$$
 
-위와 같이 구글은 하이퍼 파라미터인 hidden_size와 head의 갯수를 논문에 제시하였습니다. 좀 더 자세한 셋팅 값은 논문을 참고하기 바랍니다.
+위와 같이 구글은 하이퍼 파라미터인 hidden_size와 head의 갯수를 논문에 제시하였습니다. h는 헤드(head)의 갯수로 다양한 피쳐를 어텐션을 통해 뽑아낼 수 있도록 도와줍니다. 좀 더 자세한 셋팅 값은 논문을 참고하기 바랍니다.
 
-### Self Attention for Decoder
+위의 텐서 크기들을 활용하여 우리는 실제 각 계산별로 어떤 크기의 텐서들이 결과로 나오는지 따라갈 볼 수 있습니다. 실제 이렇게 손으로 따라는 연습을 해 두면, 새로운 논문이나 수식을 볼 때, 이것을 구현하는데 훨씬 수월합니다. 아래의 수식은 실제 곱셈을 하는 것이 아닌, 텐서 사이의 행렬곱 또는 배치행렬곱(batch matrix multiplication, bmm)을 수행할 때, 크기를 계산한 것을 나타낸 것 입니다. <comment> 이전 챕터에서 어텐션 설명과 torch.bmm() 함수 설명을 참고하세요. </comment>
 
-Decoder의 self-attention은 encoder의 그것과 조금 다릅니다. 이전 레이어의 출력값을 가지고 Q, K, V를 구성하는 것은 같지만, 약간의 제약이 더해졌습니다. 그 이유는 inference 할 때, 다음 time-step의 값을 알 수 없기 때문입니다. 따라서, self-attention을 하더라도 이전 time-step에 대해서만 접근이 가능하도록 해야 합니다. 이를 구현하기 위해서 scaled dot-product attention 계산을 할 때에 masking을 추가하여, 미래의 time-step에 대해서는 weight를 가질 수 없도록 하였습니다.
+![배치 행렬곱 연산의 모습](image_needed)
 
-### Position-wise Feed Forward Layer
+$$\begin{aligned}
+|QW_i^Q|&=(\text{batch\_size},m,\text{hidden\_size})\times(\text{hidden\_size},\text{head\_size}) \\
+&=(\text{batch\_size},m,\text{head\_size}) \\
+|KW_i^K|=|VW_i^V|&=(\text{batch\_size},n,\text{hidden\_size})\times(\text{hidden\_size},\text{head\_size}) \\
+&=(\text{batch\_size},n,\text{head\_size}) \\
+\\
+|(QW_i^Q)\cdot(KW_i^K)^T|&=(\text{batch\_size},m,\text{head\_size})\times(\text{batch\_size},n,\text{head\_size})^T \\
+&=(\text{batch\_size},m,\text{head\_size})\times(\text{batch\_size},\text{head\_size},n) \\
+&=(\text{batch\_size},m,n) \\
+\\
+|\text{Attention}(QW_i^Q,KW_i^K,VW_i^V)|&=(\text{batch\_size},m,n)\times(\text{batch\_size},n,\text{head\_size}) \\
+&=(\text{batch\_size},m,\text{head\_size}) \\
+&=|head_i| \\
+\\
+|[head_1;\cdots;head_h]|&=(\text{batch\_size},m,\text{head\_size}\times{h}) \\
+&=(\text{batch\_size},m,\text{hidden\_size}) \\
+\\
+|\text{MultiHead}(Q,K,V)|&=(\text{batch\_size},m,\text{hidden\_size})\times(\text{head\_size}\times{h},\text{hidden\_size}) \\
+&=(\text{batch\_size},m,\text{hidden\_size})\times(\text{hidden\_size},\text{hidden\_size}) \\
+&=(\text{batch\_size},m,\text{hidden\_size})
+\end{aligned}$$
 
-$$\text{FFN}(x) = \max{(0, xW_1 + b_1)}W_2 + b_2\text{ where }d_{ff} = 2048$$
+즉 최종 결과값인 멀티헤드 함수의 결과값의 크기를 보면, 미니배치의 각 샘플 별, 타겟 문장의 각 time-step 별, 히든 스테이트(hidden state) 벡터임을 알 수 있습니다. 이전 챕터의 오리지널 sequence-to-sequence의 경우에는 디코더의 한 time-step 별로 각각 어텐션 연산이 수행되었다면, 트랜스포머에서는 타겟 문장의 모든 time-step을 인코더(또는 대상 텐서)의 모든 time-step에 대해서 한번에 어텐션을 수행하는 것을 볼 수 있습니다. 따라서 이전 챕터의 어텐션 결과 텐서의 크기는 $(\text{batch\_size},1,\text{hidden\_size})$ 였지만, 멀티헤드 어텐션의 결과 텐서 크기는 $(\text{batch\_size},m,\text{hidden\_size})$ 가 되는 것 입니다. 셀프 어텐션도 키(key)와 밸류(value)가 쿼리(query)와 같은 텐서일 뿐, 원리는 똑같습니다. <comment> 따라서 $m=n$ 입니다. </comment>
 
-사실 여기에서 소개한 이 layer는 기존의 fully connected feed forward layer라기보단, kernel size가 1인 convolutional layer라고 볼 수 있습니다. Channel숫자가 512 $\rightarrow$ 2048 으로 가는 convolution과, 2048 $\rightarrow$ 512로 가는 convolution으로 이루어져 있는 것 입니다.
+### 디코더에서의 셀프 어텐션
 
-## Evaluation
+디코더의 셀프 어텐션은 인코더의 그것과 조금 다릅니다. 이전 레이어의 출력값을 가지고 Q, K, V를 구성하는 것은 같지만, 약간의 제약이 더해져야 합니다. 왜냐하면 추론(inference)을 수행할 때, 사실은 당연히 다음 time-step의 입력 값을 알 수 없기 때문입니다. 따라서 이전 레이어의 결과값을 K와 V로 활용하는 셀프 어텐션을 수행 하더라도 미래 time-step에 대해서는 접근이 가능하지 않도록 훈련시에도 똑같이 구현해주어야 합니다. 이를 위해서 어텐션 연산을 할 때, 마스킹(masking)을 추가하여, 미래의 time-step에 대해서는 어텐션 웨이트(weight)를 가질 수 없도록 합니다.
 
-![Transformer의 성능 비교](../assets/nmt-transformer-3.png)
+### 피드포워드 레이어
 
-Google은 transformer를 통해서 State of the Art의 성능을 달성했다고 보고하였습니다. 뿐만아니라, 기존의 RNN 및 Facebook의 ConvS2S보다 훨씬 빠른 속도로 훈련이 가능하다고 하였습니다. 실제로 위의 table을 보면, transformer의 training cost의 magnitude는 $10^{18}$ 으로, 대부분의 다른 방식 $10^{19}$ 와 급격한 차이를 보이는 것을 알 수 있습니다.
+$$\begin{gathered}
+\text{FFN}(x)=\text{ReLU}(xW_1+b_1)W_2+b_2 \\
+\text{where }|x|=(\text{batch\_size},n,\text{hidden\_size}) \\
+\text{and }W_1\in\mathbb{R}^{\text{hidden\_size}\times{d_{ff}}}\text{, }W_2\in\mathbb{R}^{d_{ff}\times\text{hidden\_size}}\text{ and }d_{ff}=2048
+\end{gathered}$$
 
-또 하나의 속도 개선의 원인은 input feeding의 부재입니다. RNN기반의 방식은 input feeding이 도입되면서 decoder를 훈련할 때 모든 time-step을 한번에 할 수 없게 되었습니다. 이로 인해서 대부분의 병목이 decoder에서 발생합니다. 하지만 transformer는 input feeding이 없기 때문에 한번에 모든 time-step에 대해서 계산할 수 있게 되었습니다.
+피드 포워드 레이어를 통해 어텐션 결과를 정리하는 과정을 거칩니다.
 
-비록 transformer가 최고 성능을 달성하긴 헀지만 그 모델 구조의 과격함 때문인지 (Facebook의 모델과 함께) 아직 주류로 편입되지 않았습니다. 아직 대부분의 논문들은 이 구조를 비교대상으로 논하기보다, RNN구조의 seq2seq를 대상으로 실험을 비교/진행 하곤 합니다.
+## 평가
+
+![트랜스포머의 성능 비교](../assets/nmt-transformer-3.png)
+
+구글은 트랜스포머를 통해서 기존의 다른 알고리즘 대비 훨씬 나은 성능을 달성하였다고 합니다. 뿐만 아니라, 기존의 RNN 및 페이습북의 ConvS2S보다 훨씬 빠른 속도로 훈련이 가능하다고 하였습니다. 실제로 위의 테이블을 보면, 트랜스포머의 훈련 속도의 크기는 $10^{18}$ 으로, 대부분의 다른 방식 $10^{19}$ 와 급격한 차이를 보이는 것을 알 수 있습니다.
+
+또 하나의 속도 개선의 원인은 input feeding이 없어진 점 이라고 볼 수 있습니다. 기존의 RNN기반의 sequence-to-sequence 방식은 input feeding이 도입되면서 디코더를 훈련할 때 모든 time-step을 한번에 할 수 없게 되었습니다. 이로 인해서 연산 속도 대부분의 병목이 디코더에서 발생합니다. 하지만 트랜스포머는 input feeding이 없기 때문에 한번에 모든 time-step에 대해서 병렬적으로 계산할 수 있게 되었습니다.
 
 ## 결론
+
+트랜스포머의 혁신적인 구조의 차이 때문인지 한동안 기계번역에서는 트랜스포머가 성능과 속도가 뛰어남에도 주류 알고리즘이 되지 못하였습니다. 하지만, 점차 상용 번역 시스템들도 트랜스포머로 바뀌기 시작하였으며, 2018년 마지막으로 발표 된 마이크로소프트의 번역 시스템에서는 트랜스포머를 사용하였음을 밝히고 있습니다. 또한, 트랜스포머는 sequence-to-sequence를 활용한 번역 및 자연어생성 시스템에 쓰일 뿐만이 아니라, [BERT[Devlin et al.2018]](https://arxiv.org/abs/1810.04805)와 같은 자연어이해의 범주에까지 발을 넓혀가고 있습니다.
