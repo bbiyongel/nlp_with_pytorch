@@ -1,11 +1,12 @@
-FONT_SIZE=12pt
+FONT_SIZE=11pt
 DIR_PATH=./pdf/
+MARGIN=1in
 
 # * [소개글](README.md)
 # * [Index](index_list.md)
 echo 'cover'
 cd ./nlp-with-deeplearning
-pandoc ../README.md ../index_list.md --latex-engine=xelatex -o ../${DIR_PATH}/0.cover.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
+pandoc ../README.md ../index_list.md --latex-engine=xelatex -o ../${DIR_PATH}/0.cover.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE} -V geometry:margin=${MARGIN}
 cd ..
 
 # * [딥러닝을 활용한 자연어처리](nlp-with-deeplearning/cover.md)
@@ -16,7 +17,7 @@ cd ..
 #   * [최근 추세](nlp-with-deeplearning/trends.md)
 echo 'nlp-with-deeplearning'
 cd ./nlp-with-deeplearning
-pandoc ./cover.md ./intro.md ./deeplearning.md ./why-nlp-difficult.md ./korean-is-hell.md ./trends.md --latex-engine=xelatex -o ../${DIR_PATH}/1.introduction.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
+pandoc ./cover.md ./intro.md ./deeplearning.md ./why-nlp-difficult.md ./korean-is-hell.md ./trends.md --latex-engine=xelatex -o ../${DIR_PATH}/1.introduction.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE} -V geometry:margin=${MARGIN}
 cd ..
 
 # * [기초 수학](basic-math/cover.md)
@@ -30,7 +31,7 @@ cd ..
 #   * [결론](basic-math/conclusion.md)
 echo 'basic-math'
 cd ./basic-math
-pandoc ./cover.md ./intro.md ./prob-dist.md ./monty-hall.md ./sampling.md ./mle.md ./information.md ./mse.md ./conclusion.md  --latex-engine=xelatex -o ../${DIR_PATH}/2.basic-math.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
+pandoc ./cover.md ./intro.md ./prob-dist.md ./monty-hall.md ./sampling.md ./mle.md ./information.md ./mse.md ./conclusion.md  --latex-engine=xelatex -o ../${DIR_PATH}/2.basic-math.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE} -V geometry:margin=${MARGIN}
 cd ..
 
 # * [Hello PyTorch](pytorch-intro/cover.md)
@@ -39,7 +40,7 @@ cd ..
 #   * [PyTorch 짧은 튜토리얼](pytorch-intro/hello-pytorch.md)
 echo 'pytorch-intro'
 cd ./pytorch-intro
-pandoc ./cover.md ./intro.md ./how-to-install.md ./hello-pytorch.md --latex-engine=xelatex -o ../${DIR_PATH}/3.pytorch-intro.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
+pandoc ./cover.md ./intro.md ./how-to-install.md ./hello-pytorch.md --latex-engine=xelatex -o ../${DIR_PATH}/3.pytorch-intro.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE} -V geometry:margin=${MARGIN}
 cd ..
 
 # * [전처리](preprocessing/cover.md)
@@ -53,21 +54,23 @@ cd ..
 #   * [TorchText](preprocessing/torchtext.md)
 echo 'preprocessing'
 cd ./preprocessing
-pandoc ./cover.md ./intro.md ./collecting-corpus.md ./cleaning-corpus.md ./tokenization.md ./align.md ./bpe.md ./detokenization.md ./torchtext.md --latex-engine=xelatex -o ../${DIR_PATH}/4.preprocessing.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
+pandoc ./cover.md ./intro.md ./collecting-corpus.md ./cleaning-corpus.md ./tokenization.md ./align.md ./bpe.md ./detokenization.md ./torchtext.md --latex-engine=xelatex -o ../${DIR_PATH}/4.preprocessing.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE} -V geometry:margin=${MARGIN}
 cd ..
 
 # * [의미: 유사성과 모호성](word-senses/cover.md)
 #   * [소개](word-senses/intro.md)
 #   * [One-hot 인코딩](word-senses/one-hot-encoding.md)
 #   * [워드넷](word-senses/wordnet.md)
-#   * [출현빈도 활용하기: TF-IDF](word-senses/tf-idf.md)
-#   * [유사도 구하기](word-senses/similarity.md)
+#   * [피쳐란](word-senses/feature.md)
+#   * [피쳐 추출하기: TF-IDF](word-senses/tf-idf.md)
+#   * [피쳐 벡터 만들기](word-senses/vectorization.md)
+#   * [벡터 유사도 구하기](word-senses/similarity.md)
 #   * [단어 중의성 해소](word-senses/wsd.md)
 #   * [Selectional Preference](word-senses/selectional-preference.md)
 #   * [결론](word-senses/conclusion.md)
 echo 'word-senses'
 cd ./word-senses
-pandoc ./cover.md ./one-hot-encoding.md ./wordnet.md ./tf-idf.md ./similarity.md ./wsd.md ./selectional-preference.md ./conclusion.md --latex-engine=xelatex -o ../${DIR_PATH}/5.word-senses.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
+pandoc ./cover.md ./one-hot-encoding.md ./wordnet.md ./feature.md ./tf-idf.md ./vectorization.md ./similarity.md ./wsd.md ./selectional-preference.md ./conclusion.md --latex-engine=xelatex -o ../${DIR_PATH}/5.word-senses.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE} -V geometry:margin=${MARGIN}
 cd ..
 
 # * [워드 임베딩](word-embedding-vector/cover.md)
@@ -79,7 +82,7 @@ cd ..
 #   * [예제 코드](word-embedding-vector/example.md)
 echo 'word-embedding-vector'
 cd ./word-embedding-vector
-pandoc ./cover.md ./intro.md ./dimension-reduction.md ./myth.md ./word2vec.md ./glove.md ./example.md --latex-engine=xelatex -o ../${DIR_PATH}/6.word-embedding.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
+pandoc ./cover.md ./intro.md ./dimension-reduction.md ./myth.md ./word2vec.md ./glove.md ./example.md --latex-engine=xelatex -o ../${DIR_PATH}/6.word-embedding.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE} -V geometry:margin=${MARGIN}
 cd ..
 
 # * [시퀀스 모델링](sequential-modeling/cover.md)
@@ -90,18 +93,19 @@ cd ..
 #   * [그래디언트 clipping](sequential-modeling/gradient-clipping.md)
 echo 'sequential-modeling'
 cd ./sequential-modeling
-pandoc ./cover.md ./intro.md ./rnn.md ./lstm.md ./gru.md ./gradient-clipping.md --latex-engine=xelatex -o ../${DIR_PATH}/7.sequential-modeling.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
+pandoc ./cover.md ./intro.md ./rnn.md ./lstm.md ./gru.md ./gradient-clipping.md --latex-engine=xelatex -o ../${DIR_PATH}/7.sequential-modeling.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE} -V geometry:margin=${MARGIN}
 cd ..
 
 # * [텍스트 분류](text-classification/cover.md)
 #   * [서문](text-classification/intro.md)
-#   * [Naive Bayes](text-classification/naive-bayes.md)
-#   * [RNN을 활용한 텍스트 분류](text-classification/rnn.md)
-#   * [CNN을 활용한 텍스트 분류](text-classification/cnn.md)
+#   * [나이브 베이즈를 활용하기](text-classification/naive-bayes.md)
+#   * [흔한 오해 2](text-classification/myth.md)
+#   * [RNN을 활용하기](text-classification/rnn.md)
+#   * [CNN을 활용하기](text-classification/cnn.md)
 #   * [구현 예제](text-classification/code.md)
 echo 'text-classification'
 cd ./text-classification
-pandoc ./cover.md ./intro.md ./naive-bayes.md ./cnn.md ./rnn.md ./code.md --latex-engine=xelatex -o ../${DIR_PATH}/8.text-classification.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
+pandoc ./cover.md ./intro.md ./naive-bayes.md ./myth.md ./rnn.md ./cnn.md ./code.md --latex-engine=xelatex -o ../${DIR_PATH}/8.text-classification.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE} -V geometry:margin=${MARGIN}
 cd ..
 
 # * [언어 모델링](language-modeling/cover.md)
@@ -113,7 +117,7 @@ cd ..
 #   * [활용 분야](language-modeling/application.md)
 echo 'language-modeling'
 cd ./language-modeling
-pandoc ./cover.md ./intro.md ./n-gram.md ./perpexity.md ./srilm.md ./nnlm.md ./application.md --latex-engine=xelatex -o ../${DIR_PATH}/9.language-modeling.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
+pandoc ./cover.md ./intro.md ./n-gram.md ./perpexity.md ./srilm.md ./nnlm.md ./application.md --latex-engine=xelatex -o ../${DIR_PATH}/9.language-modeling.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE} -V geometry:margin=${MARGIN}
 cd ..
 
 # * [신경망 기계번역](neural-machine-translation/cover.md)
@@ -127,7 +131,7 @@ cd ..
 #   * [구현 예제](neural-machine-translation/code.md)
 echo 'machine-translation'
 cd ./neural-machine-translation
-pandoc ./cover.md ./intro.md ./seq2seq.md ./attention.md ./input-feeding.md ./teacher-forcing.md beam-search.md eval.md code.md --latex-engine=xelatex -o ../${DIR_PATH}/10.nmt.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
+pandoc ./cover.md ./intro.md ./seq2seq.md ./attention.md ./input-feeding.md ./teacher-forcing.md beam-search.md eval.md code.md --latex-engine=xelatex -o ../${DIR_PATH}/10.nmt.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE} -V geometry:margin=${MARGIN}
 cd ..
 
 # * [신경망 기계 번역 심화 주제](adv-nmt/cover.md)
@@ -136,7 +140,7 @@ cd ..
 #   * [트랜스포머](adv-nmt/transformer.md)
 echo 'adv-nmt'
 cd ./adv-nmt
-pandoc ./cover.md ./multilingual-nmt.md ./monolingual-corpus.md transformer.md --latex-engine=xelatex -o ../${DIR_PATH}/11.adv-nmt.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=12pt
+pandoc ./cover.md ./multilingual-nmt.md ./monolingual-corpus.md transformer.md --latex-engine=xelatex -o ../${DIR_PATH}/11.adv-nmt.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE} -V geometry:margin=${MARGIN}
 cd ..
 
 # * [강화학습을 활용한 자연어생성](reinforcement-learning/cover.md)
@@ -148,7 +152,7 @@ cd ..
 #   * [강화학습을 활용한 비지도학습](reinforcement-learning/unsupervised-nmt.md)
 echo 'rl'
 cd ./reinforcement-learning
-pandoc ./cover.md ./intro.md ./rl_basics.md ./policy-gradient.md ./characteristic.md ./supervised-nmt.md ./unsupervised-nmt.md --latex-engine=xelatex -o ../${DIR_PATH}/12.rl.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
+pandoc ./cover.md ./intro.md ./rl_basics.md ./policy-gradient.md ./characteristic.md ./supervised-nmt.md ./unsupervised-nmt.md --latex-engine=xelatex -o ../${DIR_PATH}/12.rl.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE} -V geometry:margin=${MARGIN}
 cd ..
 
 # * [듀얼리티 활용하기](duality/cover.md)
@@ -157,7 +161,7 @@ cd ..
 #   * [듀얼리티를 활용한 비지도학습](duality/dul.md)
 echo 'duality'
 cd ./duality
-pandoc ./cover.md ./intro.md ./dsl.md ./dul.md --latex-engine=xelatex -o ../${DIR_PATH}/13.duality.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
+pandoc ./cover.md ./intro.md ./dsl.md ./dul.md --latex-engine=xelatex -o ../${DIR_PATH}/13.duality.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE} -V geometry:margin=${MARGIN}
 cd ..
 
 # * [서비스 만들기](productization/cover.md)
@@ -167,5 +171,5 @@ cd ..
 #   * [Microsoft의 신경망 기계번역](productization/microsoft.md)
 echo 'productization'
 cd ./productization
-pandoc ./cover.md ./pipeline.md ./gnmt.md ./nematus.md ./microsoft.md --latex-engine=xelatex -o ../${DIR_PATH}/14.productization.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE}
+pandoc ./cover.md ./pipeline.md ./gnmt.md ./nematus.md ./microsoft.md --latex-engine=xelatex -o ../${DIR_PATH}/14.productization.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE} -V geometry:margin=${MARGIN}
 cd ..

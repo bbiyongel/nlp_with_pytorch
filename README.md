@@ -28,7 +28,7 @@
 
 ## 지은이: 김기현(Kim, Ki Hyun)
 
-![김기현](./assets/me.jpeg)
+![김기현](../assets/me.jpeg){ width=500px }
 
 ### 연락처
 
@@ -49,13 +49,10 @@
   * Automatic Speech Translation: GenieTalk \[[Android](https://play.google.com/store/apps/details?id=com.hancom.interfree.genietalk&hl=ko)\], \[[iOS](https://itunes.apple.com/kr/app/지니톡-genietalk/id1104930501?mt=8)\], \[[TV Ads](https://www.youtube.com/watch?v=Jda0G0yhWpM)\]
 
 ## 패스트캠퍼스 강의 소개
-![자연어처리 심화 캠프](./assets/fastcampus_lecture.png)
+![자연어처리 심화 캠프](../assets/fastcampus_lecture.png)
 
 현재 이 책을 바탕으로 패스트캠퍼스에서 [자연어처리 입문 캠프](https://www.fastcampus.co.kr/data_camp_nlpbasic/), [자연어처리 심화 캠프](http://www.fastcampus.co.kr/data_camp_nlpadv/)도 진행하고 있습니다.
 
 이 저작물은 크리에이티브 커먼즈 [저작자표시-비영리-동일조건변경허락(BY-NC-SA)](https://creativecommons.org/licenses/by-nc-sa/2.0/kr/)에 따라 이용할 수 있습니다.
 
 ![저작자표시-비영리-동일조건변경허락(BY-NC-SA)](../assets/ccl.png)
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIyMzAzODE3N119
--->
