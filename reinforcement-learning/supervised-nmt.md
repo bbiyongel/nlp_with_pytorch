@@ -1,54 +1,49 @@
-# Supervised NMT
+# 지도학습을 통한 기계번역 고도화
 
-## Cross-entropy vs BLEU
+자연어생성(NLG)을 위한 sequence-to-sequence의 훈련 과정에 teacher-forcing 및 크로스 엔트로피 손실함수를 적용하게 되면, 그 자체의 특성으로 인해서 실제 번역 품질과의 괴리(discrepancy)가 생기게 됩니다. 일반적으로 BLEU는 실제 사람이 평가한 번역의 품질과 높은 상관관계에 있다고 알려져 있기 때문에, BLEU를 훈련 과정의 목적함수(objective function)로 사용하게 된다면 더 좋은 결과를 얻을 수 있을 것 입니다. 마찬가지로 다른 NLG 문제(요약 및 챗봇 등)에 대해서도 비슷한 접근을 생각 할 수 있습니다.
 
-$$L= -\frac{1}{|Y|}\sum_{y \in Y}{P(y) \log P_\theta(y)}$$
+## Minimum Risk Training (MRT)
 
-Cross entropy는 훌륭한 분류(classification) 문제에서 이미 훌륭한 손실함수(loss function)이지만 약간의 문제점을 가지고 있습니다. 자연어생성(NLG)을 위한 sequence-to-sequence의 훈련 과정에 적용하게 되면, 그 자체의 특성으로 인해서 우리가 평가하는 BLEU와의 괴리(discrepancy)가 생기게 됩니다. (자세한 내용은 이전 챕터 내용 참조 바랍니다.) 따라서 어찌보면 우리가 원하는 실제 기계번역의 목표(objective)와 다름으로 인해서 cross-entropy 자체에 오버피팅(over-fitting) 되는 효과가 생길 수 있습니다. 일반적으로 BLEU는 human evluation과 좋은 상관관계에 있다고 알려져 있지만, cross entropy는 이에 비해 낮은 상관관계를 가지기 때문입니다. 따라서 차라리 BLEU를 훈련 과정의 목적함수(objective function)로 사용하게 된다면 더 좋은 결과를 얻을 수 있을 것 입니다. 마찬가지로 다른 NLG 문제(요약 및 챗봇 등)에 대해서도 비슷한 접근을 생각 할 수 있습니다.
+위의 아이디어에서 출발한 논문[[Shen at el.2015]](https://arxiv.org/pdf/1512.02433.pdf)이 Minimum Risk Training이라는 방법을 제안하였습니다. 당시 저자는 폴리시 그래디언트를 직접적으로 사용하진 않았지만, 유사한 수식이 유도 되었다는 점이 매우 인상적입니다.
 
-## Minimum Risk Training
+$$\begin{gathered}
+\hat{\theta}_{\text{MLE}}=\underset{\theta}{\text{argmin}}~\mathcal{L}(\theta) \\
+\text{where }\mathcal{L}(\theta)=-\sum_{s=1}^S\log{P(y^{(s)}|x^{(s)};\theta)}.
+\end{gathered}$$
 
-위의 아이디어에서 출발한 논문[[Shen at el.2015]](https://arxiv.org/pdf/1512.02433.pdf)이 Minimum Risk Training이라는 방법을 제안하였습니다. 이때에는 Policy Gradient를 직접적으로 사용하진 않았지만, 거의 비슷한 수식이 유도 되었다는 점이 매우 인상적입니다.
-
-$$\begin{aligned}
-\hat{\theta}_{MLE} &= argmin_\theta(\mathcal{L}(\theta)) \\
-where~\mathcal{L}(\theta)&=-\sum_{s=1}^S\log{P(y^{(s)}|x^{(s)};\theta)}
-\end{aligned}$$
-
-기존의 Maximum Likelihood Estimation (MLE)방식은 위와 같은 손실 함수(Loss function)를 사용하여 $|S|$ 개의 입력과 출력에 대해서 손실(loss)값을 구하고, 이를 최소화 하는 $\theta$ 를 찾는 것이 목표(objective)였습니다. 하지만 이 논문에서는 ***Risk***를 아래와 같이 정의하고, 이를 최소화 하는 학습 방식을 Minimum Risk Training (MRT)라고 하였습니다.
+기존의 Maximum Likelihood Estimation (MLE)방식은 위와 같은 손실 함수(Loss function)를 사용하여 $|S|$ 개의 입력과 출력에 대해서 손실(loss)값을 구하고, 이를 최소화 하는 $\theta$ 를 찾는 것이 목표(objective)였습니다. 하지만 이 논문에서는 Risk를 아래와 같이 정의하고, 이를 최소화 하는 학습 방식을 Minimum Risk Training (MRT)라고 하였습니다.
 
 $$\begin{aligned}
-\mathcal{R}(\theta)&=\sum_{s=1}^S E_{y|x^{(s)};\theta}[\triangle(y,y^{(s)})] \\
-&=\sum_{s=1}^S \sum_{y \in \mathcal{Y(x^{(s)})}}{P(y|x^{(s)};\theta) \triangle(y, y^{(s)})}
+\mathcal{R}(\theta)&=\sum_{s=1}^S{\mathbb{E}_{y|x^{(s)};\theta}\big[\triangle(y,y^{(s)})\big]} \\
+&=\sum_{s=1}^S{\sum_{y\in\mathcal{Y(x^{(s)})}}{P(y|x^{(s)};\theta)\triangle(y, y^{(s)})}}
 \end{aligned}$$
 
 위의 수식에서 $\mathcal{Y}(x^{(s)})$ 는 full search space로써, $s$ 번째 입력 $x^{(s)}$ 가 주어졌을 때, 가능한 정답의 집합을 의미합니다. 또한 $\triangle(y,y^{(s)})$ 는 입력과 파라미터 $\theta$ 가 주어졌을 때, sampling한 $y$ 와 실제 정답 $y^{(s)}$ 의 차이(error)값을 나타냅니다. 즉, 위 수식에 따르면 risk $\mathcal{R}$ 은 주어진 입력과 현재 파라미터 상에서 얻은 y를 통해 현재 모델(함수)을 구하고, 동시에 이를 사용하여 risk의 기대값을 구한다고 볼 수 있습니다.
 
-$$\hat{\theta}_{MRT}=argmin_\theta(\mathcal{R}(\theta))$$
+$$\hat{\theta}_{\text{MRT}}=\underset{\theta}{\text{argmin}}~\mathcal{R}(\theta)$$
 
 이렇게 정의된 risk를 최소화(minimize) 하도록 하는 것이 목표(objective)입니다. 사실 risk 대신에 reward로 생각하면, reward를 최대화(maximize) 하는 것이 목표가 됩니다. 결국은 risk를 최소화 할 때에는 gradient descent, reward를 최대화 할 때는 gradient ascent를 사용하게 되므로, 수식을 풀어보면 결국 완벽하게 같은 이야기라고 볼 수 있습니다. 따라서 실제 구현에 있어서는 $\triangle(y,y^{(s)})$ 사용을 위해서 BLEU 점수에 $-1$을 곱하여 사용 합니다.
 
 $$\begin{aligned}
-\tilde{\mathcal{R}}(\theta)&=\sum_{s=1}^S{E_{y|x^{(s)};\theta,\alpha}[\triangle(y,y^{(s)})]} \\
-&=\sum_{s=1}^S \sum_{y \in \mathcal{S}(x^{(s)})}{Q(y|x^{(s)};\theta,\alpha)\triangle(y,y^{(s)})}
+\tilde{\mathcal{R}}(\theta)&=\sum_{s=1}^S{\mathbb{E}_{y|x^{(s)};\theta,\alpha}\big[\triangle(y,y^{(s)})\big]} \\
+&=\sum_{s=1}^S{\sum_{y\in\mathcal{S}(x^{(s)})}{Q(y|x^{(s)};\theta,\alpha)\triangle(y,y^{(s)})}}
 \end{aligned}$$
 
-$$\begin{aligned}
-where~\mathcal{S}(x^{(s)})~is~a~sampled~subset~of~the~full~search~space~\mathcal{y}(x^{(s)}) \\
-and~Q(y|x^{(s)};\theta,\alpha)~is~a~distribution~defined~on~the~subspace~S(x^{(s)}):
-\end{aligned}$$
-
-$$Q(y|x^{(s)};\theta,\alpha)=\frac{P(y|x^{(s)};\theta)^\alpha}{\sum_{y' \in S(x^{(s)})}P(y'|x^{(s)};\theta)^\alpha}$$
+$$\begin{gathered}
+\text{where }\mathcal{S}(x^{(s)})\text{ is a sampled subset of the full search space }\mathcal{y}(x^{(s)}) \\
+\text{and }Q(y|x^{(s)};\theta,\alpha)\text{ is a distribution defined on the subspace }S(x^{(s)})\text{:} \\
+Q(y|x^{(s)};\theta,\alpha)=\frac{P(y|x^{(s)};\theta)^\alpha}{\sum_{y'\in S(x^{(s)})}P(y'|x^{(s)};\theta)^\alpha}
+\end{gathered}$$
 
 하지만 주어진 입력에 대한 가능한 정답에 대한 전체 space를 탐색(search)할 수는 없기 때문에, Monte Carlo를 사용하여 서브스페이스(sub-space)를 샘플링(sampling) 하는 것을 택합니다. 그리고 위의 수식에서 $\theta$ 에 대해서 미분을 수행합니다. 미분을 하여 얻은 수식은 아래와 같습니다.
 
 $$\begin{aligned}
-\frac{\partial\tilde{R}(\theta)}{\partial\theta_i}&=\alpha\sum_{s=1}^{S}{\mathbb{E}_{y|x^{(s)};\theta,\alpha}[\frac{\partial P(y|x^{(s)};\theta)}{\partial\theta_i P(y|x^{(s)};\theta)}\times(\triangle(y,y^{(s)})-\mathbb{E}_{y'|x^{(s)};\theta,\alpha}[\triangle(y',y^{(s)})])]} \\
-&=\alpha\sum_{s=1}^{S}{\mathbb{E}_{y|x^{(s)};\theta,\alpha}[\frac{\partial \log{P(y|x^{(s)};\theta)}}{\partial\theta_i}\times(\triangle(y,y^{(s)})-\mathbb{E}_{y'|x^{(s)};\theta,\alpha}[\triangle(y',y^{(s)})])]} \\
-&\approx \alpha \sum_{s=1}^{S}{\frac{\partial \log{P(y|x^{(s)};\theta)}}{\partial\theta_i}\times(\triangle(y,y^{(s)})-\frac{1}{K}\sum_{k=1}^{K}{\triangle(y^{(k)},y^{(s)})})}
+\nabla_\theta\tilde{R}(\theta)&=\alpha\sum_{s=1}^{S}{\mathbb{E}_{y|x^{(s)};\theta,\alpha}[\frac{\nabla_\theta P(y|x^{(s)};\theta)}{P(y|x^{(s)};\theta)}\times(\triangle(y,y^{(s)})-\mathbb{E}_{y'|x^{(s)};\theta,\alpha}[\triangle(y',y^{(s)})])]} \\
+&=\alpha\sum_{s=1}^{S}{\mathbb{E}_{y|x^{(s)};\theta,\alpha}[\nabla_\theta\log{P(y|x^{(s)};\theta)}\times(\triangle(y,y^{(s)})-\mathbb{E}_{y'|x^{(s)};\theta,\alpha}[\triangle(y',y^{(s)})])]} \\
+&\approx\alpha\sum_{s=1}^{S}{\nabla_\theta\log{P(y|x^{(s)};\theta)}\times(\triangle(y,y^{(s)})-\frac{1}{K}\sum_{k=1}^{K}{\triangle(y^{(k)},y^{(s)})})}
 \end{aligned}$$
 
-$$\theta_{i+1} \leftarrow \theta_i - \frac{\partial\tilde{R}(\theta)}{\partial\theta_i}$$
+$$\theta\leftarrow\theta-\nabla_\theta\tilde{R}(\theta)$$
 
 이제 미분을 통해 얻은 MRT의 최종 수식을 해석 해 보겠습니다. 이해가 어렵다면 아래의 policy gradients 수식과 비교하며 따라가면 좀 더 이해가 수월할 수 있습니다.
 
@@ -96,162 +91,30 @@ MRT(or RL)을 PyTorch를 사용하여 구현 해 보도록 하겠습니다. 자�
 
 - git repo url: https://github.com/kh-kim/simple-nmt
 
-#### train.py
-
-```python
-import argparse, sys
-
-import torch
-import torch.nn as nn
-
-from data_loader import DataLoader
-import data_loader
-from simple_nmt.seq2seq import Seq2Seq
-import simple_nmt.trainer as trainer
-import simple_nmt.rl_trainer as rl_trainer
-```
-
-```python
-def define_argparser():
-    p = argparse.ArgumentParser()
-
-    p.add_argument('-model', required = True, help = 'Model file name to save. Additional information would be annotated to the file name.')
-    p.add_argument('-train', required = True, help = 'Training set file name except the extention. (ex: train.en --> train)')
-    p.add_argument('-valid', required = True, help = 'Validation set file name except the extention. (ex: valid.en --> valid)')
-    p.add_argument('-lang', required = True, help = 'Set of extention represents language pair. (ex: en + ko --> enko)')
-    p.add_argument('-gpu_id', type = int, default = -1, help = 'GPU ID to train. Currently, GPU parallel is not supported. -1 for CPU. Default = -1')
-
-    p.add_argument('-batch_size', type = int, default = 32, help = 'Mini batch size for gradient descent. Default = 32')
-    p.add_argument('-n_epochs', type = int, default = 18, help = 'Number of epochs to train. Default = 18')
-    p.add_argument('-print_every', type = int, default = 1000, help = 'Number of gradient descent steps to skip printing the training status. Default = 1000')
-    p.add_argument('-early_stop', type = int, default = -1, help = 'The training will be stopped if there is no improvement this number of epochs. Default = -1')
-
-    p.add_argument('-max_length', type = int, default = 80, help = 'Maximum length of the training sequence. Default = 80')
-    p.add_argument('-dropout', type = float, default = .2, help = 'Dropout rate. Default = 0.2')
-    p.add_argument('-word_vec_dim', type = int, default = 512, help = 'Word embedding vector dimension. Default = 512')
-    p.add_argument('-hidden_size', type = int, default = 768, help = 'Hidden size of LSTM. Default = 768')
-    p.add_argument('-n_layers', type = int, default = 4, help = 'Number of layers in LSTM. Default = 4')
-    
-    p.add_argument('-max_grad_norm', type = float, default = 5., help = 'Threshold for gradient clipping. Default = 5.0')
-    p.add_argument('-adam', action = 'store_true', help = 'Use Adam instead of using SGD.')
-    p.add_argument('-lr', type = float, default = 1., help = 'Initial learning rate. Default = 1.0')
-    p.add_argument('-min_lr', type = float, default = .000001, help = 'Minimum learning rate. Default = .000001')
-    p.add_argument('-lr_decay_start_at', type = int, default = 10, help = 'Start learning rate decay from this epoch.')
-    p.add_argument('-lr_slow_decay', action = 'store_true', help = 'Decay learning rate only if there is no improvement on last epoch.')
-    p.add_argument('-lr_decay_rate', type = float, default = .5, help = 'Learning rate decay rate. Default = 0.5')
-
-    p.add_argument('-rl_lr', type = float, default = .01, help = 'Learning rate for reinforcement learning. Default = .01')
-    p.add_argument('-n_samples', type = int, default = 1, help = 'Number of samples to get baseline. Default = 1')
-    p.add_argument('-rl_n_epochs', type = int, default = 10, help = 'Number of epochs for reinforcement learning. Default = 10')
-    p.add_argument('-rl_n_gram', type = int, default = 6, help = 'Maximum number of tokens to calculate BLEU for reinforcement learning. Default = 6')
-
-    config = p.parse_args()
-
-    return config
-```
-
-```python
-if __name__ == "__main__":
-    config = define_argparser()
-
-    import os.path
-    # If the model exists, load model and configuration to continue the training.
-    if os.path.isfile(config.model):
-        saved_data = torch.load(config.model)
-    
-        prev_config = saved_data['config']
-        config = overwrite_config(config, prev_config)
-        config.lr = saved_data['current_lr']
-    else:
-        saved_data = None
-    
-    # Load training and validation data set.
-    loader = DataLoader(config.train, 
-                        config.valid, 
-                        (config.lang[:2], config.lang[-2:]), 
-                        batch_size = config.batch_size, 
-                        device = config.gpu_id, 
-                        max_length = config.max_length
-                        )
-
-    input_size = len(loader.src.vocab) # Encoder's embedding layer input size
-    output_size = len(loader.tgt.vocab) # Decoder's embedding layer input size and Generator's softmax layer output size
-    # Declare the model
-    model = Seq2Seq(input_size,
-                    config.word_vec_dim, # Word embedding vector size
-                    config.hidden_size, # LSTM's hidden vector size
-                    output_size, 
-                    n_layers = config.n_layers, # number of layers in LSTM
-                    dropout_p = config.dropout # dropout-rate in LSTM
-                    )
-
-    # Default weight for loss equals to 1, but we don't need to get loss for PAD token.
-    # Thus, set a weight for PAD to zero.
-    loss_weight = torch.ones(output_size)
-    loss_weight[data_loader.PAD] = 0.
-    # Instead of using Cross-Entropy loss, we can use Negative Log-Likelihood(NLL) loss with log-probability.
-    criterion = nn.NLLLoss(weight = loss_weight, size_average = False) 
-
-    print(model)
-    print(criterion)
-
-    # Pass models to GPU device if it is necessary.
-    if config.gpu_id >= 0:
-        model.cuda(config.gpu_id)
-        criterion.cuda(config.gpu_id)
-
-    # If we have loaded model weight parameters, use that weights for declared model.
-    if saved_data is not None:
-        model.load_state_dict(saved_data['model'])
-
-    # Start training. This function maybe equivalant to 'fit' function in Keras.
-    trainer.train_epoch(model, 
-                        criterion, 
-                        loader.train_iter, 
-                        loader.valid_iter, 
-                        config,
-                        start_epoch = saved_data['epoch'] if saved_data is not None else 1,
-                        others_to_save = {'src_vocab': loader.src.vocab, 'tgt_vocab': loader.tgt.vocab} # We can put any object here to save with model.
-                        )
-```
-
-```python
-    # Start reinforcement learning.
-    if config.rl_n_epochs > 0:
-        rl_trainer.train_epoch(model,
-                            criterion, # Although it does not use cross-entropy loss, but its equation equals to use entropy.
-                            loader.train_iter,
-                            loader.valid_iter,
-                            config,
-                            start_epoch = (saved_data['epoch'] - config.n_epochs) if saved_data is not None else 1,
-                            others_to_save = {'src_vocab': loader.src.vocab, 'tgt_vocab': loader.tgt.vocab}
-                            )
-```
-
 #### simple_nmt/rl_trainer.py
 
 ```python
-import time
-import numpy as np
-#from nltk.translate.bleu_score import sentence_bleu as score_func
+from tqdm import tqdm
+# from nltk.translate.bleu_score import sentence_bleu as score_func
 from nltk.translate.gleu_score import sentence_gleu as score_func
+# from utils import score_sentence as score_func
 
 import torch
-import torch.nn as nn
-import torch.optim as optim
 import torch.nn.utils as torch_utils
 
 import utils
 import data_loader
+
+from simple_nmt.trainer import Trainer
 ```
 
 ```python
-def get_reward(y, y_hat, n_gram = 6):
+def _get_reward(self, y_hat, y, n_gram=6):
     # This method gets the reward based on the sampling result and reference sentence.
     # For now, we uses GLEU in NLTK, but you can used your own well-defined reward function.
     # In addition, GLEU is variation of BLEU, and it is more fit to reinforcement learning.
 
-    # Since we don't calculate reward score exactly as same as multi-bleu.perl, 
+    # Since we don't calculate reward score exactly as same as multi-bleu.perl,
     # (especialy we do have different tokenization,) I recommend to set n_gram to 6.
 
     # |y| = (batch_size, length1)
@@ -275,10 +138,10 @@ def get_reward(y, y_hat, n_gram = 6):
                 break
 
         # for nltk.bleu & nltk.gleu
-        scores += [score_func([ref], hyp, max_len = n_gram) * 100.]
+        scores += [score_func([ref], hyp, max_len=n_gram) * 100.]
 
         # for utils.score_sentence
-        #scores += [score_func(ref, hyp, 4, smooth = 1)[-1] * 100.]
+        # scores += [score_func(ref, hyp, 4, smooth = 1)[-1] * 100.]
     scores = torch.FloatTensor(scores).to(y.device)
     # |scores| = (batch_size)
 
@@ -286,194 +149,124 @@ def get_reward(y, y_hat, n_gram = 6):
 ```
 
 ```python
-def get_gradient(y, y_hat, criterion, reward = 1):
+def _get_gradient(self, y_hat, y, crit=None, reward=1):
     # |y| = (batch_size, length)
     # |y_hat| = (batch_size, length, output_size)
     # |reward| = (batch_size)
-    batch_size = y.size(0)
+    crit = self.crit if crit is None else crit
 
     # Before we get the gradient, multiply -reward for each sample and each time-step.
     y_hat = y_hat * -reward.view(-1, 1, 1).expand(*y_hat.size())
 
     # Again, multiply -1 because criterion is NLLLoss.
-    log_prob = -criterion(y_hat.contiguous().view(-1, y_hat.size(-1)), y.contiguous().view(-1))
-    log_prob.div(batch_size).backward()
+    log_prob = -crit(y_hat.contiguous().view(-1, y_hat.size(-1)),
+                        y.contiguous().view(-1)
+                        )
+    log_prob.div(y.size(0)).backward()
 
     return log_prob
 ```
 
 ```python
-def train_epoch(model, criterion, train_iter, valid_iter, config, start_epoch = 1, others_to_save = None):
-    current_lr = config.rl_lr
-
-    highest_valid_bleu = -np.inf
-    no_improve_cnt = 0
-
-    # Print initial valid BLEU before we start RL.
-    model.eval()
-    total_reward, sample_cnt = 0, 0
-    for batch_index, batch in enumerate(valid_iter):
-        current_batch_word_cnt = torch.sum(batch.tgt[1])
-        x = batch.src
-        y = batch.tgt[0][:, 1:]
-        batch_size = y.size(0)
-        # |x| = (batch_size, length)
-        # |y| = (batch_size, length)
-
-        # feed-forward
-        y_hat, indice = model.search(x, is_greedy = True, max_length = config.max_length)
-        # |y_hat| = (batch_size, length, output_size)
-        # |indice| = (batch_size, length)
-
-        reward = get_reward(y, indice, n_gram = config.rl_n_gram)
-
-        total_reward += float(reward.sum())
-        sample_cnt += batch_size
-        if sample_cnt >= len(valid_iter.dataset.examples):
-            break
-    avg_bleu = total_reward / sample_cnt
-    print("initial valid BLEU: %.4f" % avg_bleu) # You can figure-out improvement.
-    model.train() # Now, begin training.
-
-    # Start RL
-    for epoch in range(start_epoch, config.rl_n_epochs + 1):
-        #optimizer = optim.Adam(model.parameters(), lr = current_lr)
-        optimizer = optim.SGD(model.parameters(), lr = current_lr) # Default hyper-parameter is set for SGD.
-        print("current learning rate: %f" % current_lr)
-        print(optimizer)
-
+    def train_epoch(self,
+                    train,
+                    optimizer,
+                    max_grad_norm=5,
+                    verbose=VERBOSE_SILENT
+                    ):
+        '''
+        Train an epoch with given train iterator and optimizer.
+        '''
+        total_reward, total_actor_reward = 0, 0
+        total_grad_norm = 0
+        avg_reward, avg_actor_reward = 0, 0
+        avg_param_norm, avg_grad_norm = 0, 0
         sample_cnt = 0
-        total_loss, total_bleu, total_sample_count, total_word_count, total_parameter_norm, total_grad_norm = 0, 0, 0, 0, 0, 0
-        start_time = time.time()
-        train_bleu = np.inf
 
-        for batch_index, batch in enumerate(train_iter):
-            optimizer.zero_grad()
-
-            current_batch_word_cnt = torch.sum(batch.tgt[1])
-            x = batch.src
-            y = batch.tgt[0][:, 1:]
-            batch_size = y.size(0)
+        progress_bar = tqdm(train,
+                            desc='Training: ',
+                            unit='batch'
+                            ) if verbose is VERBOSE_BATCH_WISE else train
+        # Iterate whole train-set.
+        for idx, mini_batch in enumerate(progress_bar):
+            # Raw target variable has both BOS and EOS token. 
+            # The output of sequence-to-sequence does not have BOS token. 
+            # Thus, remove BOS token for reference.
+            x, y = mini_batch.src, mini_batch.tgt[0][:, 1:]
             # |x| = (batch_size, length)
             # |y| = (batch_size, length)
+            
+            # You have to reset the gradients of all model parameters before to take another step in gradient descent.
+            optimizer.zero_grad()
 
             # Take sampling process because set False for is_greedy.
-            y_hat, indice = model.search(x, is_greedy = False, max_length = config.max_length)
+            y_hat, indice = self.model.search(x,
+                                              is_greedy=False,
+                                              max_length=self.config.max_length
+                                              )
             # Based on the result of sampling, get reward.
-            q_actor = get_reward(y, indice, n_gram = config.rl_n_gram)
+            actor_reward = self._get_reward(indice,
+                                            y,
+                                            n_gram=self.config.rl_n_gram
+                                            )
             # |y_hat| = (batch_size, length, output_size)
             # |indice| = (batch_size, length)
-            # |q_actor| = (batch_size)
+            # |actor_reward| = (batch_size)
 
             # Take samples as many as n_samples, and get average rewards for them.
             # I figured out that n_samples = 1 would be enough.
             baseline = []
             with torch.no_grad():
-                for i in range(config.n_samples):
-                    _, sampled_indice = model.search(x, is_greedy = False, max_length = config.max_length)
-                    baseline += [get_reward(y, sampled_indice, n_gram = config.rl_n_gram)]
-                baseline = torch.stack(baseline).sum(dim = 0).div(config.n_samples)
+                for i in range(self.config.n_samples):
+                    _, sampled_indice = self.model.search(x,
+                                                          is_greedy=False,
+                                                          max_length=self.config.max_length
+                                                          )
+                    baseline += [self._get_reward(sampled_indice,
+                                                  y,
+                                                  n_gram=self.config.rl_n_gram
+                                                  )]
+                baseline = torch.stack(baseline).sum(dim=0).div(self.config.n_samples)
                 # |baseline| = (n_samples, batch_size) --> (batch_size)
 
             # Now, we have relatively expected cumulative reward.
-            # Which score can be drawn from q_actor subtracted by baseline.
-            tmp_reward = q_actor - baseline
-            # |tmp_reward| = (batch_size)
+            # Which score can be drawn from actor_reward subtracted by baseline.
+            final_reward = actor_reward - baseline
+            # |final_reward| = (batch_size)
+
             # calcuate gradients with back-propagation
-            get_gradient(indice, y_hat, criterion, reward = tmp_reward)
+            self._get_gradient(y_hat, indice, reward=final_reward)
+            
+            # Simple math to show stats.
+            total_reward += float(final_reward.sum())
+            total_actor_reward += float(actor_reward.sum())
+            sample_cnt += int(actor_reward.size(0))
+            total_grad_norm += float(utils.get_grad_norm(self.model.parameters()))
 
-            # simple math to show stats
-            total_loss += float(tmp_reward.sum())
-            total_bleu += float(q_actor.sum())
-            total_sample_count += batch_size
-            total_word_count += int(current_batch_word_cnt)
-            total_parameter_norm += float(utils.get_parameter_norm(model.parameters()))
-            total_grad_norm += float(utils.get_grad_norm(model.parameters()))
+            avg_reward = total_reward / sample_cnt
+            avg_actor_reward = total_actor_reward / sample_cnt
+            avg_grad_norm = total_grad_norm / (idx + 1)
 
-            if (batch_index + 1) % config.print_every == 0:
-                avg_loss = total_loss / total_sample_count
-                avg_bleu = total_bleu / total_sample_count
-                avg_parameter_norm = total_parameter_norm / config.print_every
-                avg_grad_norm = total_grad_norm / config.print_every
-                elapsed_time = time.time() - start_time
-
-                print("epoch: %d batch: %d/%d\t|param|: %.2f\t|g_param|: %.2f\trwd: %.4f\tBLEU: %.4f\t%5d words/s %3d secs" % (epoch, 
-                                                                                                            batch_index + 1, 
-                                                                                                            int(len(train_iter.dataset.examples) // config.batch_size), 
-                                                                                                            avg_parameter_norm, 
-                                                                                                            avg_grad_norm, 
-                                                                                                            avg_loss,
-                                                                                                            avg_bleu,
-                                                                                                            total_word_count // elapsed_time,
-                                                                                                            elapsed_time
-                                                                                                            ))
-
-                total_loss, total_bleu, total_sample_count, total_word_count, total_parameter_norm, total_grad_norm = 0, 0, 0, 0, 0, 0
-                start_time = time.time()
-
-                train_bleu = avg_bleu
+            if verbose is VERBOSE_BATCH_WISE:
+                progress_bar.set_postfix_str('|g_param|=%.2f rwd=%4.2f avg_frwd=%.2e BLEU=%.4f' % (avg_grad_norm,
+                                                                                                 float(actor_reward.sum().div(y.size(0))),
+                                                                                                 avg_reward,
+                                                                                                 avg_actor_reward
+                                                                                                 ))
 
             # In orther to avoid gradient exploding, we apply gradient clipping.
-            torch_utils.clip_grad_norm_(model.parameters(), config.max_grad_norm)
+            torch_utils.clip_grad_norm_(self.model.parameters(),
+                                        self.config.max_grad_norm
+                                        )
             # Take a step of gradient descent.
             optimizer.step()
 
-            sample_cnt += batch_size
-            if sample_cnt >= len(train_iter.dataset.examples):
+
+            if idx >= len(progress_bar) * self.config.train_ratio_per_epoch:
                 break
 
-        sample_cnt = 0
-        total_reward = 0
+        if verbose is VERBOSE_BATCH_WISE:
+            progress_bar.close()
 
-        # Start validation
-        with torch.no_grad():
-            model.eval() # Turn-off drop-out
-
-            for batch_index, batch in enumerate(valid_iter):
-                current_batch_word_cnt = torch.sum(batch.tgt[1])
-                x = batch.src
-                y = batch.tgt[0][:, 1:]
-                batch_size = y.size(0)
-                # |x| = (batch_size, length)
-                # |y| = (batch_size, length)
-
-                # feed-forward
-                y_hat, indice = model.search(x, is_greedy = True, max_length = config.max_length)
-                # |y_hat| = (batch_size, length, output_size)
-                # |indice| = (batch_size, length)
-
-                reward = get_reward(y, indice, n_gram = config.rl_n_gram)
-
-                total_reward += float(reward.sum())
-                sample_cnt += batch_size
-                if sample_cnt >= len(valid_iter.dataset.examples):
-                    break
-
-            avg_bleu = total_reward / sample_cnt
-            print("valid BLEU: %.4f" % avg_bleu)
-
-            if highest_valid_bleu < avg_bleu:
-                highest_valid_bleu = avg_bleu
-                no_improve_cnt = 0
-            else:
-                no_improve_cnt += 1
-
-            model.train()
-
-        model_fn = config.model.split(".")
-        model_fn = model_fn[:-1] + ["%02d" % (config.n_epochs + epoch), "%.2f-%.4f" % (train_bleu, avg_bleu)] + [model_fn[-1]]
-
-        # PyTorch provides efficient method for save and load model, which uses python pickle.
-        to_save = {"model": model.state_dict(),
-                    "config": config,
-                    "epoch": config.n_epochs + epoch + 1,
-                    "current_lr": current_lr
-                    }
-        if others_to_save is not None:
-            for k, v in others_to_save.items():
-                to_save[k] = v
-        torch.save(to_save, '.'.join(model_fn))
-
-        if config.early_stop > 0 and no_improve_cnt > config.early_stop:
-            break
+        return avg_actor_reward, param_norm, avg_grad_norm
 ```
