@@ -1,4 +1,4 @@
-# 지도학습을 통한 기계번역 고도화
+# 강화학습을 활용한 지도학습
 
 자연어생성(NLG)을 위한 sequence-to-sequence의 훈련 과정에 teacher-forcing 및 크로스 엔트로피 손실함수를 적용하게 되면, 그 자체의 특성으로 인해서 실제 번역 품질과의 괴리(discrepancy)가 생기게 됩니다. 일반적으로 BLEU는 실제 사람이 평가한 번역의 품질과 높은 상관관계에 있다고 알려져 있기 때문에, BLEU를 훈련 과정의 목적함수(objective function)로 사용하게 된다면 더 좋은 결과를 얻을 수 있을 것 입니다. 마찬가지로 다른 NLG 문제(요약 및 챗봇 등)에 대해서도 비슷한 접근을 생각 할 수 있습니다.
 
@@ -18,11 +18,11 @@ $$\begin{aligned}
 &=\sum_{s=1}^S{\sum_{y\in\mathcal{Y(x^{(s)})}}{P(y|x^{(s)};\theta)\triangle(y, y^{(s)})}}
 \end{aligned}$$
 
-위의 수식에서 $\mathcal{Y}(x^{(s)})$ 는 full search space로써, $s$ 번째 입력 $x^{(s)}$ 가 주어졌을 때, 가능한 정답의 집합을 의미합니다. 또한 $\triangle(y,y^{(s)})$ 는 입력과 파라미터 $\theta$ 가 주어졌을 때, sampling한 $y$ 와 실제 정답 $y^{(s)}$ 의 차이(error)값을 나타냅니다. 즉, 위 수식에 따르면 risk $\mathcal{R}$ 은 주어진 입력과 현재 파라미터 상에서 얻은 y를 통해 현재 모델(함수)을 구하고, 동시에 이를 사용하여 risk의 기대값을 구한다고 볼 수 있습니다.
+위의 수식에서 $\mathcal{Y}(x^{(s)})$ 는 탐색 공간의 전체 집합(full search space)로써, $s$ 번째 입력 $x^{(s)}$ 가 주어졌을 때, 가능한 정답의 집합을 의미합니다. 또한 $\triangle(y,y^{(s)})$ 는 입력과 파라미터 $\theta$ 가 주어졌을 때, 샘플링한 $y$ 와 실제 정답 $y^{(s)}$ 의 차이(error)값을 나타냅니다. 즉, 위 수식에 따르면 risk $\mathcal{R}$ 은 주어진 입력과 현재 파라미터 상에서 얻은 y를 통해 현재 모델(함수)을 구하고, 동시에 이를 사용하여 risk의 기대값을 구한다고 볼 수 있습니다.
 
 $$\hat{\theta}_{\text{MRT}}=\underset{\theta}{\text{argmin}}~\mathcal{R}(\theta)$$
 
-이렇게 정의된 risk를 최소화(minimize) 하도록 하는 것이 목표(objective)입니다. 사실 risk 대신에 reward로 생각하면, reward를 최대화(maximize) 하는 것이 목표가 됩니다. 결국은 risk를 최소화 할 때에는 gradient descent, reward를 최대화 할 때는 gradient ascent를 사용하게 되므로, 수식을 풀어보면 결국 완벽하게 같은 이야기라고 볼 수 있습니다. 따라서 실제 구현에 있어서는 $\triangle(y,y^{(s)})$ 사용을 위해서 BLEU 점수에 $-1$을 곱하여 사용 합니다.
+이렇게 정의된 risk를 최소화(minimize) 하도록 하는 것이 목표(objective)입니다. 이에 반대로 risk 대신에 보상(reward)으로 생각하면, 보상을 최대화(maximize) 하는 것이 목표가 됩니다. 결국은 risk를 최소화 할 때에는 그래디언트 디센트, 보상을 최대화 할 때는 그래디언트 어센트를 사용하게 되므로, 수식을 풀어보면 결국 완벽하게 같은 이야기라고 볼 수 있습니다. 따라서 실제 구현에 있어서는 $\triangle(y,y^{(s)})$ 사용을 위해서 BLEU 점수에 $-1$ 을 곱하여 사용 합니다.
 
 $$\begin{aligned}
 \tilde{\mathcal{R}}(\theta)&=\sum_{s=1}^S{\mathbb{E}_{y|x^{(s)};\theta,\alpha}\big[\triangle(y,y^{(s)})\big]} \\
@@ -35,7 +35,7 @@ $$\begin{gathered}
 Q(y|x^{(s)};\theta,\alpha)=\frac{P(y|x^{(s)};\theta)^\alpha}{\sum_{y'\in S(x^{(s)})}P(y'|x^{(s)};\theta)^\alpha}
 \end{gathered}$$
 
-하지만 주어진 입력에 대한 가능한 정답에 대한 전체 space를 탐색(search)할 수는 없기 때문에, Monte Carlo를 사용하여 서브스페이스(sub-space)를 샘플링(sampling) 하는 것을 택합니다. 그리고 위의 수식에서 $\theta$ 에 대해서 미분을 수행합니다. 미분을 하여 얻은 수식은 아래와 같습니다.
+하지만 주어진 입력에 대한 가능한 정답에 대한 전체 공간을 탐색(search)할 수는 없기 때문에, 전체 탐색공간 샘플링한 서브스페이스(sub-space)에서 샘플링 하는 것을 택합니다. 그리고 위의 수식에서 $\theta$ 에 대해서 미분을 수행합니다. 미분을 하여 얻은 수식은 아래와 같습니다.
 
 $$\begin{aligned}
 \nabla_\theta\tilde{R}(\theta)&=\alpha\sum_{s=1}^{S}{\mathbb{E}_{y|x^{(s)};\theta,\alpha}[\frac{\nabla_\theta P(y|x^{(s)};\theta)}{P(y|x^{(s)};\theta)}\times(\triangle(y,y^{(s)})-\mathbb{E}_{y'|x^{(s)};\theta,\alpha}[\triangle(y',y^{(s)})])]} \\
@@ -45,49 +45,51 @@ $$\begin{aligned}
 
 $$\theta\leftarrow\theta-\nabla_\theta\tilde{R}(\theta)$$
 
-이제 미분을 통해 얻은 MRT의 최종 수식을 해석 해 보겠습니다. 이해가 어렵다면 아래의 policy gradients 수식과 비교하며 따라가면 좀 더 이해가 수월할 수 있습니다.
+이제 미분을 통해 얻은 MRT의 최종 수식을 해석 해 보겠습니다. 이해가 어렵다면 아래의 폴리시 그래디언트 수식과 비교하며 따라가면 좀 더 이해가 수월할 수 있습니다.
 
-- $s$ 번째 입력 $x^{(s)}$ 를 신경망 $\theta$ 에 넣어 얻은 로그확률 $\log{P(y|x^{(s)};\theta)}$ 을 미분하여 gradient를 얻습니다.
-- 그리고 $\theta$ 로부터 샘플링(samping) 한 $y$ 와 실제 정답 $y^{(s)}$ 와의 차이(여기서는 주로 BLEU에 $-1$ 을 곱하여 사용)값에서 
-- 또 다시 $\theta$ 로부터 샘플링하여 얻은 $y'$ 와 실제 정답 $y^{(s)}$ 와의 차이(마찬가지로 -BLEU)의 기대값을
-- 빼 준 값을 risk로써 로그확률의 gradient에 곱해 줍니다.
-- 이 과정을 전체 데이터셋(실제로는 mini-batch) $S$ 에 대해서 수행한 후 합(summation)을 구하고 learning rate $\alpha$ 를 곱 합니다.
+- $s$ 번째 입력 $x^{(s)}$ 를 신경망 $\theta$ 에 넣어 얻은 로그확률 $\log{P(y|x^{(s)};\theta)}$ 을 $\theta$ 에 대하여 미분하여 그래디언트를 얻습니다.
+- 그리고 $\theta$ 로부터 샘플링한 $y$ 와 실제 정답 $y^{(s)}$ 와의 차이(여기서는 주로 BLEU에 $-1$ 을 곱하여 사용)값에서 
+- 또 다시 $\theta$ 로부터 샘플링하여 얻은 $y'$ 와 실제 정답 $y^{(s)}$ 와의 차이(마찬가지로 -BLEU)의 기대값을 빼 준 값
+- 그 값을 risk로 아까 계산한 로그 확률값의 그래디언트에 곱해 줍니다.
+- 이 과정을 전체 데이터셋(실제로는 미니배치) $S$ 에 대해서 수행한 후 합(summation)을 구하고 learning rate $\alpha$ 를 곱합니다.
 
-최종적으로는 기대값 수식을 monte carlo sampling을 통해 제거할 수 있습니다.
+최종적으로는 수식에서 기대값 부분을 몬테카를로 샘플링을 통해 제거할 수 있습니다. 아래는 폴리시 그래디언트의 REINFORCE 알고리즘 수식 입니다. 위의 MRT 수식과 비교하며 참고하기 바랍니다.
 
-아래는 policy gradients 수식 입니다.
+$$\begin{gathered}
+\theta\leftarrow\theta+\alpha\nabla_\theta{J(\theta)} \\
+\text{where }\nabla_\theta{J(\theta)}=\mathbb{E}_{\pi_\theta}[\nabla_\theta\log{\pi_\theta(a|s)}\times\big(G_t-b(s)\big))]. \\
+\end{gathered}$$
 
-$$\begin{aligned}
-\triangledown_\theta J(\theta)&=\mathbb{E}_{\pi_\theta}[\triangledown_\theta \log{\pi_\theta (a|s)} \times Q^{\pi_\theta}(s,a)] \\
-\theta &\leftarrow \theta + \alpha \triangledown_\theta J(\theta)
-\end{aligned}$$
+MRT는 risk에 대해 최소화 해야 하기 때문에 그래디언트 디센트를 해 주는 것을 제외하면 똑같은 수식이 나오는 것을 알 수 있습니다. 하지만 결과적으로는 risk $\triangle(y,y^{(s)})$ 가 -BLEU로 정의되기 때문에, 결국에는 $\theta$ 를 업데이트 하는 방식은 그래디언트 디센트와 어센트를 떠나서 똑같은 수식이 나오게 됩니다.
 
-MRT는 risk에 대해 minimize 해야 하기 때문에 gradient descent를 해 주는 것을 제외하면 똑같은 수식이 나오는 것을 알 수 있습니다. 
+![MRT의 성능 평가](../assets/rl-minimum-risk-training.png)
 
-![](../assets/rl-minimum-risk-training.png)
+위와 같이 훈련한 MRT에 대한 성능을 실험한 결과 입니다. 기존의 MLE 방식에 비해서 BLEU가 1.5가량 상승한 것을 확인할 수 있습니다. 이처럼 MRT는 강화학습으로써의 접근을 전혀 하지 않고도, 수식적으로 폴리시 그래디언트의 REINFORCE 알고리즘 수식을 이끌어내고 성능을 끌어올리는 방법을 제시한 점이 인상 깊습니다.
 
-위와 같이 훈련한 MRT에 대한 성능을 실험한 결과 입니다. 기존의 MLE 방식에 비해서 BLEU가 1.5가량 상승한 것을 확인할 수 있습니다. 이처럼 MRT는 강화학습으로써의 접근을 전혀 하지 않고도, 수식적으로 policy gradients의 일종인 REINFORCE with baseline 수식을 이끌어내고 성능을 끌어올리는 방법을 제시한 점이 인상깊습니다.
+### 구현
 
-### Implementation
+우리는 아래의 방법을 통해 Minimum Risk Training을 파이토치로 구현 할 겁니다. 
 
-우리는 아래의 방법을 통해 Minimum Risk Training을 PyTorch로 구현 할 겁니다. 
+1. 주어진 입력 문장에 대해 정책 $\theta$ 를 이용하여 번역 문장을 샘플링 합니다.
+1. 샘플링 문장과 정답 문장 사이의 BLEU를 계산하고 $-1$ 을 곱해주어 risk로 변환 합니다. 
+1. 그리고 로그 확률 분포 전체에 risk를 곱해주고, 각 샘플과 time-step 별로 구해진 negative 로그확률값의 합에 $-1$ 을 곱해줍니다.
+1. 로그확률값의 합에 대해서 $\theta$ 로 미분을 수행하면, back-propagation을 통해서 신경망 $\theta$ 전체에 그래디언트가 구해집니다.
+1. 이미 우리는 risk를 곱하였기 때문에, 곧바로 이 그래디언트를 통해 그래디언트 디센트를 수행하여 최적화를 수행 합니다.
 
-1. 먼저 BLEU를 통해 얻은 reward에 $-1$ 을 곱해주어 risk로 변환 합니다. 
-1. 그리고 로그 확률에 risk를 곱해주고, 기존에 Negative Log Likelihodd Loss (NLLLoss)를 사용했으므로 NLLLoss 값에 $-1$ 을 곱해주어 sum of positive log probability를 구합니다. 
-1. Summation 결과물에 대해서 $\theta$ 에 대해 미분을 수행하면, back-propagation을 통해서 신경망 $\theta$ 전체에 gradient가 구해집니다. 
-1. 이 gradient를 사용하여 gradient descent를 통해 최적화(optimize) 하도록 할 겁니다.
+이전 수식과 달리 그래디언트에 risk를 곱하는 것이 아닌, 로그확률값에 risk를 곱한 후에 그래디언트를 구하도록 하였습니다. 하지만 risk는 $\theta$ 에 대해서 상수이기 때문에, 미분 전에 곱해주어도 차이가 없습니다.
 
-$$\nabla_\theta J(\theta) = \nabla_\theta\sum_{s=1}^{S}{\bigg( \log{P(y|x^{(s)};\theta)}\times\Big(\triangle(y,y^{(s)})-\frac{1}{K}\sum_{k=1}^{K}{\triangle(y^{(k)},y^{(s)})}\Big)\bigg)}$$
+$$\begin{gathered}
+\nabla_\theta{J(\theta)}=\nabla_\theta\sum_{s=1}^{S}{\bigg(\log{P(y|x^{(s)};\theta)}\times\Big(\triangle(y,y^{(s)})-\frac{1}{K}\sum_{k=1}^{K}{\triangle(y^{(k)},y^{(s)})}\Big)\bigg)} \\
+\text{where }\triangle(\hat{y}, y)=-\text{BLEU}(\hat{y}, y) \\
+\\
+\theta\leftarrow\theta-\lambda\nabla_\theta{J(\theta)}
+\end{gathered}$$
 
-$$where~\triangle(\hat{y}, y)=-BLEU(\hat{y}, y)$$
+우리는 실험을 통해서 심지어 $K=1$ 일 때도, MRT가 잘 동작함을 확인할 수 있습니다. 즉 베이스라인을 위한 샘플링 횟수가 1회에 불과하더라도 몬테카를로 샘플링이 잘 동작하여 정상적으로 학습되는 것을 확인 가능 합니다.
 
-$$\theta \leftarrow \theta - \lambda\nabla_\theta J(\theta)$$
+### 파이토치 예제 코드
 
-우리는 실험을 통해서 심지어 $K=1$ 일 때도, MRT가 잘 동작함을 확인할 수 있습니다.
-
-### Code
-
-MRT(or RL)을 PyTorch를 사용하여 구현 해 보도록 하겠습니다. 자세한 전체 코드는 이전의 NMT PyTorch 실습 코드의 git repository에서 다운로드 할 수 있습니다.
+MRT을 파이토치를 사용하여 구현 해 보도록 하겠습니다. 자세한 전체 코드는 이전의 NMT 파이토치 실습 코드의 깃허브에서 다운로드 할 수 있습니다.
 
 - git repo url: https://github.com/kh-kim/simple-nmt
 
