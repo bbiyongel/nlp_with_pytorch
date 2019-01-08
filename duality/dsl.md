@@ -39,11 +39,17 @@ $$\begin{aligned}
 
 여기서 $\lambda$ 를 통해 손실함수 내에서 비율을 조절할 수 있습니다. 만약 $\lambda$ 가 너무 크다면 최적화 과정에서 regularization term을 최소화하는데 너무 집중하게 될 겁니다. 따라서 적절한 크기의 $\lambda$가 필요 합니다. 따라서 $\lambda$ 는 하이퍼 파라미터이며 실험 결과 $\lambda=0.01$ 일 때 가장 좋은 성능을 나타냅니다.
 
+|모델|설명|BLEU|
+|-|-|-|
+|NMT[1] [Jean et al.2015] |Teacher Forcing by MLE|33.08|
+|MRT[2] [Shen et al.2016] |Minimum Risk Training by BLEU|34.23|
+|DSL|Dual Supervised Learning|34.84|
+
+<!--
 ![](../assets/duality-dsl-eval.png)
+-->
 
-위의 테이블과 같이 기존의 Teacher Forcing 아래의 MLE 방식([1]번)과 Minimum Risk Training(MRT) 방식([2]번) 보다 더 높은 성능을 보입니다.
-
-이 방법은 강화학습과 같이 비효율적이고 훈련이 까다로운 방식을 벗어나서 regularization term을 추가하여 강화학습을 상회하는 성능을 얻어낸 것이 주목할 점이라고 할 수 있습니다.
+위의 테이블과 같이 기존의 Teacher Forcing 아래의 MLE 방식([1]번)과 Minimum Risk Training(MRT) 방식([2]번) 보다 더 높은 성능을 보입니다. 이 방법은 강화학습과 같이 비효율적이고 훈련이 까다로운 방식을 벗어나서 regularization term을 추가하여 강화학습을 상회하는 성능을 얻어낸 것이 주목할 점이라고 할 수 있습니다.
 
 ## 파이토치 예제 코드
 
@@ -51,7 +57,7 @@ DSL을 파이토치를 사용하여 구현 해 보도록 하겠습니다. 자세
 
 - git repo url: https://github.com/kh-kim/simple-nmt
 
-#### simple_nmt/dual_trainer.py
+### simple_nmt/dual_trainer.py
 
 ```python
 # In order to avoid to use hard coding.

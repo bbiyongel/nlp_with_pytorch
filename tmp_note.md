@@ -126,28 +126,6 @@ $$\mathcal{L}^*(\theta_{x\rightarrow y})\ge\mathcal{L}(\theta_{x\rightarrow y})=
 
 $$\mathcal{L}(\theta_{x\rightarrow y})=\sum_{n=1}^N{\log{p(y^{(n)}|x^{(n)})}}+\sum_{t=1}^T{\sum_x{p(x|y^{(t)})\log{p(y^{(t)}|x)}}}$$
 
-### Re-write
-
-$$\mathcal{L}(\theta)=-\sum_{n=1}^N{\log{P(y^{n}|x^{n};\theta)}}-\sum_{s=1}^S{\log{P(y^s)}}$$
-
-$$\begin{aligned}
-\log{P(y)}&=\log{\sum_{x\in\mathcal{X}}{P(y|x)P(x)}} \\
-&=\log{\sum_{x\in\mathcal{X}}{P(x|y)\frac{P(y|x)P(x)}{P(x|y)}}} \\
-&\ge\sum_{x\in\mathcal{X}}{P(x|y)\log{\frac{P(y|x)P(x)}{P(x|y)}}} \\
-&=\mathbb{E}_{x\sim P(x|y)}[\log{P(y|x)}+\log{\frac{P(x)}{P(x|y)}}] \\
-&=\mathbb{E}_{x\sim P(x|y)}[\log{P(y|x)}]+\mathbb{E}_{x\sim P(x|y)}[\log{\frac{P(x)}{P(x|y)}}] \\
-&=\mathbb{E}_{x\sim P(x|y)}[\log{P(y|x)}]-\text{KL}\big(P(x|y)||P(x)\big)
-\end{aligned}$$
-
-$$-\log{P(y)}\le-\mathbb{E}_{x\sim P(x|y)}[\log{P(y|x)}]+\text{KL}\big(P(x|y)||P(x)\big)$$
-
-$$\begin{aligned}
-\mathcal{L}(\theta)&\le-\sum_{n=1}^N{\log{P(y^{n}|x^{n};\theta)}}-\sum_{s=1}^S{\Big(\mathbb{E}_{x\sim P(x|y^s)}[\log{P(y^s|x;\theta)}]-\text{KL}\big(P(x|y^s)||P(x)\big)\Big)} \\
-&\approx-\sum_{n=1}^N{\log{P(y^{n}|x^{n};\theta)}}-\frac{1}{K}\sum_{s=1}^S{\sum_{i=1}^K{\log{P(y^s|x_i;\theta)}}}+\sum_{s=1}^S{\text{KL}\big(P(x|y^s)||P(x)\big)} \\
-&=\tilde{\mathcal{L}}(\theta)
-\end{aligned}$$
-
-$$\nabla_\theta\tilde{\mathcal{L}}(\theta)=-\sum_{n=1}^N{\nabla_\theta\log{P(y^n|x^n;\theta)}}-\frac{1}{K}\sum_{s=1}^S{\sum_{i=1}^K{\nabla_\theta\log{P(y^s|x_i;\theta)}}}$$
 
 <!--
 ### Upgrade

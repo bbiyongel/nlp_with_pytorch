@@ -93,7 +93,7 @@
   * [듀얼리티란](duality/intro.md)
   * [듀얼리티를 활용한 지도학습](duality/dsl.md)
   * [듀얼리티를 활용한 비지도학습](duality/dul.md)
-  * [쉬어가기: Back-translation 재해석](duality/auto_encoder.md)
+  * [쉬어가기: Back-translation을 재해석 하기](duality/back_translation.md)
 * [서비스 만들기](productization/cover.md)
   * [파이프라인](productization/pipeline.md)
   * [Google의 신경망 기계번역](productization/gnmt.md)
