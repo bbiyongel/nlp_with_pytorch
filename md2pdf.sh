@@ -159,9 +159,10 @@ cd ..
 #   * [듀얼리티란](duality/intro.md)
 #   * [듀얼리티를 활용한 지도학습](duality/dsl.md)
 #   * [듀얼리티를 활용한 비지도학습](duality/dul.md)
+#   * [쉬어가기: Back-translation을 재해석 하기](duality/back_translation.md)
 echo 'duality'
 cd ./duality
-pandoc ./cover.md ./intro.md ./dsl.md ./dul.md --latex-engine=xelatex -o ../${DIR_PATH}/13.duality.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE} -V geometry:margin=${MARGIN}
+pandoc ./cover.md ./intro.md ./dsl.md ./dul.md ./back_translation.md --latex-engine=xelatex -o ../${DIR_PATH}/13.duality.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE} -V geometry:margin=${MARGIN}
 cd ..
 
 # * [서비스 만들기](productization/cover.md)

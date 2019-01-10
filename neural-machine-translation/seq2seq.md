@@ -88,39 +88,59 @@ $$\begin{gathered}
 
 사실 이 항목은 단점이라기보다는 그냥 당연한 이야기일 수 있습니다. sequence-to-sequence는 시퀀스 데이터를 입력으로 받아서 다른 도메인의 시계열 데이터로 출력하는 능력이 뛰어납니다. 따라서, 처음에는 많은 사람들이 sequence-to-sequence를 잘 훈련시키면 챗봇의 기능도 어느정도 할 수 있지 않을까 하는 기대를 했습니다. 하지만 자세히 생각해보면, 대화의 흐름에서 대답은 질문에 비해서 새로운 정보(지식-knowledge, 문맥-context)가 추가 된 경우가 많습니다. 따라서 기존의 전형적인 sequence-to-sequence의 문제(번역, 요약)등은 새로운 정보의 추가가 별로 없기 때문에 잘 해결할 수 있지만, 대화의 경우에는 좀 더 발전된 구조가 필요할 것 입니다.
 
-## 코드 예제
+## 파이토치 예제 코드
 
 기계번역을 수행 하는 sequence-to-sequence를 파이토치로 구현하는 방법을 소개합니다. 이번 챕터에서 사용될 전체 코드는 저자의 깃허브에서 다운로드 할 수 있습니다. (업데이트 여부에 따라 코드가 약간 다를 수 있습니다.)
 
-- github repo url: https://github.com/kh-kim/simple-nmt
+- Github Repository URL: https://github.com/kh-kim/simple-nmt
+- 파일 URL: https://github.com/kh-kim/simple-nmt/blob/master/simple_nmt/seq2seq.py
 
-### 인코더 클래스 정의
+### 인코더 클래스
+
+인코더의 RNN은 그 역할이 그렇듯이, 텍스트 분류기의 코드와 매우 유사함을 알 수 있습니다. 마찬가지로 양방향 LSTM을 사용하기 때문에, 선언 할 때에 bidirectional 옵션을 True로 준 것을 볼 수 있습니다. 또한 양방향 LSTM의 히든스테이트는 기존 단방향 LSTM의 히든스테이트보다 2배로 늘어나기 때문에, 애초에 "hidden_size / 2"를 RNN의 hidden_size로 사용한 것을 볼 수 있습니다.
 
 ```python
 class Encoder(nn.Module):
 
-    def __init__(self, word_vec_dim, hidden_size, n_layers = 4, dropout_p = .2):
+    def __init__(self, word_vec_dim, hidden_size, n_layers=4, dropout_p=.2):
         super(Encoder, self).__init__()
 
         # Be aware of value of 'batch_first' parameter.
         # Also, its hidden_size is half of original hidden_size, because it is bidirectional.
-        self.rnn = nn.LSTM(word_vec_dim, int(hidden_size / 2), num_layers = n_layers, dropout = dropout_p, bidirectional = True, batch_first = True)
+        self.rnn = nn.LSTM(word_vec_dim,
+                           int(hidden_size / 2),
+                           num_layers=n_layers,
+                           dropout=dropout_p,
+                           bidirectional=True,
+                           batch_first=True
+                           )
 
     def forward(self, emb):
         # |emb| = (batch_size, length, word_vec_dim)
 
         if isinstance(emb, tuple):
             x, lengths = emb
-            x = pack(x, lengths.tolist(), batch_first = True)
+            x = pack(x, lengths.tolist(), batch_first=True)
+
+            # Below is how pack_padded_sequence works.
+            # As you can see, PackedSequence object has information about mini-batch-wise information, not time-step-wise information.
+            # 
+            # a = [torch.tensor([1,2,3]), torch.tensor([3,4])]
+            # b = torch.nn.utils.rnn.pad_sequence(a, batch_first=True)
+            # >>>>
+            # tensor([[ 1,  2,  3],
+            #     [ 3,  4,  0]])
+            # torch.nn.utils.rnn.pack_padded_sequence(b, batch_first=True, lengths=[3,2]
+            # >>>>PackedSequence(data=tensor([ 1,  3,  2,  4,  3]), batch_sizes=tensor([ 2,  2,  1]))
         else:
             x = emb
-        
+
         y, h = self.rnn(x)
         # |y| = (batch_size, length, hidden_size)
         # |h[0]| = (num_layers * 2, batch_size, hidden_size / 2)
 
         if isinstance(emb, tuple):
-            y, _ = unpack(y, batch_first = True)
+            y, _ = unpack(y, batch_first=True)
 
         return y, h
 ```
@@ -139,20 +159,20 @@ class Encoder(nn.Module):
     >>>>PackedSequence(data=tensor([ 1,  3,  2,  4,  3]), batch_sizes=tensor([ 2,  2,  1]))
 ```
 
-### 디코터 클래스 정의
+### 디코터 클래스
 
 추후 어텐션 및 추가 개념이 더해질 것이기 때문에, 디코더 클래스 코드는 이후 섹션에서 다루기로 합니다.
 
-### 제너레이터 클래스 정의
+### 제너레이터 클래스
 
 ```python
 class Generator(nn.Module):
-    
+
     def __init__(self, hidden_size, output_size):
         super(Generator, self).__init__()
 
         self.output = nn.Linear(hidden_size, output_size)
-        self.softmax = nn.LogSoftmax(dim = -1)
+        self.softmax = nn.LogSoftmax(dim=-1)
 
     def forward(self, x):
         # |x| = (batch_size, length, hidden_size)
@@ -175,22 +195,26 @@ sequence-to-sequence는 기본적으로 각 time-step 별로 가장 확률이 �
 아래는 손실값을 계산하기 위해 파이토치로부터 손실 함수를 준비하는 모습입니다. 사실 실제 구현할 때에는 "softmax 레이어 + [cross entropy](https://pytorch.org/docs/stable/nn.html?highlight=crossentropyloss#torch.nn.CrossEntropyLoss)"를 사용하기보단, "log softmax layer + [negative log likelihood](https://pytorch.org/docs/stable/nn.html?highlight=nll#torch.nn.NLLLoss)"를 사용합니다. <comment> 크로스 엔트로피와 negative 로그 라이클리후드에 관계에 대한 내용은 이전 기초 수학 챕터를 참고하세요. </comment>
 
 ```python
-    loss_weight = torch.ones(output_size)
-    loss_weight[data_loader.PAD] = 0
-    criterion = nn.NLLLoss(weight = loss_weight, size_average = False)
+        # Default weight for loss equals to 1, but we don't need to get loss for PAD token.
+        # Thus, set a weight for PAD to zero.
+        loss_weight = torch.ones(output_size)
+        loss_weight[data_loader.PAD] = 0.
+        # Instead of using Cross-Entropy loss, we can use Negative Log-Likelihood(NLL) loss with log-probability.
+        crit = nn.NLLLoss(weight=loss_weight, 
+                          reduction='sum'
+                          )
 ```
 
 따라서 softmax 레이어를 사용하는 대신에, log-softmax 레이어를 사용하여 로그 확률(log probability)을 구하고, 수식의 나머지 작업을 수행하면 됩니다.
 
 ```python
-def get_loss(y, y_hat, criterion, do_backward = True):
-    # |y| = (batch_size, length)
-    # |y_hat| = (batch_size, length, output_size)
-    batch_size = y.size(0)
+    def _get_loss(self, y_hat, y, crit=None):
+        # |y_hat| = (batch_size, length, output_size)
+        # |y| = (batch_size, length)
+        crit = self.crit if crit is None else crit
+        loss = crit(y_hat.contiguous().view(-1, y_hat.size(-1)),
+                    y.contiguous().view(-1)
+                    )
 
-    loss = criterion(y_hat.contiguous().view(-1, y_hat.size(-1)), y.contiguous().view(-1))
-    if do_backward:
-        loss.div(batch_size).backward()
-
-    return loss
+        return loss
 ```

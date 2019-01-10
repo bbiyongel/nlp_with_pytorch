@@ -167,13 +167,20 @@ c = H^{src}\cdot w\text{ and }c\text{ is a context vector}. \\
 torch.bmm 함수는 batch matrix multiplication(bmm, 배치 행렬곱)을 수행하는 함수로써, 2개 이상의 차원을 지닌 텐서가 주어졌을 때 뒤 2개 차원에 대해서는 행렬곱을 수행하고 앞의 다른 차원은 미니배치로 취급합니다. 따라서 앞의 차원들은 크기가 같아야 하고, 뒤 2개 차원은 행렬 곱을 수행하기 위한 적절한 크기를 지녀야 합니다.
 
 ```python
+import torch
+
 # |t1| = (batch_size, p, q)
 # |t2| = (batch_size, q, m)
 t3 = torch.bmm(t1, t2)
 # |t3| = (batch_size, p, m)
 ```
 
-선형변환을 위한 웨이트 파라미터를 bias가 없는 Linear 레이어로 대체하였음을 확인할 수 있습니다.
+### 어텐션 클래스
+
+- Github Repository URL: https://github.com/kh-kim/simple-nmt
+- 파일 URL: https://github.com/kh-kim/simple-nmt/blob/master/simple_nmt/seq2seq.py
+
+선형변환을 위한 웨이트 파라미터를 bias가 없는 Linear 레이어로 대체하였음을 확인할 수 있습니다. 추가적인 자세한 설명은 이후 섹션에서 하도록 합니다.
 
 ```python
 class Attention(nn.Module):
@@ -181,10 +188,10 @@ class Attention(nn.Module):
     def __init__(self, hidden_size):
         super(Attention, self).__init__()
 
-        self.linear = nn.Linear(hidden_size, hidden_size, bias = False)
-        self.softmax = nn.Softmax(dim = -1)
+        self.linear = nn.Linear(hidden_size, hidden_size, bias=False)
+        self.softmax = nn.Softmax(dim=-1)
 
-    def forward(self, h_src, h_t_tgt, mask = None):
+    def forward(self, h_src, h_t_tgt, mask=None):
         # |h_src| = (batch_size, length, hidden_size)
         # |h_t_tgt| = (batch_size, 1, hidden_size)
         # |mask| = (batch_size, length)
