@@ -26,7 +26,7 @@ $$\begin{aligned}
 
 우리는 젠센 부등식(Jensen's inequality) 정리를 사용하여 항상 $\log{P(y)}$ 보다 작거나 같은 수식으로 정리할 수 있습니다. 젠센 부등식에 대해서 좀 더 이야기 해 보도록 하겠습니다. 로그의 함수 곡선은 아래와 같이 생겼습니다. 이때, 두 점 $x_1, x_2$ 에 대한 평균을 $x_m=1/2\times(x_1+x_2)$ 라고 하겠습니다. 그럼 $\log{x_m}\ge1/2\times(\log{x_1}+\log{x_2})$ 은 항상 성립하는 것을 알 수 있습니다.
 
-![로그 함수 곡선](../assets/duality-jensens_inequality.png)
+![젠슨스 부등식의 예](../assets/duality-jensens_inequality.png)
 
 위의 성질을 이용하여 우리는 $\log{P(y)}$ 보다 항상 작거나 같은 lower bound를 구할 수 있습니다. 여기에 음의 부호를 붙여주면 부등호의 방향은 바뀔 것 입니다.
 
@@ -44,4 +44,4 @@ $$\begin{aligned}
 
 $$\nabla_\theta\tilde{\mathcal{L}}(\theta)=-\sum_{n=1}^N{\nabla_\theta\log{P(y^n|x^n;\theta)}}-\frac{1}{K}\sum_{s=1}^S{\sum_{i=1}^K{\nabla_\theta\log{P(y^s|x_i;\theta)}}}$$
 
-결국 우리가 back-translation을 통해 수행하던것이 $\tilde{\mathcal{L}}(\theta)$ 를 최소화 하는 것임을 우리는 알 수 있습니다.
+최종적으로 얻게 된 손실 함수 각 부분의 의미를 살펴보도록 하겠습니다. 첫 번째 텀 $\sum_{n=1}^N{\nabla_\theta\log{P(y^n|x^n;\theta)}}$ 은 당연히 $x^n$ 이 주어졌을 때, $y^n$ 의 확률을 최대로 하는 $\theta$ 를 찾는 것을 가리킵니다. 두 번째 텀 $\frac{1}{K}\sum_{s=1}^S{\sum_{i=1}^K{\nabla_\theta\log{P(y^s|x_i;\theta)}}}$ 의 경우에는 샘플링 된 문장 $x^i$ 이 주어졌을 때, 단방향 코퍼스의 문장 $y^s$ 가 나올 평균 확률을 최대로 하는 $\theta$ 를 찾는 것이 됩니다. 결국 우리가 back-translation을 통해 수행하던것이 $\tilde{\mathcal{L}}(\theta)$ 를 최소화 하는 것임을 우리는 알 수 있습니다.

@@ -94,7 +94,7 @@ P(y)=\mathbb{E}_{\text{x}\sim\hat{P}(\text{x})}\big[P(y|x;\theta)\big]&=\sum_{x\
 &\approx\frac{1}{K}\sum^K_{i=1}{\frac{P(y|x_i;\theta)\hat{P}(x_i)}{P(x_i|y)}}\text{, }x_i\sim{P(\text{x}|y)}
 \end{aligned}$$
 
-위와 같이 importance sampling을 통해, 타겟 언어의 문장 $y$ 를 반대 방향 번역기( $y\rightarrow{x}$ )에 넣어 K 개의 소스 언어의 문장 $x$ 를 샘플링하여 $P(y)$ 를 구합니다. 이 과정을 다시 하나의 손실함수로 표현하면 아래와 같습니다.
+위와 같이 importance sampling을 통해, 타겟 언어의 문장 $y$ 를 반대 방향 번역기( $y\rightarrow{x}$ )에 넣어 K 개의 소스 언어의 문장 $x$ 를 샘플링하여 $P(y)$ 를 구합니다. 이 과정을 다시 하나의 손실함수로 표현하면 아래와 같습니다. 우변의 첫 번째 텀 $\sum^N_{n=1}{\log{P(y^n|x^n;\theta)}}$ 은 문장 $x^n$ 이 주어졌을 때, $y^n$ 의 확률을 최대로 하는 $\theta$ 를 찾도록 합니다. 두 번째 텀은 단방향 코퍼스에서 주어진 문장 $y^s$ 의 언어모델에서의 확률 값 $\log{\hat{P}(y^s)}$ 과의 차이를 줄여야 합니다. 그 값은 반대방향( $\text{y}\rightarrow\text{x}$ ) 번역기를 통해 K번 샘플링한 문장 $x_i$ 의 언어모델 확률값 $\hat{P}(x_i)$ 과 $x_i$ 가 주어졌을 때, $y^s$ 의 확률값을 곱하고, 문장 $y^s$ 가 주어졌을 때 샘플링한 문장 $x_i$ 의 확률값으로 나누어준 값이 됩니다.
 
 $$\mathcal{L}(\theta)\approx-\sum^N_{n=1}{\log{P(y^n|x^n;\theta)}}+\lambda\sum^S_{s=1}{\Bigg[\log{\hat{P}(y^s)}-\log{\frac{1}{K}\sum^K_{i=1}\frac{\hat{P}(x_i)P(y^s|x_i\theta)}{P(x_i|y^s)}}\Bigg]^2}$$
 
@@ -114,6 +114,7 @@ $$\mathcal{L}(\theta)\approx-\sum^N_{n=1}{\log{P(y^n|x^n;\theta)}}+\lambda\sum^S
 
 위의 테이블과 같이, 이 방법은 앞 챕터에서 소개한 기존의 단방향 corpus[[Gulcehre et al.2015]](https://arxiv.org/abs/1503.03535)[[Sennrich et al.2016]](https://arxiv.org/abs/1511.06709)를 활용한 방식들과 비교하여 훨씬 더 나은 성능의 개선을 보여주었으며, 바로 앞서 소개한 [Dual Learning[He et al.2016a]](https://arxiv.org/pdf/1611.00179.pdf)보다도 더 나은 성능을 보여줍니다. 마찬가지로, 불안정하고 비효율적인 강화학습을 사용하지 않고도 더 나은 성능을 보여준 것은 주목할 만한 성과라고 할 수 있습니다.
 
+<!--
 ### 쉬어가기: 임포턴스 샘플링 (Importance Sampling)
 
 Importance 샘플링은 기존의 샘플링하던 분포가 아닌 다른 분포에서 샘플링을 하는 것을 이릅니다. 따라서 윗변과 아랫변에 샘플링하고자 하는 분포 q를 곱해주게 됩니다.
@@ -133,3 +134,4 @@ w(x)=\frac{p(x)}{q(x)} \\
 \end{aligned} \\
 \text{where }x_i\sim{q(\text{x})}.
 \end{gathered}$$
+-->

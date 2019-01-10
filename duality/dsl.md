@@ -33,8 +33,8 @@ $$\mathcal{L}_{duality}=\Big(\big(\log{\hat{P}(x)}+\log{P(y|x;\theta_{x \rightar
 이 부가적인 제약조건의 손실함수를 기존의 손실 함수에 추가하여 동시에 최소화 하도록 하면, 아래와 같이 표현 할 수 있습니다.
 
 $$\begin{aligned}
-\theta_{x \rightarrow y} \leftarrow \theta_{x \rightarrow y}-\gamma\nabla_{\theta_{x \rightarrow y}}\frac{1}{n}\sum^m_{j=1}{\Big[\ell_1(f(x_i;\theta_{x \rightarrow y}), y_i)+\lambda_{x \rightarrow y}\mathcal{L}_{duality}\Big]} \\
-\theta_{y \rightarrow x} \leftarrow \theta_{y \rightarrow x}-\gamma\nabla_{\theta_{y \rightarrow x}}\frac{1}{n}\sum^m_{j=1}{\Big[\ell_2(g(y_i;\theta_{y \rightarrow x}), x_i)+\lambda_{y \rightarrow x}\mathcal{L}_{duality}\Big]}
+\theta_{x \rightarrow y} \leftarrow \theta_{x \rightarrow y}-\gamma\nabla_{\theta_{x \rightarrow y}}\frac{1}{n}\sum^n_{i=1}{\Big[\ell_1(f(x_i;\theta_{x \rightarrow y}), y_i)+\lambda_{x \rightarrow y}\mathcal{L}_{duality}\Big]} \\
+\theta_{y \rightarrow x} \leftarrow \theta_{y \rightarrow x}-\gamma\nabla_{\theta_{y \rightarrow x}}\frac{1}{n}\sum^n_{i=1}{\Big[\ell_2(g(y_i;\theta_{y \rightarrow x}), x_i)+\lambda_{y \rightarrow x}\mathcal{L}_{duality}\Big]}
 \end{aligned}$$
 
 여기서 $\lambda$ 를 통해 손실함수 내에서 비율을 조절할 수 있습니다. 만약 $\lambda$ 가 너무 크다면 최적화 과정에서 regularization term을 최소화하는데 너무 집중하게 될 겁니다. 따라서 적절한 크기의 $\lambda$가 필요 합니다. 따라서 $\lambda$ 는 하이퍼 파라미터이며 실험 결과 $\lambda=0.01$ 일 때 가장 좋은 성능을 나타냅니다.
