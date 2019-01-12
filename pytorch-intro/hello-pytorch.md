@@ -408,7 +408,7 @@ n_epochs = 1000
 n_iter = 10000
 
 model = MyModel(3, 1)
-optim = torch.optim.SGD(model.parameters(), lr = 0.0001, momentum=0.1)
+optim = torch.optim.SGD(model.parameters(), lr=0.0001, momentum=0.1)
 
 print(model)
 ```

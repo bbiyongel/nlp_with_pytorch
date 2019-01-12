@@ -101,4 +101,3 @@ $$P(x)=\sum_{y\in\mathcal{Y}}{P(x,y)}=\sum_{y\in\mathcal{Y}}{P(x|y)P(y)}$$
 위의 수식은 discrete 랜덤 변수에 관한 marginal이고, 랜덤 변수의 값이 continuous한 경우에는 아래와 같이 적분으로 표현 가능 합니다.
 
 $$p(x)=\int{p(x,y)}dy=\int{p(x|y)p(y)}dy$$
-
