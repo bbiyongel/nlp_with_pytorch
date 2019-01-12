@@ -102,10 +102,9 @@ cd ..
 #   * [흔한 오해 2](text-classification/myth.md)
 #   * [RNN을 활용하기](text-classification/rnn.md)
 #   * [CNN을 활용하기](text-classification/cnn.md)
-#   * [구현 예제](text-classification/code.md)
 echo 'text-classification'
 cd ./text-classification
-pandoc ./cover.md ./intro.md ./naive-bayes.md ./myth.md ./rnn.md ./cnn.md ./code.md --latex-engine=xelatex -o ../${DIR_PATH}/8.text-classification.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE} -V geometry:margin=${MARGIN}
+pandoc ./cover.md ./intro.md ./naive-bayes.md ./myth.md ./rnn.md ./cnn.md --latex-engine=xelatex -o ../${DIR_PATH}/8.text-classification.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE} -V geometry:margin=${MARGIN}
 cd ..
 
 # * [언어 모델링](language-modeling/cover.md)
@@ -128,10 +127,9 @@ cd ..
 #   * [Auto-regressive and Teacher Forcing](neural-machine-translation/teacher-forcing.md)
 #   * [탐색(추론)](neural-machine-translation/beam-search.md)
 #   * [성능 평가 방법](neural-machine-translation/eval.md)
-#   * [구현 예제](neural-machine-translation/code.md)
 echo 'machine-translation'
 cd ./neural-machine-translation
-pandoc ./cover.md ./intro.md ./seq2seq.md ./attention.md ./input-feeding.md ./teacher-forcing.md beam-search.md eval.md code.md --latex-engine=xelatex -o ../${DIR_PATH}/10.nmt.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE} -V geometry:margin=${MARGIN}
+pandoc ./cover.md ./intro.md ./seq2seq.md ./attention.md ./input-feeding.md ./teacher-forcing.md ./beam-search.md ./eval.md --latex-engine=xelatex -o ../${DIR_PATH}/10.nmt.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE} -V geometry:margin=${MARGIN}
 cd ..
 
 # * [신경망 기계 번역 심화 주제](adv-nmt/cover.md)
