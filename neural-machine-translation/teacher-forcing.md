@@ -17,6 +17,8 @@ $$\begin{gathered}
 
 ## Teacher Forcing 훈련 방법
 
+![훈련방식과 추론방식](image_needed)
+
 따라서 우리는 Teacher Forcing이라고 불리는 방법을 사용하여 훈련 합니다. 훈련 할 때에 각 time-step 별 수식은 아래와 같습니다. 위와 같이 조건부에 $\hat{y}_{<t}$ 가 들어가는 것이 아닌, $y_{<t}$ 가 들어가는 것이기 때문에, 훈련시에는 이전 time-step의 출력 $\hat{y}_{<t}$ 을 현재 time-step의 입력으로 넣어줄 수 없습니다.
 
 $$\begin{gathered}
