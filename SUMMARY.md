@@ -23,7 +23,7 @@
   * [소개 및 설치](pytorch-intro/how-to-install.md)
   * [짧은 튜토리얼](pytorch-intro/hello-pytorch.md)
 * [전처리](preprocessing/cover.md)
-  * [서문](preprocessing/intro.md)
+  * [들어가기에 앞서](preprocessing/intro.md)
   * [코퍼스 수집](preprocessing/collecting-corpus.md)
   * [코퍼스 정제](preprocessing/cleaning-corpus.md)
   * [분절하기 (형태소 분석)](preprocessing/tokenization.md)
