@@ -28,7 +28,7 @@
 
 ## 지은이: 김기현(Kim, Ki Hyun)
 
-![김기현](../assets/me.jpeg){ width=500px }
+![김기현](../assets/me.jpeg){ width=300px }
 
 ### 연락처
 

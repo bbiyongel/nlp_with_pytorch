@@ -22,11 +22,11 @@ $$\min_{G}\max_{D}\mathcal{L}(D,G)=\mathbb{E}_{\text{x}\sim p_r(\text{x})}\Big[\
 
 그렇다면 번역 또는 자연어생성에도 위의 아이디어를 적용 해 보는 것도 매우 멋진 일이 될 것 같습니다. 예를 들어 크로스 엔트로피를 사용하여 바로 학습하기 보단, 실제 코퍼스에서 나온 문장인지 sequence-to-sequence에서 나온 문장인지 판별하는 디스크리미네이터 $D$ 를 두어서, sequence-to-sequence에서 나온 문장이 진짜 문장과 같아지도록 훈련하면 정말 멋질 것 같습니다.
 
-![GAN을 sequence-to-sequence에 적용하자](image_needed)
+![GAN을 sequence-to-sequence에 적용하자](../assets/image_needed.jpeg)
 
 하지만 아쉽게도 이 멋진 아이디어는 곧바로 적용할 수 없습니다. Sequence-to-sequence의 결과는 discrete 확률 분포입니다. 여기서 샘플링 또는 $\text{argmax}$ 를 통해서 얻어지는 결과물은 discrete한 값일 것이고, 따라서 one-hot 벡터로 표현되어야 할 것 입니다. 하지만 이 과정은 확률적인(stochastic) 프로세스로 그래디언트를 back-propagation 할 수 없습니다. 따라서 디스크리미네이터 $D$ 가 맞추거나 속은 여부가 sequence-to-sequence $G$ 로 전달 될 수 없고, 따라서 학습이 불가능 합니다.
 
-![샘플링 과정은 그래디언트 전달이 어렵습니다.](image_needed)
+![샘플링 과정은 그래디언트 전달이 어렵습니다.](../assets/image_needed.jpeg)
 
 ## GAN과 자연어생성
 

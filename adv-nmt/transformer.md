@@ -22,7 +22,7 @@
 
 RNN은 데이터를 순차적으로 받으면서 자동적으로 순서에 대한 정보를 기록하게 됩니다. 하지만 트랜스포머는 RNN을 이용하지 않기 때문에, 순서 정보를 단어와 함께 주는 것이 필요합니다. 왜냐하면 같은 단어라 하더라도 위치에 따라서 그 쓰임새와 역할 의미가 달라질 수 있기 때문입니다. 따라서 포지션 임베딩이라는 방법을 통해서 위치 정보를 나타내고자 하였습니다.
 
-![포지션 임베딩의 직관적인 설명](image_needed)
+![포지션 임베딩의 직관적인 설명](../assets/image_needed.jpeg)
 
 $$\begin{gathered}
 \text{PE}(\text{pos}, 2i) = \sin(\text{pos} / 10000^{2i / d_{model}}) \\
@@ -71,7 +71,7 @@ $$\begin{gathered}
 
 위의 텐서 크기들을 활용하여 우리는 실제 각 계산별로 어떤 크기의 텐서들이 결과로 나오는지 따라갈 볼 수 있습니다. 실제 이렇게 손으로 따라는 연습을 해 두면, 새로운 논문이나 수식을 볼 때, 이것을 구현하는데 훨씬 수월합니다. 아래의 수식은 실제 곱셈을 하는 것이 아닌, 텐서 사이의 행렬곱 또는 배치행렬곱(batch matrix multiplication, bmm)을 수행할 때, 크기를 계산한 것을 나타낸 것 입니다. <comment> 이전 챕터에서 어텐션 설명과 torch.bmm() 함수 설명을 참고하세요. </comment>
 
-![배치 행렬곱 연산의 모습](image_needed)
+![배치 행렬곱 연산의 모습](../assets/image_needed.jpeg)
 
 $$\begin{aligned}
 |QW_i^Q|&=(\text{batch\_size},m,\text{hidden\_size})\times(\text{hidden\_size},\text{head\_size}) \\
