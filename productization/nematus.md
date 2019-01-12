@@ -1,27 +1,34 @@
-# The University of Edinburgh’s Neural MT Systems for WMT17
+# 에딘버러 대학의 신경망 기계번역
 
-사실 Google의 논문은 훌륭하지만 매우 스케일이 매우 큽니다. 저는 그래서 작은 스케일의 기계번역 시스템에 관한 논문은 이 논문[[Sennrich at el.2017]](https://arxiv.org/pdf/1708.00726.pdf)을 높게 평가합니다. 이 논문도 기계번역 시스템을 구성할 때에 훌륭한 baseline이 될 수 있습니다.
-Edinburgh 대학의 Sennrich교수는 매년 열리는 WMT 대회에 참가하고 있고, 해당 대회에 참가하는 기계번역 시스템들은 이처럼 매년 자신들의 기술에 대한 논문을 제출합니다. 좋은 참고자료로 삼을 수 있습니다.
+사실 구글의 논문은 매우 훌륭하지만 매우 스케일이 매우 큽니다. 아마 세계 최대 스케일 중에 하나가 될 겁니다.  따라서 좀 더 현실적인 스케일의 기계번역 시스템에 관한 논문으로 에딘버러(Edinburgh) 대학의 신경망 기계번역 시스템[[Sennrich at el.2017]](https://arxiv.org/pdf/1708.00726.pdf)을 높게 평가합니다.
 
-## Subword Segmentation
+## 서브워드 분절
 
-![[[Sennrich at el.2016]](http://www.aclweb.org/anthology/P16-1162)](../assets/nmt-edinburgh-1.png)
+![BPE 알고리즘 - 출처: [[Sennrich at el.2016]](http://www.aclweb.org/anthology/P16-1162)](../assets/nmt-edinburgh-1.png){ width=400px }
 
-이 논문 또한 (그들이 처음으로 제안한 방식이기에) BPE 방식을 사용하여 tokenization을 수행하였습니다. 이제 우리는 subword 기반의 tokenization 방식이 하나의 정석이 되었음을 알 수 있습니다. 위의 code는 BPE algorithm에 대해서 간략하게 소개한 code 입니다. 전처리 챕터에서 소개했지만, subword 방식은 위와 같이 가장 많이 등장한 문자열(character sequence)에 대해서 합쳐주며 iteration을 반복하고, 원하는 어휘(vocabulary) 숫자가 채워질때가지 해당 iteration을 반복합니다.
+에딘버러 대학은 BPE 방식을 통한 분절 방식을 처음 제안한 곳 입니다. 따라서 그들의 시스템 또한 BPE 방식을 사용하여 분절을 수행하였습니다. 이제 우리는 서브워드(subword) 기반의 분절 방식이 하나의 정석이 되었음을 알 수 있습니다. 위의 pseudo 코드는 BPE 알고리즘에 대해서 간략하게 소개한 것 입니다. 전처리 챕터에서 소개했지만, 서브워드 방식은 위와 같이 가장 많이 등장한 문자열(character sequence)에 대해서 합쳐주며(merge) 이터레이션을 반복하고, 원하는 어휘(vocabulary) 숫자가 채워질때가지 반복합니다.
 
-## Architecture
+## 모델 구조
 
-이 논문에서는 seq2seq를 기반으로 모델 구조(architecture)를 만들었는데, 다만 LSTM이 아닌 GRU를 사용하여 RNN stack을 구성하였습니다. Google과 마찬가지로 residual connection을 사용하여 stack을 구성하였고, encoder의 경우에는 4개층, decoder의 경우에는 8개 층을 쌓아 모델을 구성하였습니다. 실험 시에는 $hidden~size = 1024,~word~vector~dimension = 512$ 를 사용하였습니다. 또한, Google과는 다르게 순수하게 Adam만을 optimizer로 사용하여 훈련을 하였습니다.
+이 논문에서는 sequence-to-sequence를 기반으로 모델 구조(architecture)를 만들었는데, 다만 LSTM이 아닌 GRU를 사용하여 RNN을 구성하였습니다. 구글과 마찬가지로 레지듀얼 커넥션(residual connection)을 사용하여 더 깊은 RNN을 구성하였고, 인코더의의 경우에는 4개층, 디코더의 경우에는 8개 층을 쌓아 모델을 구성하였습니다. 실험 시에는 hidden_size=1024, word_vector_dim=512 를 사용하였습니다. 또한 구글과는 다르게 순수하게 Adam만을 optimizer로 사용하여 훈련을 하였습니다.
 
-## Synthetic Data using Monolingual Data
+## 단방향 코퍼스를 활용하기
 
-이전 섹션에서 소개한 그들이 제안한 논문[[Sennrich at el.2015]](https://arxiv.org/pdf/1511.06709.pdf)의 방식대로 back translation과 copied translation 방식을 사용하여 합성 병렬(pseudo parallel) corpus를 구성하여 훈련 데이터셋에 추가하였습니다. 이때에 비율은 실험결과에 따라서 $parallel : copied : back = 1 : 1 \sim 2 : 1\sim 2$ 로 조절하여 사용하였습니다.
+에딘버러 대학은 BPE 뿐만 아니라 back-translation도 처음 제안한 곳 입니다. 따라서 이전 섹션에서 소개한 그들이 제안한 논문[[Sennrich at el.2015]](https://arxiv.org/pdf/1511.06709.pdf)의 방식대로 back translation과 copied translation 방식을 사용하여 합성 병렬 코퍼스를 구성하여 훈련 데이터셋에 추가하였습니다. 이 논문의 실험 결과에 따라, 합성 병렬 코퍼스를 구성할 때의 비율은 아래의 테이블을 참고하면 좋습니다.
 
-## Ensemble
+|코퍼스 종류|구성 비율|
+|-|-|
+|오리지널 병렬 코퍼스|1|
+|Copied-translation 방식|1 ~ 2|
+|Back-translation 방식|1 ~ 2|
+
+## 앙상블
 
 이 논문에서 그들은 2가지 앙상블(ensemble) 기법을 모두 사용하였습니다.
 
-- checkpoint ensemble
-    + 특정 epoch에서부터 다른 모델로 다시 훈련하여 ensemble을 구성합니다. 훈련 중간부터 다시 훈련하기 때문에 시간적으로 굉장히 효율적입니다.
-- independent ensemble
-    + 처음부터 다른 모델로 훈련하여 ensemble로 구성합니다. 처음부터 다시 훈련하므로 checkpoint 방식에 비해서 비효율적이지만, 다양성(diversity) 관점에서 낫습니다.
+|방법|설명|
+|-|-|
+|체크포인트 방식|특정 에포크(epoch)부터 다시 훈련하여 다른 모델을 구성합니다. 시간적으로 효율적|
+|독립 앙상블|처음부터 다른 모델로 훈련하여 앙상블을 구성합니다. 체크포인트 방식에 비해 느리지만 다양성 관점에서 장점|
+
+이와 같이 이 논문도 기계번역 시스템을 구성할 때에 훌륭한 베이스라인과 참고자료가 될 수 있습니다. 에딘버러 대학의 Sennrich교수는 매년 열리는 WMT 대회에 참가하고 있고, 해당 대회에 참가하는 기계번역 시스템들은 이처럼 매년 자신들의 기술에 대한 논문을 제출합니다. 따라서 해당 대회에 제출된 다른 논문들도 좋은 참고자료로 삼을 수 있습니다.
