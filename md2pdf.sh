@@ -125,12 +125,13 @@ cd ..
 #   * [Sequence-to-Sequence](neural-machine-translation/seq2seq.md)
 #   * [Attention](neural-machine-translation/attention.md)
 #   * [Input Feeding](neural-machine-translation/input-feeding.md)
-#   * [Auto-regressive and Teacher Forcing](neural-machine-translation/teacher-forcing.md)
+#   * [Auto-regressive 속성과 Teacher Forcing](neural-machine-translation/teacher-forcing.md)
 #   * [탐색(추론)](neural-machine-translation/beam-search.md)
 #   * [성능 평가 방법](neural-machine-translation/eval.md)
+#   * [정리](neural-machine-translation/summary.md)
 echo 'machine-translation'
 cd ./neural-machine-translation
-pandoc ./cover.md ./intro.md ./seq2seq.md ./attention.md ./input-feeding.md ./teacher-forcing.md ./beam-search.md ./eval.md --latex-engine=xelatex -o ../${DIR_PATH}/10.nmt.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE} -V geometry:margin=${MARGIN} -V linestretch=${LINE_SPACE}
+pandoc ./cover.md ./intro.md ./seq2seq.md ./attention.md ./input-feeding.md ./teacher-forcing.md ./beam-search.md ./eval.md ./summary.md --latex-engine=xelatex -o ../${DIR_PATH}/10.nmt.pdf --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE} -V geometry:margin=${MARGIN} -V linestretch=${LINE_SPACE}
 cd ..
 
 # * [신경망 기계 번역 심화 주제](adv-nmt/cover.md)

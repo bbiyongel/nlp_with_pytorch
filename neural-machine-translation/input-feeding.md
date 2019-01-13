@@ -46,6 +46,100 @@ c = H^{src} \cdot w\text{ and }c\text{ is a context vector}. \\
 
 ## 구현 관점에서 바라보기
 
+자, 그럼 이제 기본적인 sequence-to-sequence에 대해 이야기했으니, 구현 관점에서 sequence-to-sequence의 수식을 따라가보도록 하겠습니다.
+
+$$\begin{gathered}
+\mathcal{B}=\{\text{X}_i,\text{Y}_i\}_{i=1}^N \\
+\text{where }\text{X}=\{x_1,\cdots,x_n\}\text{, }\text{Y}=\{y_1,\cdots,y_m\}.
+\end{gathered}$$
+
+$$\begin{gathered}
+|\text{X}|=(\text{batch\_size},n,|V_\text{src}|) \\
+|x_t|=(\text{batch\_size},1,|V_\text{src}|) \\
+|\text{Y}|=(\text{batch\_size},m,|V_\text{tgt}|) \\
+|y_t|=(\text{batch\_size},1,|V_\text{tgt}|)
+\end{gathered}$$
+
+$$\begin{gathered}
+h_{t}^{src} = \text{RNN}_{enc}(\text{emb}_{src}(x_t), h_{t-1}^{src}) \\
+|\text{emb}_\text{src}(x_t)|=(\text{batch\_size},1,\text{word\_vec\_dim}) \\
+|h_t^{src}|=(\text{batch\_size},1,\text{hidden\_size})
+\end{gathered}$$
+
+$$\begin{gathered}
+\begin{aligned}
+H^{src}&=[h_{1}^{src}; h_{2}^{src}; \cdots; h_{n}^{src}] \\
+&=\text{RNN}_{enc}(\text{emb}_{src}(X),h_0^{src})
+\end{aligned}
+\end{gathered}$$
+
+$$|H^{src}|=(\text{batch\_size},n,\text{hidden\_size})$$
+
+$$\begin{gathered}
+h_{t}^{tgt}=\text{RNN}_{dec}([\text{emb}_{tgt}(y_{t-1});\tilde{h}_{t-1}^{tgt}], h_{t-1}^{tgt}) \\
+\text{ where }h_{0}^{tgt}=h_{n}^{src}\text{ and }y_{0}=\text{BOS}. \\
+|\text{emb}_{src}(y_{t-1})|=(\text{batch\_size},1,\text{word\_vec\_dim}) \\
+|h_{t}^{tgt}|=(\text{batch\_size},1,\text{hidden\_size}) \\
+|[\text{emb}_{tgt}(y_{t-1});\tilde{h}_{t-1}^{tgt}]|=(\text{batch\_size},1,\text{word\_vec\_dim}+\text{hidden\_size})
+\end{gathered}$$
+
+$$\begin{gathered}
+w=\text{softmax}\big(H^{src}\cdot(h_t^{tgt}\cdot{W})\big) \\
+|W|=(\text{hidden\_size},\text{hidden\_size}) \\
+\begin{aligned}
+|h_t^{tgt}\cdot{W}|&=(\text{batch\_size},1,\text{hidden\_size})\times(\text{hidden\_size},\text{hidden\_size}) \\
+&=(\text{batch\_size},1,\text{hidden\_size}) \\
+&=(\text{batch\_size},\text{hidden\_size}) \\
+&=(\text{batch\_size},\text{hidden\_size},1)
+\end{aligned} \\
+\begin{aligned}
+|H^{src}\cdot(h_t^{tgt}\cdot{W})|&=(\text{batch\_size},n,\text{hidden\_size})\times(\text{batch\_size},\text{hidden\_size},1) \\
+&=(\text{batch\_size},n,1) \\
+&=(\text{batch\_size},1,n) \\
+\end{aligned} \\
+|w|=(\text{batch\_size},1,n)
+\end{gathered}$$
+
+$$\begin{gathered}
+c=w\cdot{H^{src}} \\
+\begin{aligned}
+|c|&=(\text{batch\_size},1,n)\times(\text{batch\_size},n,\text{hidden\_size}) \\
+&=(\text{batch\_size},1,\text{hidden\_size})
+\end{aligned}
+\end{gathered}$$
+
+$$\begin{gathered}
+\tilde{h}_{t}^{tgt}=\tanh(\text{linear}_{2hs\rightarrow hs}([h_{t}^{tgt};c])) \\
+\begin{aligned}
+|[h_{t}^{tgt};c]|&=(\text{batch\_size},1,\text{hidden\_size}+\text{hidden\_size}) \\
+&=(\text{batch\_size},1,2\times\text{hidden\_size})
+\end{aligned}
+\end{gathered}$$
+
+$$\begin{gathered}
+\text{linear}_{2hs\rightarrow{hs}}(x)=Wx+b \\
+\text{where }W\in\mathbb{R}^{2\text{hidden\_size}\times\text{hidden\_size}}\text{ and }b\in\mathbb{R}^{\text{hidden\_size}}. \\
+|\tilde{h}_{t}^{tgt}|=(\text{batch\_size},1,\text{hidden\_size})
+\end{gathered}$$
+
+$$\begin{gathered}
+P(\text{y}_t|\text{X},y_{<t};\theta)=\text{softmax}(\text{linear}_{hs\rightarrow|V_{tgt}|}(\tilde{h}_{t}^{tgt})) \\
+\hat{y}_{t}=\underset{y\in\mathcal{Y}}{\text{argmax }}P(\text{y}_t|\text{X},y_{<t}) \\
+\text{linear}_{hs\rightarrow|V_{tgt}|}(x)=Wx+b \\
+\text{where }W\in\mathbb{R}^{\text{hidden\_size}\times|V_{tgt}|}\text{ and }b\in\mathbb{R}^{|V_{tgt}|}
+\end{gathered}$$
+
+$$\begin{gathered}
+|\hat{y}_t|=(\text{batch\_size},1,|V_{tgt}|)
+\end{gathered}$$
+
+$$\begin{gathered}
+\mathcal{L}_\theta(\hat{\text{Y}},\text{Y})=-\frac{1}{N}\sum_{i=1}^N{y_t\cdot\log{P(\text{y}_t|\text{X},y_{<t};\theta)}} \\
+\text{where }y_t\text{ is one-hot vector.}
+\end{gathered}$$
+
+$$\theta\leftarrow\theta-\gamma\nabla_\theta\mathcal{L}_\theta(\hat{\text{Y}},\text{Y})$$
+
 ## 파이토치 예제 코드
 
 이제까지 다룬 sequence-to-sequence를 파이토치로 구현하는 방법을 소개합니다. 전체 코드는 저자의 깃허브에서 다운로드 할 수 있습니다. (업데이트 여부에 따라 코드가 약간 다를 수 있습니다.)

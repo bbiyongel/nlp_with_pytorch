@@ -16,6 +16,8 @@ $$\begin{aligned}
 
 수식을 보면, 그래디언트 norm이 정해진 최대값(역치, threshold)보다 클 경우에, 그래디언트 벡터를 최대값 보다 큰 만큼의 비율로 나누어 줍니다. 따라서 그래디언트는 항상 역치 보다 작으며 이는 학습이 발산함을 방지함과 동시에, 그래디언트의 방향 자체는 바뀌지 않고 유지하기 때문에 모델 파라미터 $\theta$ 가 학습해야 하는 방향은 잃지 않습니다. 즉, 손실 함수(loss function)을 최소화(minimize)하기 위한 그래디언트의 방향은 유지한 채, 크기만 조절하는 것을 볼 수 있습니다.
 
+![그래디언트의 방향은 유지한 채, 크기만 달라지는 모습](../assets/image_needed.jpeg)]
+
 다만, 기존의 Stochastic Gradient Descent (SGD)가 아닌, Adam [[Kingma et al.2014]](https://arxiv.org/pdf/1412.6980.pdf)과 같은 동적인 러닝레이트를 갖는 optimizer(옵티마이저)를 사용할 경우에는 굳이 그래디언트 클리핑을 적용하지 않아도 괜찮습니다. <comment> 하지만 안전장치로 적용하는 것은 괜찮은 생각 입니다. </comment>
 
 아래와 같이 파이토치에서도 기능을 [torch.nn.utils.clip_grad_norm_](https://pytorch.org/docs/stable/nn.html?highlight=clip#torch.nn.utils.clip_grad_norm_) 이라는 함수를 제공하고 있으므로 매우 쉽게 사용 할 수 있습니다.
