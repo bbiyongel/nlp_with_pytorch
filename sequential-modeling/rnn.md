@@ -6,11 +6,13 @@
 
 $$y=f(x;\theta)$$
 
-하지만 리커런트 뉴럴 네트워크(recurrent neural network, RNN)는 입력 $x_t$ 와 직전 자신의 히든 스테이트(hidden state) $h_{t-1}$ 를 참조하여 현재 자신의 상태 $h_t$ 를 결정하는 작업을 여러 time-step에 걸쳐 수행 합니다. 각 time-step별 RNN의 히든 스테이트는 경우에 따라 출력이 되기도 합니다.
+하지만 리커런트 뉴럴 네트워크(recurrent neural network, RNN)는 입력 $x_t$ 와 직전 자신의 히든 스테이트(hidden state) $h_{t-1}$ 를 참조하여 현재 자신의 상태 $h_t$ 를 결정하는 작업을 여러 time-step에 걸쳐 수행 합니다. 각 time-step별 RNN의 히든스테이트는 경우에 따라 출력값이 될 수 있습니다. 일단 추후 다른 경우에 대해서 소개하기 전까지 RNN의 출력값은 히든스테이트라고 가정 하겠습니다.
 
 ![Recursive한 속성이 부여된 뉴럴넷 구조](../assets/rnn-basic.png)
 
 $$h_t=f(x_t, h_{t-1};\theta)$$
+
+위의 수식 처럼 RNN은 이전 time-step의 히든스테이트를 현재 time-step의 입력과 함께 받아 현재 time-step의 히든스테이트를 반환합니다.
 
 ## 값이 앞으로 전달되는 과정: 피드포워드(feed-forward)
 
@@ -46,7 +48,7 @@ $$|x_t|=(\text{batch\_size},1,\text{input\_size})$$
 
 텐서에서 첫 번째 차원은 미니배치 내에서의 샘플의 인덱스를 나타내며, 마지막 차원은 미리 정해진 입력 벡터의 차원<comment> 예를들어 임베딩 레이어의 출력 벡터의 차원 수 </comment>을 가리킵니다. 두 번째 차원은 시퀀스 내에서 현재 time-step의 인덱스를 나타냅니다. 현재는 하나의 time-step에 대한 텐서였으므로 1이 들어가있는 것을 알 수 있습니다. <comment> 총 1개의 시퀀스에 대해서 첫 번째 time-step </comment> 그럼 $n$ 개의 time-step을 가진 전체 시퀀스를 텐서로 나타낸다면 아래와 같을 것 입니다.
 
-![RNN의 히든 스테이트 텐서](../assets/rnn-hidden_state_tensor.png)
+![RNN의 입력 텐서 (n time-step)](../assets/image_needed.jpeg)
 
 $$\begin{gathered}
 |X|=(\text{batch\_size},n,\text{input\_size}) \\
@@ -54,6 +56,19 @@ $$\begin{gathered}
 \end{gathered}$$
 
 위 크기의 텐서를 입력으로 받아 RNN은 매 time-step 마다 히든 스테이트를 갱신합니다. 이 히든 스테이트 텐서의 크기는 아래와 같습니다.
+
+$$|h_t|=(\text{batch\_size},\text{hidden\_size})$$
+
+이것을 n개 time-step에 대해서 이어붙이면 RNN의 전체 time-step에 대한 출력 텐서가 됩니다.
+
+![여러 time-step의 히든스테이트들을 이어붙여 전체 time-step에 대한 히든스테이트로 만드는 모습](../assets/image_needed.jpeg)
+
+$$\begin{gathered}
+|h_{1:n}|= (\text{batch\_size},n,\text{hidden\_size}) \\
+\text{where }h_{1:n}=[h_1;h_2;\cdots;h_n].
+\end{gathered}$$
+
+위 수식에서 세미콜론은 이어붙이는 작업(concatenate)을 의미 합니다. 이어붙이기를 time-step의 차원에 대해서 수행하면 전체 time-step에 대한 히든 스테이트가 위와 같이 만들어질 겁니다.
 
 ## Back-propagation Through Time (BPTT)
 
@@ -97,7 +112,17 @@ sigmoid(x)&=\frac{1}{1+e^{-x}} \\
 
 ![여러 층이 쌓인 RNN의 형태](../assets/rnn-multi-layer.png)
 
-기존의 하나의 레이어만 갖는 RNN의 경우에는 히든 스테이트와 출력 값이 같은 값이었지만, 여러 층이 쌓여 이루어진 RNN의 경우에는 각 time-step의 RNN 전체 출력 값은 맨 윗층의 히든 스테이트가 됩니다.
+기존의 하나의 레이어만 갖는 RNN의 경우에는 히든 스테이트와 출력 값이 같은 값이었지만, 여러 층이 쌓여 이루어진 RNN의 경우에는 각 time-step의 RNN 전체 출력 값은 맨 윗층의 히든 스테이트가 됩니다. 따라서 여전히 RNN의 출력 텐서의 크기는 아래와 같습니다. 앞서 소개한 1개 레이어를 가진 RNN과 같은것을 알 수 있습니다.
+
+![RNN의 출력 텐서 (n time-step)](../assets/rnn-hidden_state_tensor.png)
+
+$$|h_{1:n}|=(\text{batch\_size},n,\text{hidden\_size})$$
+
+대신에 여러 레이어를 가진 RNN의 히든스테이트의 크기는 아래와 같습니다.
+
+![여러개의 레이어를 가진 RNN의 히든스테이트 (1 time-step)](../assets/image_needed.jpeg)
+
+$$|h_t|=(\text{\#direction}\times\text{\#layers},\text{batch\_size},\text{hidden\_size})$$
 
 ## 양방향(Bi-directional) RNN
 
