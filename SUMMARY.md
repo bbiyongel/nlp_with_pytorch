@@ -71,6 +71,7 @@
   * [n-gram 예제](language-modeling/srilm.md)
   * [뉴럴네트워크 언어 모델링](language-modeling/nnlm.md)
   * [활용 분야](language-modeling/application.md)
+  * [정리](language-modeling/conclusion.md)
 * [신경망 기계번역](neural-machine-translation/cover.md)
   * [서문](neural-machine-translation/intro.md)
   * [Sequence-to-Sequence](neural-machine-translation/seq2seq.md)
