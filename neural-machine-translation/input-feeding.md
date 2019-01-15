@@ -46,12 +46,14 @@ c = H^{src} \cdot w\text{ and }c\text{ is a context vector}. \\
 
 ## 구현 관점에서 바라보기
 
-자, 그럼 이제 기본적인 sequence-to-sequence에 대해 이야기했으니, 구현 관점에서 sequence-to-sequence의 수식을 따라가보도록 하겠습니다.
+자, 그럼 이제 기본적인 sequence-to-sequence에 대해 이야기했으니, 구현 관점에서 sequence-to-sequence의 수식을 따라가보도록 하겠습니다. 먼저 아래와 같이 소스(source) 문장과 타겟(target) 문장으로 이루어진 병렬 코퍼스가 있습니다.
 
 $$\begin{gathered}
 \mathcal{B}=\{\text{X}_i,\text{Y}_i\}_{i=1}^N \\
 \text{where }\text{X}=\{x_1,\cdots,x_n\}\text{, }\text{Y}=\{y_1,\cdots,y_m\}.
 \end{gathered}$$
+
+소스 문장은 n개의 단어로 이루어져 있고, 타겟 문장은 m개의 단어로 이루어져 있습니다. 이때, 미니배치 단위로 sequence-to-sequence의 훈련이 어떻게 이루어지는지 살펴보겠습니다. 따라서 각 소스 문장과 타겟 문장의 미니배치 사이즈는 아래와 같습니다.
 
 $$\begin{gathered}
 |\text{X}|=(\text{batch\_size},n,|V_\text{src}|) \\
@@ -60,11 +62,15 @@ $$\begin{gathered}
 |y_t|=(\text{batch\_size},1,|V_\text{tgt}|)
 \end{gathered}$$
 
+이때, 인코더에 1 time-step을 넣고 피드포워드 하는 과정은 아래와 같습니다. 하나의 단어 또는 토큰을 임베딩 레이어에 통과시켜 정해진 단어 임베딩 벡터 사이즈의 텐서를 얻습니다. 이것을 다시 이전 time-step의 RNN의 히든 스테이트와 함게 RNN에 입력으로 넣으면, 현재 time-step RNN의 히든스테이트가 나옵니다. RNN이 1개의 레이어만 가지고 있으면, 히든스테이트가 곧 출력값이 됩니다. 만약, RNN이 여러개의 레이어를 갖고 있으면 마지막 레이어의 히든 스테이트가 출력값이 됩니다. 지금은 RNN이 1개의 레이어만 가지고 있다고 가정하고, 히든스테이트가 곧 출력값이 됩니다.
+
 $$\begin{gathered}
 h_{t}^{src} = \text{RNN}_{enc}(\text{emb}_{src}(x_t), h_{t-1}^{src}) \\
 |\text{emb}_\text{src}(x_t)|=(\text{batch\_size},1,\text{word\_vec\_dim}) \\
 |h_t^{src}|=(\text{batch\_size},1,\text{hidden\_size})
 \end{gathered}$$
+
+이것을 전체 time-step에 대해서 인코더에서 수행할 수 있습니다. 이는 CUDA(쿠다)와 파이토치에 의해서 쉽게 구현 가능 합니다.
 
 $$\begin{gathered}
 \begin{aligned}
@@ -73,7 +79,11 @@ H^{src}&=[h_{1}^{src}; h_{2}^{src}; \cdots; h_{n}^{src}] \\
 \end{aligned}
 \end{gathered}$$
 
+이때, 전체 time-step의 RNN의 출력 텐서의 사이즈는 아래와 같습니다. 이는 각 time-step의 RNN의 히든스테이트들을 순서 차원(dimension)에 대해서 이어붙이기(concatenate)한 것과 같습니다. 따라서, 1 time-step일 때의 텐서 크기보다 n배 커졌습니다.
+
 $$|H^{src}|=(\text{batch\_size},n,\text{hidden\_size})$$
+
+이제 디코더의 피드포워드에 대해서 다루겠습니다. 마찬가지로 1 time-step의 단어 또는 토큰을 타겟 언어의 임베딩 레이어에 통과시키면 정해진 단어 임베딩 벡터 사이즈의 텐서를 얻습니다. 이것을 다시 디코더의 RNN에 이전 time-step의 히든스테이트와 함께 넣어주어 현재 time-step의 히든 스테이트를 구합니다. 주의할 점은 RNN에 넣어줄 때, 이전 time-step의 $\tilde{h}_{t-1}^{tgt}$ 를 단어 임베딩 텐서에 이어붙여(concatenate) 넣어준다는 것 입니다. 따라서 RNN의 허용 가능한 입력의 크기를 주목하기 바랍니다. 또한, 첫 번째 time-step의 디코더 입력 단어는 BOS로 문장의 시작을 가리키며, 첫 번째 time-step의 디코더 RNN 히든 스테이트는 인코더 RNN의 마지막 time-step 히든 스테이트 입니다.
 
 $$\begin{gathered}
 h_{t}^{tgt}=\text{RNN}_{dec}([\text{emb}_{tgt}(y_{t-1});\tilde{h}_{t-1}^{tgt}], h_{t-1}^{tgt}) \\
@@ -82,6 +92,8 @@ h_{t}^{tgt}=\text{RNN}_{dec}([\text{emb}_{tgt}(y_{t-1});\tilde{h}_{t-1}^{tgt}], 
 |h_{t}^{tgt}|=(\text{batch\_size},1,\text{hidden\_size}) \\
 |[\text{emb}_{tgt}(y_{t-1});\tilde{h}_{t-1}^{tgt}]|=(\text{batch\_size},1,\text{word\_vec\_dim}+\text{hidden\_size})
 \end{gathered}$$
+
+어텐션(attention)의 구현 부분을 보도록 하겠습니다. 아래의 수식은 기존의 어텐션과 아주 약간 다른 것을 볼 수 있습니다. 이는 배치행렬곱(batch matrix multiplication, bmm)을 위해서 수식을 이에 맞게 고쳐 쓴 것 입니다. 따라가 보도록 하겠습니다. 아래 수식에서 곱하기 부호 $\times$ 는 실제 곱하기가 아닌, 좌우의 사이즈를 가진 텐서간의 행렬곱이 일어남을 의미 합니다. 기본적으로 행렬곱은 2차원의 행렬에 대해서만 정의 되며, 이는 보통 마지막 2개 차원에 대해서 이루어집니다. 따라서 나머지 차원의 크기는 같아야 합니다. 아래의 수식은 어텐션 웨이트를 구하는 수식 입니다.
 
 $$\begin{gathered}
 w=\text{softmax}\big(H^{src}\cdot(h_t^{tgt}\cdot{W})\big) \\
@@ -100,6 +112,16 @@ w=\text{softmax}\big(H^{src}\cdot(h_t^{tgt}\cdot{W})\big) \\
 |w|=(\text{batch\_size},1,n)
 \end{gathered}$$
 
+어텐션 웨이트 텐서의 크기를 주목하세요. 첫 번째 차원은 미니배치 내의 샘플의 순서 인덱스(index)를 가리킵니다. 두 번째 차원은 문장 내 time-step을 의미하는데, 1이 들어있어 타겟 문장의 1개 time-step임을 알 수 있습니다. 마지막 세 번째 차원은 n이 들어있어, 소스 문장의 전체 time-step임을 알 수 있습니다. 즉, 어텐션 웨이트 텐서가 의미하는 값은, 
+
+- 미니배치의 각 샘플별로
+- 디코더의 현재 time-step에 대해서
+- 인코더의 각각 time-step별 어텐션 웨이트값
+
+을 가지게 되는 것을 알 수 있습니다.
+
+아래의 수식은 위에서 얻어진 어텐션 웨이트에 인코더 RNN 전체 time-step의 출력 텐서를 곱하여, 웨이트에 따라 가중합을 구하는 과정 입니다. 이렇게 구해진 텐서는 컨텍스트 텐서 $c$ 가 됩니다.
+
 $$\begin{gathered}
 c=w\cdot{H^{src}} \\
 \begin{aligned}
@@ -107,6 +129,8 @@ c=w\cdot{H^{src}} \\
 &=(\text{batch\_size},1,\text{hidden\_size})
 \end{aligned}
 \end{gathered}$$
+
+컨텍스트 텐서와 현재 time-step의 디코더의 출력값을 이어붙여(concatenate) 원래 hidden_size의 2배가 되는 텐서를 얻습니다.
 
 $$\begin{gathered}
 \tilde{h}_{t}^{tgt}=\tanh(\text{linear}_{2hs\rightarrow hs}([h_{t}^{tgt};c])) \\
@@ -116,29 +140,48 @@ $$\begin{gathered}
 \end{aligned}
 \end{gathered}$$
 
+ 이를 아래와 같은 리니어(linear) 레이어에 넣고 $\tanh$ 를 통과시켜 원래의 hidden_size를 갖는 텐서로 만들어 줍니다. 이를 우리는 $\tilde{h}_{t}^{tgt}$ 라고 부르며, 다음 time-step의 디코더의 또다른 입력값으로 주어 input-feeding을 구현 합니다.
+
 $$\begin{gathered}
 \text{linear}_{2hs\rightarrow{hs}}(x)=Wx+b \\
 \text{where }W\in\mathbb{R}^{2\text{hidden\_size}\times\text{hidden\_size}}\text{ and }b\in\mathbb{R}^{\text{hidden\_size}}. \\
 |\tilde{h}_{t}^{tgt}|=(\text{batch\_size},1,\text{hidden\_size})
 \end{gathered}$$
 
+위에서 얻어진 $\tilde{h}_{t}^{tgt}$ 를 softmax 레이어를 통과시켜, 소스 문장과 이전 time-step의 타겟 단어들이 주어졌을 때, 현재 time-step의 타겟 단어에 대한 확률 분포를 구합니다. 이는 discrete한 multinoulli 확률 분포입니다. 즉, 타겟 언어의 각 단어별 확률값을 가진 레이어가 됩니다. 여기서 최고 확률 값을 갖는 단어를 $\hat{y}_t$ 라고 하겠습니다.
+
 $$\begin{gathered}
 P(\text{y}_t|\text{X},y_{<t};\theta)=\text{softmax}(\text{linear}_{hs\rightarrow|V_{tgt}|}(\tilde{h}_{t}^{tgt})) \\
-\hat{y}_{t}=\underset{y\in\mathcal{Y}}{\text{argmax }}P(\text{y}_t|\text{X},y_{<t}) \\
+\hat{y}_{t}=\underset{y\in\mathcal{Y}}{\text{argmax }}P(\text{y}_t|\text{X},y_{<t};\theta) \\
 \text{linear}_{hs\rightarrow|V_{tgt}|}(x)=Wx+b \\
 \text{where }W\in\mathbb{R}^{\text{hidden\_size}\times|V_{tgt}|}\text{ and }b\in\mathbb{R}^{|V_{tgt}|}
 \end{gathered}$$
+
+따라서 현재 time-step의 타겟 단어 텐서의 크기는 아래와 같습니다.
 
 $$\begin{gathered}
 |\hat{y}_t|=(\text{batch\_size},1,|V_{tgt}|)
 \end{gathered}$$
 
+그럼 sequence-to-sequence 뉴럴 네트워크 파라미터 $\theta$ 를 훈련하기 위한 손실 함수를 살펴보도록 하겠습니다. 크로스 엔트로피 손실함수를 사용하면 아래와 같은 수식이 만들어질 것 입니다. 이전 챕터에서 설명하였듯이, $y_t^i$ 는 one-hot 벡터이므로, 정답 단어 인덱스(index)만 1이고 나머지는 0으로 채워져 있을 것 입니다. 따라서, 예측한 확률 분포에서 정답 단어 인덱스의 확률값에 대한 평균 곱하기 -1인 것과 같습니다.
+
 $$\begin{gathered}
-\mathcal{L}_\theta(\hat{\text{Y}},\text{Y})=-\frac{1}{N}\sum_{i=1}^N{y_t\cdot\log{P(\text{y}_t|\text{X},y_{<t};\theta)}} \\
-\text{where }y_t\text{ is one-hot vector.}
+\mathcal{L}(\theta)=-\frac{1}{N}\sum_{i=1}^N{y_t^i\cdot\log{P(\text{y}_t|\text{X}_i,y_{<t}^i;\theta)}} \\
+\text{where }y_t\text{ is one-hot vector.} \\
+\\
+\begin{aligned}
+|y_t^i\cdot\log{P(\text{y}_t|\text{X}_i,y_{<t}^i;\theta)}|&=(\text{batch\_size},1,|V_{tgt}|)\times(\text{batch\_size},1,|V_{tgt}|) \\
+&=(\text{batch\_size},1,|V_{tgt}|)\times(\text{batch\_size},|V_{tgt}|,1) \\
+&=(\text{batch\_size},1,1) \\
+&=(\text{batch\_size},)
+\end{aligned} \\
 \end{gathered}$$
 
+미니배치 내의 각 샘플별 손실값이 구해지면, 이를 모두 평균내어 스칼라(scalar)로 만들고, -1을 곱합니다. 이후 그 손실값을 $\theta$ 에 대해서 미분하여 그래디언트 디센트를 수행하면, 우리는 sequence-to-sequence의 파라미터를 업데이트 할 수 있습니다.
+
 $$\theta\leftarrow\theta-\gamma\nabla_\theta\mathcal{L}_\theta(\hat{\text{Y}},\text{Y})$$
+
+이렇게 우리는 미니배치까지 감안하여 수식 상에서 계산이 어떻게 이루어지는지 살펴 보았습니다. 그럼 이제 위의 수식을 파이토치 코드로 구현한 것을 살펴 보도록 하겠습니다.
 
 ## 파이토치 예제 코드
 
