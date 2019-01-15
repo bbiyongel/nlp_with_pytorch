@@ -24,7 +24,7 @@ $$\begin{aligned}
 
 이때 우리는 가우시안 분포의 $\sigma$ 가 상수라고 가정하겠습니다. 즉, 우리가 관심 있는 값은 오직 $\mu$ 라고 할 때, $\mu$ 에 대해서 미분을 취하면 우리는 마치 아래와 같은 결과를 얻을 수 있습니다.
 
-$$\nabla_\theta\mathcal{L}(\theta,\phi)=\nabla_\theta\Big(\log{\sigma}+\frac{1}{2}\log{2\pi}+\frac{1}{2\sigma\cdot N}\sum_{i=1}^N\big(y_i-\mu_\phi(x_i)\big)^2\Big)$$
+$$\nabla_\theta\mathcal{L}(\theta,\phi)=\nabla_\theta\Big(\log{\sigma}+\frac{1}{2}\log{2\pi}+\frac{1}{2\sigma\cdot N}\sum_{i=1}^N\big(y_i-\mu_\theta(x_i)\big)^2\Big)$$
 
 즉, 우리의 뉴럴네트워크는 위의 손실함수를 최소화 하도록 그래디언트 디센트를 통해 훈련 될 것 입니다.
 
