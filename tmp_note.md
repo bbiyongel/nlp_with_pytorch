@@ -209,6 +209,7 @@ d_i(x)&=\text{enc}_{1:i}(\hat{x})-\text{enc}_{1:i}(x) \\
 \tilde{d}_d(x)=\frac{[d_i(x);\cdots;d_{n-1}(x)]\cdot{v_d}}{s_d} \\
 \\
 \begin{aligned}
+\text{recon}&=|\hat{x}-x|_2 \\
 \text{d\_loss}(x)&=\sum_{i}^{n-1}{|d_i(x)|_2} \\
 \text{d\_norm\_z}(x)&=|\tilde{d}_z(x)|_2 \\
 \text{d\_norm\_d}(x)&=|\tilde{d}_d(x)|_2 \\
