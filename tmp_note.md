@@ -203,13 +203,15 @@ d_i(x)&=\text{enc}_{1:i}(\hat{x})-\text{enc}_{1:i}(x) \\
 &=\text{enc}_{1:i}(\text{dec}(\text{enc}(x)))-\text{enc}_{1:i}(x)
 \end{aligned} \\
 \\
-\_,s_{z_i},v_{z_i}=\text{svd}(z_i) \\
-\_,s_{d_i},v_{d_i}=\text{svd}(d_i) \\
-\tilde{d}_z(x)=\Bigg[\frac{d_1(x)\cdot{v_{z_1}}}{s_{z_1}};\cdots;\frac{d_{n-1}(x)\cdot{v_{z_{n-1}}}}{s_{z_{n-1}}}\Bigg] \\
-\tilde{d}_d(x)=\Bigg[\frac{d_1(x)\cdot{v_{d_1}}}{s_{d_1}};\cdots;\frac{d_{n-1}(x)\cdot{v_{d_{n-1}}}}{s_{d_{n-1}}}\Bigg] \\
+\_,s_{z},v_{z}=\text{svd}\Big([z_1;\cdots;z_{n-1}]\Big) \\
+\_,s_{d},v_{d}=\text{svd}\Big([d_i;\cdots;d_{n-1}]\Big) \\
+\tilde{d}_z(x)=\frac{[d_i(x);\cdots;d_{n-1}(x)]\cdot{v_z}}{s_z} \\
+\tilde{d}_d(x)=\frac{[d_i(x);\cdots;d_{n-1}(x)]\cdot{v_d}}{s_d} \\
 \\
-\text{d\_loss}(x)=\sum_{i}^{n-1}{|d_i(x)|_2} \\
-\text{d\_norm\_z}(x)=|\tilde{d}_z(x)|_2 \\
-\text{d\_norm\_d}(x)=|\tilde{d}_d(x)|_2 \\
-\text{d\_norm\_z\_std}(x)=|\text{standardize}\big(\tilde{d}_z(x)\big)|_2
+\begin{aligned}
+\text{d\_loss}(x)&=\sum_{i}^{n-1}{|d_i(x)|_2} \\
+\text{d\_norm\_z}(x)&=|\tilde{d}_z(x)|_2 \\
+\text{d\_norm\_d}(x)&=|\tilde{d}_d(x)|_2 \\
+\text{d\_norm\_z\_std}(x)&=|\text{standardize}\big(\tilde{d}_z(x)\big)|_2
+\end{aligned} \\
 \end{gathered}$$
