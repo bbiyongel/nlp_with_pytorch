@@ -205,8 +205,8 @@ d_i(x)&=\text{enc}_{1:i}(\hat{x})-\text{enc}_{1:i}(x) \\
 \\
 \_,s_{z},v_{z}=\text{svd}\Big([z_1;\cdots;z_{n-1}]\Big) \\
 \_,s_{d},v_{d}=\text{svd}\Big([d_i;\cdots;d_{n-1}]\Big) \\
-\tilde{d}_z(x)=\frac{[d_i(x);\cdots;d_{n-1}(x)]\cdot{v_z}}{s_z} \\
-\tilde{d}_d(x)=\frac{[d_i(x);\cdots;d_{n-1}(x)]\cdot{v_d}}{s_d} \\
+\tilde{d}_z(x)=\frac{[d_1(x);\cdots;d_{n-1}(x)]\cdot{v_z}}{s_z} \\
+\tilde{d}_d(x)=\frac{[d_1(x);\cdots;d_{n-1}(x)]\cdot{v_d}}{s_d} \\
 \\
 \begin{aligned}
 \text{recon}&=|\hat{x}-x|_2 \\
