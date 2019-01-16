@@ -190,3 +190,26 @@ z_{t+1}\leftarrow z_t-\alpha\nabla_{z}J(z,x), \\
 \end{gathered}$$
 
 $$\text{Anomaly Score }A(x)=(1-\lambda)\cdot\mathcal{L}_R(x;\theta)+\lambda\cdot\mathcal{L}_D(x;\phi)$$
+
+## Test
+
+$$\begin{gathered}
+x\sim{P_{\text{normal}}(\text{x})} \\
+\\
+\hat{x}=\text{dec}(\text{enc}(x)) \\
+z_i=\text{enc}_{1:i}(x) \\
+\begin{aligned}
+d_i(x)&=\text{enc}_{1:i}(\hat{x})-\text{enc}_{1:i}(x) \\
+&=\text{enc}_{1:i}(\text{dec}(\text{enc}(x)))-\text{enc}_{1:i}(x)
+\end{aligned} \\
+\\
+\_,s_{z_i},v_{z_i}=\text{svd}(z_i) \\
+\_,s_{d_i},v_{d_i}=\text{svd}(d_i) \\
+\tilde{d}_z(x)=\Bigg[\frac{d_1(x)\cdot{v_{z_1}}}{s_{z_1}};\cdots;\frac{d_{n-1}(x)\cdot{v_{z_{n-1}}}}{s_{z_{n-1}}}\Bigg] \\
+\tilde{d}_d(x)=\Bigg[\frac{d_1(x)\cdot{v_{d_1}}}{s_{d_1}};\cdots;\frac{d_{n-1}(x)\cdot{v_{d_{n-1}}}}{s_{d_{n-1}}}\Bigg] \\
+\\
+\text{d\_loss}(x)=\sum_{i}^{n-1}{|d_i(x)|_2} \\
+\text{d\_norm\_z}(x)=|\tilde{d}_z(x)|_2 \\
+\text{d\_norm\_d}(x)=|\tilde{d}_d(x)|_2 \\
+\text{d\_norm\_z\_std}(x)=|\text{standardize}\big(\tilde{d}_z(x)\big)|_2
+\end{gathered}$$
