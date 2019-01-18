@@ -71,7 +71,11 @@ $$\begin{gathered}
 $$\begin{gathered}
 (x_1,y_1),(x_2,y_2),\cdots,(x_n,y_n)\sim P(\text{y|x}) \\
 \mathcal{B}=\{(x_i,y_i)\}_{i=1}^n \\
-\mathcal{L}(\theta)=H(P,P_\theta)=-\frac{1}{n}\sum_{i=1}^n{\sum_{\text{y}\in\mathcal{Y}}{P(\text{y}|x_i)\log{P(\hat{\text{y}}|x_i;\theta)}}} \\
+\\
+\begin{aligned}
+\mathcal{L}(\theta)=H(P,P_\theta)&=-\mathbb{E}_{\text{x}\sim{P(\text{x})}}\Big[\mathbb{E}_{\text{y}\sim{P(\text{y}|\text{x})}}\big[\log{P(\text{y}|\text{x};\theta)}\big]\Big] \\
+&\approx-\frac{1}{n}\sum_{i=1}^n{\sum_{y\in\mathcal{Y}}{P(\text{y}=y|x_i)\log{P(\hat{\text{y}}=y|x_i;\theta)}}}
+\end{aligned} \\
 \text{where }P(\text{y}|x_i)=y_i\text{ and }P(\hat{\text{y}}|x_i;\theta)=\hat{y}_i=f_\theta(x_i)\text{.} \\
 \end{gathered}$$
 
@@ -84,7 +88,7 @@ $$\begin{gathered}
 \text{For example, }y_1=[0, 0, 1, 0], \forall y\in\mathbb{R}^{d}\text{, and }d=4.
 \end{gathered}$$
 
-그리고 뉴럴 네트워크는 마지막 레이어를 softmax 레이어를 가짐으로써, 샘플당 각 클래스에 대한 확률값을 반환하는 함수 형태가 될 것 입니다. <comment> $P(\hat{\text{y}}|x_i;\theta)$ </comment>
+그리고 뉴럴 네트워크는 마지막 레이어를 softmax 레이어를 가짐으로서, 샘플별 각 클래스에 대한 확률값을 반환하는 함수 형태가 될 것 입니다. <comment> $P(\hat{\text{y}}|x_i;\theta)$ </comment>
 
 $$\begin{gathered}
 \text{If we get }\hat{y}_1=[.2,.5,.1,.2], \\
@@ -94,15 +98,15 @@ y_1\odot\hat{y}_1=[0,0,1,0]\times[.2,.5,.1,.2]=0\times.2+0\times.5+1\times.1+0\t
 \text{where }\odot\text{ means sum of element-wise product.}
 \end{gathered}$$
 
-그럼 우리는 위의 수식대로 손실 함수를 계산하게 될 겁니다. 즉, discrete 확률 분포를 계산할 때, 크로스 엔트로피는 log-likelihood의 합에 $-1$ 을 곱한 것과 같습니다. 이를 negative log-likelihood라고 합니다.
+그럼 우리는 위의 수식대로 손실 함수를 계산하게 될 겁니다. Discrete 확률 분포는 벡터의 형태가 될 것이고, 정답 샘플의 값 또한 one-hot 벡터이기 때문에, 두 벡터간의 내적과 같습니다. 이때, 곱해지는 one-hot 벡터는 한 개의 1과 나머지 0으로 채워져 있기 때문에, 1인 클래스를 제외하면 모두 0이 곱해지게 됩니다. 즉, 이는 discrete 확률 분포를 계산할 때, 크로스 엔트로피는 log-likelihood의 합에 -1을 곱한 것과 같습니다. <comment> 이를 negative log-likelihood라고 합니다. </comment>
 
 $$\begin{gathered}
 \begin{aligned}
-\mathcal{L}(\theta)=H(P,P_\theta)&=-\frac{1}{n}\sum_{i=1}^n{\sum_{\text{y}\in\mathcal{Y}}{P(\text{y}|x_i)\log{P(\hat{\text{y}}|x_i;\theta)}}} \\
-&=-\frac{1}{n}\sum_{i=1}^n{\log{P(\text{y}=y_i|x_i;\theta)}}
+\mathcal{L}(\theta)=H(P,P_\theta)&\approx-\frac{1}{n}\sum_{i=1}^n{\sum_{y\in\mathcal{Y}}{P(\text{y}=y|x_i)\log{P(\hat{\text{y}}=y|x_i;\theta)}}} \\
+&=-\frac{1}{n}\sum_{i=1}^n{\log{P(\text{y}=\tilde{y}_i|x_i;\theta)}}
 \end{aligned} \\
-\text{where }P(\text{y}=\tilde{y}|\text{x}=x_i;\theta)=y_i\odot\hat{y}_i=.1 \\
-\text{ and }\tilde{y}=\underset{y\in\mathcal{Y}}{\text{argmax }}P(\text{y}=y|\text{x}=x_i).
+\text{where }P(\text{y}=\tilde{y}_i|\text{x}=x_i;\theta)=y_i\odot\hat{y}_i=.1 \\
+\text{ and }\tilde{y}_i=\underset{y\in\mathcal{Y}}{\text{argmax }}P(\text{y}=y|\text{x}=x_i).
 \end{gathered}$$
 
-따라서 우리는 크로스 엔트로피를 최소화(minimize)하는 것이 log-likelihood를 최대화(maximize)하는 것을 확인 할 수 있습니다.
+따라서 우리는 크로스 엔트로피를 최소화(minimize)하는 것이 log-likelihood를 최대화(maximize) 또는 negative log-likelihood를 최소화하는 것과 동일함을 확인 할 수 있습니다.
