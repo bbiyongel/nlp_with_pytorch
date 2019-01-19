@@ -26,7 +26,7 @@ Disallow: /profiles
 
 모든 User-agent에 대해서 일부 경우에 대해서 disallow 인 것을 확인 할 수 있습니다. robots.txt에 대한 좀 더 자세한 내용은 http://www.robotstxt.org/ 에서 확인 할 수 있습니다.
 
-크롤링 할 때에는 selenium이라는 패키지(package)를 사용하여 웹브라우져 드라이버를 직접 컨트롤하여 크롤링을 수행하곤 합니다. 이때, phantomJS나 chrome과 같은 헤드리스 브라우져(headless browser)를 사용하면, 실제 사용자가 화면에서 보던 것과 같은 웹페이지를 다운로드 받을 수 있습니다. (예를 들어 wget과 같이 그냥 다운로드 할 경우, 브라우저와 다른 모양의 페이지가 다운로드 되는 경우도 많습니다.) 이후, beautiful-soup이라는 패키지를 사용하여 HTML 코드를 쉽고 간단하게 파싱 할 수 있습니다.
+크롤링 할 때에는 selenium(셀레니움)이라는 패키지(package)를 사용하여 웹브라우져 드라이버를 직접 컨트롤하여 크롤링을 수행하곤 합니다. 이때, phantomJS나 chrome(크롬)과 같은 헤드리스 브라우져(headless browser)를 사용하면, 실제 사용자가 화면에서 보던 것과 같은 웹페이지를 다운로드 받을 수 있습니다. (예를 들어 wget과 같이 그냥 다운로드 할 경우, 브라우저와 다른 모양의 페이지가 다운로드 되는 경우도 많습니다.) 이후, beautiful-soup이라는 패키지를 사용하여 HTML 코드를 쉽고 간단하게 파싱 할 수 있습니다.
 
 ## Monolingual 코퍼스 수집
 

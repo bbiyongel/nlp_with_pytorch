@@ -6,6 +6,7 @@
 - [[Chambers et al.2010](https://web.stanford.edu/~jurafsky/chambers-acl2010-pseudowords.pdf)] Improving the Use of Pseudo-Words for Evaluating Selectional Preferences
 - [[Chiu et al.2017](https://arxiv.org/abs/1712.01769)] State-of-the-art Speech Recognition With Sequence-to-Sequence Models
 - [[Church et al.1991](https://www.sciencedirect.com/science/article/pii/088523089190016J)] A comparison of the enhanced Good-Turing and deleted estimation methods for estimating probabilities of English bigrams
+- [[Conneau et al.2017](https://arxiv.org/abs/1710.04087)] WORD TRANSLATION WITHOUT PARALLEL DATA
 - [[Currey et al.2017](https://kheafield.com/papers/edinburgh/copy_paper.pdf)] Copied Monolingual Data Improves Low-Resource Neural Machine Translation
 - [[Devlin et al.2018](https://arxiv.org/abs/1810.04805)] BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding
 - [[Erk et al.2007](http://www.aclweb.org/anthology/P07-1028)] A Simple, Similarity-based Model for Selectional Preferences

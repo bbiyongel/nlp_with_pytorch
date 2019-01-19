@@ -99,7 +99,7 @@ if __name__ == "__main__":
 
 각 언어별 주요 프로그램들을 정리하면 아래와 같습니다.
 
-|언어|프로그램명|제작언어|특징|
+|언어|프로그램명|제작 언어|특징|
 |-|-|-|-|
 |한국어|Mecab|C++|일본어 Mecab을 랩핑(wrapping)하였으며, 속도가 가장 빠름. 설치가 종종 까다로움|
 |한국어|KoNLPy|Python Wrapping(복합)|PIP을 통해 설치 가능하며 사용이 쉬우나, 일부 모듈의 경우에는 속도가 느림|
@@ -121,9 +121,7 @@ $ sudo apt-get install curl
 $ bash <(curl -s https://raw.githubusercontent.com/konlpy/konlpy/master/scripts/mecab.sh)
 ```
 
-위의 설명을 따라 정상적으로 설치 된 Mecab의 경우에는, KoNLPy에서 불러 사용할 수 있습니다. <comment> 참고사이트: http://konlpy-ko.readthedocs.io/ko/v0.4.3/api/konlpy.tag/#mecab-class </comment>
-
-또는 아래와 같이 bash상에서 **mecab**명령어를 통해서 직접 실행 가능하며 standard input/output을 사용하여 분절을 수행할 수 있습니다.
+위의 설명을 따라 정상적으로 설치 된 Mecab의 경우에는, KoNLPy에서 불러 사용할 수 있습니다. <comment> 참고사이트: http://konlpy-ko.readthedocs.io/ko/v0.4.3/api/konlpy.tag/#mecab-class </comment> 또는 아래와 같이 bash상에서 **mecab**명령어를 통해서 직접 실행 가능하며 standard input/output을 사용하여 분절을 수행할 수 있습니다.
 
 ```bash
 $ echo "안녕하세요, 반갑습니다!" | mecab
