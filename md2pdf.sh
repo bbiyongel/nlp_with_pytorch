@@ -193,3 +193,5 @@ time pandoc ../epilogue.md --latex-engine=xelatex -o ../${DIR_PATH}/0.epilogue.p
 cd ..
 
 time gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=./pdf/merged.pdf ./pdf/0.cover.pdf ./pdf/0.preface.pdf ./pdf/1.introduction.pdf ./pdf/2.basic-math.pdf ./pdf/3.pytorch-intro.pdf ./pdf/4.preprocessing.pdf ./pdf/5.word-senses.pdf ./pdf/6.word-embedding.pdf ./pdf/7.sequential-modeling.pdf ./pdf/8.text-classification.pdf ./pdf/9.language-modeling.pdf ./pdf/10.nmt.pdf ./pdf/11.adv-nmt.pdf ./pdf/12.rl.pdf ./pdf/13.duality.pdf ./pdf/14.productization.pdf ./pdf/0.epilogue.pdf
+
+python ./collect_info.py ./ image_needed.jpeg > ./image_needed.txt
