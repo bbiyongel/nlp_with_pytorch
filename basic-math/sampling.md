@@ -11,7 +11,7 @@ $$\begin{gathered}
 \text{where }P(x)=\frac{1}{6}, \forall x\text{ and reward}(x)=x.
 \end{gathered}$$
 
-따라서 실제 주사위 보상의 기대값은 아래와 같이 $3.5$ 가 됩니다.
+따라서 실제 주사위 보상의 기대값은 아래와 같이 3.5가 됩니다.
 
 $$\frac{1}{6}\times(1+2+3+4+5+6)=3.5$$
 
@@ -37,4 +37,4 @@ Continuous 랜덤 변수의 경우는 아래와 같습니다.
 
 $$\mathbb{E}_{\text{x}\sim p}[f(\text{x})]=\int{p(x)\cdot f(x)}{\text{ }dx}\approx\frac{1}{K}\sum_{i=1}^K{f(x_i)}$$
 
-위와 같이 우리는 $K$ 번 샘플링한 값을 유니폼(uniform) 분포인 것처럼 다루어 가중 평균(weighted average) 대신 단순한 $\frac{1}{K}$ , 산술 평균을 취합니다. 재미있는 것은 컴픁터를 통해 몬테카를로 샘플링을 수행 할 때에, $K=1$ 인 경우에도 훌륭하게 동작한다는 것 입니다.
+위와 같이 우리는 K번 샘플링한 값을 유니폼(uniform) 분포인 것처럼 다루어 가중 평균(weighted average) 대신 단순한 $\frac{1}{K}$ , 산술 평균을 취합니다. 재미있는 것은 컴픁터를 통해 몬테카를로 샘플링을 수행 할 때에, $K=1$ 인 경우에도 훌륭하게 동작한다는 것 입니다.

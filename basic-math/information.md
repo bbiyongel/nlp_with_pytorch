@@ -21,7 +21,7 @@ $$I(\text{x})=-\log{P(\text{x})}$$
 
 $$H(P)=-\mathbb{E}_{\text{x}\sim P(\text{x})}[\log{P(\text{x})}]=-\sum_{x\in\mathcal{X}}{P(x)\log{P(x)}}$$
 
-이때, 엔트로피는 분포가 얼마나 퍼져(flat)있는지, 샤프(sharp)한지를 가늠해 볼 수 있는 척도라고 볼 수 있습니다. 보통 분산이 작을수록 작을수록 샤프한 모양을 갖게 됩니다. 이 말은 샤프한 확률 분포일수록 특정 값 $x$ 에 대해서 확률이 높다는 것 입니다. 
+이때, 엔트로피는 분포가 얼마나 퍼져(flat)있는지, 뾰족(sharp)한지를 가늠해 볼 수 있는 척도라고 볼 수 있습니다. 보통 분산이 작을수록 작을수록 뾰족한 모양을 갖게 됩니다. 이 말은 뾰족한 확률 분포일수록 특정 값 $x$ 에 대해서 확률이 높다는 것 입니다.
 
 ![flat한 분포와 sharp한 분포](../assets/image_needed.jpeg)
 
@@ -29,7 +29,7 @@ $$H(P)=-\mathbb{E}_{\text{x}\sim P(\text{x})}[\log{P(\text{x})}]=-\sum_{x\in\mat
 
 ![크로스 엔트로피의 직관적인 표현](../assets/image_needed.jpeg)
 
-$$H(P, Q)=-\mathbb{E}_{\text{x}\sim P(\text{x})}[\log{Q(\text{x})}]=-\sum_{x\in\mathcal{X}}{P(x)\log{Q(x)}}$$
+$$H(P,Q)=-\mathbb{E}_{\text{x}\sim P(\text{x})}[\log{Q(\text{x})}]=-\sum_{x\in\mathcal{X}}{P(x)\log{Q(x)}}$$
 
  $-\log$ 를 취하였기 때문에, 분포 $P$ 와 분포 $Q$ 가 비슷한 모양일수록 크로스 엔트로피 $H(P,Q)$ 는 더 작은 값을 갖게 됩니다. 그러므로 우리는 그동안 분류 문제에서 크로스 엔트로피 손실 함수(loss function)를 사용하여, 손실 함수의 값이 최소가 되도록 그래디언트 디센트(gradient descent)를 통해 뉴럴 네트워크를 훈련하여 온 것 입니다. 즉, 우리가 알아내고 싶은 ground-truth 확률 분포 $P$ 에서 샘플링한 데이터 $\text{x}$ 를 통해 뉴럴 네트워크 확률 분포 $P_\theta$ 에 넣어 크로스 엔트로피가 최소가 되도록 그래디언트 디센트를 수행해 온 것 입니다.
 

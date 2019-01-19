@@ -37,7 +37,7 @@ $$J(\theta)=\frac{100!}{30!(100-30)!}\cdot\theta^{30}(1-\theta)^{100-30}$$
 
 $$J(\theta)=P(n=100,k=30|\theta)$$
 
-이 함수를 실제로 $\theta$ 에 대해서 그래프로 나타내면 아래와 같습니다. $0.3$ 에서 $J(\theta)$ 가 최대가 되는 것을 볼 수 있습니다. 즉, $\theta=0.3$ 일 때, bionomial 분포는 우리가 수집한 데이터 또는 현상을 가장 잘 설명(재현)합니다.
+이 함수를 실제로 $\theta$ 에 대해서 그래프로 나타내면 아래와 같습니다. 0.3 에서 $J(\theta)$ 가 최대가 되는 것을 볼 수 있습니다. 즉, $\theta=0.3$ 일 때, bionomial 분포는 우리가 수집한 데이터 또는 현상을 가장 잘 설명(재현)합니다.
 
 ![Likelihood 함수 곡선](../assets/basic_math-binomial.png)
 
@@ -47,7 +47,7 @@ $$P(\text{x}=x_1^n;\theta)$$
 
 > 여기서 세미콜론(;)은 수학적으로는 조건부 표기와 같습니다. 따라서 해석의 관점 차이가 존재할 뿐, $P(\text{x};\theta)=P(\text{x}|\theta)$ 라고 볼 수 있습니다. 또한 $P(\text{y}|\text{x};\theta)$ 의 경우에는 $P(\text{y}|\text{x},\theta)$ 와 같습니다.
 
-따라서 discrete 랜덤 변수 확률 분포에서는 확률값 자체가 likelihood로 표현 될 수 있으며, continuous 랜덤 변수 확률 분포의 경우에는 확률 밀도(probability density)값이 likelihood를 나타냅니다. 서로 독립인 $n$ 번 시행을 거쳐 얻은 데이터( $x_1, x_2, \cdots, x_n$ )에 대한 likelihood는 아래와 같이 표현 할 수 있습니다.
+따라서 discrete 랜덤 변수 확률 분포에서는 확률값 자체가 likelihood로 표현 될 수 있으며, continuous 랜덤 변수 확률 분포의 경우에는 확률 밀도(probability density)값이 likelihood를 나타냅니다. 서로 독립인 n번 시행을 거쳐 얻은 데이터( $x_1, x_2, \cdots, x_n$ )에 대한 likelihood는 아래와 같이 표현 할 수 있습니다.
 
 $$P(x_1,x_2,\cdots,x_n|\theta)=P(x_1;\theta)P(x_2;\theta)\cdots P(x_n;\theta)=\prod_{i=1}^n{P(x_i;\theta)}$$
 

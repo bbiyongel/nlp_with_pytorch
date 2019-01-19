@@ -17,14 +17,18 @@
 - [[Hassan et al.,2018](https://arxiv.org/abs/1803.05567)] Achieving Human Parity on Automatic Chinese to English News Translation
 - [[He et al.2015](https://arxiv.org/abs/1512.03385)] Deep Residual Learning for Image Recognition
 - [[He et al.2016a](https://arxiv.org/abs/1611.00179)] Dual Learning for Machine Translation
+- [[Karras et al.2017](https://arxiv.org/abs/1710.10196)] Progressive Growing of GANs for Improved Quality, Stability, and Variation
+- [[Karras et al.2018](https://arxiv.org/abs/1812.04948)] A Style-Based Generator Architecture for Generative Adversarial Networks
 - [[Kim, 2014](https://arxiv.org/abs/1408.5882)] Convolutional Neural Networks for Sentence Classification
 - [[Kingma et al.2013](https://arxiv.org/abs/1312.6114)] Auto-Encoding Variational Bayes
 - [[Kingma et al.2014](https://arxiv.org/abs/1412.6980)] Adam: A Method for Stochastic Optimization
 - [[Kneser et al.1995](https://www.semanticscholar.org/paper/Improved-backing-off-for-M-gram-language-modeling-Kneser-Ney/9548ac30c113562a51e603dbbc8e9fa651cfd3ab)] Improved backing-off for M-gram language modeling
+- [[Liu et al.2016](https://arxiv.org/abs/1606.07536)] Coupled Generative Adversarial Networks
 - [[Loung et al.2015](https://arxiv.org/abs/1508.04025)] Effective Approaches to Attention-based Neural Machine Translation
 - [[Mikolov et al.2010](https://www.isca-speech.org/archive/archive_papers/interspeech_2010/i10_1045.pdf)] Recurrent neural network based language model
 - [[Mikolov et al.2013](https://arxiv.org/pdf/1310.4546)] Distributed Representations of Words and Phrases and their Compositionality
 - [[Pennington et al.2014](https://www.aclweb.org/anthology/D14-1162)] GloVe: Global Vectors for Word Representation
+- [[Radford et al.2015](https://arxiv.org/abs/1511.06434)] Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks
 - [[Resnik et al.1997](http://www.aclweb.org/anthology/W97-0209)] Selectional Preference and Sense Disambiguation
 - [[Sennrich et al.2015](https://arxiv.org/abs/1511.06709)] Improving Neural Machine Translation Models with Monolingual Data
 - [[Sennrich et al.2016](https://arxiv.org/abs/1511.06709)] Improving Neural Machine Translation Models with Monolingual Data
