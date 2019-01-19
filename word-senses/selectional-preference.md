@@ -26,7 +26,7 @@ $$A_R(w,c)=-\frac{P(c|w)\log{\frac{P(c)}{P(c|w)}}}{S_R(w)}$$
 
 위의 수식에 따르면, selectional preference 강도가 낮은 술어(predicate)에 대해서 윗변의 값이 클 경우에는 술어와 클래스 사이에 더 큰 selectional association(선택 관련도)를 갖는다고 정의 합니다. 즉, selectional preference 강도가 낮아서, 해당 술어(predicate)는 클래스(class)에 대한 선택적 선호 강도가 낮음에도 불구하고, 특정 클래스만 유독 술어에 영향을 받아서 윗변이 커질수록 selectional association의 수치도 커집니다.
 
-예를 들어 어떤 아주 일반적인 동사에 대해서는 대부분의 클래스들이 prior(사전)확률 분포와 비슷하게 여전히 나타날 것입니다. 따라서 selectional preference 강도 $S_R(w)$ 는 0에 가까울것 입니다. 하지만 그 가운데 해당 동사와 붙어서 좀 더 나타나는 클래스의 목적어가 있다면, selectional association $A_R(w,c)$ 는 매우 높게 나타날 것 입니다.
+예를 들어 어떤 아주 일반적인 동사에 대해서는 대부분의 클래스들이 사전(prior))확률 분포와 비슷하게 여전히 나타날 것입니다. 따라서 selectional preference 강도 $S_R(w)$ 는 0에 가까울것 입니다. 하지만 그 가운데 해당 동사와 붙어서 좀 더 나타나는 클래스의 목적어가 있다면, selectional association $A_R(w,c)$ 는 매우 높게 나타날 것 입니다.
 
 ## Selectional Preference와 단어 중의성 해소(WSD)
 
@@ -36,7 +36,7 @@ $$A_R(w,c)=-\frac{P(c|w)\log{\frac{P(c)}{P(c|w)}}}{S_R(w)}$$
 
 ## 워드넷 기반의 Selectional Preference
 
-이때, 워드넷(WordNet)이 위력을 발휘합니다. 우리는 워드넷을 통해서 '차(car)'의 상위어(hypernym)를 알 수 있고, 이것을 클래스로 삼으면 우리가 필요한 정보들을 얻을 수 있습니다. 영어 워드넷에서의 예를 들어 'eat' 뒤에 있는 'bass'의 상위어를 통해 먹는 물고기 'bass'인지, 악기 'bass'인지 구분 할 수 있을 것 입니다. [[Resnik et al.1997](http://www.aclweb.org/anthology/W97-0209)]에서는 술어와 클래스 사이의 확률 분포를 정의하기 위한 출현빈도를 계산하는 수식을 아래와 같이 제안하였습니다. 
+이때, 워드넷(WordNet)이 위력을 발휘합니다. 우리는 워드넷을 통해서 '차(car)'의 상위어(hypernym)를 알 수 있고, 이것을 클래스로 삼으면 우리가 필요한 정보들을 얻을 수 있습니다. 영어 워드넷에서의 예를 들어 'eat' 뒤에 있는 'bass'의 상위어를 통해 먹는 물고기 'bass'인지, 악기 'bass'인지 구분 할 수 있을 것 입니다. [[Resnik et al.1997](http://www.aclweb.org/anthology/W97-0209)]에서는 술어와 클래스 사이의 확률 분포를 정의하기 위한 출현빈도를 계산하는 수식을 아래와 같이 제안하였습니다.
 
 $$\text{Count}_R(w, c)\approx\sum_{h\in c}{\frac{\text{Count}_R(w,h)}{|\text{Classes}(h)|}}$$
 
@@ -50,31 +50,31 @@ $$\hat{c}=\underset{c\in\mathcal{C}}{\text{argmax}}{A_R(w,c)},\text{ where }\mat
 
 단어 중의성 해소(WSD)를 해결할 수 있는 방법 중에 하나로, selectional preference를 살펴 보았습니다. Selectional preference를 잘 해결할 수 있다면 아마도 단어 중의성 해소 문제도 잘 해결 될 것 입니다. 그럼 selectional preference를 어떻게 평가 할 수 있을까요? 정교한 테스트셋을 설계하고 만들어서 selectional preference의 성능을 평가 할 수 있겠지만, 좀 더 쉽고 일반적으로 적용 가능한 방법은 없을까요?
 
-Pseudo 워드가 하나의 해답이 될 수 있습니다. Pseudo 워드는 두개의 단어가 인위적으로 합성되어 만들어진 단어를 이릅니다. 실제 일상 생활에서 쓰이기보다는 단순히 두 단어를 합친 것 입니다. 예를 들어 'banana'와 'door'를 합쳐 'banana-door'라는 pseudo 워드를 만들어 낼 수 있습니다. 이 'banana-door'라는 단어는 사실 실생활에서 쓰일리 없는 단어입니다. 하지만 우리는 이 단어가 'eat' 또는 'open'이라는 동사 술어(verb predicate)와 함꼐 headword object로써 나타났을때, 'eat'에 대해서는 'banana'를 선택해야 하고, 'open'에 대해서는 'door'를 선택하도록 해야 올바른 selectional preference 알고리즘을 만들거나 구현했음을 확인할 수 있습니다.
-
-[[Chambers et al.2010](https://web.stanford.edu/~jurafsky/chambers-acl2010-pseudowords.pdf)]
+Pseudo 워드가 하나의 해답이 될 수 있습니다. Pseudo 워드는 두개의 단어가 인위적으로 합성되어 만들어진 단어를 이릅니다. 실제 일상 생활에서 쓰이기보다는 단순히 두 단어를 합친 것 입니다. 예를 들어 'banana'와 'door'를 합쳐 'banana-door'라는 pseudo 워드를 만들어 낼 수 있습니다. 이 'banana-door'라는 단어는 사실 실생활에서 쓰일리 없는 단어입니다. 하지만 우리는 이 단어가 'eat' 또는 'open'이라는 동사 술어(verb predicate)와 함꼐 headword object로써 나타났을때, 'eat'에 대해서는 'banana'를 선택해야 하고, 'open'에 대해서는 'door'를 선택하도록 해야 올바른 selectional preference 알고리즘을 만들거나 구현했음을 확인할 수 있습니다. <comment> pseudo 워드를 활용하여 selectional preference를 잘 평가하는 방법에 대해서 더 알고 싶다면, [[Chambers et al.2010](https://web.stanford.edu/~jurafsky/chambers-acl2010-pseudowords.pdf)]을 참고 바랍니다. </comment>
 
 ## 유사도 기반의 Selectional Preference
 
-위와 같이 selectional preference를 워드넷등의 도움을 받아 구현하는 방법을 살펴보았습니다. 하지만, 워드넷이라는것은 아쉽게도 모든 언어에 존재하지 않으며, 새롭게 생겨난 신조어들도 반영되어 있지 않을 가능성이 매우 높습니다. 따라서 워드넷과 같은 시소러스(thesaurus, 어휘 분류 사전)에 의존하지 않고 selectional preference를 구할 수 있으면 매우 좋을 것 입니다. [[Erk et al.2007](http://www.aclweb.org/anthology/P07-1028)]에서는 단어간의 유사도를 통해 시소러스에 의존하지 않고 간단하게 selectional preference를 구하는 방법을 제시 하였습니다.
+위와 같이 selectional preference를 워드넷등의 도움을 받아 구현하는 방법을 살펴보았습니다. 하지만 워드넷이라는것은 아쉽게도 모든 언어에 존재하지 않으며, 새롭게 생겨난 신조어들도 반영되어 있지 않을 가능성이 매우 높습니다. 따라서 워드넷과 같은 시소러스(thesaurus)에 의존하지 않고 selectional preference를 구할 수 있으면 매우 좋을 것 입니다. [[Erk et al.2007](http://www.aclweb.org/anthology/P07-1028)]에서는 단어간의 유사도를 통해 시소러스에 의존하지 않고 데이터를 기반으로 간단하게 selectional preference를 구하는 방법을 제시 하였습니다.
 
 $$(w,h,R),\text{ where }R\text{ is a relationship, such as verb-object}.$$
 
-이전과 같이 문제 정의는 비슷합니다. 술어(predicate) $w$ 와 headword $h$ , 그리고 두 단어 사이의 관계 $R$ 이 튜플(tuple)로 주어집니다. 이때, selectional association, $A_R(w,h_0)$ 은 아래와 같이 정의 할 수 있습니다.
+이전과 같이 문제 정의는 비슷합니다. 술어(predicate) $w$ 와 headword $h$ , 그리고 두 단어 사이의 관계 $R$ 이 튜플(tuple)로 주어집니다. 이때 selectional association $A_R(w,h_0)$ 은 아래와 같이 정의 할 수 있습니다.
 
 $$A_R(w,h_0)=\sum_{h\in\text{Seen}_R(w)}{\text{sim}(h_0,h)\cdot \phi_R(w,h)}$$
 
-이때, 웨이트(weight) $\phi_R(w,h)$ 는 동등(uniform)하게 1로 주어도 되고, 아래와 같이 Inverse Document Frequency (IDF)를 사용하여 정의 할 수도 있습니다.
+이때 웨이트(weight) $\phi_R(w,h)$ 는 동등(uniform)하게 1로 주어도 되고, 아래와 같이 Inverse Document Frequency (IDF)를 사용하여 정의 할 수도 있습니다.
 
 $$\phi_R(w,h)=\text{IDF}(h)$$
 
-또한, $\text{sim}$ 함수는 이전에 다루었던 코사인 유사도(cosine similarity)나 자카드 유사도(jaccard similarity)를 포함하여 다양한 유사도 함수를 사용할 수 있습니다.
+또한 $\text{sim}$ 함수는 이전에 다루었던 코사인 유사도(cosine similarity)나 자카드 유사도(jaccard similarity)를 포함하여 다양한 유사도 함수를 사용할 수 있습니다.
 
-다만, 이전에 다루었던 selectional association은 $A_R(w,c)$ 을 다루었는데, 지금은 $A_R(w,h_0)$ 을 다루는 것이 차이점이긴 합니다. 하지만 우리는 좀 전에 selectional preference의 문제를 선호하는 클래스를 알아내는 것이 아닌, pseudo 워드와 같이 두 개의 단어가 주어졌을 때 선호하는 단어를 고르는 문제로 만들었습니다. 따라서 큰 문제가 되지 않습니다.
+다만 이전에 다루었던 selectional association은 $A_R(w,c)$ 을 다루었는데, 지금은 $A_R(w,h_0)$ 을 다루는 것이 차이점이긴 합니다. 하지만 우리는 좀 전에 selectional preference의 문제를 선호하는 클래스를 알아내는 것이 아닌, pseudo 워드와 같이 두 개의 단어가 주어졌을 때 선호하는 단어를 고르는 문제로 만들었습니다. 따라서 큰 문제가 되지 않습니다.
 
 이 방법은 쉽게 워드넷과 같은 시소러스 없이 쉽게 selectional preference를 계산할 수 있게 합니다. 하지만 유사도를 비교하기 위해서 $Seen_R(w)$ 함수를 통해 대상 단어를 선정하기 때문에, 코퍼스에 따라서 유사도를 구할 수 있는 대상이 달라지게 됩니다. 따라서 이에 따랏 커버리지 문제가 발생할 수 있습니다.
 
 ## 유사도 기반의 Selectional Preference 예제
+
+그럼 위의 방법을 파이썬으로 구현한 에제를 살펴보도록 하겠습니다. 먼저 코퍼스를 받아 문장 내에서 술어(동사, VV)와 headword(명사, NNG)를 찾아 $\text{Seen}_R(w)$ 를 구성합니다.
 
 ```python
 from konlpy.tag import Mecab
@@ -101,6 +101,8 @@ def count_seen_headwords(lines, predicate='VV', headword='NNG'):
     return seen_dict
 ```
 
+그럼 주어진 술어와 headword에 대해서 selectional association 점수를 구하는 함수를 아래와 같이 구현할 수 있습니다. 우리는 단어 사이의 유사도 $\text{sim}(h_0,h)$ 를 구하기 위해서, 이전에 구성한 피쳐벡터들을 담은 판다스(pandas) 데이터프레임을 받습니다. 그럼 metric으로 주어진 함수를 통해 유사도를 계산합니다.
+
 ```python
 def get_selectional_association(predicate, headword, lines, dataframe, metric):
     v1 = torch.FloatTensor(dataframe.loc[headword].values)
@@ -117,6 +119,8 @@ def get_selectional_association(predicate, headword, lines, dataframe, metric):
     return total
 ```
 
+위의 함수들을 활용하여 주어진 술어에 대해서 올바른 headword를 고르는 함수 wsd는 아래와 같습니다.
+
 ```python
 def wsd(predicate, headwords):
     selectional_associations = []
@@ -126,7 +130,11 @@ def wsd(predicate, headwords):
     print(selectional_associations)
 ```
 
+실제로 wsd함수에 대해서 '피우'라는 동사가 주어졌을 때, '담배', '맥주', '사과'중에서 어떤 단어를 선택하는지 살펴 본 결과는 아래와 같습니다.
+
 ```python
 >>> wsd('피우', ['담배', '맥주', '사과'])
 [tensor(6.1853), tensor(3.9723), tensor(3.8503)]
 ```
+
+기특하게도 '담배'가 우리의 예상대로 잘 선택되는 것을 알 수 있습니다. 또한 아무래도 '맥주'의 경우에는 '담배'와 비슷한 역할을 하는 경우가 '사과'에 비해서 많을 것이기 때문에, '사과'가 가장 꼴찌를 기록하는 것을 볼 수 있습니다. 물론 위의 wsd 함수가 항상 잘 동작하는 것은 아닐 겁니다. 하지만 많은 코퍼스를 가지고 있고, 정확한 피쳐 벡터를 구성할 수록 정확한 유사도 계산이 가능해져, 점점 더 좋은 성능의 중의성 해소가 가능 할 것 입니다. 이것이 기존의 시소러스 기반의 Lesk 알고리즘과 다른 데이터기반 알고리즘의 장점이라고 할 수 있습니다.

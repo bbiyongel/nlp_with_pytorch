@@ -15,7 +15,7 @@ $$v\in\mathbb{R}^{|V|},\text{ where }v\text{ is one-hot vector and }|V|\text{ is
 
 전체 단어에 대해서 one-hot 벡터를 구성한다면 아래와 같은 형태가 될 것 입니다.
 
-|단어|사전에서의 순서(index)|One-hot 벡터|
+|단어|사전내 순서(index)|One-hot 벡터|
 |-|-|-|
 |...|||
 |강아지|8| $0,0,0,0,0,0,0,1,0,0,0,\cdots,0$ |
@@ -26,7 +26,7 @@ $$v\in\mathbb{R}^{|V|},\text{ where }v\text{ is one-hot vector and }|V|\text{ is
 |하마|20,567| $0,\cdots,0,0,0,0,0,0,0,0,0,0,1$ |
 |...|||
 
-앞어 언급하였듯이 단어는 discrete한 심볼로써, discrete 랜덤변수(random variable)로써 나타내게 됩니다. Discrete 랜덤 변수는 그 값을 불연속적으로 가질 수 밖에 없습니다. 따라서 one-hot 벡터는 discrete 확률 분포(probability distribution)로부터 샘플링(sampling)한 샘플이라고 할 수 있습니다. <comment> 주로 multinoulli 확률 분포가 될 것 입니다. </comment>
+앞서 언급하였듯이 단어는 discrete한 심볼로써, discrete 랜덤변수(random variable)로 나타내게 됩니다. Discrete 랜덤 변수는 그 값을 불연속적으로 가질 수 밖에 없습니다. 따라서 one-hot 벡터는 discrete 확률 분포(probability distribution)로부터 샘플링(sampling)한 샘플이라고 할 수 있습니다. <comment> 주로 multinoulli 확률 분포가 될 것 입니다. </comment>
 
 ![Discrete 확률 분포로부터 샘플링하여 얻어지는 One-hot 벡터](../assets/image_needed.jpeg)
 
@@ -38,8 +38,8 @@ $$[0,0,\cdots,1,0]\times[0,1,0,\cdots,0]^T=0$$
 
 ## 차원의 저주(Curse of dimensionality)
 
-또 다른 문제는 이런 sparse vector는 기계학습에 있어서 매우 큰 장벽으로 작용한다는 점 입니다. 예를 들어, 점보를 표현하는데 훨씬 큰 차원이 사용되었다면 작은 차원으로 같은 정보를 표현한 것에 비해서, 상대적으로 같은 크기의 공간에 표현되는 정보는 훨씬 더 적을 것이기 때문입니다. 아래의 그림과 같이 같은 크기로 나뉘어진 단위 공간이 비어있는 경우가 많을 것 입니다. 그리고 정보를 표현하는 각 점(벡터)들은 매우 낮은 밀도로 희소(sparse)하게 퍼져 있을 것 입니다.
+또 다른 문제는 이런 sparse 벡터는 기계학습에 있어서 매우 큰 장벽으로 작용한다는 점 입니다. 예를 들어, 점보를 표현하는데 훨씬 큰 차원이 사용되었다면 작은 차원으로 같은 정보를 표현한 것에 비해서, 상대적으로 같은 크기의 공간에 표현되는 정보는 훨씬 더 적을 것이기 때문입니다. 아래의 그림과 같이 같은 크기로 나뉘어진 단위 공간이 비어있는 경우가 많을 것 입니다. 그리고 정보를 표현하는 각 점(벡터)들은 매우 낮은 밀도로 희소(sparse)하게 퍼져 있을 것 입니다.
 
 ![차원의 저주: 차원이 높을 수록 같은 정보를 표현하는데 불리합니다.](../assets/image_needed.jpeg)
 
-차원이 늘어날수록 이와 같은 문제가 지수적으로(exponential) 늘어나게 됩니다. 우리는 이런 문제를 차원의 저주(curse of dimensionailty)라고 부릅니다. 따라서 우리는 위와 같이 one-hot encoding의 한계를 실감할 수 밖에 없습니다. 따라서 우리는 차원의 저주로부터 벗어나기 위해 차원을 축소하여 단어를 표현해야 할 필요성을 느낍니다.
+차원이 늘어날수록 이와 같은 문제가 지수적으로(exponential) 늘어나게 됩니다. 우리는 이런 문제를 차원의 저주(curse of dimensionailty)라고 부릅니다. 따라서 우리는 위와 같이 one-hot 인코딩의 한계를 실감할 수 밖에 없습니다. 따라서 우리는 차원의 저주로부터 벗어나기 위해 차원을 축소하여 단어를 표현해야 할 필요성을 느낍니다.
