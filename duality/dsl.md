@@ -26,7 +26,7 @@ s.t.~P(x)P(y|x;\theta_{x \rightarrow y})=P(y)P(x|y;\theta_{y \rightarrow x}), \f
 
 위의 수식을 해석하면, 목표(objective1)은 베이즈 정리에 따른 제약조건을 만족함과 동시에, $\ell_1$ 을 최소화(minimize) 하도록 해야 합니다. $\ell_1$ 은 번역함수 $f$ 에 입력 $x_i$ 를 넣어 나온 반환값과 $y_i$ 사이의 손실(loss)를 의미 합니다. 마찬가지로, $\ell_2$ 도 번역함수 $g$ 에 대해 같은 작업을 수행하고 최소화하여 목표(objective2)를 만족해야 합니다.
 
-$$\mathcal{L}_{duality}=\Big(\big(\log{\hat{P}(x)}+\log{P(y|x;\theta_{x \rightarrow y})}\big)-\big(\log{\hat{P}(y)}+\log{P(x|y;\theta_{y \rightarrow x})}\big)\Big)^2$$
+$$\mathcal{L}_{duality}=\Big|\big(\log{\hat{P}(x)}+\log{P(y|x;\theta_{x \rightarrow y})}\big)-\big(\log{\hat{P}(y)}+\log{P(x|y;\theta_{y \rightarrow x})}\big)\Big|^2$$
 
 그러므로 우리는 $\mathcal{L}_{duality}$ 와 같이 베이즈 정리에 따른 제약조건의 양 변의 값의 차이를 최소화하도록 하는 MSE 손실 함수를 만들 수 있습니다. 위의 수식에서 우리가 동시에 훈련시키는 신경망 네트워크 파라미터를 통해 $\log{P(y|x;\theta_{x \rightarrow y})}$ 와 $\log{P(x|y;\theta_{y \rightarrow x})}$ 를 구하고, 단방향 코퍼스를 통해 별도로 이미 훈련시켜 놓은 언어모델을 통해 $\log{\hat{P}(x)}$ 와 $\log{\hat{P}(y)}$ 를 근사(approximation)할 수 있습니다.
 
@@ -59,10 +59,14 @@ DSL을 파이토치를 사용하여 구현 해 보도록 하겠습니다. 자세
 
 ### simple_nmt/dual_trainer.py
 
+강화학습 챕터에서 다룬 Minimum Risk Training(MRT)와 마찬가지로 DSL도 sequence-to-sequence 모델 구조는 바뀌지 않고, 훈련 방식만 변화 합니다. 따라서 MRT에서처럼 train_epoch() 함수를 다시 구현하였습니다. 우리는 $\theta_{\text{x}\rightarrow\text{y}}$ 와 $\theta_{\text{y}\rightarrow\text{x}}$ 를 동시에 학습할 것이기 때문에, 아래와 같이 하드코딩(hard coding)을 피하기 위해서 상수를 담을 변수를 선언합니다.
+
 ```python
 # In order to avoid to use hard coding.
 X2Y, Y2X = 0, 1
 ```
+
+이전 기계번역 챕터에서 다루었듯이, sequence-to-sequence 인코더 RNN은 packed_sequence라는 타입의 텐서를 받아 효율적으로 계산을 수행 합니다. packed_sequence를 다루기 위해서는 미니배치 내의 샘플들의 문장이 긴 순서대로 정렬해 주어야 합니다. 처음 미니배치를 로딩(loading)할 때는 토치텍스트(TorchText)가 이 작업을 수행해 주었지만, 반대방향 모델을 훈련하기 위해서는 미니배치 내의 샘플들을 다시 정렬해야 합니다. 즉, 타겟(target) 문장 미니배치가 인코더에 들어갈 수 있도록 바꿔야 합니다. 아래의 코드는 이 작업을 위한 함수입니다. 타겟 문장들의 길이로 재정렬함과 동시에 다시 원래의 순서대로 복원할 수 있도록 restore_indice라는 값 또한 함께 반환하는 것을 볼 수 있습니다.
 
 ```python
 def _reordering(self, x, y, l):
@@ -85,6 +89,8 @@ def _reordering(self, x, y, l):
 
     return x_, y_, l_, restore_indice
 ```
+
+두 모델 $\theta_{\text{x}\rightarrow\text{y}}$ 와 $\theta_{\text{y}\rightarrow\text{x}}$ 에 대해서 피드 포워드를 수행한 후, 정답과 비교하여 각 모델별 손실값을 구하는 작업을 수행하는 함수 입니다. 이때, 미리 훈련을 마친 언어모델들을 통해서 추론한 값들 x_lm과 y_lm 역시 함수에 주어져야 합니다. 각 모델들을 훈련하기 위한 손실값을 계산할 때, 다른 방향의 모델에서 나온 값은 detach() 함수를 통해 그래디언트를 계산하지 않도록 끊어주는 모습을 주목하기 바랍니다.
 
 ```python
     def _get_loss(self, x, y, x_hat, y_hat, x_lm=None, y_lm=None, lagrange=1e-3):
@@ -142,6 +148,8 @@ def _reordering(self, x, y, l):
             return losses[X2Y].sum(), losses[Y2X].sum(), None
 ```
 
+위에서 선언된 함수들을 활용하여 1 epoch에 대해서 훈련을 수행하는 함수 입니다.
+
 ```python
 def train_epoch(self,
                 train,
@@ -166,7 +174,7 @@ def train_epoch(self,
         # Raw target variable has both BOS and EOS token. 
         # The output of sequence-to-sequence does not have BOS token. 
         # Thus, remove BOS token for reference.
-        
+
         # You have to reset the gradients of all model parameters before to take another step in gradient descent.
         optimizers[X2Y].zero_grad()
         optimizers[Y2X].zero_grad()
@@ -209,7 +217,7 @@ def train_epoch(self,
                                 # Thus, we turn-off the regularization at the beginning.
                                 lagrange=self.config.dsl_lambda if not no_regularization else .0
                                 )
-        
+
         losses[X2Y].div(y.size(0)).backward()
         losses[Y2X].div(x.size(0)).backward()
 
@@ -245,7 +253,7 @@ def train_epoch(self,
         torch_utils.clip_grad_norm_(self.models[Y2X].parameters(),
                                     self.config.max_grad_norm
                                     )
-        
+
         # Take a step of gradient descent.
         optimizers[X2Y].step()
         optimizers[Y2X].step()
@@ -260,3 +268,15 @@ def train_epoch(self,
 
     return avg_loss, param_norm, avg_grad_norm
 ```
+
+## 실험 결과
+
+아래 테이블은 영한 또는 한영 번역을 각 알고리즘 별로 훈련 하였을 때 최종 BLEU 수치 입니다. 보다시피 DSL이 가장 높은 성능을 보여주는 것을 알 수 있습니다.
+
+|알고리즘|영한 번역|한영 번역|
+|-|-|-|
+|MLE|28.15|23.56|
+|MRT|29.83(+1.68)|25.17(+1.61)|
+|DSL|30.14(+0.27)|26.34(+1.17)|
+
+우리는 이처럼 여전히 teacher-forcing을 사용하면서, 샘플링을 통한 학습효율 저하 없이, 간단한 regularization 텀을 손실함수에 더함으로서, 기존의 다른 알고리즘보다 더 나은 성능의 기계번역 모델을 학습할 수 있음을 알 수 있습니다.

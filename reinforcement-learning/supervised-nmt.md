@@ -202,6 +202,8 @@ $$
 
 물론 K가 크면 클수록 정확한 값을 근사하겠지만, 샘플링을 수없이 반복하는 딥러닝 및 강화학습의 특성상 $K=1$ 인 경우에도 몬테카를로 샘플링을 통한 근사(approximation)가 매우 잘 동작하게 됩니다.
 
+그리고 중요한 점은 샘플링 기반으로 동작하기 때문에 더이상 teacher-forcing을 사용하지 않는다는 것 입니다. 따라서 기존의 sequence-to-sequence의 forward() 함수 대신에 직접 구현한 search() 함수를 사용하여 샘플링을 하여 학습을 수행 합니다. 이때, search 함수의 greedy 파라미터를 False 값을 주어, 랜덤 샘플링을 수행 할 수 있습니다.
+
 ```python
     def train_epoch(self,
                     train,

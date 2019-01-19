@@ -112,7 +112,7 @@ $$\mathcal{L}(\theta)\approx-\sum^N_{n=1}{\log{P(y^n|x^n;\theta)}}+\lambda\sum^S
 ![](../assets/duality-dul-eval.png)
 -->
 
-위의 테이블과 같이, 이 방법은 앞 챕터에서 소개한 기존의 단방향 corpus[[Gulcehre et al.2015]](https://arxiv.org/abs/1503.03535)[[Sennrich et al.2016]](https://arxiv.org/abs/1511.06709)를 활용한 방식들과 비교하여 훨씬 더 나은 성능의 개선을 보여주었으며, 바로 앞서 소개한 [Dual Learning[He et al.2016a]](https://arxiv.org/pdf/1611.00179.pdf)보다도 더 나은 성능을 보여줍니다. 마찬가지로, 불안정하고 비효율적인 강화학습을 사용하지 않고도 더 나은 성능을 보여준 것은 주목할 만한 성과라고 할 수 있습니다.
+위의 테이블과 같이, 이 방법은 앞 챕터에서 소개한 기존의 단방향 코퍼스[[Gulcehre et al.2015]](https://arxiv.org/abs/1503.03535)[[Sennrich et al.2016]](https://arxiv.org/abs/1511.06709)를 활용한 방식들과 비교하여 훨씬 더 나은 성능의 개선을 보여주었으며, 바로 앞서 소개한 [Dual Learning[He et al.2016a]](https://arxiv.org/pdf/1611.00179.pdf)보다도 더 나은 성능을 보여줍니다. 마찬가지로, 불안정하고 비효율적인 강화학습을 사용하지 않고도 더 나은 성능을 보여준 것은 주목할 만한 성과라고 할 수 있습니다.
 
 <!--
 ### 쉬어가기: 임포턴스 샘플링 (Importance Sampling)
