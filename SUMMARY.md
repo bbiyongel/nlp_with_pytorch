@@ -1,8 +1,8 @@
 # Summary
 
 * [소개글](README.md)
+* [서문](preface.md)
 * [Index](index_list.md)
-* [Temporal Note](tmp_note.md)
 * [딥러닝을 활용한 자연어처리](nlp-with-deeplearning/cover.md)
   * [서문](nlp-with-deeplearning/intro.md)
   * [딥러닝의 역사](nlp-with-deeplearning/deeplearning.md)

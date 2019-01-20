@@ -1,8 +1,8 @@
 # Index
 
 * [소개글](README.md)
+* [서문](preface.md)
 * [Index](index_list.md)
-* [Temporal Note](tmp_note.md)
 * [딥러닝을 활용한 자연어처리](nlp-with-deeplearning/cover.md)
   * [서문](nlp-with-deeplearning/intro.md)
   * [딥러닝의 역사](nlp-with-deeplearning/deeplearning.md)
@@ -48,7 +48,7 @@
   * [흔한 오해](word-embedding-vector/myth.md)
   * [Word2Vec](word-embedding-vector/word2vec.md)
   * [GloVe](word-embedding-vector/glove.md)
-  * [예제 코드](word-embedding-vector/example.md)
+  * [예제](word-embedding-vector/example.md)
   * [정리](word-embedding-vector/conclusion.md)
 * [시퀀스 모델링](sequential-modeling/cover.md)
   * [서문](sequential-modeling/intro.md)
@@ -71,6 +71,7 @@
   * [n-gram 예제](language-modeling/srilm.md)
   * [뉴럴네트워크 언어 모델링](language-modeling/nnlm.md)
   * [활용 분야](language-modeling/application.md)
+  * [정리](language-modeling/conclusion.md)
 * [신경망 기계번역](neural-machine-translation/cover.md)
   * [서문](neural-machine-translation/intro.md)
   * [Sequence-to-Sequence](neural-machine-translation/seq2seq.md)

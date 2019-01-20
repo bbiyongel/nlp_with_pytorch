@@ -8,9 +8,6 @@
 
 수식이 낯설은 입문자 분들은 수식은 좀 더 과감히 건너뛰고 읽으셔도 좋습니다. 먼저 한번 읽은 후에 큰 그림을 이해하고 다시 읽으며 수식을 이해하면 좀 더 좋을 것 같습니다. 좀 더 깊은 내용을 알고 싶은 독자분들은 수식까지 모두 집중하여 읽어주길 권장 합니다.
 
-* Github Repo: [https://github.com/kh-kim/nlp\_with\_pytorch](https://github.com/kh-kim/nlp_with_pytorch)
-* Gitbook: [https://kh-kim.gitbook.io/natural-language-processing-with-pytorch/](https://kh-kim.gitbook.io/natural-language-processing-with-pytorch/)
-
 ### Pre-requisites
 
 자연어처리 분야에 좀 더 집중하기 위하여, 시중의 도서나 인터넷에서 쉽게 접할 수 있는, 머신러닝과 딥러닝을 입문하기 위한 내용(예를 들어 역전파 알고리즘)에 대한 설명은 최소화 하였습니다. 따라서 이 책의 대부분의 내용은 독자가 아래의 내용에 대해서 지식이 있거나 다른 자료를 통해 같이 공부하며 읽을 것을 권장 합니다.
