@@ -48,7 +48,7 @@
   * [흔한 오해](word-embedding-vector/myth.md)
   * [Word2Vec](word-embedding-vector/word2vec.md)
   * [GloVe](word-embedding-vector/glove.md)
-  * [예제 코드](word-embedding-vector/example.md)
+  * [예제](word-embedding-vector/example.md)
   * [정리](word-embedding-vector/conclusion.md)
 * [시퀀스 모델링](sequential-modeling/cover.md)
   * [서문](sequential-modeling/intro.md)
