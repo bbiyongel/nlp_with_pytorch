@@ -1,11 +1,4 @@
 Found 104 files.
-./basic-math/information.md	![flat한 분포와 sharp한 분포](../assets/image_needed.jpeg)
-./basic-math/information.md	![크로스 엔트로피의 직관적인 표현](../assets/image_needed.jpeg)
-./sequential-modeling/rnn.md	![RNN의 입력 텐서 (n time-step)](../assets/image_needed.jpeg)
-./sequential-modeling/rnn.md	![여러 time-step의 히든스테이트들을 이어붙여 전체 time-step에 대한 히든스테이트로 만드는 모습](../assets/image_needed.jpeg)
-./sequential-modeling/rnn.md	![여러개의 레이어를 가진 RNN의 히든스테이트 (1 time-step)](../assets/image_needed.jpeg)
-./sequential-modeling/rnn.md	![각 타입 별 RNN의 형태](../assets/image_needed.jpeg)
-./sequential-modeling/gradient-clipping.md	![그래디언트의 방향은 유지한 채, 크기만 달라지는 모습](../assets/image_needed.jpeg)]
 ./neural-machine-translation/teacher-forcing.md	![훈련방식과 추론방식](../assets/image_needed.jpeg)
 ./neural-machine-translation/input-feeding.md	![문장 길이에 따른 미니배치의 형태](../assets/image_needed.jpeg)
 ./neural-machine-translation/input-feeding.md	![마스크가 적용되었을 때 어텐션](../assets/image_needed.jpeg)
@@ -14,10 +7,7 @@ Found 104 files.
 ./adv-nmt/transformer.md	![포지션 임베딩의 직관적인 설명](../assets/image_needed.jpeg)
 ./adv-nmt/transformer.md	![배치 행렬곱 연산의 모습](../assets/image_needed.jpeg)
 ./preprocessing/intro.md	![전처리 과정 개요도](../assets/image_needed.jpeg)
-./word-senses/one-hot-encoding.md	![Discrete 확률 분포로부터 샘플링하여 얻어지는 One-hot 벡터](../assets/image_needed.jpeg)
-./word-senses/one-hot-encoding.md	![차원의 저주: 차원이 높을 수록 같은 정보를 표현하는데 불리합니다.](../assets/image_needed.jpeg)
 ./duality/intro.md	![듀얼리티의 예](../assets/image_needed.jpeg)
 ./productization/pipeline.md	![준비과정 개요도](../assets/image_needed.jpeg)
 ./reinforcement-learning/intro.md	![GAN을 sequence-to-sequence에 적용하자](../assets/image_needed.jpeg)
 ./reinforcement-learning/intro.md	![샘플링 과정은 그래디언트 전달이 어렵습니다.](../assets/image_needed.jpeg)
-./reinforcement-learning/characteristic.md	![강화학습을 기계번역에 적용한다면](../assets/image_needed.jpeg)

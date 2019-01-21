@@ -166,7 +166,7 @@ c = H^{src}\cdot w\text{ and }c\text{ is a context vector}. \\
 
 torch.bmm 함수는 batch matrix multiplication(bmm, 배치 행렬곱)을 수행하는 함수로써, 2개 이상의 차원을 지닌 텐서가 주어졌을 때 뒤 2개 차원에 대해서는 행렬곱을 수행하고 앞의 다른 차원은 미니배치로 취급합니다. 따라서 앞의 차원들은 크기가 같아야 하고, 뒤 2개 차원은 행렬 곱을 수행하기 위한 적절한 크기를 지녀야 합니다.
 
-![파이토치 배치 행렬곱 연산](../assets/bmm.png)
+![파이토치 배치 행렬곱 연산](../assets/nmt-bmm.png)
 
 ```python
 import torch
