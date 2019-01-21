@@ -89,6 +89,8 @@ $$\begin{gathered}
 
 우리는 위의 수식에서 learning rate $\gamma$ 를 통해 업데이트의 크기를 조절 하는 것을 확인할 수 있습니다. 아래는 폴리시 그래디언트에 기반하여 누적 기대 보상을 최대로 하는 그래디언트 어센트 수식 입니다.
 
+![폴리시 그래디언트는 샘플링 확률을 최대화 하는 방향으로 그래디언트를 구합니다.](../assets/rl-policy_gradient_ascent.png)
+
 $$\begin{gathered}
 \theta\leftarrow\theta+\gamma\nabla{J(\theta)} \\
 \theta\leftarrow\theta+\gamma{Q^{\pi_\theta}(s_t,a_t)\nabla_\theta\log{\pi_\theta(a_t|s_t)}}

@@ -50,6 +50,8 @@ $$\hat{c}=\underset{c\in\mathcal{C}}{\text{argmax}}{A_R(w,c)},\text{ where }\mat
 
 단어 중의성 해소(WSD)를 해결할 수 있는 방법 중에 하나로, selectional preference를 살펴 보았습니다. Selectional preference를 잘 해결할 수 있다면 아마도 단어 중의성 해소 문제도 잘 해결 될 것 입니다. 그럼 selectional preference를 어떻게 평가 할 수 있을까요? 정교한 테스트셋을 설계하고 만들어서 selectional preference의 성능을 평가 할 수 있겠지만, 좀 더 쉽고 일반적으로 적용 가능한 방법은 없을까요?
 
+![](../assets/wsd-banana_door.png)
+
 Pseudo 워드가 하나의 해답이 될 수 있습니다. Pseudo 워드는 두개의 단어가 인위적으로 합성되어 만들어진 단어를 이릅니다. 실제 일상 생활에서 쓰이기보다는 단순히 두 단어를 합친 것 입니다. 예를 들어 'banana'와 'door'를 합쳐 'banana-door'라는 pseudo 워드를 만들어 낼 수 있습니다. 이 'banana-door'라는 단어는 사실 실생활에서 쓰일리 없는 단어입니다. 하지만 우리는 이 단어가 'eat' 또는 'open'이라는 동사 술어(verb predicate)와 함꼐 headword object로써 나타났을때, 'eat'에 대해서는 'banana'를 선택해야 하고, 'open'에 대해서는 'door'를 선택하도록 해야 올바른 selectional preference 알고리즘을 만들거나 구현했음을 확인할 수 있습니다. <comment> pseudo 워드를 활용하여 selectional preference를 잘 평가하는 방법에 대해서 더 알고 싶다면, [[Chambers et al.2010](https://web.stanford.edu/~jurafsky/chambers-acl2010-pseudowords.pdf)]을 참고 바랍니다. </comment>
 
 ## 유사도 기반의 Selectional Preference

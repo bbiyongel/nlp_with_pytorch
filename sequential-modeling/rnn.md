@@ -61,7 +61,7 @@ $$|h_t|=(\text{batch\_size},\text{hidden\_size})$$
 
 이것을 n개 time-step에 대해서 이어붙이면 RNN의 전체 time-step에 대한 출력 텐서가 됩니다.
 
-![여러 time-step의 히든스테이트들을 이어붙여 전체 time-step에 대한 히든스테이트로 만드는 모습](../assets/image_needed.jpeg)
+![여러 time-step의 히든스테이트들을 이어붙여 전체 time-step에 대한 히든스테이트로 만드는 모습](../assets/rnn-n_hidden_states.png)
 
 $$\begin{gathered}
 |h_{1:n}|= (\text{batch\_size},n,\text{hidden\_size}) \\
@@ -132,7 +132,7 @@ $$|h_t|=(\text{\#layers},\text{batch\_size},text{hidden\_size})$$
 
 보통은 여러 층의 양방향 RNN을 쌓게 되면, 각 층마다 두 방향의 각 time-step 별 출력(hidden state)값을 이어붙여(concatenate) 다음 층(layer)의 각 방향 별 입력으로 사용하게 됩니다. <comment> 경우에 따라서 전체 RNN 레이어들 중에서 일부 층만 양방향 RNN 레이어를 사용하기도 합니다. </comment> 따라서 양방향 RNN의 히든스테이트 텐서의 크기는 아래와 같습니다.
 
-![여러개의 레이어를 가진 양방향 RNN의 히든스테이트 (1 time-step)](../assets/image_needed.jpeg)
+![여러개의 레이어를 가진 양방향 RNN의 히든스테이트 (1 time-step)](../assets/rnn-multi_layer_bidirectional_hidden_states.png)
 
 $$|h_t|=(\text{\#direction}\times\text{\#layers},\text{batch\_size},\text{hidden\_size})$$
 
@@ -146,7 +146,7 @@ $$|h_t|=(\text{\#direction}\times\text{\#layers},\text{batch\_size},\text{hidden
 |다수|다수|many to many|
 |단일|다수|one to many|
 
-![각 타입 별 RNN의 형태](../assets/image_needed.jpeg)
+![각 타입 별 RNN의 형태](../assets/rnn-type_by_type.png)
 
 앞으로 표현 할 그림에서는 RNN을 한개 층만 쌓아 정방향으로만 다룬 것 처럼 묘사하였지만, 여러 층을 양방향으로 쌓아 사용하는 것도 대부분의 경우 가능 합니다.
 
