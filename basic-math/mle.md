@@ -68,6 +68,8 @@ J(\theta)=\log{\mathcal{N}(x|\mu,\sigma^2)}=-\frac{1}{2}\log{2\pi\sigma^2}-\frac
 
 사실은 지금까지 likelihood 이야기를 한 이유가 바로 뉴럴 네트워크 또한 확률분포 함수이기 때문입니다. 기존에 MNIST 분류 문제를 풀고자 하는 경우에는 0부터 9까지의 레이블(클래스)를 예측하게 되므로 discrete 랜덤 변수를 다루는 multinoulli 확률 분포가 됩니다. 따라서 MNIST 분류문제를 위한 뉴럴 네트워크의 마지막 softmax 레이어의 결과값은 각 클래스별 확률 $\hat{y}$ 을 반환 합니다. 또한 실제 정답 레이블 $y$ 의 경우에는 discrete 값이기 때문에 one-hot 벡터가 되는 것 입니다. 달리 말하면 $\text{y}$ 도메인의 샘플은 discrete 확률 분포 $P(\text{y})$ 에서 샘플링한 샘플이기 때문에 one-hot 벡터로 표현됩니다. 우리는 따라서 뉴럴 네트워크 웨이트 파라미터 $\theta$ 가 훈련 데이터를 잘 설명하도록 그래디언트 디센트(gradient descent, 경사하강법)를 통해 maximum likelihood estimation(MLE)을 수행 하는 것 입니다.
 
+![뉴럴 네트워크는 확률분포 함수 입니다.](../assets/basic_math-nn_is_prob_dist.png)
+
 $$\begin{gathered}
 \theta \leftarrow \theta-\lambda\nabla_\theta J(\theta) \\
 \text{where }\theta\text{ is network weight parameter, and }J(\theta)\text{ is negative log-likelihood.}
