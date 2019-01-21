@@ -122,7 +122,7 @@ $$|h_{1:n}|=(\text{batch\_size},n,\text{hidden\_size})$$
 
 ![여러개의 레이어를 가진 RNN의 히든스테이트 (1 time-step)](../assets/image_needed.jpeg)
 
-$$|h_t|=(\text{\#direction}\times\text{\#layers},\text{batch\_size},\text{hidden\_size})$$
+$$|h_t|=(\text{\#layers},\text{batch\_size},text{hidden\_size})$$
 
 ## 양방향(Bi-directional) RNN
 
@@ -130,7 +130,11 @@ $$|h_t|=(\text{\#direction}\times\text{\#layers},\text{batch\_size},\text{hidden
 
 ![두 방향으로 히든 스테이트를 전달 및 계산하는 RNN의 형태](../assets/rnn-bidirectional.png)
 
-보통은 여러 층의 양방향 RNN을 쌓게 되면, 각 층마다 두 방향의 각 time-step 별 출력(hidden state)값을 이어붙여(concatenate) 다음 층(layer)의 각 방향 별 입력으로 사용하게 됩니다. <comment> 경우에 따라서 전체 RNN 레이어들 중에서 일부 층만 양방향 RNN 레이어를 사용하기도 합니다. </comment>
+보통은 여러 층의 양방향 RNN을 쌓게 되면, 각 층마다 두 방향의 각 time-step 별 출력(hidden state)값을 이어붙여(concatenate) 다음 층(layer)의 각 방향 별 입력으로 사용하게 됩니다. <comment> 경우에 따라서 전체 RNN 레이어들 중에서 일부 층만 양방향 RNN 레이어를 사용하기도 합니다. </comment> 따라서 양방향 RNN의 히든스테이트 텐서의 크기는 아래와 같습니다.
+
+![여러개의 레이어를 가진 양방향 RNN의 히든스테이트 (1 time-step)](../assets/image_needed.jpeg)
+
+$$|h_t|=(\text{\#direction}\times\text{\#layers},\text{batch\_size},\text{hidden\_size})$$
 
 ## 자연어처리에 RNN을 적용하는 사례
 
