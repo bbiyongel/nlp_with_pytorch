@@ -48,7 +48,7 @@ $$|x_t|=(\text{batch\_size},1,\text{input\_size})$$
 
 텐서에서 첫 번째 차원은 미니배치 내에서의 샘플의 인덱스를 나타내며, 마지막 차원은 미리 정해진 입력 벡터의 차원<comment> 예를들어 임베딩 레이어의 출력 벡터의 차원 수 </comment>을 가리킵니다. 두 번째 차원은 시퀀스 내에서 현재 time-step의 인덱스를 나타냅니다. 현재는 하나의 time-step에 대한 텐서였으므로 1이 들어가있는 것을 알 수 있습니다. <comment> 총 1개의 시퀀스에 대해서 첫 번째 time-step </comment> 그럼 $n$ 개의 time-step을 가진 전체 시퀀스를 텐서로 나타낸다면 아래와 같을 것 입니다.
 
-![RNN의 입력 텐서 (n time-step)](../assets/image_needed.jpeg)
+![RNN의 입력 텐서 (n time-step)](../assets/rnn-input_tensor.png)
 
 $$\begin{gathered}
 |X|=(\text{batch\_size},n,\text{input\_size}) \\
@@ -120,7 +120,7 @@ $$|h_{1:n}|=(\text{batch\_size},n,\text{hidden\_size})$$
 
 대신에 여러 레이어를 가진 RNN의 히든스테이트의 크기는 아래와 같습니다.
 
-![여러개의 레이어를 가진 RNN의 히든스테이트 (1 time-step)](../assets/image_needed.jpeg)
+![여러개의 레이어를 가진 RNN의 히든스테이트 (1 time-step)](../assets/rnn-multi_layer_hidden_states.png)
 
 $$|h_t|=(\text{\#layers},\text{batch\_size},text{hidden\_size})$$
 
