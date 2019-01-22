@@ -68,11 +68,11 @@ def rename_images(fn):
 
             if fn_p.search(line):
                 img_fn = fn_p.sub(r'\1', line.strip())
-
                 cnt += 1
 
                 to_fn = '%s-%s-%02d' % (chapter_n, section_n, cnt)
-                print('%s\t%s\t%s' % (fn, img_fn, to_fn))
+                if img_fn.startswith('http'):
+                    print('%s\t%s\t%s' % (fn, img_fn, to_fn))
 
     f.close()
 
