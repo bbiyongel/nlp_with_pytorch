@@ -43,5 +43,11 @@ def rename():
     lines = ''.join(lines)
     print(lines)
 
+    f = open(ref_fn, 'w')
+
+    f.write(lines)
+
+    f.close()
+
 if __name__ == '__main__':
     rename()
