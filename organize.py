@@ -64,15 +64,15 @@ def rename_images(fn):
     cnt = 0
     for line in f:
         if line.strip() != '':
-            fn_p = re.compile(r"^.*!\[.+\]\((.+)\).*$")
+            fn_p = re.compile(r"^.*!\[.*\]\((.+)\).*$")
 
             if fn_p.search(line):
                 img_fn = fn_p.sub(r'\1', line.strip())
                 cnt += 1
 
                 to_fn = '%s-%s-%02d' % (chapter_n, section_n, cnt)
-                if img_fn.startswith('http'):
-                    print('%s\t%s\t%s' % (fn, img_fn, to_fn))
+                #if img_fn.startswith('http'):
+                print('%s\t%s\t%s' % (fn, img_fn, to_fn))
 
     f.close()
 

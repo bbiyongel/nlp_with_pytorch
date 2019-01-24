@@ -260,8 +260,6 @@ class Attention(nn.Module):
         return mask
 ```
 
-![미니배치의 문장별 길이에 따라 마스크 생성하기](../assets/image_needed.jpeg)
-
 ### 인코더 클래스
 
 앞 섹션의 코드와 동일합니다.
