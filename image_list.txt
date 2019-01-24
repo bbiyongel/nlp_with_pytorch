@@ -15,8 +15,8 @@ Found 102 files.
 ./14-productization/00-cover.md	![적절한 번역의 예](../assets/nmt-waldo.png){ width=500px }
 ./12-reinforcement_learning/01-intro.md	![GAN의 전형적인 구조](https://sthalles.github.io/assets/dcgan/GANs.png)
 ./12-reinforcement_learning/01-intro.md	![L1 손실함수와 GAN의 생성 결과물 비교 (출처: pix2pix)](../assets/rl-mse_vs_gan.png)
-./12-reinforcement_learning/01-intro.md	![GAN을 sequence-to-sequence에 적용하자](../assets/image_needed.jpeg)
-./12-reinforcement_learning/01-intro.md	![샘플링 과정은 그래디언트 전달이 어렵습니다.](../assets/image_needed.jpeg)
+./12-reinforcement_learning/01-intro.md	![GAN을 sequence-to-sequence에 적용하자](../assets/rl-seq2seq_gan.png)
+./12-reinforcement_learning/01-intro.md	![샘플링 과정은 그래디언트 전달이 어렵습니다.](../assets/rl-stochastic_cannot_back_prop.png)
 ./12-reinforcement_learning/05-supervised-nmt.md	![MRT의 성능 평가](../assets/rl-minimum-risk-training.png)
 ./12-reinforcement_learning/04-characteristic.md	![강화학습을 기계번역에 적용한다면](../assets/rl-rl_to_nmt.png)
 ./12-reinforcement_learning/02-rl_basics.md	![강화학습이 동작하는 과정](../assets/rl-universe.png)
