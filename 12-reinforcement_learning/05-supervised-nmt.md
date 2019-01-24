@@ -64,7 +64,14 @@ $$\begin{gathered}
 
 MRT는 risk에 대해 최소화 해야 하기 때문에 그래디언트 디센트를 해 주는 것을 제외하면 똑같은 수식이 나오는 것을 알 수 있습니다. 하지만 결과적으로는 risk $\triangle(y,y^{(s)})$ 가 -BLEU로 정의되기 때문에, 결국에는 $\theta$ 를 업데이트 하는 방식은 그래디언트 디센트와 어센트를 떠나서 똑같은 수식이 나오게 됩니다.
 
+|알고리즘|BLEU|
+|-|-|
+|Maximum Likelihood Estimation (MLE)|29.88|
+|Minimum Risk Training (MRT)|31.30|
+
+<!--
 ![MRT의 성능 평가](../assets/rl-minimum-risk-training.png)
+-->
 
 위와 같이 훈련한 MRT에 대한 성능을 실험한 결과 입니다. 기존의 MLE 방식에 비해서 BLEU가 1.5가량 상승한 것을 확인할 수 있습니다. 이처럼 MRT는 강화학습으로써의 접근을 전혀 하지 않고도, 수식적으로 폴리시 그래디언트의 REINFORCE 알고리즘 수식을 이끌어내고 성능을 끌어올리는 방법을 제시한 점이 인상 깊습니다.
 
