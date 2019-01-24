@@ -173,10 +173,10 @@ torch.bmm 함수는 batch matrix multiplication(bmm, 배치 행렬곱)을 수행
 ```python
 import torch
 
-# |t1| = (batch_size, n, k)
-# |t2| = (batch_size, k, m)
-t3 = torch.bmm(t1, t2)
-# |t3| = (batch_size, n, m)
+# |x| = (batch_size, n, k)
+# |y| = (batch_size, k, m)
+z = torch.bmm(x, y)
+# |z| = (batch_size, n, m)
 ```
 
 ### 어텐션 클래스
