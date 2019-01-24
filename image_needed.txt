@@ -1,7 +1,4 @@
 Found 102 files.
-./14-productization/01-pipeline.md	![준비과정 개요도](../assets/image_needed.jpeg)
 ./11-adv_neural_machine_translation/03-transformer.md	![포지션 임베딩의 직관적인 설명](../assets/image_needed.jpeg)
-./04-preprocessing/01-intro.md	![전처리 과정 개요도](../assets/image_needed.jpeg)
 ./10-neural_machine_translation/06-beam-search.md	![샘플링 또는 그리디 탐색을 통한 추론 과정](../assets/image_needed.jpeg)
-./10-neural_machine_translation/05-teacher-forcing.md	![훈련방식과 추론방식](../assets/image_needed.jpeg)
 ./13-duality/01-intro.md	![듀얼리티의 예](../assets/image_needed.jpeg)
