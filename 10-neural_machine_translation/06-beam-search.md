@@ -12,7 +12,7 @@ $$\hat{y}_t\sim{P(\text{y}_t|X,\hat{y}_{<t};\theta)}$$
 
 우리는 자료구조, 알고리즘 수업에서 깊이우선탐색(DFS), 너비우선탐색(BFS), 다이나믹 프로그래밍(Dynamic Programming) 등 수많은 탐색 기법에 대해 배웠습니다. 우리는 이중에서 욕심쟁이(greedy) 알고리즘을 기반으로 탐색을 구현합니다. 즉, softmax 레이어에서 가장 확률 값이 큰 인덱스(index)를 뽑아 해당 time-step의 $\hat{y}_t$ 로 사용하게 되는 것 입니다.
 
-![샘플링 또는 그리디 탐색을 통한 추론 과정](../assets/image_needed.jpeg)
+![샘플링 또는 그리디 탐색을 통한 추론 과정](../assets/nmt-search_by_sampling.png)
 
 $$\hat{y}_t=\underset{y\in\mathcal{Y}}{\text{argmax }}P(\text{y}_t|X,\hat{y}_{<t};\theta)$$
 
