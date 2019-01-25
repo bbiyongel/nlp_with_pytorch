@@ -6,26 +6,26 @@
 
 ```python
 def get_tf(docs):
-    vocab = {}
-    tfs = []
-    for d in docs:
-        vocab = get_term_frequency(d, vocab)
-        tfs += [get_term_frequency(d)]
+vocab = {}
+tfs = []
+for d in docs:
+vocab = get_term_frequency(d, vocab)
+tfs += [get_term_frequency(d)]
 
-    from operator import itemgetter
-    import numpy as np
-    sorted_vocab = sorted(vocab.items(), key=itemgetter(1), reverse=True)
+from operator import itemgetter
+import numpy as np
+sorted_vocab = sorted(vocab.items(), key=itemgetter(1), reverse=True)
 
-    stats = []
-    for v, freq in sorted_vocab:
-        tf_v = []
-        for idx in range(len(docs)):
-            if tfs[idx].get(v) is not None:
-                tf_v += [tfs[idx][v]]
-            else:
-                tf_v += [0]
+stats = []
+for v, freq in sorted_vocab:
+tf_v = []
+for idx in range(len(docs)):
+if tfs[idx].get(v) is not None:
+tf_v += [tfs[idx][v]]
+else:
+tf_v += [0]
 
-        print('%s\t%d\t%s' % (v, freq, '\t'.join(['%d' % tf for tf in tf_v])))
+print('%s\t%d\t%s' % (v, freq, '\t'.join(['%d' % tf for tf in tf_v])))
 ```
 
 ```python
@@ -94,15 +94,15 @@ def get_tf(docs):
 <!--
 ```python
 def read(fn):
-    lines = []
+lines = []
 
-    f = open(fn, 'r')
-    for line in f:
-        if line.strip() != '':
-            lines += [line.strip()]
-    f.close()
+f = open(fn, 'r')
+for line in f:
+if line.strip() != '':
+lines += [line.strip()]
+f.close()
 
-    return lines
+return lines
 ```
 -->
 
@@ -110,16 +110,16 @@ def read(fn):
 
 ```python
 def get_context_counts(lines, w_size=3):
-    co_dict = {}
-    for line in lines:
-        words = line.split()
+co_dict = {}
+for line in lines:
+words = line.split()
 
-        for i, w in enumerate(words):
-            for c in words[i - w_size:i + w_size]:
-                if w != c:
-                    co_dict[(w, c)] = 1 + (0 if co_dict.get((w, c)) is None else co_dict[(w, c)])
+for i, w in enumerate(words):
+for c in words[i - w_size:i + w_size]:
+if w != c:
+co_dict[(w, c)] = 1 + (0 if co_dict.get((w, c)) is None else co_dict[(w, c)])
 
-    return co_dict
+return co_dict
 ```
 
 위의 함수와 앞서 TF-IDF를 위해 작성했던 get_term_frequency() 함수를 활용하여, 공기 정보를 통해 벡터를 만드는 코드 입니다.
@@ -139,16 +139,16 @@ context_matrix = []
 row_heads = []
 col_heads = [w for w, f in sorted_tfs if f >= min_cnt and f<= max_cnt]
 for w, f in sorted_tfs:
-    row = []
-    if f >= min_cnt and f <= max_cnt:
-        row_heads += [w]
-        for w_, f_ in sorted_tfs:
-            if f_ >= min_cnt and f_ <= max_cnt:
-                if co_dict.get((w, w_)) is not None:
-                    row += [co_dict[(w, w_)]]
-                else:
-                    row += [0]
-        context_matrix += [row]
+row = []
+if f >= min_cnt and f <= max_cnt:
+row_heads += [w]
+for w_, f_ in sorted_tfs:
+if f_ >= min_cnt and f_ <= max_cnt:
+if co_dict.get((w, w_)) is not None:
+row += [co_dict[(w, w_)]]
+else:
+row += [0]
+context_matrix += [row]
 
 import pandas as pd
 
@@ -157,14 +157,14 @@ p = pd.DataFrame(data=context_matrix, index=row_heads, columns=col_heads)
 
 그리고 이 코드를 통해 얻은 결과의 일부는 아래와 같습니다. 아래의 결과에 따르면 1000개의 문장(문서)에서는 '습니다'의 컨텍스트 윈도우 내에 마침표가 3616번 등장 합니다.
 
-![컨텍스트 윈도우를 수행한 결과](../assets/wsd-context-window.png)
+![컨텍스트 윈도우를 수행한 결과](../assets/05-06-01.png)
 
 앞쪽 출현빈도가 많은 단어들은 대부분 값이 잘 채워져 있는 것을 볼 수 있습니다. 하지만 뒤쪽 출현빈도가 낮은 단어들은 많은 부분이 0으로 채워져 있는 것을 볼 수 있습니다. 출현빈도가 낮은 단어들의 row로 갈 경우에는 그 문제가 더욱 심각해 집니다. 이런 sparse 벡터들이 많으면, 유사도를 구하거나 벡터간 연산을 할 때, 직교하는 경우가 많아 매우 곤란해 집니다.
 
-![대부분의 값이 0으로 채워진 sparse 벡터](../assets/wsd-sparse-vector.png)
+![대부분의 값이 0으로 채워진 sparse 벡터](../assets/05-06-02.png)
 
 위의 컨텍스트 윈도우 실행 결과 얻은 피쳐 벡터들을 tSNE를 이용하여 시각화를 수행한 모습은 아래와 같습니다. 딱히 비슷한 단어끼리 모이지 않은 것도 많지만, 운좋게 비슷한 단어끼리 붙어 있는 경우도 종종 볼 수 있습니다. 여전히 위의 벡터를 피쳐 벡터로 활용하기엔 뭔가 부족한 모습입니다.
 
-![피쳐 벡터들을 tSNE로 표현한 모습](../assets/wsd-feature-vector-tsne.png)
+![피쳐 벡터들을 tSNE로 표현한 모습](../assets/05-06-03.png)
 
 이러한 부족함을 해결하기 위해서 다음 챕터에서는 본격적으로 차원축소를 통해 희소성(sparsity) 문제를 해결하고 단어 임베딩을 수행하는 방법에 대해서 다루도록 하겠습니다.

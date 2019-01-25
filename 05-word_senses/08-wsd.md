@@ -40,10 +40,10 @@ Lesk 알고리즘 수행을 위하여 간단하게 랩핑(wrapping)하도록 하
 
 ```python
 def lesk(sentence, word):
-    from nltk.wsd import lesk
+from nltk.wsd import lesk
 
-    best_synset = lesk(sentence.split(), word)
-    print(best_synset, best_synset.definition())
+best_synset = lesk(sentence.split(), word)
+print(best_synset, best_synset.definition())
 ```
 
 아래와 같이 주어진 문장에서는 'bass'는 물고기의 의미로 뽑히게 되었습니다.

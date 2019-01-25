@@ -4,7 +4,7 @@
 
 좀 더 비약적으로 표현하면 $t$ time-step에 등장하는 단어 $w_t$ 는 이전 time-step에 등장한 단어들 $w_1,\cdots,w_{t_1}$ 에 의존하기 때문입니다. <comment> 물론 실제로는 $t$ 이후에 등장하는 단어들로부터도 영향을 받습니다. </comment> 따라서 시간 개념이 도입되어야 하기 때문에, RNN의 사용은 불가피하다고 생각되었습니다. 하지만 앞서 소개한 [[Kim at el.2014]](https://arxiv.org/pdf/1408.5882.pdf) 논문에 의해서 새로운 시각이 열리게 됩니다.
 
-![CNN for text classification arthictecture [[Kim at el.2014]](https://arxiv.org/pdf/1408.5882.pdf)](../assets/tc-cnn-text-classification.png)
+![CNN for text classification arthictecture [[Kim at el.2014]](https://arxiv.org/pdf/1408.5882.pdf)](../assets/08-05-01.png)
 
 ## 컨볼루션 연산 (Convolution Operation)
 
@@ -14,13 +14,13 @@ CNN은 영상처리(or Computer Vision) 분야에서 매우 큰 성과를 거두
 
 전통적인 영상처리 분야에서는 손으로 한땀한땀 만들어낸 필터를 사용하여 윤곽선(edge)을 검출하는 등의 전처리 과정을 거쳐, 얻어낸 피쳐(feature)들을 통해 객체 탐지(object detection)등을 구현하곤 하였습니다. 예를 들어 주어진 이미지에서 윤곽선을 찾기 위한 컨볼루션 필터는 아래와 같습니다.
 
-![수직, 수평 윤곽선을 검출하기 위한 소벨(Sobel)필터](../assets/tc-cnn-sobel-filter.gif)
+![수직, 수평 윤곽선을 검출하기 위한 소벨(Sobel)필터](../assets/08-05-02.gif)
 
 이 필터를 이미지에 적용하면 아래와 같은 결과를 얻을 수 있습니다.
 
-![소벨 필터 적용 전 (출처: 위키피디아)](https://upload.wikimedia.org/wikipedia/commons/f/f0/Valve_original_%281%29.PNG)
+![소벨 필터 적용 전 (출처: 위키피디아)](../assets/08-05-03.PNG)
 
-![소벨 필터 적용 후 (출처: 위키피디아)](https://upload.wikimedia.org/wikipedia/commons/d/d4/Valve_sobel_%283%29.PNG)
+![소벨 필터 적용 후 (출처: 위키피디아)](../assets/08-05-04.PNG)
 
 이처럼 딥러닝 이전의 영상처리의 경우에는, 전처리 모듈에서 여러 필터들을 해결하고자 하는 문제에 따라 직접 적용하여 피쳐들을 얻어낸 이후에, 다음 단계의 모듈을 적용하여 문제를 해결하는 방식이었습니다.
 
@@ -28,7 +28,7 @@ CNN은 영상처리(or Computer Vision) 분야에서 매우 큰 성과를 거두
 
 만약 문제에 따라서 필요한 컨볼루션 필터를 자동으로 찾아준다면 어떻게 될까요? CNN이 바로 그러한 역할을 해주게 됩니다. 컨볼루션 연산을 통해 피드포워드(feed-forward) 된 값에 back-propagation을 하여, 더 나은 컨볼루션 필터 값을 찾아나가게 됩니다. 따라서 마지막에 손실 함수의 값이 수렴 한 이후에는, 해당 문제에 딱 맞는 여러 종류의 컨볼루션 필터를 찾아낼 수 있게 되는 것 입니다.
 
-![컨볼루션 연산을 적용하는 과정](../assets/tc-convolution.png)
+![컨볼루션 연산을 적용하는 과정](../assets/08-05-05.png)
 
 $$\begin{aligned}
 y_{1,1}&=\text{Convolution}(x_{1,1}\cdots,x_{3,3},\theta)\text{ where }\theta=\{k_{1,1},\cdots,k_{3,3}\} \\
@@ -49,13 +49,13 @@ y\in\mathbb{R}^{4\times4}\text{ where }x\in\mathbb{R}^{6\times6}\text{ and }k\in
 
 이처럼 CNN은 패턴을 감지하는 필터를 자동으로 최적화하는 역할을 통해, 영상처리(Computer Vision) 등의 분야에서 빼놓을 수 없는 매우 중요한 역할을 하고 있습니다. 또한, 이미지 뿐만 아니라 아래와 같이 음성 분야에서도 효과를 보고 있습니다. 음성 또는 오디오 신호의 경우에도 푸리에 변환을 통해서 2차원의 시계열 데이터를 얻을 수 있습니다. 이렇게 얻어진 데이터에 대해서도 마찬가지로 패턴을 찾아내는 컨볼루션 연산이 매우 유용합니다.
 
-![Example of convolutional neural network for speech recognition [ Abdel-Hamid et al.2014](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/CNN_ASLPTrans2-14.pdf)](../assets/tc-audio-cnn.png)
+![Example of convolutional neural network for speech recognition [ Abdel-Hamid et al.2014](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/CNN_ASLPTrans2-14.pdf)](../assets/08-05-06.png)
 
 ## 텍스트 분류에 CNN을 적용하는 방법
 
 그렇다면 텍스트 분류과정에는 어떻게 CNN을 적용하는 것일까요? 텍스트에 무슨 윤곽선과 같은 패턴이 있는 것일까요? 지금은 일단 미니배치(mini-batch)를 고려하지 않겠습니다. 먼저, One-hot 벡터를 표현하는 인덱스 값을 단어 임베딩 벡터로 변환하면, 1차원(vector)이 됩니다. 그럼 문장 내의 모든 time-step의 단어 임베딩 벡터를 합치면 2차원의 행렬이 됩니다. 이때 컨볼루션을 수행하면, 이제 텍스트에서도 CNN이 효과를 발휘할 수 있게 됩니다.
 
-![두 단어(토큰)의 패턴을 찾는 CNN](../assets/tc-cnn-architecture.png)
+![두 단어(토큰)의 패턴을 찾는 CNN](../assets/08-05-07.png)
 
 위의 각 텐서별 크기에서 맨 앞 차원에 미니배치를 위한 차원을 추가하면, 실제 구현에서의 텐서 크기가 될 것 입니다. 이는 아래와 같습니다. 필터들은 우리가 배워야 하는 뉴럴 네트워크 웨이트 파라미터가 될 것이기 때문에 아래에서는 $\theta$ 로 표현 합니다. 그리고 $\text{input}$ 은 RNN의 경우와 같이 임베딩 레이어를 거친 결과 값이라고 가정하겠습니다.
 
@@ -74,7 +74,7 @@ $$w\in\mathcal{W}=\{3,4,5\}$$
 
 CNN 레이어의 결과값은 각 필터(filter)별 점수(score)라고 볼 수 있습니다. 즉, 필터가 각각의 피쳐(feature)를 나타낸다고 생각했을 때, 각 피쳐 별 점수가 될 것 입니다. 따라서 우리는 문장 내에서 각 피쳐 또는 원하는 단어 조합 패턴이 나타나는지 확인해야 합니다. 이를 위해서 이전 단계에서 구한 cnn_out을 맥스 풀링(max pooling)을 통해서 문장당 각 피쳐의 최고 점수를 구합니다. 맥스 풀링 레이어는 각 피쳐별 최고 점수를 뽑아주지만, 이 과정에서 가변길이의 cnn_out을 고정 길이로 바꿔주는 역할도 합니다. 맥스 풀링 레이어의 결과는 문장의 임베딩 벡터가 될 것인데, 이 벡터의 크기는 피쳐의 갯수와 같을 것 입니다.
 
-![cnn_out에서 맥스 풀링을 통해 각 피쳐 별 최고 점수를 뽑아내는 과정](../assets/tc-max_pooling.png)
+![cnn_out에서 맥스 풀링을 통해 각 피쳐 별 최고 점수를 뽑아내는 과정](../assets/08-05-08.png)
 
 $$\begin{gathered}
 \text{cnn\_out}_i=\text{CNN}(\text{input},\theta_i) \\
@@ -118,83 +118,83 @@ import torch.nn as nn
 
 class CNNClassifier(nn.Module):
 
-    def __init__(self,
-                 input_size,
-                 word_vec_dim,
-                 n_classes,
-                 dropout_p=.5,
-                 window_sizes=[3, 4, 5],
-                 n_filters=[100, 100, 100]
-                 ):
-        self.input_size = input_size  # vocabulary size
-        self.word_vec_dim = word_vec_dim
-        self.n_classes = n_classes
-        self.dropout_p = dropout_p
-        # window_size means that how many words a pattern covers.
-        self.window_sizes = window_sizes
-        # n_filters means that how many patterns to cover.
-        self.n_filters = n_filters
+def __init__(self,
+input_size,
+word_vec_dim,
+n_classes,
+dropout_p=.5,
+window_sizes=[3, 4, 5],
+n_filters=[100, 100, 100]
+):
+self.input_size = input_size  # vocabulary size
+self.word_vec_dim = word_vec_dim
+self.n_classes = n_classes
+self.dropout_p = dropout_p
+# window_size means that how many words a pattern covers.
+self.window_sizes = window_sizes
+# n_filters means that how many patterns to cover.
+self.n_filters = n_filters
 
-        super().__init__()
+super().__init__()
 
-        self.emb = nn.Embedding(input_size, word_vec_dim)
-        # Since number of convolution layers would be vary depend on len(window_sizes),
-        # we use 'setattr' and 'getattr' methods to add layers to nn.Module object.
-        for window_size, n_filter in zip(window_sizes, n_filters):
-            cnn = nn.Conv2d(in_channels=1,
-                            out_channels=n_filter,
-                            kernel_size=(window_size, word_vec_dim)
-                            )
-            setattr(self, 'cnn-%d-%d' % (window_size, n_filter), cnn)
-        # Because below layers are just operations, 
-        # (it does not have learnable parameters)
-        # we just declare once.
-        self.relu = nn.ReLU()
-        self.dropout = nn.Dropout(dropout_p)
-        # An input of generator layer is max values from each filter.
-        self.generator = nn.Linear(sum(n_filters), n_classes)
-        # We use LogSoftmax + NLLLoss instead of Softmax + CrossEntropy
-        self.activation = nn.LogSoftmax(dim=-1)
+self.emb = nn.Embedding(input_size, word_vec_dim)
+# Since number of convolution layers would be vary depend on len(window_sizes),
+# we use 'setattr' and 'getattr' methods to add layers to nn.Module object.
+for window_size, n_filter in zip(window_sizes, n_filters):
+cnn = nn.Conv2d(in_channels=1,
+out_channels=n_filter,
+kernel_size=(window_size, word_vec_dim)
+)
+setattr(self, 'cnn-%d-%d' % (window_size, n_filter), cnn)
+# Because below layers are just operations,
+# (it does not have learnable parameters)
+# we just declare once.
+self.relu = nn.ReLU()
+self.dropout = nn.Dropout(dropout_p)
+# An input of generator layer is max values from each filter.
+self.generator = nn.Linear(sum(n_filters), n_classes)
+# We use LogSoftmax + NLLLoss instead of Softmax + CrossEntropy
+self.activation = nn.LogSoftmax(dim=-1)
 
-    def forward(self, x):
-        # |x| = (batch_size, length)
-        x = self.emb(x)
-        # |x| = (batch_size, length, word_vec_dim)
-        min_length = max(self.window_sizes)
-        if min_length > x.size(1):
-            # Because some input does not long enough for maximum length of window size,
-            # we add zero tensor for padding.
-            pad = x.new(x.size(0), min_length - x.size(1), self.word_vec_dim).zero_()
-            # |pad| = (batch_size, min_length - length, word_vec_dim)
-            x = torch.cat([x, pad], dim=1)
-            # |x| = (batch_size, min_length, word_vec_dim)
+def forward(self, x):
+# |x| = (batch_size, length)
+x = self.emb(x)
+# |x| = (batch_size, length, word_vec_dim)
+min_length = max(self.window_sizes)
+if min_length > x.size(1):
+# Because some input does not long enough for maximum length of window size,
+# we add zero tensor for padding.
+pad = x.new(x.size(0), min_length - x.size(1), self.word_vec_dim).zero_()
+# |pad| = (batch_size, min_length - length, word_vec_dim)
+x = torch.cat([x, pad], dim=1)
+# |x| = (batch_size, min_length, word_vec_dim)
 
-        # In ordinary case of vision task, you may have 3 channels on tensor,
-        # but in this case, you would have just 1 channel,
-        # which is added by 'unsqueeze' method in below:
-        x = x.unsqueeze(1)
-        # |x| = (batch_size, 1, length, word_vec_dim)
+# In ordinary case of vision task, you may have 3 channels on tensor,
+# but in this case, you would have just 1 channel,
+# which is added by 'unsqueeze' method in below:
+x = x.unsqueeze(1)
+# |x| = (batch_size, 1, length, word_vec_dim)
 
-        cnn_outs = []
-        for window_size, n_filter in zip(self.window_sizes, self.n_filters):
-            cnn = getattr(self, 'cnn-%d-%d' % (window_size, n_filter))
-            cnn_out = self.dropout(self.relu(cnn(x)))
-            # |x| = (batch_size, n_filter, length - window_size + 1, 1)
+cnn_outs = []
+for window_size, n_filter in zip(self.window_sizes, self.n_filters):
+cnn = getattr(self, 'cnn-%d-%d' % (window_size, n_filter))
+cnn_out = self.dropout(self.relu(cnn(x)))
+# |x| = (batch_size, n_filter, length - window_size + 1, 1)
 
-            # In case of max pooling, we does not know the pooling size,
-            # because it depends on the length of the sentence.
-            # Therefore, we use instant function using 'nn.functional' package.
-            # This is the beauty of PyTorch. :)
-            cnn_out = nn.functional.max_pool1d(input=cnn_out.squeeze(-1),
-                                               kernel_size=cnn_out.size(-2)
-                                               ).squeeze(-1)
-            # |cnn_out| = (batch_size, n_filter)
-            cnn_outs += [cnn_out]
-        # Merge output tensors from each convolution layer.
-        cnn_outs = torch.cat(cnn_outs, dim=-1)
-        # |cnn_outs| = (batch_size, sum(n_filters))
-        y = self.activation(self.generator(cnn_outs))
-        # |y| = (batch_size, n_classes)
+# In case of max pooling, we does not know the pooling size,
+# because it depends on the length of the sentence.
+# Therefore, we use instant function using 'nn.functional' package.
+# This is the beauty of PyTorch. :)
+cnn_out = nn.functional.max_pool1d(input=cnn_out.squeeze(-1),
+kernel_size=cnn_out.size(-2)
+).squeeze(-1)
+# |cnn_out| = (batch_size, n_filter)
+cnn_outs += [cnn_out]
+# Merge output tensors from each convolution layer.
+cnn_outs = torch.cat(cnn_outs, dim=-1)
+# |cnn_outs| = (batch_size, sum(n_filters))
+y = self.activation(self.generator(cnn_outs))
+# |y| = (batch_size, n_classes)
 
-        return y
+return y
 ```

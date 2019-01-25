@@ -27,7 +27,7 @@ $$\approx\sqrt[n]{\frac{1}{\prod_{i=1}^{n}{P(w_i|w_{i-n+1},\cdots,w_{i-1})}}}$$
 
 ## Perplexity의 해석
 
-![주사위 두 개](../assets/lm_rolling_dice.png)
+![주사위 두 개](../assets/09-03-01.png)
 
 Perplexity(PPL)의 개념을 좀 더 짚고 넘어가도록 해 보겠습니다. 예를 들어 우리가 6면 주사위를 던져서 나오는 값을 통해 수열을 만들어낸다고 해 보겠습니다. 따라서 1부터 6까지 숫자의 출현 확률은 모두 같다(uniform distribution)고 가정하겠습니다. 그럼 N번 주사위를 던져 얻어내는 수열에 대한 perplexity는 아래와 같습니다.
 

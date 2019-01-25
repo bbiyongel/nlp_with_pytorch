@@ -12,7 +12,7 @@ $$\hat{y}_t\sim{P(\text{y}_t|X,\hat{y}_{<t};\theta)}$$
 
 우리는 자료구조, 알고리즘 수업에서 깊이우선탐색(DFS), 너비우선탐색(BFS), 다이나믹 프로그래밍(Dynamic Programming) 등 수많은 탐색 기법에 대해 배웠습니다. 우리는 이중에서 욕심쟁이(greedy) 알고리즘을 기반으로 탐색을 구현합니다. 즉, softmax 레이어에서 가장 확률 값이 큰 인덱스(index)를 뽑아 해당 time-step의 $\hat{y}_t$ 로 사용하게 되는 것 입니다.
 
-![샘플링 또는 그리디 탐색을 통한 추론 과정](../assets/nmt-search_by_sampling.png)
+![샘플링 또는 그리디 탐색을 통한 추론 과정](../assets/10-06-01.png)
 
 $$\hat{y}_t=\underset{y\in\mathcal{Y}}{\text{argmax }}P(\text{y}_t|X,\hat{y}_{<t};\theta)$$
 
@@ -21,71 +21,71 @@ $$\hat{y}_t=\underset{y\in\mathcal{Y}}{\text{argmax }}P(\text{y}_t|X,\hat{y}_{<t
 아래의 코드는 샘플링 또는 욕심쟁이 탐색기법을 위한 코드 입니다. 사실 인코더가 동작하는 부분까지는 완전히 똑같습니다. 다만, 이후 추론을 위한 부분은 기존 훈련 코드와 상이합니다. Teacher Forcing을 사용하였던 훈련 방식(실제 정답 $y_{t-1}$ 을 t time-step의 입력으로 사용함)과 달리, 실제 이전 time-step의 출력을 현재 time-step의 입력으로 사용 합니다.
 
 ```python
-    def search(self, src, is_greedy=True, max_length=255):
-        mask, x_length = None, None
+def search(self, src, is_greedy=True, max_length=255):
+mask, x_length = None, None
 
-        if isinstance(src, tuple):
-            x, x_length = src
-            mask = self.generate_mask(x, x_length)
-        else:
-            x = src
-        batch_size = x.size(0)
+if isinstance(src, tuple):
+x, x_length = src
+mask = self.generate_mask(x, x_length)
+else:
+x = src
+batch_size = x.size(0)
 
-        emb_src = self.emb_src(x)
-        h_src, h_0_tgt = self.encoder((emb_src, x_length))
-        h_0_tgt, c_0_tgt = h_0_tgt
-        h_0_tgt = h_0_tgt.transpose(0, 1).contiguous().view(batch_size,
-                                                            -1,
-                                                            self.hidden_size
-                                                            ).transpose(0, 1).contiguous()
-        c_0_tgt = c_0_tgt.transpose(0, 1).contiguous().view(batch_size,
-                                                            -1,
-                                                            self.hidden_size
-                                                            ).transpose(0, 1).contiguous()
-        h_0_tgt = (h_0_tgt, c_0_tgt)
+emb_src = self.emb_src(x)
+h_src, h_0_tgt = self.encoder((emb_src, x_length))
+h_0_tgt, c_0_tgt = h_0_tgt
+h_0_tgt = h_0_tgt.transpose(0, 1).contiguous().view(batch_size,
+-1,
+self.hidden_size
+).transpose(0, 1).contiguous()
+c_0_tgt = c_0_tgt.transpose(0, 1).contiguous().view(batch_size,
+-1,
+self.hidden_size
+).transpose(0, 1).contiguous()
+h_0_tgt = (h_0_tgt, c_0_tgt)
 
-        # Fill a vector, which has 'batch_size' dimension, with BOS value.
-        y = x.new(batch_size, 1).zero_() + data_loader.BOS
-        is_undone = x.new_ones(batch_size, 1).float()
-        decoder_hidden = h_0_tgt
-        h_t_tilde, y_hats, indice = None, [], []
-        
-        # Repeat a loop while sum of 'is_undone' flag is bigger than 0, or current time-step is smaller than maximum length.
-        while is_undone.sum() > 0 and len(indice) < max_length:
-            # Unlike training procedure, take the last time-step's output during the inference.
-            emb_t = self.emb_dec(y)
-            # |emb_t| = (batch_size, 1, word_vec_dim)
+# Fill a vector, which has 'batch_size' dimension, with BOS value.
+y = x.new(batch_size, 1).zero_() + data_loader.BOS
+is_undone = x.new_ones(batch_size, 1).float()
+decoder_hidden = h_0_tgt
+h_t_tilde, y_hats, indice = None, [], []
 
-            decoder_output, decoder_hidden = self.decoder(emb_t,
-                                                          h_t_tilde,
-                                                          decoder_hidden
-                                                          )
-            context_vector = self.attn(h_src, decoder_output, mask)
-            h_t_tilde = self.tanh(self.concat(torch.cat([decoder_output,
-                                                         context_vector
-                                                         ], dim=-1)))
-            y_hat = self.generator(h_t_tilde)
-            # |y_hat| = (batch_size, 1, output_size)
-            y_hats += [y_hat]
+# Repeat a loop while sum of 'is_undone' flag is bigger than 0, or current time-step is smaller than maximum length.
+while is_undone.sum() > 0 and len(indice) < max_length:
+# Unlike training procedure, take the last time-step's output during the inference.
+emb_t = self.emb_dec(y)
+# |emb_t| = (batch_size, 1, word_vec_dim)
 
-            if is_greedy:
-                y = torch.topk(y_hat, 1, dim=-1)[1].squeeze(-1)
-            else:
-                # Take a random sampling based on the multinoulli distribution.
-                y = torch.multinomial(y_hat.exp().view(batch_size, -1), 1)
-            # Put PAD if the sample is done.
-            y = y.masked_fill_((1. - is_undone).byte(), data_loader.PAD)
-            is_undone = is_undone * torch.ne(y, data_loader.EOS).float()
-            # |y| = (batch_size, 1)
-            # |is_undone| = (batch_size, 1)
-            indice += [y]
+decoder_output, decoder_hidden = self.decoder(emb_t,
+h_t_tilde,
+decoder_hidden
+)
+context_vector = self.attn(h_src, decoder_output, mask)
+h_t_tilde = self.tanh(self.concat(torch.cat([decoder_output,
+context_vector
+], dim=-1)))
+y_hat = self.generator(h_t_tilde)
+# |y_hat| = (batch_size, 1, output_size)
+y_hats += [y_hat]
 
-        y_hats = torch.cat(y_hats, dim=1)
-        indice = torch.cat(indice, dim=-1)
-        # |y_hat| = (batch_size, length, output_size)
-        # |indice| = (batch_size, length)
+if is_greedy:
+y = torch.topk(y_hat, 1, dim=-1)[1].squeeze(-1)
+else:
+# Take a random sampling based on the multinoulli distribution.
+y = torch.multinomial(y_hat.exp().view(batch_size, -1), 1)
+# Put PAD if the sample is done.
+y = y.masked_fill_((1. - is_undone).byte(), data_loader.PAD)
+is_undone = is_undone * torch.ne(y, data_loader.EOS).float()
+# |y| = (batch_size, 1)
+# |is_undone| = (batch_size, 1)
+indice += [y]
 
-        return y_hats, indice
+y_hats = torch.cat(y_hats, dim=1)
+indice = torch.cat(indice, dim=-1)
+# |y_hat| = (batch_size, length, output_size)
+# |indice| = (batch_size, length)
+
+return y_hats, indice
 ```
 
 가끔 너무 어렵거나 훈련 데이터에서 볼 수 없었던 형태의 문장이 인코딩되어 들어오거나, 훈련 데이터가 적어서 디코더가 잘 훈련되어 있지 않으면, 같은 단어를 반복하며 끝이 없는 문장을 뱉어내는 현상이 발생할 수 있습니다. 즉, EOS가 나오지 않는 상황이 발생할 수 있습니다.
@@ -100,9 +100,9 @@ $$\hat{y}_t=\underset{y\in\mathcal{Y}}{\text{argmax }}P(\text{y}_t|X,\hat{y}_{<t
 
 하지만 우리는 자료구조와 알고리즘 수업에서 배웠다시피, 욕심쟁이 알고리즘은 굉장히 쉽고 간편하지만, 최적의(optimal) 해를 보장하지 않습니다. 따라서 최적의 해에 좀 더 가까워지기 위해서 우리는 약간의 트릭을 첨가합니다. k개의 후보를 더 추적하는 것 입니다. 이때 k를 빔(beam)의 크기라고 합니다.
 
-![하나의 문장을 번역 할 때, 빔 사이즈 k=3인 경우의 빔서치](../assets/nmt-single-sample-beam-search.png)
+![하나의 문장을 번역 할 때, 빔 사이즈 k=3인 경우의 빔서치](../assets/10-06-02.png)
 <!--
-![](../assets/nmt-beam-search-concept.png)
+![](../assets/10-06-03.png)
 -->
 
 현재 time-step에서 최고 누적 확률을 가진 인덱스(index)의 단어 k개를 뽑아서, 다음 time-step에 대해서 k번 추론을 수행합니다. 그리고 총 $k * |V|$ 개의 softmax 결과 값 중에서 다시 최고 누적 확률 k개를 뽑아 다음 time-step으로 넘깁니다. <comment> $|V|$ 는 어휘 사전의 크기 입니다. </comment> 여기서 중요한 점은 두가지 입니다.
@@ -124,7 +124,7 @@ $$\hat{y}_t=\underset{y\in\mathcal{Y}}{\text{argmax }}P(\text{y}_t|X,\hat{y}_{<t
 <reference> 출처: [Cho et al.2016] </reference>
 
 <!--
-![각 추론 방법에 따른 성능 비교 - 출처: [Cho et al.2016]](../assets/nmt-inference-method-evaluation.png)
+![각 추론 방법에 따른 성능 비교 - 출처: [Cho et al.2016]](../assets/10-06-04.png)
 -->
 
 특기할 점은 기계번역 문제에서는 보통 빔의 크기를 10 이하로 사용한다는 것 입니다. 보통 빔의 크기가 커질수록 더 많은 과거 사항을 기억하기 때문에 유리해지지만, 기계번역에서는 10개 이상의 빔을 사용하는 것은 성능의 개선의 효과가 거의 없음을 알 수 있습니다.
@@ -156,11 +156,11 @@ b_t^k&=\{\hat{y}_1^k,\cdots,\hat{y}_{t-1}^k\}+\{\hat{y}_t^k\}=\{\hat{y}_1^k,\cdo
 
 예를 들어 $|V|=30,000$ 이고 k=3 라고 가정하겠습니다. 그럼 softmax 레이어의 유닛 갯수는 30,000개 입니다. 따라서 한 time-step의 예측 결과의 갯수는 $|V|\times k=90,000$ 가 됩니다. 이 9만개의 softmax 레이어 유닛(vocabulary의 각 단어)들의 각각의 확률 값에, 이전 time-step에서 선택된 빔(beam)의 누적 확률 값을 더해 최종 누적 확률 값 90,000개를 얻습니다. 여기서 총 90,000개의 누적 확률 값 중에서 최고의 k개를 뽑아, 다음 time-step의 예측을 위한 디코더의 입력으로 사용하게 됩니다. 이때 반복하는 k번의 작업을 for반복문을 사용해서 해결하는 것도 한가지 방법이겠지만, 우리는 더 나은 방법에 대해서 고민해야 할 것 입니다. 따라서 마치 미니배치 사이즈가 k인것 처럼 미니배치를 구성해서 sequence-to-sequence에 넣어주면 될 것 입니다. 이것은 한개의 문장이 주어졌을때 시나리오이고, 미니배치로 문장이 주어진다면 $\text{batch\_size}\times|V|\times{k}$ 가 될 것 입니다.
 
-![빔 사이즈 k=3인 경우의 병렬 빔서치 수행](../assets/nmt-beam-search-space.png)
+![빔 사이즈 k=3인 경우의 병렬 빔서치 수행](../assets/10-06-05.png)
 
 미니배치 단위로 문장이 입력으로 주어졌을 때, 빔서치를 병렬로 수행하기 위해서는 트릭이 필요합니다. 겉보기에는 복잡하고 어려워보일 수 있으나, 필요성과 기본 원리를 이해한다면 구현하는 것은 그렇게 어렵지 않을 것 입니다.
 
-![미니배치 내에서 빔서치를 병렬로 수행하기 위한 과정](../assets/nmt-mini-batch-parallelized-beam-search-overview.png)
+![미니배치 내에서 빔서치를 병렬로 수행하기 위한 과정](../assets/10-06-06.png)
 
 Sequence-to-sequence는 미니배치를 입력으로 받아 미니배치를 출력으로 반환합니다. 따라서 상황에 따라서 그때그때 필요한 입력들을 모아서 미니배치를 만들고, 그에 해당하는 출력을 미니배치로 받아서 입력에 대해서 필요한 출력을 나눠 가지면 되는 것 입니다. 아까 1개의 문장에 대해서 설명할 때, k번 반복하는 작업에 대해서 for 반복문을 사용하는 대신, 마치 미니배치 사이즈가 k개인것처럼 미니배치를 만들어 병렬 연산을 통해 구현하는 것을 이야기 하였습니다. m개의 문장이 주어지는 미니배치 상황에서도 똑같습니다. 각 문장별로 k번 반복하는 작업이 있기 때문에, 결국 최종 임시 미니배치 사이즈는 $m\times{k}$ 가 될 것 입니다. 우리는 매 time-step 마다 각 m개의 문장(샘플)별로 최고 누적확률 k개의 입력을 뽑아내서, $m\times{k}$ 크기의 미니배치를 구성하여 sequence-to-sequence에 입력으로 넣습니다. Sequence-to-sequence가 $m\times{k}$ 크기의 미니배치를 출력으로 반환하면, 다시 m개의 문장별로 k개씩 확률 분포를 뽑아서, 최고 누적확률을 계산하여 다음 time-step의 입력이 될 것을 정하면 됩니다.
 
@@ -214,46 +214,46 @@ MIN_LENGTH = 5
 
 class SingleBeamSearchSpace():
 
-    def __init__(self,
-                 hidden,
-                 h_t_tilde=None,
-                 beam_size=5,
-                 max_length=255
-                 ):
-        self.beam_size = beam_size
-        self.max_length = max_length
+def __init__(self,
+hidden,
+h_t_tilde=None,
+beam_size=5,
+max_length=255
+):
+self.beam_size = beam_size
+self.max_length = max_length
 
-        super(SingleBeamSearchSpace, self).__init__()
+super(SingleBeamSearchSpace, self).__init__()
 
-        # To put data to same device.
-        self.device = hidden[0].device
-        # Inferred word index for each time-step. For now, initialized with initial time-step.
-        self.word_indice = [torch.LongTensor(beam_size).zero_().to(self.device) + data_loader.BOS]
-        # Index origin of current beam.
-        self.prev_beam_indice = [torch.LongTensor(beam_size).zero_().to(self.device) - 1]
-        # Cumulative log-probability for each beam.
-        self.cumulative_probs = [torch.FloatTensor([.0] + [-float('inf')] * (beam_size - 1)).to(self.device)]
-        # 1 if it is done else 0
-        self.masks = [torch.ByteTensor(beam_size).zero_().to(self.device)]
+# To put data to same device.
+self.device = hidden[0].device
+# Inferred word index for each time-step. For now, initialized with initial time-step.
+self.word_indice = [torch.LongTensor(beam_size).zero_().to(self.device) + data_loader.BOS]
+# Index origin of current beam.
+self.prev_beam_indice = [torch.LongTensor(beam_size).zero_().to(self.device) - 1]
+# Cumulative log-probability for each beam.
+self.cumulative_probs = [torch.FloatTensor([.0] + [-float('inf')] * (beam_size - 1)).to(self.device)]
+# 1 if it is done else 0
+self.masks = [torch.ByteTensor(beam_size).zero_().to(self.device)]
 
-        # We don't need to remember every time-step of hidden states: prev_hidden, prev_cell, prev_h_t_tilde
-        # What we need is remember just last one.
-        # Future work: make this class to deal with any necessary information for other architecture, such as Transformer.
+# We don't need to remember every time-step of hidden states: prev_hidden, prev_cell, prev_h_t_tilde
+# What we need is remember just last one.
+# Future work: make this class to deal with any necessary information for other architecture, such as Transformer.
 
-        # |hidden[0]| = (n_layers, 1, hidden_size)
-        self.prev_hidden = torch.cat([hidden[0]] * beam_size, dim=1)
-        self.prev_cell = torch.cat([hidden[1]] * beam_size, dim=1)
-        # |prev_hidden| = (n_layers, beam_size, hidden_size)
-        # |prev_cell| = (n_layers, beam_size, hidden_size)
+# |hidden[0]| = (n_layers, 1, hidden_size)
+self.prev_hidden = torch.cat([hidden[0]] * beam_size, dim=1)
+self.prev_cell = torch.cat([hidden[1]] * beam_size, dim=1)
+# |prev_hidden| = (n_layers, beam_size, hidden_size)
+# |prev_cell| = (n_layers, beam_size, hidden_size)
 
-        # |h_t_tilde| = (batch_size = 1, 1, hidden_size)
-        self.prev_h_t_tilde = torch.cat([h_t_tilde] * beam_size,
-                                        dim=0
-                                        ) if h_t_tilde is not None else None
-        # |prev_h_t_tilde| = (beam_size, 1, hidden_size)
+# |h_t_tilde| = (batch_size = 1, 1, hidden_size)
+self.prev_h_t_tilde = torch.cat([h_t_tilde] * beam_size,
+dim=0
+) if h_t_tilde is not None else None
+# |prev_h_t_tilde| = (beam_size, 1, hidden_size)
 
-        self.current_time_step = 0
-        self.done_cnt = 0
+self.current_time_step = 0
+self.done_cnt = 0
 ```
 
 #### 길이 패널티 구현하기
@@ -261,16 +261,16 @@ class SingleBeamSearchSpace():
 우리는 파일 초반에 길이 패널티의 두 하이퍼 파라미터를 미리 정의 해 놓았습니다. 이것을 사용하여 길이 패널티 함수를 구현 및 사용합니다.
 
 ```python
-    def get_length_penalty(self,
-                           length,
-                           alpha=LENGTH_PENALTY,
-                           min_length=MIN_LENGTH
-                           ):
-        # Calculate length-penalty, because shorter sentence usually have bigger probability.
-        # Thus, we need to put penalty for shorter one.
-        p = (1 + length) ** alpha / (1 + min_length) ** alpha
+def get_length_penalty(self,
+length,
+alpha=LENGTH_PENALTY,
+min_length=MIN_LENGTH
+):
+# Calculate length-penalty, because shorter sentence usually have bigger probability.
+# Thus, we need to put penalty for shorter one.
+p = (1 + length) ** alpha / (1 + min_length) ** alpha
 
-        return p
+return p
 ```
 
 #### 디코딩 작업 종료 체크
@@ -278,11 +278,11 @@ class SingleBeamSearchSpace():
 EOS가 한개씩 나타날 때마다 'self.done_cnt'가 증가하도록 되어 있기 때문에, 빔의 크기 k 보다 'self.done_cnt'가 크면 디코딩(탐색) 작업이 종료 됩니다.
 
 ```python
-    def is_done(self):
-        # Return 1, if we had EOS more than 'beam_size'-times.
-        if self.done_cnt >= self.beam_size:
-            return 1
-        return 0
+def is_done(self):
+# Return 1, if we had EOS more than 'beam_size'-times.
+if self.done_cnt >= self.beam_size:
+return 1
+return 0
 ```
 
 #### 가짜 미니배치의 일부 만들기
@@ -290,15 +290,15 @@ EOS가 한개씩 나타날 때마다 'self.done_cnt'가 증가하도록 되어 �
 매 time-step마다 sequence-to-sequence에게 1개의 문장에 대해서 k개의 입력이 주어져야 합니다. 배치사이즈가 m일 때, m개의 문장에 대해서 각각 k개의 입력이 될 것 입니다. 최종 미니배치의 사이즈는 $m\times{k}$ 가 될 것이므로, 그 일부인 k개를 반환하는 함수 입니다.
 
 ```python
-    def get_batch(self):
-        y_hat = self.word_indice[-1].unsqueeze(-1)
-        hidden = (self.prev_hidden, self.prev_cell)
-        h_t_tilde = self.prev_h_t_tilde
+def get_batch(self):
+y_hat = self.word_indice[-1].unsqueeze(-1)
+hidden = (self.prev_hidden, self.prev_cell)
+h_t_tilde = self.prev_h_t_tilde
 
-        # |y_hat| = (beam_size, 1)
-        # |hidden| = (n_layers, beam_size, hidden_size)
-        # |h_t_tilde| = (beam_size, 1, hidden_size) or None
-        return y_hat, hidden, h_t_tilde
+# |y_hat| = (beam_size, 1)
+# |hidden| = (n_layers, beam_size, hidden_size)
+# |h_t_tilde| = (beam_size, 1, hidden_size) or None
+return y_hat, hidden, h_t_tilde
 ```
 
 #### 최고 누적확률 k개를 고르기
@@ -306,54 +306,54 @@ EOS가 한개씩 나타날 때마다 'self.done_cnt'가 증가하도록 되어 �
 매 time-step마다 k개의 결과값(softmax 레이어 결과값)을 받아서 이전 time-step으로부터의 빔서치 정보를 이용하여 누적확률을 계산하고, 최고 누적확률 k개를 뽑는 작업을 수행하는 함수 입니다. 'self.mask'의 값에 따라 이전에 EOS가 출현한 경우에는 직전 누적확률을 0(로그확률 마이너스 무한대)으로 만들어 계산하는 것을 볼 수 있습니다.
 
 ```python
-    def collect_result(self, y_hat, hidden, h_t_tilde):
-        # |y_hat| = (beam_size, 1, output_size)
-        # |hidden| = (n_layers, beam_size, hidden_size)
-        # |h_t_tilde| = (beam_size, 1, hidden_size)
-        output_size = y_hat.size(-1)
+def collect_result(self, y_hat, hidden, h_t_tilde):
+# |y_hat| = (beam_size, 1, output_size)
+# |hidden| = (n_layers, beam_size, hidden_size)
+# |h_t_tilde| = (beam_size, 1, hidden_size)
+output_size = y_hat.size(-1)
 
-        self.current_time_step += 1
+self.current_time_step += 1
 
-        # Calculate cumulative log-probability.
-        # First, fill -inf value to last cumulative probability, if the beam is already finished.
-        # Second, expand -inf filled cumulative probability to fit to 'y_hat'. (beam_size) --> (beam_size, 1, 1) --> (beam_size, 1, output_size)
-        # Third, add expanded cumulative probability to 'y_hat'
-        cumulative_prob = y_hat + self.cumulative_probs[-1].masked_fill_(self.masks[-1], -float('inf')).view(-1, 1, 1).expand(self.beam_size, 1, output_size)
-        # Now, we have new top log-probability and its index. We picked top index as many as 'beam_size'.
-        # Be aware that we picked top-k from whole batch through 'view(-1)'.
-        top_log_prob, top_indice = torch.topk(cumulative_prob.view(-1),
-                                              self.beam_size,
-                                              dim=-1
-                                              )
-        # |top_log_prob| = (beam_size)
-        # |top_indice| = (beam_size)
+# Calculate cumulative log-probability.
+# First, fill -inf value to last cumulative probability, if the beam is already finished.
+# Second, expand -inf filled cumulative probability to fit to 'y_hat'. (beam_size) --> (beam_size, 1, 1) --> (beam_size, 1, output_size)
+# Third, add expanded cumulative probability to 'y_hat'
+cumulative_prob = y_hat + self.cumulative_probs[-1].masked_fill_(self.masks[-1], -float('inf')).view(-1, 1, 1).expand(self.beam_size, 1, output_size)
+# Now, we have new top log-probability and its index. We picked top index as many as 'beam_size'.
+# Be aware that we picked top-k from whole batch through 'view(-1)'.
+top_log_prob, top_indice = torch.topk(cumulative_prob.view(-1),
+self.beam_size,
+dim=-1
+)
+# |top_log_prob| = (beam_size)
+# |top_indice| = (beam_size)
 
-        # Because we picked from whole batch, original word index should be calculated again.
-        self.word_indice += [top_indice.fmod(output_size)]
-        # Also, we can get an index of beam, which has top-k log-probability search result.
-        self.prev_beam_indice += [top_indice.div(output_size).long()]
+# Because we picked from whole batch, original word index should be calculated again.
+self.word_indice += [top_indice.fmod(output_size)]
+# Also, we can get an index of beam, which has top-k log-probability search result.
+self.prev_beam_indice += [top_indice.div(output_size).long()]
 
-        # Add results to history boards.
-        self.cumulative_probs += [top_log_prob]
-        self.masks += [torch.eq(self.word_indice[-1],
-                       data_loader.EOS)
-                       ]  # Set finish mask if we got EOS.
-        # Calculate a number of finished beams.
-        self.done_cnt += self.masks[-1].float().sum()
+# Add results to history boards.
+self.cumulative_probs += [top_log_prob]
+self.masks += [torch.eq(self.word_indice[-1],
+data_loader.EOS)
+]  # Set finish mask if we got EOS.
+# Calculate a number of finished beams.
+self.done_cnt += self.masks[-1].float().sum()
 
-        # Set hidden states for next time-step, using 'index_select' method.
-        self.prev_hidden = torch.index_select(hidden[0],
-                                              dim=1,
-                                              index=self.prev_beam_indice[-1]
-                                              ).contiguous()
-        self.prev_cell = torch.index_select(hidden[1],
-                                            dim=1,
-                                            index=self.prev_beam_indice[-1]
-                                            ).contiguous()
-        self.prev_h_t_tilde = torch.index_select(h_t_tilde,
-                                                 dim=0,
-                                                 index=self.prev_beam_indice[-1]
-                                                 ).contiguous()
+# Set hidden states for next time-step, using 'index_select' method.
+self.prev_hidden = torch.index_select(hidden[0],
+dim=1,
+index=self.prev_beam_indice[-1]
+).contiguous()
+self.prev_cell = torch.index_select(hidden[1],
+dim=1,
+index=self.prev_beam_indice[-1]
+).contiguous()
+self.prev_h_t_tilde = torch.index_select(h_t_tilde,
+dim=0,
+index=self.prev_beam_indice[-1]
+).contiguous()
 ```
 
 #### 결과값 정리
@@ -361,42 +361,42 @@ EOS가 한개씩 나타날 때마다 'self.done_cnt'가 증가하도록 되어 �
 디코딩이 종료되었을 때, 최종적으로 살아남은 k개의 빔(beam)에 대해서 최고 누적확률 n개를 고르고, 마지막 time-step에서부터 뒤로 역추적하여 문장을 복원하는 작업을 수행합니다.
 
 ```python
-    def get_n_best(self, n=1):
-        sentences, probs, founds = [], [], []
+def get_n_best(self, n=1):
+sentences, probs, founds = [], [], []
 
-        for t in range(len(self.word_indice)):  # for each time-step,
-            for b in range(self.beam_size):  # for each beam,
-                if self.masks[t][b] == 1:  # if we had EOS on this time-step and beam,
-                    # Take a record of penaltified log-proability.
-                    probs += [self.cumulative_probs[t][b] / self.get_length_penalty(t)]
-                    founds += [(t, b)]
+for t in range(len(self.word_indice)):  # for each time-step,
+for b in range(self.beam_size):  # for each beam,
+if self.masks[t][b] == 1:  # if we had EOS on this time-step and beam,
+# Take a record of penaltified log-proability.
+probs += [self.cumulative_probs[t][b] / self.get_length_penalty(t)]
+founds += [(t, b)]
 
-        # Also, collect log-probability from last time-step, for the case of EOS is not shown.
-        for b in range(self.beam_size):
-            if self.cumulative_probs[-1][b] != -float('inf'):
-                if not (len(self.cumulative_probs) - 1, b) in founds:
-                    probs += [self.cumulative_probs[-1][b]]
-                    founds += [(t, b)]
+# Also, collect log-probability from last time-step, for the case of EOS is not shown.
+for b in range(self.beam_size):
+if self.cumulative_probs[-1][b] != -float('inf'):
+if not (len(self.cumulative_probs) - 1, b) in founds:
+probs += [self.cumulative_probs[-1][b]]
+founds += [(t, b)]
 
-        # Sort and take n-best.
-        sorted_founds_with_probs = sorted(zip(founds, probs),
-                                          key=itemgetter(1),
-                                          reverse=True
-                                          )[:n]
-        probs = []
+# Sort and take n-best.
+sorted_founds_with_probs = sorted(zip(founds, probs),
+key=itemgetter(1),
+reverse=True
+)[:n]
+probs = []
 
-        for (end_index, b), prob in sorted_founds_with_probs:
-            sentence = []
+for (end_index, b), prob in sorted_founds_with_probs:
+sentence = []
 
-            # Trace from the end.
-            for t in range(end_index, 0, -1):
-                sentence = [self.word_indice[t][b]] + sentence
-                b = self.prev_beam_indice[t][b]
+# Trace from the end.
+for t in range(end_index, 0, -1):
+sentence = [self.word_indice[t][b]] + sentence
+b = self.prev_beam_indice[t][b]
 
-            sentences += [sentence]
-            probs += [prob]
+sentences += [sentence]
+probs += [prob]
 
-        return sentences, probs
+return sentences, probs
 ```
 
 ### 병렬 빔서치 수행 함수
@@ -406,132 +406,132 @@ EOS가 한개씩 나타날 때마다 'self.done_cnt'가 증가하도록 되어 �
 - URL: https://github.com/kh-kim/simple-nmt/blob/master/simple_nmt/seq2seq.py
 
 ```python
-    def batch_beam_search(self, src, beam_size=5, max_length=255, n_best=1):
-        mask, x_length = None, None
+def batch_beam_search(self, src, beam_size=5, max_length=255, n_best=1):
+mask, x_length = None, None
 
-        if isinstance(src, tuple):
-            x, x_length = src
-            mask = self.generate_mask(x, x_length)
-            # |mask| = (batch_size, length)
-        else:
-            x = src
-        batch_size = x.size(0)
+if isinstance(src, tuple):
+x, x_length = src
+mask = self.generate_mask(x, x_length)
+# |mask| = (batch_size, length)
+else:
+x = src
+batch_size = x.size(0)
 
-        emb_src = self.emb_src(x)
-        h_src, h_0_tgt = self.encoder((emb_src, x_length))
-        # |h_src| = (batch_size, length, hidden_size)
-        h_0_tgt, c_0_tgt = h_0_tgt
-        h_0_tgt = h_0_tgt.transpose(0, 1).contiguous().view(batch_size,
-                                                            -1,
-                                                            self.hidden_size
-                                                            ).transpose(0, 1).contiguous()
-        c_0_tgt = c_0_tgt.transpose(0, 1).contiguous().view(batch_size,
-                                                            -1,
-                                                            self.hidden_size
-                                                            ).transpose(0, 1).contiguous()
-        # |h_0_tgt| = (n_layers, batch_size, hidden_size)
-        h_0_tgt = (h_0_tgt, c_0_tgt)
+emb_src = self.emb_src(x)
+h_src, h_0_tgt = self.encoder((emb_src, x_length))
+# |h_src| = (batch_size, length, hidden_size)
+h_0_tgt, c_0_tgt = h_0_tgt
+h_0_tgt = h_0_tgt.transpose(0, 1).contiguous().view(batch_size,
+-1,
+self.hidden_size
+).transpose(0, 1).contiguous()
+c_0_tgt = c_0_tgt.transpose(0, 1).contiguous().view(batch_size,
+-1,
+self.hidden_size
+).transpose(0, 1).contiguous()
+# |h_0_tgt| = (n_layers, batch_size, hidden_size)
+h_0_tgt = (h_0_tgt, c_0_tgt)
 
-        # initialize 'SingleBeamSearchSpace' as many as batch_size
-        spaces = [SingleBeamSearchSpace((h_0_tgt[0][:, i, :].unsqueeze(1),
-                                         h_0_tgt[1][:, i, :].unsqueeze(1)
-                                         ),
-                                        None,
-                                        beam_size,
-                                        max_length=max_length
-                                        ) for i in range(batch_size)]
-        done_cnt = [space.is_done() for space in spaces]
+# initialize 'SingleBeamSearchSpace' as many as batch_size
+spaces = [SingleBeamSearchSpace((h_0_tgt[0][:, i, :].unsqueeze(1),
+h_0_tgt[1][:, i, :].unsqueeze(1)
+),
+None,
+beam_size,
+max_length=max_length
+) for i in range(batch_size)]
+done_cnt = [space.is_done() for space in spaces]
 
-        length = 0
-        # Run loop while sum of 'done_cnt' is smaller than batch_size, or length is still smaller than max_length.
-        while sum(done_cnt) < batch_size and length <= max_length:
-            # current_batch_size = sum(done_cnt) * beam_size
+length = 0
+# Run loop while sum of 'done_cnt' is smaller than batch_size, or length is still smaller than max_length.
+while sum(done_cnt) < batch_size and length <= max_length:
+# current_batch_size = sum(done_cnt) * beam_size
 
-            # Initialize fabricated variables.
-            # As far as batch-beam-search is running, 
-            # temporary batch-size for fabricated mini-batch is 'beam_size'-times bigger than original batch_size.
-            fab_input, fab_hidden, fab_cell, fab_h_t_tilde = [], [], [], []
-            fab_h_src, fab_mask = [], []
+# Initialize fabricated variables.
+# As far as batch-beam-search is running,
+# temporary batch-size for fabricated mini-batch is 'beam_size'-times bigger than original batch_size.
+fab_input, fab_hidden, fab_cell, fab_h_t_tilde = [], [], [], []
+fab_h_src, fab_mask = [], []
 
-            # Build fabricated mini-batch in non-parallel way.
-            # This may cause a bottle-neck.
-            for i, space in enumerate(spaces):
-                if space.is_done() == 0:  # Batchfy only if the inference for the sample is still not finished.
-                    y_hat_, (hidden_, cell_), h_t_tilde_ = space.get_batch()
+# Build fabricated mini-batch in non-parallel way.
+# This may cause a bottle-neck.
+for i, space in enumerate(spaces):
+if space.is_done() == 0:  # Batchfy only if the inference for the sample is still not finished.
+y_hat_, (hidden_, cell_), h_t_tilde_ = space.get_batch()
 
-                    fab_input += [y_hat_]
-                    fab_hidden += [hidden_]
-                    fab_cell += [cell_]
-                    if h_t_tilde_ is not None:
-                        fab_h_t_tilde += [h_t_tilde_]
-                    else:
-                        fab_h_t_tilde = None
+fab_input += [y_hat_]
+fab_hidden += [hidden_]
+fab_cell += [cell_]
+if h_t_tilde_ is not None:
+fab_h_t_tilde += [h_t_tilde_]
+else:
+fab_h_t_tilde = None
 
-                    fab_h_src += [h_src[i, :, :]] * beam_size
-                    fab_mask += [mask[i, :]] * beam_size
+fab_h_src += [h_src[i, :, :]] * beam_size
+fab_mask += [mask[i, :]] * beam_size
 
-            # Now, concatenate list of tensors.
-            fab_input = torch.cat(fab_input, dim=0)
-            fab_hidden = torch.cat(fab_hidden, dim=1)
-            fab_cell = torch.cat(fab_cell, dim=1)
-            if fab_h_t_tilde is not None:
-                fab_h_t_tilde = torch.cat(fab_h_t_tilde, dim=0)
-            fab_h_src = torch.stack(fab_h_src)
-            fab_mask = torch.stack(fab_mask)
-            # |fab_input| = (current_batch_size, 1)
-            # |fab_hidden| = (n_layers, current_batch_size, hidden_size)
-            # |fab_cell| = (n_layers, current_batch_size, hidden_size)
-            # |fab_h_t_tilde| = (current_batch_size, 1, hidden_size)
-            # |fab_h_src| = (current_batch_size, length, hidden_size)
-            # |fab_mask| = (current_batch_size, length)
+# Now, concatenate list of tensors.
+fab_input = torch.cat(fab_input, dim=0)
+fab_hidden = torch.cat(fab_hidden, dim=1)
+fab_cell = torch.cat(fab_cell, dim=1)
+if fab_h_t_tilde is not None:
+fab_h_t_tilde = torch.cat(fab_h_t_tilde, dim=0)
+fab_h_src = torch.stack(fab_h_src)
+fab_mask = torch.stack(fab_mask)
+# |fab_input| = (current_batch_size, 1)
+# |fab_hidden| = (n_layers, current_batch_size, hidden_size)
+# |fab_cell| = (n_layers, current_batch_size, hidden_size)
+# |fab_h_t_tilde| = (current_batch_size, 1, hidden_size)
+# |fab_h_src| = (current_batch_size, length, hidden_size)
+# |fab_mask| = (current_batch_size, length)
 
-            emb_t = self.emb_dec(fab_input)
-            # |emb_t| = (current_batch_size, 1, word_vec_dim)
+emb_t = self.emb_dec(fab_input)
+# |emb_t| = (current_batch_size, 1, word_vec_dim)
 
-            fab_decoder_output, (fab_hidden, fab_cell) = self.decoder(emb_t,
-                                                                      fab_h_t_tilde,
-                                                                      (fab_hidden, fab_cell)
-                                                                      )
-            # |fab_decoder_output| = (current_batch_size, 1, hidden_size)
-            context_vector = self.attn(fab_h_src, fab_decoder_output, fab_mask)
-            # |context_vector| = (current_batch_size, 1, hidden_size)
-            fab_h_t_tilde = self.tanh(self.concat(torch.cat([fab_decoder_output,
-                                                             context_vector
-                                                             ], dim=-1)))
-            # |fab_h_t_tilde| = (current_batch_size, 1, hidden_size)
-            y_hat = self.generator(fab_h_t_tilde)
-            # |y_hat| = (current_batch_size, 1, output_size)
+fab_decoder_output, (fab_hidden, fab_cell) = self.decoder(emb_t,
+fab_h_t_tilde,
+(fab_hidden, fab_cell)
+)
+# |fab_decoder_output| = (current_batch_size, 1, hidden_size)
+context_vector = self.attn(fab_h_src, fab_decoder_output, fab_mask)
+# |context_vector| = (current_batch_size, 1, hidden_size)
+fab_h_t_tilde = self.tanh(self.concat(torch.cat([fab_decoder_output,
+context_vector
+], dim=-1)))
+# |fab_h_t_tilde| = (current_batch_size, 1, hidden_size)
+y_hat = self.generator(fab_h_t_tilde)
+# |y_hat| = (current_batch_size, 1, output_size)
 
-            # separate the result for each sample.
-            cnt = 0
-            for space in spaces:
-                if space.is_done() == 0:
-                    # Decide a range of each sample.
-                    from_index = cnt * beam_size
-                    to_index = from_index + beam_size
+# separate the result for each sample.
+cnt = 0
+for space in spaces:
+if space.is_done() == 0:
+# Decide a range of each sample.
+from_index = cnt * beam_size
+to_index = from_index + beam_size
 
-                    # pick k-best results for each sample.
-                    space.collect_result(y_hat[from_index:to_index],
-                                         (fab_hidden[:, from_index:to_index, :],
-                                          fab_cell[:, from_index:to_index, :]
-                                          ),
-                                         fab_h_t_tilde[from_index:to_index]
-                                         )
-                    cnt += 1
+# pick k-best results for each sample.
+space.collect_result(y_hat[from_index:to_index],
+(fab_hidden[:, from_index:to_index, :],
+fab_cell[:, from_index:to_index, :]
+),
+fab_h_t_tilde[from_index:to_index]
+)
+cnt += 1
 
-            done_cnt = [space.is_done() for space in spaces]
-            length += 1
+done_cnt = [space.is_done() for space in spaces]
+length += 1
 
-        # pick n-best hypothesis.
-        batch_sentences = []
-        batch_probs = []
+# pick n-best hypothesis.
+batch_sentences = []
+batch_probs = []
 
-        # Collect the results.
-        for i, space in enumerate(spaces):
-            sentences, probs = space.get_n_best(n_best)
+# Collect the results.
+for i, space in enumerate(spaces):
+sentences, probs = space.get_n_best(n_best)
 
-            batch_sentences += [sentences]
-            batch_probs += [probs]
+batch_sentences += [sentences]
+batch_probs += [probs]
 
-        return batch_sentences, batch_probs
+return batch_sentences, batch_probs
 ```

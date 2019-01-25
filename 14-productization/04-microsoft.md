@@ -19,25 +19,25 @@
 <!--
 ### Joint Training of Src2Tgt and Tgt2Src Models
 
-![](../assets/nmt-productization-msnmt-joint-training.png)
+![](../assets/14-04-01.png)
 -->
 
 ## 딜리버레이션 네트워크 (Deliberation Networks)
 
 마이크로소프트는 [Xia et al.2017]에서 소개한 방식을 통해 번역 성능을 더욱 높이려 하였습니다. 사실 사람은 번역을 할 때에 소스(source) 문장에서 번역 초안을 얻고, 그 초안 문장으로부터 최종적인 타겟(target) 문장을 번역 해 내곤 합니다. 따라서 신경망을 통해 같은 방법을 구현하고자 하였습니다.
 
-![딜리버레이션 네트워크의 개요](../assets/nmt-productization-msnmt-deliberation.png)
+![딜리버레이션 네트워크의 개요](../assets/14-04-02.png)
 
 <!--
 예를 들어 기존의 번역의 수식은 아래와 같이 바뀔 수 있습니다.
 
 $$P(Y|X)=\prod{P(y_i|X,y_{<i})} \longrightarrow P(Y|X)=\prod{P(y_i|X,Y_{mid},y_{<i})}$$
 
-![](../assets/nmt-productization-msnmt-deliberation-implementation.png)
+![](../assets/14-04-03.png)
 
 ### Agreement Regularization of Left-to-Right and Right-to-Left Models
 
-![](../assets/nmt-productization-msnmt-kld.png)
+![](../assets/14-04-04.png)
 
 ## Data Selection and Filtering
 -->
@@ -52,7 +52,7 @@ $$P(Y|X)=\prod{P(y_i|X,y_{<i})} \longrightarrow P(Y|X)=\prod{P(y_i|X,Y_{mid},y_{
 |DLDN|DL + 딜리버레이션 네트워크|27.40|
 
 <!--
-![](../assets/nmt-productization-msnmt-evaluation.png)
+![](../assets/14-04-05.png)
 -->
 
 마이크로소프트의 논문은 트랜스포머를 메이저 상용시스템에 성공적으로 적용한 좋은 사례가 될 수 있습니다. 사실 이전까지는 주류로 올라오지 못하였던 트랜스포머 모델 구조는 이후에는 널리 쓰이는 모델이 되었습니다. 또한 단방향 코퍼스를 활용하여 번역 성능을 높이고자 하는 노력이 듀얼러닝을 통해 한층 더 끌어올려졌으며, 성공적으로 상용화 시스템에 적용되었음을 알 수 있습니다.

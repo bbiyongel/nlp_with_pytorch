@@ -2,7 +2,7 @@
 
 머신러닝의 목표는 보지 못한 데이터(unseen data)에 대한 좋은 예측(prediction)을 하는 것 입니다. 이것을 우리는 일반화(generalization)라고 합니다. 좋은 일반화 성능을 얻기 위해서 우리는 알고자 하는 ground-truth 확률 분포로부터 데이터를 수집(샘플링)하여, 수집된 데이터를 가장 잘 설명하는 확률 분포 모델을 추정함으로써, 알고자 하는 ground-truth 확률 분포를 근사(approximate) 합니다.
 
-![어느 평범한 압정](../assets/basic_math-push_pin.png)
+![어느 평범한 압정](../assets/02-05-01.png)
 
 어느날 당신에게 얄미운 친구녀석이 내기를 제안합니다. 압정을 던졌을 때, 압정의 납작한 면이 바닥을 향해 떨어지면 50원을 받고, 반대의 경우에는 20원을 내야하는 게임 입니다. 우리는 이 게임을 참여할지 말아야 할지 결정해야 합니다. 그래서 게임에서 사용 될 압정과 똑같은 압정을 하나 구해서 집에서 100번 던져 봅니다. 그랬더니 납작한 면이 바닥으로 30번 떨어졌습니다. 그럼 우리는 추측해 볼 수 있죠.
 
@@ -22,8 +22,8 @@ Binomial 분포의 파라미터 $\theta$ 가 있을 때, $n$ 번 압정을 던�
 $$\begin{aligned}
 P(K=k)&=
 \begin{pmatrix}
-   n \\
-   k
+n \\
+k
 \end{pmatrix}
 \theta^k(1-\theta)^{n-k} \\
 &=\frac{n!}{k!(n-k)!}\cdot\theta^k(1-\theta)^{n-k}
@@ -39,7 +39,7 @@ $$J(\theta)=P(n=100,k=30|\theta)$$
 
 이 함수를 실제로 $\theta$ 에 대해서 그래프로 나타내면 아래와 같습니다. 0.3 에서 $J(\theta)$ 가 최대가 되는 것을 볼 수 있습니다. 즉, $\theta=0.3$ 일 때, bionomial 분포는 우리가 수집한 데이터 또는 현상을 가장 잘 설명(재현)합니다.
 
-![Likelihood 함수 곡선](../assets/basic_math-binomial.png)
+![Likelihood 함수 곡선](../assets/02-05-02.png)
 
 앞서 $J(\theta)$ 는 likelihood라고 하였습니다. 따라서 우리는 주어진 데이터를 잘 설명하기 위해서, likelihood를 최대화(maximize)하도록 $\theta$ 를 추정하기 때문에 maximum likelihood estimation이라고 부르는 것 입니다. 이처럼 likelihood는 주어진 데이터 $x_1^n=\{x_1,x_2,\cdots,x_n\}$ 를 설명하기위한 확률분포 파라미터( $\theta$ )에 대한 함수이고, 아래와 같이 표현 합니다.
 
@@ -68,7 +68,7 @@ J(\theta)=\log{\mathcal{N}(x|\mu,\sigma^2)}=-\frac{1}{2}\log{2\pi\sigma^2}-\frac
 
 사실은 지금까지 likelihood 이야기를 한 이유가 바로 뉴럴 네트워크 또한 확률분포 함수이기 때문입니다. 기존에 MNIST 분류 문제를 풀고자 하는 경우에는 0부터 9까지의 레이블(클래스)를 예측하게 되므로 discrete 랜덤 변수를 다루는 multinoulli 확률 분포가 됩니다. 따라서 MNIST 분류문제를 위한 뉴럴 네트워크의 마지막 softmax 레이어의 결과값은 각 클래스별 확률 $\hat{y}$ 을 반환 합니다. 또한 실제 정답 레이블 $y$ 의 경우에는 discrete 값이기 때문에 one-hot 벡터가 되는 것 입니다. 달리 말하면 $\text{y}$ 도메인의 샘플은 discrete 확률 분포 $P(\text{y})$ 에서 샘플링한 샘플이기 때문에 one-hot 벡터로 표현됩니다. 우리는 따라서 뉴럴 네트워크 웨이트 파라미터 $\theta$ 가 훈련 데이터를 잘 설명하도록 그래디언트 디센트(gradient descent, 경사하강법)를 통해 maximum likelihood estimation(MLE)을 수행 하는 것 입니다.
 
-![뉴럴 네트워크는 확률분포 함수 입니다.](../assets/basic_math-nn_is_prob_dist.png)
+![뉴럴 네트워크는 확률분포 함수 입니다.](../assets/02-05-03.png)
 
 $$\begin{gathered}
 \theta \leftarrow \theta-\lambda\nabla_\theta J(\theta) \\

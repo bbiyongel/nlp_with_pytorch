@@ -13,7 +13,7 @@ c_t &= f_t c_{(t-1)} + i_t g_t \\
 h_t &= o_t \tanh(c_t)
 \end{aligned}$$
 
-![LSTM의 구조](../assets/rnn-lstm-architecture.png)
+![LSTM의 구조](../assets/07-03-01.png)
 
 각 게이트(gate) 앞에는 sigmoid( $\sigma$ )가 붙어 0에서 1 사이의 값으로 얼마나 게이트를 열고 닫을지를 결정합니다. 그럼 그 결정된 값에 따라서 셀 스테이트(cell state) $c_{t-1}$ 와 $g_t$ , $c_t$ 가 새롭게 인코딩(encoding) 됩니다.
 

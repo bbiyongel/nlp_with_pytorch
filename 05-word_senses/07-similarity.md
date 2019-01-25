@@ -18,7 +18,7 @@ L1 norm을 사용한 L1 디스턴스 입니다. 이 방법은 두 벡터의 각 
 
 ```python
 def get_l1_distance(x1, x2):
-    return ((x1 - x2).abs()).sum()**.5
+return ((x1 - x2).abs()).sum()**.5
 ```
 
 위의 코드는 파이토치 텐서 $x_1$ , $x_2$ 를 입력으로 받아 L1 디스턴스를 반환 해 주는 코드 입니다.
@@ -31,12 +31,12 @@ $$\text{d}_{\text{L2}}(w,v)=\sqrt{\sum_{i=1}^d{(w_i-v_i)^2}},\text{ where }w,v\i
 
 ```python
 def get_l2_distance(x1, x2):
-    return ((x1 - x2)**2).sum()**.5
+return ((x1 - x2)**2).sum()**.5
 ```
 
 L2 디스턴스를 구하기 위해 파이토치 텐서들읍 입력으로 받아 계산하는 함수의 코드는 위와 같습니다.
 
-![L1 vs L2(초록색) from wikipedia](https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Manhattan_distance.svg/283px-Manhattan_distance.svg.png)
+![L1 vs L2(초록색) from wikipedia](../assets/05-07-01.png)
 
 위의 그림은 L1 디스턴스와 L2 디스턴스의 차이를 쉽게 나타낸 그림 입니다. L2 디스턴스를 의미하는 초록색 선을 제외하고 나머지 L1 디스턴스를 나타내는 세가지 선의 길이는 모두 같습니다. L1 디스턴스의 또 다른 이름인 맨하탄 디스턴스의 그 이름답게 마치 잘 계획된 도시의 길을 지나가는 듯한 선의 형태를 나타내고 있습니다.
 
@@ -48,10 +48,10 @@ L1, L2 디스턴스가 있다면 $L_\infty$ 디스턴스도 있습니다. 재미
 
 ```python
 def get_infinity_distance(x1, x2):
-    return ((x1 - x2).abs()).max()
+return ((x1 - x2).abs()).max()
 ```
 
-![같은 값 $r$ 크기를 갖는 $L_1$ , $L_2$ , $L_\infty$ 거리를 그림으로 나타낸 모습](../assets/wsd-distance.png)
+![같은 값 $r$ 크기를 갖는 $L_1$ , $L_2$ , $L_\infty$ 거리를 그림으로 나타낸 모습](../assets/05-07-02.png)
 
 위의 그림은 각 L1, L2, $L_\infty$ 별로 거리의 크기가 $r$ 일때 모습 입니다. 각 색깔의 선 위의 점들은 모두 해당 디스턴스 방법에서 같은 거리를 나타냅니다. 보이는바와 같이 L1 디스턴스는 각 값들을 동시에 나타냅니다. 하지만 L2, $L_\infty$ 로 갈수록 큰 값에 대해서 더욱 집중해서 디스턴스를 나타냅니다. 즉, 각 디스턴스를 최소화(minimize)하도록 최적화(optimization)를 수행한다면, L2, $L_\infty$ 로 갈수록 큰 값을 자체에 집중하여 작아지도록 최적화를 수행 합니다.
 
@@ -72,7 +72,7 @@ $$\begin{aligned}
 
 ```python
 def get_cosine_similarity(x1, x2):
-    return (x1 * x2).sum() / ((x1**2).sum()**.5 * (x2**2).sum()**.5)
+return (x1 * x2).sum() / ((x1**2).sum()**.5 * (x2**2).sum()**.5)
 ```
 
 ## 자카드(Jaccard) 유사도
@@ -88,7 +88,7 @@ $$\begin{aligned}
 
 ```python
 def get_jaccard_similarity(x1, x2):
-    return torch.stack([x1, x2]).min(dim=0)[0].sum() / torch.stack([x1, x2]).max(dim=1)[0].sum()
+return torch.stack([x1, x2]).min(dim=0)[0].sum() / torch.stack([x1, x2]).max(dim=1)[0].sum()
 ```
 
 ## 문서(문장)간 유사도 구하기

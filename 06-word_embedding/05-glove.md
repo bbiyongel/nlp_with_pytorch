@@ -1,6 +1,6 @@
 # GloVe
 
-이전 섹션에서는 Word2Vec에 대해서 다루어 보았습니다. 이번 섹션에서는 또 하나의 대표적인 워드 임베딩 방법인 GloVe (Global Vectors for Word Representation) [Pennington et al.2014]에 대해 다루어보고자 합니다. 
+이전 섹션에서는 Word2Vec에 대해서 다루어 보았습니다. 이번 섹션에서는 또 하나의 대표적인 워드 임베딩 방법인 GloVe (Global Vectors for Word Representation) [Pennington et al.2014]에 대해 다루어보고자 합니다.
 
 ## 알고리즘
 
@@ -8,11 +8,11 @@
 
 $$\begin{gathered}
 \hat{\theta}=\underset{\theta}{\text{argmin}}\sum_{x\in\mathcal{X}}f(x)\times\big|W'Wx-\log{C_x}\big|_2 \\
-\text{where }C_x\text{ is vector of co-occurences with }x \\ 
+\text{where }C_x\text{ is vector of co-occurences with }x \\
 \text{Also, }x\in\{0,1\}^{|V|}, W\in\mathbb{R}^{d\times|V|}\text{ and }W'\in\mathbb{R}^{|V|\times d}.
 \end{gathered}$$
 
-Skip-gram을 위한 네트워크와 거의 유사한 형태임을 알 수 있습니다. 다만, 여기서는 분류(classification) 문제 <comment> Skip-gram은 마지막 레이어가 소프트맥스로 구성되어 있었습니다. </comment>가 아닌, 출현 빈도를 근사(approximation)하는 리그레션(regression)문제가 되었기 때문에, Mean Square Error (MSE)를 사용한 것을 볼 수 있습니다. 
+Skip-gram을 위한 네트워크와 거의 유사한 형태임을 알 수 있습니다. 다만, 여기서는 분류(classification) 문제 <comment> Skip-gram은 마지막 레이어가 소프트맥스로 구성되어 있었습니다. </comment>가 아닌, 출현 빈도를 근사(approximation)하는 리그레션(regression)문제가 되었기 때문에, Mean Square Error (MSE)를 사용한 것을 볼 수 있습니다.
 
 마찬가지로 one-hot 인코딩 벡터 $x$ 를 입력으로 받아 한 개의 히든 레이어 $W$ 를 거쳐 출력 레이어 $W'$ 를 통해 출력 벡터를 반환 합니다. 이 출력 벡터는 단어 $x$ 와 함께 코퍼스에 출현했던 모든 단어들의 각 동시 출현 빈도들을 나타낸 벡터인 $C_x$ 를 근사해야 합니다. 따라서 이 둘의 차이값인 손실(loss)를 최소화 하도록 back-propagation 및 그래디언트 디센트를 통해 학습을 할 수 있습니다.
 

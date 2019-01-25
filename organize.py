@@ -52,27 +52,62 @@ def rename():
 def download_image(url, fn):
     import urllib.request
 
-    urllib.request.urlretrieve(url, fn)
+    try:
+        urllib.request.urlretrieve(url, fn)
+    except:
+        return False
+    return True
 
-def rename_images(fn):
+def get_ext(fn):
+    ext = fn.split('.')[-1]
+
+    return ext
+
+def get_dir_path(fn):
+    return os.path.dirname(fn)
+
+def rename_images(fn, img_dir='./assets'):
     extract_p = re.compile(r"^.*([0-9]{2})\-[a-z_]+/([0-9]{2})\-.+\.md.*$")
     chapter_n = extract_p.sub(r'\1', fn)
     section_n = extract_p.sub(r'\2', fn)
 
     f = open(fn, 'r')
 
+    lines = []
     cnt = 0
     for line in f:
         if line.strip() != '':
-            fn_p = re.compile(r"^.*!\[.*\]\((.+)\).*$")
+            fn_p = re.compile(r"^(.*!\[.*\]\()(.+)(\).*)$")
 
             if fn_p.search(line):
-                img_fn = fn_p.sub(r'\1', line.strip())
+                img_fn = fn_p.sub(r'\2', line.strip())
                 cnt += 1
+                to_fn = '%s/%s-%s-%02d.%s' % (img_dir, chapter_n, section_n, cnt, get_ext(img_fn))
 
-                to_fn = '%s-%s-%02d' % (chapter_n, section_n, cnt)
-                #if img_fn.startswith('http'):
                 print('%s\t%s\t%s' % (fn, img_fn, to_fn))
+                if img_fn.startswith('http'):
+                    if download_image(img_fn, to_fn) == False:
+                        to_fn = img_fn
+                else:
+                    try:
+                        if '%s/%s' % (img_dir, os.path.basename(img_fn)) != to_fn:
+                            os.rename('%s/%s' % (img_dir, os.path.basename(img_fn)), to_fn)
+                    except:
+                        print("File not exists:", '%s/%s' % (img_dir, os.path.basename(img_fn)))
+
+                print(fn_p.sub(r'\1%s\3' % ('.' + to_fn), line.strip()))
+                lines += [fn_p.sub(r'\1%s\3' % ('.' + to_fn), line.strip())]
+            else:
+                lines += [line.strip()]
+        else:
+            lines += ['']
+
+    f.close()
+
+    f = open(fn, 'w')
+
+    f.write('\n'.join(lines) + '\n')
+    #print('\n'.join(lines) + '\n')
 
     f.close()
 

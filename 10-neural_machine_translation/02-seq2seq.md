@@ -6,19 +6,19 @@
 
 $$\hat{\theta}=\underset{\theta}{\text{argmax }}P(Y|X;\theta)\text{ where }=\{x_1,x_2,\cdots,x_n\},~Y=\{y_1,y_2,\cdots,y_m\}$$
 
- $P(Y|X;\theta)$ 를 최대로 하는 모델 파라미터를 찾는 작업 입니다. 이렇게 파라미터에 대한 학습이 완료되면, 사후확률을 최대로 하는 $ Y$를 찾아야 합니다.
+$P(Y|X;\theta)$ 를 최대로 하는 모델 파라미터를 찾는 작업 입니다. 이렇게 파라미터에 대한 학습이 완료되면, 사후확률을 최대로 하는 $ Y$를 찾아야 합니다.
 
 $$\hat{Y}=\underset{Y\in\mathcal{Y}}{\text{argmax }}P(Y|X;\theta)$$
 
 이를 위해서 sequence-to-sequence는 크게 3개의 서브 모듈(인코더, 디코더, 제너레이터)로 구성되어 있습니다.
 
-![3개의 구성요소로 이루어진 기본적인 Sequence-to-Sequence 구조](../assets/nmt-seq2seq-architecture.png)
+![3개의 구성요소로 이루어진 기본적인 Sequence-to-Sequence 구조](../assets/10-02-01.png)
 
 ### 인코더 (Encoder)
 
 인코더는 주어진 소스(source) 문장을 입력으로 받아 문장을 함축하는 문장 임베딩 벡터(sentence embedding vector)로 만들어 냅니다. $P(\text{z}|X)$ 를 모델링 하는 것이라고 볼 수 있습니다. 사실 새로운 형태라기 보단, 이전 챕터에서 다루었던 텍스트 분류(Text Classificaion)에서 사용되었던 RNN 모델과 거의 같다고 볼 수 있습니다. $P(\text{z}|X)$ 를 모델링하여, 주어진 문장을 차원축소(dimension reduction)하여 해당 도메인의 latent 공간(매니폴드)의 어떤 한 점에 투영하는 작업 입니다.
 
-![인코더의 문장 임베딩](../assets/nmt-enc-sent-proj.png)
+![인코더의 문장 임베딩](../assets/10-02-02.png)
 
 다만 기존의 텍스트 분류 문제에서는 모든 정보가 필요하지 않기 때문에 <comment> 예를들어 감성분석(Sentiment Analysis)에서는 "나는"과 같이 중립적인 단어는 감성을 분류하는데 필요하지 않기 때문에 해당 정보를 굳이 간직해야 하지 않을 수도 있습니다. </comment> 벡터로 만들어내는 과정에서 많은 정보를 간직하지 않아도 되지만, 기계번역을 위한 문장 임베딩 벡터를 생성하기 위해서는 최대한 많은 정보를 간직해야 할 것 입니다.
 
@@ -47,7 +47,7 @@ h_{t}^{\text{tgt}} = \text{RNN}_{dec}(\text{emb}_{\text{tgt}}(y_{t-1}), h_{t-1}^
 \text{ where }h_{0}^{\text{tgt}}=h_{n}^{\text{src}}\text{ and }y_{0}=\text{BOS}.
 \end{gathered}$$
 
-위 수식은 디코더를 나타낸 것입니다. 특기할 점은 뉴럴 네크워크 언어모델과 같이 디코더 입력의 초기값으로써, $y_0$ 에 BOS 토큰을 입력으로 준다는 것 입니다. 
+위 수식은 디코더를 나타낸 것입니다. 특기할 점은 뉴럴 네크워크 언어모델과 같이 디코더 입력의 초기값으로써, $y_0$ 에 BOS 토큰을 입력으로 준다는 것 입니다.
 
 ### 제너레이터 (Generator)
 
@@ -102,47 +102,47 @@ $$\begin{gathered}
 ```python
 class Encoder(nn.Module):
 
-    def __init__(self, word_vec_dim, hidden_size, n_layers=4, dropout_p=.2):
-        super(Encoder, self).__init__()
+def __init__(self, word_vec_dim, hidden_size, n_layers=4, dropout_p=.2):
+super(Encoder, self).__init__()
 
-        # Be aware of value of 'batch_first' parameter.
-        # Also, its hidden_size is half of original hidden_size, because it is bidirectional.
-        self.rnn = nn.LSTM(word_vec_dim,
-                           int(hidden_size / 2),
-                           num_layers=n_layers,
-                           dropout=dropout_p,
-                           bidirectional=True,
-                           batch_first=True
-                           )
+# Be aware of value of 'batch_first' parameter.
+# Also, its hidden_size is half of original hidden_size, because it is bidirectional.
+self.rnn = nn.LSTM(word_vec_dim,
+int(hidden_size / 2),
+num_layers=n_layers,
+dropout=dropout_p,
+bidirectional=True,
+batch_first=True
+)
 
-    def forward(self, emb):
-        # |emb| = (batch_size, length, word_vec_dim)
+def forward(self, emb):
+# |emb| = (batch_size, length, word_vec_dim)
 
-        if isinstance(emb, tuple):
-            x, lengths = emb
-            x = pack(x, lengths.tolist(), batch_first=True)
+if isinstance(emb, tuple):
+x, lengths = emb
+x = pack(x, lengths.tolist(), batch_first=True)
 
-            # Below is how pack_padded_sequence works.
-            # As you can see, PackedSequence object has information about mini-batch-wise information, not time-step-wise information.
-            # 
-            # a = [torch.tensor([1,2,3]), torch.tensor([3,4])]
-            # b = torch.nn.utils.rnn.pad_sequence(a, batch_first=True)
-            # >>>>
-            # tensor([[ 1,  2,  3],
-            #     [ 3,  4,  0]])
-            # torch.nn.utils.rnn.pack_padded_sequence(b, batch_first=True, lengths=[3,2]
-            # >>>>PackedSequence(data=tensor([ 1,  3,  2,  4,  3]), batch_sizes=tensor([ 2,  2,  1]))
-        else:
-            x = emb
+# Below is how pack_padded_sequence works.
+# As you can see, PackedSequence object has information about mini-batch-wise information, not time-step-wise information.
+#
+# a = [torch.tensor([1,2,3]), torch.tensor([3,4])]
+# b = torch.nn.utils.rnn.pad_sequence(a, batch_first=True)
+# >>>>
+# tensor([[ 1,  2,  3],
+#     [ 3,  4,  0]])
+# torch.nn.utils.rnn.pack_padded_sequence(b, batch_first=True, lengths=[3,2]
+# >>>>PackedSequence(data=tensor([ 1,  3,  2,  4,  3]), batch_sizes=tensor([ 2,  2,  1]))
+else:
+x = emb
 
-        y, h = self.rnn(x)
-        # |y| = (batch_size, length, hidden_size)
-        # |h[0]| = (num_layers * 2, batch_size, hidden_size / 2)
+y, h = self.rnn(x)
+# |y| = (batch_size, length, hidden_size)
+# |h[0]| = (num_layers * 2, batch_size, hidden_size / 2)
 
-        if isinstance(emb, tuple):
-            y, _ = unpack(y, batch_first=True)
+if isinstance(emb, tuple):
+y, _ = unpack(y, batch_first=True)
 
-        return y, h
+return y, h
 ```
 
 #### Pack Padded Sequence
@@ -150,13 +150,13 @@ class Encoder(nn.Module):
 아래는 pack_padded_sequence 함수가 동작하는 모습 입니다. 이 함수는 기존의 샘플 별 미니배치(mini-batch)를 time-step 별로 표현 해 줍니다. PackedSequence로 표현된 time-step별 미니배치는 각 time-step별 샘플의 숫자를 추가적인 정보로 갖고 있습니다. 따라서, 이를 위해서는 미니배치 내에는 가장 긴 길이의 문장부터 차례대로 정렬되어 있어야 합니다.
 
 ```python
-    a = [torch.tensor([1, 2, 3]), torch.tensor([3, 4])]
-    b = torch.nn.utils.rnn.pad_sequence(a, batch_first=True)
-    >>>>
-    tensor([[ 1,  2,  3],
-            [ 3,  4,  0]])
-    torch.nn.utils.rnn.pack_padded_sequence(b, batch_first=True, lengths=[3, 2]
-    >>>>PackedSequence(data=tensor([ 1,  3,  2,  4,  3]), batch_sizes=tensor([ 2,  2,  1]))
+a = [torch.tensor([1, 2, 3]), torch.tensor([3, 4])]
+b = torch.nn.utils.rnn.pad_sequence(a, batch_first=True)
+>>>>
+tensor([[ 1,  2,  3],
+[ 3,  4,  0]])
+torch.nn.utils.rnn.pack_padded_sequence(b, batch_first=True, lengths=[3, 2]
+>>>>PackedSequence(data=tensor([ 1,  3,  2,  4,  3]), batch_sizes=tensor([ 2,  2,  1]))
 ```
 
 ### 디코터 클래스
@@ -168,20 +168,20 @@ class Encoder(nn.Module):
 ```python
 class Generator(nn.Module):
 
-    def __init__(self, hidden_size, output_size):
-        super(Generator, self).__init__()
+def __init__(self, hidden_size, output_size):
+super(Generator, self).__init__()
 
-        self.output = nn.Linear(hidden_size, output_size)
-        self.softmax = nn.LogSoftmax(dim=-1)
+self.output = nn.Linear(hidden_size, output_size)
+self.softmax = nn.LogSoftmax(dim=-1)
 
-    def forward(self, x):
-        # |x| = (batch_size, length, hidden_size)
+def forward(self, x):
+# |x| = (batch_size, length, hidden_size)
 
-        y = self.softmax(self.output(x))
-        # |y| = (batch_size, length, output_size)
+y = self.softmax(self.output(x))
+# |y| = (batch_size, length, output_size)
 
-        # Return log-probability instead of just probability.
-        return y
+# Return log-probability instead of just probability.
+return y
 ```
 
 ### 전체 sequence-to-sequence 클래스
@@ -195,26 +195,26 @@ sequence-to-sequence는 기본적으로 각 time-step 별로 가장 확률이 �
 아래는 손실값을 계산하기 위해 파이토치로부터 손실 함수를 준비하는 모습입니다. 사실 실제 구현할 때에는 "softmax 레이어 + [cross entropy](https://pytorch.org/docs/stable/nn.html?highlight=crossentropyloss#torch.nn.CrossEntropyLoss)"를 사용하기보단, "log softmax layer + [negative log likelihood](https://pytorch.org/docs/stable/nn.html?highlight=nll#torch.nn.NLLLoss)"를 사용합니다. <comment> 크로스 엔트로피와 negative 로그 라이클리후드에 관계에 대한 내용은 이전 기초 수학 챕터를 참고하세요. </comment>
 
 ```python
-        # Default weight for loss equals to 1, but we don't need to get loss for PAD token.
-        # Thus, set a weight for PAD to zero.
-        loss_weight = torch.ones(output_size)
-        loss_weight[data_loader.PAD] = 0.
-        # Instead of using Cross-Entropy loss, we can use Negative Log-Likelihood(NLL) loss with log-probability.
-        crit = nn.NLLLoss(weight=loss_weight, 
-                          reduction='sum'
-                          )
+# Default weight for loss equals to 1, but we don't need to get loss for PAD token.
+# Thus, set a weight for PAD to zero.
+loss_weight = torch.ones(output_size)
+loss_weight[data_loader.PAD] = 0.
+# Instead of using Cross-Entropy loss, we can use Negative Log-Likelihood(NLL) loss with log-probability.
+crit = nn.NLLLoss(weight=loss_weight,
+reduction='sum'
+)
 ```
 
 따라서 softmax 레이어를 사용하는 대신에, log-softmax 레이어를 사용하여 로그 확률(log probability)을 구하고, 수식의 나머지 작업을 수행하면 됩니다.
 
 ```python
-    def _get_loss(self, y_hat, y, crit=None):
-        # |y_hat| = (batch_size, length, output_size)
-        # |y| = (batch_size, length)
-        crit = self.crit if crit is None else crit
-        loss = crit(y_hat.contiguous().view(-1, y_hat.size(-1)),
-                    y.contiguous().view(-1)
-                    )
+def _get_loss(self, y_hat, y, crit=None):
+# |y_hat| = (batch_size, length, output_size)
+# |y| = (batch_size, length)
+crit = self.crit if crit is None else crit
+loss = crit(y_hat.contiguous().view(-1, y_hat.size(-1)),
+y.contiguous().view(-1)
+)
 
-        return loss
+return loss
 ```

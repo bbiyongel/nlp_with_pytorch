@@ -19,11 +19,11 @@
 
 자연어처리 분야에서의 전처리는 목적에 따라 약간씩 다르지만 대체로 아래와 같이 비슷한 과정을 지니고 있습니다. 이번 챕터에서는 이러한 과정에 대해서 다루고 넘어갈 것입니다.
 
-![전처리 과정 개요도](../assets/preproc-overview.png)
+![전처리 과정 개요도](../assets/04-01-01.png)
 
 1. 코퍼스(corpus) 수집
 1. 코퍼스(corpus) 정제(normalization)
-    1. 정제(cleaning)
-    1. 문장 단위 분절(Sentence Tokenization)
-    1. 분절(Tokenization)
-    1. 서브워드 분절(Subword segmentation)
+1. 정제(cleaning)
+1. 문장 단위 분절(Sentence Tokenization)
+1. 분절(Tokenization)
+1. 서브워드 분절(Subword segmentation)

@@ -9,6 +9,6 @@ n_t &= \tanh(W_{in} x_t + b_{in} + r_t (W_{hn} h_{(t-1)}+ b_{hn})) \\
 h_t &= (1 - z_t) n_t + z_t h_{(t-1)} \\
 \end{aligned}$$
 
-![GRU의 구조](../assets/rnn-gru-architecture.png)
+![GRU의 구조](../assets/07-04-01.png)
 
 사실 LSTM 대비 GRU는 더 가벼운 몸집을 자랑하지만, 아직까지는 LSTM을 사용하는 빈도가 더 높은 것이 사실이긴 합니다. 사실 특별히 성능의 차이가 있다고 하기보단, LSTM과 GRU의 러닝 레이트(learning-rate)나 히든 스테이트의 크기 (hidden size)등의 하이퍼 파라미터(hyper-parameter)가 다르므로, 사용 모델에 따라서 다시 파라미터 셋팅을 찾아내야 합니다. 따라서 연구자의 관성에 따라 사용 경향이 달라지는 것 같습니다.

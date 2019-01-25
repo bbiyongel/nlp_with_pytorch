@@ -21,7 +21,7 @@ NNLM은 다양한 형태를 가질 수 있지만 우리는 가장 효율적이�
 
 ## Recurrent Neural Network 언어모델
 
-![Recurrent Neural 언어모델 구조](../assets/rnn_lm_architecture.png)
+![Recurrent Neural 언어모델 구조](../assets/09-05-01.png)
 
 Recurrent Neural Network 언어모델(RNNLM)은 위와 같은 구조를 지니고 있습니다. 기존의 언어모델은 각각의 단어를 descrete한 데이터로 취급하였기 때문에, 단어 시퀀스(word sequence)의 길이가 길어지면 희소성(sparseness)문제가 발생하여 어려움을 겪었습니다. 따라서 마코프 가정을 통해 $n-1$ 이전까지의 단어만 (주로 $n=3$ ) 조건부로 사용하여 확률을 근사(approximation) 하였습니다. 하지만 RNNLM은 단어 임베딩을 통해 dense 벡터로 만듦으로써, 희소성 문제를 해소하였기 때문에, 문장의 첫 단어부터 해당 단어 직전의 단어까지 모두 조건부에 넣어 확률을 근사 할 수 있습니다.
 
@@ -97,81 +97,81 @@ import data_loader
 
 class LanguageModel(nn.Module):
 
-    def __init__(self, 
-                 vocab_size,
-                 word_vec_dim=512,
-                 hidden_size=512,
-                 n_layers=4,
-                 dropout_p=.2,
-                 max_length=255
-                 ):
-        self.vocab_size = vocab_size
-        self.word_vec_dim = word_vec_dim
-        self.hidden_size = hidden_size
-        self.n_layers = n_layers
-        self.dropout_p = dropout_p
-        self.max_length = max_length
+def __init__(self,
+vocab_size,
+word_vec_dim=512,
+hidden_size=512,
+n_layers=4,
+dropout_p=.2,
+max_length=255
+):
+self.vocab_size = vocab_size
+self.word_vec_dim = word_vec_dim
+self.hidden_size = hidden_size
+self.n_layers = n_layers
+self.dropout_p = dropout_p
+self.max_length = max_length
 
-        super(LanguageModel, self).__init__()
+super(LanguageModel, self).__init__()
 
-        self.emb = nn.Embedding(vocab_size, 
-                                word_vec_dim,
-                                padding_idx=data_loader.PAD
-                                )
-        self.rnn = nn.LSTM(word_vec_dim,
-                           hidden_size,
-                           n_layers,
-                           batch_first=True,
-                           dropout=dropout_p
-                           )
-        self.out = nn.Linear(hidden_size, vocab_size, bias=True)
-        self.log_softmax = nn.LogSoftmax(dim=2)
+self.emb = nn.Embedding(vocab_size,
+word_vec_dim,
+padding_idx=data_loader.PAD
+)
+self.rnn = nn.LSTM(word_vec_dim,
+hidden_size,
+n_layers,
+batch_first=True,
+dropout=dropout_p
+)
+self.out = nn.Linear(hidden_size, vocab_size, bias=True)
+self.log_softmax = nn.LogSoftmax(dim=2)
 
-    def forward(self, x):
-        # |x| = (batch_size, length)
-        x = self.emb(x) 
-        # |x| = (batch_size, length, word_vec_dim)
-        x, (h, c) = self.rnn(x) 
-        # |x| = (batch_size, length, hidden_size)
-        x = self.out(x) 
-        # |x| = (batch_size, length, vocab_size)
-        y_hat = self.log_softmax(x)
+def forward(self, x):
+# |x| = (batch_size, length)
+x = self.emb(x)
+# |x| = (batch_size, length, word_vec_dim)
+x, (h, c) = self.rnn(x)
+# |x| = (batch_size, length, hidden_size)
+x = self.out(x)
+# |x| = (batch_size, length, vocab_size)
+y_hat = self.log_softmax(x)
 
-        return y_hat
+return y_hat
 
-    def search(self, batch_size=64, max_length=255):
-        x = torch.LongTensor(batch_size, 1).to(next(self.parameters()).device).zero_() + data_loader.BOS
-        # |x| = (batch_size, 1)
-        is_undone = x.new_ones(batch_size, 1).float()
+def search(self, batch_size=64, max_length=255):
+x = torch.LongTensor(batch_size, 1).to(next(self.parameters()).device).zero_() + data_loader.BOS
+# |x| = (batch_size, 1)
+is_undone = x.new_ones(batch_size, 1).float()
 
-        y_hats, indice = [], []
-        h, c = None, None
-        while is_undone.sum() > 0 and len(indice) < max_length:
-            x = self.emb(x)
-            # |emb_t| = (batch_size, 1, word_vec_dim)
+y_hats, indice = [], []
+h, c = None, None
+while is_undone.sum() > 0 and len(indice) < max_length:
+x = self.emb(x)
+# |emb_t| = (batch_size, 1, word_vec_dim)
 
-            x, (h, c) = self.rnn(x, (h, c)) if h is not None and c is not None else self.rnn(x)
-            # |x| = (batch_size, 1, hidden_size)
-            y_hat = self.log_softmax(x)
-            # |y_hat| = (batch_size, 1, output_size)
-            y_hats += [y_hat]
+x, (h, c) = self.rnn(x, (h, c)) if h is not None and c is not None else self.rnn(x)
+# |x| = (batch_size, 1, hidden_size)
+y_hat = self.log_softmax(x)
+# |y_hat| = (batch_size, 1, output_size)
+y_hats += [y_hat]
 
-            # y = torch.topk(y_hat, 1, dim = -1)[1].squeeze(-1)
-            y = torch.multinomial(y_hat.exp().view(batch_size, -1), 1)
-            y = y.masked_fill_((1. - is_undone).byte(), data_loader.PAD)
-            is_undone = is_undone * torch.ne(y, data_loader.EOS).float()            
-            # |y| = (batch_size, 1)
-            # |is_undone| = (batch_size, 1)
-            indice += [y]
+# y = torch.topk(y_hat, 1, dim = -1)[1].squeeze(-1)
+y = torch.multinomial(y_hat.exp().view(batch_size, -1), 1)
+y = y.masked_fill_((1. - is_undone).byte(), data_loader.PAD)
+is_undone = is_undone * torch.ne(y, data_loader.EOS).float()
+# |y| = (batch_size, 1)
+# |is_undone| = (batch_size, 1)
+indice += [y]
 
-            x = y
+x = y
 
-        y_hats = torch.cat(y_hats, dim=1)
-        indice = torch.cat(indice, dim=-1)
-        # |y_hat| = (batch_size, length, output_size)
-        # |indice| = (batch_size, length)
+y_hats = torch.cat(y_hats, dim=1)
+indice = torch.cat(indice, dim=-1)
+# |y_hat| = (batch_size, length, output_size)
+# |indice| = (batch_size, length)
 
-        return y_hats, indice
+return y_hats, indice
 ```
 
 ## 결론

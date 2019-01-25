@@ -46,7 +46,7 @@ $$\begin{aligned}
 |DSL|Dual Supervised Learning|34.84|
 
 <!--
-![](../assets/duality-dsl-eval.png)
+![](../assets/13-02-01.png)
 -->
 
 위의 테이블과 같이 기존의 Teacher Forcing 아래의 MLE 방식([1]번)과 Minimum Risk Training(MRT) 방식([2]번) 보다 더 높은 성능을 보입니다. 이 방법은 강화학습과 같이 비효율적이고 훈련이 까다로운 방식을 벗어나서 regularization term을 추가하여 강화학습을 상회하는 성능을 얻어낸 것이 주목할 점이라고 할 수 있습니다.
@@ -70,203 +70,203 @@ X2Y, Y2X = 0, 1
 
 ```python
 def _reordering(self, x, y, l):
-    # This method is one of important methods in this class.
-    # Since encoder takes packed_sequence instance,
-    # the samples in mini-batch must be sorted by lengths.
-    # Thus, we need to re-order the samples in mini-batch, if src and tgt is reversed.
-    # (Because originally src and tgt are sorted by the length of samples in src.)
+# This method is one of important methods in this class.
+# Since encoder takes packed_sequence instance,
+# the samples in mini-batch must be sorted by lengths.
+# Thus, we need to re-order the samples in mini-batch, if src and tgt is reversed.
+# (Because originally src and tgt are sorted by the length of samples in src.)
 
-    # sort by length.
-    indice = l.topk(l.size(0))[1]
+# sort by length.
+indice = l.topk(l.size(0))[1]
 
-    # re-order based on the indice.
-    x_ = x.index_select(dim=0, index=indice).contiguous()
-    y_ = y.index_select(dim=0, index=indice).contiguous()
-    l_ = l.index_select(dim=0, index=indice).contiguous()
+# re-order based on the indice.
+x_ = x.index_select(dim=0, index=indice).contiguous()
+y_ = y.index_select(dim=0, index=indice).contiguous()
+l_ = l.index_select(dim=0, index=indice).contiguous()
 
-    # generate information to restore the re-ordering.
-    restore_indice = (-indice).topk(l.size(0))[1]
+# generate information to restore the re-ordering.
+restore_indice = (-indice).topk(l.size(0))[1]
 
-    return x_, y_, l_, restore_indice
+return x_, y_, l_, restore_indice
 ```
 
 두 모델 $\theta_{\text{x}\rightarrow\text{y}}$ 와 $\theta_{\text{y}\rightarrow\text{x}}$ 에 대해서 피드 포워드를 수행한 후, 정답과 비교하여 각 모델별 손실값을 구하는 작업을 수행하는 함수 입니다. 이때, 미리 훈련을 마친 언어모델들을 통해서 추론한 값들 x_lm과 y_lm 역시 함수에 주어져야 합니다. 각 모델들을 훈련하기 위한 손실값을 계산할 때, 다른 방향의 모델에서 나온 값은 detach() 함수를 통해 그래디언트를 계산하지 않도록 끊어주는 모습을 주목하기 바랍니다.
 
 ```python
-    def _get_loss(self, x, y, x_hat, y_hat, x_lm=None, y_lm=None, lagrange=1e-3):
-        # |x| = (batch_size, length0)
-        # |y| = (batch_size, length1)
-        # |x_hat| = (batch_size, length0, output_size0)
-        # |y_hat| = (batch_size, length1, output_size1)
-        # |x_lm| = |x_hat|
-        # |y_lm| = |y_hat|
+def _get_loss(self, x, y, x_hat, y_hat, x_lm=None, y_lm=None, lagrange=1e-3):
+# |x| = (batch_size, length0)
+# |y| = (batch_size, length1)
+# |x_hat| = (batch_size, length0, output_size0)
+# |y_hat| = (batch_size, length1, output_size1)
+# |x_lm| = |x_hat|
+# |y_lm| = |y_hat|
 
-        losses = []
-        losses += [self.crits[X2Y](y_hat.contiguous().view(-1, y_hat.size(-1)),
-                                   y.contiguous().view(-1)
-                                   )]
-        losses += [self.crits[Y2X](x_hat.contiguous().view(-1, x_hat.size(-1)),
-                                   x.contiguous().view(-1)
-                                   )]
-        # |losses[X2Y]| = (batch_size * length1)
-        # |losses[Y2X]| = (batch_size * length0)
+losses = []
+losses += [self.crits[X2Y](y_hat.contiguous().view(-1, y_hat.size(-1)),
+y.contiguous().view(-1)
+)]
+losses += [self.crits[Y2X](x_hat.contiguous().view(-1, x_hat.size(-1)),
+x.contiguous().view(-1)
+)]
+# |losses[X2Y]| = (batch_size * length1)
+# |losses[Y2X]| = (batch_size * length0)
 
-        losses[X2Y] = losses[X2Y].view(y.size(0), -1).sum(dim=-1)
-        losses[Y2X] = losses[Y2X].view(x.size(0), -1).sum(dim=-1)
-        # |losses[X2Y]| = (batch_size)
-        # |losses[Y2X]| = (batch_size)
+losses[X2Y] = losses[X2Y].view(y.size(0), -1).sum(dim=-1)
+losses[Y2X] = losses[Y2X].view(x.size(0), -1).sum(dim=-1)
+# |losses[X2Y]| = (batch_size)
+# |losses[Y2X]| = (batch_size)
 
-        if x_lm is not None and y_lm is not None:
-            lm_losses = []
-            lm_losses += [self.crits[X2Y](y_lm.contiguous().view(-1, y_lm.size(-1)),
-                                          y.contiguous().view(-1)
-                                          )]
-            lm_losses += [self.crits[Y2X](x_lm.contiguous().view(-1, x_lm.size(-1)),
-                                          x.contiguous().view(-1)
-                                          )]
-            # |lm_losses[X2Y]| = (batch_size * length1)
-            # |lm_losses[Y2X]| = (batch_size * length0)
+if x_lm is not None and y_lm is not None:
+lm_losses = []
+lm_losses += [self.crits[X2Y](y_lm.contiguous().view(-1, y_lm.size(-1)),
+y.contiguous().view(-1)
+)]
+lm_losses += [self.crits[Y2X](x_lm.contiguous().view(-1, x_lm.size(-1)),
+x.contiguous().view(-1)
+)]
+# |lm_losses[X2Y]| = (batch_size * length1)
+# |lm_losses[Y2X]| = (batch_size * length0)
 
-            lm_losses[X2Y] = lm_losses[X2Y].view(y.size(0), -1).sum(dim=-1)
-            lm_losses[Y2X] = lm_losses[Y2X].view(x.size(0), -1).sum(dim=-1)
-            # |lm_losses[X2Y]| = (batch_size)
-            # |lm_losses[Y2X]| = (batch_size)
+lm_losses[X2Y] = lm_losses[X2Y].view(y.size(0), -1).sum(dim=-1)
+lm_losses[Y2X] = lm_losses[Y2X].view(x.size(0), -1).sum(dim=-1)
+# |lm_losses[X2Y]| = (batch_size)
+# |lm_losses[Y2X]| = (batch_size)
 
-            # just for information
-            dual_loss = lagrange * ((-lm_losses[Y2X] + -losses[X2Y].detach()) - (-lm_losses[X2Y] + -losses[Y2X].detach()))**2
+# just for information
+dual_loss = lagrange * ((-lm_losses[Y2X] + -losses[X2Y].detach()) - (-lm_losses[X2Y] + -losses[Y2X].detach()))**2
 
-            # Note that 'detach()' is following the loss for another direction.
-            dual_loss_x2y = lagrange * ((-lm_losses[Y2X] + -losses[X2Y]) - (-lm_losses[X2Y] + -losses[Y2X].detach()))**2
-            dual_loss_y2x = lagrange * ((-lm_losses[Y2X] + -losses[X2Y].detach()) - (-lm_losses[X2Y] + -losses[Y2X]))**2
+# Note that 'detach()' is following the loss for another direction.
+dual_loss_x2y = lagrange * ((-lm_losses[Y2X] + -losses[X2Y]) - (-lm_losses[X2Y] + -losses[Y2X].detach()))**2
+dual_loss_y2x = lagrange * ((-lm_losses[Y2X] + -losses[X2Y].detach()) - (-lm_losses[X2Y] + -losses[Y2X]))**2
 
-            losses[X2Y] += dual_loss_x2y
-            losses[Y2X] += dual_loss_y2x
+losses[X2Y] += dual_loss_x2y
+losses[Y2X] += dual_loss_y2x
 
-        if x_lm is not None and y_lm is not None:
-            return losses[X2Y].sum(), losses[Y2X].sum(), dual_loss.sum()
-        else:
-            return losses[X2Y].sum(), losses[Y2X].sum(), None
+if x_lm is not None and y_lm is not None:
+return losses[X2Y].sum(), losses[Y2X].sum(), dual_loss.sum()
+else:
+return losses[X2Y].sum(), losses[Y2X].sum(), None
 ```
 
 위에서 선언된 함수들을 활용하여 1 epoch에 대해서 훈련을 수행하는 함수 입니다.
 
 ```python
 def train_epoch(self,
-                train,
-                optimizers,
-                no_regularization=True,
-                verbose=VERBOSE_BATCH_WISE
-                ):
-    '''
-    Train an epoch with given train iterator and optimizers.
-    '''
-    total_loss, total_word_count = 0, 0
-    total_grad_norm = 0
-    avg_loss, avg_grad_norm = 0, 0
-    sample_cnt = 0
+train,
+optimizers,
+no_regularization=True,
+verbose=VERBOSE_BATCH_WISE
+):
+'''
+Train an epoch with given train iterator and optimizers.
+'''
+total_loss, total_word_count = 0, 0
+total_grad_norm = 0
+avg_loss, avg_grad_norm = 0, 0
+sample_cnt = 0
 
-    progress_bar = tqdm(train,
-                        desc='Training: ',
-                        unit='batch'
-                        ) if verbose is VERBOSE_BATCH_WISE else train
-    # Iterate whole train-set.
-    for idx, mini_batch in enumerate(progress_bar):
-        # Raw target variable has both BOS and EOS token. 
-        # The output of sequence-to-sequence does not have BOS token. 
-        # Thus, remove BOS token for reference.
+progress_bar = tqdm(train,
+desc='Training: ',
+unit='batch'
+) if verbose is VERBOSE_BATCH_WISE else train
+# Iterate whole train-set.
+for idx, mini_batch in enumerate(progress_bar):
+# Raw target variable has both BOS and EOS token.
+# The output of sequence-to-sequence does not have BOS token.
+# Thus, remove BOS token for reference.
 
-        # You have to reset the gradients of all model parameters before to take another step in gradient descent.
-        optimizers[X2Y].zero_grad()
-        optimizers[Y2X].zero_grad()
+# You have to reset the gradients of all model parameters before to take another step in gradient descent.
+optimizers[X2Y].zero_grad()
+optimizers[Y2X].zero_grad()
 
-        x_0, y_0 = (mini_batch.src[0][:, 1:-1],  # Remove BOS and EOS
-                    mini_batch.src[1] - 2
-                    ), mini_batch.tgt[0][:, :-1]
-        # |x_0| = (batch_size, length0)
-        # |y_0| = (batch_size, length1)
-        y_hat = self.models[X2Y](x_0, y_0)
-        # |y_hat| = (batch_size, length1, output_size1)
-        with torch.no_grad():
-            y_lm = self.language_models[X2Y](y_0)
-            # |y_lm| = |y_hat|
+x_0, y_0 = (mini_batch.src[0][:, 1:-1],  # Remove BOS and EOS
+mini_batch.src[1] - 2
+), mini_batch.tgt[0][:, :-1]
+# |x_0| = (batch_size, length0)
+# |y_0| = (batch_size, length1)
+y_hat = self.models[X2Y](x_0, y_0)
+# |y_hat| = (batch_size, length1, output_size1)
+with torch.no_grad():
+y_lm = self.language_models[X2Y](y_0)
+# |y_lm| = |y_hat|
 
-        # Since encoder in seq2seq takes packed_sequence instance,
-        # we need to re-sort if we use reversed src and tgt.
-        x_0, y_0_0, y_0_1, restore_indice = self._reordering(mini_batch.src[0][:, :-1],
-                                                                mini_batch.tgt[0][:, 1:-1], # Remove BOS and EOS
-                                                                mini_batch.tgt[1] - 2
-                                                                )
-        y_0 = (y_0_0, y_0_1)
-        # |x_0| = (batch_size, length0)
-        # |y_0| = (batch_size, length1)
-        x_hat = self.models[Y2X](y_0, x_0).index_select(dim=0, index=restore_indice)
-        # |x_hat| = (batch_size, length0, output_size0)
+# Since encoder in seq2seq takes packed_sequence instance,
+# we need to re-sort if we use reversed src and tgt.
+x_0, y_0_0, y_0_1, restore_indice = self._reordering(mini_batch.src[0][:, :-1],
+mini_batch.tgt[0][:, 1:-1], # Remove BOS and EOS
+mini_batch.tgt[1] - 2
+)
+y_0 = (y_0_0, y_0_1)
+# |x_0| = (batch_size, length0)
+# |y_0| = (batch_size, length1)
+x_hat = self.models[Y2X](y_0, x_0).index_select(dim=0, index=restore_indice)
+# |x_hat| = (batch_size, length0, output_size0)
 
-        with torch.no_grad():
-            x_lm = self.language_models[Y2X](x_0)
-            # |x_lm| = |x_hat|
+with torch.no_grad():
+x_lm = self.language_models[Y2X](x_0)
+# |x_lm| = |x_hat|
 
-        x, y = mini_batch.src[0][:, 1:], mini_batch.tgt[0][:, 1:]
-        losses = self._get_loss(x,
-                                y,
-                                x_hat,
-                                y_hat,
-                                x_lm,
-                                y_lm,
-                                # According to the paper, DSL should be warm-started.
-                                # Thus, we turn-off the regularization at the beginning.
-                                lagrange=self.config.dsl_lambda if not no_regularization else .0
-                                )
+x, y = mini_batch.src[0][:, 1:], mini_batch.tgt[0][:, 1:]
+losses = self._get_loss(x,
+y,
+x_hat,
+y_hat,
+x_lm,
+y_lm,
+# According to the paper, DSL should be warm-started.
+# Thus, we turn-off the regularization at the beginning.
+lagrange=self.config.dsl_lambda if not no_regularization else .0
+)
 
-        losses[X2Y].div(y.size(0)).backward()
-        losses[Y2X].div(x.size(0)).backward()
+losses[X2Y].div(y.size(0)).backward()
+losses[Y2X].div(x.size(0)).backward()
 
-        word_count = int((mini_batch.src[1].detach().sum()) + 
-                            (mini_batch.tgt[1].detach().sum())
-                            )
-        loss = float(losses[X2Y].detach() + losses[Y2X].detach()) - float(losses[-1].detach() * 2)
-        param_norm = float(utils.get_parameter_norm(self.models[X2Y].parameters()).detach() + 
-                            utils.get_parameter_norm(self.models[Y2X].parameters()).detach()
-                            )
-        grad_norm = float(utils.get_grad_norm(self.models[X2Y].parameters()).detach() +
-                            utils.get_grad_norm(self.models[Y2X].parameters()).detach()
-                            )  
+word_count = int((mini_batch.src[1].detach().sum()) +
+(mini_batch.tgt[1].detach().sum())
+)
+loss = float(losses[X2Y].detach() + losses[Y2X].detach()) - float(losses[-1].detach() * 2)
+param_norm = float(utils.get_parameter_norm(self.models[X2Y].parameters()).detach() +
+utils.get_parameter_norm(self.models[Y2X].parameters()).detach()
+)
+grad_norm = float(utils.get_grad_norm(self.models[X2Y].parameters()).detach() +
+utils.get_grad_norm(self.models[Y2X].parameters()).detach()
+)
 
-        total_loss += loss
-        total_word_count += word_count
-        total_grad_norm += grad_norm
+total_loss += loss
+total_word_count += word_count
+total_grad_norm += grad_norm
 
-        avg_loss = total_loss / total_word_count
-        avg_grad_norm = total_grad_norm / (idx + 1)
+avg_loss = total_loss / total_word_count
+avg_grad_norm = total_grad_norm / (idx + 1)
 
-        if verbose is VERBOSE_BATCH_WISE:
-            progress_bar.set_postfix_str('|param|=%.2f |g_param|=%.2f loss=%.4e PPL=%.2f' % (param_norm,
-                                                                                                grad_norm,
-                                                                                                loss / word_count,
-                                                                                                exp(avg_loss)
-                                                                                                ))
+if verbose is VERBOSE_BATCH_WISE:
+progress_bar.set_postfix_str('|param|=%.2f |g_param|=%.2f loss=%.4e PPL=%.2f' % (param_norm,
+grad_norm,
+loss / word_count,
+exp(avg_loss)
+))
 
-        # In orther to avoid gradient exploding, we apply gradient clipping.
-        torch_utils.clip_grad_norm_(self.models[X2Y].parameters(),
-                                    self.config.max_grad_norm
-                                    )
-        torch_utils.clip_grad_norm_(self.models[Y2X].parameters(),
-                                    self.config.max_grad_norm
-                                    )
+# In orther to avoid gradient exploding, we apply gradient clipping.
+torch_utils.clip_grad_norm_(self.models[X2Y].parameters(),
+self.config.max_grad_norm
+)
+torch_utils.clip_grad_norm_(self.models[Y2X].parameters(),
+self.config.max_grad_norm
+)
 
-        # Take a step of gradient descent.
-        optimizers[X2Y].step()
-        optimizers[Y2X].step()
+# Take a step of gradient descent.
+optimizers[X2Y].step()
+optimizers[Y2X].step()
 
-        sample_cnt += mini_batch.tgt[0].size(0)
+sample_cnt += mini_batch.tgt[0].size(0)
 
-        if idx >= len(progress_bar) * self.config.train_ratio_per_epoch:
-            break
+if idx >= len(progress_bar) * self.config.train_ratio_per_epoch:
+break
 
-    if verbose is VERBOSE_BATCH_WISE:
-        progress_bar.close()
+if verbose is VERBOSE_BATCH_WISE:
+progress_bar.close()
 
-    return avg_loss, param_norm, avg_grad_norm
+return avg_loss, param_norm, avg_grad_norm
 ```
 
 ## 실험 결과

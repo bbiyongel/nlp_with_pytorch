@@ -27,7 +27,7 @@
 ### 다수의 언어에서 하나의 언어로 (Many to One)
 
 <!--
-![Many to One](../assets/nmt-zeroshot-1.png)
+![Many to One](../assets/11-01-01.png)
 -->
 
 |그룹|방법|기존 방법|제안 방법|차이|
@@ -46,7 +46,7 @@
 ### 하나의 언어에서 다수의 언어로 (One to Many)
 
 <!--
-![One to Many](../assets/nmt-zeroshot-2.png)
+![One to Many](../assets/11-01-02.png)
 -->
 
 |그룹|방법|기존 방법|제안 방법|차이|
@@ -65,7 +65,7 @@
 ### 다수의 언어에서 다수의 언어로 (Many to Many)
 
 <!--
-![Many to Many](../assets/nmt-zeroshot-3.png)
+![Many to Many](../assets/11-01-03.png)
 -->
 
 |그룹|방법|기존 방법|제안 방법|차이|
@@ -92,7 +92,7 @@
 ### 제로샷 번역 테스트
 
 <!--
-![Zero-shot Translation](../assets/nmt-zeroshot-4.png)
+![Zero-shot Translation](../assets/11-01-04.png)
 -->
 
 |번호|방법|제로샷|BLEU|

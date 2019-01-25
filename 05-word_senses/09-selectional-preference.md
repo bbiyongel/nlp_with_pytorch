@@ -14,7 +14,7 @@ S_R(w)&=\text{KL}(P(C|w)||P(C)) \\
 
 위의 수식을 해석하면, selectional preference 강도 $S_R(w)$ 은 $w$ 가 주어졌을 때의 오브젝트 클래스 $C$ 의 분포 $P(C|w)$ 와 그냥 해당 클래스들의 prior(사전) 분포 $P(C)$ 와의 KL-divergence로 정의되어 있음을 알 수 있습니다. 즉, selectional preference 강도는 술어(predicate)가 headword로 특정 클래스를 얼마나 선택적으로 선호(selectional preference)하는지에 대한 수치라고 할 수 있습니다.
 
-![클래스의 사전 확률 분포와 술어가 주어졌을 때의 확률 분포 변화](../assets/wsd-selectional-preference-strength.png)
+![클래스의 사전 확률 분포와 술어가 주어졌을 때의 확률 분포 변화](../assets/05-09-01.png)
 
 예를 들어 '<음식>' 클래스의 단어는 '<공구>' 클래스의 단어보다 나타날 확률이 훨씬 높을 것 입니다. 이때, '사용하다'라는 동사(verb) 술어(predicate)가 주어진다면, 동사-목적어(verb-object) 관계에 있는 headword로써의 '<음식>' 클래스의 확률은 '<공구>' 클래스의 확률보다 낮아질 것 입니다.
 
@@ -30,7 +30,7 @@ $$A_R(w,c)=-\frac{P(c|w)\log{\frac{P(c)}{P(c|w)}}}{S_R(w)}$$
 
 ## Selectional Preference와 단어 중의성 해소(WSD)
 
-눈치가 빠른 분들은 이미 눈치 채셨겠지만, 우리는 이런 selectional preference의 특성을 이용하여 단어 중의성 해소(Word Sense Disambiguation)에 활용할 수 있습니다. '마시다'라는 동사에 '차'라는 목적어가 함께 있을 때, 우리는 selectional preference를 통해서 '차'는 '<음료>' 클래스에 속한다고 말할 수 있을 것 입니다. 
+눈치가 빠른 분들은 이미 눈치 채셨겠지만, 우리는 이런 selectional preference의 특성을 이용하여 단어 중의성 해소(Word Sense Disambiguation)에 활용할 수 있습니다. '마시다'라는 동사에 '차'라는 목적어가 함께 있을 때, 우리는 selectional preference를 통해서 '차'는 '<음료>' 클래스에 속한다고 말할 수 있을 것 입니다.
 
 문제는 '차'가 '<탈 것>' 또는 '<음료>' 클래스에 속하는 것을 알아내는 것 입니다. 우리가 가지고 있는 코퍼스는 단어들로 표현되어 있지, 클래스로 표현되어 있지는 않습니다. 만약 우리는 단어가 어떤 클래스들에 속하는지 미리 알고 있다면 단어들의 출현 빈도를 세어 클래스의 확률 분포를 추정(estimation)할 수 있을 것 입니다. 결국 이를 위해서는 사전에 정의되어 있는 지식 또는 데이터셋이 필요할 것 입니다.
 
@@ -50,7 +50,7 @@ $$\hat{c}=\underset{c\in\mathcal{C}}{\text{argmax}}{A_R(w,c)},\text{ where }\mat
 
 단어 중의성 해소(WSD)를 해결할 수 있는 방법 중에 하나로, selectional preference를 살펴 보았습니다. Selectional preference를 잘 해결할 수 있다면 아마도 단어 중의성 해소 문제도 잘 해결 될 것 입니다. 그럼 selectional preference를 어떻게 평가 할 수 있을까요? 정교한 테스트셋을 설계하고 만들어서 selectional preference의 성능을 평가 할 수 있겠지만, 좀 더 쉽고 일반적으로 적용 가능한 방법은 없을까요?
 
-![](../assets/wsd-banana_door.png)
+![](../assets/05-09-02.png)
 
 Pseudo 워드가 하나의 해답이 될 수 있습니다. Pseudo 워드는 두개의 단어가 인위적으로 합성되어 만들어진 단어를 이릅니다. 실제 일상 생활에서 쓰이기보다는 단순히 두 단어를 합친 것 입니다. 예를 들어 'banana'와 'door'를 합쳐 'banana-door'라는 pseudo 워드를 만들어 낼 수 있습니다. 이 'banana-door'라는 단어는 사실 실생활에서 쓰일리 없는 단어입니다. 하지만 우리는 이 단어가 'eat' 또는 'open'이라는 동사 술어(verb predicate)와 함꼐 headword object로써 나타났을때, 'eat'에 대해서는 'banana'를 선택해야 하고, 'open'에 대해서는 'door'를 선택하도록 해야 올바른 selectional preference 알고리즘을 만들거나 구현했음을 확인할 수 있습니다. <comment> pseudo 워드를 활용하여 selectional preference를 잘 평가하는 방법에 대해서 더 알고 싶다면, [[Chambers et al.2010](https://web.stanford.edu/~jurafsky/chambers-acl2010-pseudowords.pdf)]을 참고 바랍니다. </comment>
 
@@ -82,54 +82,54 @@ $$\phi_R(w,h)=\text{IDF}(h)$$
 from konlpy.tag import Mecab
 
 def count_seen_headwords(lines, predicate='VV', headword='NNG'):
-    mecab = Mecab()
-    seen_dict = {}
+mecab = Mecab()
+seen_dict = {}
 
-    for line in lines:
-        pos_result = mecab.pos(line)
+for line in lines:
+pos_result = mecab.pos(line)
 
-        word_h = None
-        word_p = None
-        for word, pos in pos_result:
-            if pos == predicate or pos[:3] == predicate + '+':
-                word_p = word
-                break
-            if pos == headword:
-                word_h = word
+word_h = None
+word_p = None
+for word, pos in pos_result:
+if pos == predicate or pos[:3] == predicate + '+':
+word_p = word
+break
+if pos == headword:
+word_h = word
 
-        if word_h is not None and word_p is not None:
-            seen_dict[word_p] = [word_h] + ([] if seen_dict.get(word_p) is None else seen_dict[word_p])
+if word_h is not None and word_p is not None:
+seen_dict[word_p] = [word_h] + ([] if seen_dict.get(word_p) is None else seen_dict[word_p])
 
-    return seen_dict
+return seen_dict
 ```
 
 그럼 주어진 술어와 headword에 대해서 selectional association 점수를 구하는 함수를 아래와 같이 구현할 수 있습니다. 우리는 단어 사이의 유사도 $\text{sim}(h_0,h)$ 를 구하기 위해서, 이전에 구성한 피쳐벡터들을 담은 판다스(pandas) 데이터프레임을 받습니다. 그럼 metric으로 주어진 함수를 통해 유사도를 계산합니다.
 
 ```python
 def get_selectional_association(predicate, headword, lines, dataframe, metric):
-    v1 = torch.FloatTensor(dataframe.loc[headword].values)
-    seens = count_seen_headwords(lines)[predicate]
+v1 = torch.FloatTensor(dataframe.loc[headword].values)
+seens = count_seen_headwords(lines)[predicate]
 
-    total = 0
-    for seen in seens:
-        try:
-            v2 = torch.FloatTensor(dataframe.loc[seen].values)
-            total += metric(v1, v2)
-        except:
-            pass
+total = 0
+for seen in seens:
+try:
+v2 = torch.FloatTensor(dataframe.loc[seen].values)
+total += metric(v1, v2)
+except:
+pass
 
-    return total
+return total
 ```
 
 위의 함수들을 활용하여 주어진 술어에 대해서 올바른 headword를 고르는 함수 wsd는 아래와 같습니다.
 
 ```python
 def wsd(predicate, headwords):
-    selectional_associations = []
-    for h in query_h:
-        selectional_associations += [get_selectional_association(query_p, h, lines, p, get_cosine_similarity)]
+selectional_associations = []
+for h in query_h:
+selectional_associations += [get_selectional_association(query_p, h, lines, p, get_cosine_similarity)]
 
-    print(selectional_associations)
+print(selectional_associations)
 ```
 
 실제로 wsd함수에 대해서 '피우'라는 동사가 주어졌을 때, '담배', '맥주', '사과'중에서 어떤 단어를 선택하는지 살펴 본 결과는 아래와 같습니다.

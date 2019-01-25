@@ -4,12 +4,12 @@
 
 ## 언어모델 앙상블
 
-![[[Gulcehre at el.2015]](https://arxiv.org/pdf/1503.03535.pdf)](../assets/nmt_with_lm_ensemble.png)  
+![[[Gulcehre at el.2015]](https://arxiv.org/pdf/1503.03535.pdf)](../assets/11-02-01.png)
 
 이 방법은 벤지오(Bengio) 교수의 연구실에서 제안 된 방법[[Gulcehre at el.2015]](https://arxiv.org/pdf/1503.03535.pdf)입니다. 언어모델을 명시적으로 앙상블하여 디코더의 성능을 올리고자 하였습니다. 두 개의 다른 모델을 쓴 "shallow fusion" 방법 보다, 언어모델을 Sequence-to-Sequence에 포함시켜 end2end 학습을 통해 한 개의 모델로 만든 "deep fusion" 방법이 좀 더 나은 성능을 나타냈습니다. 두 방식 모두 단방향 코퍼스를 활용하여 언어모델을 학습한 이후 실제 번역기를 훈련시킬 때에는 네트워크 파라미터 값을 고정한 상태로 sequence-to-sequence 모델을 훈련합니다.
 
 <!--
-![[[Gulcehre at el.2015]](https://arxiv.org/pdf/1503.03535.pdf)](../assets/nmt_with_lm_ensemble_evaluation.png)
+![[[Gulcehre at el.2015]](https://arxiv.org/pdf/1503.03535.pdf)](../assets/11-02-02.png)
 -->
 
 |방법|실험 1|실험 2|실험 3|실험 4|
@@ -30,7 +30,7 @@
 
 사실 우리는 번역기를 만들게 되면 하나의 병렬 코퍼스를 가지고 두개의 번역 모델을 만들 수 있습니다. 예를 들어 한국어와 영어로 이루어진 병렬 코퍼스가 있다면, 자연스럽게 우리는 영한 번역기 뿐만 아니라, 한영 번역기도 얻게 될 것 입니다. 따라서 이 방법은 이렇게 동시에 얻어지는 두 개의 모델을 활용하여 서로 보완하여 성능을 향상 시키는 방법을 제시합니다.
 
-![Back Translation 개요](../assets/nmt_back_translation_overview.png)
+![Back Translation 개요](../assets/11-02-03.png)
 
 $$\begin{gathered}
 \hat{\theta}_e=\underset{\theta}{\text{argmax}}P_{f \rightarrow e}(e|\hat{f};\theta_e) \\
@@ -40,7 +40,7 @@ $$\begin{gathered}
 예를 들어, 한국어 단방향 코퍼스가 있을 때, 이것을 기존에 훈련된 한 $\rightarrow$ 영 번역기에 기계번역시켜 한영 합성 병렬 코퍼스를 만들고, 이것을 기존에 수집한 오리지널 한영 병렬 코퍼스와 합쳐, 영 $\rightarrow$ 한 번역기를 훈련시키는데 사용하는 것 입니다. 이러한 방법의 특성 때문에 back translation이라고 명명되었습니다.
 
 <!--
-![[[Sennrich at el.2015]](https://arxiv.org/pdf/1511.06709.pdf)](../assets/nmt_back_translation.png)
+![[[Sennrich at el.2015]](https://arxiv.org/pdf/1511.06709.pdf)](../assets/11-02-04.png)
 -->
 
 |방법|병렬 코퍼스 크기|단방향 코퍼스 크기|실험 1|실험 2|
@@ -56,7 +56,7 @@ $$\begin{gathered}
 이 방식은 같은 저자인 Rich Sennrich에 의해서 [[Currey et al.2017]](https://kheafield.com/papers/edinburgh/copy_paper.pdf)에서 제안 되었습니다. 앞서 설명한 기존의 더미 문장을 활용한 방식에서 좀 더 발전한 방식입니다. 기존의 방식 대신에 소스(source) 쪽과 타겟(target) 쪽에 똑같은 데이터를 넣어 훈련시키는 것 입니다. 기존의 더미 문장을 인코더에 넣는 방식은 인코더에서 디코더로 가는 길을 훈련 시에 드랍아웃 처리 해주어야 했지만, 이 방식은 그럴 필요가 없어진 것이 장점입니다. 하지만 소스 언어의 어휘(vocabulary)에 타겟 언어(target language)의 어휘가 포함되어야 하는 불필요함을 감수해야 합니다. 보통은 back-translation 방식과 함께 사용 됩니다.
 
 <!--
-![[[Sennrich at el.2017]](https://arxiv.org/pdf/1708.00726.pdf)](../assets/nmt_copied_translation.png)  
+![[[Sennrich at el.2017]](https://arxiv.org/pdf/1708.00726.pdf)](../assets/11-02-05.png)
 -->
 
 |방법|터키어 $\rightarrow$ 영어|영어 $\rightarrow$ 터키어|
@@ -73,7 +73,7 @@ $$\begin{gathered}
 
 [[Artetxe at el.2017]](https://arxiv.org/pdf/1710.11041.pdf)
 
-![](../assets/rl-unsupervised-nmt-1.png)
+![](../assets/11-02-06.png)
 
-![](../assets/rl-unsupervised-nmt-2.png)
+![](../assets/11-02-07.png)
 -->

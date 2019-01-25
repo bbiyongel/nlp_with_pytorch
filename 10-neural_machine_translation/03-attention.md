@@ -16,27 +16,27 @@
 
 ```py
 def key_value_func(query):
-    weights = []
+weights = []
 
-    for key in dic.keys():
-        weights += [is_same(key, query)]
-        
-    weight_sum = sum(weights)
-    for i, w in enumerate(weights):
-        weights[i] = weights[i] / weight_sum
+for key in dic.keys():
+weights += [is_same(key, query)]
 
-    answer = 0
+weight_sum = sum(weights)
+for i, w in enumerate(weights):
+weights[i] = weights[i] / weight_sum
 
-    for weight, value in zip(weights, dic.values()):
-        answer += weight * value
+answer = 0
 
-    return answer
+for weight, value in zip(weights, dic.values()):
+answer += weight * value
+
+return answer
 
 def is_same(key, query):
-    if key == query:
-        return 1.
-    else:
-        return .0
+if key == query:
+return 1.
+else:
+return .0
 ```
 
 코드를 살펴보면, 순차적으로 'dic' 변수 내부의 key값들과 query 값을 비교하여, key가 같을 경우 'weights' 변수에 1.0을 더하고, 다를 경우에는 0을 더합니다. 그리고 'weights'를 'weights'의 총 합으로 나누어 그 합이 1이 되도록 만들어 줍니다. 다시 'dic' 내부의 value값들과 'weights'의 값에 대해서 곱하여 더해 줍니다. 즉, 'weight'가 1.0인 경우에만 'value'값을 'answer'에 더합니다.
@@ -74,18 +74,18 @@ def is_same(key, query):
 
 ```py
 def key_value_func(query):
-    weights = []
+weights = []
 
-    for key in dic.keys():
-        weights += [how_similar(key, query)]    # cosine similarity 값을 채워 넣는다.
+for key in dic.keys():
+weights += [how_similar(key, query)]    # cosine similarity 값을 채워 넣는다.
 
-    weights = softmax(weights)    # 모든 weight들을 구한 후에 softmax를 계산한다.
-    answer = 0
+weights = softmax(weights)    # 모든 weight들을 구한 후에 softmax를 계산한다.
+answer = 0
 
-    for weight, value in zip(weights, dic.values()):
-        answer += weight * value
+for weight, value in zip(weights, dic.values()):
+answer += weight * value
 
-    return answer
+return answer
 ```
 
 이번에 key_value_func는 그럼 그 값을 받아서 weights에 저장 한 후, 모든 weights의 값이 채워지면 softmax 함수를 취할 겁니다. 여기서 softmax는 weights의 합의 크기를 1로 고정시키는 정규화 역할을 합니다. 따라서 유사도의 총 합에서 차지하는 비율 만큼 weight의 값이 채워질 겁니다.
@@ -133,7 +133,7 @@ c = H^{src}\cdot w\text{ and }c\text{ is a context vector}. \\
 
 원하는 정보를 어텐션을 통해 인코더에서 획득한 후, 해당 정보를 디코더의 출력과 이어붙여(concatenate) $tanh$ 를 취한 후, softmax 계산을 통해 다음 time-step의 입력이 되는 $\hat{y}_{t}$ 을 구합니다.
 
-![어텐션이 추가된 Sequence-to-Sequence의 구조](../assets/nmt-seq2seq-with-attention-architecture.png)
+![어텐션이 추가된 Sequence-to-Sequence의 구조](../assets/10-03-01.png)
 
 ### 선형 변환
 
@@ -146,11 +146,11 @@ c = H^{src}\cdot w\text{ and }c\text{ is a context vector}. \\
 
 신경망 내부의 각 차원들은 숨겨진 특징 값(latent feature)이므로 딱 잘라 정의할 수 없습니다. 하지만 분명한건 소스 언어와 대상 언어가 애초에 다르다는 것 입니다. 따라서 단순히 벡터 내적을 해 주기보단 소스 언어와 대상 언어 간에 연결고리를 하나 놓아주어야 할 겁니다. 그래서 우리는 추상적으로 상상해 보았을때, 두 언어가 각각 임베딩 된 latent 공간이 선형(linear) 관계에 있다고 가정하고, 내적 연산을 수행하기 전에 선형 변환(linear transformation)을 해 줍니다. 이 선형 변환을 위한 $W$ 값은 뉴럴 네트워크 웨이트 파라미터로써, 피드포워드(feed-forward) 및 back-propagation을 통해서 학습됩니다.
 
-![인코더의 출력값과 디코더의 출력값 사이의 선형 맵핑](../assets/nmt-attention-linear-transform.png)
+![인코더의 출력값과 디코더의 출력값 사이의 선형 맵핑](../assets/10-03-02.png)
 
 왜 어텐션이 필요한 것일까요? 기존의 sequence-to-sequence는 두 개의 RNN(인코더와 디코더)로 이루어져 있습니다. 여기서 문장 임베딩 벡터에 해당하는 인코더 결과 벡터의 정보를 디코더의 히든 스테이트(hidden state, LSTM의 경우에는 cell state가 추가)로 전달해야 합니다. 그리고 디코더는 인코더로부터 넘겨받은 히든 스테이트로부터 문장을 만들어냅니다. 이때 히든 스테이트만으로는 문장의 모든 정보를 완벽하게 전달하기 힘들기 때문 입니다. 특히 문장이 길어질수록 이 문제는 더 심각해 집니다. 따라서 디코더의 매 time-step마다, 현재 디코더의 상태(히든 스테이트)에 따라 필요한 인코더의 정보(인코더 마지막 레이어의 히든 스테이트)에 접근하여 끌어다 쓰겠다는 것 입니다.
 
-![어텐션이 번역에서 동작하는 직관적인 예](../assets/nmt-attention-working-example.png)
+![어텐션이 번역에서 동작하는 직관적인 예](../assets/10-03-03.png)
 
 이 선형변환을 배우는 것 자체가 어텐션이라고 표현해도 과하지 않습니다. 선형변환 과정을 통해서 디코더의 현재 상태에 따라, 필요한 query를 만들어 내어, 인코더의 key값들과 비교하여 가중합(weighted sum)을 하는 것이기 때문입니다. 즉, 어텐션을 통해 디코더는 인코더에 query를 날리는 것인데, query를 잘 날려야지 좋은 정답을 얻을 것 입니다.
 
@@ -160,7 +160,7 @@ c = H^{src}\cdot w\text{ and }c\text{ is a context vector}. \\
 
 ### 어텐션의 적용 결과
 
-![[어텐션의 사용여부에 따른 문장 길이별 번역 성능](http://web.stanford.edu/class/cs224n/syllabus.html)](../assets/nmt-attention-evaluation-graph.png)
+![[어텐션의 사용여부에 따른 문장 길이별 번역 성능](http://web.stanford.edu/class/cs224n/syllabus.html)](../assets/10-03-04.png)
 
 어텐션을 사용하지 않은 sequence-to-sequence는 전반적으로 성능이 떨어짐을 알 수 있을 뿐만 아니라, 특히 문장이 길어질수록 성능이 더욱 하락함을 알 수 있습니다. 하지만 이에 비해서 어텐션을 사용하면 문장이 길어지더라도 성능이 크게 하락하지 않음을 알 수 있습니다.
 
@@ -168,7 +168,7 @@ c = H^{src}\cdot w\text{ and }c\text{ is a context vector}. \\
 
 torch.bmm 함수는 batch matrix multiplication(bmm, 배치 행렬곱)을 수행하는 함수로써, 2개 이상의 차원을 지닌 텐서가 주어졌을 때 뒤 2개 차원에 대해서는 행렬곱을 수행하고 앞의 다른 차원은 미니배치로 취급합니다. 따라서 앞의 차원들은 크기가 같아야 하고, 뒤 2개 차원은 행렬 곱을 수행하기 위한 적절한 크기를 지녀야 합니다.
 
-![파이토치 배치 행렬곱 연산](../assets/nmt-bmm.png)
+![파이토치 배치 행렬곱 연산](../assets/10-03-05.png)
 
 ```python
 import torch
@@ -189,31 +189,31 @@ z = torch.bmm(x, y)
 ```python
 class Attention(nn.Module):
 
-    def __init__(self, hidden_size):
-        super(Attention, self).__init__()
+def __init__(self, hidden_size):
+super(Attention, self).__init__()
 
-        self.linear = nn.Linear(hidden_size, hidden_size, bias=False)
-        self.softmax = nn.Softmax(dim=-1)
+self.linear = nn.Linear(hidden_size, hidden_size, bias=False)
+self.softmax = nn.Softmax(dim=-1)
 
-    def forward(self, h_src, h_t_tgt, mask=None):
-        # |h_src| = (batch_size, length, hidden_size)
-        # |h_t_tgt| = (batch_size, 1, hidden_size)
-        # |mask| = (batch_size, length)
+def forward(self, h_src, h_t_tgt, mask=None):
+# |h_src| = (batch_size, length, hidden_size)
+# |h_t_tgt| = (batch_size, 1, hidden_size)
+# |mask| = (batch_size, length)
 
-        query = self.linear(h_t_tgt.squeeze(1)).unsqueeze(-1)
-        # |query| = (batch_size, hidden_size, 1)
+query = self.linear(h_t_tgt.squeeze(1)).unsqueeze(-1)
+# |query| = (batch_size, hidden_size, 1)
 
-        weight = torch.bmm(h_src, query).squeeze(-1)
-        # |weight| = (batch_size, length)
-        if mask is not None:
-            # Set each weight as -inf, if the mask value equals to 1.
-            # Since the softmax operation makes -inf to 0, masked weights would be set to 0 after softmax operation.
-            # Thus, if the sample is shorter than other samples in mini-batch, the weight for empty time-step would be set to 0.
-            weight.masked_fill_(mask, -float('inf'))
-        weight = self.softmax(weight)
+weight = torch.bmm(h_src, query).squeeze(-1)
+# |weight| = (batch_size, length)
+if mask is not None:
+# Set each weight as -inf, if the mask value equals to 1.
+# Since the softmax operation makes -inf to 0, masked weights would be set to 0 after softmax operation.
+# Thus, if the sample is shorter than other samples in mini-batch, the weight for empty time-step would be set to 0.
+weight.masked_fill_(mask, -float('inf'))
+weight = self.softmax(weight)
 
-        context_vector = torch.bmm(weight.unsqueeze(1), h_src)
-        # |context_vector| = (batch_size, 1, hidden_size)
+context_vector = torch.bmm(weight.unsqueeze(1), h_src)
+# |context_vector| = (batch_size, 1, hidden_size)
 
-        return context_vector
+return context_vector
 ```

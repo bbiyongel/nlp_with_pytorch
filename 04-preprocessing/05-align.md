@@ -7,15 +7,15 @@
 정렬(Alignment)을 수행하기 위한 전체 과정을 요약하면 아래와 같습니다.
 
 1. 소스 언어(source language)와 타겟 언어(target language) 사이의 단어 사전을 준비 합니다.
-    1. 만약 준비된 단어 사전이 없다면 아래와 같은 작업을 수행 합니다.
-    1. 각 언어에 대해서 코퍼스를 수집 및 정제 합니다.
-    1. 각 언어에 대해서 워드 임베딩 벡터를 구합니다. <comment>워드 임베딩 벡터에 대해서는 추후 다루도록 하겠습니다. </comment>
-    1. [MUSE](https://github.com/facebookresearch/MUSE)를 통해 단어 레벨 번역기를 훈련합니다.
-    1. 훈련된 단어 레벨 번역기를 통해 단어 사전을 생성합니다.
+1. 만약 준비된 단어 사전이 없다면 아래와 같은 작업을 수행 합니다.
+1. 각 언어에 대해서 코퍼스를 수집 및 정제 합니다.
+1. 각 언어에 대해서 워드 임베딩 벡터를 구합니다. <comment>워드 임베딩 벡터에 대해서는 추후 다루도록 하겠습니다. </comment>
+1. [MUSE](https://github.com/facebookresearch/MUSE)를 통해 단어 레벨 번역기를 훈련합니다.
+1. 훈련된 단어 레벨 번역기를 통해 단어 사전을 생성합니다.
 1. [Champollion](https://github.com/LowResourceLanguages/champollion)을 통해 기존에 수집된 bilingual 코퍼스를 정렬 합니다.
-    1. 각 언어에 대해서 단어 사전을 적용하기 위해, 알맞은 수준의 분절을 수행 합니다.
-    1. 각 언어에 대해서 정제를 수행 합니다.
-    1. Champollion을 사용하여 병렬 코퍼스를 생성합니다.
+1. 각 언어에 대해서 단어 사전을 적용하기 위해, 알맞은 수준의 분절을 수행 합니다.
+1. 각 언어에 대해서 정제를 수행 합니다.
+1. Champollion을 사용하여 병렬 코퍼스를 생성합니다.
 
 ## 사전 생성
 
@@ -47,7 +47,7 @@ salt <> 소금
 
 Chapollion Toolkit(CTK)는 bilingual 코퍼스의 문장 정렬을 수행하는 오픈소스입니다. 펄(Perl)을 사용하여 구현되었으며, 이집트 상형문자를 처음으로 해독해낸 역사학자 [Champollion(샴폴리온)](https://ko.wikipedia.org/wiki/%EC%9E%A5%ED%94%84%EB%9E%91%EC%88%98%EC%95%84_%EC%83%B9%ED%8F%B4%EB%A6%AC%EC%98%B9)의 이름을 따서 명명되었습니다.
 
-![Jean-François Champollion, 이미지 출처: 위키피디아](https://upload.wikimedia.org/wikipedia/commons/f/ff/Jean-Francois_Champollion.jpg)
+![Jean-François Champollion, 이미지 출처: 위키피디아](../assets/04-05-01.jpg)
 
 기존에 구축된 단어 사전을 이용하거나, 위와 같이 자동으로 구축한 단어 사전을 참고하여 Champollion은 문장 정렬을 수행합니다. 여러 라인으로 구성된 각 언어 별 하나의 문서에 대해서 문장 정렬을 수행한 결과는 아래와 같습니다.
 
@@ -80,77 +80,77 @@ OMIT = "omitted"
 INTERMEDIATE_FN = "./tmp/tmp.txt"
 
 def read_alignment(fn):
-    aligns = []
+aligns = []
 
-    f = open(fn, 'r')
+f = open(fn, 'r')
 
-    for line in f:
-        if line.strip() != "":
-            srcs, tgts = line.strip().split(' <=> ')
+for line in f:
+if line.strip() != "":
+srcs, tgts = line.strip().split(' <=> ')
 
-            if srcs == OMIT:
-                srcs = []
-            else:
-                srcs = list(map(int, srcs.split(',')))
+if srcs == OMIT:
+srcs = []
+else:
+srcs = list(map(int, srcs.split(',')))
 
-            if tgts == OMIT:
-                tgts = []
-            else:
-                tgts = list(map(int, tgts.split(',')))
+if tgts == OMIT:
+tgts = []
+else:
+tgts = list(map(int, tgts.split(',')))
 
-            aligns += [(srcs, tgts)]
+aligns += [(srcs, tgts)]
 
-    f.close()
+f.close()
 
-    return aligns
+return aligns
 
 def get_aligned_corpus(src_fn, tgt_fn, aligns):
-    f_src = open(src_fn, 'r')
-    f_tgt = open(tgt_fn, 'r')
+f_src = open(src_fn, 'r')
+f_tgt = open(tgt_fn, 'r')
 
-    for align in aligns:
-        srcs, tgts = align
+for align in aligns:
+srcs, tgts = align
 
-        src_buf, tgt_buf = [], []
+src_buf, tgt_buf = [], []
 
-        for src in srcs:
-            src_buf += [f_src.readline().strip()]
-        for tgt in tgts:
-            tgt_buf += [f_tgt.readline().strip()]
+for src in srcs:
+src_buf += [f_src.readline().strip()]
+for tgt in tgts:
+tgt_buf += [f_tgt.readline().strip()]
 
-        if len(src_buf) > 0 and len(tgt_buf) > 0:
-            sys.stdout.write("%s\t%s\n" % (" ".join(src_buf), " ".join(tgt_buf)))
+if len(src_buf) > 0 and len(tgt_buf) > 0:
+sys.stdout.write("%s\t%s\n" % (" ".join(src_buf), " ".join(tgt_buf)))
 
-    f_tgt.close()
-    f_src.close()
+f_tgt.close()
+f_src.close()
 
 def parse_argument():
-    p = argparse.ArgumentParser()
+p = argparse.ArgumentParser()
 
-    p.add_argument('--src', required = True)
-    p.add_argument('--tgt', required = True)
-    p.add_argument('--src_ref', default = None)
-    p.add_argument('--tgt_ref', default = None)
-    p.add_argument('--dict', required = True)
-    p.add_argument('--ratio', type = float, default = 1.2750)
+p.add_argument('--src', required = True)
+p.add_argument('--tgt', required = True)
+p.add_argument('--src_ref', default = None)
+p.add_argument('--tgt_ref', default = None)
+p.add_argument('--dict', required = True)
+p.add_argument('--ratio', type = float, default = 1.2750)
 
-    config = p.parse_args()
+config = p.parse_args()
 
-    return config
+return config
 
 if __name__ == "__main__":
-    config = parse_argument()
+config = parse_argument()
 
-    if config.src_ref is None:
-        config.src_ref = config.src
-    if config.tgt_ref is None:
-        config.tgt_ref = config.tgt
+if config.src_ref is None:
+config.src_ref = config.src
+if config.tgt_ref is None:
+config.tgt_ref = config.tgt
 
-    cmd = CMD % (BIN, config.ratio, config.dict, config.src_ref, config.tgt_ref, INTERMEDIATE_FN)
-    os.system(cmd)
+cmd = CMD % (BIN, config.ratio, config.dict, config.src_ref, config.tgt_ref, INTERMEDIATE_FN)
+os.system(cmd)
 
-    aligns = read_alignment(INTERMEDIATE_FN)
-    get_aligned_corpus(config.src, config.tgt, aligns)
+aligns = read_alignment(INTERMEDIATE_FN)
+get_aligned_corpus(config.src, config.tgt, aligns)
 
 ```
 
@@ -160,12 +160,12 @@ if __name__ == "__main__":
 $ ./champollion
 usage: ./champollion [-hdscn] <X token file> <Y token file> <alignment file>
 
-      -h       : this (help) message
-      -d dictf : use dictf as the translation dictionary
-      -s xstop : use words in file xstop as X stop words
-      -c n     : number of Y chars for each X char
-      -n       : disallow 1-3, 3-1, 1-4, 4-1 alignments
-              (faster, lower performance)
+-h       : this (help) message
+-d dictf : use dictf as the translation dictionary
+-s xstop : use words in file xstop as X stop words
+-c n     : number of Y chars for each X char
+-n       : disallow 1-3, 3-1, 1-4, 4-1 alignments
+(faster, lower performance)
 ```
 
 즉, 소스 언어의 캐릭터 당 타겟 언어의 캐릭터 비율을 의미합니다. 이를 기반하여 champollion은 문장 내 모든 단어에 대해서 번역 단어를 모르더라도 문장 정렬을 수행할 수 있게 됩니다.

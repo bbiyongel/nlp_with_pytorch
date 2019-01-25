@@ -26,7 +26,7 @@ $$\begin{aligned}
 
 우리는 젠센 부등식(Jensen's inequality) 정리를 사용하여 항상 $\log{P(y)}$ 보다 작거나 같은 수식으로 정리할 수 있습니다. 젠센 부등식에 대해서 좀 더 이야기 해 보도록 하겠습니다. 로그의 함수 곡선은 아래와 같이 생겼습니다. 이때, 두 점 $x_1, x_2$ 에 대한 평균을 $x_m=1/2\times(x_1+x_2)$ 라고 하겠습니다. 그럼 $\log{x_m}\ge1/2\times(\log{x_1}+\log{x_2})$ 은 항상 성립하는 것을 알 수 있습니다.
 
-![젠슨스 부등식의 예](../assets/duality-jensens_inequality.png)
+![젠슨스 부등식의 예](../assets/13-04-01.png)
 
 위의 성질을 이용하여 우리는 $\log{P(y)}$ 보다 항상 작거나 같은 lower bound를 구할 수 있습니다. 여기에 음의 부호를 붙여주면 부등호의 방향은 바뀔 것 입니다.
 
@@ -40,7 +40,7 @@ $$\begin{aligned}
 &=\tilde{\mathcal{L}}(\theta)
 \end{aligned}$$
 
-우리는 결국 $\tilde{\mathcal{L}}(\theta)$ 를 정의하였습니다. 위의 $-\log{P(y)}$ 에 대한 부등호와 마찬가지로 $\tilde{\mathcal{L}}(\theta)$ 를 최소화 하는 것은 $\mathcal{L}(\theta)$ 를 최소화 하는 효과를 만들 수 있습니다. 따라서 우리는 $\tilde{\mathcal{L}}(\theta)$ 를 최소화 하기 위해서 그래디언트 디센트를 수행하여 최적화를 수행해야 합니다. 그럼 이 새로운 손실 함수를 $\theta$ 에 대해서 미분하면 아래와 같이 될 것 입니다. KL divergence 부분은 $\theta$에 대해서 상수이기 때문에, 생략 될 것 입니다. 
+우리는 결국 $\tilde{\mathcal{L}}(\theta)$ 를 정의하였습니다. 위의 $-\log{P(y)}$ 에 대한 부등호와 마찬가지로 $\tilde{\mathcal{L}}(\theta)$ 를 최소화 하는 것은 $\mathcal{L}(\theta)$ 를 최소화 하는 효과를 만들 수 있습니다. 따라서 우리는 $\tilde{\mathcal{L}}(\theta)$ 를 최소화 하기 위해서 그래디언트 디센트를 수행하여 최적화를 수행해야 합니다. 그럼 이 새로운 손실 함수를 $\theta$ 에 대해서 미분하면 아래와 같이 될 것 입니다. KL divergence 부분은 $\theta$에 대해서 상수이기 때문에, 생략 될 것 입니다.
 
 $$\nabla_\theta\tilde{\mathcal{L}}(\theta)=-\sum_{n=1}^N{\nabla_\theta\log{P(y^n|x^n;\theta)}}-\frac{1}{K}\sum_{s=1}^S{\sum_{i=1}^K{\nabla_\theta\log{P(y^s|x_i;\theta)}}}$$
 

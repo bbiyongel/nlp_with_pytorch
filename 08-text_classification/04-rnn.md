@@ -17,7 +17,7 @@ $$\begin{gathered}
 
 ## 아키텍쳐 내부 설명
 
-![RNN의 마지막 time-step의 출력을 사용 하는 경우](../assets/rnn-apply-1.png)
+![RNN의 마지막 time-step의 출력을 사용 하는 경우](../assets/08-04-01.png)
 
 우리가 텍스트 분류를 RNN을 통해 구현한다면 위와 같은 구조가 될 것 입니다. 내부를 구성하고 있는 레이어들을 하나씩 따라가면서 살펴보도록 하겠습니다.
 
@@ -75,7 +75,7 @@ $$\mathcal{L}(\hat{y}, y)=-\frac{1}{m}\sum_{i=1}^m{y_i\log{\hat{y}_i}}$$
 
 위와 같이 우리는 크로스 엔트로피 수식을 통해서 ground-truth 확률분포에 우리의 뉴럴네트워크 확률 분포함수가 근사(approximate)하도록 합니다. 재미있는 것은 $y_i$ 가 one-hot 벡터이므로 1인 인덱스의 로그 확률(log-probability)값만 최대화 하도록 하면 된다는 것 입니다. 그럼 softmax의 수식에 따라 다른 인덱스의 확률값이 작아질 것 입니다. 이 수식은 네가티브 로그 라이클리후드(negative log-likelihood, NLL)를 최소화 하는 것과 똑같습니다.
 
-![One-hot 벡터로 구성된 정답 샘플과 뉴럴 네트워크를 통해 얻은 discrete 확률 분포 사이의 손실 함수 계산](../assets/tc-cross_entropy.png)
+![One-hot 벡터로 구성된 정답 샘플과 뉴럴 네트워크를 통해 얻은 discrete 확률 분포 사이의 손실 함수 계산](../assets/08-04-02.png)
 
 우리는 이렇게 얻어진 손실 함수에 대해서 확률 분포 함수 뉴럴 네트워크 파라미터 $\theta$ 로 미분하면, 라이클리후드를 최대화 하도록하는 $\theta$ 를 업데이트 할 수 있습니다.
 
@@ -93,43 +93,43 @@ import torch.nn as nn
 
 class RNNClassifier(nn.Module):
 
-    def __init__(self, 
-                 input_size, 
-                 word_vec_dim, 
-                 hidden_size, 
-                 n_classes,
-                 n_layers=4, 
-                 dropout_p=.3
-                 ):
-        self.input_size = input_size  # vocabulary_size
-        self.word_vec_dim = word_vec_dim
-        self.hidden_size = hidden_size
-        self.n_classes = n_classes
-        self.n_layers = n_layers
-        self.dropout_p = dropout_p
+def __init__(self,
+input_size,
+word_vec_dim,
+hidden_size,
+n_classes,
+n_layers=4,
+dropout_p=.3
+):
+self.input_size = input_size  # vocabulary_size
+self.word_vec_dim = word_vec_dim
+self.hidden_size = hidden_size
+self.n_classes = n_classes
+self.n_layers = n_layers
+self.dropout_p = dropout_p
 
-        super().__init__()
+super().__init__()
 
-        self.emb = nn.Embedding(input_size, word_vec_dim)
-        self.rnn = nn.LSTM(input_size=word_vec_dim,
-                           hidden_size=hidden_size,
-                           num_layers=n_layers,
-                           dropout=dropout_p,
-                           batch_first=True,
-                           bidirectional=True
-                           )
-        self.generator = nn.Linear(hidden_size * 2, n_classes)
-        # We use LogSoftmax + NLLLoss instead of Softmax + CrossEntropy
-        self.activation = nn.LogSoftmax(dim=-1)
+self.emb = nn.Embedding(input_size, word_vec_dim)
+self.rnn = nn.LSTM(input_size=word_vec_dim,
+hidden_size=hidden_size,
+num_layers=n_layers,
+dropout=dropout_p,
+batch_first=True,
+bidirectional=True
+)
+self.generator = nn.Linear(hidden_size * 2, n_classes)
+# We use LogSoftmax + NLLLoss instead of Softmax + CrossEntropy
+self.activation = nn.LogSoftmax(dim=-1)
 
-    def forward(self, x):
-        # |x| = (batch_size, length)
-        x = self.emb(x)
-        # |x| = (batch_size, length, word_vec_dim)
-        x, _ = self.rnn(x)
-        # |x| = (batch_size, length, hidden_size * 2)
-        y = self.activation(self.generator(x[:, -1]))
-        # |y| = (batch_size, n_classes)
+def forward(self, x):
+# |x| = (batch_size, length)
+x = self.emb(x)
+# |x| = (batch_size, length, word_vec_dim)
+x, _ = self.rnn(x)
+# |x| = (batch_size, length, hidden_size * 2)
+y = self.activation(self.generator(x[:, -1]))
+# |y| = (batch_size, n_classes)
 
-        return y
+return y
 ```

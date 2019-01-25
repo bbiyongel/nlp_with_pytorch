@@ -50,7 +50,7 @@ $$\begin{gathered}
 이제 미분을 통해 얻은 MRT의 최종 수식을 해석 해 보겠습니다. 이해가 어렵다면 아래의 폴리시 그래디언트 수식과 비교하며 따라가면 좀 더 이해가 수월할 수 있습니다.
 
 - $s$ 번째 입력 $x^{(s)}$ 를 신경망 $\theta$ 에 넣어 얻은 로그확률 $\log{P(y|x^{(s)};\theta)}$ 을 $\theta$ 에 대하여 미분하여 그래디언트를 얻습니다.
-- 그리고 $\theta$ 로부터 샘플링한 $y$ 와 실제 정답 $y^{(s)}$ 와의 차이(여기서는 주로 BLEU에 $-1$ 을 곱하여 사용)값에서 
+- 그리고 $\theta$ 로부터 샘플링한 $y$ 와 실제 정답 $y^{(s)}$ 와의 차이(여기서는 주로 BLEU에 $-1$ 을 곱하여 사용)값에서
 - 또 다시 $\theta$ 로부터 샘플링하여 얻은 $y'$ 와 실제 정답 $y^{(s)}$ 와의 차이(마찬가지로 -BLEU)의 기대값을 빼 준 값
 - 그 값을 risk로 아까 계산한 로그 확률값의 그래디언트에 곱해 줍니다.
 - 이 과정을 전체 데이터셋(실제로는 미니배치) $S$ 에 대해서 수행한 후 합(summation)을 구하고 learning rate $\alpha$ 를 곱합니다.
@@ -70,17 +70,17 @@ MRT는 risk에 대해 최소화 해야 하기 때문에 그래디언트 디센�
 |Minimum Risk Training (MRT)|31.30|
 
 <!--
-![MRT의 성능 평가](../assets/rl-minimum-risk-training.png)
+![MRT의 성능 평가](../assets/12-05-01.png)
 -->
 
 위와 같이 훈련한 MRT에 대한 성능을 실험한 결과 입니다. 기존의 MLE 방식에 비해서 BLEU가 1.5가량 상승한 것을 확인할 수 있습니다. 이처럼 MRT는 강화학습으로써의 접근을 전혀 하지 않고도, 수식적으로 폴리시 그래디언트의 REINFORCE 알고리즘 수식을 이끌어내고 성능을 끌어올리는 방법을 제시한 점이 인상 깊습니다.
 
 ### 구현
 
-우리는 아래의 방법을 통해 Minimum Risk Training을 파이토치로 구현 할 겁니다. 
+우리는 아래의 방법을 통해 Minimum Risk Training을 파이토치로 구현 할 겁니다.
 
 1. 주어진 입력 문장에 대해 정책 $\theta$ 를 이용하여 번역 문장을 샘플링 합니다.
-1. 샘플링 문장과 정답 문장 사이의 BLEU를 계산하고 $-1$ 을 곱해주어 risk로 변환 합니다. 
+1. 샘플링 문장과 정답 문장 사이의 BLEU를 계산하고 $-1$ 을 곱해주어 risk로 변환 합니다.
 1. 그리고 로그 확률 분포 전체에 risk를 곱해주고, 각 샘플과 time-step 별로 구해진 negative 로그확률값의 합에 $-1$ 을 곱해줍니다.
 1. 로그확률값의 합에 대해서 $\theta$ 로 미분을 수행하면, back-propagation을 통해서 신경망 $\theta$ 전체에 그래디언트가 구해집니다.
 1. 이미 우리는 risk를 곱하였기 때문에, 곧바로 이 그래디언트를 통해 그래디언트 디센트를 수행하여 최적화를 수행 합니다.
@@ -130,42 +130,42 @@ from simple_nmt.trainer import Trainer
 
 ```python
 def _get_reward(self, y_hat, y, n_gram=6):
-    # This method gets the reward based on the sampling result and reference sentence.
-    # For now, we uses GLEU in NLTK, but you can used your own well-defined reward function.
-    # In addition, GLEU is variation of BLEU, and it is more fit to reinforcement learning.
+# This method gets the reward based on the sampling result and reference sentence.
+# For now, we uses GLEU in NLTK, but you can used your own well-defined reward function.
+# In addition, GLEU is variation of BLEU, and it is more fit to reinforcement learning.
 
-    # Since we don't calculate reward score exactly as same as multi-bleu.perl,
-    # (especialy we do have different tokenization,) I recommend to set n_gram to 6.
+# Since we don't calculate reward score exactly as same as multi-bleu.perl,
+# (especialy we do have different tokenization,) I recommend to set n_gram to 6.
 
-    # |y| = (batch_size, length1)
-    # |y_hat| = (batch_size, length2)
+# |y| = (batch_size, length1)
+# |y_hat| = (batch_size, length2)
 
-    scores = []
+scores = []
 
-    # Actually, below is really far from parallized operations.
-    # Thus, it may cause slow training.
-    for b in range(y.size(0)):
-        ref = []
-        hyp = []
-        for t in range(y.size(1)):
-            ref += [str(int(y[b, t]))]
-            if y[b, t] == data_loader.EOS:
-                break
+# Actually, below is really far from parallized operations.
+# Thus, it may cause slow training.
+for b in range(y.size(0)):
+ref = []
+hyp = []
+for t in range(y.size(1)):
+ref += [str(int(y[b, t]))]
+if y[b, t] == data_loader.EOS:
+break
 
-        for t in range(y_hat.size(1)):
-            hyp += [str(int(y_hat[b, t]))]
-            if y_hat[b, t] == data_loader.EOS:
-                break
+for t in range(y_hat.size(1)):
+hyp += [str(int(y_hat[b, t]))]
+if y_hat[b, t] == data_loader.EOS:
+break
 
-        # for nltk.bleu & nltk.gleu
-        scores += [score_func([ref], hyp, max_len=n_gram) * 100.]
+# for nltk.bleu & nltk.gleu
+scores += [score_func([ref], hyp, max_len=n_gram) * 100.]
 
-        # for utils.score_sentence
-        # scores += [score_func(ref, hyp, 4, smooth = 1)[-1] * 100.]
-    scores = torch.FloatTensor(scores).to(y.device)
-    # |scores| = (batch_size)
+# for utils.score_sentence
+# scores += [score_func(ref, hyp, 4, smooth = 1)[-1] * 100.]
+scores = torch.FloatTensor(scores).to(y.device)
+# |scores| = (batch_size)
 
-    return scores
+return scores
 ```
 
 아래의 함수는 $J(\theta)$ 를 입력으로 받아 $\theta$에 대해서 미분을 수행하고 $\nabla_\theta{J(\theta)}$ 를 반환하는 작업을 하는 함수 입니다. 기존의 MLE에서는 정답 $y$ 와 예측값 $\hat{y}$ 사이의 차이(error)를 최소화 하도록 미분을 수행하였다면, 지금은 샘플링을 한 인덱스(index)를 $y$ 라고 할 때, softmax 결과값인 분포 $\hat{y}$ 가 주어지면 해당 인덱스의 값을 가져와 계산을 수행 합니다.
@@ -182,21 +182,21 @@ Y=\{y_1,\cdots,y_T\} \\
 
 ```python
 def _get_gradient(self, y_hat, y, crit=None, reward=1):
-    # |y| = (batch_size, length)
-    # |y_hat| = (batch_size, length, output_size)
-    # |reward| = (batch_size)
-    crit = self.crit if crit is None else crit
+# |y| = (batch_size, length)
+# |y_hat| = (batch_size, length, output_size)
+# |reward| = (batch_size)
+crit = self.crit if crit is None else crit
 
-    # Before we get the gradient, multiply -reward for each sample and each time-step.
-    y_hat = y_hat * -reward.view(-1, 1, 1).expand(*y_hat.size())
+# Before we get the gradient, multiply -reward for each sample and each time-step.
+y_hat = y_hat * -reward.view(-1, 1, 1).expand(*y_hat.size())
 
-    # Again, multiply -1 because criterion is NLLLoss.
-    log_prob = -crit(y_hat.contiguous().view(-1, y_hat.size(-1)),
-                        y.contiguous().view(-1)
-                        )
-    log_prob.div(y.size(0)).backward()
+# Again, multiply -1 because criterion is NLLLoss.
+log_prob = -crit(y_hat.contiguous().view(-1, y_hat.size(-1)),
+y.contiguous().view(-1)
+)
+log_prob.div(y.size(0)).backward()
 
-    return log_prob
+return log_prob
 ```
 
 재미있게도 그래디언트 디센트를 사용하기 위하여 보상값에 -1을 곱하여 risk로 바꾸었지만, 다시 또 NLL 손실함수 결과값에 -1을 곱해주는 것을 볼 수 있습니다. <comment> 실제 수식에서는 negative log-likelihood 대신에 일반 log-likelihood가 사용되었기 때문입니다. </comment> 결국 -1을 두번 곱해주는 것을 볼 수 있고, 이것은 마치 likelihood를 최대화 하기 위해서 -1을 곱하고 그래디언트 디센트를 수행하였던 것 처럼, 보상(reward)을 최대화 하기 위해서 -1을 곱하고 그래디언트 디센트를 수행하는 것과 같음을 알 수 있습니다. 처음에 이 내용을 본다면 헷갈릴 수 있지만, 무엇이 최대화 되고 무엇이 최소화 되는지 찬찬히 생각하고 그래디언트 디센트를 수행하는 것임을 기억한다면 이해하는데 한결 수월 할 것 입니다.
@@ -212,107 +212,107 @@ $$
 그리고 중요한 점은 샘플링 기반으로 동작하기 때문에 더이상 teacher-forcing을 사용하지 않는다는 것 입니다. 따라서 기존의 sequence-to-sequence의 forward() 함수 대신에 직접 구현한 search() 함수를 사용하여 샘플링을 하여 학습을 수행 합니다. 이때, search 함수의 greedy 파라미터를 False 값을 주어, 랜덤 샘플링을 수행 할 수 있습니다.
 
 ```python
-    def train_epoch(self,
-                    train,
-                    optimizer,
-                    max_grad_norm=5,
-                    verbose=VERBOSE_SILENT
-                    ):
-        '''
-        Train an epoch with given train iterator and optimizer.
-        '''
-        total_reward, total_actor_reward = 0, 0
-        total_grad_norm = 0
-        avg_reward, avg_actor_reward = 0, 0
-        avg_param_norm, avg_grad_norm = 0, 0
-        sample_cnt = 0
+def train_epoch(self,
+train,
+optimizer,
+max_grad_norm=5,
+verbose=VERBOSE_SILENT
+):
+'''
+Train an epoch with given train iterator and optimizer.
+'''
+total_reward, total_actor_reward = 0, 0
+total_grad_norm = 0
+avg_reward, avg_actor_reward = 0, 0
+avg_param_norm, avg_grad_norm = 0, 0
+sample_cnt = 0
 
-        progress_bar = tqdm(train,
-                            desc='Training: ',
-                            unit='batch'
-                            ) if verbose is VERBOSE_BATCH_WISE else train
-        # Iterate whole train-set.
-        for idx, mini_batch in enumerate(progress_bar):
-            # Raw target variable has both BOS and EOS token. 
-            # The output of sequence-to-sequence does not have BOS token. 
-            # Thus, remove BOS token for reference.
-            x, y = mini_batch.src, mini_batch.tgt[0][:, 1:]
-            # |x| = (batch_size, length)
-            # |y| = (batch_size, length)
+progress_bar = tqdm(train,
+desc='Training: ',
+unit='batch'
+) if verbose is VERBOSE_BATCH_WISE else train
+# Iterate whole train-set.
+for idx, mini_batch in enumerate(progress_bar):
+# Raw target variable has both BOS and EOS token.
+# The output of sequence-to-sequence does not have BOS token.
+# Thus, remove BOS token for reference.
+x, y = mini_batch.src, mini_batch.tgt[0][:, 1:]
+# |x| = (batch_size, length)
+# |y| = (batch_size, length)
 
-            # You have to reset the gradients of all model parameters before to take another step in gradient descent.
-            optimizer.zero_grad()
+# You have to reset the gradients of all model parameters before to take another step in gradient descent.
+optimizer.zero_grad()
 
-            # Take sampling process because set False for is_greedy.
-            y_hat, indice = self.model.search(x,
-                                              is_greedy=False,
-                                              max_length=self.config.max_length
-                                              )
-            # Based on the result of sampling, get reward.
-            actor_reward = self._get_reward(indice,
-                                            y,
-                                            n_gram=self.config.rl_n_gram
-                                            )
-            # |y_hat| = (batch_size, length, output_size)
-            # |indice| = (batch_size, length)
-            # |actor_reward| = (batch_size)
+# Take sampling process because set False for is_greedy.
+y_hat, indice = self.model.search(x,
+is_greedy=False,
+max_length=self.config.max_length
+)
+# Based on the result of sampling, get reward.
+actor_reward = self._get_reward(indice,
+y,
+n_gram=self.config.rl_n_gram
+)
+# |y_hat| = (batch_size, length, output_size)
+# |indice| = (batch_size, length)
+# |actor_reward| = (batch_size)
 
-            # Take samples as many as n_samples, and get average rewards for them.
-            # I figured out that n_samples = 1 would be enough.
-            baseline = []
-            with torch.no_grad():
-                for i in range(self.config.n_samples):
-                    _, sampled_indice = self.model.search(x,
-                                                          is_greedy=False,
-                                                          max_length=self.config.max_length
-                                                          )
-                    baseline += [self._get_reward(sampled_indice,
-                                                  y,
-                                                  n_gram=self.config.rl_n_gram
-                                                  )]
-                baseline = torch.stack(baseline).sum(dim=0).div(self.config.n_samples)
-                # |baseline| = (n_samples, batch_size) --> (batch_size)
+# Take samples as many as n_samples, and get average rewards for them.
+# I figured out that n_samples = 1 would be enough.
+baseline = []
+with torch.no_grad():
+for i in range(self.config.n_samples):
+_, sampled_indice = self.model.search(x,
+is_greedy=False,
+max_length=self.config.max_length
+)
+baseline += [self._get_reward(sampled_indice,
+y,
+n_gram=self.config.rl_n_gram
+)]
+baseline = torch.stack(baseline).sum(dim=0).div(self.config.n_samples)
+# |baseline| = (n_samples, batch_size) --> (batch_size)
 
-            # Now, we have relatively expected cumulative reward.
-            # Which score can be drawn from actor_reward subtracted by baseline.
-            final_reward = actor_reward - baseline
-            # |final_reward| = (batch_size)
+# Now, we have relatively expected cumulative reward.
+# Which score can be drawn from actor_reward subtracted by baseline.
+final_reward = actor_reward - baseline
+# |final_reward| = (batch_size)
 
-            # calcuate gradients with back-propagation
-            self._get_gradient(y_hat, indice, reward=final_reward)
+# calcuate gradients with back-propagation
+self._get_gradient(y_hat, indice, reward=final_reward)
 
-            # Simple math to show stats.
-            total_reward += float(final_reward.sum())
-            total_actor_reward += float(actor_reward.sum())
-            sample_cnt += int(actor_reward.size(0))
-            total_grad_norm += float(utils.get_grad_norm(self.model.parameters()))
+# Simple math to show stats.
+total_reward += float(final_reward.sum())
+total_actor_reward += float(actor_reward.sum())
+sample_cnt += int(actor_reward.size(0))
+total_grad_norm += float(utils.get_grad_norm(self.model.parameters()))
 
-            avg_reward = total_reward / sample_cnt
-            avg_actor_reward = total_actor_reward / sample_cnt
-            avg_grad_norm = total_grad_norm / (idx + 1)
+avg_reward = total_reward / sample_cnt
+avg_actor_reward = total_actor_reward / sample_cnt
+avg_grad_norm = total_grad_norm / (idx + 1)
 
-            if verbose is VERBOSE_BATCH_WISE:
-                progress_bar.set_postfix_str('|g_param|=%.2f rwd=%4.2f avg_frwd=%.2e BLEU=%.4f' % (avg_grad_norm,
-                                                                                                 float(actor_reward.sum().div(y.size(0))),
-                                                                                                 avg_reward,
-                                                                                                 avg_actor_reward
-                                                                                                 ))
+if verbose is VERBOSE_BATCH_WISE:
+progress_bar.set_postfix_str('|g_param|=%.2f rwd=%4.2f avg_frwd=%.2e BLEU=%.4f' % (avg_grad_norm,
+float(actor_reward.sum().div(y.size(0))),
+avg_reward,
+avg_actor_reward
+))
 
-            # In orther to avoid gradient exploding, we apply gradient clipping.
-            torch_utils.clip_grad_norm_(self.model.parameters(),
-                                        self.config.max_grad_norm
-                                        )
-            # Take a step of gradient descent.
-            optimizer.step()
+# In orther to avoid gradient exploding, we apply gradient clipping.
+torch_utils.clip_grad_norm_(self.model.parameters(),
+self.config.max_grad_norm
+)
+# Take a step of gradient descent.
+optimizer.step()
 
 
-            if idx >= len(progress_bar) * self.config.train_ratio_per_epoch:
-                break
+if idx >= len(progress_bar) * self.config.train_ratio_per_epoch:
+break
 
-        if verbose is VERBOSE_BATCH_WISE:
-            progress_bar.close()
+if verbose is VERBOSE_BATCH_WISE:
+progress_bar.close()
 
-        return avg_actor_reward, param_norm, avg_grad_norm
+return avg_actor_reward, param_norm, avg_grad_norm
 ```
 
 ## 실험 결과

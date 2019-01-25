@@ -6,11 +6,11 @@
 
 [워드넷(WordNet)](https://wordnet.princeton.edu/)은 1985년부터 심리학 교수인 George Armitage Miller 교수의 지도하에 프린스턴 대학에서 만든 프로그램 입니다. 처음에는 주로 기계번역(Machine Translation)을 돕기 위한 목적으로 만들어졌으며, 따라서 동의어 집합(Synset) 또는 상위어(Hypernym)나 하위어(Hyponym)에 대한 정보가 특히 잘 구축되어 있는 것이 장점 입니다. 단어에 대한 상위어와 하위어 정보를 구축하게 됨으로써, 유방향 비순환 그래프(Directed Acyclic Graph, DAG)를 이루게 됩니다. 트리 구조가 아닌 이유는 하나의 노드가 여러 상위 노드를 가질 수 있기 때문입니다.
 
-![각 단어별 top-1 의미의 top-1 상위어만 선택하여 트리 구조로 나타낸 경우](../assets/wsd-wordnet_hierarchy.png)
+![각 단어별 top-1 의미의 top-1 상위어만 선택하여 트리 구조로 나타낸 경우](../assets/05-03-01.png)
 
 워드넷은 프로그램으로 제공되므로 다운로드 받아 설치할 수도 있고, [워드넷 웹사이트](http://wordnetweb.princeton.edu/perl/webwn)에서 바로 이용 할 수도 있습니다. 또한 NLTK에 랩핑(wrapping)되어 포함되어 있어, import하여 사용 가능합니다. 아래는 워드넷 웹사이트에서 'bank'를 검색한 결과 입니다.
 
-![[워드넷 웹사이트](http://wordnetweb.princeton.edu/perl/webwn)에서 단어 'bank'를 검색 한 결과](../assets/wsd-wordnet_screenshot.png)
+![[워드넷 웹사이트](http://wordnetweb.princeton.edu/perl/webwn)에서 단어 'bank'를 검색 한 결과](../assets/05-03-02.png)
 
 그림에서와 같이 'bank'라는 단어에 대해서 명사(noun)일때의 의미 10개, 동사(verb)인 경우의 의미 8개를 정의 해 놓았습니다. 명사 'bank#2'의 경우에는 여러 다른 표현(depository finaancial institution#1, banking concern#1)들도 같이 게시되어 있는데, 이것이 동의어 집합(synset) 입니다.
 
@@ -31,13 +31,13 @@
 from nltk.corpus import wordnet as wn
 
 def get_hypernyms(synset):
-    current_node = synset
-    while True:
-        print(current_node)
-        hypernym = current_node.hypernyms()
-        if len(hypernym) == 0:
-            break
-        current_node = hypernym[0]
+current_node = synset
+while True:
+print(current_node)
+hypernym = current_node.hypernyms()
+if len(hypernym) == 0:
+break
+current_node = hypernym[0]
 ```
 
 위의 코드를 사용하면 워드넷에서 특정 단어의 최상위 부모 노드까지의 경로를 구할 수 있습니다. 아래와 같이 'policeman'은 'firefighter', 'sheriff'와 매우 비슷한 경로를 가짐을 알 수 있습니다. 'student'와도 매우 비슷하지만, 'mailman'과 좀 더 비슷함을 알 수 있습니다.
@@ -99,13 +99,13 @@ Synset('physical_entity.n.01')
 Synset('entity.n.01')
 ```
 
-위로 부터 얻어낸 정보들을 취합하여 그래프로 나타내면 아래와 같습니다. 그림에서 각 최하단 노드들은 코드에서 쿼리로 주어진 단어들이 됩니다. 
+위로 부터 얻어낸 정보들을 취합하여 그래프로 나타내면 아래와 같습니다. 그림에서 각 최하단 노드들은 코드에서 쿼리로 주어진 단어들이 됩니다.
 
-![각 단어들의 쿼리 결과 구조도](../assets/wsd-wordnet_hierarchy.png)
+![각 단어들의 쿼리 결과 구조도](../assets/05-03-03.png)
 
 이때 각 노드들간에 거리를 우리는 구할 수 있습니다. 아래의 그림에 따르면 'student'에서 'fireman'으로 가는 최단거리에는 'enrollee', 'person', 'preserver', 'defender' 노드들이 위치하고 있습니다. 따라서 'student'와 'fireman'의 거리는 5임을 알 수 있습니다.
 
-!['student'와 'fireman' 사이에 위치한 노드들(점선)](../assets/wsd-wordnet_distance.png)
+!['student'와 'fireman' 사이에 위치한 노드들(점선)](../assets/05-03-04.png)
 
 이처럼 우리는 각 최하단 노드 간의 최단 거리를 알 수 있고, 이것을 유사도로 치환하여 활용할 수 있습니다. 당연히 거리가 멀수록 단어간의 유사도는 떨어질테니, 아래와 같은 공식을 적용 해 볼 수 있습니다.
 

@@ -20,7 +20,7 @@ $$\sum_{i=1}^N{P(\text{x}=x_i)}=\sum_{i=1}^N{P(x_i)}=1$$
 
 보통 우리가 접하는 확률 변수는 discrete(불연속, 이산)한 값인 경우가 많습니다. 주사위가 하나의 예가 될 수 있습니다. 이처럼 discrete한 확률 변수를 다루는 확률 분포(probabiliy distribution)를 그리면 아래와 같이 나타낼 수 있습니다.
 
-![주사위의 확률 질량 함수(probability mass function)](../assets/basic_math-pmf.png)
+![주사위의 확률 질량 함수(probability mass function)](../assets/02-02-01.png)
 
 우리는 이와 같이 discrete한 랜덤 변수에 대한 확률 함수를 확률 질량 함수(probability mass function)이라 합니다. 위의 분포에서 알 수 있듯이, 우리는 어떤 값에 대한 확률값을 바로 알 수 있습니다. <comment> $P(\text{x}=3)=1/6$ </comment>
 
@@ -38,7 +38,7 @@ $$\begin{gathered}
 
 위와 같이 $p(x)$ 는 꼭 1보다 작을 필요는 없으며, $p(x)$ 를 적분한 값은 항상 1 입니다. 우리는 위의 확률 분포 함수를 continuous한 랜덤 변수에 대한 확률 밀도 함수(probability density function)라고 합니다. 가우시안(Guassian 또는 정규) 확률 분포 함수가 가장 좋은 예가 될 수 있습니다.
 
-![가우시안 분포의 확률 밀도 함수(probability density funcion)](../assets/basic_math-pdf.png)
+![가우시안 분포의 확률 밀도 함수(probability density funcion)](../assets/02-02-02.png)
 
 Continuous 확률 분포 함수에서 확률 값이란 어떠한 구간의 넓이를 말합니다. 따라서 우리는 특정 값 $x$ 가 주어졌을 때, 확률 값을 구할 수 없습니다. 확률 밀도 값만 구할 수 있을 뿐 입니다. 확률 값을 구하기 위해서는 구간(예를 들어 $x_1$ 과 $x_2$ )이 주어져야 합니다. 위의 그림에서는 $-1\sigma$ 에서 $1\sigma$ 까지의 넓이가 68.27% 임을 알 수 있습니다.
 
@@ -92,7 +92,7 @@ $$P(A|B)=\frac{P(B|A)P(A)}{P(B)}$$
 
 마지막으로 Marginal 확률 분포에 대해 이야기 해보겠습니다. 아래 그림에서와 같이 두 랜덤 변수의 결합 확률 분포(joint probability distribution)가 있을 때, 하나의 랜덤 변수에 대해서 적분을 수행한 결과를 말합니다.
 
-![Marginal 확률 분포의 개념](../assets/basic_math-marginal.png)
+![Marginal 확률 분포의 개념](../assets/02-02-03.png)
 
 이는 마치 두 랜덤 변수의 분포가 3차원 공간에 존재할 때에, 한쪽으로만 손전등을 비추었을 때 생기는 그림자와 같다고 볼 수 있을 것 입니다. 이를 수식으로 나타내면 아래와 같습니다.
 

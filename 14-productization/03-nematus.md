@@ -4,7 +4,7 @@
 
 ## 서브워드 분절
 
-![BPE 알고리즘 - 출처: [[Sennrich at el.2016]](http://www.aclweb.org/anthology/P16-1162)](../assets/nmt-edinburgh-1.png){ width=400px }
+![BPE 알고리즘 - 출처: [[Sennrich at el.2016]](http://www.aclweb.org/anthology/P16-1162)](../assets/14-03-01.png){ width=400px }
 
 에딘버러 대학은 BPE 방식을 통한 분절 방식을 처음 제안한 곳 입니다. 따라서 그들의 시스템 또한 BPE 방식을 사용하여 분절을 수행하였습니다. 이제 우리는 서브워드(subword) 기반의 분절 방식이 하나의 정석이 되었음을 알 수 있습니다. 위의 pseudo 코드는 BPE 알고리즘에 대해서 간략하게 소개한 것 입니다. 전처리 챕터에서 소개했지만, 서브워드 방식은 위와 같이 가장 많이 등장한 문자열(character sequence)에 대해서 합쳐주며(merge) 이터레이션을 반복하고, 원하는 어휘(vocabulary) 숫자가 채워질때가지 반복합니다.
 

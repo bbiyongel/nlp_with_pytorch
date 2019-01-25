@@ -6,7 +6,7 @@
 
 2016년부터 주목받기 시작하여 2017년에 가장 큰 화제였던 분야는 단연 적대적 생성 네트워크(GAN)라고 말할 수 있습니다. Variational Auto Encoder(VAE)와 함께 Generative learning을 대표하는 방법 중에 하나입니다. GAN을 통해서 우리는 사실같은 이미지를 생성해내고 합성해내는 일들을 딥러닝을 통해 할 수 있게 되었습니다. 이러한 합성/생성 된 이미지들을 통해, 자율주행과 같은 실생활에 중요하고 어렵지만 훈련 데이터셋을 얻기 힘든 문제들을 해결 하는데 큰 도움을 얻을 수 있으리라고 예상 됩니다. <comment> 실제로 GTA게임을 통해 자율주행을 훈련하려는 시도는 이미 유명합니다. </comment>
 
-![GAN의 전형적인 구조](https://sthalles.github.io/assets/dcgan/GANs.png)
+![GAN의 전형적인 구조](../assets/12-01-01.png)
 
 $$\min_{G}\max_{D}\mathcal{L}(D,G)=\mathbb{E}_{\text{x}\sim p_r(\text{x})}\Big[\log{D(\text{x})}\Big]+\mathbb{E}_{\text{z}\sim p_z(\text{z})}\Big[\log{\big(1-D(G(\text{z}))\big)}\Big]$$
 
@@ -14,7 +14,7 @@ $$\min_{G}\max_{D}\mathcal{L}(D,G)=\mathbb{E}_{\text{x}\sim p_r(\text{x})}\Big[\
 
 ### 왜 GAN이 중요한가?
 
-![L1 손실함수와 GAN의 생성 결과물 비교 (출처: pix2pix)](../assets/rl-mse_vs_gan.png)
+![L1 손실함수와 GAN의 생성 결과물 비교 (출처: pix2pix)](../assets/12-01-02.png)
 
 마찬가지의 이유로 GAN또한 주목받게 됩니다. 예를 들어, 생성된 이미지와 정답 이미지 간의 차이를 비교하는데 MSE(Mean Square Error)방식을 사용하게 되면, 결국 이미지는 MSE를 최소화 하기 위해서 자신의 학습했던 확률 분포의 중간으로 출력을 낼 수 밖에 없습니다. 예를 들어 사람의 얼굴을 일부 가리고 가려진 부분을 채워 넣도록 훈련한다면, MSE 손실함수(loss function) 아래에서는 각 픽셀마다 가능한 확률 분포의 평균값으로 채워 질 겁니다. 이것이 MSE를 최소화 하는 길이기 때문입니다. 하지만 우리는 그런 흐려진 이미지를 잘 생성된 이미지라고 하지 않습니다. 따라서 사실적인 표현을 위해서는 MSE보다 정교한 목적함수(objective function)를 쓸 수 밖에 없습니다. GAN에서는 그러한 복잡한 함수를 $D$ 가 근사하여 해결한 것 입니다.
 
@@ -22,11 +22,11 @@ $$\min_{G}\max_{D}\mathcal{L}(D,G)=\mathbb{E}_{\text{x}\sim p_r(\text{x})}\Big[\
 
 그렇다면 번역 또는 자연어생성에도 위의 아이디어를 적용 해 보는 것도 매우 멋진 일이 될 것 같습니다. 예를 들어 크로스 엔트로피를 사용하여 바로 학습하기 보단, 실제 코퍼스에서 나온 문장인지 sequence-to-sequence에서 나온 문장인지 판별하는 디스크리미네이터 $D$ 를 두어서, sequence-to-sequence에서 나온 문장이 진짜 문장과 같아지도록 훈련하면 정말 멋질 것 같습니다.
 
-![GAN을 sequence-to-sequence에 적용하자](../assets/rl-seq2seq_gan.png)
+![GAN을 sequence-to-sequence에 적용하자](../assets/12-01-03.png)
 
 하지만 아쉽게도 이 멋진 아이디어는 곧바로 적용할 수 없습니다. Sequence-to-sequence의 결과는 discrete 확률 분포입니다. 여기서 샘플링 또는 $\text{argmax}$ 를 통해서 얻어지는 결과물은 discrete한 값일 것이고, 따라서 one-hot 벡터로 표현되어야 할 것 입니다. 하지만 이 과정은 확률적인(stochastic) 프로세스로 그래디언트를 back-propagation 할 수 없습니다. 따라서 디스크리미네이터 $D$ 가 맞추거나 속은 여부가 sequence-to-sequence $G$ 로 전달 될 수 없고, 따라서 학습이 불가능 합니다.
 
-![샘플링 과정은 그래디언트 전달이 어렵습니다.](../assets/rl-stochastic_cannot_back_prop.png)
+![샘플링 과정은 그래디언트 전달이 어렵습니다.](../assets/12-01-04.png)
 
 ## GAN과 자연어생성
 

@@ -23,15 +23,15 @@ $$H(P)=-\mathbb{E}_{\text{x}\sim P(\text{x})}[\log{P(\text{x})}]=-\sum_{x\in\mat
 
 이때, 엔트로피는 분포가 얼마나 퍼져(flat)있는지, 뾰족(sharp)한지를 가늠해 볼 수 있는 척도라고 볼 수 있습니다. 보통 분산이 작을수록 작을수록 뾰족한 모양을 갖게 됩니다. 이 말은 뾰족한 확률 분포일수록 특정 값 $x$ 에 대해서 확률이 높다는 것 입니다.
 
-![flat한 분포와 sharp한 분포](../assets/basic_math-flat_and_sharp.png)
+![flat한 분포와 sharp한 분포](../assets/02-06-01.png)
 
 여기서 다시한번 하나의 개념이 추가 됩니다. 아마 기존의 딥러닝을 통해 분류 문제(classification problem)를 해결해보고자 한 독자분들은 익히 들어보셨을 이름입니다. 크로스 엔트로피(cross entropy)는 $P$ 분포함수에서 샘플링한 $x$ 를 통해 $Q$ 분포함수의 평균 정보량을 나타낸 것 입니다. 크로스라는 단어에서 알 수 있듯이, 다른 분포 $P$ 를 사용하여 대상 분포 $Q$ 의 엔트로피를 측정 합니다.
 
-![크로스 엔트로피의 직관적인 표현](../assets/basic_math-cross_entropy_intuition.png)
+![크로스 엔트로피의 직관적인 표현](../assets/02-06-02.png)
 
 $$H(P,Q)=-\mathbb{E}_{\text{x}\sim P(\text{x})}[\log{Q(\text{x})}]=-\sum_{x\in\mathcal{X}}{P(x)\log{Q(x)}}$$
 
- $-\log$ 를 취하였기 때문에, 분포 $P$ 와 분포 $Q$ 가 비슷한 모양일수록 크로스 엔트로피 $H(P,Q)$ 는 더 작은 값을 갖게 됩니다. 그러므로 우리는 그동안 분류 문제에서 크로스 엔트로피 손실 함수(loss function)를 사용하여, 손실 함수의 값이 최소가 되도록 그래디언트 디센트(gradient descent)를 통해 뉴럴 네트워크를 훈련하여 온 것 입니다. 즉, 우리가 알아내고 싶은 ground-truth 확률 분포 $P$ 에서 샘플링한 데이터 $\text{x}$ 를 통해 뉴럴 네트워크 확률 분포 $P_\theta$ 에 넣어 크로스 엔트로피가 최소가 되도록 그래디언트 디센트를 수행해 온 것 입니다.
+$-\log$ 를 취하였기 때문에, 분포 $P$ 와 분포 $Q$ 가 비슷한 모양일수록 크로스 엔트로피 $H(P,Q)$ 는 더 작은 값을 갖게 됩니다. 그러므로 우리는 그동안 분류 문제에서 크로스 엔트로피 손실 함수(loss function)를 사용하여, 손실 함수의 값이 최소가 되도록 그래디언트 디센트(gradient descent)를 통해 뉴럴 네트워크를 훈련하여 온 것 입니다. 즉, 우리가 알아내고 싶은 ground-truth 확률 분포 $P$ 에서 샘플링한 데이터 $\text{x}$ 를 통해 뉴럴 네트워크 확률 분포 $P_\theta$ 에 넣어 크로스 엔트로피가 최소가 되도록 그래디언트 디센트를 수행해 온 것 입니다.
 
 $$\begin{gathered}
 \theta\leftarrow\theta-\nabla_\theta\mathcal{L}(\theta) \\

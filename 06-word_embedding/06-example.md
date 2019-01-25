@@ -51,40 +51,40 @@ $ ./fasttext skipgram
 Empty input or output path.
 
 The following arguments are mandatory:
-  -input              training file path
-  -output             output file path
+-input              training file path
+-output             output file path
 
 The following arguments are optional:
-  -verbose            verbosity level [2]
+-verbose            verbosity level [2]
 
 The following arguments for the dictionary are optional:
-  -minCount           minimal number of word occurences [5]
-  -minCountLabel      minimal number of label occurences [0]
-  -wordNgrams         max length of word ngram [1]
-  -bucket             number of buckets [2000000]
-  -minn               min length of char ngram [3]
-  -maxn               max length of char ngram [6]
-  -t                  sampling threshold [0.0001]
-  -label              labels prefix [__label__]
+-minCount           minimal number of word occurences [5]
+-minCountLabel      minimal number of label occurences [0]
+-wordNgrams         max length of word ngram [1]
+-bucket             number of buckets [2000000]
+-minn               min length of char ngram [3]
+-maxn               max length of char ngram [6]
+-t                  sampling threshold [0.0001]
+-label              labels prefix [__label__]
 
 The following arguments for training are optional:
-  -lr                 learning rate [0.05]
-  -lrUpdateRate       change the rate of updates for the learning rate [100]
-  -dim                size of word vectors [100]
-  -ws                 size of the context window [5]
-  -epoch              number of epochs [5]
-  -neg                number of negatives sampled [5]
-  -loss               loss function {ns, hs, softmax} [ns]
-  -thread             number of threads [12]
-  -pretrainedVectors  pretrained word vectors for supervised learning []
-  -saveOutput         whether output params should be saved [false]
+-lr                 learning rate [0.05]
+-lrUpdateRate       change the rate of updates for the learning rate [100]
+-dim                size of word vectors [100]
+-ws                 size of the context window [5]
+-epoch              number of epochs [5]
+-neg                number of negatives sampled [5]
+-loss               loss function {ns, hs, softmax} [ns]
+-thread             number of threads [12]
+-pretrainedVectors  pretrained word vectors for supervised learning []
+-saveOutput         whether output params should be saved [false]
 
 The following arguments for quantization are optional:
-  -cutoff             number of words and ngrams to retain [0]
-  -retrain            whether embeddings are finetuned if a cutoff is applied [false]
-  -qnorm              whether the norm is quantized separately [false]
-  -qout               whether the classifier is quantized [false]
-  -dsub               size of each sub-vector [2]
+-cutoff             number of words and ngrams to retain [0]
+-retrain            whether embeddings are finetuned if a cutoff is applied [false]
+-qnorm              whether the norm is quantized separately [false]
+-qout               whether the classifier is quantized [false]
+-dsub               size of each sub-vector [2]
 ```
 
 <comment> FastText는 단어 임베딩 벡터 뿐만 아니라 추가적으로 텍스트 분류를 훈련하는 기능[[Joulin et al.2016](https://arxiv.org/abs/1607.01759)]도 갖추고 있으니 참고 바랍니다. </comment>
@@ -93,10 +93,10 @@ The following arguments for quantization are optional:
 
 위의 방법을 통해 얻어진 벡터들은 시각화 툴을 사용하여 시각화하면 쉽게 훈련 결과에 대해서 살펴 볼 수 있습니다. 다만 아쉽게도 파이토치에서는 시각화 툴을 제공하지 않습니다. 하지만 우리는 텐서플로우에서 제공하는 텐서보드(TensorBoard)를 활용하면 쉽고 간편하게 훌륭한 시각화를 수행할 수 있습니다.
 
-![텐서보드를 통한 시각화 예제](https://2.bp.blogspot.com/-Uql7bl2KEYM/WEfQ4Kl_0YI/AAAAAAAABck/GkktuPM8KoMcMl2Tot6GzH3-NgwPNETMgCLcB/s640/image03.png)
+![텐서보드를 통한 시각화 예제](../assets/06-06-01.png)
 
 더군다나 텐서보드는 interactive한 사용자 인터페이스를 갖고 있기 때문에, 3차원으로 시각화 한 경우에도 마우스를 통해서 시점을 이리저리 옮겨가며 임베딩 벡터의 결과를 살펴볼 수 있다는 장점이 있습니다.
 
-![텐서보드를 통한 시각화 예제](https://2.bp.blogspot.com/-yL_425HS2ck/WEDZLk5cq0I/AAAAAAAABcI/kwy4F4Cmfi4jyG_InIiYu6F7y2-BKTXWQCLcB/s640/embedding-mnist.gif)
+![텐서보드를 통한 시각화 예제](../assets/06-06-02.gif)
 
 이밖에도 텐서보드는 뉴럴네트워크 훈련에 있어서 유용한 기능들을 많이 제공하므로, 유용하게 사용할 수 있습니다. 다만 우리는 파이토치를 사용하기 때문에, 파이토치 텐서를 NumPy 값으로 변환하여 텐서보드에서 사용해야 합니다. 구글링을 해 보면 이와 관련하여 간편하게 사용할 수 있도록 도와주는 공개 코드들이 많이 있으니 참고 바랍니다.

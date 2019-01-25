@@ -46,18 +46,18 @@ $ ngram -help
 아래는 주로 SRILM에서 사용되는 프로그램들의 주요 인자에 대한 설명입니다.
 
 - ngram-count: LM을 훈련
-    - vocab: lexicon file name
-    - text: training corpus file name 
-    - order: n-gram count 
-    - write: output countfile file name 
-    - unk: mark OOV as
-    - kndiscountn: Use Kneser-Ney discounting for N-grams of order n
+- vocab: lexicon file name
+- text: training corpus file name
+- order: n-gram count
+- write: output countfile file name
+- unk: mark OOV as
+- kndiscountn: Use Kneser-Ney discounting for N-grams of order n
 
 
 - ngram: LM을 활용
-    - ppl: calculate perplexity for test file name
-    - order: n-gram count
-    - lm: language model file name
+- ppl: calculate perplexity for test file name
+- order: n-gram count
+- lm: language model file name
 
 ### 언어모델 만들기
 
@@ -101,17 +101,17 @@ file ./data/test.refined.tok.bpe.txt: 1000 sentences, 13302 words, 32 OOVs
 
 ```
 ▁▁I ▁▁m ▁▁pleased ▁▁with ▁▁the ▁▁way ▁▁we ▁▁handled ▁▁it ▁.
-	p( ▁▁I | <s> ) 	= [2gram] 0.06806267 [ -1.167091 ]
-	p( ▁▁m | ▁▁I ...) 	= [1gram] 6.597231e-06 [ -5.180638 ]
-	p( ▁▁pleased | ▁▁m ...) 	= [1gram] 6.094323e-06 [ -5.215075 ]
-	p( ▁▁with | ▁▁pleased ...) 	= [2gram] 0.1292281 [ -0.8886431 ]
-	p( ▁▁the | ▁▁with ...) 	= [2gram] 0.05536767 [ -1.256744 ]
-	p( ▁▁way | ▁▁the ...) 	= [3gram] 0.003487763 [ -2.457453 ]
-	p( ▁▁we | ▁▁way ...) 	= [3gram] 0.1344272 [ -0.8715127 ]
-	p( ▁▁handled | ▁▁we ...) 	= [1gram] 1.902798e-06 [ -5.720607 ]
-	p( ▁▁it | ▁▁handled ...) 	= [1gram] 0.002173233 [ -2.662894 ]
-	p( ▁. | ▁▁it ...) 	= [2gram] 0.05907027 [ -1.228631 ]
-	p( </s> | ▁. ...) 	= [3gram] 0.8548805 [ -0.06809461 ]
+p( ▁▁I | <s> ) 	= [2gram] 0.06806267 [ -1.167091 ]
+p( ▁▁m | ▁▁I ...) 	= [1gram] 6.597231e-06 [ -5.180638 ]
+p( ▁▁pleased | ▁▁m ...) 	= [1gram] 6.094323e-06 [ -5.215075 ]
+p( ▁▁with | ▁▁pleased ...) 	= [2gram] 0.1292281 [ -0.8886431 ]
+p( ▁▁the | ▁▁with ...) 	= [2gram] 0.05536767 [ -1.256744 ]
+p( ▁▁way | ▁▁the ...) 	= [3gram] 0.003487763 [ -2.457453 ]
+p( ▁▁we | ▁▁way ...) 	= [3gram] 0.1344272 [ -0.8715127 ]
+p( ▁▁handled | ▁▁we ...) 	= [1gram] 1.902798e-06 [ -5.720607 ]
+p( ▁▁it | ▁▁handled ...) 	= [1gram] 0.002173233 [ -2.662894 ]
+p( ▁. | ▁▁it ...) 	= [2gram] 0.05907027 [ -1.228631 ]
+p( </s> | ▁. ...) 	= [3gram] 0.8548805 [ -0.06809461 ]
 1 sentences, 10 words, 0 OOVs
 0 zeroprobs, logprob= -26.71738 ppl= 268.4436 ppl1= 469.6111
 ```

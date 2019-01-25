@@ -88,5 +88,5 @@ ___
 서브워드 단위 분절을 수행하기 위한 오픈소스들은 다음과 같습니다. 구글의 SentencePiece 모듈이 속도가 빠르지만, 논문 원저자의 파이썬 코드는 수정이 쉬워 편의에 따라 사용하면 됩니다.
 
 - Sennrich(원저자)의 깃허브: https://github.com/rsennrich/subword-nmt
-    - 본서의 저자가 수정한 버전: https://github.com/kh-kim/subword-nmt
+- 본서의 저자가 수정한 버전: https://github.com/kh-kim/subword-nmt
 - Google의 SentencePiece 모듈: https://github.com/google/sentencepiece

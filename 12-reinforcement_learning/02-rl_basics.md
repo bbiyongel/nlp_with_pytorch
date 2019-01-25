@@ -6,7 +6,7 @@
 
 먼저, 강화학습은 어떤 형태로 구성이 되어 있는지 이야기 해 보겠습니다. 강화학습은 어떠한 객체가 주어진 환경에서 상황에 따라 어떻게 행동해야 할지 학습하는 방법에 대한 학문입니다. 그러므로 강화학습은 아래와 같은 요소들로 구성되어 동작 합니다.
 
-![강화학습이 동작하는 과정](../assets/rl-universe.png)
+![강화학습이 동작하는 과정](../assets/12-02-01.png)
 
 처음 상태(state) $S_t$ (t=0)을 받아서 에이전트(agent)는 자신의 정책에 따라 행동(action) $A_t$ 를 선택합니다. 그럼 environment(환경)는 에이전트로부터 선택된 행동 $A_t$ 를 받아 보상(reward) $R_{t+1}$ 과 새롭게 바뀐 상태(state) $S_{t+1}$ 을 반환합니다. 그럼 에이전트는 다시 그것을 받아 주어진 기준에 따라 판단하여 다음 행동을 선택하게 됩니다. 따라서 아래와 같이 상태, 행동과 보상이 시퀀스(sequence)로 나타나게 됩니다.
 
@@ -26,7 +26,7 @@ $$P(S'|S, A)$$
 
 이제 우리는 MDP 아래에서 environment(환경)와 에이전트가 상태와 보상, 행동을 주고 받으며 나아가는 과정을 표현 할 수 있습니다.
 
-![가위바위보](../assets/rl-rpc.png)
+![가위바위보](../assets/12-02-02.png)
 
 ## 보상
 
@@ -50,7 +50,7 @@ $$\pi(a|s)=P(A_t=a|S_t=s)$$
 
 따라서 우리는 마음속의 정책에 따라 비가 오는 상태(state)에서 자장면과 짬뽕 중에 어떤 음식을 먹을지 확률적으로 선택 할 수 있고, 맑은 날에도 다른 확률 분포 중에서 선택 할 수 있습니다.
 
-![가장 어려운 고민](../assets/rl-policy-choice.png)
+![가장 어려운 고민](../assets/12-02-03.png)
 
 ## 가치 함수 (Value Function)
 
@@ -70,7 +70,7 @@ $$q_\pi(s,a) \doteq \mathbb{E}_\pi[G_t|S_t=s,A_t=a]=\mathbb{E}_\pi\bigg[\sum_{k=
 
 가치함수와 행동가치함수의 정의에 따라서 우리는 이상적인 가치함수와 행동가치함수를 정의할 때 벨만 방정식(Bellman equation)의 형태로 아래와 같이 나타낼 수 있습니다.
 
-![백트래킹과 다이나믹 프로그래밍](../assets/rl-exhaustive_search_vs_dp.png)
+![백트래킹과 다이나믹 프로그래밍](../assets/12-02-04.png)
 
 $$\begin{aligned}
 v_*(s)&=\underset{a}{\max}~\mathbb{E}\Big[R_{t+1}+\gamma{v_*}(S_{t+1})|S_t=s,A_t=a\Big] \\
@@ -101,7 +101,7 @@ $$V(S_t)\leftarrow V(S_t)+\alpha\big[R_{t+1}+\gamma V(S_{t+1})-V(S_t)\big]$$
 <!--
 ## Policy Iteration
 
-![](../assets/rl-policy_iteration.png)
+![](../assets/12-02-05.png)
 
 ### Policy Evaluation
 
@@ -136,7 +136,7 @@ $$Q(S_t,A_t) \leftarrow Q(S_t,A_t)+\alpha\Big[\overbrace{R_{t+1}+\gamma\max_aQ(S
 
 이처럼 상황과 행동을 근사하여 문제를 해결한다고 할 때, 뉴럴 네트워크는 매우 훌륭한 해결 방법이 될 수 있습니다. 딥마인드(DeepMind)는 신경망을 사용하여 근사한 큐러닝을 통해 아타리(Atari) 게임을 훌륭하게 플레이하는 강화학습 방법을 제시하였고, 이를 deep Q-learning (or DQN)이라고 이름 붙였습니다.
 
-![뉴럴 네트워크를 활용한 큐 러닝의 개요](../assets/rl-atari.png)
+![뉴럴 네트워크를 활용한 큐 러닝의 개요](../assets/12-02-06.png)
 
 $$Q(S_t,A_t) \leftarrow \underbrace{Q(S_t,A_t)}_{\text{Approximated}}+\alpha\Big[R_{t+1}+\gamma\max_aQ(S_{t+1},a)-Q(S_t,A_t)\Big]$$
 

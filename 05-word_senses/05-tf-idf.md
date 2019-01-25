@@ -24,73 +24,73 @@ ___
 
 ```python
 def get_term_frequency(document, word_dict=None):
-    if word_dict is None:
-        word_dict = {}
-    words = document.split()
+if word_dict is None:
+word_dict = {}
+words = document.split()
 
-    for w in words:
-        word_dict[w] = 1 + (0 if word_dict.get(w) is None else word_dict[w])
+for w in words:
+word_dict[w] = 1 + (0 if word_dict.get(w) is None else word_dict[w])
 
-    return word_dict
+return word_dict
 ```
 
 그리고 문서들이 주어졌을 때, 각 단어들이 몇개의 문서에서 나타났는지 세는 함수는 아래와 같이 구현 할 수 있습니다.
 
 ```python
 def get_document_frequency(documents):
-    dicts = []
-    vocab = set([])
-    df = {}
+dicts = []
+vocab = set([])
+df = {}
 
-    for d in documents:
-        tf = get_term_frequency(d)
-        dicts += [tf]
-        vocab = vocab | set(tf.keys())
+for d in documents:
+tf = get_term_frequency(d)
+dicts += [tf]
+vocab = vocab | set(tf.keys())
 
-    for v in list(vocab):
-        df[v] = 0
-        for dict_d in dicts:
-            if dict_d.get(v) is not None:
-                df[v] += 1
+for v in list(vocab):
+df[v] = 0
+for dict_d in dicts:
+if dict_d.get(v) is not None:
+df[v] += 1
 
-    return df
+return df
 ```
 
 그럼 아래와 같은 이름으로 위의 문서들이 각 변수에 들어있다고 가정해 보도록 하겠습니다.
 
 ```python
-doc1, doc2, doc3 
+doc1, doc2, doc3
 ```
 
 그럼 TF-IDF를 계산하는 최종 함수는 아래와 같이 구현할 수 있을 것 입니다.
 
 ```python
 def get_tfidf(docs, top_k=30):
-    vocab = {}
-    tfs = []
-    for d in docs:
-        vocab = get_term_frequency(d, vocab)
-        tfs += [get_term_frequency(d)]
-    df = get_document_frequency(docs)
+vocab = {}
+tfs = []
+for d in docs:
+vocab = get_term_frequency(d, vocab)
+tfs += [get_term_frequency(d)]
+df = get_document_frequency(docs)
 
-    from operator import itemgetter
-    import numpy as np
-    sorted_vocab = sorted(vocab.items(), key=itemgetter(1), reverse=True)
+from operator import itemgetter
+import numpy as np
+sorted_vocab = sorted(vocab.items(), key=itemgetter(1), reverse=True)
 
-    stats = []
-    for v, freq in sorted_vocab:
-        tfidfs = []
-        for idx in range(len(docs)):
-            if tfs[idx].get(v) is not None:
-                tfidfs += [tfs[idx][v] * np.log(len(docs) / df[v])]
-            else:
-                tfidfs += [0]
+stats = []
+for v, freq in sorted_vocab:
+tfidfs = []
+for idx in range(len(docs)):
+if tfs[idx].get(v) is not None:
+tfidfs += [tfs[idx][v] * np.log(len(docs) / df[v])]
+else:
+tfidfs += [0]
 
-        stats += [(v, freq, tfidfs, max(tfidfs))]
+stats += [(v, freq, tfidfs, max(tfidfs))]
 
-    sorted_tfidfs = sorted(stats, key=itemgetter(3), reverse=True)[:top_k]
-    for v, freq, tfidfs, max_tfidfs in sorted_tfidfs:
-        print('%s\t%d\t%s' % (v, freq, '\t'.join(['%.4f' % tfidfs[i] for i in range(len(docs))])))
+sorted_tfidfs = sorted(stats, key=itemgetter(3), reverse=True)[:top_k]
+for v, freq, tfidfs, max_tfidfs in sorted_tfidfs:
+print('%s\t%d\t%s' % (v, freq, '\t'.join(['%.4f' % tfidfs[i] for i in range(len(docs))])))
 ```
 
 ```python

@@ -39,34 +39,34 @@ import sys
 STR = '▁'
 
 if __name__ == "__main__":
-    ref_fn = sys.argv[1]
+ref_fn = sys.argv[1]
 
-    f = open(ref_fn, 'r')
+f = open(ref_fn, 'r')
 
-    for ref in f:
-        ref_tokens = ref.strip().split(' ')
-        tokens = sys.stdin.readline().strip().split(' ')
+for ref in f:
+ref_tokens = ref.strip().split(' ')
+tokens = sys.stdin.readline().strip().split(' ')
 
-        idx = 0
-        buf = []
+idx = 0
+buf = []
 
-        # We assume that stdin has more tokens than reference input.
-        for ref_token in ref_tokens:
-            tmp_buf = []
+# We assume that stdin has more tokens than reference input.
+for ref_token in ref_tokens:
+tmp_buf = []
 
-            while idx < len(tokens):
-                tmp_buf += [tokens[idx]]
-                idx += 1
+while idx < len(tokens):
+tmp_buf += [tokens[idx]]
+idx += 1
 
-                if ''.join(tmp_buf) == ref_token:
-                    break
+if ''.join(tmp_buf) == ref_token:
+break
 
-            if len(tmp_buf) > 0:
-                buf += [STR + tmp_buf[0]] + tmp_buf[1:]
+if len(tmp_buf) > 0:
+buf += [STR + tmp_buf[0]] + tmp_buf[1:]
 
-        sys.stdout.write(' '.join(buf) + '\n')
+sys.stdout.write(' '.join(buf) + '\n')
 
-    f.close()
+f.close()
 ```
 
 위 스크립트의 사용 방법은 아래와 같습니다. 주로 다른 분절 모듈의 수행 후에 바로 붙여 사용하여 좋습니다.
@@ -89,9 +89,9 @@ sed "s/ //g" | sed "s/▁▁/ /g" | sed "s/▁//g" | sed "s/^\s//g"
 import sys
 
 if __name__ == "__main__":
-    for line in sys.stdin:
-        if line.strip() != "":
-            line = line.strip().replace(' ', '').replace('▁▁', ' ').replace('▁', '').strip()
+for line in sys.stdin:
+if line.strip() != "":
+line = line.strip().replace(' ', '').replace('▁▁', ' ').replace('▁', '').strip()
 
-            sys.stdout.write(line + '\n')
+sys.stdout.write(line + '\n')
 ```
