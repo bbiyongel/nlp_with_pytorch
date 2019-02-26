@@ -1,3 +1,5 @@
 # Neural Machine Translation
 
-![[Kyunghyun Cho](http://www.kyunghyuncho.me/)](../assets/10-00-01.jpg)
+![[Kyunghyun Cho: Assistant Professor at NYU](http://www.kyunghyuncho.me/)](../assets/10-00-01.jpg)
+
+번역은 오랜동안 인류에게 난제로 남아있었습니다. 항공과 통신 기술의 발전으로 세계는 더욱 가까워졌지만, 언어의 장벽은 더욱 크게 다가오기 마련이었습니다. 따라서 번역에 대한 연구는 자연어처리의 역사와 함께 하였습니다. 하지만 언어의 방대함과 모호성은 매우 큰 어려움으로 다가왔습니다. 하지만 딥러닝을 통해 이를 해결하면서, 기계 번역에 대한 실마리가 풀리기 시작하였고, 현재는 딥러닝을 통해 가장 성공적으로 상용화 된 기술이 되었습니다. 이번 챕터에서는 기계번역에 대해서 이야기하고, 또한 자연어생성과 이를 위한 sequence-to-sequence 및 어텐션 기법을 다룹니다.

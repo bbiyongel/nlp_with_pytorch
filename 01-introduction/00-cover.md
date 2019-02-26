@@ -1,3 +1,5 @@
 # 딥러닝을 활용한 자연어처리 개요
 
-![TARS from Interstellar - Image from [web](https://www.wired.com/2014/11/interstellar-droids/)](../assets/01-00-01.jpg){ width=500px }
+![TARS from movie Interstellar - Image from [web](https://www.wired.com/2014/11/interstellar-droids/)](../assets/01-00-01.jpg){ width=500px }
+
+우리의 일상생활 속에서 인공지능은 이미 녹아들어와 뗄 수 없는 존재가 되었습니다. 인간의 명령을 알아듣고 수행하며, 정보를 인간의 언어로 변환하여 전달을 위해서는 자연어처리는 필수적으로 사용 됩니다. 예를 들어, 이메일의 스팸메일 필터링에서부터 Google Home이나 Apple Siri와 같은 음성 비서에 이르기까지 자연어처리는 사람과 컴퓨터 사이의 매개체로써 매우 중요한 역할을 합니다. 하지만 영화 인터스텔라의 TARS처럼 멋진 인공지능을 만드는 길은 아직 요원합니다. 이번 챕터에서는 자연어처리에 대해 알아보고, 어려운 점과 그동안의 연구 성과에 대해 살펴 봅니다.
