@@ -108,7 +108,7 @@
 * [전이학습 활용하기](15-transfer_learning/00-cover.md)
   * [전이학습이란](15-transfer_learning/01-intro.md)
   * [기존의 방법](15-transfer_learning/02-previous_work.md)
-  * [ELMO](15-transfer_learning/03-elmo.md)
+  * [ELMo](15-transfer_learning/03-elmo.md)
   * [BERT](15-transfer_learning/04-bert.md)
   * [기계번역에 적용하기](15-transfer_learning/05-machine_translation.md)
   * [정리](15-transfer_learning/06-conclusion.md)
