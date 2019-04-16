@@ -1,6 +1,11 @@
 # BERT
 
-ELMo에 이어 2018년말 출시된 BERT 알고리즘([BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://arxiv.org/pdf/1810.04805.pdf))은 자연어 처리 학계 및 실무자들을 흥분시키기에 충분하였습니다. 
+ELMo에 이어 2018년말 출시된 BERT 알고리즘([BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://arxiv.org/pdf/1810.04805.pdf))은 자연어 처리 학계 및 실무자들을 흥분시키기에 충분하였습니다.
+
+|방법|특징|
+|-|-|
+|특징 기반(feature-based) 전이학습|...|
+|fine-tuning 기반 전이학습|...|
 
 기존의 특징 기반(feature-based)의 전이학습 방법인 ELMo와는 달리 BERT는 fine-tuning을 통해 접근합니다. 즉, ELMo는 사전훈련(pretrain)된 언어모델(language model)의 각 계층별 히든스테이트들을 가중합하여 해당 time-step의 임베딩 벡터로 사용하였던것과 달리, BERT는 훈련된 언어모델에 단순히 아주 약간의 계층을 추가하여 학습함으로써, 특정 문제(task)에 맞는 신경망을 만들어낼 수 있게 되었습니다. 따라서 ELMo + task 전용 신경망이 필요했던 ELMo에 비하여 (문제 해결을 위한 또 다른 신경망을 구현하는 등의) 추가적인 노력이 매우 적게 요구 됩니다.
 
