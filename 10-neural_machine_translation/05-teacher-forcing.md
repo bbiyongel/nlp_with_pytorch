@@ -40,3 +40,9 @@ $$H^{tgt}=\text{RNN}_{dec}(\text{emb}_{tgt}([BOS;Y[:-1]]),h_{n}^{src})$$
 $$h_{t}^{tgt}=\text{RNN}_{dec}([\text{emb}_{tgt}(y_{t-1});\tilde{h}_{t-1}^{tgt}], h_{t-1}^{tgt})\text{ where }h_{0}^{tgt}=h_{n}^{src}\text{ and }y_{0}=\text{BOS}.$$
 
 이런 auto-regressive 속성 및 teacher forcing 방법은 신경망 언어모델(NNLM)에도 똑같이 적용되는 문제 입니다. 하지만 언어모델의 경우에는 perplexity는 문장의 확률과 직접적으로 연관이 있기 때문에, 큰 문제가 되지 않는 반면에 기계번역에서는 좀 더 큰 문제로 다가옵니다. 이에 대해서는 이어지는 섹션에서 다루도록 하겠습니다.
+
+## 참고: 언어모델의 Teacher Forcing
+
+![언어모델 훈련시 Teacher Forcing이 적용된 상황](../assets/10-05-02.png)
+
+![언어모델 추론시 auto-regressive하게 추론이 적용되는 상황](../assets/10-05-03.png)
