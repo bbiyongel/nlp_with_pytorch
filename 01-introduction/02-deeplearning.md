@@ -24,11 +24,13 @@
 
 음성인식에 있어서도 딥러닝(당시에는 Deep Neural Network라는 이름으로 더욱 유명하였습니다.)을 활용하여 큰 발전을 이룩하였습니다. 오히려 이 분야에서는 영상처리(computer vision)분야에 비해서 딥러닝 기술을 활용하여 상용화에까지 성공한 더욱 인상적인 사례라고 할 수 있습니다.
 
-![전통적인 음성인식 시스템의 구성](../assets/01-02-02.gif)
+![전통적인 음성인식 시스템의 구성](../assets/01-02-02.png)
 
 사실 음성인식은 2000년대에 들어 큰 정체기를 맞이하고 있었습니다. GMM(Gaussian Mixture Model)을 통해 음소(phone)를 인식하고, 이를 HMM(Hidden Markov Model)을 통해 시퀀셜(sequential) 정보를 반영하여 학습하여 만든 음향 모델(Acoustic Model, AM)과 n-gram기반의 언어모델(Language Model, LM)을 WFST (Weighted Finite State Transeducer)방식을 통해 결합하는 전통적인 음성인식(Automatic Speech Recognition, ASR) 시스템은 위의 설명에서 볼 수 있듯이 너무나도 복잡한 구조와 함께 그 성능의 한계를 보이고 있었습니다.
 
+<!--
 ![음성인식의 정확도](../assets/01-02-03.png)
+-->
 
 그러던 중, 2012년 GMM을 DNN으로 대체하며, 십수년간의 정체를 단숨에 뛰어넘는 큰 혁명을 맞이하게 됩니다. (영상처리 자연어처리에서 모두 보이는 익숙한 패턴입니다.) 그리고 점차 음향 모델 전체를 LSTM으로 대체하고, 또한 end-to-end model([[Chiu et al.2017](https://arxiv.org/pdf/1712.01769.pdf)])이 점점 저변을 넓혀가고 있는 추세입니다.
 
@@ -38,7 +40,7 @@
 
 사실 다른 인공지능의 다른 분야에 비해서 자연어처리 또는 기계번역 분야는 이렇다할 큰 성과를 거두지는 못하고 있었습니다. 하지만 결국 물밀듯이 밀려오는 딥러닝의 침략 앞에서 기계번역 또한 예외일 순 없었습니다. 딥러닝 이전의 기계번역은 통계 기반 기계번역(Statistical Machine Translation, SMT)가 지배하고 있었습니다. 비록 통계 기반 기계번역은 규칙기반의 번역방식(Rule based Machine Translation, RBMT)에 비해서 언어간 확장이 용이한 장점이 있었고, 성능도 더 뛰어났지만, 음성인식과 마찬가지로 통계 기반 기계번역 시스템은 역시 너무나도 복잡한 구조를 지니고 있었습니다.
 
-![통계기반 기게번역 시스템을 구성하는 서브 모듈 (SMT)](../assets/01-02-05.jpg)
+![통계기반 기게번역 시스템을 구성하는 서브 모듈 (SMT)](../assets/01-02-05.png)
 
 2014년 Sequence-to-sequence(seq2seq)라는 모델 구조가 소개 되며, end-to-end 신경망 기계 번역 (Neural Machine Translation, NMT)의 시대가 열리게 되었습니다.
 
@@ -83,7 +85,7 @@ $$\hat{\theta} = \underset{\theta}{\text{argmax }}{P(X;\theta)}$$
 
 하지만, 위에서 언급한 기계번역의 사례 처럼 자연어처리 전반에 걸쳐 딥러닝의 물결이 들어오기 시작했습니다. 처음에는 각 하위 모듈을 대체하는 형태로 진행되었지만, 점차 기계번역의 사례처럼 결국 end-to-end 모델들로 대체 되었습니다. 현재에도 챗봇과 같은 아직 많은 문제들에서 end-to-end 학습이 이루어지지 않았지만, 최종적으로는 end-to-end 모델들이 제안될 것이라 볼 수 있습니다.
 
-![[[Gao et al.2017](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/07/dl-summer-school-2017.-Jianfeng-Gao.v2.pdf)]](../assets/01-02-09.png)
+![전통적인 자연어 처리 접근 방식과 딥러닝을 통한 자연어 처리 접근 방식의 차이[[Gao et al.2017](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/07/dl-summer-school-2017.-Jianfeng-Gao.v2.pdf)]](../assets/01-02-09.png)
 
 딥러닝이 자연어처리에서도 주류가 되면서, 위와 같은 접근 방법의 변화들을 꼽을 수 있습니다. 사람의 언어는 discrete(비연속적)한 심볼로 이루어져 있습니다. 비록 그 심볼간에는 유사성이 있을 수 있지만 기본적으로 모든 단어(또는 토큰)은 다른 심볼이라고 볼 수 있습니다. 따라서 기존의 전통적인 자연어처리에서는 discrete 심볼로써 데이터를 취급하였습니다. 따라서 사람이 데이터를 보고 해석하기는 쉬운 장점이 있었지만, 모호성이나 유의성을 다루는데에는 어려움을 겪을 수 밖에 없었습니다.
 
