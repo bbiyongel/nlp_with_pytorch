@@ -4,29 +4,29 @@
 
 아래와 같은 영어 원문이 주어지면,
 ```
-There's currently over a thousand TED Talks on the TED website.
+Natural language processing is one of biggest streams in artificial intelligence, and it becomes very popular after seq2seq's invention.
 ```
 각 언어 별 분절기 모듈(영어의 경우 NLTK)을 통해 분절을 수행하고, 기존의 띄어쓰기와 이번에 분절기에 의해 수행된 공백과의 구분을 위해 특수문자 '▁'를 원래의 공백 위치에 삽입합니다. 다만 이 ▁ 문자는 기존의 _와 다른 문자로써 특수기호 입니다.
 ```
-▁There 's ▁currently ▁over ▁a ▁thousand ▁TED ▁Talks ▁on ▁the ▁TED ▁website .
+▁Natural ▁language ▁processing ▁is ▁one ▁of ▁biggest ▁streams ▁in ▁artificial ▁intelligence , ▁and ▁it ▁becomes ▁very ▁popular ▁after ▁seq2seq 's ▁invention .
 ```
 여기에 서브워드 단위 분절을 수행하며 이전 과정까지의 공백과 서브워드 단위 분절로 인한 공백을 구분하기 위한 특수문자 '▁'를 삽입합니다.
 ```
-▁▁There ▁'s ▁▁currently ▁▁over ▁▁a ▁▁thous and ▁▁TED ▁▁T al ks ▁▁on ▁▁the ▁▁TED ▁▁we b site ▁.
+▁▁Natural ▁▁language ▁▁processing ▁▁is ▁▁one ▁▁of ▁▁biggest ▁▁streams ▁▁in ▁▁artificial ▁▁intelligence ▁, ▁▁and ▁▁it ▁▁becomes ▁▁very ▁▁popular ▁▁after ▁▁se q 2 se q ▁'s ▁▁invention ▁.
 ```
 이렇게 전처리 과정이 종료 되었습니다. 이런 형태의 문절 된 문장을 자연어처리 모델에 훈련시키면 똑같은 형태로 분절 된 문장을 생성 해 낼 것 입니다. 그럼 이런 문장을 복원(detokenization)하여 사람이 읽기 좋은 형태로 만들어 주어야 합니다.
 
 먼저 공백(whitespace)을 제거합니다.
 ```
-▁▁There▁'s▁▁currently▁▁over▁▁a▁▁thousand▁▁TED▁▁Talks▁▁on▁▁the▁▁TED▁▁website▁.
+▁▁Natural▁▁language▁▁processing▁▁is▁▁one▁▁of▁▁biggest▁▁streams▁▁in▁▁artificial▁▁intelligence▁,▁▁and▁▁it▁▁becomes▁▁very▁▁popular▁▁after▁▁seq2seq▁'s▁▁invention▁.
 ```
 그리고 특수문자 '▁'가 2개가 동시에 있는 문자열 '▁▁'을 공백으로 치환합니다. 그럼 한 개 짜리 '▁'만 남습니다.
 ```
-There▁'s currently over a thousand TED Talks on the TED website▁.
+ Natural language processing is one of biggest streams in artificial intelligence▁, and it becomes very popular after seq2seq▁'s invention▁.
 ```
 마지막 남은 특수문자 '▁'를 제거합니다. 그럼 문장 복원이 완성 됩니다.
 ```
-There's currently over a thousand TED Talks on the TED website.
+Natural language processing is one of biggest streams in artificial intelligence, and it becomes very popular after seq2seq's invention.
 ```
 
 ## 분절 후처리
