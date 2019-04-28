@@ -77,81 +77,84 @@ import sys, argparse, os
 BIN = CTK_ROOT + "/bin/champollion"
 CMD = "%s -c %f -d %s %s %s %s"
 OMIT = "omitted"
-INTERMEDIATE_FN = "./tmp/tmp.txt"
+DIR_PATH = './tmp/'
+INTERMEDIATE_FN = DIR_PATH + "tmp.txt"
 
 def read_alignment(fn):
-aligns = []
+    aligns = []
 
-f = open(fn, 'r')
+    f = open(fn, 'r')
 
-for line in f:
-if line.strip() != "":
-srcs, tgts = line.strip().split(' <=> ')
+    for line in f:
+        if line.strip() != "":
+            srcs, tgts = line.strip().split(' <=> ')
 
-if srcs == OMIT:
-srcs = []
-else:
-srcs = list(map(int, srcs.split(',')))
+            if srcs == OMIT:
+                srcs = []
+            else:
+                srcs = list(map(int, srcs.split(',')))
 
-if tgts == OMIT:
-tgts = []
-else:
-tgts = list(map(int, tgts.split(',')))
+            if tgts == OMIT:
+                tgts = []
+            else:
+                tgts = list(map(int, tgts.split(',')))
 
-aligns += [(srcs, tgts)]
+            aligns += [(srcs, tgts)]
 
-f.close()
+    f.close()
 
-return aligns
+    return aligns
 
 def get_aligned_corpus(src_fn, tgt_fn, aligns):
-f_src = open(src_fn, 'r')
-f_tgt = open(tgt_fn, 'r')
+    f_src = open(src_fn, 'r')
+    f_tgt = open(tgt_fn, 'r')
 
-for align in aligns:
-srcs, tgts = align
+    for align in aligns:
+        srcs, tgts = align
 
-src_buf, tgt_buf = [], []
+        src_buf, tgt_buf = [], []
 
-for src in srcs:
-src_buf += [f_src.readline().strip()]
-for tgt in tgts:
-tgt_buf += [f_tgt.readline().strip()]
+        for src in srcs:
+            src_buf += [f_src.readline().strip()]
+        for tgt in tgts:
+            tgt_buf += [f_tgt.readline().strip()]
 
-if len(src_buf) > 0 and len(tgt_buf) > 0:
-sys.stdout.write("%s\t%s\n" % (" ".join(src_buf), " ".join(tgt_buf)))
+        if len(src_buf) > 0 and len(tgt_buf) > 0:
+            sys.stdout.write("%s\t%s\n" % (" ".join(src_buf), " ".join(tgt_buf)))
 
-f_tgt.close()
-f_src.close()
+    f_tgt.close()
+    f_src.close()
 
 def parse_argument():
-p = argparse.ArgumentParser()
+    p = argparse.ArgumentParser()
 
-p.add_argument('--src', required = True)
-p.add_argument('--tgt', required = True)
-p.add_argument('--src_ref', default = None)
-p.add_argument('--tgt_ref', default = None)
-p.add_argument('--dict', required = True)
-p.add_argument('--ratio', type = float, default = 1.2750)
+    p.add_argument('--src', required = True)
+    p.add_argument('--tgt', required = True)
+    p.add_argument('--src_ref', default = None)
+    p.add_argument('--tgt_ref', default = None)
+    p.add_argument('--dict', required = True)
+    p.add_argument('--ratio', type = float, default = 1.1966)
 
-config = p.parse_args()
+    config = p.parse_args()
 
-return config
+    return config
 
 if __name__ == "__main__":
-config = parse_argument()
+    if not os.path.exists(DIR_PATH):
+         os.mkdir(DIR_PATH)
 
-if config.src_ref is None:
-config.src_ref = config.src
-if config.tgt_ref is None:
-config.tgt_ref = config.tgt
+    config = parse_argument()
 
-cmd = CMD % (BIN, config.ratio, config.dict, config.src_ref, config.tgt_ref, INTERMEDIATE_FN)
-os.system(cmd)
+    if config.src_ref is None:
+        config.src_ref = config.src
+    if config.tgt_ref is None:
+        config.tgt_ref = config.tgt
 
-aligns = read_alignment(INTERMEDIATE_FN)
-get_aligned_corpus(config.src, config.tgt, aligns)
+    cmd = CMD % (BIN, config.ratio, config.dict, config.src_ref, config.tgt_ref, INTERMEDIATE_FN)
+    os.system(cmd)
 
+    aligns = read_alignment(INTERMEDIATE_FN)
+    get_aligned_corpus(config.src, config.tgt, aligns)
 ```
 
 특기할 점은 ratio 파라미터의 역할입니다. 이 파라미터는 실제 champollion의 '-c' 옵션으로 맵핑되어 사용되는데, champollion 상에서의 설명은 다음과 같습니다.

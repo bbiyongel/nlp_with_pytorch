@@ -16,16 +16,15 @@ import sys, fileinput, re
 from nltk.tokenize import sent_tokenize
 
 if __name__ == "__main__":
-for line in fileinput.input():
-if line.strip() != "":
-line = re.sub(r'([a-z])\.([A-Z])', r'\1. \2', line.strip())
+    for line in fileinput.input():
+        if line.strip() != "":
+            line = re.sub(r'([a-z])\.([A-Z])', r'\1. \2', line.strip())
 
-sentences = sent_tokenize(line.strip())
+            sentences = sent_tokenize(line.strip())
 
-for s in sentences:
-if s != "":
-sys.stdout.write(s + "\n")
-
+            for s in sentences:
+                if s != "":
+                    sys.stdout.write(s + "\n")
 ```
 
 적용 후:
@@ -61,19 +60,19 @@ import sys, fileinput
 from nltk.tokenize import sent_tokenize
 
 if __name__ == "__main__":
-buf = []
+    buf = []
 
-for line in fileinput.input():
-if line.strip() != "":
-buf += [line.strip()]
-sentences = sent_tokenize(" ".join(buf))
+    for line in fileinput.input():
+        if line.strip() != "":
+            buf += [line.strip()]
+            sentences = sent_tokenize(" ".join(buf))
 
-if len(sentences) > 1:
-buf = sentences[1:]
+            if len(sentences) > 1:
+                buf = sentences[1:]
 
-sys.stdout.write(sentences[0] + '\n')
+                sys.stdout.write(sentences[0] + '\n')
 
-sys.stdout.write(" ".join(buf) + "\n")
+    sys.stdout.write(" ".join(buf) + "\n")
 ```
 
 적용 후:
@@ -172,11 +171,13 @@ from nltk.tokenize.moses import MosesTokenizer
 t = MosesTokenizer()
 
 if __name__ == "__main__":
-for line in fileinput.input():
-if line.strip() != "":
-tokens = t.tokenize(line.strip(), escape=False)
+    for line in fileinput.input():
+        if line.strip() != "":
+            tokens = t.tokenize(line.strip(), escape=False)
 
-sys.stdout.write(" ".join(tokens) + "\n")
+            sys.stdout.write(" ".join(tokens) + "\n")
+        else:
+            sys.stdout.write('\n')
 ```
 
 적용 후:

@@ -39,34 +39,43 @@ import sys
 STR = '▁'
 
 if __name__ == "__main__":
-ref_fn = sys.argv[1]
+    ref_fn = sys.argv[1]
 
-f = open(ref_fn, 'r')
+    f = open(ref_fn, 'r')
 
-for ref in f:
-ref_tokens = ref.strip().split(' ')
-tokens = sys.stdin.readline().strip().split(' ')
+    for ref in f:
+        ref_tokens = ref.strip().split(' ')
+        input_line = sys.stdin.readline().strip()
 
-idx = 0
-buf = []
+        if input_line != "":
+            tokens = input_line.split(' ')
 
-# We assume that stdin has more tokens than reference input.
-for ref_token in ref_tokens:
-tmp_buf = []
+            idx = 0
+            buf = []
 
-while idx < len(tokens):
-tmp_buf += [tokens[idx]]
-idx += 1
+            # We assume that stdin has more tokens than reference input.
+            for ref_token in ref_tokens:
+                tmp_buf = []
 
-if ''.join(tmp_buf) == ref_token:
-break
+                while idx < len(tokens):
+                    if tokens[idx].strip() == '':
+                        idx += 1
+                        continue
 
-if len(tmp_buf) > 0:
-buf += [STR + tmp_buf[0]] + tmp_buf[1:]
+                    tmp_buf += [tokens[idx]]
+                    idx += 1
 
-sys.stdout.write(' '.join(buf) + '\n')
+                    if ''.join(tmp_buf) == ref_token:
+                        break
 
-f.close()
+                if len(tmp_buf) > 0:
+                    buf += [STR + tmp_buf[0].strip()] + tmp_buf[1:]
+
+            sys.stdout.write(' '.join(buf) + '\n')
+        else:
+            sys.stdout.write('\n')
+
+    f.close()
 ```
 
 위 스크립트의 사용 방법은 아래와 같습니다. 주로 다른 분절 모듈의 수행 후에 바로 붙여 사용하여 좋습니다.
@@ -89,9 +98,14 @@ sed "s/ //g" | sed "s/▁▁/ /g" | sed "s/▁//g" | sed "s/^\s//g"
 import sys
 
 if __name__ == "__main__":
-for line in sys.stdin:
-if line.strip() != "":
-line = line.strip().replace(' ', '').replace('▁▁', ' ').replace('▁', '').strip()
+    for line in sys.stdin:
+        if line.strip() != "":
+            if '▁▁' in line:
+                line = line.strip().replace(' ', '').replace('▁▁', ' ').replace('▁', '').strip()
+            else:
+                line = line.strip().replace(' ', '').replace('▁', ' ').strip()
 
-sys.stdout.write(line + '\n')
+            sys.stdout.write(line + '\n')
+        else:
+            sys.stdout.write('\n')
 ```
