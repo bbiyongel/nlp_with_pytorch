@@ -93,44 +93,44 @@ $$P(w|c)\approx\frac{\text{Count}(w,c)}{\sum_{j=1}^{|V|}{\text{Count}(w_j,c)}}$$
 그럼 실제 예제로 접근해 보죠. 감성분석은 가장 많이 활용되는 텍스트 분류 기법 입니다. 사용자의 댓글이나 리뷰 등을 긍정 또는 부정으로 분류하여 마케팅이나 서비스 향상에 활용하고자 하는 방법 입니다.
 
 $$\begin{gathered}
-\mathcal{C}=\{\text{pos},\text{neg}\} \\
+\mathcal{C}=\{\color{cyan}\text{pos}\color{black},\color{red}\text{neg}\color{black}\} \\
 \mathcal{D}=\{d_1,d_2,\cdots\}
 \end{gathered}$$
 
-위와 같이 긍정( $\text{pos}$ )과 부정( $\text{neg}$ )으로 클래스의 집합 $\mathcal{C}$ 가 구성되어 있고, 문서 $d$ 로 구성된 데이터 $\mathcal{D}$ 가 있습니다. 이때, 우리에게 "I am happy to see this movie!"라는 문장이 주어졌을 때, 이 문장이 긍정인지 부정인지 판단해 보겠습니다.
+위와 같이 긍정( $\color{cyan}\text{pos}$ )과 부정( $\color{red}\text{neg}$ )으로 클래스의 집합 $\mathcal{C}$ 가 구성되어 있고, 문서 $d$ 로 구성된 데이터 $\mathcal{D}$ 가 있습니다. 이때, 우리에게 "I am happy to see this movie!"라는 문장이 주어졌을 때, 이 문장이 긍정인지 부정인지 판단해 보겠습니다.
 
 $$\begin{aligned}
-P(\text{pos}|\text{I, am, happy, to, see, this, movie, !})&= \frac{P(\text{I, am, happy, to, see, this, movie, !}|\text{pos})P(\text{pos})}{P(\text{I, am, happy, to, see, this, movie, !})}\\
-&\approx \frac{P(I|\text{pos})P(am|\text{pos})P(happy|\text{pos})\cdots P(!|\text{pos})P(\text{pos})}{P(\text{I, am, happy, to, see, this, movie, !})}
+P(\color{cyan}\text{pos}\color{black}|\text{I, am, happy, to, see, this, movie, !})&= \frac{P(\text{I, am, happy, to, see, this, movie, !}|\color{cyan}\text{pos}\color{black})P(\color{cyan}\text{pos}\color{black})}{P(\text{I, am, happy, to, see, this, movie, !})}\\
+&\approx \frac{P(I|\color{cyan}\text{pos}\color{black})P(am|\color{cyan}\text{pos}\color{black})P(happy|\color{cyan}\text{pos}\color{black})\cdots P(!|\color{cyan}\text{pos}\color{black})P(\color{cyan}\text{pos}\color{black})}{P(\text{I, am, happy, to, see, this, movie, !})}
 \end{aligned}$$
 
 나이브 베이즈를 활용하여 단어의 조합에 대한 확률을 각각 분해할 수 있습니다. 즉, 우리는 각 단어의 출현 확률을 독립이라고 가정 한 이후에, 결합 라이클리후드 확률을 모두 각각의 라이클리후드 확률로 분해합니다. 그리고 그 확률들은 아래와 같이 데이터 $\mathcal{D}$ 에서의 출현 빈도를 통해 구할 수 있습니다.
 
 $$\begin{aligned}
-P(\text{happy}|\text{pos})&\approx\frac{\text{Count}(\text{happy},\text{pos})}{\sum_{j=1}^{|V|}{\text{Count}(w_j,\text{pos})}} \\
-P(\text{pos})&\approx\frac{\text{Count}(\text{pos})}{|\mathcal{D}|}
+P(\text{happy}|\color{cyan}\text{pos}\color{black})&\approx\frac{\text{Count}(\text{happy},\color{cyan}\text{pos}\color{black})}{\sum_{j=1}^{|V|}{\text{Count}(w_j,\color{cyan}\text{pos}\color{black})}} \\
+P(\color{cyan}\text{pos}\color{black})&\approx\frac{\text{Count}(\color{cyan}\text{pos}\color{black})}{|\mathcal{D}|}
 \end{aligned}$$
 
 마찬가지로 부정 감성에 대해 같은 작업을 반복 할 수 있습니다.
 
 $$\begin{aligned}
-P(\text{neg}|\text{I, am, happy, to, see, this, movie, !})&= \frac{P(\text{I, am, happy, to, see, this, movie, !}|\text{neg})P(\text{neg})}{P(\text{I, am, happy, to, see, this, movie, !})}\\
-&\approx \frac{P(I|\text{neg})P(am|\text{neg})P(happy|\text{neg})\cdots P(!|\text{neg})P(\text{neg})}{P(\text{I, am, happy, to, see, this, movie, !})} \\
+P(\color{red}\text{neg}\color{black}|\text{I, am, happy, to, see, this, movie, !})&= \frac{P(\text{I, am, happy, to, see, this, movie, !}|\color{red}\text{neg}\color{black})P(\color{red}\text{neg}\color{black})}{P(\text{I, am, happy, to, see, this, movie, !})}\\
+&\approx \frac{P(I|\color{red}\text{neg}\color{black})P(am|\color{red}\text{neg}\color{black})P(happy|\color{red}\text{neg}\color{black})\cdots P(!|\color{red}\text{neg}\color{black})P(\color{red}\text{neg}\color{black})}{P(\text{I, am, happy, to, see, this, movie, !})} \\
 \\
-P(\text{happy}|\text{neg})&\approx\frac{\text{Count}(\text{happy},\text{neg})}{\sum_{j=1}^{|V|}{\text{Count}(w_j,\text{neg})}} \\
-P(\text{neg})&\approx\frac{\text{Count}(\text{neg})}{|\mathcal{D}|}
+P(\text{happy}|\color{red}\text{neg}\color{black})&\approx\frac{\text{Count}(\text{happy},\color{red}\text{neg}\color{black})}{\sum_{j=1}^{|V|}{\text{Count}(w_j,\color{red}\text{neg}\color{black})}} \\
+P(\color{red}\text{neg}\color{black})&\approx\frac{\text{Count}(\color{red}\text{neg}\color{black})}{|\mathcal{D}|}
 \end{aligned}$$
 
 이처럼 우리는 단순히 코퍼스에서 각 단어의 클래스 당 출현 빈도를 계산하는 것만으로도 간단하게 감성분석을 수행 할 수 있습니다.
 
 ## Add-one 스무딩(Smoothing)
 
-여기에 문제가 하나 있습니다. 만약 훈련 데이터에서 $\text{Count}(\text{happy},\text{neg})$ 가 0이었다면 $P(\text{happy}|\text{neg})=0$ 이 되겠지만, 그저 훈련 데이터(코퍼스)에 존재하지 않는 경우라고 해서, 해당 샘플의 실제 출현 확률을 0으로 추정하는 것은 매우 위험한 일 입니다.
+여기에 문제가 하나 있습니다. 만약 훈련 데이터에서 $\text{Count}(\text{happy},\color{red}\text{neg}\color{black})$ 가 0이었다면 $P(\text{happy}|\color{red}\text{neg}\color{black})=0$ 이 되겠지만, 그저 훈련 데이터(코퍼스)에 존재하지 않는 경우라고 해서, 해당 샘플의 실제 출현 확률을 0으로 추정하는 것은 매우 위험한 일 입니다.
 
 $$\begin{gathered}
-P(\text{happy}|\text{neg})\approx\frac{\text{Count}(\text{happy},\text{neg})}{\sum_{j=1}^{|V|}{\text{Count}(w_j,\text{neg})}}=0, \\
+P(\text{happy}|\color{red}\text{neg}\color{black})\approx\frac{\text{Count}(\text{happy},\color{red}\text{neg}\color{black})}{\sum_{j=1}^{|V|}{\text{Count}(w_j,\color{red}\text{neg}\color{black})}}=0, \\
 \\
-\text{where }\text{Count}(\text{happy},\text{neg})=0.
+\text{where }\text{Count}(\text{happy},\color{red}\text{neg}\color{black})=0.
 \end{gathered}$$
 
 따라서 우리는 이런 경우를 위하여 각 출현횟수에 1을 더해주어 간단하게 문제를 완화 할 수 있습니다. 물론 완벽한 해결법은 아니지만 나이브 베이즈의 기존 가정과 마찬가지로 매우 간단하고 강력합니다.
@@ -142,8 +142,8 @@ $$\tilde{P}(w|c)=\frac{\text{Count}(w,c)+1}{\big(\sum_{j=1}^{|V|}{\text{Count}(w
 위와 같이 나이브 베이즈를 통해서 단순히 출현 빈도를 세는 것처럼 쉽고 간단하지만 강력하게 감성분석을 구현 할 수 있습니다. 하지만 문장 "I am not happy to see this movie!"라는 문장이 주어지면 어떻게 될까요? "not"이 추가 되었을 뿐이지만 문장의 뜻은 반대가 되었습니다.
 
 $$\begin{gathered}
-P(\text{pos}|\text{I, am, not, happy, to, see, this, movie, !}) \\
-P(\text{neg}|\text{I, am, not, happy, to, see, this, movie, !})
+P(\color{cyan}\text{pos}\color{black}|\text{I, am, not, happy, to, see, this, movie, !}) \\
+P(\color{red}\text{neg}\color{black}|\text{I, am, not, happy, to, see, this, movie, !})
 \end{gathered}$$
 
 "not"은 "happy"를 수식하기 때문에 두 단어를 독립적으로 보는 것은 옳지 않을 것 입니다.
