@@ -106,10 +106,11 @@ cd ..
 #   * [흔한 오해 2](08-text_classification/03-myth.md)
 #   * [RNN을 활용하기](08-text_classification/04-rnn.md)
 #   * [CNN을 활용하기](08-text_classification/05-cnn.md)
-#   * [정리](08-text_classification/06-conclusion.md)
+#   * [쉬어가기: 멀티 레이블 분류](08-text_classification/06-multi_classification.md)
+#   * [정리](08-text_classification/07-conclusion.md)
 echo '08-text_classification'
 cd ./08-text_classification
-time pandoc ./00-cover.md ./01-intro.md ./02-naive-bayes.md ./03-myth.md ./04-rnn.md ./05-cnn.md ./06-conclusion.md --latex-engine=xelatex -o ../${DIR_PATH}/8.text-classification.docx --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE} -V geometry:margin=${MARGIN} -V linestretch=${LINE_SPACE}
+time pandoc ./00-cover.md ./01-intro.md ./02-naive-bayes.md ./03-myth.md ./04-rnn.md ./05-cnn.md ./06-multi_classification.md ./07-conclusion.md --latex-engine=xelatex -o ../${DIR_PATH}/8.text-classification.docx --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE} -V geometry:margin=${MARGIN} -V linestretch=${LINE_SPACE}
 cd ..
 
 # * [언어 모델링](09-language_modeling/00-cover.md)
@@ -183,11 +184,23 @@ cd ./14-productization
 time pandoc ./00-cover.md ./01-pipeline.md ./02-gnmt.md ./03-nematus.md ./04-microsoft.md --latex-engine=xelatex -o ../${DIR_PATH}/14.productization.docx --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE} -V geometry:margin=${MARGIN} -V linestretch=${LINE_SPACE}
 cd ..
 
+# * [전이학습 활용하기](15-transfer_learning/00-cover.md)
+#   * [전이학습이란](15-transfer_learning/01-intro.md)
+#   * [기존의 방법](15-transfer_learning/02-previous_work.md)
+#   * [ELMo](15-transfer_learning/03-elmo.md)
+#   * [BERT](15-transfer_learning/04-bert.md)
+#   * [기계번역에 적용하기](15-transfer_learning/05-machine_translation.md)
+#   * [정리](15-transfer_learning/06-conclusion.md)
+echo '15-transfer_learning'
+cd ./15-transfer_learning
+time pandoc ./00-cover.md ./01-intro.md ./02-previous_work.md ./03-elmo.md ./04-bert.md ./05-machine_translation.md ./06-conclusion.md --latex-engine=xelatex -o ../${DIR_PATH}/15.transfer_learning.docx --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE} -V geometry:margin=${MARGIN} -V linestretch=${LINE_SPACE}
+cd ..
+
 # * [이 책을 마치며](epilogue.md)
 # * [References](references.md)
 echo 'epilogue'
 cd ./14-productization
-time pandoc ../epilogue.md ../references.md --latex-engine=xelatex -o ../${DIR_PATH}/15.epilogue.docx --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE} -V geometry:margin=${MARGIN} -V linestretch=${LINE_SPACE}
+time pandoc ../epilogue.md ../references.md --latex-engine=xelatex -o ../${DIR_PATH}/16.epilogue.docx --variable mainfont='Nanum Myeongjo' -V fontsize=${FONT_SIZE} -V geometry:margin=${MARGIN} -V linestretch=${LINE_SPACE}
 cd ..
 
 time gs -q -dNOPAUSE -dBATCH -sDEVICE=docxwrite -sOutputFile=./docx/merged.docx ./docx/0.preface.docx ./docx/1.introduction.docx ./docx/2.basic-math.docx ./docx/3.pytorch-intro.docx ./docx/4.preprocessing.docx ./docx/5.word-senses.docx ./docx/6.word-embedding.docx ./docx/7.sequential-modeling.docx ./docx/8.text-classification.docx ./docx/9.language-modeling.docx ./docx/10.nmt.docx ./docx/11.adv-nmt.docx ./docx/12.rl.docx ./docx/13.duality.docx ./docx/14.productization.docx ./docx/15.epilogue.docx
