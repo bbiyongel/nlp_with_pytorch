@@ -38,7 +38,7 @@ $$\text{BCELoss}(\hat{y}, y)=-\big(y\times\log{\hat{y}}+(1-y)\times\log{(1-\hat{
 
 $$\begin{gathered}
 \mathcal{L}=\sum_{i=1}^n{\text{BCELoss}(\hat{y}_i,y_i)} \\
-\text{where }\text{BCELoss}(\hat{y}i,y_i)=-\big(y_i\times\log{\hat{y}_i}+(1-y_i)\times\log{(1-\hat{y}_i)}\big)
+\text{where }\text{BCELoss}(\hat{y}_i,y_i)=-\big(y_i\times\log{\hat{y}_i}+(1-y_i)\times\log{(1-\hat{y}_i)}\big)
 \end{gathered}$$
 
 ## 이진분류가 아닌 경우
