@@ -22,7 +22,7 @@ $$\hat{\theta}=\underset{\theta}{\text{argmax}}\sum_{t=1}^T{\Big(\sum_{i=1}^n{\l
 
 $$\begin{gathered}
 \hat{y}=\underset{y\in\mathcal{Y}}{\text{argmax }}\text{softmax}(W'Wx) \\
-\text{where }W'\in\mathbb{R}^{|V|\times d}, W\in\mathbb{R}^{d\times|V|}\text{ and }x\in\mathbb\{0,1\}^{|V|}.
+\text{where }W'\in\mathbb{R}^{|V|\times d}, W\in\mathbb{R}^{d\times|V|}\text{ and }x\in\{0,1\}^{|V|}.
 \end{gathered}$$
 
 위의 수식을 그림으로 표현하면 아래와 같습니다. 수식에서 볼 수 있듯이 1개의 히든 레이어를 갖고 있으며, 매우 간단한 구조입니다. <comment> 소프트맥스 레이어는 출력 레이어 입니다. </comment> 주의할 점은 네트워크 내부에 시그모이드(sigmoid)와 같은 비선형 함수가 존재하지 않는다는 것 입니다.

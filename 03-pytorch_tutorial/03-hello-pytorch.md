@@ -367,7 +367,7 @@ return y
 $$\begin{gathered}
 y=f(x_1, x_2, x_3) = 3x_1 + x_2 - 2x_3 \\
 \hat{y}=\tilde{f}(x_1,x_2,x_3;\theta) \\
-\hat{\theta}=\underset{\theta\in\varTheta}{\text{argmin }}\mathcal{L}(\hat{y},y)
+\hat{\theta}=\underset{\theta\in\Theta}{\text{argmin }}\mathcal{L}(\hat{y},y)
 \end{gathered}$$
 
 해당 함수를 파이썬으로 구현하면 아래와 같습니다. 물론 신경망 입장에서는 내부 동작 내용을 알 수 없는 함수 입니다.

@@ -18,7 +18,7 @@
 
 이전 챕터에서 다루었듯이 sequence-to-sequence 모델도 결국 오토인코더의 일종이라고 볼 수 있습니다. 그러한 관점에서 입력을 받아 같은 값으로 출력을 해 주는 오토인코더의 할 일은 굉장히 쉬운 문제에 속합니다. 그러므로 단순히 인코딩 한 소스(source) 문장을 같은 언어의 문장으로 디코딩 하는 것은 매우 쉬운 일이 될 것입니다. 따라서 오토인코더에게 단순히 복사 작업을 지시하는 것이 아닌 노이즈를 섞어 준 소스 문장에서 노이즈를 제거하는 작업(denoising)을 하면서 입력값을 출력에서 복원(reconstruction) 할 수 있도록 훈련해야 합니다. 이는 아래와 같이 표현 가능합니다.
 
-$$\mathcal{L}_{auto}(\theta_{enc},\theta_{dec},\mathcal{Z},\ell)=\Bbb{E}_{x\sim\mathcal{D}_\ell,\hat{x}\sim d(e(C(x),\ell),\ell)}\Big[\triangle(\hat{x},x)\Big]$$
+$$\mathcal{L}_{auto}(\theta_{enc},\theta_{dec},\mathcal{Z},\ell)=\mathbb{E}_{x\sim\mathcal{D}_\ell,\hat{x}\sim d(e(C(x),\ell),\ell)}\Big[\triangle(\hat{x},x)\Big]$$
 
 $\hat{x}\sim d(e(C(x),\ell),\ell)$ 는 입력 문장 $ x$ 를 노이즈 모델 $C$ 를 통해 노이즈를 더하고, 같은 언어 $\ell$ 로 인코딩과 디코딩을 수행한 것을 의미합니다. $\triangle(\hat{x},x)$ 는 MRT에서와 같이 원문과 복원된 문장과의 차이(error)를 나타냅니다.
 

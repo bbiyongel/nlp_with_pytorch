@@ -99,7 +99,7 @@ $$P_{\text{continuation}}(w)=\frac{|\{ v : \text{Count}(v, w) > 0 \}|}{\sum_{w'}
 이렇게 우리는 $P_{\text{KN}}$ 를 정의 할 수 있습니다.
 
 $$\begin{gathered}
-P_{\text{\text{KN}}}(w_i|w_{i-1})=\frac{\max{(\text{Count}(w_{i-1}, w_i) - d, 0)}}{\text{Count}(w_{i-1})}+\lambda(w_{i-1})P_{\text{continuation}}(w_i), \\
+P_{\text{KN}}(w_i|w_{i-1})=\frac{\max{(\text{Count}(w_{i-1}, w_i) - d, 0)}}{\text{Count}(w_{i-1})}+\lambda(w_{i-1})P_{\text{continuation}}(w_i), \\
 \text{where }\lambda(w_{i-1})=\frac{d}{\sum_v{\text{Count}(w_{i-1}, v)}}\times|\{ w: c(w_{i-1}, w)>0 \}|.
 \end{gathered}$$
 

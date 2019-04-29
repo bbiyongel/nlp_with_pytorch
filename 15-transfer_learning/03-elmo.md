@@ -20,10 +20,10 @@ $$\begin{gathered}
 \text{where }\Theta=\{\theta_x,\overrightarrow{\theta}_{LSTM},\overleftarrow{\theta}_{LSTM},\theta_s\}.
 \end{gathered}$$
 
-그럼 우리는 단어의 임베딩 벡터를 비롯하여, LSTM의 각 계층별 히든스테이트(hidden state)를 각 time-step 별로 얻을 수 있습니다. 이들에 대한 가중합(weighted sum)을 구하여, 해당 단어(또는 토큰)에 대한 문장 내에서의 임베딩 표현(representation) $\bold{ELMo}_k^{task}$ 를 구할 수 있습니다.
+그럼 우리는 단어의 임베딩 벡터를 비롯하여, LSTM의 각 계층별 히든스테이트(hidden state)를 각 time-step 별로 얻을 수 있습니다. 이들에 대한 가중합(weighted sum)을 구하여, 해당 단어(또는 토큰)에 대한 문장 내에서의 임베딩 표현(representation) $\text{ELMo}_k^{task}$ 를 구할 수 있습니다.
 
 $$\begin{gathered}
-\bold{ELMo}_k^{task}=\gamma^{task}\sum_{j=0}^L{s_j^{task}\cdot{\bold{h}_{k,j}^{LM}}} \\
+\text{ELMo}_k^{task}=\gamma^{task}\sum_{j=0}^L{s_j^{task}\cdot{\text{h}_{k,j}^{LM}}} \\
 \text{where }h_{k,j}^{LM}=\begin{cases}
 x_k\text{ if }j=0, \\
 \big[\overrightarrow{h}_{k,j}^{LM};\overleftarrow{h}_{k,j}^{LM}\big]\text{ if }j>0.
