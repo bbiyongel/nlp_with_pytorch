@@ -63,7 +63,7 @@
   * [흔한 오해 2](08-text_classification/03-myth.md)
   * [RNN을 활용하기](08-text_classification/04-rnn.md)
   * [CNN을 활용하기](08-text_classification/05-cnn.md)
-  * [쉬어가기: 멀티 클래스 분류](08-text_classification/06-multi_classification.md)
+  * [쉬어가기: 멀티 레이블 분류](08-text_classification/06-multi_classification.md)
   * [정리](08-text_classification/07-conclusion.md)
 * [언어 모델링](09-language_modeling/00-cover.md)
   * [서문](09-language_modeling/01-intro.md)
