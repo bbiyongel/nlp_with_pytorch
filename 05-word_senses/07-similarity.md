@@ -18,7 +18,7 @@ L1 norm을 사용한 L1 디스턴스 입니다. 이 방법은 두 벡터의 각 
 
 ```python
 def get_l1_distance(x1, x2):
-return ((x1 - x2).abs()).sum()**.5
+    return ((x1 - x2).abs()).sum()
 ```
 
 위의 코드는 파이토치 텐서 $x_1$ , $x_2$ 를 입력으로 받아 L1 디스턴스를 반환 해 주는 코드 입니다.
@@ -31,7 +31,7 @@ $$\text{d}_{\text{L2}}(w,v)=\sqrt{\sum_{i=1}^d{(w_i-v_i)^2}},\text{ where }w,v\i
 
 ```python
 def get_l2_distance(x1, x2):
-return ((x1 - x2)**2).sum()**.5
+    return ((x1 - x2)**2).sum()**.5
 ```
 
 L2 디스턴스를 구하기 위해 파이토치 텐서들읍 입력으로 받아 계산하는 함수의 코드는 위와 같습니다.
@@ -48,7 +48,7 @@ L1, L2 디스턴스가 있다면 $L_\infty$ 디스턴스도 있습니다. 재미
 
 ```python
 def get_infinity_distance(x1, x2):
-return ((x1 - x2).abs()).max()
+    return ((x1 - x2).abs()).max()
 ```
 
 ![같은 값 $r$ 크기를 갖는 $L_1$ , $L_2$ , $L_\infty$ 거리를 그림으로 나타낸 모습](../assets/05-07-02.png)
@@ -72,7 +72,7 @@ $$\begin{aligned}
 
 ```python
 def get_cosine_similarity(x1, x2):
-return (x1 * x2).sum() / ((x1**2).sum()**.5 * (x2**2).sum()**.5)
+    return (x1 * x2).sum() / ((x1**2).sum()**.5 * (x2**2).sum()**.5)
 ```
 
 ## 자카드(Jaccard) 유사도
@@ -88,7 +88,7 @@ $$\begin{aligned}
 
 ```python
 def get_jaccard_similarity(x1, x2):
-return torch.stack([x1, x2]).min(dim=0)[0].sum() / torch.stack([x1, x2]).max(dim=1)[0].sum()
+    return torch.stack([x1, x2]).min(dim=0)[0].sum() / torch.stack([x1, x2]).max(dim=0)[0].sum()
 ```
 
 ## 문서(문장)간 유사도 구하기

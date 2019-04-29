@@ -30,14 +30,16 @@
 ```python
 from nltk.corpus import wordnet as wn
 
-def get_hypernyms(synset):
-current_node = synset
-while True:
-print(current_node)
-hypernym = current_node.hypernyms()
-if len(hypernym) == 0:
-break
-current_node = hypernym[0]
+def hypernyms(word):
+    current_node = wn.synsets(word)[0]
+    yield current_node
+
+    while True:
+        try:
+            current_node = current_node.hypernyms()[0]
+            yield current_node
+        except IndexError:
+            break
 ```
 
 위의 코드를 사용하면 워드넷에서 특정 단어의 최상위 부모 노드까지의 경로를 구할 수 있습니다. 아래와 같이 'policeman'은 'firefighter', 'sheriff'와 매우 비슷한 경로를 가짐을 알 수 있습니다. 'student'와도 매우 비슷하지만, 'mailman'과 좀 더 비슷함을 알 수 있습니다.

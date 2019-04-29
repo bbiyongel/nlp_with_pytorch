@@ -82,54 +82,54 @@ $$\phi_R(w,h)=\text{IDF}(h)$$
 from konlpy.tag import Mecab
 
 def count_seen_headwords(lines, predicate='VV', headword='NNG'):
-mecab = Mecab()
-seen_dict = {}
+    tagger = Kkma()
+    seen_dict = {}
 
-for line in lines:
-pos_result = mecab.pos(line)
+    for line in lines:
+        pos_result = tagger.pos(line)
 
-word_h = None
-word_p = None
-for word, pos in pos_result:
-if pos == predicate or pos[:3] == predicate + '+':
-word_p = word
-break
-if pos == headword:
-word_h = word
+        word_h = None
+        word_p = None
+        for word, pos in pos_result:
+            if pos == predicate or pos[:3] == predicate + '+':
+                word_p = word
+                break
+            if pos == headword:
+                word_h = word
 
-if word_h is not None and word_p is not None:
-seen_dict[word_p] = [word_h] + ([] if seen_dict.get(word_p) is None else seen_dict[word_p])
+        if word_h is not None and word_p is not None:
+            seen_dict[word_p] = [word_h] + ([] if seen_dict.get(word_p) is None else seen_dict[word_p])
 
-return seen_dict
+    return seen_dict
 ```
 
 그럼 주어진 술어와 headword에 대해서 selectional association 점수를 구하는 함수를 아래와 같이 구현할 수 있습니다. 우리는 단어 사이의 유사도 $\text{sim}(h_0,h)$ 를 구하기 위해서, 이전에 구성한 피쳐벡터들을 담은 판다스(pandas) 데이터프레임을 받습니다. 그럼 metric으로 주어진 함수를 통해 유사도를 계산합니다.
 
 ```python
 def get_selectional_association(predicate, headword, lines, dataframe, metric):
-v1 = torch.FloatTensor(dataframe.loc[headword].values)
-seens = count_seen_headwords(lines)[predicate]
+    v1 = torch.FloatTensor(dataframe.loc[headword].values)
+    seens = seen_headwords[predicate]
 
-total = 0
-for seen in seens:
-try:
-v2 = torch.FloatTensor(dataframe.loc[seen].values)
-total += metric(v1, v2)
-except:
-pass
+    total = 0
+    for seen in seens:
+        try:
+            v2 = torch.FloatTensor(dataframe.loc[seen].values)
+            total += metric(v1, v2)
+        except:
+            pass
 
-return total
+    return total
 ```
 
 위의 함수들을 활용하여 주어진 술어에 대해서 올바른 headword를 고르는 함수 wsd는 아래와 같습니다.
 
 ```python
 def wsd(predicate, headwords):
-selectional_associations = []
-for h in query_h:
-selectional_associations += [get_selectional_association(query_p, h, lines, p, get_cosine_similarity)]
+    selectional_associations = []
+    for h in headwords:
+        selectional_associations += [get_selectional_association(predicate, h, lines, co, get_cosine_similarity)]
 
-print(selectional_associations)
+    print(selectional_associations)
 ```
 
 실제로 wsd함수에 대해서 '피우'라는 동사가 주어졌을 때, '담배', '맥주', '사과'중에서 어떤 단어를 선택하는지 살펴 본 결과는 아래와 같습니다.

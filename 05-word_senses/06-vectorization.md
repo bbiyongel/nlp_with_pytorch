@@ -6,26 +6,30 @@
 
 ```python
 def get_tf(docs):
-vocab = {}
-tfs = []
-for d in docs:
-vocab = get_term_frequency(d, vocab)
-tfs += [get_term_frequency(d)]
+    vocab = {}
+    tfs = []
+    for d in docs:
+        vocab = get_term_frequency(d, vocab)
+        tfs += [get_term_frequency(d)]
 
-from operator import itemgetter
-import numpy as np
-sorted_vocab = sorted(vocab.items(), key=itemgetter(1), reverse=True)
+    from operator import itemgetter
+    import numpy as np
 
-stats = []
-for v, freq in sorted_vocab:
-tf_v = []
-for idx in range(len(docs)):
-if tfs[idx].get(v) is not None:
-tf_v += [tfs[idx][v]]
-else:
-tf_v += [0]
+    stats = []
+    for word, freq in vocab.items():
+        tf_v = []
+        for idx in range(len(docs)):
+            if tfs[idx].get(word) is not None:
+                tf_v += [tfs[idx][word]]
+            else:
+                tf_v += [0]
+        stats.append((word, freq, *tf_v))
 
-print('%s\t%d\t%s' % (v, freq, '\t'.join(['%d' % tf for tf in tf_v])))
+    return pd.DataFrame(stats, columns=('word',
+                                        'frequency',
+                                        'doc1',
+                                        'doc2',
+                                        'doc3')).sort_values('frequency', ascending=False)
 ```
 
 ```python
@@ -109,50 +113,43 @@ return lines
 문장들을 입력으로 받아 주어진 윈도우 사이즈(w_size) 내에서 함께 출현한 단어들의 빈도를 세는 함수는 아래와 같습니다.
 
 ```python
-def get_context_counts(lines, w_size=3):
-co_dict = {}
-for line in lines:
-words = line.split()
+from collections import defaultdict
 
-for i, w in enumerate(words):
-for c in words[i - w_size:i + w_size]:
-if w != c:
-co_dict[(w, c)] = 1 + (0 if co_dict.get((w, c)) is None else co_dict[(w, c)])
+import pandas as pd
 
-return co_dict
+def get_context_counts(lines, w_size=2):
+    co_dict = defaultdict(int)
+
+    for line in lines:
+        words = line.split()
+
+        for i, w in enumerate(words):
+            for c in words[i - w_size:i + w_size]:
+                if w != c:
+                    co_dict[(w, c)] += 1
+
+    return pd.Series(co_dict)
 ```
 
 위의 함수와 앞서 TF-IDF를 위해 작성했던 get_term_frequency() 함수를 활용하여, 공기 정보를 통해 벡터를 만드는 코드 입니다.
 
 ```python
-from operator import itemgetter
+def co_occurrence(co_dict, vocab):
+    data = []
 
-fn = 'test.txt'
-min_cnt, max_cnt = 0, 100000
+    for word1 in vocab:
+        row = []
 
-lines = read(fn)
-co_dict = get_context_counts(lines)
-tfs = get_term_frequency(' '.join(lines))
-sorted_tfs = sorted(tfs.items(), key=itemgetter(1), reverse=True)
+        for word2 in vocab:
+            try:
+                count = co_dict[(word1, word2)]
+            except KeyError:
+                count = 0
+            row.append(count)
 
-context_matrix = []
-row_heads = []
-col_heads = [w for w, f in sorted_tfs if f >= min_cnt and f<= max_cnt]
-for w, f in sorted_tfs:
-row = []
-if f >= min_cnt and f <= max_cnt:
-row_heads += [w]
-for w_, f_ in sorted_tfs:
-if f_ >= min_cnt and f_ <= max_cnt:
-if co_dict.get((w, w_)) is not None:
-row += [co_dict[(w, w_)]]
-else:
-row += [0]
-context_matrix += [row]
+        data.append(row)
 
-import pandas as pd
-
-p = pd.DataFrame(data=context_matrix, index=row_heads, columns=col_heads)
+    return pd.DataFrame(data, index=vocab, columns=vocab)
 ```
 
 그리고 이 코드를 통해 얻은 결과의 일부는 아래와 같습니다. 아래의 결과에 따르면 1000개의 문장(문서)에서는 '습니다'의 컨텍스트 윈도우 내에 마침표가 3616번 등장 합니다.
