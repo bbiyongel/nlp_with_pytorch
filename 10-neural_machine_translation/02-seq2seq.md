@@ -102,47 +102,48 @@ $$\begin{gathered}
 ```python
 class Encoder(nn.Module):
 
-def __init__(self, word_vec_dim, hidden_size, n_layers=4, dropout_p=.2):
-super(Encoder, self).__init__()
+    def __init__(self, word_vec_dim, hidden_size, n_layers=4, dropout_p=.2):
+        super(Encoder, self).__init__()
 
-# Be aware of value of 'batch_first' parameter.
-# Also, its hidden_size is half of original hidden_size, because it is bidirectional.
-self.rnn = nn.LSTM(word_vec_dim,
-int(hidden_size / 2),
-num_layers=n_layers,
-dropout=dropout_p,
-bidirectional=True,
-batch_first=True
-)
+        # Be aware of value of 'batch_first' parameter.
+        # Also, its hidden_size is half of original hidden_size, because it is bidirectional.
+        self.rnn = nn.LSTM(word_vec_dim,
+                           int(hidden_size / 2),
+                           num_layers=n_layers,
+                           dropout=dropout_p,
+                           bidirectional=True,
+                           batch_first=True
+                           )
 
-def forward(self, emb):
-# |emb| = (batch_size, length, word_vec_dim)
+    def forward(self, emb):
+        # |emb| = (batch_size, length, word_vec_dim)
 
-if isinstance(emb, tuple):
-x, lengths = emb
-x = pack(x, lengths.tolist(), batch_first=True)
+        if isinstance(emb, tuple):
+            x, lengths = emb
+            x = pack(x, lengths.tolist(), batch_first=True)
 
-# Below is how pack_padded_sequence works.
-# As you can see, PackedSequence object has information about mini-batch-wise information, not time-step-wise information.
-#
-# a = [torch.tensor([1,2,3]), torch.tensor([3,4])]
-# b = torch.nn.utils.rnn.pad_sequence(a, batch_first=True)
-# >>>>
-# tensor([[ 1,  2,  3],
-#     [ 3,  4,  0]])
-# torch.nn.utils.rnn.pack_padded_sequence(b, batch_first=True, lengths=[3,2]
-# >>>>PackedSequence(data=tensor([ 1,  3,  2,  4,  3]), batch_sizes=tensor([ 2,  2,  1]))
-else:
-x = emb
+            # Below is how pack_padded_sequence works.
+            # As you can see, PackedSequence object has information about mini-batch-wise information, 
+            # not time-step-wise information.
+            # 
+            # a = [torch.tensor([1,2,3]), torch.tensor([3,4])]
+            # b = torch.nn.utils.rnn.pad_sequence(a, batch_first=True)
+            # >>>>
+            # tensor([[ 1,  2,  3],
+            #     [ 3,  4,  0]])
+            # torch.nn.utils.rnn.pack_padded_sequence(b, batch_first=True, lengths=[3,2]
+            # >>>>PackedSequence(data=tensor([ 1,  3,  2,  4,  3]), batch_sizes=tensor([ 2,  2,  1]))
+        else:
+            x = emb
 
-y, h = self.rnn(x)
-# |y| = (batch_size, length, hidden_size)
-# |h[0]| = (num_layers * 2, batch_size, hidden_size / 2)
+        y, h = self.rnn(x)
+        # |y| = (batch_size, length, hidden_size)
+        # |h[0]| = (num_layers * 2, batch_size, hidden_size / 2)
 
-if isinstance(emb, tuple):
-y, _ = unpack(y, batch_first=True)
+        if isinstance(emb, tuple):
+            y, _ = unpack(y, batch_first=True)
 
-return y, h
+        return y, h
 ```
 
 #### Pack Padded Sequence
@@ -152,9 +153,8 @@ return y, h
 ```python
 a = [torch.tensor([1, 2, 3]), torch.tensor([3, 4])]
 b = torch.nn.utils.rnn.pad_sequence(a, batch_first=True)
->>>>
-tensor([[ 1,  2,  3],
-[ 3,  4,  0]])
+>>>> tensor([[ 1,  2,  3],
+             [ 3,  4,  0]])
 torch.nn.utils.rnn.pack_padded_sequence(b, batch_first=True, lengths=[3, 2]
 >>>>PackedSequence(data=tensor([ 1,  3,  2,  4,  3]), batch_sizes=tensor([ 2,  2,  1]))
 ```
@@ -168,20 +168,20 @@ torch.nn.utils.rnn.pack_padded_sequence(b, batch_first=True, lengths=[3, 2]
 ```python
 class Generator(nn.Module):
 
-def __init__(self, hidden_size, output_size):
-super(Generator, self).__init__()
+    def __init__(self, hidden_size, output_size):
+        super(Generator, self).__init__()
 
-self.output = nn.Linear(hidden_size, output_size)
-self.softmax = nn.LogSoftmax(dim=-1)
+        self.output = nn.Linear(hidden_size, output_size)
+        self.softmax = nn.LogSoftmax(dim=-1)
 
-def forward(self, x):
-# |x| = (batch_size, length, hidden_size)
+    def forward(self, x):
+        # |x| = (batch_size, length, hidden_size)
 
-y = self.softmax(self.output(x))
-# |y| = (batch_size, length, output_size)
+        y = self.softmax(self.output(x))
+        # |y| = (batch_size, length, output_size)
 
-# Return log-probability instead of just probability.
-return y
+        # Return log-probability instead of just probability.
+        return y
 ```
 
 ### 전체 sequence-to-sequence 클래스
@@ -201,20 +201,20 @@ loss_weight = torch.ones(output_size)
 loss_weight[data_loader.PAD] = 0.
 # Instead of using Cross-Entropy loss, we can use Negative Log-Likelihood(NLL) loss with log-probability.
 crit = nn.NLLLoss(weight=loss_weight,
-reduction='sum'
-)
+                  reduction='sum',
+                  )
 ```
 
 따라서 softmax 레이어를 사용하는 대신에, log-softmax 레이어를 사용하여 로그 확률(log probability)을 구하고, 수식의 나머지 작업을 수행하면 됩니다.
 
 ```python
-def _get_loss(self, y_hat, y, crit=None):
-# |y_hat| = (batch_size, length, output_size)
-# |y| = (batch_size, length)
-crit = self.crit if crit is None else crit
-loss = crit(y_hat.contiguous().view(-1, y_hat.size(-1)),
-y.contiguous().view(-1)
-)
+    def _get_loss(self, y_hat, y, crit=None):
+        # |y_hat| = (batch_size, length, output_size)
+        # |y| = (batch_size, length)
+        crit = self.crit if crit is None else crit
+        loss = crit(y_hat.contiguous().view(-1, y_hat.size(-1)),
+                    y.contiguous().view(-1)
+                    )
 
-return loss
+        return loss
 ```

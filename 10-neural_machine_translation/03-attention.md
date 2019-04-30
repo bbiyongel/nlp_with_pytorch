@@ -16,27 +16,27 @@
 
 ```py
 def key_value_func(query):
-weights = []
+    weights = []
 
-for key in dic.keys():
-weights += [is_same(key, query)]
+    for key in dic.keys():
+        weights += [is_same(key, query)]
 
-weight_sum = sum(weights)
-for i, w in enumerate(weights):
-weights[i] = weights[i] / weight_sum
+    weight_sum = sum(weights)
+    for i, w in enumerate(weights):
+        weights[i] = weights[i] / weight_sum
 
-answer = 0
+    answer = 0
 
-for weight, value in zip(weights, dic.values()):
-answer += weight * value
+    for weight, value in zip(weights, dic.values()):
+        answer += weight * value
 
-return answer
+    return answer
 
 def is_same(key, query):
-if key == query:
-return 1.
-else:
-return .0
+    if key == query:
+        return 1.
+    else:
+        return .0
 ```
 
 코드를 살펴보면, 순차적으로 'dic' 변수 내부의 key값들과 query 값을 비교하여, key가 같을 경우 'weights' 변수에 1.0을 더하고, 다를 경우에는 0을 더합니다. 그리고 'weights'를 'weights'의 총 합으로 나누어 그 합이 1이 되도록 만들어 줍니다. 다시 'dic' 내부의 value값들과 'weights'의 값에 대해서 곱하여 더해 줍니다. 즉, 'weight'가 1.0인 경우에만 'value'값을 'answer'에 더합니다.
@@ -74,18 +74,18 @@ return .0
 
 ```py
 def key_value_func(query):
-weights = []
+    weights = []
 
-for key in dic.keys():
-weights += [how_similar(key, query)]    # cosine similarity 값을 채워 넣는다.
+    for key in dic.keys():
+        weights += [how_similar(key, query)]    # cosine similarity 값을 채워 넣는다.
 
-weights = softmax(weights)    # 모든 weight들을 구한 후에 softmax를 계산한다.
-answer = 0
+    weights = softmax(weights)    # 모든 weight들을 구한 후에 softmax를 계산한다.
+    answer = 0
 
-for weight, value in zip(weights, dic.values()):
-answer += weight * value
+    for weight, value in zip(weights, dic.values()):
+        answer += weight * value
 
-return answer
+    return answer
 ```
 
 이번에 key_value_func는 그럼 그 값을 받아서 weights에 저장 한 후, 모든 weights의 값이 채워지면 softmax 함수를 취할 겁니다. 여기서 softmax는 weights의 합의 크기를 1로 고정시키는 정규화 역할을 합니다. 따라서 유사도의 총 합에서 차지하는 비율 만큼 weight의 값이 채워질 겁니다.
@@ -189,31 +189,31 @@ z = torch.bmm(x, y)
 ```python
 class Attention(nn.Module):
 
-def __init__(self, hidden_size):
-super(Attention, self).__init__()
+    def __init__(self, hidden_size):
+        super(Attention, self).__init__()
 
-self.linear = nn.Linear(hidden_size, hidden_size, bias=False)
-self.softmax = nn.Softmax(dim=-1)
+        self.linear = nn.Linear(hidden_size, hidden_size, bias=False)
+        self.softmax = nn.Softmax(dim=-1)
 
-def forward(self, h_src, h_t_tgt, mask=None):
-# |h_src| = (batch_size, length, hidden_size)
-# |h_t_tgt| = (batch_size, 1, hidden_size)
-# |mask| = (batch_size, length)
+    def forward(self, h_src, h_t_tgt, mask=None):
+        # |h_src| = (batch_size, length, hidden_size)
+        # |h_t_tgt| = (batch_size, 1, hidden_size)
+        # |mask| = (batch_size, length)
 
-query = self.linear(h_t_tgt.squeeze(1)).unsqueeze(-1)
-# |query| = (batch_size, hidden_size, 1)
+        query = self.linear(h_t_tgt.squeeze(1)).unsqueeze(-1)
+        # |query| = (batch_size, hidden_size, 1)
 
-weight = torch.bmm(h_src, query).squeeze(-1)
-# |weight| = (batch_size, length)
-if mask is not None:
-# Set each weight as -inf, if the mask value equals to 1.
-# Since the softmax operation makes -inf to 0, masked weights would be set to 0 after softmax operation.
-# Thus, if the sample is shorter than other samples in mini-batch, the weight for empty time-step would be set to 0.
-weight.masked_fill_(mask, -float('inf'))
-weight = self.softmax(weight)
+        weight = torch.bmm(h_src, query).squeeze(-1)
+        # |weight| = (batch_size, length)
+        if mask is not None:
+            # Set each weight as -inf, if the mask value equals to 1.
+            # Since the softmax operation makes -inf to 0, masked weights would be set to 0 after softmax operation.
+            # Thus, if the sample is shorter than other samples in mini-batch, the weight for empty time-step would be set to 0.
+            weight.masked_fill_(mask, -float('inf'))
+        weight = self.softmax(weight)
 
-context_vector = torch.bmm(weight.unsqueeze(1), h_src)
-# |context_vector| = (batch_size, 1, hidden_size)
+        context_vector = torch.bmm(weight.unsqueeze(1), h_src)
+        # |context_vector| = (batch_size, 1, hidden_size)
 
-return context_vector
+        return context_vector
 ```
