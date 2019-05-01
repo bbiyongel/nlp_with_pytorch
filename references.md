@@ -2,7 +2,7 @@
 
 1. [[Abdel-Hamid et al.,2014](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/CNN_ASLPTrans2-14.pdf)] Convolutional Neural Networks for Speech Recognition
 1. [[Bahdanau et al.,2014](https://arxiv.org/abs/1409.0473)] Neural Machine Translation by Jointly Learning to Align and Translate
-1. [[Bahdanau et al.,2016](https://arxiv.org/abs/1409.0473)] Neural Machine Translation by Jointly Learning to Align and Translate
+1. [[Bahdanau et al.,2016](https://arxiv.org/abs/1607.07086)] An Actor-Critic Algorithm for Sequence Prediction
 1. [[Bojanowski et al.,2016](https://arxiv.org/abs/1607.04606)] Enriching Word Vectors with Subword Information
 1. [[Chambers et al.,2010](https://web.stanford.edu/~jurafsky/chambers-acl2010-pseudowords.pdf)] Improving the Use of Pseudo-Words for Evaluating Selectional Preferences
 1. [[Chiu et al.,2017](https://arxiv.org/abs/1712.01769)] State-of-the-art Speech Recognition With Sequence-to-Sequence Models
@@ -26,15 +26,18 @@
 1. [[Kingma et al.,2013](https://arxiv.org/abs/1312.6114)] Auto-Encoding Variational Bayes
 1. [[Kingma et al.,2014](https://arxiv.org/abs/1412.6980)] Adam: A Method for Stochastic Optimization
 1. [[Kneser et al.,1995](https://www.semanticscholar.org/paper/Improved-backing-off-for-M-gram-language-modeling-Kneser-Ney/9548ac30c113562a51e603dbbc8e9fa651cfd3ab)] Improved backing-off for M-gram language modeling
+1. [[Lample et al.,2019](https://arxiv.org/abs/1901.07291)] Cross-lingual Language Model Pretraining
 1. [[Liu et al.,2016](https://arxiv.org/abs/1606.07536)] Coupled Generative Adversarial Networks
 1. [[Loung et al.,2015](https://arxiv.org/abs/1508.04025)] Effective Approaches to Attention-based Neural Machine Translation
 1. [[Mikolov et al.,2010](https://www.isca-speech.org/archive/archive_papers/interspeech_2010/i10_1045.pdf)] Recurrent neural network based language model
 1. [[Mikolov et al.,2013](https://arxiv.org/pdf/1310.4546)] Distributed Representations of Words and Phrases and their Compositionality
 1. [[Pennington et al.,2014](https://www.aclweb.org/anthology/D14-1162)] GloVe: Global Vectors for Word Representation
+1. [[Peters et al.,2018](https://arxiv.org/abs/1802.05365)] Deep contextualized word representations
 1. [[Radford et al.,2015](https://arxiv.org/abs/1511.06434)] Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks
 1. [[Resnik et al.,1997](http://www.aclweb.org/anthology/W97-0209)] Selectional Preference and Sense Disambiguation
-1. [[Sennrich et al.,2015](https://arxiv.org/abs/1511.06709)] Improving Neural Machine Translation Models with Monolingual Data
-1. [[Sennrich et al.,2016](https://arxiv.org/abs/1511.06709)] Improving Neural Machine Translation Models with Monolingual Data
+1. [[Ruder 2019](http://ruder.io/thesis/neural_transfer_learning_for_nlp.pdf)] Neural Transfer Learning for Natural Language Processing. PhD thesis
+1. [[Sennrich et al.,2015a](https://arxiv.org/abs/1508.07909)] Neural Machine Translation of Rare Words with Subword Units
+1. [[Sennrich et al.,2015b](https://arxiv.org/abs/1511.06709)] Improving Neural Machine Translation Models with Monolingual Data
 1. [[Sennrich et al.,2017](https://arxiv.org/abs/1708.00726)] The University of Edinburgh's Neural MT Systems for WMT17
 1. [[Shen et al.,2016](http://www.aclweb.org/anthology/P16-1159)] Minimum Risk Training for Neural Machine Translation
 1. [[Sundermeyer at el.2012](https://www.isca-speech.org/archive/archive_papers/interspeech_2012/i12_0194.pdf)] LSTM Neural Networks for Language Modeling
