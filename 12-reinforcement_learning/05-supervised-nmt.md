@@ -338,10 +338,25 @@ $$
 
 NLTK에서 제공되는 GLEU 함수로 서브워드까지 최종 분절 상태에서 측정한 BLEU 값은 계속하여 증가하는 것을 볼 수 있습니다. 이에 비해 multi_bleu.perl 을 통해서 측정한 실제 BLEU는 단조증가하지는 않지만, 18 epoch에서의 MLE 방식때의 성능보다 결국 증가하는 것을 확인할 수 있습니다. 아래는 실제 문장을 넣어 추론(inference)한 결과를 비교한 테이블 입니다. 이미 MLE에서도 나름 훌륭한 번역의 품질이 나오지만, MRT를 통해서 한층 더 번역의 품질이 향상된 것을 체감할 수 있습니다.
 
-|입력|정답|MLE|MRT|
-|-|-|-|-|
-|우리는 또한 그 지역의 생선 가공 공장에서 심한 악취를 내며 썩어가는 엄청난 양의 생선도 치웠습니다.|We cleared tons and tons of stinking, rotting fish carcasses from the local fish processing plant.|We also had a huge stink in the fish processing plant in the area, smelling havoc with a huge amount of fish.|We also cleared a huge amount of fish that rot and rot in the fish processing factory in the area.|
-|나는 이것들이 내 삶을 바꾸게 하지 않겠어.|I won't let this thing alter my life.|I'm not gonna let these things change my life.|I won't let these things change my life.|
-|하지만, 나는 나중에 곧 잠들었다.|But I fell asleep shortly afterwards.|However, I fell asleep in a moment.|However, I fell asleep soon afterwards.|
-|하지만 1997년 아시아에 외환위기가 불어닥쳤다.|But Asia was hit hard by the 1997 foreign currency crisis.|In 1997, however, the financial crisis in Asia has become a reality for Asia.|But in 1997, the foreign currency crisis was swept in Asia.|
-|그 다음 몇 주 동안에 사태가 극적으로 전환되었다.|Events took a dramatic turn in the weeks that followed.|The situation has been dramatically changed for the next few weeks.|The situation was dramatically reversed for the next few weeks.|
+|번호|레이블|문장|
+|-|-|-|
+|1|입력|우리는 또한 그 지역의 생선 가공 공장에서 심한 악취를 내며 썩어가는 엄청난 양의 생선도 치웠습니다.|
+||정답|We cleared tons and tons of stinking, rotting fish carcasses from the local fish processing plant.|
+||MLE|We also had a huge stink in the fish processing plant in the area, smelling havoc with a huge amount of fish.|
+||MRT|We also cleared a huge amount of fish that rot and rot in the fish processing factory in the area.|
+|2|입력|나는 이것들이 내 삶을 바꾸게 하지 않겠어.|
+||정답|I won't let this thing alter my life.|
+||MLE|I'm not gonna let these things change my life.|
+||MRT|I won't let these things change my life.|
+|3|입력|하지만, 나는 나중에 곧 잠들었다.|
+||정답|But I fell asleep shortly afterwards.|
+||MLE|However, I fell asleep in a moment.|
+||MRT|However, I fell asleep soon afterwards.|
+|4|입력|하지만 1997년 아시아에 외환위기가 불어닥쳤다.|
+||정답|But Asia was hit hard by the 1997 foreign currency crisis.|
+||MLE|In 1997, however, the financial crisis in Asia has become a reality for Asia.|
+||MRT|But in 1997, the foreign currency crisis was swept in Asia.|
+|5|입력|그 다음 몇 주 동안에 사태가 극적으로 전환되었다.|
+||정답|Events took a dramatic turn in the weeks that followed.|
+||MLE|The situation has been dramatically changed for the next few weeks.|
+||MRT|The situation was dramatically reversed for the next few weeks.|
