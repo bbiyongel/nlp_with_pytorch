@@ -73,6 +73,8 @@ $$\begin{gathered}
 
 ![트랜스포머는 모든 time-step의 어텐션 연산을 한 번에 수행합니다.](../assets/11-03-04.png)
 
+![마찬가지로 한번에 모든 웨이트를 한번에 V에 곱하여 가중합을 구합니다.](../assets/11-03-05.png)
+
 $$\begin{aligned}
 |QW_i^Q|&=(\text{batch\_size},m,\text{hidden\_size})\times(\text{hidden\_size},\text{head\_size}) \\
 &=(\text{batch\_size},m,\text{head\_size}) \\
@@ -112,10 +114,6 @@ $$\begin{gathered}
 피드 포워드 레이어를 통해 어텐션 결과를 정리하는 과정을 거칩니다.
 
 ## 평가
-
-<!--
-![트랜스포머의 성능 비교](../assets/11-03-05.png)
--->
 
 |모델|영어 $\rightarrow$ 독일어 BLEU|훈련 비용(FLOPs)|영어 $\rightarrow$ 프랑스어|훈련 비용(FLOPs)|
 |-|:-:|:-:|:-:|:-:|
