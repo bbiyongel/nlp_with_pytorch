@@ -4,7 +4,7 @@
 
 ## FastText를 활용한 단어 임베딩 벡터 학습
 
-단어 임베딩 벡터를 훈련하는 기능을 제공하는 공개 라이브러리는 여러가지가 있습니다. 가장 대표적으로 사용되는 것이 Gensim과 FastText 입니다. Gensim은 공개 연혁이 상대적으로 오래되었지만, 덕분에 학습 속도가 좀 더 느린것이 단점 입니다. 대신 페이스북에서 공개한 FastText 라이브러리는 이름 그대로 좀 더 빠른 속도를 자랑합니다. 기존의 CBOW, Skip-gram 뿐만 아니라, FastText 자체의 알고리즘[[Bojanowski et al.2016](https://arxiv.org/abs/1607.04606)]이 매우 빠르기 때문입니다.
+단어 임베딩 벡터를 훈련하는 기능을 제공하는 공개 라이브러리는 여러가지가 있습니다. 가장 대표적으로 사용되는 것이 Gensim과 FastText 입니다. Gensim은 공개 연혁이 상대적으로 오래되었지만, 덕분에 학습 속도가 좀 더 느린것이 단점 입니다. 대신 페이스북에서 공개한 FastText 라이브러리는 이름 그대로 좀 더 빠른 속도를 자랑합니다. 기존의 CBOW, Skip-gram 뿐만 아니라, FastText 자체의 알고리즘[[Bojanowski et al.,2016](https://arxiv.org/abs/1607.04606)]이 매우 빠르기 때문입니다.
 
 ### 설치 방법
 
@@ -87,7 +87,7 @@ The following arguments for quantization are optional:
 -dsub               size of each sub-vector [2]
 ```
 
-<comment> FastText는 단어 임베딩 벡터 뿐만 아니라 추가적으로 텍스트 분류를 훈련하는 기능[[Joulin et al.2016](https://arxiv.org/abs/1607.01759)]도 갖추고 있으니 참고 바랍니다. </comment>
+<comment> FastText는 단어 임베딩 벡터 뿐만 아니라 추가적으로 텍스트 분류를 훈련하는 기능[[Joulin et al.,2016](https://arxiv.org/abs/1607.01759)]도 갖추고 있으니 참고 바랍니다. </comment>
 
 ## 시각화
 

@@ -49,7 +49,7 @@ $$\begin{aligned}
 
 ## Dual Unsupervised Learning with Marginal Distribution Regularization
 
-앞서 설명한 Dual Supervised Learning (DSL)은 베이즈 정리에 따른 수식을 제약조건으로 사용하였다면, 이 방법[[Wang et al.2017]](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/11/17041-72820-1-SM.pdf)은 Marginal 분포(distribution)의 성질을 이용하여 제약조건을 만듭니다. <comment> Marginal 분포에 대한 설명은 앞서 기초수학 챕터에서 간단하게 이야기한 바 있습니다. </comment>
+앞서 설명한 Dual Supervised Learning (DSL)은 베이즈 정리에 따른 수식을 제약조건으로 사용하였다면, 이 방법[[Wang et al.,2017]](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/11/17041-72820-1-SM.pdf)은 Marginal 분포(distribution)의 성질을 이용하여 제약조건을 만듭니다. <comment> Marginal 분포에 대한 설명은 앞서 기초수학 챕터에서 간단하게 이야기한 바 있습니다. </comment>
 
 $$P(y)=\sum_{x \in \mathcal{X}}{P(x,y)}=\sum_{x \in \mathcal{X}}{P(y|x)P(x)}$$
 
@@ -103,16 +103,16 @@ $$\mathcal{L}(\theta)\approx-\sum^N_{n=1}{\log{P(y^n|x^n;\theta)}}+\lambda\sum^S
 |모델|En $\rightarrow$ Fr| $\triangle$ |DE $\rightarrow$ En| $\triangle$ |
 |-|-|-|-|-|
 |기본 NMT|29.92||30.99||
-|언어모델 앙상블 [Gulcehre et al.2015]|30.03|+0.11|31.08|+0.09|
+|언어모델 앙상블 [Gulcehre et al.,2015]|30.03|+0.11|31.08|+0.09|
 |Back Translation [Sennrich, Haddow and Birch 2016]|30.40|+0.48|31.76|+0.77|
-|듀얼러닝 기계번역 [He et al.2016a]|32.06|+2.14|32.05|+1.06|
+|듀얼러닝 기계번역 [He et al.,2016a]|32.06|+2.14|32.05|+1.06|
 |DUL|32.85|+2.93|32.35|+1.36|
 
 <!--
 ![](../assets/13-03-04.png)
 -->
 
-위의 테이블과 같이, 이 방법은 앞 챕터에서 소개한 기존의 단방향 코퍼스[[Gulcehre et al.2015]](https://arxiv.org/abs/1503.03535)[[Sennrich et al.2016]](https://arxiv.org/abs/1511.06709)를 활용한 방식들과 비교하여 훨씬 더 나은 성능의 개선을 보여주었으며, 바로 앞서 소개한 [Dual Learning[He et al.2016a]](https://arxiv.org/pdf/1611.00179.pdf)보다도 더 나은 성능을 보여줍니다. 마찬가지로, 불안정하고 비효율적인 강화학습을 사용하지 않고도 더 나은 성능을 보여준 것은 주목할 만한 성과라고 할 수 있습니다.
+위의 테이블과 같이, 이 방법은 앞 챕터에서 소개한 기존의 단방향 코퍼스[[Gulcehre et al.,2015]](https://arxiv.org/abs/1503.03535)[[Sennrich et al.,2016]](https://arxiv.org/abs/1511.06709)를 활용한 방식들과 비교하여 훨씬 더 나은 성능의 개선을 보여주었으며, 바로 앞서 소개한 [Dual Learning[He et al.,2016a]](https://arxiv.org/pdf/1611.00179.pdf)보다도 더 나은 성능을 보여줍니다. 마찬가지로, 불안정하고 비효율적인 강화학습을 사용하지 않고도 더 나은 성능을 보여준 것은 주목할 만한 성과라고 할 수 있습니다.
 
 <!--
 ### 쉬어가기: 임포턴스 샘플링 (Importance Sampling)

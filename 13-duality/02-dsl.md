@@ -1,6 +1,6 @@
 # 듀얼리티를 활용한 지도학습
 
-이번에 소개할 방법은 [Dual Supervised Learning (DSL) [Xia et al.2017]](https://arxiv.org/pdf/1707.00415.pdf) 입니다. 이 방법은 기존의 Teacher Forcing의 문제로 생기는 어려움을 강화학습을 사용하지 않고, 듀얼리티로부터 regularization term을 이끌어내어 해결하였습니다.
+이번에 소개할 방법은 [Dual Supervised Learning (DSL) [Xia et al.,2017]](https://arxiv.org/pdf/1707.00415.pdf) 입니다. 이 방법은 기존의 Teacher Forcing의 문제로 생기는 어려움을 강화학습을 사용하지 않고, 듀얼리티로부터 regularization term을 이끌어내어 해결하였습니다.
 
 먼저 베이즈 정리(Bayes Theorem)에 따라서 우리는 아래의 수식이 언제나 성립함을 알고 있습니다.
 
@@ -41,8 +41,8 @@ $$\begin{aligned}
 
 |모델|설명|BLEU|
 |-|-|-|
-|NMT[1] [Jean et al.2015] |Teacher Forcing by MLE|33.08|
-|MRT[2] [Shen et al.2016] |Minimum Risk Training by BLEU|34.23|
+|NMT[1] [Jean et al.,2015] |Teacher Forcing by MLE|33.08|
+|MRT[2] [Shen et al.,2016] |Minimum Risk Training by BLEU|34.23|
 |DSL|Dual Supervised Learning|34.84|
 
 <!--

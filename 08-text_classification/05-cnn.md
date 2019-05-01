@@ -49,7 +49,7 @@ y\in\mathbb{R}^{4\times4}\text{ where }x\in\mathbb{R}^{6\times6}\text{ and }k\in
 
 이처럼 CNN은 패턴을 감지하는 필터를 자동으로 최적화하는 역할을 통해, 영상처리(Computer Vision) 등의 분야에서 빼놓을 수 없는 매우 중요한 역할을 하고 있습니다. 또한, 이미지 뿐만 아니라 아래와 같이 음성 분야에서도 효과를 보고 있습니다. 음성 또는 오디오 신호의 경우에도 푸리에 변환을 통해서 2차원의 시계열 데이터를 얻을 수 있습니다. 이렇게 얻어진 데이터에 대해서도 마찬가지로 패턴을 찾아내는 컨볼루션 연산이 매우 유용합니다.
 
-![Example of convolutional neural network for speech recognition [ Abdel-Hamid et al.2014](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/CNN_ASLPTrans2-14.pdf)](../assets/08-05-06.png)
+![Example of convolutional neural network for speech recognition [ Abdel-Hamid et al.,2014](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/CNN_ASLPTrans2-14.pdf)](../assets/08-05-06.png)
 
 ## 텍스트 분류에 CNN을 적용하는 방법
 

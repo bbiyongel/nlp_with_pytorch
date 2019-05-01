@@ -18,7 +18,7 @@ $$\begin{aligned}
 
 ![그래디언트의 방향은 유지한 채, 크기만 달라지는 모습](../assets/07-05-01.png)
 
-다만, 기존의 Stochastic Gradient Descent (SGD)가 아닌, Adam [[Kingma et al.2014]](https://arxiv.org/pdf/1412.6980.pdf)과 같은 동적인 러닝레이트를 갖는 optimizer(옵티마이저)를 사용할 경우에는 굳이 그래디언트 클리핑을 적용하지 않아도 괜찮습니다. <comment> 하지만 안전장치로 적용하는 것은 괜찮은 생각 입니다. </comment>
+다만, 기존의 Stochastic Gradient Descent (SGD)가 아닌, Adam [[Kingma et al.,2014]](https://arxiv.org/pdf/1412.6980.pdf)과 같은 동적인 러닝레이트를 갖는 optimizer(옵티마이저)를 사용할 경우에는 굳이 그래디언트 클리핑을 적용하지 않아도 괜찮습니다. <comment> 하지만 안전장치로 적용하는 것은 괜찮은 생각 입니다. </comment>
 
 아래와 같이 파이토치에서도 기능을 [torch.nn.utils.clip_grad_norm_](https://pytorch.org/docs/stable/nn.html?highlight=clip#torch.nn.utils.clip_grad_norm_) 이라는 함수를 제공하고 있으므로 매우 쉽게 사용 할 수 있습니다.
 

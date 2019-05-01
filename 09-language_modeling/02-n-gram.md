@@ -68,7 +68,7 @@ $$P(w_i|w_{<i}) \approx \frac{\text{Count}(w_{<i},w_i)+m P(w_i)}{\text{Count}(w_
 <!--
 #### 절대값 스무딩 (Absolute Smoothing)
 
-[[Church et al.1991](https://www.sciencedirect.com/science/article/pii/088523089190016J)]은 bigram에 대해서 실험을 한 결과를 제시하였습니다. 훈련 코퍼스에서 n번 나타난 2-gram에 대해서, held-out corpus (validation 또는 development 데이터셋)에서의 출현빈도를 계산하여 평균을 낸 것 입니다. 그 결과는 아래와 같습니다.
+[[Church et al.,1991](https://www.sciencedirect.com/science/article/pii/088523089190016J)]은 bigram에 대해서 실험을 한 결과를 제시하였습니다. 훈련 코퍼스에서 n번 나타난 2-gram에 대해서, held-out corpus (validation 또는 development 데이터셋)에서의 출현빈도를 계산하여 평균을 낸 것 입니다. 그 결과는 아래와 같습니다.
 
 ![](../assets/09-02-02.png)
 
@@ -79,7 +79,7 @@ $$P(w_i|w_{<i}) \approx \frac{\text{Count}(w_{<i},w_i)+m P(w_i)}{\text{Count}(w_
 
 #### Kneser-Ney 디스카운팅
 
-[[Kneser et al.1995](https://www.semanticscholar.org/paper/Improved-backing-off-for-M-gram-language-modeling-Kneser-Ney/9548ac30c113562a51e603dbbc8e9fa651cfd3ab)]은 한발 더 나아가, KN 디스카운팅을 제시하였습니다.
+[[Kneser et al.,1995](https://www.semanticscholar.org/paper/Improved-backing-off-for-M-gram-language-modeling-Kneser-Ney/9548ac30c113562a51e603dbbc8e9fa651cfd3ab)]은 한발 더 나아가, KN 디스카운팅을 제시하였습니다.
 
 KN 디스카운팅 주요 아이디어는 단어 $w$ 가 다른 단어 $v$ 의 뒤에서 출현 할 때, 얼마나 다양한 단어 뒤에서 출현하는지( $v$ 가 얼마나 다양한지)를 알아내는 것 입니다. 그래서 다양한 단어 뒤에 나타나는 단어일수록, 훈련 코퍼스에서 보지 못한 단어 시퀀스(unseen word sequence)로 나타날 가능성이 높다는 것 입니다.
 

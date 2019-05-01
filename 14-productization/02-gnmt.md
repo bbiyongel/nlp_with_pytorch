@@ -90,7 +90,7 @@ cp(X;Y)=\beta*\sum_{i=1}^{|X|}{\log{(\min{(\sum_{j=1}^{|Y|}{p_{i,j}},1.0)})}} \\
 
 ![Optimizer에 따른 손실값의 변화 (출처: [[Wo at el.2016]](https://arxiv.org/pdf/1609.08144.pdf))](../assets/14-02-05.png)
 
-구글은 stochastic gradient descent(SGD) 또는 Adam[Kingma et al.2014]을 단독으로 사용하여 훈련 시키는 것 보다, 둘을 섞어 사용하면 더 좋은 성능을 발휘하는 것을 확인하였습니다. 첫 번째 에포크(epoch)는 Adam을 사용하여 낮은 손실값까지 빠르게 학습한 이후에, 두 번째 에포크부터 SGD를 사용하여 최적화를 수행하였을 때, 더 좋은 성능을 발휘하는 것을 확인하였다고 합니다.
+구글은 stochastic gradient descent(SGD) 또는 Adam[Kingma et al.,2014]을 단독으로 사용하여 훈련 시키는 것 보다, 둘을 섞어 사용하면 더 좋은 성능을 발휘하는 것을 확인하였습니다. 첫 번째 에포크(epoch)는 Adam을 사용하여 낮은 손실값까지 빠르게 학습한 이후에, 두 번째 에포크부터 SGD를 사용하여 최적화를 수행하였을 때, 더 좋은 성능을 발휘하는 것을 확인하였다고 합니다.
 
 ## 성능 평가
 

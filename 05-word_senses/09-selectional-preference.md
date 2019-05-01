@@ -4,7 +4,7 @@
 
 ## Selectional Preference 강도(Strength)
 
-앞서 언급한 것처럼 selectional preference는 단어와 단어 사이의 관계(예: verb-object)가 좀 더 특별한 경우에 대해 수치화 하여 나타냅니다. 술어(predicate) 동사(예: verb)가 주어졌을 때, 목적어(예: object)관계에 있는 headword 단어(보통은 명사가 될 겁니다.)들의 분포는, 평소 문서 내에 해당 명사(예: object로써 noun)가 나올 분포와 다를 것 입니다. 그 분포의 차이가 크면 클수록 해당 술어(predicate)는 더 강력한 selectional preference를 갖는다고 할 수 있습니다. 이것을 Philip Resnik은 [[Resnik et al.1997](http://www.aclweb.org/anthology/W97-0209)]에서 Selectional Preference 강도라고 명명하고 KL-divergence를 사용하여 정의하였습니다.
+앞서 언급한 것처럼 selectional preference는 단어와 단어 사이의 관계(예: verb-object)가 좀 더 특별한 경우에 대해 수치화 하여 나타냅니다. 술어(predicate) 동사(예: verb)가 주어졌을 때, 목적어(예: object)관계에 있는 headword 단어(보통은 명사가 될 겁니다.)들의 분포는, 평소 문서 내에 해당 명사(예: object로써 noun)가 나올 분포와 다를 것 입니다. 그 분포의 차이가 크면 클수록 해당 술어(predicate)는 더 강력한 selectional preference를 갖는다고 할 수 있습니다. 이것을 Philip Resnik은 [[Resnik et al.,1997](http://www.aclweb.org/anthology/W97-0209)]에서 Selectional Preference 강도라고 명명하고 KL-divergence를 사용하여 정의하였습니다.
 
 $$\begin{aligned}
 S_R(w)&=\text{KL}(P(C|w)||P(C)) \\
@@ -36,7 +36,7 @@ $$A_R(w,c)=-\frac{P(c|w)\log{\frac{P(c)}{P(c|w)}}}{S_R(w)}$$
 
 ## 워드넷 기반의 Selectional Preference
 
-이때, 워드넷(WordNet)이 위력을 발휘합니다. 우리는 워드넷을 통해서 '차(car)'의 상위어(hypernym)를 알 수 있고, 이것을 클래스로 삼으면 우리가 필요한 정보들을 얻을 수 있습니다. 영어 워드넷에서의 예를 들어 'eat' 뒤에 있는 'bass'의 상위어를 통해 먹는 물고기 'bass'인지, 악기 'bass'인지 구분 할 수 있을 것 입니다. [[Resnik et al.1997](http://www.aclweb.org/anthology/W97-0209)]에서는 술어와 클래스 사이의 확률 분포를 정의하기 위한 출현빈도를 계산하는 수식을 아래와 같이 제안하였습니다.
+이때, 워드넷(WordNet)이 위력을 발휘합니다. 우리는 워드넷을 통해서 '차(car)'의 상위어(hypernym)를 알 수 있고, 이것을 클래스로 삼으면 우리가 필요한 정보들을 얻을 수 있습니다. 영어 워드넷에서의 예를 들어 'eat' 뒤에 있는 'bass'의 상위어를 통해 먹는 물고기 'bass'인지, 악기 'bass'인지 구분 할 수 있을 것 입니다. [[Resnik et al.,1997](http://www.aclweb.org/anthology/W97-0209)]에서는 술어와 클래스 사이의 확률 분포를 정의하기 위한 출현빈도를 계산하는 수식을 아래와 같이 제안하였습니다.
 
 $$\text{Count}_R(w, c)\approx\sum_{h\in c}{\frac{\text{Count}_R(w,h)}{|\text{Classes}(h)|}}$$
 
@@ -52,11 +52,11 @@ $$\hat{c}=\underset{c\in\mathcal{C}}{\text{argmax}}{A_R(w,c)},\text{ where }\mat
 
 ![](../assets/05-09-02.png)
 
-Pseudo 워드가 하나의 해답이 될 수 있습니다. Pseudo 워드는 두개의 단어가 인위적으로 합성되어 만들어진 단어를 이릅니다. 실제 일상 생활에서 쓰이기보다는 단순히 두 단어를 합친 것 입니다. 예를 들어 'banana'와 'door'를 합쳐 'banana-door'라는 pseudo 워드를 만들어 낼 수 있습니다. 이 'banana-door'라는 단어는 사실 실생활에서 쓰일리 없는 단어입니다. 하지만 우리는 이 단어가 'eat' 또는 'open'이라는 동사 술어(verb predicate)와 함꼐 headword object로써 나타났을때, 'eat'에 대해서는 'banana'를 선택해야 하고, 'open'에 대해서는 'door'를 선택하도록 해야 올바른 selectional preference 알고리즘을 만들거나 구현했음을 확인할 수 있습니다. <comment> pseudo 워드를 활용하여 selectional preference를 잘 평가하는 방법에 대해서 더 알고 싶다면, [[Chambers et al.2010](https://web.stanford.edu/~jurafsky/chambers-acl2010-pseudowords.pdf)]을 참고 바랍니다. </comment>
+Pseudo 워드가 하나의 해답이 될 수 있습니다. Pseudo 워드는 두개의 단어가 인위적으로 합성되어 만들어진 단어를 이릅니다. 실제 일상 생활에서 쓰이기보다는 단순히 두 단어를 합친 것 입니다. 예를 들어 'banana'와 'door'를 합쳐 'banana-door'라는 pseudo 워드를 만들어 낼 수 있습니다. 이 'banana-door'라는 단어는 사실 실생활에서 쓰일리 없는 단어입니다. 하지만 우리는 이 단어가 'eat' 또는 'open'이라는 동사 술어(verb predicate)와 함꼐 headword object로써 나타났을때, 'eat'에 대해서는 'banana'를 선택해야 하고, 'open'에 대해서는 'door'를 선택하도록 해야 올바른 selectional preference 알고리즘을 만들거나 구현했음을 확인할 수 있습니다. <comment> pseudo 워드를 활용하여 selectional preference를 잘 평가하는 방법에 대해서 더 알고 싶다면, [[Chambers et al.,2010](https://web.stanford.edu/~jurafsky/chambers-acl2010-pseudowords.pdf)]을 참고 바랍니다. </comment>
 
 ## 유사도 기반의 Selectional Preference
 
-위와 같이 selectional preference를 워드넷등의 도움을 받아 구현하는 방법을 살펴보았습니다. 하지만 워드넷이라는것은 아쉽게도 모든 언어에 존재하지 않으며, 새롭게 생겨난 신조어들도 반영되어 있지 않을 가능성이 매우 높습니다. 따라서 워드넷과 같은 시소러스(thesaurus)에 의존하지 않고 selectional preference를 구할 수 있으면 매우 좋을 것 입니다. [[Erk et al.2007](http://www.aclweb.org/anthology/P07-1028)]에서는 단어간의 유사도를 통해 시소러스에 의존하지 않고 데이터를 기반으로 간단하게 selectional preference를 구하는 방법을 제시 하였습니다.
+위와 같이 selectional preference를 워드넷등의 도움을 받아 구현하는 방법을 살펴보았습니다. 하지만 워드넷이라는것은 아쉽게도 모든 언어에 존재하지 않으며, 새롭게 생겨난 신조어들도 반영되어 있지 않을 가능성이 매우 높습니다. 따라서 워드넷과 같은 시소러스(thesaurus)에 의존하지 않고 selectional preference를 구할 수 있으면 매우 좋을 것 입니다. [[Erk et al.,2007](http://www.aclweb.org/anthology/P07-1028)]에서는 단어간의 유사도를 통해 시소러스에 의존하지 않고 데이터를 기반으로 간단하게 selectional preference를 구하는 방법을 제시 하였습니다.
 
 $$(w,h,R),\text{ where }R\text{ is a relationship, such as verb-object}.$$
 

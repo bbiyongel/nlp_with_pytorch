@@ -1,6 +1,6 @@
 # GloVe
 
-이전 섹션에서는 Word2Vec에 대해서 다루어 보았습니다. 이번 섹션에서는 또 하나의 대표적인 워드 임베딩 방법인 GloVe (Global Vectors for Word Representation) [Pennington et al.2014]에 대해 다루어보고자 합니다.
+이전 섹션에서는 Word2Vec에 대해서 다루어 보았습니다. 이번 섹션에서는 또 하나의 대표적인 워드 임베딩 방법인 GloVe (Global Vectors for Word Representation) [Pennington et al.,2014]에 대해 다루어보고자 합니다.
 
 ## 알고리즘
 

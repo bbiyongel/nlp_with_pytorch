@@ -40,7 +40,7 @@ c = H^{src} \cdot w\text{ and }c\text{ is a context vector}. \\
 |4| 3 + attention | 어텐션 추가 | 7.3 | 16.8(+2.8) |
 |5| 4 + feed input | input feeding 추가 | 6.4 | 18.1(+1.3) |
 
-<reference>[[Loung et al.2015] Effective Approaches to Attention-based Neural Machine Translation](https://arxiv.org/pdf/1508.04025.pdf)</reference>
+<reference>[[Loung et al.,2015] Effective Approaches to Attention-based Neural Machine Translation](https://arxiv.org/pdf/1508.04025.pdf)</reference>
 
 우리는 위 테이블을 통해 어텐션과 input feeding을 사용함으로써, 최종적으로 훨씬 더 나은 성능을 얻을 수 있음을 알 수 있습니다.
 
