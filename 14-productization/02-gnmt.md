@@ -9,13 +9,13 @@
 
 ### 레지듀얼 커넥션 (Residual Connection)
 
-![레지듀얼 커넥션을 적용한 모습](../assets/14-02-01.png)
+![레지듀얼 커넥션을 적용한 모습 (출처: [[Wo at el.2016]](https://arxiv.org/pdf/1609.08144.pdf))](../assets/14-02-01.png)
 
 보통 LSTM 레이어를 4개 이상 쌓기 시작하면 모델이 더욱 깊어짐에 따라서 성능 효율이 저하되기 시작한다고 합니다. 따라서 구글은 깊은 모델은 효율적으로 훈련시키기 위하여 레지듀얼 커넥션을 적용하여 이 문제를 해결하고 더 깊은 LSTM을 사용하였습니다.
 
 ### 인코더의 첫 레이어에만 양방향으로 사용하기
 
-![인코더의 첫번째 레이어에 적용 된 모습](../assets/14-02-02.png)
+![인코더의 첫번째 레이어에 적용 된 모습 (출처: [[Wo at el.2016]](https://arxiv.org/pdf/1609.08144.pdf))](../assets/14-02-02.png)
 
 모든 LSTM 레이어에 대해서 양방향(bi-directional) LSTM을 적용하는 대신에, 첫번째 층에 대해서만 양방향 LSTM을 적용하였습니다. 이를 통해 성능의 큰 하락 없이, 훈련 및 추론 속도에 개선이 있었다고 합니다.
 
@@ -65,7 +65,7 @@ $$\mathcal{O}_{Mixed}(\theta)=\alpha*\mathcal{O}_{ML}(\theta)+\mathcal{O}_{RL}(\
 - 모델의 실제 저장되는 크기를 줄여 서비스를 위한 설치(deploy)를 효율적으로 할 수 있다.
 - 부가적으로 regularization의 효과를 볼 수 있다.
 
-![양자화에 따른 성능 개선 효과 - 출처: [Wo at el.2016]](../assets/14-02-04.png)
+![양자화에 따른 성능 개선 효과 (출처: [[Wo at el.2016]](https://arxiv.org/pdf/1609.08144.pdf)))](../assets/14-02-04.png)
 
 위의 그래프를 보면 전체적으로 양자화 된 모델이 더 낮은 negative log-likelihood를 보여주는 것을 확인할 수 있습니다.
 
@@ -88,7 +88,7 @@ cp(X;Y)=\beta*\sum_{i=1}^{|X|}{\log{(\min{(\sum_{j=1}^{|Y|}{p_{i,j}},1.0)})}} \\
 
 ## 훈련 과정
 
-![Optimizer에 따른 손실값의 변화](../assets/14-02-05.png)
+![Optimizer에 따른 손실값의 변화 (출처: [[Wo at el.2016]](https://arxiv.org/pdf/1609.08144.pdf))](../assets/14-02-05.png)
 
 구글은 stochastic gradient descent(SGD) 또는 Adam[Kingma et al.2014]을 단독으로 사용하여 훈련 시키는 것 보다, 둘을 섞어 사용하면 더 좋은 성능을 발휘하는 것을 확인하였습니다. 첫 번째 에포크(epoch)는 Adam을 사용하여 낮은 손실값까지 빠르게 학습한 이후에, 두 번째 에포크부터 SGD를 사용하여 최적화를 수행하였을 때, 더 좋은 성능을 발휘하는 것을 확인하였다고 합니다.
 

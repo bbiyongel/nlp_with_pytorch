@@ -46,7 +46,9 @@ $$\theta \leftarrow \theta + \gamma Q^{\pi_\theta}(s_t,a_t)\triangledown_\theta\
 
 따라서 실제 보상을 최대화하는 행동의 확률을 최대로 하는 파라미터 $\theta$를 찾도록 할 겁니다. 하지만 기존의 그래디언트는 방향과 크기를 나타낼 수 있었던 것에 비해서, 폴리시 그래디언트는 기존의 그래디언트의 방향에 크기(scalar)값을 곱해주었기 때문에, 실제 보상을 최대화 하는 직접적인 방향을 직접 지정해 줄 수는 없습니다. 그러므로 보상을 최대화 하는 최적의 방향을 스스로 찾아갈 수는 없습니다. 그러므로 사실 훈련이 어렵고 비효율적인 단점을 갖고 있습니다.
 
+<!--
 ![손실 함수를 최소화 하기 위한 그래디언트 디센트 vs 샘플링을 통한 보상의 최대화를 위한 그래디언트 어센트](../assets/12-03-01.png)
+-->
 
 폴리시 그래디언트에 대한 자세한 설명은 원 논문인 [[Sutton at el.1999]](https://papers.nips.cc/paper/1713-policy-gradient-methods-for-reinforcement-learning-with-function-approximation.pdf), 또는 해당 저자가 쓴 텍스트북 Reinforcement Learning: An Introduction[Sutton et al.2017]을 참고하거나, 딥마인드 David Silver의 유튜브 강의를 참고하면 좋습니다.
 
